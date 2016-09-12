@@ -1,0 +1,724 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head>
+    <title>Indexing Strategies — MongoDB Manual</title>
+
+    <link rel="shortcut icon" href="http://media.mongodb.org/favicon.ico">
+    <meta name="robots" content="index">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <link rel="canonical" href="http://docs.mongodb.org/manual/applications/indexes">
+
+    
+    
+    <link rel="stylesheet" href="Indexing%20Strategies%20%E2%80%94%20MongoDB%20Manual_files/mongodb-docs.css" type="text/css">
+    <link rel="stylesheet" href="Indexing%20Strategies%20%E2%80%94%20MongoDB%20Manual_files/pygments.css" type="text/css">
+      
+    <script id="undefined" src="Indexing%20Strategies%20%E2%80%94%20MongoDB%20Manual_files/inpage_linkid.js" async="" type="text/javascript"></script><script src="Indexing%20Strategies%20%E2%80%94%20MongoDB%20Manual_files/ga.js" async="" type="text/javascript"></script><script src="Indexing%20Strategies%20%E2%80%94%20MongoDB%20Manual_files/cse.js" async="" type="text/javascript"></script><script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '2.2.3',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '',
+        HAS_SOURCE:  false
+      };
+    </script>
+    <script type="text/javascript" src="Indexing%20Strategies%20%E2%80%94%20MongoDB%20Manual_files/jquery.js"></script>
+    <script type="text/javascript" src="Indexing%20Strategies%20%E2%80%94%20MongoDB%20Manual_files/underscore.js"></script>
+    <script type="text/javascript" src="Indexing%20Strategies%20%E2%80%94%20MongoDB%20Manual_files/doctools.js"></script>
+      <link rel="search" type="application/opensearchdescription+xml" href="http://docs.mongodb.org/osd.xml" title="MongoDB Help">
+<link rel="author" title="About these documents" href="http://docs.mongodb.org/manual/about/">
+<link rel="top" title="MongoDB Manual" href="http://docs.mongodb.org/manual/">
+<link rel="up" title="Indexes" href="http://docs.mongodb.org/manual/indexes/">
+<link rel="next" title="Geospatial Queries with 2d Indexes" href="http://docs.mongodb.org/manual/applications/geospatial-indexes/">
+<link rel="prev" title="Indexing Operations" href="http://docs.mongodb.org/manual/administration/indexes/">
+<!-- Put the following javascript before the closing </head> tag. -->
+<script>
+  (function() {
+    var cx = '017213726194841070573:WMX6838984';
+    var gcse = document.createElement('script'); gcse.type = 'text/javascript'; gcse.async = true;
+    gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+        '//www.google.com/cse/cse.js?cx=' + cx;
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(gcse, s);
+  })();
+</script>
+  <style type="text/css">.atlwdg-blanket {background:#000;height:100%;left:0;opacity:.5;position:fixed;top:0;width:100%;z-index:1000000;}
+.atlwdg-popup {background:#fff;border:1px solid #666;position:fixed;top:50%;left:50%;z-index:10000011;}
+.atlwdg-popup.atlwdg-box-shadow {-moz-box-shadow:10px 10px 20px rgba(0,0,0,0.5);-webkit-box-shadow:10px 10px 20px rgba(0,0,0,0.5);box-shadow:10px 10px 20px rgba(0,0,0,0.5);background-color:#fff;}
+.atlwdg-hidden {display:none;}
+.atlwdg-trigger {position: fixed; background: #013466; padding: 5px;border: 2px solid white;border-top: none; font-weight: bold; color: white; display:block;white-space:nowrap;text-decoration:none; font-family:arial, FreeSans, Helvetica, sans-serif;font-size:12px;box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5);-webkit-box-shadow:5px 5px 10px rgba(0, 0, 0, 0.5); -moz-box-shadow:5px 5px 10px rgba(0, 0, 0, 0.5);border-radius: 0 0 5px 5px; -moz-border-radius: 0 0 5px 5px;}
+a.atlwdg-trigger {text-decoration:none;}
+.atlwdg-trigger.atlwdg-TOP {left: 45%;top:0; }
+.atlwdg-trigger.atlwdg-RIGHT {left:100%; top:40%; -webkit-transform-origin:top left; -webkit-transform: rotate(90deg); -moz-transform: rotate(90deg); -moz-transform-origin:top left;-ms-transform: rotate(90deg); -ms-transform-origin:top left; }
+.atlwdg-trigger.atlwdg-SUBTLE { right:0; bottom:0; border: 1px solid #ccc; border-bottom: none; border-right: none; background-color: #f5f5f5; color: #444; font-size: 11px; padding: 6px; box-shadow: -1px -1px 2px rgba(0, 0, 0, 0.5); border-radius: 2px 0 0 0; }
+.atlwdg-loading {position:absolute;top:220px;left:295px;}</style><script type="text/javascript" src="Indexing%20Strategies%20%E2%80%94%20MongoDB%20Manual_files/jsapi"></script><link rel="stylesheet" href="Indexing%20Strategies%20%E2%80%94%20MongoDB%20Manual_files/defaulten.css" type="text/css"><link rel="stylesheet" href="Indexing%20Strategies%20%E2%80%94%20MongoDB%20Manual_files/default.css" type="text/css"><script src="Indexing%20Strategies%20%E2%80%94%20MongoDB%20Manual_files/defaulten.js" type="text/javascript"></script><script src="Indexing%20Strategies%20%E2%80%94%20MongoDB%20Manual_files/search.js" type="text/javascript"></script><style type="text/css">
+.gsc-control-cse {
+font-family: Arial, sans-serif;
+border-color: #FFFFFF;
+background-color: #FFFFFF;
+}
+.gsc-control-cse .gsc-table-result {
+font-family: Arial, sans-serif;
+}
+input.gsc-input, .gsc-input-box, .gsc-input-box-hover, .gsc-input-box-focus {
+border-color: #D9D9D9;
+}
+input.gsc-search-button, input.gsc-search-button:hover, input.gsc-search-button:focus {
+border-color: #5AAC41;
+background-color: #5AAC41;
+background-image: none;
+filter: none;
+}
+.gsc-tabHeader.gsc-tabhInactive {
+border-color: #CCCCCC;
+background-color: #FFFFFF;
+}
+.gsc-tabHeader.gsc-tabhActive {
+border-color: #CCCCCC;
+border-bottom-color: #FFFFFF;
+background-color: #FFFFFF;
+}
+.gsc-tabsArea {
+border-color: #CCCCCC;
+}
+.gsc-webResult.gsc-result,
+.gsc-results .gsc-imageResult {
+border-color: #FFFFFF;
+background-color: #FFFFFF;
+}
+.gsc-webResult.gsc-result:hover,
+.gsc-imageResult:hover {
+border-color: #FFFFFF;
+background-color: #FFFFFF;
+}
+.gs-webResult.gs-result a.gs-title:link,
+.gs-webResult.gs-result a.gs-title:link b,
+.gs-imageResult a.gs-title:link,
+.gs-imageResult a.gs-title:link b {
+color: #1155CC;
+}
+.gs-webResult.gs-result a.gs-title:visited,
+.gs-webResult.gs-result a.gs-title:visited b,
+.gs-imageResult a.gs-title:visited,
+.gs-imageResult a.gs-title:visited b {
+color: #1155CC;
+}
+.gs-webResult.gs-result a.gs-title:hover,
+.gs-webResult.gs-result a.gs-title:hover b,
+.gs-imageResult a.gs-title:hover,
+.gs-imageResult a.gs-title:hover b {
+color: #1155CC;
+}
+.gs-webResult.gs-result a.gs-title:active,
+.gs-webResult.gs-result a.gs-title:active b,
+.gs-imageResult a.gs-title:active,
+.gs-imageResult a.gs-title:active b {
+color: #1155CC;
+}
+.gsc-cursor-page {
+color: #1155CC;
+}
+a.gsc-trailing-more-results:link {
+color: #1155CC;
+}
+.gs-webResult .gs-snippet,
+.gs-imageResult .gs-snippet,
+.gs-fileFormatType {
+color: #333333;
+}
+.gs-webResult div.gs-visibleUrl,
+.gs-imageResult div.gs-visibleUrl {
+color: #009933;
+}
+.gs-webResult div.gs-visibleUrl-short {
+color: #009933;
+}
+.gs-webResult div.gs-visibleUrl-short {
+display: none;
+}
+.gs-webResult div.gs-visibleUrl-long {
+display: block;
+}
+.gs-promotion div.gs-visibleUrl-short {
+display: none;
+}
+.gs-promotion div.gs-visibleUrl-long {
+display: block;
+}
+.gsc-cursor-box {
+border-color: #FFFFFF;
+}
+.gsc-results .gsc-cursor-box .gsc-cursor-page {
+border-color: #CCCCCC;
+background-color: #FFFFFF;
+color: #1155CC;
+}
+.gsc-results .gsc-cursor-box .gsc-cursor-current-page {
+border-color: #CCCCCC;
+background-color: #FFFFFF;
+color: #1155CC;
+}
+.gsc-webResult.gsc-result.gsc-promotion {
+border-color: #F6F6F6;
+background-color: #F6F6F6;
+}
+.gsc-completion-title {
+color: #1155CC;
+}
+.gsc-completion-snippet {
+color: #333333;
+}
+.gs-promotion a.gs-title:link,
+.gs-promotion a.gs-title:link *,
+.gs-promotion .gs-snippet a:link {
+color: #1155CC;
+}
+.gs-promotion a.gs-title:visited,
+.gs-promotion a.gs-title:visited *,
+.gs-promotion .gs-snippet a:visited {
+color: #1155CC;
+}
+.gs-promotion a.gs-title:hover,
+.gs-promotion a.gs-title:hover *,
+.gs-promotion .gs-snippet a:hover {
+color: #1155CC;
+}
+.gs-promotion a.gs-title:active,
+.gs-promotion a.gs-title:active *,
+.gs-promotion .gs-snippet a:active {
+color: #1155CC;
+}
+.gs-promotion .gs-snippet,
+.gs-promotion .gs-title .gs-promotion-title-right,
+.gs-promotion .gs-title .gs-promotion-title-right * {
+color: #333333;
+}
+.gs-promotion .gs-visibleUrl,
+.gs-promotion .gs-visibleUrl-short {
+color: #009933;
+}
+.gsc-input input.gsc-input {
+background: none repeat scroll 0% 0% white !important;
+}
+</style><style type="text/css">.gsfe_a{border:1px solid #b9b9b9;border-top-color:#a0a0a0;box-shadow:inset 0px 1px 2px rgba(0,0,0,0.1);-moz-box-shadow:inset 0px 1px 2px rgba(0,0,0,0.1);-webkit-box-shadow:inset 0px 1px 2px rgba(0,0,0,0.1);}.gsfe_b{border:1px solid #4d90fe;outline:none;box-shadow:inset 0px 1px 2px rgba(0,0,0,0.3);-moz-box-shadow:inset 0px 1px 2px rgba(0,0,0,0.3);-webkit-box-shadow:inset 0px 1px 2px rgba(0,0,0,0.3);}.gssb_c{border:0;position:absolute;z-index:989}.gssb_e{border:1px solid #ccc;border-top-color:#d9d9d9;box-shadow:0 2px 4px rgba(0,0,0,0.2);-moz-box-shadow:0 2px 4px rgba(0,0,0,0.2);cursor:default}.gssb_f{visibility:hidden;white-space:nowrap}.gssb_k{border:0;display:block;position:absolute;top:0;z-index:988}.gsdd_a{border:none!important}.gsib_a{width:100%;padding:4px 6px 0}.gsib_a,.gsib_b{vertical-align:top}.gssb_a{padding:0 7px}.gssb_a,.gssb_a td{white-space:nowrap;overflow:hidden;line-height:22px}#gssb_b{font-size:11px;color:#36c;text-decoration:none}#gssb_b:hover{font-size:11px;color:#36c;text-decoration:underline}.gssb_g{text-align:center;padding:8px 0 7px;position:relative}.gssb_h{font-size:15px;height:28px;margin:0.2em}.gssb_i{background:#eee}.gss_ifl{visibility:hidden;padding-left:5px}.gssb_i .gss_ifl{visibility:visible}a.gssb_j{font-size:13px;color:#36c;text-decoration:none;line-height:100%}a.gssb_j:hover{text-decoration:underline}.gssb_l{height:1px;background-color:#e5e5e5}.gssb_m{color:#000;background:#fff}.gscsep_a{display:none}.gsq_a{padding:0}.gscb_a{display:inline-block;font:27px/13px arial,sans-serif}.gsst_a .gscb_a{color:#a1b9ed;cursor:pointer}.gsst_a:hover .gscb_a,.gsst_a:focus .gscb_a{color:#36c}.gsst_a{display:inline-block}.gsst_a{cursor:pointer;padding:0 4px}.gsst_a:hover{text-decoration:none!important}.gsst_b{font-size:16px;padding:0 2px;user-select:none;-moz-user-select:none;white-space:nowrap}.gsst_e{opacity:0.55;}.gsst_a:hover .gsst_e,.gsst_a:focus .gsst_e{opacity:0.72;}.gsst_a:active .gsst_e{opacity:1;}.gsst_f{background:white;text-align:left}.gsst_g{background-color:white;border:1px solid #ccc;border-top-color:#d9d9d9;box-shadow:0 2px 4px rgba(0,0,0,0.2);-moz-box-shadow:0 2px 4px rgba(0,0,0,0.2);margin:-1px -3px;padding:0 6px}.gsst_h{background-color:white;height:1px;margin-bottom:-1px;position:relative;top:-1px}.gssb_a{padding:0 9px}.gsib_a{padding-right:8px;padding-left:8px}.gsst_a{padding-top:3px}.gssb_e{border:0}.gssb_l{margin:5px 0}.gssb_c .gsc-completion-container{position:static}.gssb_c{z-index:5000}.gsc-completion-container table{background:transparent;font-size:inherit;font-family:inherit}.gssb_c > tbody > tr,.gssb_c > tbody > tr > td,.gssb_d,.gssb_d > tbody > tr,.gssb_d > tbody > tr > td,.gssb_e,.gssb_e > tbody > tr,.gssb_e > tbody > tr > td{padding:0;margin:0;border:0}.gssb_a table,.gssb_a table tr,.gssb_a table tr td{padding:0;margin:0;border:0}</style></head>
+  <body>
+<div id="top-right">
+        <div class="user-right">
+                <ul id="header-menu-bar" class="ajs-menu-bar">
+                <li class="normal"><a target="_blank" href="http://groups.google.com/group/mongodb-user">Forums</a></li>
+                <li class="normal"><a target="_blank" href="http://blog.mongodb.org/">Blog</a></li>
+                <li class="normal"><a href="http://www.mongodb.org/downloads">Download</a></li>
+                <li class="normal"><a href="http://docs.mongodb.org/ecosystem/drivers/">Drivers</a></li>
+                <li class="normal"><a href="http://www.10gen.com/events">Events</a></li>
+                <li class="normal last"><a class="last" href="http://docs.mongodb.org/manual/meta/translation">Translations</a></li>
+                </ul>
+        </div>
+</div>
+<div id="header-db" class="spread">
+        <div class="split">
+                <div id="logo">
+                        <div><a href="http://docs.mongodb.org/manual/"><img class="logo" src="Indexing%20Strategies%20%E2%80%94%20MongoDB%20Manual_files/logo-mongodb.png" alt="MongoDB Logo"></a></div>
+                </div>
+        </div>
+
+<div class="search-db"><div dir="ltr" id="___gcse_0"><form accept-charset="utf-8" class="gsc-search-box gsc-search-box-tools"><table class="gsc-search-box" cellpadding="0" cellspacing="0"><tbody><tr><td class="gsc-input"><div id="gsc-iw-id1" class="gsc-input-box"><table class="gstl_0 " id="gs_id0" style="width: 100%; padding: 0pt;" cellpadding="0" cellspacing="0"><tbody><tr><td class="gsib_a" id="gs_tti0"><input spellcheck="false" dir="ltr" id="gsc-i-id1" style="width: 100%; padding: 0pt; border: medium none; margin: 0pt; height: auto; outline: medium none;" title="search" name="search" class="gsc-input" size="10" autocomplete="off" type="text"></td><td class="gsib_b"><div dir="ltr" id="gs_st0" class="gsst_b"><a style="display: none;" href="javascript:void(0)" class="gsst_a"><span id="gs_cb0" class="gscb_a">×</span></a></div></td></tr></tbody></table></div></td><td class="gsc-search-button"><input title="search" class="gsc-search-button gsc-search-button-v2" src="Indexing%20Strategies%20%E2%80%94%20MongoDB%20Manual_files/search_box_icon.png" type="image"></td><td class="gsc-clear-button"><div title="clear results" class="gsc-clear-button">&nbsp;</div></td></tr></tbody></table><table class="gsc-branding" cellpadding="0" cellspacing="0"><tbody><tr style="display: none;"><td class="gsc-branding-user-defined"></td><td class="gsc-branding-text"><div class="gsc-branding-text">powered by</div></td><td class="gsc-branding-img"><img class="gsc-branding-img" src="Indexing%20Strategies%20%E2%80%94%20MongoDB%20Manual_files/small-logo.png"></td></tr></tbody></table></form></div></div>
+<div id="etp">
+<ul>
+<li><a href="https://github.com/mongodb/docs/blob/master/source/applications/indexes.txt" target="_blank" title="Edit applications/indexes.txt on github">Edit this Page</a></li>
+<li><a href="http://github.com/mongodb/docs" target="_blank" title="Fork the documentation on GitHub and contribute.">GitHub</a></li>
+<li><a href="https://jira.mongodb.org/secure/CreateIssueDetails%21init.jspa?pid=10380&amp;issuetype=4&amp;priority=4&amp;summary=Comment+on%3a+%22applications/indexes%2Etxt%22" target="_blank" title="Report a problem with applications/indexes.txt on Jira">Report a problem</a></li>
+</ul>
+</div>
+</div>  
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            <div id="cse-results"><div id="___gcse_1"><div class="gsc-control-cse gsc-control-cse-en"><div dir="ltr" class="gsc-control-wrapper-cse"><div class="gsc-results-wrapper-nooverlay"><div class="gsc-tabsAreaInvisible"><div class="gsc-tabHeader gsc-inline-block gsc-tabhActive">Custom Search</div><span class="gs-spacer"> </span></div><div class="gsc-tabsAreaInvisible"></div><div class="gsc-above-wrapper-area-invisible"><table class="gsc-above-wrapper-area-container" cellpadding="0" cellspacing="0"><tbody><tr><td class="gsc-result-info-container"><div class="gsc-result-info-invisible"></div></td></tr></tbody></table></div><div class="gsc-adBlockInvisible"></div><div class="gsc-wrapper"><div class="gsc-adBlockInvisible"></div><div class="gsc-resultsbox-invisible"><div class="gsc-resultsRoot gsc-tabData gsc-tabdActive"><table class="gsc-resultsHeader" cellpadding="0" cellspacing="0"><tbody><tr><td class="gsc-twiddleRegionCell"><div class="gsc-twiddle"><div class="gsc-title">Web</div></div><div class="gsc-stats"></div><div class="gsc-results-selector gsc-all-results-active"><div title="show one result" class="gsc-result-selector gsc-one-result">&nbsp;</div><div title="show more results" class="gsc-result-selector gsc-more-results">&nbsp;</div><div title="show all results" class="gsc-result-selector gsc-all-results">&nbsp;</div></div></td><td class="gsc-configLabelCell"></td></tr></tbody></table><div><div class="gsc-expansionArea"></div></div></div></div></div></div></div></div></div></div>
+            
+  <div class="section" id="indexing-strategies">
+<h1>Indexing Strategies<a class="headerlink" href="#indexing-strategies" title="Permalink to this headline">¶</a></h1>
+<p>This document provides strategies for indexing in MongoDB. For
+fundamentals of MongoDB indexing, see <a class="reference internal" href="http://docs.mongodb.org/manual/core/indexes/"><em>Indexing Overview</em></a>. For
+operational guidelines and procedures, see
+<a class="reference internal" href="http://docs.mongodb.org/manual/administration/indexes/"><em>Indexing Operations</em></a>.</p>
+<div class="section" id="strategies">
+<h2>Strategies<a class="headerlink" href="#strategies" title="Permalink to this headline">¶</a></h2>
+<p>The best indexes for your application are based on a number of factors,
+including the kinds of queries you expect, the ratio of reads to writes,
+and the amount of free memory on your system.</p>
+<p>When developing your indexing strategy you should have a deep
+understanding of:</p>
+<ul class="simple">
+<li>The application’s queries.</li>
+<li>The relative frequency of each query in the application.</li>
+<li>The current indexes created for your collections.</li>
+<li>Which indexes the most common queries use.</li>
+</ul>
+<p>The best overall strategy for designing indexes is to profile a variety
+of index configurations with data sets similar to the ones you’ll be
+running in production to see which configurations perform best.</p>
+<p>MongoDB can only use <em>one</em> index to support any given
+operation. However, each clause of an <a class="reference internal" href="http://docs.mongodb.org/manual/reference/operator/or/#_S_or" title="$or"><tt class="xref mongodb mongodb-operator docutils literal"><span class="pre">$or</span></tt></a> query may use
+a different index.</p>
+</div>
+<div class="section" id="create-indexes-to-support-your-queries">
+<span id="indexes-create-to-match-queries"></span><h2>Create Indexes to Support Your Queries<a class="headerlink" href="#create-indexes-to-support-your-queries" title="Permalink to this headline">¶</a></h2>
+<p>If you only ever query on a single key in a given collection, then you need
+to create just one single-key index for that collection. For example, you
+might create an index on <tt class="docutils literal"><span class="pre">category</span></tt> in the <tt class="docutils literal"><span class="pre">product</span></tt> collection:</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="nx">db</span><span class="p">.</span><span class="nx">products</span><span class="p">.</span><span class="nx">ensureIndex</span><span class="p">(</span> <span class="p">{</span> <span class="s2">"category"</span><span class="o">:</span> <span class="mi">1</span> <span class="p">}</span> <span class="p">)</span>
+</pre></div>
+</div>
+<p>However, if you sometimes query on only one key and at other times
+query on that key combined with a second key, then creating a
+<a class="reference internal" href="http://docs.mongodb.org/manual/core/indexes/#index-type-compound"><em>compound index</em></a> is more efficient. MongoDB
+will use the compound index for both queries. For example, you might
+create an index on both <tt class="docutils literal"><span class="pre">category</span></tt> and <tt class="docutils literal"><span class="pre">item</span></tt>.</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="nx">db</span><span class="p">.</span><span class="nx">products</span><span class="p">.</span><span class="nx">ensureIndex</span><span class="p">(</span> <span class="p">{</span> <span class="s2">"category"</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s2">"item"</span><span class="o">:</span> <span class="mi">1</span> <span class="p">}</span> <span class="p">)</span>
+</pre></div>
+</div>
+<p>This allows you both options. You can query on just <tt class="docutils literal"><span class="pre">category</span></tt>, and
+you also can query on <tt class="docutils literal"><span class="pre">category</span></tt> combined with <tt class="docutils literal"><span class="pre">item</span></tt>.
+(To query on multiple keys and sort the results, see <a class="reference internal" href="#index-sort"><em>Use Indexes to Sort Query Results</em></a>.)</p>
+<p>With the exception of queries that use the <a class="reference internal" href="http://docs.mongodb.org/manual/reference/operator/or/#_S_or" title="$or"><tt class="xref mongodb mongodb-operator docutils literal"><span class="pre">$or</span></tt></a> operator, a
+query does not use multiple indexes. A query uses only one index.</p>
+</div>
+<div class="section" id="use-compound-indexes-to-support-several-different-queries">
+<span id="indexes-compound-key-indexes"></span><span id="compound-key-indexes"></span><h2>Use Compound Indexes to Support Several Different Queries<a class="headerlink" href="#use-compound-indexes-to-support-several-different-queries" title="Permalink to this headline">¶</a></h2>
+<p>A single <a class="reference internal" href="http://docs.mongodb.org/manual/core/indexes/#index-type-compound"><em>compound index</em></a> on multiple fields
+can support all the queries that search a “prefix” subset of those fields.</p>
+<div class="admonition-example admonition">
+<p class="first admonition-title">Example</p>
+<p>The following index on a collection:</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="p">{</span> <span class="nx">x</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span> <span class="nx">y</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span> <span class="nx">z</span><span class="o">:</span> <span class="mi">1</span> <span class="p">}</span>
+</pre></div>
+</div>
+<p>Can support queries that the following indexes support:</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="p">{</span> <span class="nx">x</span><span class="o">:</span> <span class="mi">1</span> <span class="p">}</span>
+<span class="p">{</span> <span class="nx">x</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span> <span class="nx">y</span><span class="o">:</span> <span class="mi">1</span> <span class="p">}</span>
+</pre></div>
+</div>
+<p>There are some situations where the prefix indexes may offer better
+query performance: for example if <tt class="docutils literal"><span class="pre">z</span></tt> is a large array.</p>
+<p>The <tt class="docutils literal"><span class="pre">{</span> <span class="pre">x:</span> <span class="pre">1,</span> <span class="pre">y:</span> <span class="pre">1,</span> <span class="pre">z:</span> <span class="pre">1</span> <span class="pre">}</span></tt> index can also support many of the same
+queries as the following index:</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="p">{</span> <span class="nx">x</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span> <span class="nx">z</span><span class="o">:</span> <span class="mi">1</span> <span class="p">}</span>
+</pre></div>
+</div>
+<p>Also, <tt class="docutils literal"><span class="pre">{</span> <span class="pre">x:</span> <span class="pre">1,</span> <span class="pre">z:</span> <span class="pre">1</span> <span class="pre">}</span></tt> has an additional use. Given the following
+query:</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="nx">db</span><span class="p">.</span><span class="nx">collection</span><span class="p">.</span><span class="nx">find</span><span class="p">(</span> <span class="p">{</span> <span class="nx">x</span><span class="o">:</span> <span class="mi">5</span> <span class="p">}</span> <span class="p">).</span><span class="nx">sort</span><span class="p">(</span> <span class="p">{</span> <span class="nx">z</span><span class="o">:</span> <span class="mi">1</span><span class="p">}</span> <span class="p">)</span>
+</pre></div>
+</div>
+<p class="last">The <tt class="docutils literal"><span class="pre">{</span> <span class="pre">x:</span> <span class="pre">1,</span> <span class="pre">z:</span> <span class="pre">1</span> <span class="pre">}</span></tt> index supports both the query and the sort
+operation, while the <tt class="docutils literal"><span class="pre">{</span> <span class="pre">x:</span> <span class="pre">1,</span> <span class="pre">y:</span> <span class="pre">1,</span> <span class="pre">z:</span> <span class="pre">1</span> <span class="pre">}</span></tt> index only supports
+the query. For more information on sorting, see
+<a class="reference internal" href="#sorting-with-indexes"><em>Use Indexes to Sort Query Results</em></a>.</p>
+</div>
+</div>
+<div class="section" id="create-indexes-that-support-covered-queries">
+<span id="indexes-covered-queries"></span><span id="covered-queries"></span><h2>Create Indexes that Support Covered Queries<a class="headerlink" href="#create-indexes-that-support-covered-queries" title="Permalink to this headline">¶</a></h2>
+<p>A covered query is a query in which:</p>
+<ul class="simple">
+<li>all the fields in the <a class="reference internal" href="http://docs.mongodb.org/manual/core/read-operations/#read-operations-query-document"><em>query</em></a>
+are part of an index, <strong>and</strong></li>
+<li>all the fields returned in the results are in the same index.</li>
+</ul>
+<p>Because the index “covers” the query, MongoDB can both match the
+<a class="reference internal" href="http://docs.mongodb.org/manual/core/read-operations/#read-operations-query-document"><em>query conditions</em></a> <strong>and</strong> return
+the results using only the index; MongoDB does not need to look at
+the documents, only the index, to fulfill the query.</p>
+<p>Querying <em>only</em> the index can be much faster than querying documents
+outside of the index. Index keys are typically smaller than the
+documents they catalog, and indexes are typically available in RAM or
+located sequentially on disk.</p>
+<p>MongoDB automatically uses an index that covers a query when possible.
+To ensure that a query is covered, create an index that includes all
+the fields listed in the query result and the <a class="reference internal" href="http://docs.mongodb.org/manual/core/read-operations/#read-operations-query-document"><em>query document</em></a>. This means that if the index does
+<strong>not</strong> include the <tt class="docutils literal"><span class="pre">_id</span></tt> field, the <a class="reference internal" href="http://docs.mongodb.org/manual/reference/glossary/#term-projection"><em class="xref std std-term">projection</em></a> document,
+which specifies the fields MongoDB returns, must explicitly exclude the
+<tt class="docutils literal"><span class="pre">_id</span></tt> field from the result set.</p>
+<p>Consider the following example where the collection <tt class="docutils literal"><span class="pre">user</span></tt> has
+an index on the fields <tt class="docutils literal"><span class="pre">user</span></tt> and <tt class="docutils literal"><span class="pre">status</span></tt>:</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="p">{</span> <span class="nx">status</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span> <span class="nx">user</span><span class="o">:</span> <span class="mi">1</span> <span class="p">}</span>
+</pre></div>
+</div>
+<p>Then, the following query which queries on the <tt class="docutils literal"><span class="pre">status</span></tt> field and
+returns only the <tt class="docutils literal"><span class="pre">user</span></tt> field is covered:</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="nx">db</span><span class="p">.</span><span class="nx">users</span><span class="p">.</span><span class="nx">find</span><span class="p">(</span> <span class="p">{</span> <span class="nx">status</span><span class="o">:</span> <span class="s2">"A"</span> <span class="p">},</span> <span class="p">{</span> <span class="nx">user</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span> <span class="nx">_id</span><span class="o">:</span> <span class="mi">0</span> <span class="p">}</span> <span class="p">)</span>
+</pre></div>
+</div>
+<p>However, the following query that uses the index to match documents is
+<strong>not</strong> covered by the index because it returns both the <tt class="docutils literal"><span class="pre">user</span></tt> field
+<strong>and</strong> the <tt class="docutils literal"><span class="pre">_id</span></tt> field:</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="nx">db</span><span class="p">.</span><span class="nx">users</span><span class="p">.</span><span class="nx">find</span><span class="p">(</span> <span class="p">{</span> <span class="nx">status</span><span class="o">:</span> <span class="s2">"A"</span> <span class="p">},</span> <span class="p">{</span> <span class="nx">user</span><span class="o">:</span> <span class="mi">1</span> <span class="p">}</span> <span class="p">)</span>
+</pre></div>
+</div>
+<p>An index <strong>cannot</strong> cover a query if:</p>
+<ul>
+<li><p class="first">any of the indexed fields in any of the documents in the collection
+includes an array. If an indexed field is an array, the index becomes
+a <a class="reference internal" href="http://docs.mongodb.org/manual/core/indexes/#index-type-multikey"><em>multi-key index</em></a> index and cannot
+support a covered query.</p>
+</li>
+<li><p class="first">any of the indexed fields are fields in subdocuments. To index fields
+in subdocuments, use <a class="reference internal" href="http://docs.mongodb.org/manual/reference/glossary/#term-dot-notation"><em class="xref std std-term">dot notation</em></a>. For example, consider
+a collection <tt class="docutils literal"><span class="pre">users</span></tt> with documents of the following form:</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="p">{</span> <span class="nx">_id</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span> <span class="nx">user</span><span class="o">:</span> <span class="p">{</span> <span class="nx">login</span><span class="o">:</span> <span class="s2">"tester"</span> <span class="p">}</span> <span class="p">}</span>
+</pre></div>
+</div>
+<p>The collection has the following indexes:</p>
+<div class="highlight-none"><div class="highlight"><pre>{ user: 1 }
+
+{ "user.login": 1 }
+</pre></div>
+</div>
+<p>The <tt class="docutils literal"><span class="pre">{</span> <span class="pre">user:</span> <span class="pre">1</span> <span class="pre">}</span></tt> index covers the following query:</p>
+<div class="highlight-none"><div class="highlight"><pre>db.users.find( { user: { login: "tester" } }, { user: 1, _id: 0 } )
+</pre></div>
+</div>
+<p>However, the <tt class="docutils literal"><span class="pre">{</span> <span class="pre">"user.login":</span> <span class="pre">1</span> <span class="pre">}</span></tt> index does <strong>not</strong> cover the
+following query:</p>
+<div class="highlight-none"><div class="highlight"><pre>db.users.find( { "user.login": "tester" }, { "user.login": 1, _id: 0 } )
+</pre></div>
+</div>
+<p>The query, however, does use the <tt class="docutils literal"><span class="pre">{</span> <span class="pre">"user.login":</span> <span class="pre">1</span> <span class="pre">}</span></tt> index to
+find matching documents.</p>
+</li>
+</ul>
+<p>To determine whether a query is a covered query, use the
+<a class="reference internal" href="http://docs.mongodb.org/manual/reference/method/cursor.explain/#cursor.explain" title="cursor.explain"><tt class="xref mongodb mongodb-method docutils literal"><span class="pre">explain()</span></tt></a> method. If the <a class="reference internal" href="http://docs.mongodb.org/manual/reference/method/cursor.explain/#cursor.explain" title="cursor.explain"><tt class="xref mongodb mongodb-method docutils literal"><span class="pre">explain()</span></tt></a>
+output displays <tt class="docutils literal"><span class="pre">true</span></tt> for the <tt class="xref mongodb mongodb-data docutils literal"><span class="pre">indexOnly</span></tt> field, the query is
+covered by an index, and MongoDB queries only that index to match the
+query <strong>and</strong> return the results.</p>
+<p>For more information see <a class="reference internal" href="http://docs.mongodb.org/manual/administration/indexes/#indexes-measuring-use"><em>Measure Index Use</em></a>.</p>
+</div>
+<div class="section" id="use-indexes-to-sort-query-results">
+<span id="sorting-with-indexes"></span><span id="index-sort"></span><h2>Use Indexes to Sort Query Results<a class="headerlink" href="#use-indexes-to-sort-query-results" title="Permalink to this headline">¶</a></h2>
+<p>For the fastest performance when sorting query results by a given field,
+create a sorted index on that field.</p>
+<p>To sort query results on multiple fields, create a <a class="reference internal" href="http://docs.mongodb.org/manual/core/indexes/#index-type-compound"><em>compound
+index</em></a>. MongoDB sorts results based on the field
+order in the index. For queries that include a sort that uses a
+compound index, ensure that all fields before the first sorted field
+are equality matches.</p>
+<div class="admonition-example admonition">
+<p class="first admonition-title">Example</p>
+<p>If you create the following index:</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="p">{</span> <span class="nx">a</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span> <span class="nx">b</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span> <span class="nx">c</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span> <span class="nx">d</span><span class="o">:</span> <span class="mi">1</span> <span class="p">}</span>
+</pre></div>
+</div>
+<p>The following query and sort operations can use the index:</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="nx">db</span><span class="p">.</span><span class="nx">collection</span><span class="p">.</span><span class="nx">find</span><span class="p">().</span><span class="nx">sort</span><span class="p">(</span> <span class="p">{</span> <span class="nx">a</span><span class="o">:</span><span class="mi">1</span> <span class="p">}</span> <span class="p">)</span>
+<span class="nx">db</span><span class="p">.</span><span class="nx">collection</span><span class="p">.</span><span class="nx">find</span><span class="p">().</span><span class="nx">sort</span><span class="p">(</span> <span class="p">{</span> <span class="nx">a</span><span class="o">:</span><span class="mi">1</span><span class="p">,</span> <span class="nx">b</span><span class="o">:</span><span class="mi">1</span> <span class="p">}</span> <span class="p">)</span>
+
+<span class="nx">db</span><span class="p">.</span><span class="nx">collection</span><span class="p">.</span><span class="nx">find</span><span class="p">(</span> <span class="p">{</span> <span class="nx">a</span><span class="o">:</span><span class="mi">4</span> <span class="p">}</span> <span class="p">).</span><span class="nx">sort</span><span class="p">(</span> <span class="p">{</span> <span class="nx">a</span><span class="o">:</span><span class="mi">1</span><span class="p">,</span> <span class="nx">b</span><span class="o">:</span><span class="mi">1</span> <span class="p">}</span> <span class="p">)</span>
+<span class="nx">db</span><span class="p">.</span><span class="nx">collection</span><span class="p">.</span><span class="nx">find</span><span class="p">(</span> <span class="p">{</span> <span class="nx">b</span><span class="o">:</span><span class="mi">5</span> <span class="p">}</span> <span class="p">).</span><span class="nx">sort</span><span class="p">(</span> <span class="p">{</span> <span class="nx">a</span><span class="o">:</span><span class="mi">1</span><span class="p">,</span> <span class="nx">b</span><span class="o">:</span><span class="mi">1</span> <span class="p">}</span> <span class="p">)</span>
+
+<span class="nx">db</span><span class="p">.</span><span class="nx">collection</span><span class="p">.</span><span class="nx">find</span><span class="p">(</span> <span class="p">{</span> <span class="nx">a</span><span class="o">:</span><span class="mi">5</span> <span class="p">}</span> <span class="p">).</span><span class="nx">sort</span><span class="p">(</span> <span class="p">{</span> <span class="nx">b</span><span class="o">:</span><span class="mi">1</span><span class="p">,</span> <span class="nx">c</span><span class="o">:</span><span class="mi">1</span> <span class="p">}</span> <span class="p">)</span>
+
+<span class="nx">db</span><span class="p">.</span><span class="nx">collection</span><span class="p">.</span><span class="nx">find</span><span class="p">(</span> <span class="p">{</span> <span class="nx">a</span><span class="o">:</span><span class="mi">5</span><span class="p">,</span> <span class="nx">c</span><span class="o">:</span><span class="mi">4</span><span class="p">,</span> <span class="nx">b</span><span class="o">:</span><span class="mi">3</span> <span class="p">}</span> <span class="p">).</span><span class="nx">sort</span><span class="p">(</span> <span class="p">{</span> <span class="nx">d</span><span class="o">:</span><span class="mi">1</span> <span class="p">}</span> <span class="p">)</span>
+
+<span class="nx">db</span><span class="p">.</span><span class="nx">collection</span><span class="p">.</span><span class="nx">find</span><span class="p">(</span> <span class="p">{</span> <span class="nx">a</span><span class="o">:</span> <span class="p">{</span> <span class="nx">$gt</span><span class="o">:</span><span class="mi">4</span> <span class="p">}</span> <span class="p">}</span> <span class="p">).</span><span class="nx">sort</span><span class="p">(</span> <span class="p">{</span> <span class="nx">a</span><span class="o">:</span><span class="mi">1</span><span class="p">,</span> <span class="nx">b</span><span class="o">:</span><span class="mi">1</span> <span class="p">}</span> <span class="p">)</span>
+<span class="nx">db</span><span class="p">.</span><span class="nx">collection</span><span class="p">.</span><span class="nx">find</span><span class="p">(</span> <span class="p">{</span> <span class="nx">a</span><span class="o">:</span> <span class="p">{</span> <span class="nx">$gt</span><span class="o">:</span><span class="mi">5</span> <span class="p">}</span> <span class="p">}</span> <span class="p">).</span><span class="nx">sort</span><span class="p">(</span> <span class="p">{</span> <span class="nx">a</span><span class="o">:</span><span class="mi">1</span><span class="p">,</span> <span class="nx">b</span><span class="o">:</span><span class="mi">1</span> <span class="p">}</span> <span class="p">)</span>
+
+<span class="nx">db</span><span class="p">.</span><span class="nx">collection</span><span class="p">.</span><span class="nx">find</span><span class="p">(</span> <span class="p">{</span> <span class="nx">a</span><span class="o">:</span><span class="mi">5</span><span class="p">,</span> <span class="nx">b</span><span class="o">:</span><span class="mi">3</span><span class="p">,</span> <span class="nx">d</span><span class="o">:</span><span class="p">{</span> <span class="nx">$gt</span><span class="o">:</span><span class="mi">4</span> <span class="p">}</span> <span class="p">}</span> <span class="p">).</span><span class="nx">sort</span><span class="p">(</span> <span class="p">{</span> <span class="nx">c</span><span class="o">:</span><span class="mi">1</span> <span class="p">}</span> <span class="p">)</span>
+<span class="nx">db</span><span class="p">.</span><span class="nx">collection</span><span class="p">.</span><span class="nx">find</span><span class="p">(</span> <span class="p">{</span> <span class="nx">a</span><span class="o">:</span><span class="mi">5</span><span class="p">,</span> <span class="nx">b</span><span class="o">:</span><span class="mi">3</span><span class="p">,</span> <span class="nx">c</span><span class="o">:</span><span class="p">{</span> <span class="nx">$lt</span><span class="o">:</span><span class="mi">2</span> <span class="p">},</span> <span class="nx">d</span><span class="o">:</span><span class="p">{</span> <span class="nx">$gt</span><span class="o">:</span><span class="mi">4</span> <span class="p">}</span> <span class="p">}</span> <span class="p">).</span><span class="nx">sort</span><span class="p">(</span> <span class="p">{</span> <span class="nx">c</span><span class="o">:</span><span class="mi">1</span> <span class="p">}</span> <span class="p">)</span>
+</pre></div>
+</div>
+<p>However, the following queries cannot sort the results using the
+index:</p>
+<div class="last highlight-javascript"><div class="highlight"><pre><span class="nx">db</span><span class="p">.</span><span class="nx">collection</span><span class="p">.</span><span class="nx">find</span><span class="p">().</span><span class="nx">sort</span><span class="p">(</span> <span class="p">{</span> <span class="nx">b</span><span class="o">:</span><span class="mi">1</span> <span class="p">}</span> <span class="p">)</span>
+<span class="nx">db</span><span class="p">.</span><span class="nx">collection</span><span class="p">.</span><span class="nx">find</span><span class="p">(</span> <span class="p">{</span> <span class="nx">b</span><span class="o">:</span><span class="mi">5</span> <span class="p">}</span> <span class="p">).</span><span class="nx">sort</span><span class="p">(</span> <span class="p">{</span> <span class="nx">b</span><span class="o">:</span><span class="mi">1</span> <span class="p">}</span> <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">For in-memory sorts that do not use an index, the <a class="reference internal" href="http://docs.mongodb.org/manual/reference/method/cursor.sort/#cursor.sort" title="cursor.sort"><tt class="xref mongodb mongodb-method docutils literal"><span class="pre">sort()</span></tt></a> operation is significantly slower. The
+<a class="reference internal" href="http://docs.mongodb.org/manual/reference/method/cursor.sort/#cursor.sort" title="cursor.sort"><tt class="xref mongodb mongodb-method docutils literal"><span class="pre">sort()</span></tt></a> operation will abort when it uses 32
+megabytes of memory.</p>
+</div>
+</div>
+<div class="section" id="ensure-indexes-fit-ram">
+<span id="indexes-ensure-indexes-fit-ram"></span><h2>Ensure Indexes Fit RAM<a class="headerlink" href="#ensure-indexes-fit-ram" title="Permalink to this headline">¶</a></h2>
+<p>For the fastest processing, ensure that your indexes fit entirely in RAM so
+that the system can avoid reading the index from disk.</p>
+<p>To check the size of your indexes, use the
+<a class="reference internal" href="http://docs.mongodb.org/manual/reference/method/db.collection.totalIndexSize/#db.collection.totalIndexSize" title="db.collection.totalIndexSize"><tt class="xref mongodb mongodb-method docutils literal"><span class="pre">db.collection.totalIndexSize()</span></tt></a> helper, which returns data in
+bytes:</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="o">&gt;</span> <span class="nx">db</span><span class="p">.</span><span class="nx">collection</span><span class="p">.</span><span class="nx">totalIndexSize</span><span class="p">()</span>
+<span class="mi">4294976499</span>
+</pre></div>
+</div>
+<p>The above example shows an index size of almost 4.3 gigabytes. To ensure
+this index fits in RAM, you must not only have more than that much RAM
+available but also must have RAM available for the rest of the
+<a class="reference internal" href="http://docs.mongodb.org/manual/reference/glossary/#term-working-set"><em class="xref std std-term">working set</em></a>. Also remember:</p>
+<p>If you have and use multiple collections, you must consider the size
+of all indexes on all collections. The indexes and the working set must be able to
+fit in memory at the same time.</p>
+<p>There are some limited cases where indexes do not need
+to fit in memory. See <a class="reference internal" href="#indexing-right-handed"><em>Indexes that Hold Only Recent Values in RAM</em></a>.</p>
+<div class="admonition-see-also admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last">For additional <a class="reference internal" href="http://docs.mongodb.org/manual/reference/collection-statistics/"><em>collection statistics</em></a>, use <a class="reference internal" href="http://docs.mongodb.org/manual/reference/command/collStats/#collStats" title="collStats"><tt class="xref mongodb mongodb-dbcommand docutils literal"><span class="pre">collStats</span></tt></a> or
+<a class="reference internal" href="http://docs.mongodb.org/manual/reference/method/db.collection.stats/#db.collection.stats" title="db.collection.stats"><tt class="xref mongodb mongodb-method docutils literal"><span class="pre">db.collection.stats()</span></tt></a>.</p>
+</div>
+<div class="section" id="indexes-that-hold-only-recent-values-in-ram">
+<span id="indexing-right-handed"></span><h3>Indexes that Hold Only Recent Values in RAM<a class="headerlink" href="#indexes-that-hold-only-recent-values-in-ram" title="Permalink to this headline">¶</a></h3>
+<p>Indexes do not have to fit <em>entirely</em> into RAM in all cases. If the
+value of the indexed field increments with every insert, and most queries
+select recently added documents; then MongoDB only needs to keep the
+parts of the index that hold the most recent or “right-most” values in
+RAM. This allows for efficient index use for read and write
+operations and minimize the amount of RAM required to support the
+index.</p>
+</div>
+</div>
+<div class="section" id="create-queries-that-ensure-selectivity">
+<span id="index-selectivity"></span><h2>Create Queries that Ensure Selectivity<a class="headerlink" href="#create-queries-that-ensure-selectivity" title="Permalink to this headline">¶</a></h2>
+<p>Selectivity is the ability of a query to narrow results using the index.
+Effective indexes are more selective and allow MongoDB to use the index
+for a larger portion of the work associated with fulfilling the query.</p>
+<p>To ensure selectivity,
+write queries that limit the number of possible documents with the
+indexed field. Write queries that are appropriately selective relative
+to your indexed data.</p>
+<div class="admonition-example admonition">
+<p class="first admonition-title">Example</p>
+<p>Suppose you have a field called <tt class="docutils literal"><span class="pre">status</span></tt> where the possible values
+are <tt class="docutils literal"><span class="pre">new</span></tt> and <tt class="docutils literal"><span class="pre">processed</span></tt>. If you add an index on <tt class="docutils literal"><span class="pre">status</span></tt>
+you’ve created a low-selectivity index. The index will
+be of little help in locating records.</p>
+<p>A better strategy, depending on your queries, would be to create a
+<a class="reference internal" href="http://docs.mongodb.org/manual/core/indexes/#index-type-compound"><em>compound index</em></a> that includes the
+low-selectivity field and another field. For example, you could
+create a compound index on <tt class="docutils literal"><span class="pre">status</span></tt> and <tt class="docutils literal"><span class="pre">created_at.</span></tt></p>
+<p class="last">Another option, again depending on your use case, might be to use
+separate collections, one for each status.</p>
+</div>
+<div class="admonition-example admonition">
+<p class="first admonition-title">Example</p>
+<p>Consider an index <tt class="docutils literal"><span class="pre">{</span> <span class="pre">a</span> <span class="pre">:</span> <span class="pre">1</span> <span class="pre">}</span></tt> (i.e. an index on the key <tt class="docutils literal"><span class="pre">a</span></tt>
+sorted in ascending order) on a collection where <tt class="docutils literal"><span class="pre">a</span></tt> has three
+values evenly distributed across the collection:</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="p">{</span> <span class="nx">_id</span><span class="o">:</span> <span class="nx">ObjectId</span><span class="p">(),</span> <span class="nx">a</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span> <span class="nx">b</span><span class="o">:</span> <span class="s2">"ab"</span> <span class="p">}</span>
+<span class="p">{</span> <span class="nx">_id</span><span class="o">:</span> <span class="nx">ObjectId</span><span class="p">(),</span> <span class="nx">a</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span> <span class="nx">b</span><span class="o">:</span> <span class="s2">"cd"</span> <span class="p">}</span>
+<span class="p">{</span> <span class="nx">_id</span><span class="o">:</span> <span class="nx">ObjectId</span><span class="p">(),</span> <span class="nx">a</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span> <span class="nx">b</span><span class="o">:</span> <span class="s2">"ef"</span> <span class="p">}</span>
+<span class="p">{</span> <span class="nx">_id</span><span class="o">:</span> <span class="nx">ObjectId</span><span class="p">(),</span> <span class="nx">a</span><span class="o">:</span> <span class="mi">2</span><span class="p">,</span> <span class="nx">b</span><span class="o">:</span> <span class="s2">"jk"</span> <span class="p">}</span>
+<span class="p">{</span> <span class="nx">_id</span><span class="o">:</span> <span class="nx">ObjectId</span><span class="p">(),</span> <span class="nx">a</span><span class="o">:</span> <span class="mi">2</span><span class="p">,</span> <span class="nx">b</span><span class="o">:</span> <span class="s2">"lm"</span> <span class="p">}</span>
+<span class="p">{</span> <span class="nx">_id</span><span class="o">:</span> <span class="nx">ObjectId</span><span class="p">(),</span> <span class="nx">a</span><span class="o">:</span> <span class="mi">2</span><span class="p">,</span> <span class="nx">b</span><span class="o">:</span> <span class="s2">"no"</span> <span class="p">}</span>
+<span class="p">{</span> <span class="nx">_id</span><span class="o">:</span> <span class="nx">ObjectId</span><span class="p">(),</span> <span class="nx">a</span><span class="o">:</span> <span class="mi">3</span><span class="p">,</span> <span class="nx">b</span><span class="o">:</span> <span class="s2">"pq"</span> <span class="p">}</span>
+<span class="p">{</span> <span class="nx">_id</span><span class="o">:</span> <span class="nx">ObjectId</span><span class="p">(),</span> <span class="nx">a</span><span class="o">:</span> <span class="mi">3</span><span class="p">,</span> <span class="nx">b</span><span class="o">:</span> <span class="s2">"rs"</span> <span class="p">}</span>
+<span class="p">{</span> <span class="nx">_id</span><span class="o">:</span> <span class="nx">ObjectId</span><span class="p">(),</span> <span class="nx">a</span><span class="o">:</span> <span class="mi">3</span><span class="p">,</span> <span class="nx">b</span><span class="o">:</span> <span class="s2">"tv"</span> <span class="p">}</span>
+</pre></div>
+</div>
+<p>If you query for <tt class="docutils literal"><span class="pre">{</span> <span class="pre">a:</span> <span class="pre">2,</span> <span class="pre">b:</span> <span class="pre">"no"</span> <span class="pre">}</span></tt> MongoDB must scan 3
+<a class="reference internal" href="http://docs.mongodb.org/manual/reference/glossary/#term-document"><em class="xref std std-term">documents</em></a> in the collection to return the one
+matching result. Similarly, a query for <tt class="docutils literal"><span class="pre">{</span> <span class="pre">a:</span> <span class="pre">{</span> <span class="pre">$gt:</span> <span class="pre">1},</span> <span class="pre">b:</span> <span class="pre">"tv"</span> <span class="pre">}</span></tt>
+must scan 6 documents, also to return one result.</p>
+<p>Consider the same index on a collection where <tt class="docutils literal"><span class="pre">a</span></tt> has <em>nine</em> values
+evenly distributed across the collection:</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="p">{</span> <span class="nx">_id</span><span class="o">:</span> <span class="nx">ObjectId</span><span class="p">(),</span> <span class="nx">a</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span> <span class="nx">b</span><span class="o">:</span> <span class="s2">"ab"</span> <span class="p">}</span>
+<span class="p">{</span> <span class="nx">_id</span><span class="o">:</span> <span class="nx">ObjectId</span><span class="p">(),</span> <span class="nx">a</span><span class="o">:</span> <span class="mi">2</span><span class="p">,</span> <span class="nx">b</span><span class="o">:</span> <span class="s2">"cd"</span> <span class="p">}</span>
+<span class="p">{</span> <span class="nx">_id</span><span class="o">:</span> <span class="nx">ObjectId</span><span class="p">(),</span> <span class="nx">a</span><span class="o">:</span> <span class="mi">3</span><span class="p">,</span> <span class="nx">b</span><span class="o">:</span> <span class="s2">"ef"</span> <span class="p">}</span>
+<span class="p">{</span> <span class="nx">_id</span><span class="o">:</span> <span class="nx">ObjectId</span><span class="p">(),</span> <span class="nx">a</span><span class="o">:</span> <span class="mi">4</span><span class="p">,</span> <span class="nx">b</span><span class="o">:</span> <span class="s2">"jk"</span> <span class="p">}</span>
+<span class="p">{</span> <span class="nx">_id</span><span class="o">:</span> <span class="nx">ObjectId</span><span class="p">(),</span> <span class="nx">a</span><span class="o">:</span> <span class="mi">5</span><span class="p">,</span> <span class="nx">b</span><span class="o">:</span> <span class="s2">"lm"</span> <span class="p">}</span>
+<span class="p">{</span> <span class="nx">_id</span><span class="o">:</span> <span class="nx">ObjectId</span><span class="p">(),</span> <span class="nx">a</span><span class="o">:</span> <span class="mi">6</span><span class="p">,</span> <span class="nx">b</span><span class="o">:</span> <span class="s2">"no"</span> <span class="p">}</span>
+<span class="p">{</span> <span class="nx">_id</span><span class="o">:</span> <span class="nx">ObjectId</span><span class="p">(),</span> <span class="nx">a</span><span class="o">:</span> <span class="mi">7</span><span class="p">,</span> <span class="nx">b</span><span class="o">:</span> <span class="s2">"pq"</span> <span class="p">}</span>
+<span class="p">{</span> <span class="nx">_id</span><span class="o">:</span> <span class="nx">ObjectId</span><span class="p">(),</span> <span class="nx">a</span><span class="o">:</span> <span class="mi">8</span><span class="p">,</span> <span class="nx">b</span><span class="o">:</span> <span class="s2">"rs"</span> <span class="p">}</span>
+<span class="p">{</span> <span class="nx">_id</span><span class="o">:</span> <span class="nx">ObjectId</span><span class="p">(),</span> <span class="nx">a</span><span class="o">:</span> <span class="mi">9</span><span class="p">,</span> <span class="nx">b</span><span class="o">:</span> <span class="s2">"tv"</span> <span class="p">}</span>
+</pre></div>
+</div>
+<p>If you query for <tt class="docutils literal"><span class="pre">{</span> <span class="pre">a:</span> <span class="pre">2,</span> <span class="pre">b:</span> <span class="pre">"cd"</span> <span class="pre">}</span></tt>, MongoDB must scan only one
+document to fulfill the query. The index and query are more selective
+because the values of <tt class="docutils literal"><span class="pre">a</span></tt> are evenly distributed <em>and</em> the query
+can select a specific document using the index.</p>
+<p class="last">However, although the index on <tt class="docutils literal"><span class="pre">a</span></tt> is more selective, a query such
+as <tt class="docutils literal"><span class="pre">{</span> <span class="pre">a:</span> <span class="pre">{</span> <span class="pre">$gt:</span> <span class="pre">5</span> <span class="pre">},</span> <span class="pre">b:</span> <span class="pre">"tv"</span> <span class="pre">}</span></tt> would still need to scan 4
+documents.</p>
+</div>
+<p>If overall selectivity is low, and if MongoDB must read a number of
+documents to return results, then some queries may perform faster
+without indexes. To determine performance, see
+<a class="reference internal" href="http://docs.mongodb.org/manual/administration/indexes/#indexes-measuring-use"><em>Measure Index Use</em></a>.</p>
+</div>
+<div class="section" id="consider-performance-when-creating-indexes-for-write-heavy-applications">
+<h2>Consider Performance when Creating Indexes for Write-heavy Applications<a class="headerlink" href="#consider-performance-when-creating-indexes-for-write-heavy-applications" title="Permalink to this headline">¶</a></h2>
+<p>If your application is write-heavy, then be careful when creating new
+indexes, since each additional index with impose a
+write-performance penalty. In general, don’t be careless about adding
+indexes. Add indexes to complement your queries. Always have
+a good reason for adding a new index, and be sure to benchmark
+alternative strategies.</p>
+<div class="section" id="consider-insert-throughput">
+<h3>Consider Insert Throughput<a class="headerlink" href="#consider-insert-throughput" title="Permalink to this headline">¶</a></h3>
+<p>MongoDB must update <em>all</em> indexes associated with a collection after
+every insert, update, or delete operation. For update operations, if
+the updated document does not move to a new location, then MongoDB only
+modifies the updated fields in the index. Therefore, every index on a
+collection adds some amount of overhead to these write operations. In
+almost every case, the performance gains that indexes realize for read
+operations are worth the insertion penalty. However, in some cases:</p>
+<ul class="simple">
+<li>An index to support an infrequent query might incur more
+insert-related costs than savings in read-time.</li>
+<li>If you have many indexes on a collection with a high insert throughput
+and a number of related indexes, you may find better overall
+performance with a smaller number of indexes, even if some queries
+are less optimally supported by an index.</li>
+<li>If your indexes and queries are not sufficiently <a class="reference internal" href="#index-selectivity"><em>selective</em></a>, the speed improvements for query operations
+may not offset the costs of maintaining an index. For more
+information see <a class="reference internal" href="#index-selectivity"><em>Create Queries that Ensure Selectivity</em></a>.</li>
+</ul>
+</div>
+</div>
+</div>
+
+
+<div id="btnv">
+<ul id="btnvl">
+<li id="btnvpr"><a href="http://docs.mongodb.org/manual/administration/indexes/" title="Previous Section: Indexing Operations">&lt; &nbsp; Indexing Operations</a></li>
+<li id="btnvup"><a href="http://docs.mongodb.org/manual/indexes/" title="Parent Section: Indexes">/\&nbsp; Indexes</a></li>
+<li id="btnvnx"><a href="http://docs.mongodb.org/manual/applications/geospatial-indexes/" title="Next Section: Geospatial Queries with 2d Indexes">Geospatial Queries with 2d Indexes &nbsp;&gt;</a></li>
+</ul>
+</div>
+</div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper"><h3><a href="http://docs.mongodb.org/manual/contents/">MongoDB Manual</a>
+
+<small><a href="http://docs.mongodb.org/manual/genindex/">(Index)</a></small>
+
+</h3>
+
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="http://docs.mongodb.org/manual/installation/">Installing MongoDB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://docs.mongodb.org/manual/administration/">Administration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://docs.mongodb.org/manual/security/">Security</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://docs.mongodb.org/manual/crud/">Core MongoDB Operations (CRUD)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://docs.mongodb.org/manual/aggregation/">Aggregation</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="http://docs.mongodb.org/manual/indexes/">Indexes</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="http://docs.mongodb.org/manual/core/indexes/">Indexing Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="http://docs.mongodb.org/manual/administration/indexes/">Indexing Operations</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="">Indexing Strategies</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#strategies">Strategies</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#create-indexes-to-support-your-queries">Create Indexes to Support Your Queries</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#use-compound-indexes-to-support-several-different-queries">Use Compound Indexes to Support Several Different Queries</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#create-indexes-that-support-covered-queries">Create Indexes that Support Covered Queries</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#use-indexes-to-sort-query-results">Use Indexes to Sort Query Results</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#ensure-indexes-fit-ram">Ensure Indexes Fit RAM</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#indexes-that-hold-only-recent-values-in-ram">Indexes that Hold Only Recent Values in RAM</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#create-queries-that-ensure-selectivity">Create Queries that Ensure Selectivity</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#consider-performance-when-creating-indexes-for-write-heavy-applications">Consider Performance when Creating Indexes for Write-heavy Applications</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#consider-insert-throughput">Consider Insert Throughput</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="http://docs.mongodb.org/manual/applications/geospatial-indexes/">Geospatial Queries with <tt class="docutils literal"><span class="pre">2d</span></tt> Indexes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="http://docs.mongodb.org/manual/core/geospatial-indexes/"><tt class="docutils literal"><span class="pre">2d</span></tt> Geospatial Indexes</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="http://docs.mongodb.org/manual/replication/">Replication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://docs.mongodb.org/manual/sharding/">Sharding</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://docs.mongodb.org/manual/applications/">Application Development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://docs.mongodb.org/manual/mongo/">Using the <tt class="docutils literal"><span class="pre">mongo</span></tt> Shell</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://docs.mongodb.org/manual/use-cases/">Use Cases</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://docs.mongodb.org/manual/tutorial/">MongoDB Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://docs.mongodb.org/manual/faq/">Frequently Asked Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://docs.mongodb.org/manual/reference/">Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://docs.mongodb.org/manual/about/">About MongoDB Documentation</a></li>
+</ul>
+
+<h3 style="padding-bottom: 1em;"><a href="http://www.mongodb.org/about/">MongoDB.org</a></h3>
+<h3 style="padding-bottom: 1em;"><a href="http://docs.mongodb.org/ecosystem/">MongoDB Ecosystem</a></h3><h3>Formats</h3>
+<ul class="this-page-menu">
+  <li><a href="http://docs.mongodb.org/master/single/">MongoDB Manual, Single HTML Page</a></li>
+  <li><a href="http://docs.mongodb.org/master/MongoDB-Manual-master.pdf" rel="nofollow">MongoDB Manual, PDF Format</a></li>
+  <li><a href="http://docs.mongodb.org/master/MongoDB-Manual-master.epub" rel="nofollow">MongoDB Manual, ePub Format</a></li>
+</ul><h3>MongoDB Resources</h3>
+
+<ul>
+ <li><strong>Getting Started</strong>
+   <ul>
+     <li><a href="http://www.mongodb.org/about/introduction">Introduction</a></li>
+     <li><a href="http://www.mongodb.org/downloads">Downloads</a></li>
+   </ul>
+ </li>
+ <li><strong><a href="http://www.mongodb.org/about/community">Community</a> and <a href="http://docs.mongodb.org/ecosystem/">Ecosystem</a></strong>
+   <ul>
+     <li><a href="http://www.10gen.com/">10gen</a></li>
+     <li><a href="http://www.10gen.com/events">MongoDB Events</a></li>
+     <li><a href="http://planet.mongodb.org/">Planet MongoDB</a></li>
+     <li><a href="http://mongodb.org/about/community/masters">MongoDB Masters</a></li>
+     <li><a href="http://www.10gen.com/presentations">Slides and Video</a></li>
+     <li><a href="http://docs.mongodb.org/ecosystem/platforms/">Hosting Center</a></li>
+     <li><a href="http://docs.mongodb.org/ecosystem/platforms/windows">Windows</a></li>
+     <li><a href="http://www.10gen.com/products/mms/">MongoDB Monitoring Service</a> (<a href="http://mms.10gen.com/help/">docs</a>)</li>
+     <li><a href="http://docs.mongodb.org/ecosystem/tools/administration-interfaces/">Administrative Interfaces</a></li>
+     <li><a href="http://www.10gen.com/books/">MongoDB Books</a></li>
+   </ul>
+ </li>
+ <li><strong><a href="http://docs.mongodb.org/ecosystem/drivers/">Drivers</a></strong>
+   <ul>
+     <li><a href="http://docs.mongodb.org/ecosystem/drivers/javascript">JavaScript</a> (<a href="http://api.mongodb.org/js/current">docs</a>)</li>
+     <li><a href="http://docs.mongodb.org/ecosystem/drivers/python">Python</a> (<a href="http://api.mongodb.org/python/current">docs</a>)</li>
+     <li><a href="http://docs.mongodb.org/ecosystem/drivers/ruby">Ruby</a> (<a href="http://api.mongodb.org/ruby/current">docs</a>)</li>
+     <li><a href="http://docs.mongodb.org/ecosystem/drivers/php">PHP</a> (<a href="http://php.net/mongo/">docs</a>)</li>
+     <li><a href="http://docs.mongodb.org/ecosystem/drivers/perl">Perl</a> (<a href="http://api.mongodb.org/perl/current/">docs</a>)</li>
+     <li><a href="http://docs.mongodb.org/ecosystem/drivers/java">Java</a> (<a href="http://api.mongodb.org/java/current">docs</a>)</li>
+     <li><a href="http://docs.mongodb.org/ecosystem/drivers/scala">Scala</a> (<a href="http://api.mongodb.org/scala/casbah/current/">docs</a>)</li>
+     <li><a href="http://docs.mongodb.org/ecosystem/drivers/csharp">C#</a> (<a href="http://api.mongodb.org/csharp/current/">docs</a>)</li>
+     <li><a href="http://docs.mongodb.org/ecosystem/drivers/c">C</a> (<a href="http://api.mongodb.org/c/current/">docs</a>)</li>
+     <li><a href="http://docs.mongodb.org/ecosystem/drivers/cpp">C++</a> (<a href="http://api.mongodb.org/cplusplus/current/">docs</a>)</li>
+     <li><a href="http://hackage.haskell.org/package/mongoDB">Haskell</a> (<a href="http://api.mongodb.org/haskell">docs</a>)</li>
+     <li><a href="http://docs.mongodb.org/ecosystem/drivers/erlang">Erlang</a> (<a href="http://api.mongodb.org/erlang">docs</a>)</li>
+   </ul>
+ </li>
+</ul>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+  <div class="footer">
+    <p>
+       © <a href="">Copyright</a> 2011-2013, 10gen, Inc. 
+       MongoDB®, Mongo®, and the leaf logo are registered trademarks of 10gen, Inc.
+    </p>
+  </div><script type="text/javascript">
+var _gaq = _gaq || [];
+var pluginUrl = (('https:' == document.location.protocol) ? 'https://ssl.' : 'http://www.') + 'google-analytics.com/plugins/ga/inpage_linkid.js';
+_gaq.push(['_require', 'inpage_linkid', pluginUrl]);
+_gaq.push(['_setAccount', 'UA-7301842-8']);
+_gaq.push(['_setDomainName', 'docs.mongodb.org']);
+_gaq.push(['_trackPageview']);
+(function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0];
+        s.parentNode.insertBefore(ga, s);
+        })();
+</script>
+
+<script type="text/javascript">
+document.write(unescape("%3Cscript src='" + document.location.protocol + "//munchkin.marketo.net/munchkin.js' type='text/javascript'%3E%3C/script%3E"));
+</script><script src="Indexing%20Strategies%20%E2%80%94%20MongoDB%20Manual_files/munchkin.htm" type="text/javascript"></script>
+<script>try { mktoMunchkin("017-HGS-593"); } catch(e) {}</script><script type="text/javascript">
+jQuery.ajax({
+    url: "https://jira.mongodb.org/s/en_US-bxctp1/782/6/1.2.4/_/download/batch/com.atlassian.jira.collector.plugin.jira-issue-collector-plugin:issuecollector-embededjs/com.atlassian.jira.collector.plugin.jira-issue-collector-plugin:issuecollector-embededjs.js?collectorId=298ba4e7",
+    type: "get",
+    cache: true,
+    dataType: "script"
+});
+window.ATL_JQ_PAGE_PROPS =  {
+"triggerFunction": function(showCollectorDialog) {
+jQuery("#jirafeedback").click(function(e) {e.preventDefault();showCollectorDialog();});
+jQuery("#jirafooter").click(function(e) {e.preventDefault();showCollectorDialog();});
+}};
+</script>
+
+<div style="display: none;" id="atlwdg-blanket" class="atlwdg-blanket"></div><div class="atlwdg-popup atlwdg-box-shadow atlwdg-hidden" id="atlwdg-container"></div><table class="gstl_0 gssb_c" style="width: 129px; display: none; top: 70px; left: 751px; position: absolute;" cellpadding="0" cellspacing="0"><tbody><tr><td class="gssb_f"></td><td style="width: 100%;" class="gssb_e"></td></tr></tbody></table></body></html>

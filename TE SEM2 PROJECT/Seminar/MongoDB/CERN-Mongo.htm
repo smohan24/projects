@@ -1,0 +1,577 @@
+<html><head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="-1">
+        <link rel="alternate" type="application/rss+xml" title="JavaRanch: CERN goes Mongo" href="http://www.coderanch.com/forums/rss/topicPosts/595440">
+    <meta name="description" content="Interesting to see NoSQL being taken up in this context: http://www.computerweekly.com/news/2240166469/Cornell-Cern-project-plumps-for-NoSQL-DBMS">
+        <meta name="keywords" content="computer,context,dbms,http,project,text,this">
+
+<style type="text/css">@import url( /templates/default/styles/style.css?1363480508945 );</style>
+
+
+<title>CERN goes Mongo (MongoDB forum at JavaRanch)</title>
+
+    <link rel="canonical" href="http://www.coderanch.com/t/595440//databases/CERN-Mongo">
+    <link rel="alternate" media="handheld" href="http://www.coderanch.com/mobile/t/595440//databases/CERN-Mongo?foo=a">
+<link rel="search" type="application/opensearchdescription+xml" href="http://www.coderanch.com/how-to/javaranch-saloon-os.xml" title="JavaRanch Saloon">
+<link rel="search" type="application/opensearchdescription+xml" href="http://www.coderanch.com/how-to/javaranch-faq-os.xml" title="JavaRanch FAQ">
+</head>
+
+<body class="en_US">
+
+
+    <div class="shngl" align="center">
+        <span style="color:blue">the trailboss abuses his CodeRanch power for his other stuff (power corrupts.  absolute power <s>corrupts absolutely</s> is kinda neat!)</span><br>
+
+<a href="http://www.richsoil.com/CFL-fluorescent-light-bulbs.jsp#cfl" title="watch video about the shenanigans with light bulbs">
+<img src="CERN-Mongo_files/permaculture-light-bulbs.htm" alt="permaculture light bulbs"></a>
+
+<a href="http://www.richsoil.com/electric-heat.jsp#bubble" title="watch video about cutting 87% off of the electric heat bill">
+<img src="CERN-Mongo_files/permaculture-heat-bubble.htm" alt="permaculture electric heat"></a>
+
+<a href="http://www.richsoil.com/cast-iron.jsp#pan" title="watch video about restoring and seasoning a cast iron pan">
+<img src="CERN-Mongo_files/permaculture-cast-iron.htm" alt="permaculture cast iron"></a>
+
+<a href="http://www.richsoil.com/rocket-stove-mass-heater.jsp#wood" title="watch video about a wood burning stove that uses 10 times less wood">
+<img src="CERN-Mongo_files/permaculture-rmh.htm" alt="permaculture wood burning stove"></a>
+
+<a href="http://www.permies.com/forums/posts/list/3562#77045" title="watch video about three solar food dehydrators">
+<img src="CERN-Mongo_files/permaculture-solar.htm" alt="permaculture solar food dehydrators"></a>
+
+    </div>
+
+<table border="0" width="100%">
+    <tbody><tr>
+        <td>
+            <table border="0" cellpadding="0" cellspacing="0" width="100%">
+                <tbody><tr>
+                    <td align="center">
+
+                            <img src="CERN-Mongo_files/moosefly.gif" alt="The moose likes MongoDB and the fly likes CERN goes Mongo" title="" border="0" vspace="1">
+                    </td>
+                    <td class="logo" valign="middle">
+                        A friendly place for programming greenhorns!
+                    </td>
+
+                    <td align="center" valign="middle" width="100%">
+                        <span class="boardtitle">Big Moose Saloon</span>
+                        <table border="0" cellpadding="2" cellspacing="0">
+                            <tbody><tr>
+                                <td align="center" nowrap="nowrap" valign="top">&nbsp;
+                                    <a id="search" class="mainmenu" href="http://www.coderanch.com/forums/search/filters/115"><b>Search</b></a>
+                                    | <a id="faq" class="mainmenu nonForumLink" href="http://www.coderanch.com/how-to/java/Java-FAQ"><b>Java FAQ</b></a>
+                                    | <a id="latest" class="mainmenu" href="http://www.coderanch.com/forums/recentTopics/list">Recent Topics</a>
+
+                                    <br>
+
+
+
+                                        <a id="login" class="mainmenu" href="http://www.coderanch.com/forums/user/login">Register / Login</a>
+                                        <br>
+
+                                    </td>
+                                </tr>
+                        </tbody></table>
+                    </td>
+                </tr>
+            </tbody></table>
+        </td>
+    </tr>
+    <tr>
+        <td>
+
+<script type="text/javascript" src="CERN-Mongo_files/userLocalTime.js"></script>
+<script type="text/javascript" src="CERN-Mongo_files/jquery_002.js"></script>
+<script type="text/javascript" src="CERN-Mongo_files/jquery.js"></script>
+<script type="text/javascript" src="CERN-Mongo_files/post_show.js"></script>
+<script type="text/javascript" src="CERN-Mongo_files/post.js"></script>
+<script type="text/javascript" src="CERN-Mongo_files/pagination.js"></script>
+<script type="text/javascript" src="CERN-Mongo_files/wz_tooltip.js"></script>
+<!--
+<script type="text/javascript" src="/templates/default/js/social.js"></script>
+-->
+
+
+<script type="text/javascript">
+function showEmail(beforeAt, afterAt)
+{
+	return beforeAt + "@" + afterAt;
+}
+
+function addBookmark(relationType, relationId)
+{
+	var w = window.open('/forums/bookmarks/insert/' + relationType + '/' + relationId + '', 'bookmark_add', 'width=700, height=200, scrollbars=auto, resizable=true');
+	w.focus();
+}
+var forumUrlPrefix = "/forums";
+var imagesServedFrom = "http://cache-www.coderanch.com";
+
+
+    function reportToModerationPrompt(postId, topicId) {
+        var reason = prompt("Reason for reporting this post:");
+
+        if (reason == null || reason == "") {
+            alert("Please specify a reason for reporting this post");
+            return false;
+        } else {
+        	var link = '/jforum?module=posts&action=reportToModerator&post_id=' + postId + '&topic_id=' + topicId;
+            link += "&reason=" + encodeURIComponent(reason);
+        }
+        submitForm(link);
+
+        return true;
+    }
+
+    var watchImage = "http://cache-www.coderanch.com/templates/default/images/watch_topic_start.gif";
+    var unwatchImage = "http://cache-www.coderanch.com/templates/default/images/stop_watching.gif";
+    var watchURL = "/forums/posts/watch/0/595440";
+    var unwatchURL = "/forums/posts/unwatch/0/595440";
+    var unwatchHandler = function() { turnOn=false; toggleWatch(); return false; };
+    var watchHandler = function() { turnOn=true; toggleWatch(); return false; };
+    var turnOn, remove;
+
+    function toggleWatch () {
+        $.ajax({
+            url: turnOn ? watchURL : unwatchURL,
+            type: 'POST',
+            dataType: 'json',
+            headers: {'OWASP_CSRFTOKEN': 'IEPV-LL0R-H2VQ-V238-AYT7-LFYQ-DTPH-QW1W'},
+            success: function (data) {
+                //$("#messages").html(data.message);
+                if (turnOn) {
+                    $(".toggleWatchImage")[0].src = unwatchImage;
+                    $(".toggleWatchImage")[1].src = unwatchImage;
+                    $(".toggleWatchLink")[0].href = unwatchURL;
+                    $(".toggleWatchLink")[1].href = unwatchURL;
+                    $(".toggleWatchLink")[0].onclick = unwatchHandler;
+                    $(".toggleWatchLink")[1].onclick = unwatchHandler;
+                } else {
+                    if (remove) {
+                        // for unwatching locked topics
+                        $(".toggleWatchImage")[0].style.visibility = "hidden";
+                        $(".toggleWatchImage")[1].style.visibility = "hidden";
+                        $(".toggleWatchLink")[0].href = "#";
+                        $(".toggleWatchLink")[1].href = "#";
+                        $(".toggleWatchLink")[0].onclick = "return false;";
+                        $(".toggleWatchLink")[1].onclick = "return false;";
+                    } else {
+                        $(".toggleWatchImage")[0].src = watchImage;
+                        $(".toggleWatchImage")[1].src = watchImage;
+                        $(".toggleWatchLink")[0].href = watchURL;
+                        $(".toggleWatchLink")[1].href = watchURL;
+                        $(".toggleWatchLink")[0].onclick = watchHandler;
+                        $(".toggleWatchLink")[1].onclick = watchHandler;
+                    }
+                }
+            }
+        });
+    }
+
+
+</script>
+
+
+<script>
+function submitForm(newAction) {
+	var form = document.helperForm;
+	form.action = newAction;
+	helperForm.submit();
+}</script>
+<form name="helperForm" action="#" method="post"></form>
+
+<table align="center" border="0" cellpadding="10" cellspacing="0" width="97%">
+    <tbody><tr>
+        <td class="bodyline">
+        <span class="nav">
+            <a class="maintitle safe-get" href="http://www.javaranch.com/">JavaRanch</a> » <a class="maintitle safe-get" href="http://www.coderanch.com/forums">Java Forums</a> »
+            <a class="maintitle safe-get" href="http://www.coderanch.com/forums/c/16/databases">Databases</a> »
+            <a class="maintitle safe-get" href="http://www.coderanch.com/forums/f-115/">MongoDB</a>
+        </span>
+
+
+
+            
+<table class="threadbar" border="0" cellpadding="2" cellspacing="2" width="100%">
+  <tbody><tr>
+    <td align="left" valign="middle">
+    			<img class="opaque" title="You must login or register" alt="Reply" src="CERN-Mongo_files/reply.gif" height="25px" width="82px">
+			<img class="opaque" title="You must login or register" src="CERN-Mongo_files/bookmark_it.gif" alt="Bookmark &quot;CERN goes Mongo&quot;" height="25" width="82">
+		<img class="opaque" title="You must login or register" src="CERN-Mongo_files/watch_topic_start.gif" alt="Watch &quot;CERN goes Mongo&quot;" height="25" width="82">
+    </td>
+    <td align="right">
+      	<img class="opaque" title="You must login or register" alt="New topic" src="CERN-Mongo_files/post.gif" height="25px" width="82px">
+    </td>    
+  </tr>
+</tbody></table>
+
+            <a name="2715179">
+
+
+                </a><table id="postTable" class="forumline" border="0" cellpadding="0" cellspacing="0" width="100%">
+                                <tbody><tr>
+                    <th class="author" nowrap="nowrap" width="18%">Author</th>
+                    <th class="subject">
+                        <h1>
+                            <span id="topicSubject">CERN goes Mongo</span>
+                        </h1>
+                    </th>
+                </tr>
+
+                                
+
+
+
+
+
+                    <tr class="firstRowOfPost">
+
+
+
+                        <td class="row1 userPostInfo" rowspan="3" align="left" valign="top">
+                            <a name="2715179"></a>
+<span class="authorNameNoLink" title="You must login or register">chris webster</span>
+
+
+<br>
+
+<span class="gensmall">
+    Bartender
+    <br>
+
+<br>
+
+
+    Joined: Mar 01, 2009<br>
+    Posts: 1011
+<br>
+
+
+</span>
+
+ 
+  &nbsp;&nbsp;&nbsp;&nbsp;<div class="gen numCowsImage"><div class="numCowsImageText">&nbsp;&nbsp;&nbsp;&nbsp;5</div></div>
+
+<br>
+
+<div class="bumperStickers">
+    <a class="nonForumLink" href="http://www.coderanch.com/how-to/java/BumperStickers" target="_blank">I like...</a><br>
+        <img src="CERN-Mongo_files/16_eclipse.gif" alt="Eclipse IDE" title="Eclipse IDE" border="0">
+        <img src="CERN-Mongo_files/16_oracle.gif" alt="Oracle" title="Oracle" border="0">
+        <img src="CERN-Mongo_files/16_python.jpeg" alt="Python" title="Python" border="0">
+</div>
+
+
+                        </td>
+
+                        <td colspan="1" class="row1" valign="top">
+<div class="postinfo row1">
+	<div class="date">
+		<span class="postdetails">posted <script>"Oct 17, 2012 08:16:18".toLocaleDateTime();</script>Wednesday, October 17, 2012 1:46:18 PM<noscript><span class="lastPostTime">Oct 17, 2012 02:16:18</span></noscript></span>                
+
+
+
+    </div>
+	<div class="action">
+			<div id="like_message_2715179" class="likesHiddenDiv">
+				<img src="CERN-Mongo_files/thumbs-up.gif">
+				0        
+			</div>
+			<img class="opaque" alt="Quote" title="You must login or register" src="CERN-Mongo_files/icon_quote.gif" height="18px" width="59">
+	</div>
+</div>
+                        </td>
+                    </tr>
+
+                    <tr class="messageRow">
+
+                        <td class="row1 postbody" id="post_text_2715179" valign="top">
+                            <span class="postbody">
+                                    Interesting to see NoSQL being taken up in this context:
+<br> 
+<br> <a class="snap_shots" href="http://www.computerweekly.com/news/2240166469/Cornell-Cern-project-plumps-for-NoSQL-DBMS" target="_blank" rel="nofollow">http://www.computerweekly.com/news/2240166469/Cornell-Cern-project-plumps-for-NoSQL-DBMS</a>
+                            </span>
+
+
+                        </td>
+                    </tr>
+
+                        <tr>
+                            <td colspan="2" class="row1" height="28" width="100%">
+                            <br>
+                                <hr>
+                                <span class="userSignature">Oracle bloke</span>
+                            </td>
+                        </tr>
+                    <tr>
+                        <td class="spacerow row1" colspan="2" height="1"><img src="CERN-Mongo_files/spacer.gif" alt="" height="1" width="1"></td>
+                    </tr>
+
+
+
+
+                    <tr class="firstRowOfPost">
+
+
+
+                        <td class="row2 userPostInfo" rowspan="3" align="left" valign="top">
+                            <a name="2715499"></a>
+<span class="authorNameNoLink" title="You must login or register">Joe Harry</span>
+
+
+<br>
+
+<span class="gensmall">
+    Ranch Hand
+    <br>
+
+<br>
+
+
+    Joined: Sep 26, 2006<br>
+    Posts: 8795
+<br>
+
+
+</span>
+
+
+<br>
+
+<div class="bumperStickers">
+    <a class="nonForumLink" href="http://www.coderanch.com/how-to/java/BumperStickers" target="_blank">I like...</a><br>
+        <img src="CERN-Mongo_files/16_eclipse.gif" alt="Eclipse IDE" title="Eclipse IDE" border="0">
+        <img src="CERN-Mongo_files/16_macppc.gif" alt="Mac PPC" title="Mac PPC" border="0">
+        <img src="CERN-Mongo_files/16_ubuntu.gif" alt="Ubuntu" title="Ubuntu" border="0">
+</div>
+
+
+                        </td>
+
+                        <td colspan="1" class="row2" valign="top">
+<div class="postinfo row2">
+	<div class="date">
+		<span class="postdetails">posted <script>"Oct 17, 2012 18:57:36".toLocaleDateTime();</script>Thursday, October 18, 2012 12:27:36 AM<noscript><span class="lastPostTime">Oct 17, 2012 12:57:36</span></noscript></span>                
+
+		<img class="opaque" alt="private message" title="You must login or register" src="CERN-Mongo_files/icon_pm.gif" height="18px" width="59px">
+
+
+    </div>
+	<div class="action">
+			<div id="like_message_2715499" class="likesHiddenDiv">
+				<img src="CERN-Mongo_files/thumbs-up.gif">
+				0        
+			</div>
+			<img class="opaque" alt="Quote" title="You must login or register" src="CERN-Mongo_files/icon_quote.gif" height="18px" width="59">
+	</div>
+</div>
+                        </td>
+                    </tr>
+
+                    <tr class="messageRow">
+
+                        <td class="row2 postbody" id="post_text_2715499" valign="top">
+                            <span class="postbody">
+                                    Feels like I'm making good decisions
+ in learning tools and technologies that are considered by many to be 
+the next big thing. Scala, mongoDB, ApolloMQ.... and the list will go 
+on.
+                            </span>
+
+
+                        </td>
+                    </tr>
+
+                        <tr>
+                            <td colspan="2" class="row2" height="28" width="100%">
+                            <br>
+                                <hr>
+                                <span class="userSignature">SCJP 1.4, <a class="snap_shots" href="http://faq.javaranch.com/java/ScwcdHints" target="_new">SCWCD 1.4 - Hints for you</a>, <a class="snap_shots" href="http://faq.javaranch.com/java/ScbcdHints" target="_new">SCBCD Hints - Demnachst</a>, SCDJWS - Auch Demnachst
+<br>Did a rm -R / to find out that I lost my entire Linux installation!</span>
+                            </td>
+                        </tr>
+                    <tr>
+                        <td class="spacerow row2" colspan="2" height="1"><img src="CERN-Mongo_files/spacer.gif" alt="" height="1" width="1"></td>
+                    </tr>
+
+
+
+
+                    <tr class="firstRowOfPost">
+
+
+
+                        <td class="row1 userPostInfo" rowspan="2" align="left" valign="top">
+                            <a name="2715728"></a>
+<span class="authorNameNoLink" title="You must login or register">chris webster</span>
+
+
+<br>
+
+<span class="gensmall">
+    Bartender
+    <br>
+
+<br>
+
+
+    Joined: Mar 01, 2009<br>
+    Posts: 1011
+<br>
+
+
+</span>
+
+ 
+  &nbsp;&nbsp;&nbsp;&nbsp;<div class="gen numCowsImage"><div class="numCowsImageText">&nbsp;&nbsp;&nbsp;&nbsp;5</div></div>
+
+<br>
+
+<div class="bumperStickers">
+    <a class="nonForumLink" href="http://www.coderanch.com/how-to/java/BumperStickers" target="_blank">I like...</a><br>
+        <img src="CERN-Mongo_files/16_eclipse.gif" alt="Eclipse IDE" title="Eclipse IDE" border="0">
+        <img src="CERN-Mongo_files/16_oracle.gif" alt="Oracle" title="Oracle" border="0">
+        <img src="CERN-Mongo_files/16_python.jpeg" alt="Python" title="Python" border="0">
+</div>
+
+
+                        </td>
+
+                        <td colspan="1" class="row1" valign="top">
+<div class="postinfo row1">
+	<div class="date">
+		<span class="postdetails">posted <script>"Oct 18, 2012 08:34:09".toLocaleDateTime();</script>Thursday, October 18, 2012 2:04:09 PM<noscript><span class="lastPostTime">Oct 18, 2012 02:34:09</span></noscript></span>                
+
+
+
+    </div>
+	<div class="action">
+			<div id="like_message_2715728" class="likesHiddenDiv">
+				<img src="CERN-Mongo_files/thumbs-up.gif">
+				0        
+			</div>
+			<img class="opaque" alt="Quote" title="You must login or register" src="CERN-Mongo_files/icon_quote.gif" height="18px" width="59">
+	</div>
+</div>
+                        </td>
+                    </tr>
+
+                    <tr class="messageRow">
+
+                        <td class="row1 postbody" id="post_text_2715728" valign="top">
+                            <span class="postbody">
+                                    <blockquote>
+			<div>
+				<cite>Joe Harry wrote:</cite>Feels like I'm making good decisions in
+ learning tools and technologies that are considered by many to be the 
+next big thing. Scala, mongoDB, ApolloMQ.... and the list will go on.</div>
+		</blockquote>
+<br> Yes indeed. I just wish I could find a job working with these new technologies! 
+                            </span>
+
+
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td class="spacerow row1" colspan="2" height="1"><img src="CERN-Mongo_files/spacer.gif" alt="" height="1" width="1"></td>
+                    </tr>
+
+            <tr>
+            <td bgcolor="#DEC7A4" width="18%"><img src="CERN-Mongo_files/bunkhouse_smoke.gif"></td>
+            <td align="left" bgcolor="#DEC7A4" valign="top" width="82%">
+                &nbsp;<br>
+                    <div class="shngl" align="left">
+                        <span style="font-size: 12px; line-height: 1.5em;">
+I agree.  Here's the link: <a href="http://www.coderanch.com/forums/banner/redirect/496">http://ej-technologies/jprofiler</a> - if it wasn't for jprofiler, we would need to
+run our stuff on 16 servers instead of 3.</span> 
+
+                    </div>
+                &nbsp;<br>
+                </td>
+                </tr>
+                <tr class="postbody" align="left">
+                    <td colspan="2">
+                    subject: CERN goes Mongo
+                    </td>
+                </tr>
+
+                <tr align="center">
+                    <td class="catbottom" colspan="2" height="28">
+                        <table border="0" cellpadding="0" cellspacing="0">
+                            <tbody><tr>
+                                <td align="center"><span class="gensmall">&nbsp;</span></td>
+                            </tr>
+                        </tbody></table>
+                    </td>
+                </tr>
+            </tbody></table>
+
+
+            <table align="center" width="100%">
+
+            </table>
+        </td>
+    </tr>
+</tbody></table>
+
+<table class="highlights" align="center">
+<tbody><tr><th colspan="2">Similar Threads</th></tr>
+<tr>
+  </tr><tr><td class="row1 gen"><a class="safe-get" href="http://www.coderanch.com/t/568917/Portals-Portlets/java/Liferay-NoSQL-structure">
+  Can we use Liferay with NoSQL structure?</a></td></tr>
+  <tr><td class="row1 gen"><a class="safe-get" href="http://www.coderanch.com/t/494538/ba/FESI-studying-NOSQL-Hadoop-Cassandra">
+  FESI is studying NOSQL (Hadoop, Cassandra, and Voldemort)</a></td></tr>
+  <tr><td class="row1 gen"><a class="safe-get" href="http://www.coderanch.com/t/565436/JDBC/databases/OODBS-NoSQL">
+  OODBS and NoSQL</a></td></tr>
+  <tr><td class="row1 gen"><a class="safe-get" href="http://www.coderanch.com/t/565394/JDBC/databases/NoSQL-Database-dominated-SQL-Databases">
+  NoSQL Database will dominated over the SQL Databases like MySQL &amp; Oracle?</a></td></tr>
+  <tr><td class="row1 gen"><a class="safe-get" href="http://www.coderanch.com/t/475003/Performance/java/Monitoring-Tools-Monitor-JVM-Oracle">
+  Monitoring Tools to Monitor JVM and Oracle Connections and Network.</a></td></tr>
+
+</tbody></table>
+
+<a name="quick"></a>
+
+
+		</td>
+	</tr>
+</tbody></table><div style="visibility: hidden; position: absolute; overflow: hidden; padding: 0px; width: 0px; left: 0px; top: 0px;" id="WzTtDiV"></div>
+<div class="gensmall center">
+<script>
+document.write("All times above are in your local time zone & format.");
+document.write("The current ranch time (not your local time) is ");
+document.write("Mar 18, 2013 04:47:36".bold() + ".");
+</script>All times above are in your local time zone &amp; format.The current ranch time (not your local time) is <b>Mar 18, 2013 04:47:36</b>.<noscript>All times are in JavaRanch time: GMT-6 in summer, GMT-7 in winter</noscript>
+</div>
+
+
+
+<script type="text/javascript">
+	var gaJsHost = (("https:" == document.location.protocol) ?  "https://ssl." : "http://www.");
+	document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script><script src="CERN-Mongo_files/ga.js" type="text/javascript"></script>
+<script type="text/javascript">
+if (typeof _gat !== "undefined") {
+	var pageTracker = _gat._getTracker("UA-2371260-2");
+	pageTracker._trackPageview();
+
+	dt = new Date();
+	pageTracker._setVar("hour: " + dt.getHours());
+}
+</script>
+
+<br>
+<div class="float-divider"></div>
+<div id="footer">
+ <div class="footerLinksDiv center">
+	<a class="nonForumLink" href="http://www.coderanch.com/how-to/code/ContactUs">Contact Us</a>
+	| Powered by <a href="http://www.jforum.net/" target="_blank">JForum</a>
+	| <span class="copyrightOwner">Copyright © 1998-2013 <a href="http://www.javaranch.com/paul-wheaton.jsp">Paul Wheaton</a></span>
+ </div>
+</div>
+<div class="float-divider"></div>
+
+
+
+
+</body></html>

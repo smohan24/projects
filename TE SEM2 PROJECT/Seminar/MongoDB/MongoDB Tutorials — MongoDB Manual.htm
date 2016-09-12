@@ -1,0 +1,492 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head>
+    <title>MongoDB Tutorials — MongoDB Manual</title>
+
+    <link rel="shortcut icon" href="http://media.mongodb.org/favicon.ico">
+    <meta name="robots" content="index">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <link rel="canonical" href="http://docs.mongodb.org/manual/tutorial">
+
+    
+    
+    <link rel="stylesheet" href="MongoDB%20Tutorials%20%E2%80%94%20MongoDB%20Manual_files/mongodb-docs.css" type="text/css">
+    <link rel="stylesheet" href="MongoDB%20Tutorials%20%E2%80%94%20MongoDB%20Manual_files/pygments.css" type="text/css">
+      
+    <script id="undefined" src="MongoDB%20Tutorials%20%E2%80%94%20MongoDB%20Manual_files/inpage_linkid.js" async="" type="text/javascript"></script><script src="MongoDB%20Tutorials%20%E2%80%94%20MongoDB%20Manual_files/ga.js" async="" type="text/javascript"></script><script src="MongoDB%20Tutorials%20%E2%80%94%20MongoDB%20Manual_files/cse.js" async="" type="text/javascript"></script><script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '2.2.2',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '',
+        HAS_SOURCE:  false
+      };
+    </script>
+    <script type="text/javascript" src="MongoDB%20Tutorials%20%E2%80%94%20MongoDB%20Manual_files/jquery.js"></script>
+    <script type="text/javascript" src="MongoDB%20Tutorials%20%E2%80%94%20MongoDB%20Manual_files/underscore.js"></script>
+    <script type="text/javascript" src="MongoDB%20Tutorials%20%E2%80%94%20MongoDB%20Manual_files/doctools.js"></script>
+      <link rel="search" type="application/opensearchdescription+xml" href="http://docs.mongodb.org/osd.xml" title="MongoDB Help">
+<link rel="author" title="About these documents" href="http://docs.mongodb.org/manual/about/">
+<link rel="top" title="MongoDB Manual" href="http://docs.mongodb.org/manual/">
+<link rel="next" title="Use Database Commands" href="http://docs.mongodb.org/manual/tutorial/use-database-commands/">
+<link rel="prev" title="Write a Tumblelog Application with Flask and MongoEngine" href="http://docs.mongodb.org/manual/tutorial/write-a-tumblelog-application-with-flask-mongoengine/">
+<!-- Put the following javascript before the closing </head> tag. -->
+<script>
+  (function() {
+    var cx = '017213726194841070573:WMX6838984';
+    var gcse = document.createElement('script'); gcse.type = 'text/javascript'; gcse.async = true;
+    gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+        '//www.google.com/cse/cse.js?cx=' + cx;
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(gcse, s);
+  })();
+</script>
+  <script type="text/javascript" src="MongoDB%20Tutorials%20%E2%80%94%20MongoDB%20Manual_files/jsapi"></script><link rel="stylesheet" href="MongoDB%20Tutorials%20%E2%80%94%20MongoDB%20Manual_files/defaulten.css" type="text/css"><link rel="stylesheet" href="MongoDB%20Tutorials%20%E2%80%94%20MongoDB%20Manual_files/default.css" type="text/css"><script src="MongoDB%20Tutorials%20%E2%80%94%20MongoDB%20Manual_files/defaulten.js" type="text/javascript"></script><script src="MongoDB%20Tutorials%20%E2%80%94%20MongoDB%20Manual_files/search.js" type="text/javascript"></script><style type="text/css">
+.gsc-control-cse {
+font-family: Arial, sans-serif;
+border-color: #FFFFFF;
+background-color: #FFFFFF;
+}
+.gsc-control-cse .gsc-table-result {
+font-family: Arial, sans-serif;
+}
+input.gsc-input, .gsc-input-box, .gsc-input-box-hover, .gsc-input-box-focus {
+border-color: #D9D9D9;
+}
+input.gsc-search-button, input.gsc-search-button:hover, input.gsc-search-button:focus {
+border-color: #5AAC41;
+background-color: #5AAC41;
+background-image: none;
+filter: none;
+}
+.gsc-tabHeader.gsc-tabhInactive {
+border-color: #CCCCCC;
+background-color: #FFFFFF;
+}
+.gsc-tabHeader.gsc-tabhActive {
+border-color: #CCCCCC;
+border-bottom-color: #FFFFFF;
+background-color: #FFFFFF;
+}
+.gsc-tabsArea {
+border-color: #CCCCCC;
+}
+.gsc-webResult.gsc-result,
+.gsc-results .gsc-imageResult {
+border-color: #FFFFFF;
+background-color: #FFFFFF;
+}
+.gsc-webResult.gsc-result:hover,
+.gsc-imageResult:hover {
+border-color: #FFFFFF;
+background-color: #FFFFFF;
+}
+.gs-webResult.gs-result a.gs-title:link,
+.gs-webResult.gs-result a.gs-title:link b,
+.gs-imageResult a.gs-title:link,
+.gs-imageResult a.gs-title:link b {
+color: #1155CC;
+}
+.gs-webResult.gs-result a.gs-title:visited,
+.gs-webResult.gs-result a.gs-title:visited b,
+.gs-imageResult a.gs-title:visited,
+.gs-imageResult a.gs-title:visited b {
+color: #1155CC;
+}
+.gs-webResult.gs-result a.gs-title:hover,
+.gs-webResult.gs-result a.gs-title:hover b,
+.gs-imageResult a.gs-title:hover,
+.gs-imageResult a.gs-title:hover b {
+color: #1155CC;
+}
+.gs-webResult.gs-result a.gs-title:active,
+.gs-webResult.gs-result a.gs-title:active b,
+.gs-imageResult a.gs-title:active,
+.gs-imageResult a.gs-title:active b {
+color: #1155CC;
+}
+.gsc-cursor-page {
+color: #1155CC;
+}
+a.gsc-trailing-more-results:link {
+color: #1155CC;
+}
+.gs-webResult .gs-snippet,
+.gs-imageResult .gs-snippet,
+.gs-fileFormatType {
+color: #333333;
+}
+.gs-webResult div.gs-visibleUrl,
+.gs-imageResult div.gs-visibleUrl {
+color: #009933;
+}
+.gs-webResult div.gs-visibleUrl-short {
+color: #009933;
+}
+.gs-webResult div.gs-visibleUrl-short {
+display: none;
+}
+.gs-webResult div.gs-visibleUrl-long {
+display: block;
+}
+.gs-promotion div.gs-visibleUrl-short {
+display: none;
+}
+.gs-promotion div.gs-visibleUrl-long {
+display: block;
+}
+.gsc-cursor-box {
+border-color: #FFFFFF;
+}
+.gsc-results .gsc-cursor-box .gsc-cursor-page {
+border-color: #CCCCCC;
+background-color: #FFFFFF;
+color: #1155CC;
+}
+.gsc-results .gsc-cursor-box .gsc-cursor-current-page {
+border-color: #CCCCCC;
+background-color: #FFFFFF;
+color: #1155CC;
+}
+.gsc-webResult.gsc-result.gsc-promotion {
+border-color: #F6F6F6;
+background-color: #F6F6F6;
+}
+.gsc-completion-title {
+color: #1155CC;
+}
+.gsc-completion-snippet {
+color: #333333;
+}
+.gs-promotion a.gs-title:link,
+.gs-promotion a.gs-title:link *,
+.gs-promotion .gs-snippet a:link {
+color: #1155CC;
+}
+.gs-promotion a.gs-title:visited,
+.gs-promotion a.gs-title:visited *,
+.gs-promotion .gs-snippet a:visited {
+color: #1155CC;
+}
+.gs-promotion a.gs-title:hover,
+.gs-promotion a.gs-title:hover *,
+.gs-promotion .gs-snippet a:hover {
+color: #1155CC;
+}
+.gs-promotion a.gs-title:active,
+.gs-promotion a.gs-title:active *,
+.gs-promotion .gs-snippet a:active {
+color: #1155CC;
+}
+.gs-promotion .gs-snippet,
+.gs-promotion .gs-title .gs-promotion-title-right,
+.gs-promotion .gs-title .gs-promotion-title-right * {
+color: #333333;
+}
+.gs-promotion .gs-visibleUrl,
+.gs-promotion .gs-visibleUrl-short {
+color: #009933;
+}
+.gsc-input input.gsc-input {
+background: none repeat scroll 0% 0% white !important;
+}
+</style></head>
+  <body>
+<div id="top-right">
+        <div class="user-right">
+                <ul id="header-menu-bar" class="ajs-menu-bar">
+                <li class="normal"><a target="_blank" href="http://groups.google.com/group/mongodb-user">Forums</a></li>
+                <li class="normal"><a target="_blank" href="http://blog.mongodb.org/">Blog</a></li>
+                <li class="normal"><a href="http://www.mongodb.org/downloads">Download</a></li>
+                <li class="normal"><a href="http://docs.mongodb.org/ecosystem/drivers/">Drivers</a></li>
+                <li class="normal"><a href="http://www.10gen.com/events">Events</a></li>
+                <li class="normal last"><a class="last" href="http://docs.mongodb.org/manual/meta/translation">Translations</a></li>
+                </ul>
+        </div>
+</div>
+<div id="header-db" class="spread">
+        <div class="split">
+                <div id="logo">
+                        <div><a href="http://docs.mongodb.org/manual/"><img class="logo" src="MongoDB%20Tutorials%20%E2%80%94%20MongoDB%20Manual_files/logo-mongodb.png" alt="MongoDB Logo"></a></div>
+                </div>
+        </div>
+
+<div class="search-db"><gcse:searchbox></gcse:searchbox></div>
+<div id="etp">
+<ul>
+<li><a href="https://github.com/mongodb/docs/blob/master/source/tutorial.txt" target="_blank" title="Edit tutorial.txt on github">Edit this Page</a></li>
+<li><a href="http://github.com/mongodb/docs" target="_blank" title="Fork the documentation on GitHub and contribute.">GitHub</a></li>
+<li><a href="https://jira.mongodb.org/secure/CreateIssueDetails%21init.jspa?pid=10380&amp;issuetype=4&amp;priority=4&amp;summary=Comment+on%3a+%22tutorial%2Etxt%22" target="_blank" title="Report a problem with tutorial.txt on Jira">Report a problem</a></li>
+</ul>
+</div>
+</div>  
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            <div id="cse-results"><gcse:searchresults></gcse:searchresults></div>
+            
+  <div class="section" id="mongodb-tutorials">
+<span id="tutorials"></span><span id="tutorial"></span><span id="index-0"></span><h1>MongoDB Tutorials<a class="headerlink" href="#mongodb-tutorials" title="Permalink to this headline">¶</a></h1>
+<p>This index page provides a complete listing of all tutorials available
+as part of the <a class="reference internal" href="http://docs.mongodb.org/manual/contents/"><em>MongoDB Manual</em></a>. In addition to these
+documents, you can refer to the introductory <a class="reference internal" href="http://docs.mongodb.org/manual/tutorial/getting-started/"><em>MongoDB Tutorial</em></a> and other tutorials available in the
+<a class="reference external" href="http://www.mongodb.org/display/DOCS/">MongoDB Wiki</a>. If there is a process or pattern that you
+would like to see included here, please open a <a class="reference external" href="https://jira.mongodb.org/browse/DOCS">Jira Case</a>.</p>
+<div class="section" id="getting-started">
+<h2>Getting Started<a class="headerlink" href="#getting-started" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><a class="reference internal" href="http://docs.mongodb.org/manual/tutorial/install-mongodb-on-linux/"><em>Install MongoDB on Linux</em></a></li>
+<li><a class="reference internal" href="http://docs.mongodb.org/manual/tutorial/install-mongodb-on-red-hat-centos-or-fedora-linux/"><em>Install MongoDB on Red Hat Enterprise, CentOS, or Fedora Linux</em></a></li>
+<li><a class="reference internal" href="http://docs.mongodb.org/manual/tutorial/install-mongodb-on-debian/"><em>Install MongoDB on Debian</em></a></li>
+<li><a class="reference internal" href="http://docs.mongodb.org/manual/tutorial/install-mongodb-on-ubuntu/"><em>Install MongoDB on Ubuntu</em></a></li>
+<li><a class="reference internal" href="http://docs.mongodb.org/manual/tutorial/install-mongodb-on-os-x/"><em>Install MongoDB on OS X</em></a></li>
+<li><a class="reference internal" href="http://docs.mongodb.org/manual/tutorial/install-mongodb-on-windows/"><em>Install MongoDB on Windows</em></a></li>
+<li><a class="reference internal" href="http://docs.mongodb.org/manual/tutorial/getting-started/"><em>Getting Started with MongoDB Development</em></a></li>
+</ul>
+<span class="target" id="index-1"></span></div>
+<div class="section" id="administration">
+<span id="tutorial-administration"></span><span id="tutorials-administration"></span><span id="administration-tutorials"></span><span id="index-2"></span><h2>Administration<a class="headerlink" href="#administration" title="Permalink to this headline">¶</a></h2>
+<div class="toctree-wrapper compound">
+</div>
+<div class="section" id="replica-sets">
+<h3>Replica Sets<a class="headerlink" href="#replica-sets" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><a class="reference internal" href="http://docs.mongodb.org/manual/tutorial/deploy-replica-set/"><em>Deploy a Replica Set</em></a></li>
+<li><a class="reference internal" href="http://docs.mongodb.org/manual/tutorial/convert-standalone-to-replica-set/"><em>Convert a Standalone to a Replica Set</em></a></li>
+<li><a class="reference internal" href="http://docs.mongodb.org/manual/tutorial/expand-replica-set/"><em>Add Members to a Replica Set</em></a></li>
+<li><a class="reference internal" href="http://docs.mongodb.org/manual/tutorial/deploy-geographically-distributed-replica-set/"><em>Deploy a Geographically Distributed Replica Set</em></a></li>
+<li><a class="reference internal" href="http://docs.mongodb.org/manual/tutorial/change-oplog-size/"><em>Change the Size of the Oplog</em></a></li>
+<li><a class="reference internal" href="http://docs.mongodb.org/manual/tutorial/force-member-to-be-primary/"><em>Force a Member to Become Primary</em></a></li>
+<li><a class="reference internal" href="http://docs.mongodb.org/manual/tutorial/change-hostnames-in-a-replica-set/"><em>Change Hostnames in a Replica Set</em></a></li>
+<li><a class="reference internal" href="http://docs.mongodb.org/manual/tutorial/convert-secondary-into-arbiter/"><em>Convert a Secondary to an Arbiter</em></a></li>
+<li><a class="reference internal" href="http://docs.mongodb.org/manual/tutorial/reconfigure-replica-set-with-unavailable-members/"><em>Reconfigure a Replica Set with Unavailable Members</em></a></li>
+</ul>
+</div>
+<div class="section" id="sharding">
+<h3>Sharding<a class="headerlink" href="#sharding" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><a class="reference internal" href="http://docs.mongodb.org/manual/tutorial/deploy-shard-cluster/"><em>Deploy a Sharded Cluster</em></a></li>
+<li><a class="reference internal" href="http://docs.mongodb.org/manual/tutorial/convert-replica-set-to-replicated-shard-cluster/"><em>Convert a Replica Set to a Replicated Sharded Cluster</em></a></li>
+<li><a class="reference internal" href="http://docs.mongodb.org/manual/tutorial/add-shards-to-shard-cluster/"><em>Add Shards to a Cluster</em></a></li>
+<li><a class="reference internal" href="http://docs.mongodb.org/manual/tutorial/remove-shards-from-cluster/"><em>Remove Shards from an Existing Sharded Cluster</em></a></li>
+<li><a class="reference internal" href="http://docs.mongodb.org/manual/tutorial/backup-small-sharded-cluster-with-mongodump/"><em>Backup a Small Sharded Cluster with mongodump</em></a></li>
+<li><a class="reference internal" href="http://docs.mongodb.org/manual/tutorial/backup-sharded-cluster-with-filesystem-snapshots/"><em>Create Backup of a Sharded Cluster with Filesystem Snapshots</em></a></li>
+<li><a class="reference internal" href="http://docs.mongodb.org/manual/tutorial/backup-sharded-cluster-with-database-dumps/"><em>Create Backup of a Sharded Cluster with Database Dumps</em></a></li>
+<li><a class="reference internal" href="http://docs.mongodb.org/manual/tutorial/restore-single-shard/"><em>Restore a Single Shard</em></a></li>
+<li><a class="reference internal" href="http://docs.mongodb.org/manual/tutorial/restore-sharded-cluster/"><em>Restore Sharded Clusters</em></a></li>
+<li><a class="reference internal" href="http://docs.mongodb.org/manual/tutorial/schedule-backup-window-for-sharded-clusters/"><em>Schedule Backup Window for Sharded Clusters</em></a></li>
+</ul>
+</div>
+<div class="section" id="basic-operations">
+<h3>Basic Operations<a class="headerlink" href="#basic-operations" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><a class="reference internal" href="http://docs.mongodb.org/manual/tutorial/use-database-commands/"><em>Use Database Commands</em></a></li>
+<li><a class="reference internal" href="http://docs.mongodb.org/manual/tutorial/recover-data-following-unexpected-shutdown/"><em>Recover MongoDB Data following Unexpected Shutdown</em></a></li>
+<li><a class="reference internal" href="http://docs.mongodb.org/manual/tutorial/copy-databases-between-instances/"><em>Copy Databases Between Instances</em></a></li>
+<li><a class="reference internal" href="http://docs.mongodb.org/manual/tutorial/expire-data/"><em>Expire Data from Collections by Setting TTL</em></a></li>
+<li><a class="reference internal" href="http://docs.mongodb.org/manual/tutorial/manage-the-database-profiler/"><em>Analyze Performance of Database Operations</em></a></li>
+<li><a class="reference internal" href="http://docs.mongodb.org/manual/tutorial/rotate-log-files/"><em>Rotate Log Files</em></a></li>
+<li><a class="reference internal" href="http://docs.mongodb.org/manual/tutorial/roll-back-to-v1.8-index/"><em>Build Old Style Indexes</em></a></li>
+<li><a class="reference internal" href="http://docs.mongodb.org/manual/tutorial/manage-mongodb-processes/"><em>Manage mongod Processes</em></a></li>
+<li><a class="reference internal" href="http://docs.mongodb.org/manual/tutorial/backup-databases-with-binary-database-dumps/"><em>Use mongodump and mongorestore to Backup and Restore MongoDB Databases</em></a></li>
+<li><a class="reference internal" href="http://docs.mongodb.org/manual/tutorial/backup-databases-with-filesystem-snapshots/"><em>Use Filesystem Snapshots to Backup and Restore MongoDB Databases</em></a></li>
+</ul>
+</div>
+<div class="section" id="security">
+<h3>Security<a class="headerlink" href="#security" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><a class="reference internal" href="http://docs.mongodb.org/manual/tutorial/configure-linux-iptables-firewall/"><em>Configure Linux iptables Firewall for MongoDB</em></a></li>
+<li><a class="reference internal" href="http://docs.mongodb.org/manual/tutorial/configure-windows-netsh-firewall/"><em>Configure Windows netsh Firewall for MongoDB</em></a></li>
+<li><a class="reference internal" href="http://docs.mongodb.org/manual/tutorial/control-access-to-mongodb-with-authentication/"><em>Control Access to MongoDB Instances with Authentication</em></a></li>
+</ul>
+<span class="target" id="index-3"></span></div>
+</div>
+<div class="section" id="development-patterns">
+<span id="tutorial-development-patterns"></span><span id="tutorials-development-patterns"></span><span id="index-4"></span><h2>Development Patterns<a class="headerlink" href="#development-patterns" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><a class="reference internal" href="http://docs.mongodb.org/manual/tutorial/perform-two-phase-commits/"><em>Perform Two Phase Commits</em></a></li>
+<li><a class="reference internal" href="http://docs.mongodb.org/manual/tutorial/isolate-sequence-of-operations/"><em>Isolate Sequence of Operations</em></a></li>
+<li><a class="reference internal" href="http://docs.mongodb.org/manual/tutorial/create-an-auto-incrementing-field/"><em>Create an Auto-Incrementing Sequence Field</em></a></li>
+<li><a class="reference internal" href="http://docs.mongodb.org/manual/tutorial/enforce-unique-keys-for-sharded-collections/"><em>Enforce Unique Keys for Sharded Collections</em></a></li>
+<li><a class="reference internal" href="http://docs.mongodb.org/manual/tutorial/aggregation-examples/"><em>Aggregation Framework Examples</em></a></li>
+<li><a class="reference internal" href="http://docs.mongodb.org/manual/tutorial/model-data-for-keyword-search/"><em>Model Data to Support Keyword Search</em></a></li>
+</ul>
+<span class="target" id="index-5"></span></div>
+<div class="section" id="application-development">
+<span id="tutorial-application-development"></span><span id="tutorials-application-development"></span><span id="index-6"></span><h2>Application Development<a class="headerlink" href="#application-development" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><a class="reference internal" href="http://docs.mongodb.org/manual/tutorial/write-a-tumblelog-application-with-django-mongodb-engine/"><em>Write a Tumblelog Application with Django MongoDB Engine</em></a></li>
+<li><a class="reference internal" href="http://docs.mongodb.org/manual/tutorial/write-a-tumblelog-application-with-flask-mongoengine/"><em>Write a Tumblelog Application with Flask and MongoEngine</em></a></li>
+</ul>
+</div>
+<div class="section" id="data-modeling-patterns">
+<h2>Data Modeling Patterns<a class="headerlink" href="#data-modeling-patterns" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><a class="reference internal" href="http://docs.mongodb.org/manual/tutorial/model-embedded-one-to-one-relationships-between-documents/"><em>Model Embedded One-to-One Relationships Between Documents</em></a></li>
+<li><a class="reference internal" href="http://docs.mongodb.org/manual/tutorial/model-embedded-one-to-many-relationships-between-documents/"><em>Model Embedded One-to-Many Relationships Between Documents</em></a></li>
+<li><a class="reference internal" href="http://docs.mongodb.org/manual/tutorial/model-referenced-one-to-many-relationships-between-documents/"><em>Model Referenced One-to-Many Relationships Between Documents</em></a></li>
+<li><a class="reference internal" href="http://docs.mongodb.org/manual/tutorial/model-data-for-atomic-operations/"><em>Model Data for Atomic Operations</em></a></li>
+<li><a class="reference internal" href="http://docs.mongodb.org/manual/tutorial/model-tree-structures-with-parent-references/"><em>Model Tree Structures with Parent References</em></a></li>
+<li><a class="reference internal" href="http://docs.mongodb.org/manual/tutorial/model-tree-structures-with-child-references/"><em>Model Tree Structures with Child References</em></a></li>
+<li><a class="reference internal" href="http://docs.mongodb.org/manual/tutorial/model-tree-structures-with-materialized-paths/"><em>Model Tree Structures with Materialized Paths</em></a></li>
+<li><a class="reference internal" href="http://docs.mongodb.org/manual/tutorial/model-tree-structures-with-nested-sets/"><em>Model Tree Structures with Nested Sets</em></a></li>
+</ul>
+</div>
+<div class="section" id="mongodb-use-case-studies">
+<h2>MongoDB Use Case Studies<a class="headerlink" href="#mongodb-use-case-studies" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><a class="reference internal" href="http://docs.mongodb.org/manual/use-cases/storing-log-data/"><em>Storing Log Data</em></a></li>
+<li><a class="reference internal" href="http://docs.mongodb.org/manual/use-cases/pre-aggregated-reports/"><em>Pre-Aggregated Reports</em></a></li>
+<li><a class="reference internal" href="http://docs.mongodb.org/manual/use-cases/hierarchical-aggregation/"><em>Hierarchical Aggregation</em></a></li>
+<li><a class="reference internal" href="http://docs.mongodb.org/manual/use-cases/product-catalog/"><em>Product Catalog</em></a></li>
+<li><a class="reference internal" href="http://docs.mongodb.org/manual/use-cases/inventory-management/"><em>Inventory Management</em></a></li>
+<li><a class="reference internal" href="http://docs.mongodb.org/manual/use-cases/category-hierarchy/"><em>Category Hierarchy</em></a></li>
+<li><a class="reference internal" href="http://docs.mongodb.org/manual/use-cases/metadata-and-asset-management/"><em>Metadata and Asset Management</em></a></li>
+<li><a class="reference internal" href="http://docs.mongodb.org/manual/use-cases/storing-comments/"><em>Storing Comments</em></a></li>
+</ul>
+</div>
+</div>
+
+
+<div id="btnv">
+<ul id="btnvl">
+<li id="btnvpr"><a href="http://docs.mongodb.org/manual/tutorial/write-a-tumblelog-application-with-flask-mongoengine/" title="Previous Section: Write a Tumblelog Application with Flask and MongoEngine">&lt; &nbsp; Write a Tumblelog Application with Flask and MongoEngine</a></li>
+<li id="btnvnx"><a href="http://docs.mongodb.org/manual/tutorial/use-database-commands/" title="Next Section: Use Database Commands">Use Database Commands &nbsp;&gt;</a></li>
+</ul>
+</div>
+</div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper"><h3><a href="http://docs.mongodb.org/manual/contents/">MongoDB Manual</a>
+
+<small><a href="http://docs.mongodb.org/manual/genindex/">(Index)</a></small>
+
+</h3>
+
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="http://docs.mongodb.org/manual/installation/">Installing MongoDB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://docs.mongodb.org/manual/administration/">Administration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://docs.mongodb.org/manual/security/">Security</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://docs.mongodb.org/manual/crud/">Core MongoDB Operations (CRUD)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://docs.mongodb.org/manual/aggregation/">Aggregation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://docs.mongodb.org/manual/indexes/">Indexes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://docs.mongodb.org/manual/replication/">Replication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://docs.mongodb.org/manual/sharding/">Sharding</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://docs.mongodb.org/manual/applications/">Application Development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://docs.mongodb.org/manual/mongo/">Using the <tt class="docutils literal"><span class="pre">mongo</span></tt> Shell</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://docs.mongodb.org/manual/use-cases/">Use Cases</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="">MongoDB Tutorials</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#getting-started">Getting Started</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#administration">Administration</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="http://docs.mongodb.org/manual/tutorial/use-database-commands/">Use Database Commands</a></li>
+<li class="toctree-l3"><a class="reference internal" href="http://docs.mongodb.org/manual/tutorial/recover-data-following-unexpected-shutdown/">Recover MongoDB Data following Unexpected Shutdown</a></li>
+<li class="toctree-l3"><a class="reference internal" href="http://docs.mongodb.org/manual/tutorial/manage-mongodb-processes/">Manage <tt class="docutils literal"><span class="pre">mongod</span></tt> Processes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="http://docs.mongodb.org/manual/tutorial/convert-replica-set-to-replicated-shard-cluster/">Convert a Replica Set to a Replicated Sharded Cluster</a></li>
+<li class="toctree-l3"><a class="reference internal" href="http://docs.mongodb.org/manual/tutorial/copy-databases-between-instances/">Copy Databases Between Instances</a></li>
+<li class="toctree-l3"><a class="reference internal" href="http://docs.mongodb.org/manual/tutorial/backup-databases-with-binary-database-dumps/">Use <tt class="docutils literal"><span class="pre">mongodump</span></tt> and <tt class="docutils literal"><span class="pre">mongorestore</span></tt> to Backup and Restore MongoDB Databases</a></li>
+<li class="toctree-l3"><a class="reference internal" href="http://docs.mongodb.org/manual/tutorial/backup-databases-with-filesystem-snapshots/">Use Filesystem Snapshots to Backup and Restore MongoDB Databases</a></li>
+<li class="toctree-l3"><a class="reference internal" href="http://docs.mongodb.org/manual/tutorial/manage-the-database-profiler/">Analyze Performance of Database Operations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="http://docs.mongodb.org/manual/tutorial/rotate-log-files/">Rotate Log Files</a></li>
+<li class="toctree-l3"><a class="reference internal" href="http://docs.mongodb.org/manual/tutorial/roll-back-to-v1.8-index/">Build Old Style Indexes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#replica-sets">Replica Sets</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#sharding">Sharding</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#basic-operations">Basic Operations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#security">Security</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#development-patterns">Development Patterns</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#application-development">Application Development</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#data-modeling-patterns">Data Modeling Patterns</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#mongodb-use-case-studies">MongoDB Use Case Studies</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="http://docs.mongodb.org/manual/faq/">Frequently Asked Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://docs.mongodb.org/manual/reference/">Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://docs.mongodb.org/manual/about/">About MongoDB Documentation</a></li>
+</ul>
+
+<h3 style="padding-bottom: 1em;"><a href="http://www.mongodb.org/about/">MongoDB.org</a></h3>
+<h3 style="padding-bottom: 1em;"><a href="http://docs.mongodb.org/ecosystem/">MongoDB Ecosystem</a></h3><h3>Formats</h3>
+<ul class="this-page-menu">
+  <li><a href="http://docs.mongodb.org/master/single/">MongoDB Manual, Single HTML Page</a></li>
+  <li><a href="http://docs.mongodb.org/master/MongoDB-Manual-master.pdf" rel="nofollow">MongoDB Manual, PDF Format</a></li>
+  <li><a href="http://docs.mongodb.org/master/MongoDB-Manual-master.epub" rel="nofollow">MongoDB Manual, ePub Format</a></li>
+</ul><h3>MongoDB Wiki</h3>
+
+<ul>
+ <li><strong>Getting Started</strong>
+   <ul>
+     <li><a href="http://www.mongodb.org/about/introduction">Introduction</a></li>
+     <li><a href="http://www.mongodb.org/downloads">Downloads</a></li>
+   </ul>
+ </li>
+ <li><strong><a href="http://www.mongodb.org/about/community">Community</a> and <a href="http://docs.mongodb.org/ecosystem/">Ecosystem</a></strong>
+   <ul>
+     <li><a href="http://www.10gen.com/">10gen</a></li>
+     <li><a href="http://www.10gen.com/events">MongoDB Events</a></li>
+     <li><a href="http://planet.mongodb.org/">Planet MongoDB</a></li>
+     <li><a href="http://mongodb.org/about/community/masters">MongoDB Masters</a></li>
+     <li><a href="http://www.10gen.com/presentations">Slides and Video</a></li>
+     <li><a href="http://docs.mongodb.org/ecosystem/platforms/">Hosting Center</a></li>
+     <li><a href="http://docs.mongodb.org/ecosystem/platforms/windows">Windows</a></li>
+     <li><a href="http://www.10gen.com/products/mms/">MongoDB Monitoring Service</a> (<a href="http://mms.10gen.com/help/">docs</a>)</li>
+     <li><a href="http://docs.mongodb.org/ecosystem/tools/administration-interfaces/">Administrative Interfaces</a></li>
+     <li><a href="http://www.10gen.com/books/">MongoDB Books</a></li>
+   </ul>
+ </li>
+ <li><strong><a href="http://docs.mongodb.org/ecosystem/drivers/">Drivers</a></strong>
+   <ul>
+     <li><a href="http://docs.mongodb.org/ecosystem/drivers/javascript">JavaScript</a> (<a href="http://api.mongodb.org/js/current">docs</a>)</li>
+     <li><a href="http://docs.mongodb.org/ecosystem/drivers/python">Python</a> (<a href="http://api.mongodb.org/python/current">docs</a>)</li>
+     <li><a href="http://docs.mongodb.org/ecosystem/drivers/ruby">Ruby</a> (<a href="http://api.mongodb.org/ruby/current">docs</a>)</li>
+     <li><a href="http://docs.mongodb.org/ecosystem/drivers/php">PHP</a> (<a href="http://php.net/mongo/">docs</a>)</li>
+     <li><a href="http://docs.mongodb.org/ecosystem/drivers/perl">Perl</a> (<a href="http://api.mongodb.org/perl/current/">docs</a>)</li>
+     <li><a href="http://docs.mongodb.org/ecosystem/drivers/java">Java</a> (<a href="http://api.mongodb.org/java/current">docs</a>)</li>
+     <li><a href="http://api.mongodb.org/scala/casbah/current/">Scala</a> (<a href="http://api.mongodb.org/scala/casbah/current/">docs</a>)</li>
+<!-- <li><a href="http://docs.mongodb.org/ecosystem/drivers/scala">Scala</a> (<a href="http://api.mongodb.org/scala/casbah/current/">docs</a>)</li> -->
+     <li><a href="http://docs.mongodb.org/ecosystem/drivers/csharp">C#</a> (<a href="http://api.mongodb.org/csharp/current/">docs</a>)</li>
+     <li><a href="http://docs.mongodb.org/ecosystem/drivers/c">C</a> (<a href="http://api.mongodb.org/c/current/">docs</a>)</li>
+     <li><a href="http://docs.mongodb.org/ecosystem/drivers/cpp">C++</a> (<a href="http://api.mongodb.org/cplusplus/current/">docs</a>)</li>
+     <li><a href="http://docs.mongodb.org/ecosystem/drivers/haskell">Haskell</a> (<a href="http://api.mongodb.org/haskell">docs</a>)</li>
+     <li><a href="http://docs.mongodb.org/ecosystem/drivers/erlang">Erlang</a> (<a href="http://api.mongodb.org/erlang">docs</a>)</li>
+   </ul>
+ </li>
+</ul>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+  <div class="footer">
+    <p>
+       © <a href="">Copyright</a> 2011-2013, 10gen, Inc. 
+       MongoDB®, Mongo®, and the leaf logo are registered trademarks of 10gen, Inc.
+    </p>
+  </div><script type="text/javascript">
+var _gaq = _gaq || [];
+var pluginUrl = (('https:' == document.location.protocol) ? 'https://ssl.' : 'http://www.') + 'google-analytics.com/plugins/ga/inpage_linkid.js';
+_gaq.push(['_require', 'inpage_linkid', pluginUrl]);
+_gaq.push(['_setAccount', 'UA-7301842-8']);
+_gaq.push(['_setDomainName', 'docs.mongodb.org']);
+_gaq.push(['_trackPageview']);
+(function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0];
+        s.parentNode.insertBefore(ga, s);
+        })();
+</script>
+
+<script type="text/javascript">
+document.write(unescape("%3Cscript src='" + document.location.protocol + "//munchkin.marketo.net/munchkin.js' type='text/javascript'%3E%3C/script%3E"));
+</script><script src="MongoDB%20Tutorials%20%E2%80%94%20MongoDB%20Manual_files/munchkin.htm" type="text/javascript"></script>
+<script>try { mktoMunchkin("017-HGS-593"); } catch(e) {}</script><script type="text/javascript">
+jQuery.ajax({
+    url: "https://jira.mongodb.org/s/en_US-bxctp1/782/6/1.2.4/_/download/batch/com.atlassian.jira.collector.plugin.jira-issue-collector-plugin:issuecollector-embededjs/com.atlassian.jira.collector.plugin.jira-issue-collector-plugin:issuecollector-embededjs.js?collectorId=298ba4e7",
+    type: "get",
+    cache: true,
+    dataType: "script"
+});
+window.ATL_JQ_PAGE_PROPS =  {
+"triggerFunction": function(showCollectorDialog) {
+jQuery("#jirafeedback").click(function(e) {e.preventDefault();showCollectorDialog();});
+jQuery("#jirafooter").click(function(e) {e.preventDefault();sh</script></body></html>

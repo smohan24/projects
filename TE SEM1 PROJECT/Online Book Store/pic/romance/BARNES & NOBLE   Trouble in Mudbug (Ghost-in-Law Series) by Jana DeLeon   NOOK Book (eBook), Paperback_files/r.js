@@ -1,0 +1,1 @@
+document.write( "<img width='1' height='1' src='http://segment-pixel.invitemedia.com/set_partner_uid?partnerID=15&partnerUID=003002004010000528635&sscs_active=1' />" );

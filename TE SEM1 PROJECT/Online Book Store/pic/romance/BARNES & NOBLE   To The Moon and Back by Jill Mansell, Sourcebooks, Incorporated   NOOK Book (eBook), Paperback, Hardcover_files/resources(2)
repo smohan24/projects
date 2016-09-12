@@ -1,0 +1,15 @@
+/*[/js-min/core/utility/domready.js]*/
+BN_YUI.use("seo-links","fancy-label","event-base",function(d){var a=false,b,e=".text-field-wrapper label",c=function(f){a=true;
+d.SEOLinks.convert(f);
+(f||d).all(e).plug(d.Plugin.FancyLabel)
+};
+if(d.UA.ie>0&&d.UA.ie<8){b=d.after("contentready",c,e);
+setTimeout(function(){if(!a){b.detach();
+setTimeout(c,0)
+}},2500);
+d.SEOLinks.convert()
+}else{c()
+}d.on("ajax:updated",function(g){var f=g.currentTarget.get("host");
+c(f)
+})
+});

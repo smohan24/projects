@@ -1,0 +1,832 @@
+<!DOCTYPE html>
+<html><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    
+    <title>MongoDB database architecture - Stack Overflow</title>
+    <link rel="shortcut icon" href="http://cdn.sstatic.net/stackoverflow/img/favicon.ico">
+    <link rel="apple-touch-icon" href="http://cdn.sstatic.net/stackoverflow/img/apple-touch-icon.png">
+    <link rel="search" type="application/opensearchdescription+xml" title="Stack Overflow" href="http://stackoverflow.com/opensearch.xml">
+
+    
+    <script src="mongodb-database-architecture_files/adzerk1_2_4_43adzerk2_2_17_45.js" async="" type="text/javascript"></script><script src="mongodb-database-architecture_files/ga.js" async="" type="text/javascript"></script><script src="mongodb-database-architecture_files/quant.js" async="" type="text/javascript"></script><script type="text/javascript" src="mongodb-database-architecture_files/jquery.js"></script>
+    <script type="text/javascript" src="mongodb-database-architecture_files/stub.js"></script>
+    <link rel="stylesheet" type="text/css" href="mongodb-database-architecture_files/all.css">
+    
+    <meta name="relativepagescore" content="66606">
+    <link rel="canonical" href="http://stackoverflow.com/questions/9948483/mongodb-database-architecture">
+    <script type="text/javascript">
+        
+        StackExchange.ready(function () {
+            
+            StackExchange.question.init({showAnswerHelp:true,totalCommentCount:8,shownCommentCount:5,highlightColor:'#F4A83D',backgroundColor:'#FFF',questionId:9948483});
+
+            styleCode();
+
+                StackExchange.realtime.subscribeToQuestion('1', '9948483');
+            
+                
+        });
+    </script>
+
+
+    <script type="text/javascript">
+        StackExchange.init({"stackAuthUrl":"https://stackauth.com","serverTime":1360036159,"styleCode":true,"enableUserHovercards":true,"site":{"name":"Stack Overflow","description":"Q&A for professional and enthusiast programmers","isNoticesTabEnabled":true,"recaptchaPublicKey":"6LdchgIAAAAAAJwGpIzRQSOFaO0pU6s44Xt8aTwc","enableSocialMediaInSharePopup":true},"user":{"fkey":"4e3787400b298a5a5021574a9baca258","isAnonymous":true}});
+        StackExchange.using.setCacheBreakers({"js/prettify-full.js":"c862bf93b3ec","js/moderator.js":"53a4fbf22d01","js/full-anon.js":"1dda421a303f","js/full.js":"bbd049c5bad6","js/wmd.js":"fd5b31f81840","js/third-party/jquery.autocomplete.min.js":"e5f01e97f7c3","js/mobile.js":"6eb68240242f","js/help.js":"fc9fb0517db2","js/tageditor.js":"450c9e8426fc","js/tageditornew.js":"f12653fbfd29","js/inline-tag-editing.js":"30f72b99548b","js/revisions.js":"7273bb714bba","js/review.js":"8c05e24ebaa2","js/tagsuggestions.js":"c019341b234d"});
+        
+    </script>
+
+
+    <script type="text/javascript">
+        StackExchange.using(
+            "gps",
+            function () {
+                StackExchange.gps.init(false);
+            }
+        );
+    </script>
+
+<script src="mongodb-database-architecture_files/full-anon.js" type="text/javascript" async=""></script><script src="mongodb-database-architecture_files/ados-voting.js" type="text/javascript"></script><link href="mongodb-database-architecture_files/ados-voting.css" rel="stylesheet"></head>
+<body class="question-page">
+    <noscript><div id="noscript-padding"></div></noscript>
+    <div id="notify-container"></div>
+    <div id="overlay-header"></div>
+    <div id="custom-header"></div>
+
+    <div class="container">
+        <div id="header">
+            <div id="portalLink">
+                <a class="genu" onclick="StackExchange.ready(function(){genuwine.click();});return false;">Stack Exchange</a>
+            </div>
+            <div id="topbar">
+                <div id="hlinks">
+                    
+
+
+
+
+
+
+
+
+
+<span id="hlinks-user">
+
+</span>
+<span id="hlinks-nav">
+                   <a href="http://stackoverflow.com/users/login?returnurl=%2fquestions%2f9948483%2fmongodb-database-architecture">log in</a>
+
+ <span class="lsep">|</span>
+                    <a href="http://careers.stackoverflow.com/">careers 2.0</a>
+
+ <span class="lsep">|</span>
+
+</span>
+<span id="hlinks-custom">
+        <a href="http://chat.stackoverflow.com/">chat</a>
+
+ <span class="lsep">|</span>
+            <a href="http://meta.stackoverflow.com/">meta</a>
+
+ <span class="lsep">|</span>
+        <a href="http://stackoverflow.com/about">about</a>
+
+ <span class="lsep">|</span>
+    <a href="http://stackoverflow.com/faq">faq</a>
+
+</span>
+                </div>
+                <div id="hsearch">
+                    <form id="search" action="/search" method="get" autocomplete="off">
+                    <div>
+                        <input autocomplete="off" name="q" class="textbox" placeholder="search" tabindex="1" maxlength="240" size="28" type="text">
+                    </div>
+                    </form>
+                </div>
+            </div>
+            <br class="cbt">
+            <div id="hlogo">
+                <a href="http://stackoverflow.com/">Stack Overflow</a>
+            </div>
+            <div id="hmenus">
+                <div class="nav mainnavs">
+                    <ul>
+                        <li class="youarehere"><a id="nav-questions" href="http://stackoverflow.com/questions">Questions</a></li>
+                        <li><a id="nav-tags" href="http://stackoverflow.com/tags">Tags</a></li>
+                        <li><a id="nav-users" href="http://stackoverflow.com/users">Users</a></li>
+                        <li><a id="nav-badges" href="http://stackoverflow.com/badges">Badges</a></li>
+                        <li><a id="nav-unanswered" href="http://stackoverflow.com/unanswered">Unanswered</a></li>
+                    </ul>
+                </div>
+                <div class="nav askquestion">
+                    <ul>
+                        <li>
+                            <a id="nav-askquestion" href="http://stackoverflow.com/questions/ask">Ask Question</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        
+
+
+
+        <div id="content">
+            
+
+<div itemscope="" itemtype="http://schema.org/Article">
+<link itemprop="image" href="http://cdn.sstatic.net/stackoverflow/img/apple-touch-icon.png">
+<div id="question-header">
+    <h1 itemprop="name"><a href="http://stackoverflow.com/questions/9948483/mongodb-database-architecture" class="question-hyperlink">MongoDB database architecture [closed]</a></h1>
+</div>
+<div id="mainbar">
+
+
+
+<div class="question" data-questionid="9948483" id="question">
+    
+            <div class="everyonelovesstackoverflow adzerk-vote" id="adzerk1"><a href="http://engine.adzerk.net/redirect/0/5923/2444/8277/3b3ea2c074a648a0aef5ee8aa29f8e07/43/1178/8809/634956330259893530/?keywords=mongodb%2carchitecture%2cdatabase-design" rel="nofollow" target="_blank" title=""><img src="mongodb-database-architecture_files/46a9844d6e504212a85bc72ddd7dd829.png" title="" alt="" border="0" height="90" width="728"></a><img src="mongodb-database-architecture_files/v_002.gif" height="0" width="0"><script type="text/javascript">azInitExtension("voting", "adzerk1", 414, 8277, 43, 8809, 5923);</script><div class="adzerk-vote-controls" style="display: none;"><div class="adzerk-vote-option adzerk-vote-up"><div class="adzerk-vote-icon"></div></div><div class="adzerk-vote-option adzerk-vote-down"><div class="adzerk-vote-icon"></div></div></div><div class="adzerk-vote-survey" style="display:none;"><form><span>No problem. We won't show you that ad again. Why didn't you like it?</span><ul><li><label><input value="12" name="downvoteReason" type="radio">Uninteresting</label></li><li><label><input value="13" name="downvoteReason" type="radio">Misleading</label></li><li><label><input value="14" name="downvoteReason" type="radio">Offensive</label></li><li><label><input value="15" name="downvoteReason" type="radio">Repetitive</label></li></ul><a href="#" class="adzerk-vote-cancel">Oops! I didn't mean to do this.</a></form></div></div>
+
+
+    <table>
+        <tbody><tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+    <input value="9948483" type="hidden">
+    <a class="vote-up-off" title="This question shows research effort; it is useful and clear (click again to undo)">up vote</a>
+    <span class="vote-count-post ">1</span>
+    <a class="vote-down-off" title="This question does not show any research effort; it is unclear or not useful (click again to undo)">down vote</a>
+    
+    <a class="star-off" href="#" title="This is a favorite question (click again to undo)">favorite</a>
+    <div class="favoritecount"><b>1</b></div>   
+
+ 
+</div>
+
+            </td>
+            
+<td class="postcell">
+<div>
+    <div class="post-text" itemprop="description">
+        <p>I want to understand more about the system and DB architecture of MongoDB.</p>
+
+<p>I am trying to understand how MongoDB stores and retrieves the documents. If it's all in memory etc.</p>
+
+<p>A comparative analysis between MongoDB and Oracle will be a bonus 
+but, I am mostly focusing on understanding the MongoDB architecture per 
+se.</p>
+
+<p>Any pointers will be helpful.</p>
+
+    </div>
+    <div class="post-taglist">
+        <a href="http://stackoverflow.com/questions/tagged/mongodb" class="post-tag" title="" rel="tag">mongodb</a> <a href="http://stackoverflow.com/questions/tagged/architecture" class="post-tag" title="" rel="tag">architecture</a> <a href="http://stackoverflow.com/questions/tagged/database-design" class="post-tag" title="" rel="tag">database-design</a> 
+    </div>
+    <table class="fw">
+    <tbody><tr>
+    <td class="vt">
+
+
+
+
+
+
+
+
+
+<div class="post-menu"><a href="http://stackoverflow.com/q/9948483" title="short permalink to this question" class="short-link" id="link-post-9948483">share</a><span class="lsep">|</span><a href="http://stackoverflow.com/posts/9948483/edit" class="suggest-edit-post" title="">improve this question</a></div>            </td>
+    <td class="post-signature" align="right">
+
+
+    <div class="user-info user-hover">
+        <div class="user-action-time">
+                            edited
+                             <a href="http://stackoverflow.com/posts/9948483/revisions" title="show all edits to this post"><span title="2012-03-30 19:01:29Z" class="relativetime">Mar 30 '12 at 19:01</span></a>
+
+        </div>
+        <div class="user-gravatar32">
+            <a href="http://stackoverflow.com/users/13302/marc-s"><div class=""><img src="mongodb-database-architecture_files/b4779212f57ff2e9549ea90a4499c2d7.htm" alt="" height="32" width="32"></div></a>
+        </div>
+        <div class="user-details">
+            <a href="http://stackoverflow.com/users/13302/marc-s">marc_s</a><br>
+            <span class="reputation-score" title="reputation score 227015" dir="ltr">227k</span><span title="21 gold badges"><span class="badge1"></span><span class="badgecount">21</span></span><span title="264 silver badges"><span class="badge2"></span><span class="badgecount">264</span></span><span title="451 bronze badges"><span class="badge3"></span><span class="badgecount">451</span></span>
+        </div>
+    </div>
+    </td>
+    <td class="post-signature owner">
+        
+
+    <div class="user-info ">
+        <div class="user-action-time">
+                                    asked
+ <span title="2012-03-30 18:25:22Z" class="relativetime">Mar 30 '12 at 18:25</span>
+        </div>
+        <div class="user-gravatar32">
+            <a href="http://stackoverflow.com/users/326439/ayusman"><div class=""><img src="mongodb-database-architecture_files/52e026f55845731fe97e2eb7af8b887a.htm" alt="" height="32" width="32"></div></a>
+        </div>
+        <div class="user-details">
+            <a href="http://stackoverflow.com/users/326439/ayusman">Ayusman</a><br>
+            <span class="reputation-score" title="reputation score" dir="ltr">1,165</span><span title="8 silver badges"><span class="badge2"></span><span class="badgecount">8</span></span><span title="24 bronze badges"><span class="badge3"></span><span class="badgecount">24</span></span>
+        </div>
+    </div>
+
+    </td>
+    </tr>
+    </tbody></table>
+</div>
+</td>
+        </tr>
+
+
+<tr>
+<td class="votecell"></td>
+<td>
+    <div id="comments-9948483" class="comments">
+        <table>
+        <tbody>
+                    
+    <tr id="comment-12703549" class="comment">
+        <td></td>
+        <td class="comment-text"><div><span class="comment-copy">I can't
+ claim to be an expert, but it most certainly does write to disk (not 
+sure when / how often / whether it always flushes / whether you can 
+explicitly flush). In fact, it snatches quite a bit of space (likely to 
+do its indexing i'm guessing)</span> –&nbsp;<a href="http://stackoverflow.com/users/941394/will-buck" title="578 reputation" class="comment-user">Will Buck</a> <span class="comment-date" dir="ltr"><a class="comment-link" onclick="StackExchange.question.highlightComment(12703549, 0)" href="#comment12703549_9948483"><span title="2012-03-30 18:41:55Z" class="relativetime-clean">Mar 30 '12 at 18:41</span></a></span></div></td>
+    </tr>
+            
+    <tr id="comment-12703599" class="comment">
+        <td></td>
+        <td class="comment-text"><div><span class="comment-copy">As a 
+general, really over-arching comparison, the greatest arguments I've 
+heard between it and a traditional relational db (like Oracle or MS SQL 
+Server or MySQL) is one of transactionality/reliability vs extreme 
+scale. If you wouldn't lose sleep at night if some of your data got 
+trashed, NoSQL options like Mongo are very performant and can scale to a
+ <i>lot</i> of concurrent users. If you <i>need</i> guarantees on your data though, for now you're probably better off sticking to transactional dbs.</span> –&nbsp;<a href="http://stackoverflow.com/users/941394/will-buck" title="578 reputation" class="comment-user">Will Buck</a> <span class="comment-date" dir="ltr"><a class="comment-link" onclick="StackExchange.question.highlightComment(12703599, 0)" href="#comment12703599_9948483"><span title="2012-03-30 18:44:36Z" class="relativetime-clean">Mar 30 '12 at 18:44</span></a></span></div></td>
+    </tr>
+            
+    <tr id="comment-12707244" class="comment">
+        <td></td>
+        <td class="comment-text"><div><span class="comment-copy">This 
+question may be a little broader than the guidelines for questions on SO
+ stipulate. I recommend that you go to the mongodb docs and read the 
+material they provide. Of particular interest will be:
+<a href="http://www.mongodb.org/display/DOCS/Architecture+and+Components" rel="nofollow">mongodb.org/display/DOCS/Architecture+and+Components</a>,
+<a href="http://www.mongodb.org/display/DOCS/SQL+to+Mongo+Mapping+Chart" rel="nofollow">mongodb.org/display/DOCS/SQL+to+Mongo+Mapping+Chart</a>,
+<a href="http://www.mongodb.org/display/DOCS/Production+Notes" rel="nofollow">mongodb.org/display/DOCS/Production+Notes</a>
+
+I hope this helps.</span> –&nbsp;<a href="http://stackoverflow.com/users/121495/marr75" title="3294 reputation" class="comment-user">marr75</a> <span class="comment-date" dir="ltr"><a class="comment-link" onclick="StackExchange.question.highlightComment(12707244, 0)" href="#comment12707244_9948483"><span title="2012-03-30 22:00:31Z" class="relativetime-clean">Mar 30 '12 at 22:00</span></a></span></div></td>
+    </tr>
+            
+    <tr id="comment-12753790" class="comment">
+        <td></td>
+        <td class="comment-text"><div><span class="comment-copy">@marr75
+ I have already looked at the documents that you mentioned. Sadly they 
+do not provide the details I am looking for. For example I can find many
+ documents that talk about the file and storage structure of oracle 
+Database. That is what I am looking at. What I do not understand is why 
+posts like these are downvoted.</span> –&nbsp;<a href="http://stackoverflow.com/users/326439/ayusman" title="1165 reputation" class="comment-user owner">Ayusman</a> <span class="comment-date" dir="ltr"><a class="comment-link" onclick="StackExchange.question.highlightComment(12753790, 0)" href="#comment12753790_9948483"><span title="2012-04-02 17:51:35Z" class="relativetime-clean">Apr 2 '12 at 17:51</span></a></span></div></td>
+    </tr>
+            
+    <tr id="comment-12810207" class="comment">
+        <td></td>
+        <td class="comment-text"><div><span class="comment-copy">I 
+didn't down vote you, but I did vote that it was too broad for SO. It's 
+kind of a self-cleaning mechanism. SO questions are supposed to be 
+quickly, permanently, and definitively answered (that's the goal anyway)
+ and with broad topics, it's hard to do any of those 3. I know less than
+ nothing about the architecture of an oracle database so it might not 
+occur to me to point out that in mongo, documents within a collection 
+are stored in incrementally growing files with a postfix number 
+alongside a namespace file. (This is unique enough to a document 
+database for me to identify in this case).</span> –&nbsp;<a href="http://stackoverflow.com/users/121495/marr75" title="3294 reputation" class="comment-user">marr75</a> <span class="comment-date" dir="ltr"><a class="comment-link" onclick="StackExchange.question.highlightComment(12810207, 0)" href="#comment12810207_9948483"><span title="2012-04-04 19:50:53Z" class="relativetime-clean">Apr 4 '12 at 19:50</span></a></span><span class="edited-yes" title="this comment was edited"></span></div></td>
+    </tr>
+
+        </tbody>
+    
+        </table>
+    </div>
+    <a id="comments-link-9948483" class="comments-link" data-comments-count="3" title="expand to show all comments on this post">show <b>3</b> more comments</a>
+    
+    <div style="color: rgb(136, 136, 136);" class="was-this-helpful">Was this post useful to you? &nbsp;&nbsp;<input style="opacity: 0;" class="anon-vote" value="Yes" type="button"> &nbsp;<input style="opacity: 0;" class="anon-vote" value="No" type="button"></div>
+    
+</td>
+</tr>            </tbody></table>    
+</div>
+
+
+    <div class="question-status">
+        <h2><strong>closed</strong> as off topic by <a href="http://stackoverflow.com/users/1228/will">Will</a><span class="mod-flair" title="moderator">♦</span> <span title="2012-04-01 05:44:09Z" class="relativetime">Apr 1 '12 at 5:44</span></h2>
+        <p>Questions on Stack Overflow are expected to relate to programming or software development within the scope defined in the <a href="http://stackoverflow.com/faq">FAQ</a>.
+ Consider editing the question or leaving comments for improvement if 
+you believe the question can be reworded to fit within the scope. Read 
+more about <a href="http://stackoverflow.com/faq#close">closed questions</a> here.</p>
+    </div>
+    
+
+
+<div id="answers">
+
+    <a name="tab-top"></a>
+    <div id="answers-header">
+        <div class="subheader answers-subheader">
+            <h2>
+                    1 Answer
+            </h2>
+            <div id="tabs">
+                <a href="http://stackoverflow.com/questions/9948483/mongodb-database-architecture?answertab=active#tab-top" title="Answers with the latest activity first">active</a>
+<a href="http://stackoverflow.com/questions/9948483/mongodb-database-architecture?answertab=oldest#tab-top" title="Answers in the order they were provided">oldest</a>
+<a class="youarehere" href="http://stackoverflow.com/questions/9948483/mongodb-database-architecture?answertab=votes#tab-top" title="Answers with the highest score first">votes</a>
+
+            </div>
+        </div>    
+    </div>    
+
+
+
+
+  
+<a name="9948895"></a>
+<div id="answer-9948895" class="answer accepted-answer" data-answerid="9948895">
+    <table>
+        <tbody><tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+    <input value="9948895" type="hidden">
+    <a class="vote-up-off" title="This answer is useful (click again to undo)">up vote</a>
+    <span class="vote-count-post ">5</span>
+    <a class="vote-down-off" title="This answer is not useful (click again to undo)">down vote</a>
+    
+
+            <span class="vote-accepted-on load-accepted-answer-date" title="loading when this answer was accepted...">accepted</span>
+ 
+</div>
+
+            </td>
+            
+
+
+<td class="answercell">
+    <div class="post-text"><p>MongoDB memory maps the database files. It
+ allows the OS to control this and allocate the maximum amount of RAM to
+ the memory mapping. As MongoDB updates and reads from the DB it is 
+reading and writing to RAM. All indexes on the documents in the database
+ are held in RAM also. The files in RAM are flushed to disk every 60 
+seconds. To prevent data loss in the event of power failure, the default
+ is to run with journaling switched on. The journal file is flushed to 
+disk every 100ms and if there is power loss is used to bring the 
+database back to a consistent state. 
+An important design decision with mongo is on the amount of RAM. You 
+need to figure out your working set size - i.e if you are going to be 
+reading and writing to only the most recent 10% of your data in the 
+database then this 10% is your working set and should be held in memory 
+for maximum performance. So if your working set is 10GB you are going to
+ neen 10GB for max performance - otherwise your queries/updates will run
+ slower as pages of memory are paged from disk into memory. 
+Other important aspects of mongoDB are replication for backups and 
+sharding for scaling. 
+There are a lot of great online resources for learning.  MongoDB is free
+ and opensource.</p>
+
+<p>EDIT: 
+It's a good idea to check out the tutorial 
+<a href="http://www.mongodb.org/display/DOCS/Tutorial" rel="nofollow">http://www.mongodb.org/display/DOCS/Tutorial</a>
+and manual 
+<a href="http://www.mongodb.org/display/DOCS/Manual" rel="nofollow">http://www.mongodb.org/display/DOCS/Manual</a>
+and the Admin Zone is useful too
+<a href="http://www.mongodb.org/display/DOCS/Admin+Zone" rel="nofollow">http://www.mongodb.org/display/DOCS/Admin+Zone</a>
+and if you get bored of reading then the presentations are worth checking out. 
+<a href="http://www.10gen.com/presentations" rel="nofollow">http://www.10gen.com/presentations</a></p>
+</div>
+    <table class="fw">
+    <tbody><tr>
+    <td class="vt">
+
+
+
+
+
+
+
+
+
+<div class="post-menu"><a href="http://stackoverflow.com/a/9948895" title="short permalink to this answer" class="short-link" id="link-post-9948895">share</a><span class="lsep">|</span><a href="http://stackoverflow.com/posts/9948895/edit" class="suggest-edit-post" title="">improve this answer</a></div>                    </td>
+    <td class="post-signature" align="right">
+
+
+    <div class="user-info ">
+        <div class="user-action-time">
+                            edited
+                             <a href="http://stackoverflow.com/posts/9948895/revisions" title="show all edits to this post"><span title="2012-03-30 22:32:22Z" class="relativetime">Mar 30 '12 at 22:32</span></a>
+
+        </div>
+        <div class="user-gravatar32">
+            
+        </div>
+        <div class="user-details">
+            <br>
+            
+        </div>
+    </div>
+    </td>
+            
+
+
+    <td class="post-signature" align="right">   
+       
+
+    
+
+    <div class="user-info ">
+        <div class="user-action-time">
+                                    answered
+ <span title="2012-03-30 18:55:30Z" class="relativetime">Mar 30 '12 at 18:55</span>
+        </div>
+        <div class="user-gravatar32">
+            <a href="http://stackoverflow.com/users/1235551/gregor"><div class=""><img src="mongodb-database-architecture_files/8e39297ae62cdd29d5f755a59e4f451f.htm" alt="" height="32" width="32"></div></a>
+        </div>
+        <div class="user-details">
+            <a href="http://stackoverflow.com/users/1235551/gregor">gregor</a><br>
+            <span class="reputation-score" title="reputation score" dir="ltr">844</span><span title="4 bronze badges"><span class="badge3"></span><span class="badgecount">4</span></span>
+        </div>
+    </div>
+
+    </td>
+    </tr>
+    </tbody></table>
+</td>
+        </tr>
+
+
+
+<tr>
+<td class="votecell"></td>
+<td>
+    <div id="comments-9948895" class="comments">
+        <table>
+        <tbody>
+                    
+    <tr id="comment-12704077" class="comment">
+        <td></td>
+        <td class="comment-text"><div><span class="comment-copy">thanks 
+for the info. I am actually looking for information on the line of your 
+answer. It will be great to get similar details. Can you point me to any
+ online resource that has the MongoDB internal desgin/architecture etc?</span> –&nbsp;<a href="http://stackoverflow.com/users/326439/ayusman" title="1165 reputation" class="comment-user owner">Ayusman</a> <span class="comment-date" dir="ltr"><a class="comment-link" onclick="StackExchange.question.highlightComment(12704077, 9948895)" href="#comment12704077_9948895"><span title="2012-03-30 19:05:54Z" class="relativetime-clean">Mar 30 '12 at 19:05</span></a></span></div></td>
+    </tr>
+            
+    <tr id="comment-12704124" class="comment">
+        <td></td>
+        <td class="comment-text"><div><span class="comment-copy">replication for read/query scaling as well (not just backups).</span> –&nbsp;<a href="http://stackoverflow.com/users/683201/wes-freeman" title="5889 reputation" class="comment-user">Wes Freeman</a> <span class="comment-date" dir="ltr"><a class="comment-link" onclick="StackExchange.question.highlightComment(12704124, 9948895)" href="#comment12704124_9948895"><span title="2012-03-30 19:07:48Z" class="relativetime-clean">Mar 30 '12 at 19:07</span></a></span></div></td>
+    </tr>
+            
+    <tr id="comment-12747531" class="comment">
+        <td></td>
+        <td class="comment-text"><div><span class="comment-copy">Do you think this answers your question or do you need more help?</span> –&nbsp;<a href="http://stackoverflow.com/users/1235551/gregor" title="844 reputation" class="comment-user">gregor</a> <span class="comment-date" dir="ltr"><a class="comment-link" onclick="StackExchange.question.highlightComment(12747531, 9948895)" href="#comment12747531_9948895"><span title="2012-04-02 13:21:10Z" class="relativetime-clean">Apr 2 '12 at 13:21</span></a></span></div></td>
+    </tr>
+            
+    <tr id="comment-12753812" class="comment">
+        <td></td>
+        <td class="comment-text"><div><span class="comment-copy">@gregor yes I need some specific info, but haven't found it yet.</span> –&nbsp;<a href="http://stackoverflow.com/users/326439/ayusman" title="1165 reputation" class="comment-user owner">Ayusman</a> <span class="comment-date" dir="ltr"><a class="comment-link" onclick="StackExchange.question.highlightComment(12753812, 9948895)" href="#comment12753812_9948895"><span title="2012-04-02 17:52:34Z" class="relativetime-clean">Apr 2 '12 at 17:52</span></a></span></div></td>
+    </tr>
+            
+    <tr id="comment-12810347" class="comment">
+        <td></td>
+        <td class="comment-text"><div><span class="comment-copy"><a href="http://www.mongodb.org/display/DOCS/Caching" rel="nofollow">mongodb.org/display/DOCS/Caching</a> - Actually has nothing to do with cache, has to do with how mongo handles memory, some memory overhead, etc.
+
+<a href="http://www.mongodb.org/display/DOCS/Durability+Internals" rel="nofollow">mongodb.org/display/DOCS/Durability+Internals</a> - Internals of Journals (Durability)
+
+<a href="http://www.slideshare.net/mdirolf/inside-mongodb-the-internals-of-an-opensource-database" rel="nofollow">slideshare.net/mdirolf/…</a> - Best overview of internals I've found so far</span> –&nbsp;<a href="http://stackoverflow.com/users/121495/marr75" title="3294 reputation" class="comment-user">marr75</a> <span class="comment-date" dir="ltr"><a class="comment-link" onclick="StackExchange.question.highlightComment(12810347, 9948895)" href="#comment12810347_9948895"><span title="2012-04-04 19:57:49Z" class="relativetime-clean">Apr 4 '12 at 19:57</span></a></span></div></td>
+    </tr>
+
+        </tbody>
+    
+        </table>
+    </div>
+    
+    
+    <div style="color: rgb(136, 136, 136);" class="was-this-helpful">
+        feedback
+    </div>
+    
+</td>
+</tr>
+   
+    
+    </tbody></table>
+</div>
+
+
+
+        <h2 class="bottom-notice">
+                Not the answer you're looking for? 
+            Browse other questions tagged <a href="http://stackoverflow.com/questions/tagged/mongodb" class="post-tag" title="show questions tagged 'mongodb'" rel="tag">mongodb</a> <a href="http://stackoverflow.com/questions/tagged/architecture" class="post-tag" title="show questions tagged 'architecture'" rel="tag">architecture</a> <a href="http://stackoverflow.com/questions/tagged/database-design" class="post-tag" title="show questions tagged 'database-design'" rel="tag">database-design</a> 
+                or <a href="http://stackoverflow.com/questions/ask">ask your own question</a>.
+        </h2>
+</div>
+</div>
+<div id="sidebar">
+
+
+
+     <script type="text/javascript">
+        window.showNewUser = true;
+
+            
+                (function(){
+                    var cs = window.sessionStorage && window.sessionStorage['tNewsletter'];
+                    var m = /:\/\/([^\/]*)/.exec(document.referrer);
+                    var h = {'www.reddit.com':1,'news.ycombinator.com':1};
+                    if(window.sessionStorage && (cs || (m && m.length == 2 && h[m[1]]))){
+                        showNewUser = false;
+                        StackExchange.ready(function(){
+                            StackExchange.newsletterAd.loader(m[1], cs);
+                        });
+                    }
+                    if (window.localStorage && showNewUser){
+                        var c = parseInt(localStorage['nuCounter'],10); 
+                        c = isNaN(c) ? 1 : c+1;
+                        window.localStorage['nuCounter'] = c; 
+                        showNewUser = c < 10;
+                    }
+                })()
+            
+     </script>
+    <div class="module newuser newuser-greeting" id="newuser-box" style="">
+        <h4>Hello World!</h4>
+        <div>
+            <p>This is a collaboratively edited question and answer site for <b>professional and enthusiast programmers</b>. It's 100% free, no registration required.</p>
+            <p class="ar">
+                    <a href="http://stackoverflow.com/about?mnu=1">about »</a>&nbsp;&nbsp;&nbsp;
+                <a href="http://stackoverflow.com/faq?mnu=1">faq »</a>
+            </p>
+        </div>
+    </div>
+     <script type="text/javascript">
+        if (showNewUser) {
+            document.getElementById('newuser-box').style.display = '';
+        }
+     </script>
+        <div class="module question-stats">
+        <p class="label-key">tagged</p>
+        <div class="tagged"><a href="http://stackoverflow.com/questions/tagged/mongodb" class="post-tag" title="" rel="tag">mongodb</a>&nbsp;<span class="item-multiplier"><span class="item-multiplier-x">×</span>&nbsp;<span class="item-multiplier-count">13577</span></span><br>
+<a href="http://stackoverflow.com/questions/tagged/database-design" class="post-tag" title="" rel="tag">database-design</a>&nbsp;<span class="item-multiplier"><span class="item-multiplier-x">×</span>&nbsp;<span class="item-multiplier-count">10188</span></span><br>
+<a href="http://stackoverflow.com/questions/tagged/architecture" class="post-tag" title="show questions tagged 'architecture'" rel="tag">architecture</a>&nbsp;<span class="item-multiplier"><span class="item-multiplier-x">×</span>&nbsp;<span class="item-multiplier-count">6762</span></span><br>
+</div>
+        <table id="qinfo">
+            <tbody><tr>
+                <td><p class="label-key">asked</p></td>
+                <td style="padding-left:10px"><p class="label-key" title="2012-03-30 18:25:22Z"><b>10 months ago</b></p></td>
+            </tr>
+            <tr>
+                <td><p class="label-key">viewed</p></td>
+
+                <td style="padding-left:10px">
+                    <p class="label-key">
+                        <b>840 times</b>
+                    </p>
+                </td>
+            </tr>
+            <tr>
+                <td><p class="label-key">active</p></td>
+                <td style="padding-left:10px"><p class="label-key"><b><a href="http://stackoverflow.com/questions/9948483/mongodb-database-architecture?lastactivity" class="lastactivity-link" title="2012-03-30 22:32:22Z">10 months ago</a></b></p></td>
+            </tr>
+        </tbody></table>
+    </div>
+        
+                <script type="text/javascript">
+                var scriptSrc = "http://engine.adzerk.net/z/8277/adzerk1_2_4_43,adzerk2_2_17_45?keywords=mongodb,architecture,database-design";
+                if (document.referrer) {
+                    if (/\?/.test(scriptSrc))
+                        scriptSrc += "&";
+                    else
+                        scriptSrc += "?";
+                    scriptSrc += "xReferrer=" + document.referrer;
+                }
+                StackExchange.ready(function () {
+                    var z = document.createElement("script");
+                    z.type = "text/javascript";
+                    z.async = "true";
+                    z.src = scriptSrc;
+                    var s = document.getElementsByTagName("script")[0];
+                    s.parentNode.insertBefore(z, s);
+                });
+            </script>
+        <div class="everyonelovesstackoverflow" id="adzerk2"><div id="SE20-ad-container" style="height: 250px; width: 220px;">
+<style>
+#launched-ad { width: 220px; height: 250px; overflow: hidden; background: url(http://cdn.sstatic.net/stackexchange/Img/launched-ads/tex.png) no-repeat bottom center; }
+#launched-ad-link { display: block; width: 220px; height: 250px; line-height: 1.2; color: #953838 !important; font-family: "Palatino Linotype",Palatino,"Hoefler Text","Book Antiqua",Georgia,serif; font-size: 18px; text-align: center; text-decoration: none; cursor: pointer; }
+#launched-ad-inner { width: 200px; margin: 73px 10px 0 10px;}
+</style>
+<a id="launched-ad-link" href="http://engine.adzerk.net/redirect/0/3194/2841/8277/86814df8b8aa472dbd3b23932964edbc/45/1178/11719/634956330259940310/?keywords=mongodb%2carchitecture%2cdatabase-design&amp;url=http%3A%2F%2Ftex.stackexchange.com%2Fquestions%2F96745%2Ftikz-grouping-expressions-in-calculations">
+    <div id="launched-ad">
+        <div id="launched-ad-inner">TikZ grouping expressions in calculations</div>
+    </div>
+</a>
+</div><img src="mongodb-database-architecture_files/v.gif" height="0" width="0"><script type="text/javascript">window._launchedAdUrl= "http://engine.adzerk.net/redirect/0/3194/2841/8277/86814df8b8aa472dbd3b23932964edbc/45/1178/11719/634956330259940310/?keywords=mongodb%2carchitecture%2cdatabase-design";</script><script src="mongodb-database-architecture_files/js" type="text/javascript"></script></div>
+    <div id="hireme">
+        <script type="text/javascript">
+            var careers_adurl="http://careers.stackoverflow.com/gethired/js",careers_cssurl="//careerscdn.sstatic.net/careers/gethired/sidebar.css?fffffffff879eaa0",careers_leaderboardcssurl="//careerscdn.sstatic.net/careers/gethired/ninja.min.css?3a3e90",careers_companycssurl="//careerscdn.sstatic.net/careers/gethired/company",careers_adselector="div.hireme, div#hireme";StackExchange.ready(function(){$.ajax({url:"//careerscdn.sstatic.net/careers/gethired/loader.min.js?3a3e90",dataType:"script",cache:!0})})
+        </script>
+    </div>
+
+
+
+    
+  
+    
+    <div class="module sidebar-related">
+        <h4 id="h-related">Related</h4>
+        <div class="related" data-tracker="rq=1">
+            <div class="spacer">
+<a href="http://stackoverflow.com/questions/2906070/designing-a-mongodb-solution?rq=1" class="question-hyperlink">Designing a MongoDB solution?</a>
+</div>
+<div class="spacer">
+<a href="http://stackoverflow.com/questions/2986457/finding-changes-in-mongodb-database?rq=1" class="question-hyperlink">Finding changes in MongoDB database</a>
+</div>
+<div class="spacer">
+<a href="http://stackoverflow.com/questions/3013027/simulating-relations-in-mongodb?rq=1" class="question-hyperlink">Simulating relations in MongoDB</a>
+</div>
+<div class="spacer">
+<a href="http://stackoverflow.com/questions/4838923/mongodb-database-design?rq=1" class="question-hyperlink">MongoDB :: Database Design</a>
+</div>
+<div class="spacer">
+<a href="http://stackoverflow.com/questions/5477076/how-to-structure-data-model-for-an-advertising-tool-in-mongodb?rq=1" class="question-hyperlink">How to structure data model for an advertising tool in MongoDB</a>
+</div>
+<div class="spacer">
+<a href="http://stackoverflow.com/questions/5617360/database-architecture-for-this-scenario?rq=1" class="question-hyperlink">Database Architecture for this scenario</a>
+</div>
+<div class="spacer">
+<a href="http://stackoverflow.com/questions/5872038/basic-database-architecture-for-a-web-app?rq=1" class="question-hyperlink">Basic database architecture for a web app</a>
+</div>
+<div class="spacer">
+<a href="http://stackoverflow.com/questions/6485904/mongodb-vs-relational-databases-when-data-cant-fit-into-memory?rq=1" class="question-hyperlink">mongoDB vs relational databases when data can't fit into memory?</a>
+</div>
+<div class="spacer">
+<a href="http://stackoverflow.com/questions/6840537/using-mongodb-as-a-replication-for-mysql?rq=1" class="question-hyperlink">Using Mongodb as a replication for Mysql?</a>
+</div>
+<div class="spacer">
+<a href="http://stackoverflow.com/questions/7046462/best-way-to-model-a-voting-system-in-mongodb?rq=1" class="question-hyperlink">Best way to model a voting system in MongoDB</a>
+</div>
+<div class="spacer">
+<a href="http://stackoverflow.com/questions/7046500/using-a-second-database-for-write-heavy-data-in-mongodb?rq=1" class="question-hyperlink">Using a second database for write heavy data in MongoDB</a>
+</div>
+<div class="spacer">
+<a href="http://stackoverflow.com/questions/8494130/database-structure-for-website-analytics-using-mongodb?rq=1" class="question-hyperlink">Database structure for website analytics using MongoDB</a>
+</div>
+<div class="spacer">
+<a href="http://stackoverflow.com/questions/8575774/why-dis-similarities-in-mongodb-database-used-space-architecture?rq=1" class="question-hyperlink">Why dis-similarities in MongoDB Database Used Space Architecture?</a>
+</div>
+<div class="spacer">
+<a href="http://stackoverflow.com/questions/8737625/database-design-with-mongodb?rq=1" class="question-hyperlink">Database design with MongoDB</a>
+</div>
+<div class="spacer">
+<a href="http://stackoverflow.com/questions/8905370/how-to-handle-database-purging-in-mongodb?rq=1" class="question-hyperlink">How to handle database purging in Mongodb</a>
+</div>
+<div class="spacer">
+<a href="http://stackoverflow.com/questions/9901367/general-mongodb-database-design-and-index-performance-one-or-many-collections?rq=1" class="question-hyperlink">General MongoDb database design and index performance - one or many collections?</a>
+</div>
+<div class="spacer">
+<a href="http://stackoverflow.com/questions/10651978/database-architecture-in-mongodb-with-ruby-on-rails?rq=1" class="question-hyperlink">Database architecture in mongodb with ruby on rails</a>
+</div>
+<div class="spacer">
+<a href="http://stackoverflow.com/questions/11450654/tags-architecture?rq=1" class="question-hyperlink">Tags architecture</a>
+</div>
+<div class="spacer">
+<a href="http://stackoverflow.com/questions/11904480/document-based-storage-of-relational-data?rq=1" class="question-hyperlink">Document Based Storage of Relational Data</a>
+</div>
+<div class="spacer">
+<a href="http://stackoverflow.com/questions/12103153/database-architecture?rq=1" class="question-hyperlink">Database architecture</a>
+</div>
+<div class="spacer">
+<a href="http://stackoverflow.com/questions/12409909/mongodb-architecture?rq=1" class="question-hyperlink">mongodb architecture</a>
+</div>
+<div class="spacer">
+<a href="http://stackoverflow.com/questions/12672525/mongodb-how-to-make-a-union-of-two-or-more-databases?rq=1" class="question-hyperlink">MongoDB, how to make a union of two or more databases</a>
+</div>
+<div class="spacer">
+<a href="http://stackoverflow.com/questions/13469522/mongodb-saas-single-vs-multiple-database?rq=1" class="question-hyperlink">Mongodb SaaS Single vs Multiple Database</a>
+</div>
+<div class="spacer">
+<a href="http://stackoverflow.com/questions/13622955/best-server-design-for-mongodb-based-system-low-response-times-needed?rq=1" class="question-hyperlink">Best server design for MongoDB based system (low response times needed)</a>
+</div>
+<div class="spacer">
+<a href="http://stackoverflow.com/questions/14035188/database-engine-architecture-books?rq=1" class="question-hyperlink">Database Engine Architecture books?</a>
+</div>
+
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+StackExchange.ready(function(){$.get('/posts/9948483/ivc/a22b');});
+</script>
+<noscript>
+    <div><img src="/posts/9948483/ivc/a22b" class="dno" alt="" width="0" height="0"></div>
+</noscript><div style="display:none" id="prettify-lang"></div></div>
+        </div>
+    </div>
+    <div id="footer">
+        <div class="footerwrap">
+            <div id="footer-menu">
+                    <a href="http://stackoverflow.com/about">about</a> |
+                <a href="http://stackoverflow.com/faq">faq</a> |
+                <a href="http://blog.stackexchange.com/?blb=1">blog</a> |
+                    <a href="http://chat.stackoverflow.com/">chat</a> |
+                <a href="http://data.stackexchange.com/">data</a> |
+                <a href="http://stackexchange.com/legal">legal</a> |
+                <a href="http://stackexchange.com/legal/privacy-policy">privacy policy</a> |
+                <a href="http://stackexchange.com/about/hiring">jobs</a> |
+                <a href="http://engine.adzerk.net/redirect/0/2776/2751/0/4de3c60f719c4dfcb1a57531c7050090/0">advertising info</a> |
+
+                <a onclick="StackExchange.switchMobile('on', '/questions/9948483/mongodb-database-architecture')">mobile</a> |
+
+                <b><a href="http://stackoverflow.com/help">contact us</a></b>
+                  | <b><a href="http://meta.stackoverflow.com/">feedback</a></b>
+                <div id="footer-sites">
+                    
+                        <span style="color:#FE7A15;font-size:140%">■</span>&nbsp;<a href="http://stackoverflow.com/">stackoverflow.com</a>&nbsp; 
+                        <span style="color:#FE7A15;font-size:140%">■</span>&nbsp;<a href="http://stackapps.com/">api/apps</a>&nbsp; 
+                        <span style="color:#FE7A15;font-size:140%">■</span>&nbsp;<a href="http://careers.stackoverflow.com/">careers 2.0</a>&nbsp; 
+                        <span style="color:#E8272C;font-size:140%">■</span>&nbsp;<a href="http://serverfault.com/">serverfault.com</a>&nbsp; 
+                        <span style="color:#00AFEF;font-size:140%">■</span>&nbsp;<a href="http://superuser.com/">superuser.com</a>&nbsp; 
+                        <span style="color:#969696;font-size:140%">■</span>&nbsp;<a href="http://meta.stackoverflow.com/">meta</a>&nbsp; 
+                        <span style="color:#46937D;font-size:140%">■</span>&nbsp;<a href="http://area51.stackexchange.com/">area&nbsp;51</a>&nbsp; 
+                        <span style="color:#C0D0DC;font-size:140%">■</span>&nbsp;<a href="http://webapps.stackexchange.com/">webapps</a>&nbsp; 
+                        <span style="color:#000000;font-size:140%">■</span>&nbsp;<a href="http://gaming.stackexchange.com/">gaming</a>&nbsp; 
+                        <span style="color:#dd4814;font-size:140%">■</span>&nbsp;<a href="http://askubuntu.com/">ubuntu</a>&nbsp; 
+                        <span style="color:#9ce4fe;font-size:140%">■</span>&nbsp;<a href="http://webmasters.stackexchange.com/">webmasters</a>&nbsp; 
+                        <span style="color:#cf4d3f;font-size:140%">■</span>&nbsp;<a href="http://cooking.stackexchange.com/">cooking</a>&nbsp; 
+                        <span style="color:#f4f28d;font-size:140%">■</span>&nbsp;<a href="http://gamedev.stackexchange.com/">game development</a>&nbsp; 
+                        <span style="color:#0f3559;font-size:140%">■</span>&nbsp;<a href="http://math.stackexchange.com/">math</a>&nbsp; 
+                        <span style="color:#f2f2f2;font-size:140%">■</span>&nbsp;<a href="http://photo.stackexchange.com/">photography</a>&nbsp; 
+                        <span style="color:#037187;font-size:140%">■</span>&nbsp;<a href="http://stats.stackexchange.com/">stats</a>&nbsp; 
+                        <span style="color:#f1e7cc;font-size:140%">■</span>&nbsp;<a href="http://tex.stackexchange.com/">tex</a>&nbsp; 
+                        <span style="color:#e1cdae;font-size:140%">■</span>&nbsp;<a href="http://english.stackexchange.com/">english</a>&nbsp; 
+                        <span style="color:#a2d9f6;font-size:140%">■</span>&nbsp;<a href="http://cstheory.stackexchange.com/">theoretical cs</a>&nbsp; 
+                        <span style="color:#1b3e6c;font-size:140%">■</span>&nbsp;<a href="http://programmers.stackexchange.com/">programmers</a>&nbsp; 
+                        <span style="color:#293a5d;font-size:140%">■</span>&nbsp;<a href="http://unix.stackexchange.com/">unix</a>&nbsp;
+                        <span style="color:#bec0cb;font-size:140%">■</span>&nbsp;<a href="http://apple.stackexchange.com/">apple</a>&nbsp;
+                        <span style="color:#939185;font-size:140%">■</span>&nbsp;<a href="http://wordpress.stackexchange.com/">wordpress</a>&nbsp;
+                        <span style="color:#ebf5f5;font-size:140%">■</span>&nbsp;<a href="http://physics.stackexchange.com/">physics</a>&nbsp;
+                        <span style="color:#4176ab;font-size:140%">■</span>&nbsp;<a href="http://diy.stackexchange.com/">home&nbsp;improvement</a>&nbsp;
+                        <span style="color:#d1d8d7;font-size:140%">■</span>&nbsp;<a href="http://gis.stackexchange.com/">gis</a>&nbsp;
+                        <span style="color:#e5e2d3;font-size:140%">■</span>&nbsp;<a href="http://electronics.stackexchange.com/">electrical&nbsp;engineering</a>&nbsp;
+                        <span style="color:#a4c639;font-size:140%">■</span>&nbsp;<a href="http://android.stackexchange.com/">android</a>&nbsp;
+                        <span style="color:#2e4e60;font-size:140%">■</span>&nbsp;<a href="http://security.stackexchange.com/">security</a>&nbsp;
+                        <span style="color:#45bcb5;font-size:140%">■</span>&nbsp;<a href="http://bicycles.stackexchange.com/">bicycles</a>&nbsp;
+                        <span style="color:#00adee;font-size:140%">■</span>&nbsp;<a href="http://dba.stackexchange.com/">dba</a>&nbsp;
+                        <span style="color:#2edaf0;font-size:140%">■</span>&nbsp;<a href="http://drupal.stackexchange.com/">drupal</a>&nbsp;
+                        <span style="color:#213951;font-size:140%">■</span>&nbsp;<a href="http://sharepoint.stackexchange.com/">sharepoint</a>&nbsp;
+                        <span style="color:#73abb3;font-size:140%">■</span>&nbsp;<a href="http://scifi.stackexchange.com/">scifi&nbsp;&amp;&nbsp;fantasy</a>&nbsp;
+                        <span style="color:#23629F;font-size:140%">■</span>&nbsp;<a href="http://ux.stackexchange.com/">user&nbsp;experience</a>&nbsp;
+                        <span style="color:#faff72;font-size:140%">■</span>&nbsp;<a href="http://skeptics.stackexchange.com/">skeptics</a>&nbsp;
+                        <span style="color:#623121;font-size:140%">■</span>&nbsp;<a href="http://rpg.stackexchange.com/">rpg</a>&nbsp;
+                        <span style="color:#e4be88;font-size:140%">■</span>&nbsp;<a href="http://judaism.stackexchange.com/">judaism</a>&nbsp;
+                        <span style="color:#ffecb1;font-size:140%">■</span>&nbsp;<a href="http://mathematica.stackexchange.com/">mathematica</a>&nbsp;
+                        <span style="color:#1b8598;font-size:140%">■</span>&nbsp;<a href="http://travel.stackexchange.com/">travel</a>&nbsp;
+                </div>
+            </div>
+            <div id="footer-flair">
+                <a class="peer1" href="http://www.peer1.com/stackoverflow"></a>  
+	            <a href="http://creativecommons.org/licenses/by-sa/3.0/" class="cc-wiki-link"></a>
+                <div id="svnrev">rev 2013.2.4.1332</div>
+                        </div>
+            <div id="copyright">
+                site design / logo © 2013 stack exchange inc; 
+                user contributions licensed under <a href="http://creativecommons.org/licenses/by-sa/3.0/" rel="license">cc-wiki</a> with <a href="http://blog.stackoverflow.com/2009/06/attribution-required/" rel="license">attribution required</a>
+            </div>
+            
+
+        </div>
+    <iframe id="global-auth-frame" style="display:none" src="mongodb-database-architecture_files/read.htm"></iframe></div>
+    
+    <noscript>
+        <div id="noscript-warning">Stack Overflow works best with JavaScript enabled<img src="http://pixel.quantserve.com/pixel/p-c1rF4kxgLUzNc.gif" alt="" class="dno"></div>
+    </noscript>
+    <script type="text/javascript">var _gaq=_gaq||[];_gaq.push(['_setAccount','UA-5620270-1']);
+        _gaq.push(['_setCustomVar', 1, 'tags', '|mongodb|architecture|database-design|']); 
+_gaq.push(['_trackPageview']);
+    var _qevents = _qevents || [];
+    (function(){
+        var s=document.getElementsByTagName('script')[0];
+        var ga=document.createElement('script');
+        ga.type='text/javascript';
+        ga.async=true;
+        ga.src='http://www.google-analytics.com/ga.js';
+        s.parentNode.insertBefore(ga,s);
+        var sc=document.createElement('script');
+        sc.type='text/javascript';
+        sc.async=true;
+        sc.src='http://edge.quantserve.com/quant.js'; 
+        s.parentNode.insertBefore(sc,s);
+    })();
+    </script>
+    <script type="text/javascript">
+        _qevents.push({ qacct: "p-c1rF4kxgLUzNc" });
+    </script>    
+    
+
+</body></html>

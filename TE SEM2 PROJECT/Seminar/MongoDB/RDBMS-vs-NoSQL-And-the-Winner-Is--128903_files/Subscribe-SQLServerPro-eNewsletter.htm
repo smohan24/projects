@@ -1,0 +1,427 @@
+<!DOCTYPE html PUBLIC "-//W3C//Dtd XHTML 1.0 transitional//EN" "http://www.w3.org/tr/xhtml1/Dtd/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Sign up for the SQL Server Pro UPDATE eNewsletter</title>
+<script type="text/javascript">function submitForm() {var elqForm = document.forms['SQLServerProENL'];}</script>
+<script src="Subscribe-SQLServerPro-eNewsletter_data/jquery-1.htm" type="text/javascript">
+<script src="http://img.en25.com/Web/PentonMediaInc/elq.chkbox.js" type="text/javascript">
+<script>
+$(document).ready(function(){
+ $.chkbox();
+});
+</script>
+
+<script type="text/javascript">
+var errorSet = null;
+
+FieldObj = function() {
+   var Field;
+   this.get_Field = function() { return Field; }
+   this.set_Field = function(val) { Field = val; }
+
+   var ErrorMessage;
+   this.get_ErrorMessage = function() { return ErrorMessage; }
+   this.set_ErrorMessage = function(val) { ErrorMessage = val; }
+}
+
+
+function ResetHighlight() {
+   var field;
+
+   if (errorSet != null) {
+      for (var i = 0; i < errorSet.length; i++) {
+         errorSet[i].Field.className = 'elqField'
+      }
+    }
+   errorSet = new Array();
+}
+
+
+function DisplayErrorSet(ErrorSet) {
+   var element;
+   var ErrorMessage = '';
+
+   for (var i = 0; i < ErrorSet.length; i++) {
+      ErrorMessage = ErrorMessage + ErrorSet[i].ErrorMessage + '\n';
+      ErrorSet[i].Field.className = 'elqFieldValidation';
+   }
+
+   if (ErrorMessage != '')
+      alert(ErrorMessage);
+}
+
+
+function ValidateRequiredField(Element, args) {
+   var elementVal=Element.value;
+   var testPass=true;
+   if (Element) {
+      if (args.Type == 'text') {
+         if (Element.value == null || Element.value == "") {
+            return false;
+         }
+      }
+      else if (args.Type == 'singlesel') {
+         if (Element.value == null || Element.value == "") {
+            return false;
+         }
+   }
+      else if (args.Type == 'multisel') {
+         var selCount=0;
+         for (var i=0; i<Element.length; i++) {
+              if (Element[i].selected && Element[i].value !='') {
+                 selCount += 1;
+              }
+         }
+      if (selCount == 0)
+         return false;
+   }
+   }
+   else
+      testPass = false;
+return testPass;
+}
+
+
+function ValidateEmailAddress(Element) {
+   var varRegExp='^[A-Z0-9!#\\$%&\'\\*\\+\\-/=\\?\\^_`\\{\\|\\}~][A-Z0-9!#\\$%&\'\\*\\+\\-/=\\?\\^_`\\{\\|\\}~\\.]{0,62}@([A-Z0-9](?:[A-Z0-9\\-]{0,61}[A-Z0-9])?(\\.[A-Z0-9](?:[A-Z0-9\\-]{0,61}[A-Z0-9])?)+)$';
+   if ((Element) && (Element.value != '')) {
+      var reg = new RegExp(varRegExp,"i");
+      var match = reg.exec(Element.value);
+         if ((match) && (match.length=3) && (match[1].length<=255) && ((match[2].length>=3) & (match[2].length<=7)))
+            return true;
+   }
+   return false;
+}
+
+
+function ValidateDataTypeLength(Element, args, ErrorMessage) {
+   var elementVal = Element.value;
+   var testPass = true;
+
+   if (Element) {
+      if (args.Type == 'text') {
+         if ((elementVal == '')) {
+            testPass = false;
+         }
+         if ((args.Minimum != '') && (elementVal.length < args.Minimum))
+            testPass = false;
+         if ((args.Maximum != '') && (elementVal.length > args.Maximum))
+            testPass = false;
+      }
+      else if (args.Type == 'numeric') {
+         if ((elementVal == '')) {
+            testPass = false;
+         }
+         if ((elementVal != '') && (elementVal != parseFloat(elementVal)))
+            testPass = false;
+         if (args.Minimum != '') {
+            if ((elementVal == '') || (parseFloat(elementVal) < args.Minimum))
+            testPass = false;
+         }
+         if (args.Maximum != '') {
+            if ((elementVal != '') && (parseFloat(elementVal) > args.Maximum))
+               testPass = false;
+         }
+      }
+   }
+   else
+      testPass = false;
+   return testPass;
+}
+
+
+function CheckElqForm(elqForm) {
+var args = null;
+var allValid = true;
+
+if (elqForm == null) {
+   alert('Unable to execute form validation!\Unable to locate correct form');
+   return false;
+}
+ResetHighlight();
+
+
+formField = new FieldObj();
+formField.Field = elqForm.elements['C_EmailAddress'];
+formField.ErrorMessage ='Your Email Address is not a valid email address.  Please refresh your browser and re-enter your email.'
+if (formField.Field != null) {
+   if (!ValidateEmailAddress(formField.Field)) {
+      errorSet.push(formField);
+      allValid = false;
+   }
+}
+
+if (!allValid) {
+   DisplayErrorSet(errorSet);
+   return false;
+}
+
+return true;
+}
+
+function submitForm(elqForm) {
+   if (CheckElqForm(elqForm)) {
+       prepareSelectsForEloqua(elqForm);
+       fnPrepareCheckboxMatricesForEloqua(elqForm);
+       return true;
+   }
+   else { return false; }
+}
+
+function prepareSelectsForEloqua(elqForm) {
+   var selects = elqForm.getElementsByTagName("SELECT");
+   for (var i = 0; i < selects.length; i++) {
+       if (selects[i].multiple) {
+           createEloquaSelectField(elqForm, selects[i]);
+       }
+   }
+   return true;
+}
+
+function createEloquaSelectField(elqForm, sel) {
+   var inputName = sel.name;
+   var newInput = document.createElement('INPUT');
+   newInput.style.display = "none";
+   newInput.name = inputName;
+   newInput.value = "";
+
+   for (var i = 0; i < sel.options.length; i++) {
+       if (sel.options[i].selected) {
+           newInput.value += sel.options[i].value + "::";
+       }
+   }
+   if (newInput.value.length > 0) {
+       newInput.value = newInput.value.substr(0, newInput.value.length - 2);
+   }
+   sel.disabled = true;
+   newInput.id = inputName;
+   elqForm.insertBefore(newInput, elqForm.firstChild);
+}
+
+function fnPrepareCheckboxMatricesForEloqua(elqForm) {
+   var matrices = elqForm.getElementsByTagName('TABLE');
+   for (var i = 0; i < matrices.length; i++) {
+       var tableClassName = matrices[i].className;
+       if (tableClassName.match(/elqMatrix/)) {
+           if (fnDetermineMatrixType(matrices[i]).toLowerCase() == 'checkbox') {
+               if (matrices[i].rows[0].cells[0].childNodes.length == 1) {
+                   if (matrices[i].rows[0].cells[0].childNodes[0].nodeName != '#text') {
+                       fnCreateHorizontalMatrixCheckboxField(elqForm, matrices[i]);
+                   }
+                   else {
+                       fnCreateVerticalMatrixCheckboxField(elqForm, matrices[i]);
+                   }
+               }
+           }
+       }
+   }
+   return true;
+}
+
+function fnCreateVerticalMatrixCheckboxField(elqForm, matrix) {
+   var inputName = matrix.id + 'r' + 1;
+   var newInput = document.createElement('INPUT');
+   newInput.style.display = 'none';
+   newInput.name = inputName;
+   newInput.value = '';
+
+   var inputs = document.getElementsByName(inputName);
+   for (var i=0; i < inputs.length; i++) {
+       if (inputs[i].nodeName.toLowerCase() == 'input') {
+           if (inputs[i].checked == true) {
+               if (inputs[i].type.toLowerCase() == 'checkbox') {
+                   newInput.value += inputs[i].value + '::';
+                   inputs[i].disabled = true;
+               }
+           }
+       }
+   }
+   if (newInput.value.length > 0) {
+       newInput.value = newInput.value.substr(0, newInput.value.length - 2);
+   }
+
+   newInput.id = inputName;
+   elqForm.insertBefore(newInput, elqForm.firstChild);
+   matrix.disabled = true;
+}
+
+function fnCreateHorizontalMatrixCheckboxField(elqForm, matrix) {
+   for (var i=1; i < matrix.rows.length; i++) {
+       var inputs = document.getElementsByName(matrix.id + 'r' + i);
+       var oMatrixRow = matrix.rows[i];
+       var inputName = oMatrixRow.id;
+       var newInput = document.createElement('INPUT');
+       newInput.style.display = 'none';
+       newInput.name = inputName;
+       newInput.value = '';
+
+       for (var j=0; j < inputs.length; j++) {
+           if (inputs[j].nodeName.toLowerCase() == 'input') {
+               if (inputs[j].checked == true) {
+
+
+                   if (inputs[i].type.toLowerCase() == 'checkbox') {
+                       newInput.value += inputs[j].value + '::';
+                       inputs[j].disabled = true;
+                   }
+               }
+           }
+       }
+
+       if (newInput.value.length > 0) {
+           newInput.value = newInput.value.substr(0, newInput.value.length - 2);
+       }
+
+       newInput.id = inputName;
+       elqForm.insertBefore(newInput, elqForm.firstChild);
+   }
+   matrix.disabled = true;
+}
+
+function fnDetermineMatrixType(oTable) {
+   var oFirstMatrixInput = oTable.rows[1].cells[1].childNodes[0];
+   return oFirstMatrixInput.type;
+}
+
+</script>
+
+<style type="text/css">
+<!--
+html, body, div, span, object, iframe, h1, h2, h3, h4, h5, h6, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, q, s, samp, small, strong, strike, sub, sup, tt, var, b, u, i, center, dl, dt, dd, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, section, summary, time, mark, audio, video { border:0; margin:0; padding:0; }
+
+body { margin:0; font-family:Arial, sans-serif; font-size:12px; color:#353535; }
+
+.elementcontainer { float:left; width:336px; margin:0; background:#fff; }
+.rightrail { width:336px; float:right; }
+
+.rightraillabel { width:326px; height:32px; margin-top:20px; padding:11px 0 0 10px; font:18px "Trebuchet MS", Arial, sans-serif bold; color:#fff; -webkit-border-top-right-radius:16px; -moz-border-radius-topright:16px; border-top-right-radius:16px;
+background-color:#d81e30; /* fallback color */
+background:-moz-linear-gradient(#d81e30, #d81e30); /* FF 3.6+ */
+background:-ms-linear-gradient(#d81e30, #d81e30); /* IE10 */
+background:-webkit-gradient(linear, left top, left bottom, color-stop(0%, #d81e30), color-stop(100%, #d81e30)); /* Safari 4+, Chrome 2+ */
+background:-webkit-linear-gradient(#d81e30, #d81e30); /* Safari 5.1+, Chrome 10+ */
+background:-o-linear-gradient(#d81e30, #d81e30); /* Opera 11.10 */
+filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#d81e30', endColorstr='#d81e30'); /* IE6 & IE7 */ -ms-filter:"progid:DXImageTransform.Microsoft.gradient(startColorstr='#d81e30', endColorstr='#d81e30')"; /* IE8+ */
+background:linear-gradient(#d81e30, #d81e30); /* standard */
+filter:progid:DXImageTransform.Microsoft.gradient(enabled='false'); /* IE9 */ behavior:url(PIE.htc); }
+.rightraillabel a { color:#fff; }
+
+.containerwrapper_v1 { width:312px; float:left; margin:0; padding:10px; border-left:solid #a2ceed 2px; border-right:solid #a2ceed 2px; background:#fff; }
+.containerwrapper_v1_bottomrule { background:#a2ceed; height:2px; width:336px; float:left; }
+
+ul#communityicons { float:left; margin:0; padding:0; }
+ul#communityicons li { display:inline; width:36px; height:30px; margin:0; padding:0; list-style:none; padding:0; }
+
+.clear { clear:both; visibility:hidden; margin:0; padding:0; height:0; }
+a.clear-all { margin-left:4px; }
+.headline + .clear + h4 { margin-top:-8px; margin-bottom:6px !important; }
+hr { 
+color:#a2ceed; height:3px; margin-top:10px; margin-bottom:10px;
+background:#a2ceed; /* old browsers */
+background:-moz-linear-gradient(left, #a2ceed 0%, #fff 100%); /* FF3.6+ */
+background:-webkit-gradient(linear, left top, right top, color-stop(0%,#a2ceed), color-stop(100%,#fff)); /* Chrome,Safari4+ */
+background:-webkit-linear-gradient(left, #a2ceed 0%,#fff 100%); /* Chrome10+,Safari5.1+ */
+background:-o-linear-gradient(left, #a2ceed 0%,#fff 100%); /* Opera 11.10+ */
+background:-ms-linear-gradient(left, #a2ceed 0%,#fff 100%); /* IE10+ */
+background:linear-gradient(left, #a2ceed 0%,#fff 100%); /* W3C */
+filter:progid:DXImagetransform.Microsoft.gradient( startColorstr='#a2ceed', endColorstr='#ffffff',GradientType=1 ); /* IE6-9 */
+border:none; }
+
+a img { border:0; }
+a, a:link, a:active, a:visited { color:#0e69b5; text-decoration:none; }  /* visited, unvisited, and selected links */
+a:hover { text-decoration:underline; }
+.elqFieldValidation { background-color:#FC8888; } 
+label { font-size:11px; padding-top:4px; }
+#C_EmailAddress { color:#aaa; padding:0; float:left; border:solid #fff 1px; background:#fff; width:220px;}
+
+}
+-->
+</style>
+
+</head>
+
+<body>
+
+<div class="elementcontainer">
+<div style="background-color:#d81e30" class="rightraillabel">SQL Server Pro Community</div>
+<div class="containerwrapper_v1">
+<strong>Sign up for the SQL Server Pro UPDATE newsletter.</strong>
+
+<form name="SQLServerProENL" id="SQLServerProENL" onsubmit="return submitForm(this);" action="http://now.eloqua.com/e/f2" method="post">
+
+<div>
+<input name="elqFormName" value="SQLServerProENL" type="hidden">
+<input name="elqSiteID" value="1481" type="hidden">
+<input id="elqinput3" name="elqinput3" type="hidden">
+</div>
+
+<table id="Pagetable" border="0" cellpadding="0" cellspacing="0" width="100%">
+<tbody id="tableBody">
+<tr id="PageRow">
+<td id="pageData" width="100%">
+
+<div style="position:static;" id="Maindiv" class="back">
+
+<table class="elqLayout" style="margin:10px 0; padding:2px; border:solid #a2ceed 2px; -webkit-border-radius:6px; -moz-border-radius:6px; border-radius:6px; background:#fff;" border="0" cellpadding="0" cellspacing="0" align="center" width="312">
+<tbody>
+<tr>
+<td align="left" valign="middle"><input id="C_EmailAddress" class="elqField" value="email address" name="C_EmailAddress"></td>
+<td align="right" valign="middle">
+
+<!-- begin submit button -->
+<input src="Subscribe-SQLServerPro-eNewsletter_data/c1f85fd9-fa6b-4058-88a6-ef0faaee151b_Red_SQL_72x22.jpg" alt="sign up" align="absmiddle" type="image">  
+<!-- end submit button -->
+
+</td>
+</tr>
+</tbody>
+</table>
+
+<table class="elqLayout" border="0" cellpadding="0" cellspacing="0" align="center" width="100%">
+<tbody>
+<tr>
+<td style="margin-top:2px; padding-top:2px" valign="top" width="5%"><input id="elqinput1" class="elqField" onclick="this.value='on'" value="" name="elqinput1" type="checkbox"></td>
+<td valign="top">
+
+<label style="width: 100%; display:block; float:left" id="label1" class="elqlabel" for="elqinput1"> I agree to this site's <a href="http://www.penton.com/TermsOfUse.aspx" target="_blank">terms of use</a> &amp; <a href="http://www.penton.com/PrivacyStatementSH.aspx" target="_blank">privacy statement</a>.</label>
+
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+</td>
+</tr>
+</tbody>
+</table>
+</form>   
+<!--
+
+<hr noshade="noshade" />
+<ul id="communityicons">
+<li><a href="http://www.windowsitpro.com/rss" title="Subscribe to the official Windows IT Pro RSS feed" target="_blank"><img width="30" height="30" alt="RSS feed" src="http://www.windowsitpro.com/Portals/_default/Skins/WindowsITPro/_i/icons/community_rss.gif" /></a></li>
+<li><a href="http://www.facebook.com/home.php#/pages/Windows-IT-Pro-Magazine/70748505808?ref=ts" title="Follow us on Facebook" target="_blank"><img width="30" height="30" alt="Follow us on Facebook" src="http://www.windowsitpro.com/Portals/_default/Skins/WindowsITPro/_i/icons/community_facebook.gif" /></a></li>
+<li><a href="http://twitter.com/WindowsITPro" title="Follow us on Twitter" target="_blank"><img width="30" height="30" alt="Follow on Twitter" src="http://www.windowsitpro.com/Portals/_default/Skins/WindowsITPro/_i/icons/community_twitter.gif" /></a></li>
+<li><a href="http://www.linkedin.com/groups?about=&gid=1163947" title="We're on Linked In too!" target="_blank"><img width="30" height="30" alt="We're on Linked In too!" src="http://www.windowsitpro.com/Portals/_default/Skins/WindowsITPro/_i/icons/community_linkedin.gif" /></a></li>
+<li><a title="Here's our Google+ page" href="#"><img width="30" height="30" alt="Follow us on Google+" src="http://dev.windowsitpro.com/Portals/_default/Skins/WindowsITPro/images/community_googleplus.png" /></a></li>
+</ul>
+-->
+</div>
+<div class="containerwrapper_v1_bottomrule"></div>
+</div>
+
+<div class="clear"></div> 
+
+
+
+<script type="text/javascript">
+<!--
+if (navigator.appName == 'Netscape' || navigator.appName == 'Opera'){
+     document.write('<layer hidden=true><img src="http://s1481.t.eloqua.com/visitor/v200/svrGP?pps=60&siteid=1481&PURLSiteID=11&optin=disabled&PURLSiteAlternateDNSID=0&UserFormWebPublishID=623&PURLRecordID=0&PURLGUID=A614EA163ACE4085AE3F1739F88FDB4E&UseRelativePath=False&elq={00000000-0000-0000-0000-000000000000}&ref=http%3a%2f%2fwww.sqlmag.com%2farticle%2fsql-server%2fRDBMS-vs-NoSQL-And-the-Winner-Is--128903&elq_ck=0" border=0 width=1 height=1 ><\/layer>');
+}else{
+     document.write('<img style="display:none" src="http://s1481.t.eloqua.com/visitor/v200/svrGP?pps=60&siteid=1481&PURLSiteID=11&optin=disabled&PURLSiteAlternateDNSID=0&UserFormWebPublishID=623&PURLRecordID=0&PURLGUID=A614EA163ACE4085AE3F1739F88FDB4E&UseRelativePath=False&elq={00000000-0000-0000-0000-000000000000}&ref=http%3a%2f%2fwww.sqlmag.com%2farticle%2fsql-server%2fRDBMS-vs-NoSQL-And-the-Winner-Is--128903&elq_ck=0" border=0 width=1 height=1 >');
+}
+-->
+</script><layer hidden="true"><img src="Subscribe-SQLServerPro-eNewsletter_data/svrGP.gif" border="0" height="1" width="1"></layer>
+</body></html>

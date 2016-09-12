@@ -1,0 +1,529 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+
+<html>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>Welcome To Copper Chocs</title>
+
+</title>
+
+<style type="text/css">
+
+.caption
+{
+	
+	font-family:Garamond;
+	font-size:17px;
+	text-align:center;
+	color:black;
+}
+
+ul.main
+{
+	float:left;
+	width:100%;
+ 	margin-left:120px;
+	margin-top:140px;
+	padding:0;
+	list-style-type:none;
+}
+
+
+a.menu
+{
+	float:left;
+	width:3.8cm;
+	text-align:center;
+	text-decoration:none;
+	color:white;
+	background-color:brown;
+	padding:0.2em 0.6em;
+	border-right:1px solid white;
+}
+
+
+ul.submain
+{
+	float:left;
+	width:100%;
+ 	margin-left:60px;
+	margin-top:15px;
+	padding:0;
+	list-style-type:none;
+}
+
+
+a.submenu
+{
+	float:left;
+	width:5cm;
+	text-align:center;
+	text-decoration:none;
+	color:black;
+	background-color:white;
+	padding:0em 0em;
+	border-right:1px solid white;
+}
+
+a.menu:hover{background-color:orange;}
+li{display:inline;}
+
+.margin
+{
+	margin-left:130px;
+}
+
+.margin1
+{
+	margin-left:120px;
+}
+
+.v2
+{
+	position:absolute;
+	left:600px;
+	top:250px;
+	z-index:50;
+	border: 1px solid black;
+	padding: 2px;
+}
+
+
+.veg
+{
+	font-family:Garamond;
+	font-size:20px;
+	width:6cm;
+	text-decoration:none;
+	
+	margin-left:120px;
+	color:white;
+	background-color:green;
+	padding:0.2em 0.6em;
+}
+
+.submenu_veg
+{
+	font-family:Garamond;
+	font-size:20px;	
+	margin-left:120px;
+	text-decoration:none;
+	color:black;
+}
+
+hr.v1
+{
+	margin-left:-115px;
+	
+}
+
+
+<!-- css for menu bar -->
+
+a
+{
+	color:white;
+}
+
+
+
+.link 
+{
+	height:2em;
+	position:relative;
+	float:left;
+	z-index:10;
+}
+
+a.main 
+{
+	position:relative;
+	display:inline-block;
+	text-decoration:none;
+	text-align:center;
+	line-height:2em;
+	height:2em;
+	z-index:10;
+}
+
+a.main b 
+{
+	position:relative;
+	display:inline-block;
+	padding:0 .5em 0 .5em;
+	line-height:2em;
+	cursor:pointer;
+}
+
+.sublinkscontainer 
+{
+	position:absolute;
+}
+
+.sublinks 
+{
+	position:relative;
+	float:left;/*can be any float*/
+	margin-top:-2em;
+}
+
+.sublinks a 
+{
+	display:block;
+	background:brown;
+	padding:.2em 0 .2em 0;
+	text-decoration:none;
+}
+
+.shifter 
+{
+	position:relative;
+	float:left;
+}
+
+.sublinks .bgthing 
+{
+	height:2em;
+	background:orange;
+	display:block;
+}
+
+ul, li 
+{
+	margin:0;
+	padding:0;
+	list-type:none;
+	
+}
+
+
+/*height limit*/
+.link 
+{
+	top:-25em;
+}
+
+a.main 
+{
+	top:25em;
+	width:7.5em;
+}
+
+a.main:hover, a.main:active, a.main:focus 
+{
+	margin-bottom:25em;
+	background:orange;
+	color:yellow;
+	outline:none;
+}
+
+a.main:active b, a.main:focus b 
+{
+	outline: dotted thin;/*resetting the outline*/
+}
+
+.sublinkscontainer, .shifter 
+{
+	height:25em;
+}
+
+/*valid browser height maximization*/
+.nav > .link 
+{
+	top:-1000em;
+}
+
+.link > a.main 
+{
+	top:1000em;
+}
+
+.link > a.main:hover, .link > a.main:active, .link > a.main:focus 
+{
+	margin-bottom:1000em;
+}
+
+.link > .sublinkscontainer, .sublinkscontainer > .shifter 
+{
+	height:1000em;
+}
+
+
+/*/valid browser height maximization*/
+
+
+/*width limit*/
+
+.sublinkscontainer 
+{
+	width:7.563em;
+}
+
+.sublinks a 
+{
+	width:7.5em;/*6.5 - padding*/
+}
+
+
+.sublinks a:hover, .sublinks a:active, .sublinks a:focus 
+{
+	margin-right:0.063em;
+	background:orange;
+	color:yellow;
+}
+
+.sublinks:hover a 
+{/*opera fix*/
+	margin-right:0.063em; 
+}
+
+a.main:focus + div .sublinks a, a.main:active + div .sublinks a 
+{/*valid browser tab+hover fix*/
+	margin-right:0;
+}
+
+.shifter 
+{
+	width:0.063em;
+}
+
+.sublinks .bgthing 
+{
+	width:7.5em;
+}
+
+
+.content 
+{
+	clear:both; 
+}
+
+
+a.main span 
+{/*this nullifies the masks effects*/
+	position:absolute;
+	right:0;
+	top:0;
+	line-height:0;
+}
+
+
+
+
+.hidehotspot 
+{
+	position:relative;
+	float:left;
+	background:blue;
+	height:2em;
+	z-index:10;
+}
+
+.hidehotspot b 
+{
+	position:absolute;
+	background-image:url('bkc1.jpg');
+	height:2em;
+	width:56.25em;
+	display:block;
+}
+
+
+/*ie5 fault for not supporting paddings on links*/
+.sublinks a b 
+{
+	font-weight:normal;
+	position:relative;
+	padding-left:.5em;
+	display:block;
+}
+
+/*valid browser height fix*/
+.link > a.main:hover,
+.link > a.main:active,
+.link > a.main:focus 
+{
+	margin-bottom:0;
+}
+
+.link > a.main:hover + div .sublinks a,
+.link > a.main:active + div .sublinks a,
+.link > a.main:focus + div .sublinks a 
+{
+	margin-right:0.063em;
+}
+
+
+
+
+<!--
+/*/valid browser height fix*/
+</style>
+
+<!--[if lte IE 6]>
+<style type="text/css">
+.link {
+margin-bottom:-2000px;/*only for ie5-6*/
+}
+/*ie5 fix*/
+li {
+float:left;
+}
+-->
+
+
+
+
+.nav {/*only ie5-6 need this*/
+height:25em;
+position:absolute;
+width:56.25em;
+overflow:hidden;
+}
+<!--css to display image on mouseover event-->
+
+.gallerycontainer{
+position: relative;
+/*Add a height attribute and set to largest image's height to prevent overlaying*/
+}
+
+.thumbnail img{
+border: 1px solid white;
+margin: 0 5px 5px 0;
+}
+
+.thumbnail:hover{
+background-color: transparent;
+}
+
+.thumbnail:hover img{
+border: 1px solid black;
+}
+
+.thumbnail span{ /*CSS for enlarged image*/
+position: absolute;
+padding: 5px;
+left: -1000px;
+visibility: hidden;
+color: black;
+text-decoration: none;
+}
+
+.thumbnail span img{ /*CSS for enlarged image*/
+border-width: 0;
+padding: 2px;
+}
+
+.thumbnail:hover span{ /*CSS for enlarged image*/
+visibility: visible;
+top: 245px;
+left: 595px; /*position where enlarged image should offset horizontally */
+z-index: 50;
+}
+
+</style>
+<body>
+
+<ul class="main">
+<li><a class="menu" href="#">HOME</a></li>
+<li><a class="menu selected" href="#">ABOUT US</a></li>
+<li><a class="menu" href="#">THE MENU</a></li>
+<li><a class="menu" href="#">OUR OUTLETS</a></li>
+<li><a class="menu" href="#">CALL US</a></li>
+<li><a class="menu" href="#">FEEDBACK</a></li>
+</ul>
+
+<ul class="submain">
+<li><a class="submenu" href="dessert1.html">DESSERT</a></li>
+<li><a class="submenu selected" href="choc1.html">CHOCOLATE CAKES</a></li>
+<li><a class="submenu" href="fruit1.html">FRUIT CAKES</a></li>
+<li><a class="submenu" href="small1.html">SMALL BITES</a></li>
+<li><a class="submenu" href="special1.html">SPECIAL CAKES</a></li>
+</ul>
+
+<div class="navigation">
+<div class="nav">
+
+<div class="hidehotspot"><b> </b></div>
+</div>
+</div>
+<br>
+
+<div class="margin1">
+
+<hr class="v1">
+
+</div>
+
+<span><img class="v2" src="5.jpg" width=390 height=320/></span>
+
+<div class="margin"></div>
+<div class="gallerycontainer">
+<b>
+<br>
+<div class="veg">Chocolate Cakes</div><br>
+	
+	<a class="thumbnail" href="#" STYLE="TEXT-DECORATION: NONE"><div class="submenu_veg">Chocolate Hazelnut</div>
+	<span><img src="1.jpg" width=390 height=320/>
+	<br/><div class="caption">Chocolate Hazelnut</div>
+	</span></a>
+	<br>
+	<a class="thumbnail" href="#" STYLE="TEXT-DECORATION: NONE"><div class="submenu_veg">Choco Strawberry Truffle</div>
+	<span><img src="3.jpg" width=390 height=320/>
+	<br/><div class="caption">Choco Strawberry Truffle</div>
+	</span></a>
+	<br>
+
+	<a class="thumbnail" href="#" STYLE="TEXT-DECORATION: NONE">
+	<div class="submenu_veg">Rich Chocolate Truffle</div>
+	<span><img src="4.jpg" width=390 height=320/>
+	<br/><div class="caption">Rich Chocolate Truffle</div>
+	</span></a>
+	<br>
+
+	<a class="thumbnail" href="#" STYLE="TEXT-DECORATION: NONE"><div class="submenu_veg">Black Forest</div>
+	<span><img src="5.jpg" width=390 height=320/>
+	<br/><div class="caption">Black Forest</div>
+	</span></a>
+	<br>
+
+	<a class="thumbnail" href="#" STYLE="TEXT-DECORATION: NONE"><div class="submenu_veg">Chocolate Mint</div>
+	<span><img src="6.jpg" width=390 height=320/>
+	<br/><div class="caption">Chocolate Mint</div>
+	</span></a>
+	<br>
+
+	
+	<a class="thumbnail" href="#" STYLE="TEXT-DECORATION: NONE"><div class="submenu_veg">Chocolate Walnut</div>
+	<span><img src="7.jpg" width=390 height=320/>
+	<br/><div class="caption">Chocolate Walnut</div>
+	</span></a>
+	<br>
+
+	<a class="thumbnail" href="#" STYLE="TEXT-DECORATION: NONE">
+	<div class="submenu_veg">Chocolate Almond</div>
+	<span><img src="8.jpg" width=390 height=320/>
+	<br/><div class="caption">Chocolate Almond</div>
+	</span></a>
+	<br>
+
+	<a class="thumbnail" href="#" STYLE="TEXT-DECORATION: NONE"><div class="submenu_veg">Choco Chip Cake</div>
+	<span><img src="9.jpg" width=390 height=320/>
+	<br/><div class="caption">Choco Chip Cake</div>
+	</span></a>
+	<br>
+	<a class="thumbnail" href="#" STYLE="TEXT-DECORATION: NONE"><div class="submenu_veg">Chocolate Marble Cake</div>
+	<span><img src="11.jpg" width=390 height=320/>
+	<br/><div class="caption">Chocolate Marble Cake</div>
+	</span></a>
+	<br>
+
+
+</b>
+</div>
+</div>
+<img src="logo.png" alt="HTML tutorial" style="position:absolute; left:130px; top:0px;">
+<img src="cart.jpg" alt="View Cart" style="position:absolute; left:1050px; top:115px;" width=50 height=40>
+
+
+</body>
+</html>

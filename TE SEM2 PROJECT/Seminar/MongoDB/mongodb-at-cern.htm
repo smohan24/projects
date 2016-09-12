@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html class="dyn routable" lang="en-US"><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <title>MongoDB at CERN - Post Relational</title>
+    <link href="mongodb-at-cern_files/shCore.css" rel="stylesheet" type="text/css">
+<link href="mongodb-at-cern_files/shThemeDefault.css" rel="stylesheet" type="text/css">
+<link href="mongodb-at-cern_files/orchard-localization-base.css" rel="stylesheet" type="text/css">
+<link href="mongodb-at-cern_files/superfish.css" rel="stylesheet" type="text/css">
+<link href="mongodb-at-cern_files/smudgeit-twitter-widgit.css" rel="stylesheet" type="text/css">
+<link href="mongodb-at-cern_files/Reset.css" rel="stylesheet" type="text/css">
+<link href="mongodb-at-cern_files/General.css" rel="stylesheet" type="text/css">
+<link href="mongodb-at-cern_files/Forms.css" rel="stylesheet" type="text/css">
+<link href="mongodb-at-cern_files/Structure.css" rel="stylesheet" type="text/css">
+<link href="mongodb-at-cern_files/Main.css" rel="stylesheet" type="text/css">
+<link href="mongodb-at-cern_files/Secondary.css" rel="stylesheet" type="text/css">
+<link href="mongodb-at-cern_files/Widgets.css" rel="stylesheet" type="text/css">
+<link href="mongodb-at-cern_files/Pager.css" rel="stylesheet" type="text/css">
+<link href="mongodb-at-cern_files/Misc.css" rel="stylesheet" type="text/css">
+<link href="mongodb-at-cern_files/CSS3.css" rel="stylesheet" type="text/css">
+<link href="mongodb-at-cern_files/Site.css" rel="stylesheet" type="text/css">
+<!-- begin: typekit embed code --><script src="mongodb-at-cern_files/ga.js" async="" type="text/javascript"></script><script type="text/javascript" src="mongodb-at-cern_files/pqr5qdr.txt"></script><script type="text/javascript">try{Typekit.load();}catch(e){}</script><!-- end: typekit embed code --><meta content="Orchard" name="generator">
+<link href="http://postrelational.net/Themes/Piedone.PrettyGoodBaseTheme/Images/favicon.ico" rel="shortcut icon" type="image/x-icon">
+<script src="mongodb-at-cern_files/shCore.js" type="text/javascript"></script>
+<script src="mongodb-at-cern_files/shAutoloader.js" type="text/javascript"></script>
+<script src="mongodb-at-cern_files/autoloader.js" type="text/javascript"></script>
+<script src="mongodb-at-cern_files/jquery-1.js" type="text/javascript"></script>
+<script src="mongodb-at-cern_files/hoverIntent.js" type="text/javascript"></script>
+<script src="mongodb-at-cern_files/jquery.js" type="text/javascript"></script>
+<script src="mongodb-at-cern_files/superfish.js" type="text/javascript"></script>
+<script src="mongodb-at-cern_files/supersubs.js" type="text/javascript"></script>
+<script src="mongodb-at-cern_files/html5.js" type="text/javascript"></script>
+<script type="text/javascript">
+var _gaq=_gaq||[];
+_gaq.push(["_setAccount","UA-7177912-3"]);
+_gaq.push(["_trackPageview"]);
+(function() {
+	var ga=document.createElement("script");ga.type="text/javascript";ga.async=true;
+	ga.src=(("https:" == document.location.protocol)?"https://ssl":"http://www")+".google-analytics.com/ga.js";
+	var s=document.getElementsByTagName("script")[0];s.parentNode.insertBefore(ga, s);
+})();
+</script>
+
+<style type="text/css">
+        #menu-15.sf-menu li { 
+            background:     #FFFFFF; 
+        }
+        
+        #menu-15.sf-menu a, 
+        #menu-15.sf-menu a:visited {
+            color:          #333333 !important;
+        }
+        
+        #menu-15.sf-menu li:hover, #menu-15.sf-menu li.sfHover,
+        #menu-15.sf-menu a:focus, #menu-15.sf-menu a:hover, #menu-15.sf-menu a:active {
+        
+            background:     #F7F7F7 !important;
+            color:          #444444 !important;
+        }
+        
+        #menu-15.sf-menu li.selected,
+        #menu-15.sf-menu li.current { 
+            background:     #F1F1F1 !important;
+        }
+        
+        
+        #menu-15.sf-menu li.selected a, #menu-15.sf-menu li.selected a:visited,
+        #menu-15.sf-menu li.current a, #menu-15.sf-menu li.current a:visited { 
+            color:          #333333 !important; 
+        }
+        
+</style>
+
+<link rel="alternate" type="application/rss+xml" title="Post Relational" href="http://postrelational.net/rss?containerid=25">
+
+<link rel="alternate" type="application/rss+xml" title="Post Relational - Comments" href="http://postrelational.net/rss?commentedoncontainer=25">
+
+    <script>        (function (d) { d.className = "dyn" + d.className.substring(6, d.className.length); })(document.documentElement);</script>
+</head>
+<body>
+    
+<div class="aside-2" id="layout-wrapper">
+    <header id="layout-header" class="group">
+    <div id="header">
+        <div class="zone zone-header"><h1 id="branding"><a href="http://postrelational.net/">Post Relational</a></h1></div>
+    </div>
+</header>
+    <div id="layout-navigation" class="group">
+        <div class="zone zone-navigation">
+<nav>
+    <ul class="menu menu-main sf-menu sf-js-enabled sf-shadow" id="menu-15">
+        
+        <li>                <a href="http://postrelational.net/GSearch" class="title">Custom Search</a>
+</li><li>                <a href="http://postrelational.net/" class="title">Home</a>
+</li>
+    </ul>
+</nav></div>
+    </div>
+<div id="layout-main-container">
+    <div id="layout-main" class="group">
+        <div id="layout-content" class="group">
+                <div id="content" class="group">
+                    <div class="zone zone-content"><article class="content-item blog-post">
+    <header>
+        <h1>MongoDB at CERN</h1>
+    <p class="tags">
+        <span>Tags:</span>
+<a href="http://postrelational.net/Tags/Big%20Data">Big Data</a>, <a href="http://postrelational.net/Tags/nosql">nosql</a>, <a href="http://postrelational.net/Tags/MongoDB">MongoDB</a>, <a href="http://postrelational.net/Tags/Hadoop">Hadoop</a>    </p>
+
+    </header>
+    <p><a href="http://www.isgtw.org/" target="_blank">ISGTW</a> 
+(International Science Grid This Week, for those of us unfamiliar with 
+the acronym) published an article Wednesday discussing NOSQL, its 
+implications for CERN, and a use case involving MongoDB. In <a href="http://www.isgtw.org/feature/following-red-brick-road-data-management" target="_blank">Following the ‘yellow brick road’ to data management</a>,
+ NOSQL is introduced as a new type of database on a similar path of SQL,
+ similar to the red brick road intertwined with the yellow brick road 
+used by Dorothy in the Wizard of Oz. They also discuss the <a href="http://www.isgtw.org/feature/accelerating-materials-research-information-age" target="_blank">Materials Project</a>, an attempt to create the ‘Google’ of material properties using MongoDB as its data source. </p> <blockquote> <p>“It’s
+ important to avoid picking the wrong technology based on small scale 
+experience. Adding an index to a relational database can be painful, but
+ reconfiguring a 150 terabyte NoSQL database is not likely to be much 
+easier. No one as yet has done a comparison of use cases for large scale
+ [petabytes of] data at CERN or science in general. This is true for 
+applications that manage high volumes of data transfer. For example, we 
+manage 3.5 trillion rows of LHC data in the database, which can be 
+accessed via our Oracle system. Will a NoSQL solution be faster? No one 
+knows what happens at these limits,” said Cass.</p></blockquote> <p>The article can be read at <a title="http://www.isgtw.org/feature/following-red-brick-road-data-management" href="http://www.isgtw.org/feature/following-red-brick-road-data-management">http://www.isgtw.org/feature/following-red-brick-road-data-management</a> .</p>
+
+
+<form action="/Comments/Comment/Create" class="comment-form" method="post">    <fieldset class="who">
+        <legend id="add-comment">Add a Comment</legend> 
+    <ol>
+        <li>
+            <label for="Name">Name</label>
+            <input id="Name" class="text" name="Name" type="text">
+        </li>
+        <li>
+            <label for="Email">Email</label>
+            <input id="Email" class="text" name="Email" type="text">
+        </li>
+        <li>
+            <label for="SiteName">Url</label>
+            <input id="SiteName" class="text" name="SiteName" type="text">
+        </li>
+     </ol>
+    </fieldset>
+    <h2 id="commenter"></h2>
+    <fieldset class="what">
+    <ol>
+        <li>
+            <label for="comment-text">Comment</label>
+            <textarea id="comment-text" rows="10" cols="30" name="CommentText"></textarea>
+        </li>
+        <li>
+            <button class="primaryAction" type="submit">Submit Comment</button>
+            <input id="CommentedOn" name="CommentedOn" value="37" type="hidden"> 
+            <input id="ReturnUrl" name="ReturnUrl" value="http://postrelational.net/mongodb-at-cern" type="hidden"> 
+            <input name="__RequestVerificationToken" value="ucDFTmNspIpA/c5OY4qwmR38McUXSX93It+2PnBnDYIbkGvOaHRrnGTK5ZljROecpLE4Mmnn1Ynt19teiaBMRL2xiSostCi9Lklm2s0J9iN0FJY+/KrcL3vQK31FkM4AVOcq6mnDYg/bKYmYr3cdFpU6xMg1Rqr/4opf16Drl+faLYKnBJ3Xccf1a/0f35GCJRArPbnQcxmflyBra13vNw==" type="hidden"> 
+        </li>
+    </ol>
+    </fieldset>
+</form>
+</article></div>
+                </div>
+        </div>
+            <aside id="aside-second" class="aside-second">
+        <div class="zone zone-aside-second">
+<article class="widget-twitter-list-widget widget">        <header>
+                <h1>NOSQL @ Twitter</h1>
+            
+        </header>
+<ul class="smudgeit-twitter-list">
+    <hr>
+</ul>
+</article></div>
+    </aside>
+    </div>
+</div>
+<div id="layout-footer" class="group">
+    <footer id="footer">
+        <div id="footer-quad" class="group">
+        </div>
+        <div id="footer-sig" class="group">
+            <div class="zone zone-footer"><div class="credits"><span class="poweredby">Powered by <a href="http://www.orchardproject.net/" target="_blank">Orchard</a></span> <span class="copyright">© The Theme Machine 2010.</span></div>
+<div class="user-display">
+        <span class="user-actions"><a href="http://postrelational.net/Users/Account/LogOn?ReturnUrl=%2Fmongodb-at-cern">Sign In</a></span>
+</div></div>
+        </div>
+    </footer>
+</div>
+</div>
+
+    <script type="text/javascript">syntaxHighlight('/Modules/Heikura.SyntaxHighlighter/scripts/')</script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#menu-15").addClass('sf-menu');
+            $("#menu-15").superfish({
+                delay: 200,
+                speed: 'fast',
+                autoArrows: 1,
+                dropShadows: 1
+            });
+        });
+    </script>
+
+
+
+
+</body></html>

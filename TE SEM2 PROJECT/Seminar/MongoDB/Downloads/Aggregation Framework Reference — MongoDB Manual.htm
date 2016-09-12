@@ -1,0 +1,1273 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head>
+    <title>Aggregation Framework Reference — MongoDB Manual</title>
+
+    <link rel="shortcut icon" href="http://media.mongodb.org/favicon.ico">
+    <meta name="robots" content="index">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <link rel="canonical" href="http://docs.mongodb.org/manual/reference/aggregation">
+
+    
+    
+    <link rel="stylesheet" href="Aggregation%20Framework%20Reference%20%E2%80%94%20MongoDB%20Manual_files/mongodb-docs.css" type="text/css">
+    <link rel="stylesheet" href="Aggregation%20Framework%20Reference%20%E2%80%94%20MongoDB%20Manual_files/pygments.css" type="text/css">
+      
+    <script id="undefined" src="Aggregation%20Framework%20Reference%20%E2%80%94%20MongoDB%20Manual_files/inpage_linkid.js" async="" type="text/javascript"></script><script src="Aggregation%20Framework%20Reference%20%E2%80%94%20MongoDB%20Manual_files/ga.js" async="" type="text/javascript"></script><script src="Aggregation%20Framework%20Reference%20%E2%80%94%20MongoDB%20Manual_files/cse.js" async="" type="text/javascript"></script><script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '2.2.3',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '',
+        HAS_SOURCE:  false
+      };
+    </script>
+    <script type="text/javascript" src="Aggregation%20Framework%20Reference%20%E2%80%94%20MongoDB%20Manual_files/jquery.js"></script>
+    <script type="text/javascript" src="Aggregation%20Framework%20Reference%20%E2%80%94%20MongoDB%20Manual_files/underscore.js"></script>
+    <script type="text/javascript" src="Aggregation%20Framework%20Reference%20%E2%80%94%20MongoDB%20Manual_files/doctools.js"></script>
+      <link rel="search" type="application/opensearchdescription+xml" href="http://docs.mongodb.org/osd.xml" title="MongoDB Help">
+<link rel="author" title="About these documents" href="http://docs.mongodb.org/manual/about/">
+<link rel="top" title="MongoDB Manual" href="http://docs.mongodb.org/manual/">
+<link rel="up" title="Aggregation" href="http://docs.mongodb.org/manual/aggregation/">
+<link rel="next" title="Map-Reduce" href="http://docs.mongodb.org/manual/applications/map-reduce/">
+<link rel="prev" title="Aggregation Framework Examples" href="http://docs.mongodb.org/manual/tutorial/aggregation-examples/">
+<!-- Put the following javascript before the closing </head> tag. -->
+<script>
+  (function() {
+    var cx = '017213726194841070573:WMX6838984';
+    var gcse = document.createElement('script'); gcse.type = 'text/javascript'; gcse.async = true;
+    gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+        '//www.google.com/cse/cse.js?cx=' + cx;
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(gcse, s);
+  })();
+</script>
+  <script type="text/javascript" src="Aggregation%20Framework%20Reference%20%E2%80%94%20MongoDB%20Manual_files/jsapi"></script><link rel="stylesheet" href="Aggregation%20Framework%20Reference%20%E2%80%94%20MongoDB%20Manual_files/defaulten.css" type="text/css"><link rel="stylesheet" href="Aggregation%20Framework%20Reference%20%E2%80%94%20MongoDB%20Manual_files/default.css" type="text/css"><script src="Aggregation%20Framework%20Reference%20%E2%80%94%20MongoDB%20Manual_files/defaulten.js" type="text/javascript"></script><script src="Aggregation%20Framework%20Reference%20%E2%80%94%20MongoDB%20Manual_files/search.js" type="text/javascript"></script><style type="text/css">
+.gsc-control-cse {
+font-family: Arial, sans-serif;
+border-color: #FFFFFF;
+background-color: #FFFFFF;
+}
+.gsc-control-cse .gsc-table-result {
+font-family: Arial, sans-serif;
+}
+input.gsc-input, .gsc-input-box, .gsc-input-box-hover, .gsc-input-box-focus {
+border-color: #D9D9D9;
+}
+input.gsc-search-button, input.gsc-search-button:hover, input.gsc-search-button:focus {
+border-color: #5AAC41;
+background-color: #5AAC41;
+background-image: none;
+filter: none;
+}
+.gsc-tabHeader.gsc-tabhInactive {
+border-color: #CCCCCC;
+background-color: #FFFFFF;
+}
+.gsc-tabHeader.gsc-tabhActive {
+border-color: #CCCCCC;
+border-bottom-color: #FFFFFF;
+background-color: #FFFFFF;
+}
+.gsc-tabsArea {
+border-color: #CCCCCC;
+}
+.gsc-webResult.gsc-result,
+.gsc-results .gsc-imageResult {
+border-color: #FFFFFF;
+background-color: #FFFFFF;
+}
+.gsc-webResult.gsc-result:hover,
+.gsc-imageResult:hover {
+border-color: #FFFFFF;
+background-color: #FFFFFF;
+}
+.gs-webResult.gs-result a.gs-title:link,
+.gs-webResult.gs-result a.gs-title:link b,
+.gs-imageResult a.gs-title:link,
+.gs-imageResult a.gs-title:link b {
+color: #1155CC;
+}
+.gs-webResult.gs-result a.gs-title:visited,
+.gs-webResult.gs-result a.gs-title:visited b,
+.gs-imageResult a.gs-title:visited,
+.gs-imageResult a.gs-title:visited b {
+color: #1155CC;
+}
+.gs-webResult.gs-result a.gs-title:hover,
+.gs-webResult.gs-result a.gs-title:hover b,
+.gs-imageResult a.gs-title:hover,
+.gs-imageResult a.gs-title:hover b {
+color: #1155CC;
+}
+.gs-webResult.gs-result a.gs-title:active,
+.gs-webResult.gs-result a.gs-title:active b,
+.gs-imageResult a.gs-title:active,
+.gs-imageResult a.gs-title:active b {
+color: #1155CC;
+}
+.gsc-cursor-page {
+color: #1155CC;
+}
+a.gsc-trailing-more-results:link {
+color: #1155CC;
+}
+.gs-webResult .gs-snippet,
+.gs-imageResult .gs-snippet,
+.gs-fileFormatType {
+color: #333333;
+}
+.gs-webResult div.gs-visibleUrl,
+.gs-imageResult div.gs-visibleUrl {
+color: #009933;
+}
+.gs-webResult div.gs-visibleUrl-short {
+color: #009933;
+}
+.gs-webResult div.gs-visibleUrl-short {
+display: none;
+}
+.gs-webResult div.gs-visibleUrl-long {
+display: block;
+}
+.gs-promotion div.gs-visibleUrl-short {
+display: none;
+}
+.gs-promotion div.gs-visibleUrl-long {
+display: block;
+}
+.gsc-cursor-box {
+border-color: #FFFFFF;
+}
+.gsc-results .gsc-cursor-box .gsc-cursor-page {
+border-color: #CCCCCC;
+background-color: #FFFFFF;
+color: #1155CC;
+}
+.gsc-results .gsc-cursor-box .gsc-cursor-current-page {
+border-color: #CCCCCC;
+background-color: #FFFFFF;
+color: #1155CC;
+}
+.gsc-webResult.gsc-result.gsc-promotion {
+border-color: #F6F6F6;
+background-color: #F6F6F6;
+}
+.gsc-completion-title {
+color: #1155CC;
+}
+.gsc-completion-snippet {
+color: #333333;
+}
+.gs-promotion a.gs-title:link,
+.gs-promotion a.gs-title:link *,
+.gs-promotion .gs-snippet a:link {
+color: #1155CC;
+}
+.gs-promotion a.gs-title:visited,
+.gs-promotion a.gs-title:visited *,
+.gs-promotion .gs-snippet a:visited {
+color: #1155CC;
+}
+.gs-promotion a.gs-title:hover,
+.gs-promotion a.gs-title:hover *,
+.gs-promotion .gs-snippet a:hover {
+color: #1155CC;
+}
+.gs-promotion a.gs-title:active,
+.gs-promotion a.gs-title:active *,
+.gs-promotion .gs-snippet a:active {
+color: #1155CC;
+}
+.gs-promotion .gs-snippet,
+.gs-promotion .gs-title .gs-promotion-title-right,
+.gs-promotion .gs-title .gs-promotion-title-right * {
+color: #333333;
+}
+.gs-promotion .gs-visibleUrl,
+.gs-promotion .gs-visibleUrl-short {
+color: #009933;
+}
+.gsc-input input.gsc-input {
+background: none repeat scroll 0% 0% white !important;
+}
+</style><style type="text/css">.gsfe_a{border:1px solid #b9b9b9;border-top-color:#a0a0a0;box-shadow:inset 0px 1px 2px rgba(0,0,0,0.1);-moz-box-shadow:inset 0px 1px 2px rgba(0,0,0,0.1);-webkit-box-shadow:inset 0px 1px 2px rgba(0,0,0,0.1);}.gsfe_b{border:1px solid #4d90fe;outline:none;box-shadow:inset 0px 1px 2px rgba(0,0,0,0.3);-moz-box-shadow:inset 0px 1px 2px rgba(0,0,0,0.3);-webkit-box-shadow:inset 0px 1px 2px rgba(0,0,0,0.3);}.gssb_c{border:0;position:absolute;z-index:989}.gssb_e{border:1px solid #ccc;border-top-color:#d9d9d9;box-shadow:0 2px 4px rgba(0,0,0,0.2);-moz-box-shadow:0 2px 4px rgba(0,0,0,0.2);cursor:default}.gssb_f{visibility:hidden;white-space:nowrap}.gssb_k{border:0;display:block;position:absolute;top:0;z-index:988}.gsdd_a{border:none!important}.gsib_a{width:100%;padding:4px 6px 0}.gsib_a,.gsib_b{vertical-align:top}.gssb_a{padding:0 7px}.gssb_a,.gssb_a td{white-space:nowrap;overflow:hidden;line-height:22px}#gssb_b{font-size:11px;color:#36c;text-decoration:none}#gssb_b:hover{font-size:11px;color:#36c;text-decoration:underline}.gssb_g{text-align:center;padding:8px 0 7px;position:relative}.gssb_h{font-size:15px;height:28px;margin:0.2em}.gssb_i{background:#eee}.gss_ifl{visibility:hidden;padding-left:5px}.gssb_i .gss_ifl{visibility:visible}a.gssb_j{font-size:13px;color:#36c;text-decoration:none;line-height:100%}a.gssb_j:hover{text-decoration:underline}.gssb_l{height:1px;background-color:#e5e5e5}.gssb_m{color:#000;background:#fff}.gscsep_a{display:none}.gsq_a{padding:0}.gscb_a{display:inline-block;font:27px/13px arial,sans-serif}.gsst_a .gscb_a{color:#a1b9ed;cursor:pointer}.gsst_a:hover .gscb_a,.gsst_a:focus .gscb_a{color:#36c}.gsst_a{display:inline-block}.gsst_a{cursor:pointer;padding:0 4px}.gsst_a:hover{text-decoration:none!important}.gsst_b{font-size:16px;padding:0 2px;user-select:none;-moz-user-select:none;white-space:nowrap}.gsst_e{opacity:0.55;}.gsst_a:hover .gsst_e,.gsst_a:focus .gsst_e{opacity:0.72;}.gsst_a:active .gsst_e{opacity:1;}.gsst_f{background:white;text-align:left}.gsst_g{background-color:white;border:1px solid #ccc;border-top-color:#d9d9d9;box-shadow:0 2px 4px rgba(0,0,0,0.2);-moz-box-shadow:0 2px 4px rgba(0,0,0,0.2);margin:-1px -3px;padding:0 6px}.gsst_h{background-color:white;height:1px;margin-bottom:-1px;position:relative;top:-1px}.gssb_a{padding:0 9px}.gsib_a{padding-right:8px;padding-left:8px}.gsst_a{padding-top:3px}.gssb_e{border:0}.gssb_l{margin:5px 0}.gssb_c .gsc-completion-container{position:static}.gssb_c{z-index:5000}.gsc-completion-container table{background:transparent;font-size:inherit;font-family:inherit}.gssb_c > tbody > tr,.gssb_c > tbody > tr > td,.gssb_d,.gssb_d > tbody > tr,.gssb_d > tbody > tr > td,.gssb_e,.gssb_e > tbody > tr,.gssb_e > tbody > tr > td{padding:0;margin:0;border:0}.gssb_a table,.gssb_a table tr,.gssb_a table tr td{padding:0;margin:0;border:0}</style><style type="text/css">.atlwdg-blanket {background:#000;height:100%;left:0;opacity:.5;position:fixed;top:0;width:100%;z-index:1000000;}
+.atlwdg-popup {background:#fff;border:1px solid #666;position:fixed;top:50%;left:50%;z-index:10000011;}
+.atlwdg-popup.atlwdg-box-shadow {-moz-box-shadow:10px 10px 20px rgba(0,0,0,0.5);-webkit-box-shadow:10px 10px 20px rgba(0,0,0,0.5);box-shadow:10px 10px 20px rgba(0,0,0,0.5);background-color:#fff;}
+.atlwdg-hidden {display:none;}
+.atlwdg-trigger {position: fixed; background: #013466; padding: 5px;border: 2px solid white;border-top: none; font-weight: bold; color: white; display:block;white-space:nowrap;text-decoration:none; font-family:arial, FreeSans, Helvetica, sans-serif;font-size:12px;box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5);-webkit-box-shadow:5px 5px 10px rgba(0, 0, 0, 0.5); -moz-box-shadow:5px 5px 10px rgba(0, 0, 0, 0.5);border-radius: 0 0 5px 5px; -moz-border-radius: 0 0 5px 5px;}
+a.atlwdg-trigger {text-decoration:none;}
+.atlwdg-trigger.atlwdg-TOP {left: 45%;top:0; }
+.atlwdg-trigger.atlwdg-RIGHT {left:100%; top:40%; -webkit-transform-origin:top left; -webkit-transform: rotate(90deg); -moz-transform: rotate(90deg); -moz-transform-origin:top left;-ms-transform: rotate(90deg); -ms-transform-origin:top left; }
+.atlwdg-trigger.atlwdg-SUBTLE { right:0; bottom:0; border: 1px solid #ccc; border-bottom: none; border-right: none; background-color: #f5f5f5; color: #444; font-size: 11px; padding: 6px; box-shadow: -1px -1px 2px rgba(0, 0, 0, 0.5); border-radius: 2px 0 0 0; }
+.atlwdg-loading {position:absolute;top:220px;left:295px;}</style></head>
+  <body>
+<div id="top-right">
+        <div class="user-right">
+                <ul id="header-menu-bar" class="ajs-menu-bar">
+                <li class="normal"><a target="_blank" href="http://groups.google.com/group/mongodb-user">Forums</a></li>
+                <li class="normal"><a target="_blank" href="http://blog.mongodb.org/">Blog</a></li>
+                <li class="normal"><a href="http://www.mongodb.org/downloads">Download</a></li>
+                <li class="normal"><a href="http://docs.mongodb.org/ecosystem/drivers/">Drivers</a></li>
+                <li class="normal"><a href="http://www.10gen.com/events">Events</a></li>
+                <li class="normal last"><a class="last" href="http://docs.mongodb.org/manual/meta/translation">Translations</a></li>
+                </ul>
+        </div>
+</div>
+<div id="header-db" class="spread">
+        <div class="split">
+                <div id="logo">
+                        <div><a href="http://docs.mongodb.org/manual/"><img class="logo" src="Aggregation%20Framework%20Reference%20%E2%80%94%20MongoDB%20Manual_files/logo-mongodb.png" alt="MongoDB Logo"></a></div>
+                </div>
+        </div>
+
+<div class="search-db"><div dir="ltr" id="___gcse_0"><form accept-charset="utf-8" class="gsc-search-box gsc-search-box-tools"><table class="gsc-search-box" cellpadding="0" cellspacing="0"><tbody><tr><td class="gsc-input"><div id="gsc-iw-id1" class="gsc-input-box"><table class="gstl_0 " id="gs_id0" style="width: 100%; padding: 0pt;" cellpadding="0" cellspacing="0"><tbody><tr><td class="gsib_a" id="gs_tti0"><input spellcheck="false" dir="ltr" id="gsc-i-id1" style="width: 100%; padding: 0pt; border: medium none; margin: 0pt; height: auto; outline: medium none;" title="search" name="search" class="gsc-input" size="10" autocomplete="off" type="text"></td><td class="gsib_b"><div dir="ltr" id="gs_st0" class="gsst_b"><a style="display: none;" href="javascript:void(0)" class="gsst_a"><span id="gs_cb0" class="gscb_a">×</span></a></div></td></tr></tbody></table></div></td><td class="gsc-search-button"><input title="search" class="gsc-search-button gsc-search-button-v2" src="Aggregation%20Framework%20Reference%20%E2%80%94%20MongoDB%20Manual_files/search_box_icon.png" type="image"></td><td class="gsc-clear-button"><div title="clear results" class="gsc-clear-button">&nbsp;</div></td></tr></tbody></table><table class="gsc-branding" cellpadding="0" cellspacing="0"><tbody><tr style="display: none;"><td class="gsc-branding-user-defined"></td><td class="gsc-branding-text"><div class="gsc-branding-text">powered by</div></td><td class="gsc-branding-img"><img class="gsc-branding-img" src="Aggregation%20Framework%20Reference%20%E2%80%94%20MongoDB%20Manual_files/small-logo.png"></td></tr></tbody></table></form></div></div>
+<div id="etp">
+<ul>
+<li><a href="https://github.com/mongodb/docs/blob/master/source/reference/aggregation.txt" target="_blank" title="Edit reference/aggregation.txt on github">Edit this Page</a></li>
+<li><a href="http://github.com/mongodb/docs" target="_blank" title="Fork the documentation on GitHub and contribute.">GitHub</a></li>
+<li><a href="https://jira.mongodb.org/secure/CreateIssueDetails%21init.jspa?pid=10380&amp;issuetype=4&amp;priority=4&amp;summary=Comment+on%3a+%22reference/aggregation%2Etxt%22" target="_blank" title="Report a problem with reference/aggregation.txt on Jira">Report a problem</a></li>
+</ul>
+</div>
+</div>  
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            <div id="cse-results"><div id="___gcse_1"><div class="gsc-control-cse gsc-control-cse-en"><div dir="ltr" class="gsc-control-wrapper-cse"><div class="gsc-results-wrapper-nooverlay"><div class="gsc-tabsAreaInvisible"><div class="gsc-tabHeader gsc-inline-block gsc-tabhActive">Custom Search</div><span class="gs-spacer"> </span></div><div class="gsc-tabsAreaInvisible"></div><div class="gsc-above-wrapper-area-invisible"><table class="gsc-above-wrapper-area-container" cellpadding="0" cellspacing="0"><tbody><tr><td class="gsc-result-info-container"><div class="gsc-result-info-invisible"></div></td></tr></tbody></table></div><div class="gsc-adBlockInvisible"></div><div class="gsc-wrapper"><div class="gsc-adBlockInvisible"></div><div class="gsc-resultsbox-invisible"><div class="gsc-resultsRoot gsc-tabData gsc-tabdActive"><table class="gsc-resultsHeader" cellpadding="0" cellspacing="0"><tbody><tr><td class="gsc-twiddleRegionCell"><div class="gsc-twiddle"><div class="gsc-title">Web</div></div><div class="gsc-stats"></div><div class="gsc-results-selector gsc-all-results-active"><div title="show one result" class="gsc-result-selector gsc-one-result">&nbsp;</div><div title="show more results" class="gsc-result-selector gsc-more-results">&nbsp;</div><div title="show all results" class="gsc-result-selector gsc-all-results">&nbsp;</div></div></td><td class="gsc-configLabelCell"></td></tr></tbody></table><div><div class="gsc-expansionArea"></div></div></div></div></div></div></div></div></div></div>
+            
+  <div class="section" id="aggregation-framework-reference">
+<h1>Aggregation Framework Reference<a class="headerlink" href="#aggregation-framework-reference" title="Permalink to this headline">¶</a></h1>
+<p class="versionadded">
+<span class="versionmodified">New in version 2.1.0.</span></p>
+<p>The aggregation framework provides the ability to project, process,
+and/or control the output of the query, without using <a class="reference internal" href="http://docs.mongodb.org/manual/reference/glossary/#term-map-reduce"><em class="xref std std-term">map-reduce</em></a>.
+Aggregation uses a syntax that resembles the same syntax and
+form as “regular” MongoDB database queries.</p>
+<p>These aggregation operations are all accessible by way of the
+<a class="reference internal" href="http://docs.mongodb.org/manual/reference/method/db.collection.aggregate/#db.collection.aggregate" title="db.collection.aggregate"><tt class="xref mongodb mongodb-method docutils literal"><span class="pre">aggregate()</span></tt></a> method. While all examples in this document use this
+method, <a class="reference internal" href="http://docs.mongodb.org/manual/reference/method/db.collection.aggregate/#db.collection.aggregate" title="db.collection.aggregate"><tt class="xref mongodb mongodb-method docutils literal"><span class="pre">aggregate()</span></tt></a> is merely a wrapper around the
+<a class="reference internal" href="http://docs.mongodb.org/manual/reference/glossary/#term-database-command"><em class="xref std std-term">database command</em></a> <a class="reference internal" href="http://docs.mongodb.org/manual/reference/command/aggregate/#aggregate" title="aggregate"><tt class="xref mongodb mongodb-dbcommand docutils literal"><span class="pre">aggregate</span></tt></a>. The
+following prototype aggregation operations are equivalent:</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="nx">db</span><span class="p">.</span><span class="nx">people</span><span class="p">.</span><span class="nx">aggregate</span><span class="p">(</span> <span class="o">&lt;</span><span class="nx">pipeline</span><span class="o">&gt;</span> <span class="p">)</span>
+<span class="nx">db</span><span class="p">.</span><span class="nx">people</span><span class="p">.</span><span class="nx">aggregate</span><span class="p">(</span> <span class="p">[</span><span class="o">&lt;</span><span class="nx">pipeline</span><span class="o">&gt;</span><span class="p">]</span> <span class="p">)</span>
+<span class="nx">db</span><span class="p">.</span><span class="nx">runCommand</span><span class="p">(</span> <span class="p">{</span> <span class="nx">aggregate</span><span class="o">:</span> <span class="s2">"people"</span><span class="p">,</span> <span class="nx">pipeline</span><span class="o">:</span> <span class="p">[</span><span class="o">&lt;</span><span class="nx">pipeline</span><span class="o">&gt;</span><span class="p">]</span> <span class="p">}</span> <span class="p">)</span>
+</pre></div>
+</div>
+<p>These operations perform aggregation routines on the
+collection named <tt class="docutils literal"><span class="pre">people</span></tt>. <tt class="docutils literal"><span class="pre">&lt;pipeline&gt;</span></tt> is a placeholder for the
+aggregation <a class="reference internal" href="http://docs.mongodb.org/manual/reference/glossary/#term-pipeline"><em class="xref std std-term">pipeline</em></a> definition. <a class="reference internal" href="http://docs.mongodb.org/manual/reference/method/db.collection.aggregate/#db.collection.aggregate" title="db.collection.aggregate"><tt class="xref mongodb mongodb-method docutils literal"><span class="pre">aggregate()</span></tt></a>
+accepts the stages of the pipeline (i.e. <tt class="docutils literal"><span class="pre">&lt;pipeline&gt;</span></tt>) as an array,
+or as arguments to the method.</p>
+<p>This documentation provides an overview of all aggregation operators
+available for use in the aggregation pipeline as well as details
+regarding their use and behavior.</p>
+<div class="admonition-see-also admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="http://docs.mongodb.org/manual/applications/aggregation/"><em>Aggregation Framework</em></a> overview, the
+<a class="reference internal" href="http://docs.mongodb.org/manual/aggregation/#aggregation-framework"><em>Aggregation Framework Documentation Index</em></a>, and the
+<a class="reference internal" href="http://docs.mongodb.org/manual/tutorial/aggregation-examples/"><em>Aggregation Framework Examples</em></a> for more information on the
+aggregation functionality.</p>
+</div>
+<div class="contents local topic" id="aggregation-operators">
+<p class="topic-title first">Aggregation Operators:</p>
+<ul class="simple">
+<li><a class="reference internal" href="#pipeline" id="id1">Pipeline</a></li>
+<li><a class="reference internal" href="#expressions" id="id2">Expressions</a><ul>
+<li><a class="reference internal" href="#group-operators" id="id3"><tt class="docutils literal"><span class="pre">$group</span></tt> Operators</a></li>
+<li><a class="reference internal" href="#boolean-operators" id="id4">Boolean Operators</a></li>
+<li><a class="reference internal" href="#comparison-operators" id="id5">Comparison Operators</a></li>
+<li><a class="reference internal" href="#arithmetic-operators" id="id6">Arithmetic Operators</a></li>
+<li><a class="reference internal" href="#string-operators" id="id7">String Operators</a></li>
+<li><a class="reference internal" href="#date-operators" id="id8">Date Operators</a></li>
+<li><a class="reference internal" href="#conditional-expressions" id="id9">Conditional Expressions</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="pipeline">
+<span id="aggregation-pipeline-operator-reference"></span><h2>Pipeline<a class="headerlink" href="#pipeline" title="Permalink to this headline">¶</a></h2>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">The pipeline cannot operate on values of the following types:
+<tt class="docutils literal"><span class="pre">Binary</span></tt>, <tt class="docutils literal"><span class="pre">Symbol</span></tt>, <tt class="docutils literal"><span class="pre">MinKey</span></tt>, <tt class="docutils literal"><span class="pre">MaxKey</span></tt>, <tt class="docutils literal"><span class="pre">DBRef</span></tt>,
+<tt class="docutils literal"><span class="pre">Code</span></tt>, and <tt class="docutils literal"><span class="pre">CodeWScope</span></tt>.</p>
+</div>
+<p>Pipeline operators appear in an array. Conceptually, documents pass through
+these operators in a sequence. All examples in this section assume that the
+aggregation pipeline begins with a collection named <tt class="docutils literal"><span class="pre">article</span></tt> that
+contains documents that resemble the following:</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="p">{</span>
+  <span class="nx">title</span> <span class="o">:</span> <span class="s2">"this is my title"</span> <span class="p">,</span>
+  <span class="nx">author</span> <span class="o">:</span> <span class="s2">"bob"</span> <span class="p">,</span>
+  <span class="nx">posted</span> <span class="o">:</span> <span class="k">new</span> <span class="nb">Date</span><span class="p">()</span> <span class="p">,</span>
+  <span class="nx">pageViews</span> <span class="o">:</span> <span class="mi">5</span> <span class="p">,</span>
+  <span class="nx">tags</span> <span class="o">:</span> <span class="p">[</span> <span class="s2">"fun"</span> <span class="p">,</span> <span class="s2">"good"</span> <span class="p">,</span> <span class="s2">"fun"</span> <span class="p">]</span> <span class="p">,</span>
+  <span class="nx">comments</span> <span class="o">:</span> <span class="p">[</span>
+      <span class="p">{</span> <span class="nx">author</span> <span class="o">:</span><span class="s2">"joe"</span> <span class="p">,</span> <span class="nx">text</span> <span class="o">:</span> <span class="s2">"this is cool"</span> <span class="p">}</span> <span class="p">,</span>
+      <span class="p">{</span> <span class="nx">author</span> <span class="o">:</span><span class="s2">"sam"</span> <span class="p">,</span> <span class="nx">text</span> <span class="o">:</span> <span class="s2">"this is bad"</span> <span class="p">}</span>
+  <span class="p">],</span>
+  <span class="nx">other</span> <span class="o">:</span> <span class="p">{</span> <span class="nx">foo</span> <span class="o">:</span> <span class="mi">5</span> <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The current pipeline operators are:</p>
+<dl class="pipeline">
+<dt id="_S_project">
+<tt class="descname">$project</tt><a class="headerlink" href="#_S_project" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reshapes a document stream by renaming, adding, or removing
+fields. Also use <a class="reference internal" href="http://docs.mongodb.org/manual/reference/aggregation/project/#_S_project" title="$project"><tt class="xref agg agg-pipeline docutils literal"><span class="pre">$project</span></tt></a> to create computed values or
+sub-objects. Use <a class="reference internal" href="http://docs.mongodb.org/manual/reference/aggregation/project/#_S_project" title="$project"><tt class="xref agg agg-pipeline docutils literal"><span class="pre">$project</span></tt></a> to:</p>
+<ul class="simple">
+<li>Include fields from the original document.</li>
+<li>Insert computed fields.</li>
+<li>Rename fields.</li>
+<li>Create and populate fields that hold sub-documents.</li>
+</ul>
+<p>Use <a class="reference internal" href="http://docs.mongodb.org/manual/reference/aggregation/project/#_S_project" title="$project"><tt class="xref agg agg-pipeline docutils literal"><span class="pre">$project</span></tt></a> to quickly select the fields that you
+want to include or exclude from the response. Consider the
+following aggregation framework operation.</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="nx">db</span><span class="p">.</span><span class="nx">article</span><span class="p">.</span><span class="nx">aggregate</span><span class="p">(</span>
+    <span class="p">{</span> <span class="nx">$project</span> <span class="o">:</span> <span class="p">{</span>
+        <span class="nx">title</span> <span class="o">:</span> <span class="mi">1</span> <span class="p">,</span>
+        <span class="nx">author</span> <span class="o">:</span> <span class="mi">1</span> <span class="p">,</span>
+    <span class="p">}}</span>
+ <span class="p">);</span>
+</pre></div>
+</div>
+<p>This operation includes the <tt class="docutils literal"><span class="pre">title</span></tt> field and the <tt class="docutils literal"><span class="pre">author</span></tt>
+field in the document that returns from the aggregation
+<a class="reference internal" href="http://docs.mongodb.org/manual/reference/glossary/#term-pipeline"><em class="xref std std-term">pipeline</em></a>.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p>The <tt class="docutils literal"><span class="pre">_id</span></tt> field is always included by default. You may
+explicitly exclude <tt class="docutils literal"><span class="pre">_id</span></tt> as follows:</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="nx">db</span><span class="p">.</span><span class="nx">article</span><span class="p">.</span><span class="nx">aggregate</span><span class="p">(</span>
+    <span class="p">{</span> <span class="nx">$project</span> <span class="o">:</span> <span class="p">{</span>
+        <span class="nx">_id</span> <span class="o">:</span> <span class="mi">0</span> <span class="p">,</span>
+        <span class="nx">title</span> <span class="o">:</span> <span class="mi">1</span> <span class="p">,</span>
+        <span class="nx">author</span> <span class="o">:</span> <span class="mi">1</span>
+    <span class="p">}}</span>
+<span class="p">);</span>
+</pre></div>
+</div>
+<p class="last">Here, the projection excludes the <tt class="docutils literal"><span class="pre">_id</span></tt> field but includes the
+<tt class="docutils literal"><span class="pre">title</span></tt> and <tt class="docutils literal"><span class="pre">author</span></tt> fields.</p>
+</div>
+<p>Projections can also add computed fields to the document stream
+passing through the pipeline. A computed field can use any of the
+<a class="reference internal" href="#aggregation-expression-operators"><em>expression operators</em></a>.
+Consider the following example:</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="nx">db</span><span class="p">.</span><span class="nx">article</span><span class="p">.</span><span class="nx">aggregate</span><span class="p">(</span>
+    <span class="p">{</span> <span class="nx">$project</span> <span class="o">:</span> <span class="p">{</span>
+        <span class="nx">title</span> <span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
+        <span class="nx">doctoredPageViews</span> <span class="o">:</span> <span class="p">{</span> <span class="nx">$add</span><span class="o">:</span><span class="p">[</span><span class="s2">"$pageViews"</span><span class="p">,</span> <span class="mi">10</span><span class="p">]</span> <span class="p">}</span>
+    <span class="p">}}</span>
+<span class="p">);</span>
+</pre></div>
+</div>
+<p>Here, the field <tt class="docutils literal"><span class="pre">doctoredPageViews</span></tt> represents the value of the
+<tt class="docutils literal"><span class="pre">pageViews</span></tt> field after adding 10 to the original field using the
+<a class="reference internal" href="http://docs.mongodb.org/manual/reference/aggregation/add/#_S_add" title="$add"><tt class="xref agg agg-expression docutils literal"><span class="pre">$add</span></tt></a>.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">You must enclose the expression that defines the computed field
+in braces, so that the expression is a valid object.</p>
+</div>
+<p>You may also use <a class="reference internal" href="http://docs.mongodb.org/manual/reference/aggregation/project/#_S_project" title="$project"><tt class="xref agg agg-pipeline docutils literal"><span class="pre">$project</span></tt></a> to rename fields. Consider
+the following example:</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="nx">db</span><span class="p">.</span><span class="nx">article</span><span class="p">.</span><span class="nx">aggregate</span><span class="p">(</span>
+    <span class="p">{</span> <span class="nx">$project</span> <span class="o">:</span> <span class="p">{</span>
+        <span class="nx">title</span> <span class="o">:</span> <span class="mi">1</span> <span class="p">,</span>
+        <span class="nx">page_views</span> <span class="o">:</span> <span class="s2">"$pageViews"</span> <span class="p">,</span>
+        <span class="nx">bar</span> <span class="o">:</span> <span class="s2">"$other.foo"</span>
+    <span class="p">}}</span>
+<span class="p">);</span>
+</pre></div>
+</div>
+<p>This operation renames the <tt class="docutils literal"><span class="pre">pageViews</span></tt> field to <tt class="docutils literal"><span class="pre">page_views</span></tt>,
+and renames the <tt class="docutils literal"><span class="pre">foo</span></tt> field in the <tt class="docutils literal"><span class="pre">other</span></tt> sub-document as
+the top-level field <tt class="docutils literal"><span class="pre">bar</span></tt>. The field references used for
+renaming fields are direct expressions and do not use an operator
+or surrounding braces. All aggregation field references can use
+dotted paths to refer to fields in nested documents.</p>
+<p>Finally, you can use the <a class="reference internal" href="http://docs.mongodb.org/manual/reference/aggregation/project/#_S_project" title="$project"><tt class="xref agg agg-pipeline docutils literal"><span class="pre">$project</span></tt></a> to create and
+populate new sub-documents. Consider the following example that
+creates a new object-valued field named <tt class="docutils literal"><span class="pre">stats</span></tt> that holds a number
+of values:</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="nx">db</span><span class="p">.</span><span class="nx">article</span><span class="p">.</span><span class="nx">aggregate</span><span class="p">(</span>
+    <span class="p">{</span> <span class="nx">$project</span> <span class="o">:</span> <span class="p">{</span>
+        <span class="nx">title</span> <span class="o">:</span> <span class="mi">1</span> <span class="p">,</span>
+        <span class="nx">stats</span> <span class="o">:</span> <span class="p">{</span>
+            <span class="nx">pv</span> <span class="o">:</span> <span class="s2">"$pageViews"</span><span class="p">,</span>
+            <span class="nx">foo</span> <span class="o">:</span> <span class="s2">"$other.foo"</span><span class="p">,</span>
+            <span class="nx">dpv</span> <span class="o">:</span> <span class="p">{</span> <span class="nx">$add</span><span class="o">:</span><span class="p">[</span><span class="s2">"$pageViews"</span><span class="p">,</span> <span class="mi">10</span><span class="p">]</span> <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">}}</span>
+<span class="p">);</span>
+</pre></div>
+</div>
+<p>This projection includes the <tt class="docutils literal"><span class="pre">title</span></tt> field and places
+<a class="reference internal" href="http://docs.mongodb.org/manual/reference/aggregation/project/#_S_project" title="$project"><tt class="xref agg agg-pipeline docutils literal"><span class="pre">$project</span></tt></a> into “inclusive” mode. Then, it creates the
+<tt class="docutils literal"><span class="pre">stats</span></tt> documents with the following fields:</p>
+<ul class="simple">
+<li><tt class="docutils literal"><span class="pre">pv</span></tt> which includes and renames the <tt class="docutils literal"><span class="pre">pageViews</span></tt> from the
+top level of the original documents.</li>
+<li><tt class="docutils literal"><span class="pre">foo</span></tt> which includes the value of <tt class="docutils literal"><span class="pre">other.foo</span></tt> from the
+original documents.</li>
+<li><tt class="docutils literal"><span class="pre">dpv</span></tt> which is a computed field that adds 10 to the value of
+the <tt class="docutils literal"><span class="pre">pageViews</span></tt> field in the original document using the
+<a class="reference internal" href="http://docs.mongodb.org/manual/reference/aggregation/add/#_S_add" title="$add"><tt class="xref agg agg-expression docutils literal"><span class="pre">$add</span></tt></a> aggregation expression.</li>
+</ul>
+</dd></dl>
+
+<dl class="pipeline">
+<dt id="_S_match">
+<tt class="descname">$match</tt><a class="headerlink" href="#_S_match" title="Permalink to this definition">¶</a></dt>
+<dd><p>Provides a query-like interface to filter documents out of the
+aggregation <a class="reference internal" href="http://docs.mongodb.org/manual/reference/glossary/#term-pipeline"><em class="xref std std-term">pipeline</em></a>. The <a class="reference internal" href="http://docs.mongodb.org/manual/reference/aggregation/match/#_S_match" title="$match"><tt class="xref agg agg-pipeline docutils literal"><span class="pre">$match</span></tt></a> drops
+documents that do not match the condition from the aggregation
+pipeline, and it passes documents that match along the pipeline
+unaltered.</p>
+<p>The syntax passed to the <a class="reference internal" href="http://docs.mongodb.org/manual/reference/aggregation/match/#_S_match" title="$match"><tt class="xref agg agg-pipeline docutils literal"><span class="pre">$match</span></tt></a> is identical
+to the <a class="reference internal" href="http://docs.mongodb.org/manual/reference/glossary/#term-query"><em class="xref std std-term">query</em></a> syntax. Consider the following prototype form:</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="nx">db</span><span class="p">.</span><span class="nx">article</span><span class="p">.</span><span class="nx">aggregate</span><span class="p">(</span>
+    <span class="p">{</span> <span class="nx">$match</span> <span class="o">:</span> <span class="o">&lt;</span><span class="nx">match</span><span class="o">-</span><span class="nx">predicate</span><span class="o">&gt;</span> <span class="p">}</span>
+<span class="p">);</span>
+</pre></div>
+</div>
+<p>The following example performs a simple field equality test:</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="nx">db</span><span class="p">.</span><span class="nx">article</span><span class="p">.</span><span class="nx">aggregate</span><span class="p">(</span>
+    <span class="p">{</span> <span class="nx">$match</span> <span class="o">:</span> <span class="p">{</span> <span class="nx">author</span> <span class="o">:</span> <span class="s2">"dave"</span> <span class="p">}</span> <span class="p">}</span>
+<span class="p">);</span>
+</pre></div>
+</div>
+<p>This operation only returns documents where the <tt class="docutils literal"><span class="pre">author</span></tt> field
+holds the value <tt class="docutils literal"><span class="pre">dave</span></tt>. Consider the following example,
+which performs a range test:</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="nx">db</span><span class="p">.</span><span class="nx">article</span><span class="p">.</span><span class="nx">aggregate</span><span class="p">(</span>
+    <span class="p">{</span> <span class="nx">$match</span> <span class="o">:</span> <span class="p">{</span> <span class="nx">score</span>  <span class="o">:</span> <span class="p">{</span> <span class="nx">$gt</span> <span class="o">:</span> <span class="mi">50</span><span class="p">,</span> <span class="nx">$lte</span> <span class="o">:</span> <span class="mi">90</span> <span class="p">}</span> <span class="p">}</span> <span class="p">}</span>
+<span class="p">);</span>
+</pre></div>
+</div>
+<p>Here, all documents return when the <tt class="docutils literal"><span class="pre">score</span></tt> field holds a value
+that is greater than 50 and less than or equal to 90.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Place the <a class="reference internal" href="http://docs.mongodb.org/manual/reference/aggregation/match/#_S_match" title="$match"><tt class="xref agg agg-pipeline docutils literal"><span class="pre">$match</span></tt></a> as early in the aggregation
+<a class="reference internal" href="http://docs.mongodb.org/manual/reference/glossary/#term-pipeline"><em class="xref std std-term">pipeline</em></a> as possible. Because <a class="reference internal" href="http://docs.mongodb.org/manual/reference/aggregation/match/#_S_match" title="$match"><tt class="xref agg agg-pipeline docutils literal"><span class="pre">$match</span></tt></a>
+limits the total number of documents in the aggregation
+pipeline, earlier <a class="reference internal" href="http://docs.mongodb.org/manual/reference/aggregation/match/#_S_match" title="$match"><tt class="xref agg agg-pipeline docutils literal"><span class="pre">$match</span></tt></a> operations minimize the
+amount of later processing. If you place a <a class="reference internal" href="http://docs.mongodb.org/manual/reference/aggregation/match/#_S_match" title="$match"><tt class="xref agg agg-pipeline docutils literal"><span class="pre">$match</span></tt></a>
+at the very beginning of a pipeline, the query can take
+advantage of <a class="reference internal" href="http://docs.mongodb.org/manual/reference/glossary/#term-index"><em class="xref std std-term">indexes</em></a> like any other
+<a class="reference internal" href="http://docs.mongodb.org/manual/reference/method/db.collection.find/#db.collection.find" title="db.collection.find"><tt class="xref mongodb mongodb-method docutils literal"><span class="pre">db.collection.find()</span></tt></a> or <a class="reference internal" href="http://docs.mongodb.org/manual/reference/method/db.collection.findOne/#db.collection.findOne" title="db.collection.findOne"><tt class="xref mongodb mongodb-method docutils literal"><span class="pre">db.collection.findOne()</span></tt></a>.</p>
+</div>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">You cannot use <a class="reference internal" href="http://docs.mongodb.org/manual/reference/operator/where/#_S_where" title="$where"><tt class="xref mongodb mongodb-operator docutils literal"><span class="pre">$where</span></tt></a> or <a class="reference internal" href="http://docs.mongodb.org/manual/reference/operators/#geospatial-query-operators"><em>geospatial
+operations</em></a> in <a class="reference internal" href="http://docs.mongodb.org/manual/reference/aggregation/match/#_S_match" title="$match"><tt class="xref agg agg-pipeline docutils literal"><span class="pre">$match</span></tt></a>
+queries as part of the aggregation pipeline.</p>
+</div>
+</dd></dl>
+
+<dl class="pipeline">
+<dt id="_S_limit">
+<tt class="descname">$limit</tt><a class="headerlink" href="#_S_limit" title="Permalink to this definition">¶</a></dt>
+<dd><p>Restricts the number of <a class="reference internal" href="http://docs.mongodb.org/manual/reference/glossary/#term-document"><em class="xref std std-term">documents</em></a> that
+pass through the <a class="reference internal" href="http://docs.mongodb.org/manual/reference/aggregation/limit/#_S_limit" title="$limit"><tt class="xref agg agg-pipeline docutils literal"><span class="pre">$limit</span></tt></a> in the <a class="reference internal" href="http://docs.mongodb.org/manual/reference/glossary/#term-pipeline"><em class="xref std std-term">pipeline</em></a>.</p>
+<p><a class="reference internal" href="http://docs.mongodb.org/manual/reference/aggregation/limit/#_S_limit" title="$limit"><tt class="xref agg agg-pipeline docutils literal"><span class="pre">$limit</span></tt></a> takes a single numeric (positive whole number)
+value as a parameter. Once the specified number of documents pass
+through the pipeline operator, no more will. Consider the following
+example:</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="nx">db</span><span class="p">.</span><span class="nx">article</span><span class="p">.</span><span class="nx">aggregate</span><span class="p">(</span>
+    <span class="p">{</span> <span class="nx">$limit</span> <span class="o">:</span> <span class="mi">5</span> <span class="p">}</span>
+<span class="p">);</span>
+</pre></div>
+</div>
+<p>This operation returns only the first 5 documents passed to it from
+by the pipeline. <a class="reference internal" href="http://docs.mongodb.org/manual/reference/aggregation/limit/#_S_limit" title="$limit"><tt class="xref agg agg-pipeline docutils literal"><span class="pre">$limit</span></tt></a> has no effect on the content
+of the documents it passes.</p>
+</dd></dl>
+
+<dl class="pipeline">
+<dt id="_S_skip">
+<tt class="descname">$skip</tt><a class="headerlink" href="#_S_skip" title="Permalink to this definition">¶</a></dt>
+<dd><p>Skips over the specified number of <a class="reference internal" href="http://docs.mongodb.org/manual/reference/glossary/#term-document"><em class="xref std std-term">documents</em></a>
+that pass through the <a class="reference internal" href="http://docs.mongodb.org/manual/reference/aggregation/skip/#_S_skip" title="$skip"><tt class="xref agg agg-pipeline docutils literal"><span class="pre">$skip</span></tt></a> in the <a class="reference internal" href="http://docs.mongodb.org/manual/reference/glossary/#term-pipeline"><em class="xref std std-term">pipeline</em></a>
+before passing all of the remaining input.</p>
+<p><a class="reference internal" href="http://docs.mongodb.org/manual/reference/aggregation/skip/#_S_skip" title="$skip"><tt class="xref agg agg-pipeline docutils literal"><span class="pre">$skip</span></tt></a> takes a single numeric (positive whole number)
+value as a parameter. Once the operation has skipped the specified
+number of documents, it passes all the remaining documents along the
+<a class="reference internal" href="http://docs.mongodb.org/manual/reference/glossary/#term-pipeline"><em class="xref std std-term">pipeline</em></a> without alteration. Consider the following
+example:</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="nx">db</span><span class="p">.</span><span class="nx">article</span><span class="p">.</span><span class="nx">aggregate</span><span class="p">(</span>
+    <span class="p">{</span> <span class="nx">$skip</span> <span class="o">:</span> <span class="mi">5</span> <span class="p">}</span>
+<span class="p">);</span>
+</pre></div>
+</div>
+<p>This operation skips the first 5 documents passed to it by the
+pipeline. <a class="reference internal" href="http://docs.mongodb.org/manual/reference/aggregation/skip/#_S_skip" title="$skip"><tt class="xref agg agg-pipeline docutils literal"><span class="pre">$skip</span></tt></a> has no effect on the content of the
+documents it passes along the pipeline.</p>
+</dd></dl>
+
+<dl class="pipeline">
+<dt id="_S_unwind">
+<tt class="descname">$unwind</tt><a class="headerlink" href="#_S_unwind" title="Permalink to this definition">¶</a></dt>
+<dd><p>Peels off the elements of an array individually, and returns a
+stream of documents. <a class="reference internal" href="http://docs.mongodb.org/manual/reference/aggregation/unwind/#_S_unwind" title="$unwind"><tt class="xref agg agg-pipeline docutils literal"><span class="pre">$unwind</span></tt></a> returns one document for
+every member of the unwound array within every source
+document. Take the following aggregation command:</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="nx">db</span><span class="p">.</span><span class="nx">article</span><span class="p">.</span><span class="nx">aggregate</span><span class="p">(</span>
+    <span class="p">{</span> <span class="nx">$project</span> <span class="o">:</span> <span class="p">{</span>
+        <span class="nx">author</span> <span class="o">:</span> <span class="mi">1</span> <span class="p">,</span>
+        <span class="nx">title</span> <span class="o">:</span> <span class="mi">1</span> <span class="p">,</span>
+        <span class="nx">tags</span> <span class="o">:</span> <span class="mi">1</span>
+    <span class="p">}},</span>
+    <span class="p">{</span> <span class="nx">$unwind</span> <span class="o">:</span> <span class="s2">"$tags"</span> <span class="p">}</span>
+<span class="p">);</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The dollar sign (i.e. <tt class="docutils literal"><span class="pre">$</span></tt>) must proceed the field
+specification handed to the <a class="reference internal" href="http://docs.mongodb.org/manual/reference/aggregation/unwind/#_S_unwind" title="$unwind"><tt class="xref agg agg-pipeline docutils literal"><span class="pre">$unwind</span></tt></a> operator.</p>
+</div>
+<p>In the above aggregation <a class="reference internal" href="http://docs.mongodb.org/manual/reference/aggregation/project/#_S_project" title="$project"><tt class="xref agg agg-pipeline docutils literal"><span class="pre">$project</span></tt></a> selects
+(inclusively) the <tt class="docutils literal"><span class="pre">author</span></tt>, <tt class="docutils literal"><span class="pre">title</span></tt>, and <tt class="docutils literal"><span class="pre">tags</span></tt> fields, as
+well as the <tt class="docutils literal"><span class="pre">_id</span></tt> field implicitly. Then the pipeline passes the
+results of the projection to the <a class="reference internal" href="http://docs.mongodb.org/manual/reference/aggregation/unwind/#_S_unwind" title="$unwind"><tt class="xref agg agg-pipeline docutils literal"><span class="pre">$unwind</span></tt></a> operator,
+which will unwind the <tt class="docutils literal"><span class="pre">tags</span></tt> field. This operation may return
+a sequence of documents that resemble the following for a
+collection that contains one document holding a <tt class="docutils literal"><span class="pre">tags</span></tt> field
+with an array of 3 items.</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="p">{</span>
+     <span class="s2">"result"</span> <span class="o">:</span> <span class="p">[</span>
+             <span class="p">{</span>
+                     <span class="s2">"_id"</span> <span class="o">:</span> <span class="nx">ObjectId</span><span class="p">(</span><span class="s2">"4e6e4ef557b77501a49233f6"</span><span class="p">),</span>
+                     <span class="s2">"title"</span> <span class="o">:</span> <span class="s2">"this is my title"</span><span class="p">,</span>
+                     <span class="s2">"author"</span> <span class="o">:</span> <span class="s2">"bob"</span><span class="p">,</span>
+                     <span class="s2">"tags"</span> <span class="o">:</span> <span class="s2">"fun"</span>
+             <span class="p">},</span>
+             <span class="p">{</span>
+                     <span class="s2">"_id"</span> <span class="o">:</span> <span class="nx">ObjectId</span><span class="p">(</span><span class="s2">"4e6e4ef557b77501a49233f6"</span><span class="p">),</span>
+                     <span class="s2">"title"</span> <span class="o">:</span> <span class="s2">"this is my title"</span><span class="p">,</span>
+                     <span class="s2">"author"</span> <span class="o">:</span> <span class="s2">"bob"</span><span class="p">,</span>
+                     <span class="s2">"tags"</span> <span class="o">:</span> <span class="s2">"good"</span>
+             <span class="p">},</span>
+             <span class="p">{</span>
+                     <span class="s2">"_id"</span> <span class="o">:</span> <span class="nx">ObjectId</span><span class="p">(</span><span class="s2">"4e6e4ef557b77501a49233f6"</span><span class="p">),</span>
+                     <span class="s2">"title"</span> <span class="o">:</span> <span class="s2">"this is my title"</span><span class="p">,</span>
+                     <span class="s2">"author"</span> <span class="o">:</span> <span class="s2">"bob"</span><span class="p">,</span>
+                     <span class="s2">"tags"</span> <span class="o">:</span> <span class="s2">"fun"</span>
+             <span class="p">}</span>
+     <span class="p">],</span>
+     <span class="s2">"OK"</span> <span class="o">:</span> <span class="mi">1</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>A single document becomes 3 documents: each document is identical
+except for the value of the <tt class="docutils literal"><span class="pre">tags</span></tt> field. Each value of <tt class="docutils literal"><span class="pre">tags</span></tt>
+is one of the values in the original “tags” array.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p><a class="reference internal" href="http://docs.mongodb.org/manual/reference/aggregation/unwind/#_S_unwind" title="$unwind"><tt class="xref agg agg-pipeline docutils literal"><span class="pre">$unwind</span></tt></a> has the following behaviors:</p>
+<ul class="last simple">
+<li><a class="reference internal" href="http://docs.mongodb.org/manual/reference/aggregation/unwind/#_S_unwind" title="$unwind"><tt class="xref agg agg-pipeline docutils literal"><span class="pre">$unwind</span></tt></a> is most useful in combination
+with <a class="reference internal" href="http://docs.mongodb.org/manual/reference/aggregation/group/#_S_group" title="$group"><tt class="xref agg agg-pipeline docutils literal"><span class="pre">$group</span></tt></a>.</li>
+<li>You may undo the effects of unwind operation with the
+<a class="reference internal" href="http://docs.mongodb.org/manual/reference/aggregation/group/#_S_group" title="$group"><tt class="xref agg agg-pipeline docutils literal"><span class="pre">$group</span></tt></a> pipeline operator.</li>
+<li>If you specify a target field for <a class="reference internal" href="http://docs.mongodb.org/manual/reference/aggregation/unwind/#_S_unwind" title="$unwind"><tt class="xref agg agg-pipeline docutils literal"><span class="pre">$unwind</span></tt></a> that
+does not exist in an input document, the pipeline ignores the
+input document, and will generate no result documents.</li>
+<li>If you specify a target field for <a class="reference internal" href="http://docs.mongodb.org/manual/reference/aggregation/unwind/#_S_unwind" title="$unwind"><tt class="xref agg agg-pipeline docutils literal"><span class="pre">$unwind</span></tt></a> that is
+not an array, <tt class="xref mongodb mongodb-method docutils literal"><span class="pre">aggregate()</span></tt> generates an error.</li>
+<li>If you specify a target field for <a class="reference internal" href="http://docs.mongodb.org/manual/reference/aggregation/unwind/#_S_unwind" title="$unwind"><tt class="xref agg agg-pipeline docutils literal"><span class="pre">$unwind</span></tt></a> that
+holds an empty array (<tt class="docutils literal"><span class="pre">[]</span></tt>) in an input document, the
+pipeline ignores the input document, and will generates no
+result documents.</li>
+</ul>
+</div>
+</dd></dl>
+
+<dl class="pipeline">
+<dt id="_S_group">
+<tt class="descname">$group</tt><a class="headerlink" href="#_S_group" title="Permalink to this definition">¶</a></dt>
+<dd><p>Groups documents together for the purpose of calculating aggregate
+values based on a collection of documents. Practically, group often
+supports tasks such as average page views for each page in a
+website on a daily basis.</p>
+<p>The output of <a class="reference internal" href="http://docs.mongodb.org/manual/reference/aggregation/group/#_S_group" title="$group"><tt class="xref agg agg-pipeline docutils literal"><span class="pre">$group</span></tt></a> depends on how you define
+groups. Begin by specifying an identifier (i.e. a <tt class="docutils literal"><span class="pre">_id</span></tt> field)
+for the group you’re creating with this pipeline. You can specify a
+single field from the documents in the pipeline, a previously
+computed value, or an aggregate key made up from several incoming
+fields. Aggregate keys may resemble the following document:</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="p">{</span> <span class="nx">_id</span> <span class="o">:</span> <span class="p">{</span> <span class="nx">author</span><span class="o">:</span> <span class="s1">'$author'</span><span class="p">,</span> <span class="nx">pageViews</span><span class="o">:</span> <span class="s1">'$pageViews'</span><span class="p">,</span> <span class="nx">posted</span><span class="o">:</span> <span class="s1">'$posted'</span> <span class="p">}</span> <span class="p">}</span>
+</pre></div>
+</div>
+<p>With the exception of the <tt class="docutils literal"><span class="pre">_id</span></tt> field, <a class="reference internal" href="http://docs.mongodb.org/manual/reference/aggregation/group/#_S_group" title="$group"><tt class="xref agg agg-pipeline docutils literal"><span class="pre">$group</span></tt></a> cannot
+output nested documents.</p>
+<p>Every group expression must specify an <tt class="docutils literal"><span class="pre">_id</span></tt> field.
+You may specify the <tt class="docutils literal"><span class="pre">_id</span></tt> field as a dotted
+field path reference, a document with multiple fields enclosed in
+braces (i.e. <tt class="docutils literal"><span class="pre">{</span></tt> and <tt class="docutils literal"><span class="pre">}</span></tt>), or a constant value.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Use <a class="reference internal" href="http://docs.mongodb.org/manual/reference/aggregation/project/#_S_project" title="$project"><tt class="xref agg agg-pipeline docutils literal"><span class="pre">$project</span></tt></a> as needed to rename the grouped field
+after an <a class="reference internal" href="http://docs.mongodb.org/manual/reference/aggregation/group/#_S_group" title="$group"><tt class="xref agg agg-pipeline docutils literal"><span class="pre">$group</span></tt></a> operation, if necessary.</p>
+</div>
+<p>Consider the following example:</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="nx">db</span><span class="p">.</span><span class="nx">article</span><span class="p">.</span><span class="nx">aggregate</span><span class="p">(</span>
+    <span class="p">{</span> <span class="nx">$group</span> <span class="o">:</span> <span class="p">{</span>
+        <span class="nx">_id</span> <span class="o">:</span> <span class="s2">"$author"</span><span class="p">,</span>
+        <span class="nx">docsPerAuthor</span> <span class="o">:</span> <span class="p">{</span> <span class="nx">$sum</span> <span class="o">:</span> <span class="mi">1</span> <span class="p">},</span>
+        <span class="nx">viewsPerAuthor</span> <span class="o">:</span> <span class="p">{</span> <span class="nx">$sum</span> <span class="o">:</span> <span class="s2">"$pageViews"</span> <span class="p">}</span>
+    <span class="p">}}</span>
+<span class="p">);</span>
+</pre></div>
+</div>
+<p>This groups by the <tt class="docutils literal"><span class="pre">author</span></tt> field and computes two fields, the
+first <tt class="docutils literal"><span class="pre">docsPerAuthor</span></tt> is a counter field that adds one for
+each document with a given author field using the <a class="reference internal" href="http://docs.mongodb.org/manual/reference/aggregation/sum/#_S_sum" title="$sum"><tt class="xref agg agg-group docutils literal"><span class="pre">$sum</span></tt></a>
+function. The <tt class="docutils literal"><span class="pre">viewsPerAuthor</span></tt> field is the sum of
+all of the <tt class="docutils literal"><span class="pre">pageViews</span></tt> fields in the documents for each group.</p>
+<p>Each field defined for the <a class="reference internal" href="http://docs.mongodb.org/manual/reference/aggregation/group/#_S_group" title="$group"><tt class="xref agg agg-pipeline docutils literal"><span class="pre">$group</span></tt></a> must use one of the group
+aggregation function listed below to generate its composite value:</p>
+<ul class="simple">
+<li><a class="reference internal" href="http://docs.mongodb.org/manual/reference/aggregation/addToSet/#_S_addToSet" title="$addToSet"><tt class="xref agg agg-group docutils literal"><span class="pre">$addToSet</span></tt></a></li>
+<li><a class="reference internal" href="http://docs.mongodb.org/manual/reference/aggregation/first/#_S_first" title="$first"><tt class="xref agg agg-group docutils literal"><span class="pre">$first</span></tt></a></li>
+<li><a class="reference internal" href="http://docs.mongodb.org/manual/reference/aggregation/last/#_S_last" title="$last"><tt class="xref agg agg-group docutils literal"><span class="pre">$last</span></tt></a></li>
+<li><a class="reference internal" href="http://docs.mongodb.org/manual/reference/aggregation/max/#_S_max" title="$max"><tt class="xref agg agg-group docutils literal"><span class="pre">$max</span></tt></a></li>
+<li><a class="reference internal" href="http://docs.mongodb.org/manual/reference/aggregation/min/#_S_min" title="$min"><tt class="xref agg agg-group docutils literal"><span class="pre">$min</span></tt></a></li>
+<li><a class="reference internal" href="http://docs.mongodb.org/manual/reference/aggregation/avg/#_S_avg" title="$avg"><tt class="xref agg agg-group docutils literal"><span class="pre">$avg</span></tt></a></li>
+<li><a class="reference internal" href="http://docs.mongodb.org/manual/reference/aggregation/push/#_S_push" title="$push"><tt class="xref agg agg-group docutils literal"><span class="pre">$push</span></tt></a></li>
+<li><a class="reference internal" href="http://docs.mongodb.org/manual/reference/aggregation/sum/#_S_sum" title="$sum"><tt class="xref agg agg-group docutils literal"><span class="pre">$sum</span></tt></a></li>
+</ul>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">The aggregation system currently stores <a class="reference internal" href="http://docs.mongodb.org/manual/reference/aggregation/group/#_S_group" title="$group"><tt class="xref agg agg-pipeline docutils literal"><span class="pre">$group</span></tt></a> operations in
+memory, which may cause problems when processing a larger number
+of groups.</p>
+</div>
+</dd></dl>
+
+<dl class="pipeline">
+<dt id="_S_sort">
+<tt class="descname">$sort</tt><a class="headerlink" href="#_S_sort" title="Permalink to this definition">¶</a></dt>
+<dd><p>The <a class="reference internal" href="http://docs.mongodb.org/manual/reference/aggregation/sort/#_S_sort" title="$sort"><tt class="xref agg agg-pipeline docutils literal"><span class="pre">$sort</span></tt></a> <a class="reference internal" href="http://docs.mongodb.org/manual/reference/glossary/#term-pipeline"><em class="xref std std-term">pipeline</em></a> operator sorts all input
+documents and returns them to the pipeline in sorted
+order. Consider the following prototype form:</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="nx">db</span><span class="p">.</span><span class="o">&lt;</span><span class="nx">collection</span><span class="o">-</span><span class="nx">name</span><span class="o">&gt;</span><span class="p">.</span><span class="nx">aggregate</span><span class="p">(</span>
+    <span class="p">{</span> <span class="nx">$sort</span> <span class="o">:</span> <span class="p">{</span> <span class="o">&lt;</span><span class="nx">sort</span><span class="o">-</span><span class="nx">key</span><span class="o">&gt;</span> <span class="p">}</span> <span class="p">}</span>
+<span class="p">);</span>
+</pre></div>
+</div>
+<p>This sorts the documents in the collection named
+<tt class="docutils literal"><span class="pre">&lt;collection-name&gt;</span></tt>, according to the key and specification in
+the <tt class="docutils literal"><span class="pre">{</span> <span class="pre">&lt;sort-key&gt;</span> <span class="pre">}</span></tt> document.</p>
+<p>Specify the sort in a document with a field or fields that you want
+to sort by and a value of <tt class="docutils literal"><span class="pre">1</span></tt> or <tt class="docutils literal"><span class="pre">-1</span></tt> to specify an ascending
+or descending sort respectively, as in the following example:</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="nx">db</span><span class="p">.</span><span class="nx">users</span><span class="p">.</span><span class="nx">aggregate</span><span class="p">(</span>
+    <span class="p">{</span> <span class="nx">$sort</span> <span class="o">:</span> <span class="p">{</span> <span class="nx">age</span> <span class="o">:</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="nx">posts</span><span class="o">:</span> <span class="mi">1</span> <span class="p">}</span> <span class="p">}</span>
+<span class="p">);</span>
+</pre></div>
+</div>
+<p>This operation sorts the documents in the <tt class="docutils literal"><span class="pre">users</span></tt> collection,
+in descending order according by the <tt class="docutils literal"><span class="pre">age</span></tt> field and then in
+ascending order according to the value in the <tt class="docutils literal"><span class="pre">posts</span></tt> field.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p>The <a class="reference internal" href="http://docs.mongodb.org/manual/reference/aggregation/sort/#_S_sort" title="$sort"><tt class="xref agg agg-pipeline docutils literal"><span class="pre">$sort</span></tt></a> cannot begin sorting documents until
+previous operators in the pipeline have returned all output.</p>
+<ul class="last simple">
+<li><a class="reference internal" href="http://docs.mongodb.org/manual/reference/aggregation/skip/#_S_skip" title="$skip"><tt class="xref agg agg-pipeline docutils literal"><span class="pre">$skip</span></tt></a></li>
+</ul>
+</div>
+<p><a class="reference internal" href="http://docs.mongodb.org/manual/reference/aggregation/sort/#_S_sort" title="$sort"><tt class="xref agg agg-pipeline docutils literal"><span class="pre">$sort</span></tt></a> operator can take advantage of an index when
+placed at the <strong>beginning</strong> of the pipeline or placed <strong>before</strong>
+the following aggregation operators:</p>
+<ul class="simple">
+<li><a class="reference internal" href="http://docs.mongodb.org/manual/reference/aggregation/project/#_S_project" title="$project"><tt class="xref agg agg-pipeline docutils literal"><span class="pre">$project</span></tt></a></li>
+<li><a class="reference internal" href="http://docs.mongodb.org/manual/reference/aggregation/unwind/#_S_unwind" title="$unwind"><tt class="xref agg agg-pipeline docutils literal"><span class="pre">$unwind</span></tt></a></li>
+<li><a class="reference internal" href="http://docs.mongodb.org/manual/reference/aggregation/group/#_S_group" title="$group"><tt class="xref agg agg-pipeline docutils literal"><span class="pre">$group</span></tt></a>.</li>
+</ul>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">Unless the <a class="reference internal" href="http://docs.mongodb.org/manual/reference/aggregation/sort/#_S_sort" title="$sort"><tt class="xref agg agg-pipeline docutils literal"><span class="pre">$sort</span></tt></a> operator can use an index,
+in the current release, the sort must fit within memory. This
+may cause problems when sorting large numbers of documents.</p>
+</div>
+</dd></dl>
+
+</div>
+<div class="section" id="expressions">
+<span id="aggregation-expression-operators"></span><h2>Expressions<a class="headerlink" href="#expressions" title="Permalink to this headline">¶</a></h2>
+<p>These operators calculate values within the <a class="reference internal" href="http://docs.mongodb.org/manual/reference/glossary/#term-aggregation-framework"><em class="xref std std-term">aggregation
+framework</em></a>.</p>
+<div class="section" id="group-operators">
+<h3><tt class="docutils literal"><span class="pre">$group</span></tt> Operators<a class="headerlink" href="#group-operators" title="Permalink to this headline">¶</a></h3>
+<p>The <a class="reference internal" href="http://docs.mongodb.org/manual/reference/aggregation/group/#_S_group" title="$group"><tt class="xref agg agg-pipeline docutils literal"><span class="pre">$group</span></tt></a> pipeline stage provides the following
+operations:</p>
+<dl class="group">
+<dt id="_S_addToSet">
+<tt class="descname">$addToSet</tt><a class="headerlink" href="#_S_addToSet" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns an array of all the values found in the selected field
+among the documents in that group. <em>Every unique value only
+appears once</em> in the result set. There is no ordering guarantee
+for the output documents.</p>
+</dd></dl>
+
+<dl class="group">
+<dt id="_S_first">
+<tt class="descname">$first</tt><a class="headerlink" href="#_S_first" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the first value it encounters for its group .</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Only use <a class="reference internal" href="http://docs.mongodb.org/manual/reference/aggregation/first/#_S_first" title="$first"><tt class="xref agg agg-group docutils literal"><span class="pre">$first</span></tt></a> when the <a class="reference internal" href="http://docs.mongodb.org/manual/reference/aggregation/group/#_S_group" title="$group"><tt class="xref agg agg-pipeline docutils literal"><span class="pre">$group</span></tt></a> follows
+an <a class="reference internal" href="http://docs.mongodb.org/manual/reference/aggregation/sort/#_S_sort" title="$sort"><tt class="xref agg agg-pipeline docutils literal"><span class="pre">$sort</span></tt></a> operation. Otherwise, the result of this
+operation is unpredictable.</p>
+</div>
+</dd></dl>
+
+<dl class="group">
+<dt id="_S_last">
+<tt class="descname">$last</tt><a class="headerlink" href="#_S_last" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the last value it encounters for its group.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Only use <a class="reference internal" href="http://docs.mongodb.org/manual/reference/aggregation/last/#_S_last" title="$last"><tt class="xref agg agg-group docutils literal"><span class="pre">$last</span></tt></a> when the <a class="reference internal" href="http://docs.mongodb.org/manual/reference/aggregation/group/#_S_group" title="$group"><tt class="xref agg agg-pipeline docutils literal"><span class="pre">$group</span></tt></a>
+follows an <a class="reference internal" href="http://docs.mongodb.org/manual/reference/aggregation/sort/#_S_sort" title="$sort"><tt class="xref agg agg-pipeline docutils literal"><span class="pre">$sort</span></tt></a> operation. Otherwise, the
+result of this operation is unpredictable.</p>
+</div>
+</dd></dl>
+
+<dl class="group">
+<dt id="_S_max">
+<tt class="descname">$max</tt><a class="headerlink" href="#_S_max" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the highest value among all values of the field in all
+documents selected by this group.</p>
+</dd></dl>
+
+<dl class="group">
+<dt id="_S_min">
+<tt class="descname">$min</tt><a class="headerlink" href="#_S_min" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the lowest value among all values of the field in all
+documents selected by this group.</p>
+</dd></dl>
+
+<dl class="group">
+<dt id="_S_avg">
+<tt class="descname">$avg</tt><a class="headerlink" href="#_S_avg" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the average of all the values of the field in all documents
+selected by this group.</p>
+</dd></dl>
+
+<dl class="group">
+<dt id="_S_push">
+<tt class="descname">$push</tt><a class="headerlink" href="#_S_push" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns an array of all the values found in the selected field
+among the documents in that group. <em>A value may appear more than
+once</em> in the result set if more than one field in the grouped
+documents has that value.</p>
+</dd></dl>
+
+<dl class="group">
+<dt id="_S_sum">
+<tt class="descname">$sum</tt><a class="headerlink" href="#_S_sum" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the sum of all the values for a specified
+field in the grouped documents, as in the second use above.</p>
+<p>Alternately, if you specify a value as an argument,
+<a class="reference internal" href="http://docs.mongodb.org/manual/reference/aggregation/sum/#_S_sum" title="$sum"><tt class="xref agg agg-group docutils literal"><span class="pre">$sum</span></tt></a> will increment this field by the specified value
+for every document in the grouping. Typically, as in the first
+use above, specify a value of <tt class="docutils literal"><span class="pre">1</span></tt> in order to count members of the
+group.</p>
+</dd></dl>
+
+</div>
+<div class="section" id="boolean-operators">
+<h3>Boolean Operators<a class="headerlink" href="#boolean-operators" title="Permalink to this headline">¶</a></h3>
+<p>The three boolean operators accept Booleans as arguments and
+return Booleans as results.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">These operators convert non-booleans to Boolean values according to
+the BSON standards. Here, <tt class="docutils literal"><span class="pre">null</span></tt>, <tt class="docutils literal"><span class="pre">undefined</span></tt>, and <tt class="docutils literal"><span class="pre">0</span></tt> values
+become <tt class="docutils literal"><span class="pre">false</span></tt>, while non-zero numeric values, and all other types,
+such as strings, dates, objects become <tt class="docutils literal"><span class="pre">true</span></tt>.</p>
+</div>
+<dl class="expression">
+<dt id="_S_and">
+<tt class="descname">$and</tt><a class="headerlink" href="#_S_and" title="Permalink to this definition">¶</a></dt>
+<dd><p>Takes an array one or more values and returns <tt class="docutils literal"><span class="pre">true</span></tt> if <em>all</em> of
+the values in the array are <tt class="docutils literal"><span class="pre">true</span></tt>. Otherwise <a class="reference internal" href="http://docs.mongodb.org/manual/reference/aggregation/and/#_S_and" title="$and"><tt class="xref agg agg-expression docutils literal"><span class="pre">$and</span></tt></a>
+returns <tt class="docutils literal"><span class="pre">false</span></tt>.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last"><a class="reference internal" href="http://docs.mongodb.org/manual/reference/aggregation/and/#_S_and" title="$and"><tt class="xref agg agg-expression docutils literal"><span class="pre">$and</span></tt></a> uses short-circuit logic: the operation
+stops evaluation after encountering the first <tt class="docutils literal"><span class="pre">false</span></tt>
+expression.</p>
+</div>
+</dd></dl>
+
+<dl class="expression">
+<dt id="_S_or">
+<tt class="descname">$or</tt><a class="headerlink" href="#_S_or" title="Permalink to this definition">¶</a></dt>
+<dd><p>Takes an array of one or more values and returns <tt class="docutils literal"><span class="pre">true</span></tt> if <em>any</em> of the values in the
+array are <tt class="docutils literal"><span class="pre">true</span></tt>. Otherwise <a class="reference internal" href="http://docs.mongodb.org/manual/reference/aggregation/or/#_S_or" title="$or"><tt class="xref agg agg-expression docutils literal"><span class="pre">$or</span></tt></a> returns false.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last"><a class="reference internal" href="http://docs.mongodb.org/manual/reference/aggregation/or/#_S_or" title="$or"><tt class="xref agg agg-expression docutils literal"><span class="pre">$or</span></tt></a> uses short-circuit logic: the operation
+stops evaluation after encountering the first <tt class="docutils literal"><span class="pre">true</span></tt> expression.</p>
+</div>
+</dd></dl>
+
+<dl class="expression">
+<dt id="_S_not">
+<tt class="descname">$not</tt><a class="headerlink" href="#_S_not" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the boolean opposite value passed to it. When passed a
+<tt class="docutils literal"><span class="pre">true</span></tt> value, <a class="reference internal" href="http://docs.mongodb.org/manual/reference/aggregation/not/#_S_not" title="$not"><tt class="xref agg agg-expression docutils literal"><span class="pre">$not</span></tt></a> returns <tt class="docutils literal"><span class="pre">false</span></tt>; when passed
+a <tt class="docutils literal"><span class="pre">false</span></tt> value, <a class="reference internal" href="http://docs.mongodb.org/manual/reference/aggregation/not/#_S_not" title="$not"><tt class="xref agg agg-expression docutils literal"><span class="pre">$not</span></tt></a> returns <tt class="docutils literal"><span class="pre">true</span></tt>.</p>
+</dd></dl>
+
+</div>
+<div class="section" id="comparison-operators">
+<h3>Comparison Operators<a class="headerlink" href="#comparison-operators" title="Permalink to this headline">¶</a></h3>
+<p>These operators perform comparisons between two values and return a
+Boolean, in most cases, reflecting the result of that comparison.</p>
+<p>All comparison operators take an array with a pair of values. You may
+compare numbers, strings, and dates. Except for <a class="reference internal" href="http://docs.mongodb.org/manual/reference/aggregation/cmp/#_S_cmp" title="$cmp"><tt class="xref agg agg-expression docutils literal"><span class="pre">$cmp</span></tt></a>,
+all comparison operators return a Boolean value. <a class="reference internal" href="http://docs.mongodb.org/manual/reference/aggregation/cmp/#_S_cmp" title="$cmp"><tt class="xref agg agg-expression docutils literal"><span class="pre">$cmp</span></tt></a>
+returns an integer.</p>
+<dl class="expression">
+<dt id="_S_cmp">
+<tt class="descname">$cmp</tt><a class="headerlink" href="#_S_cmp" title="Permalink to this definition">¶</a></dt>
+<dd><p>Takes two values in an array and returns an integer. The returned
+value is:</p>
+<ul class="simple">
+<li>A negative number if the first value is less than the second.</li>
+<li>A positive number if the first value is greater than the second.</li>
+<li><tt class="docutils literal"><span class="pre">0</span></tt> if the two values are equal.</li>
+</ul>
+</dd></dl>
+
+<dl class="expression">
+<dt id="_S_eq">
+<tt class="descname">$eq</tt><a class="headerlink" href="#_S_eq" title="Permalink to this definition">¶</a></dt>
+<dd><p>Takes two values in an array and returns a boolean. The returned
+value is:</p>
+<ul class="simple">
+<li><tt class="docutils literal"><span class="pre">true</span></tt> when the values are equivalent.</li>
+<li><tt class="docutils literal"><span class="pre">false</span></tt> when the values are <strong>not</strong> equivalent.</li>
+</ul>
+</dd></dl>
+
+<dl class="expression">
+<dt id="_S_gt">
+<tt class="descname">$gt</tt><a class="headerlink" href="#_S_gt" title="Permalink to this definition">¶</a></dt>
+<dd><p>Takes two values in an array and returns an boolean. The returned
+value is:</p>
+<ul class="simple">
+<li><tt class="docutils literal"><span class="pre">true</span></tt> when the first value is <em>greater than</em> the second value.</li>
+<li><tt class="docutils literal"><span class="pre">false</span></tt> when the first value is <em>less than or equal to</em> the
+second value.</li>
+</ul>
+</dd></dl>
+
+<dl class="expression">
+<dt id="_S_gte">
+<tt class="descname">$gte</tt><a class="headerlink" href="#_S_gte" title="Permalink to this definition">¶</a></dt>
+<dd><p>Takes two values in an array and returns an boolean. The returned
+value is:</p>
+<ul class="simple">
+<li><tt class="docutils literal"><span class="pre">true</span></tt> when the first value is <em>greater than or equal</em> to the
+second value.</li>
+<li><tt class="docutils literal"><span class="pre">false</span></tt> when the first value is <em>less than</em> the second value.</li>
+</ul>
+</dd></dl>
+
+<dl class="expression">
+<dt id="_S_lt">
+<tt class="descname">$lt</tt><a class="headerlink" href="#_S_lt" title="Permalink to this definition">¶</a></dt>
+<dd><p>Takes two values in an array and returns an boolean. The returned
+value is:</p>
+<ul class="simple">
+<li><tt class="docutils literal"><span class="pre">true</span></tt> when the first value is <em>less than</em> the second value.</li>
+<li><tt class="docutils literal"><span class="pre">false</span></tt> when the first value is <em>greater than or equal to</em> the
+second value.</li>
+</ul>
+</dd></dl>
+
+<dl class="expression">
+<dt id="_S_lte">
+<tt class="descname">$lte</tt><a class="headerlink" href="#_S_lte" title="Permalink to this definition">¶</a></dt>
+<dd><p>Takes two values in an array and returns an boolean. The returned
+value is:</p>
+<ul class="simple">
+<li><tt class="docutils literal"><span class="pre">true</span></tt> when the first value is <em>less than or equal to</em> the
+second value.</li>
+<li><tt class="docutils literal"><span class="pre">false</span></tt> when the first value is <em>greater than</em> the second
+value.</li>
+</ul>
+</dd></dl>
+
+<dl class="expression">
+<dt id="_S_ne">
+<tt class="descname">$ne</tt><a class="headerlink" href="#_S_ne" title="Permalink to this definition">¶</a></dt>
+<dd><p>Takes two values in an array returns an boolean. The returned value
+is:</p>
+<ul class="simple">
+<li><tt class="docutils literal"><span class="pre">true</span></tt> when the values are <strong>not equivalent</strong>.</li>
+<li><tt class="docutils literal"><span class="pre">false</span></tt> when the values are <strong>equivalent</strong>.</li>
+</ul>
+</dd></dl>
+
+</div>
+<div class="section" id="arithmetic-operators">
+<h3>Arithmetic Operators<a class="headerlink" href="#arithmetic-operators" title="Permalink to this headline">¶</a></h3>
+<p>These operators only support numbers.</p>
+<dl class="expression">
+<dt id="_S_add">
+<tt class="descname">$add</tt><a class="headerlink" href="#_S_add" title="Permalink to this definition">¶</a></dt>
+<dd><p>Takes an array of one or more numbers and adds them together,
+returning the sum.</p>
+</dd></dl>
+
+<dl class="expression">
+<dt id="_S_divide">
+<tt class="descname">$divide</tt><a class="headerlink" href="#_S_divide" title="Permalink to this definition">¶</a></dt>
+<dd><p>Takes an array that contains a pair of numbers and returns the
+value of the first number divided by the second number.</p>
+</dd></dl>
+
+<dl class="expression">
+<dt id="_S_mod">
+<tt class="descname">$mod</tt><a class="headerlink" href="#_S_mod" title="Permalink to this definition">¶</a></dt>
+<dd><p>Takes an array that contains a pair of numbers and returns the
+<em>remainder</em> of the first number divided by the second number.</p>
+<div class="admonition-see-also admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="http://docs.mongodb.org/manual/reference/operator/mod/#_S_mod" title="$mod"><tt class="xref mongodb mongodb-operator docutils literal"><span class="pre">$mod</span></tt></a></p>
+</div>
+</dd></dl>
+
+<dl class="expression">
+<dt id="_S_multiply">
+<tt class="descname">$multiply</tt><a class="headerlink" href="#_S_multiply" title="Permalink to this definition">¶</a></dt>
+<dd><p>Takes an array of one or more numbers and multiples them, returning the
+resulting product.</p>
+</dd></dl>
+
+<dl class="expression">
+<dt id="_S_subtract">
+<tt class="descname">$subtract</tt><a class="headerlink" href="#_S_subtract" title="Permalink to this definition">¶</a></dt>
+<dd><p>Takes an array that contains a pair of numbers and subtracts the
+second from the first, returning their difference.</p>
+</dd></dl>
+
+</div>
+<div class="section" id="string-operators">
+<h3>String Operators<a class="headerlink" href="#string-operators" title="Permalink to this headline">¶</a></h3>
+<p>These operators manipulate strings within projection expressions.</p>
+<dl class="expression">
+<dt id="_S_strcasecmp">
+<tt class="descname">$strcasecmp</tt><a class="headerlink" href="#_S_strcasecmp" title="Permalink to this definition">¶</a></dt>
+<dd><p>Takes in two strings. Returns a number. <a class="reference internal" href="http://docs.mongodb.org/manual/reference/aggregation/strcasecmp/#_S_strcasecmp" title="$strcasecmp"><tt class="xref agg agg-expression docutils literal"><span class="pre">$strcasecmp</span></tt></a>
+is positive if the first string is “greater than” the second and
+negative if the first string is “less than” the
+second. <a class="reference internal" href="http://docs.mongodb.org/manual/reference/aggregation/strcasecmp/#_S_strcasecmp" title="$strcasecmp"><tt class="xref agg agg-expression docutils literal"><span class="pre">$strcasecmp</span></tt></a> returns 0 if the strings are
+identical.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p><a class="reference internal" href="http://docs.mongodb.org/manual/reference/aggregation/strcasecmp/#_S_strcasecmp" title="$strcasecmp"><tt class="xref agg agg-expression docutils literal"><span class="pre">$strcasecmp</span></tt></a> may not make sense when applied to
+glyphs outside the Roman alphabet.</p>
+<p class="last"><a class="reference internal" href="http://docs.mongodb.org/manual/reference/aggregation/strcasecmp/#_S_strcasecmp" title="$strcasecmp"><tt class="xref agg agg-expression docutils literal"><span class="pre">$strcasecmp</span></tt></a> internally capitalizes strings before
+comparing them to provide a case-<em>insensitive</em> comparison.
+Use <a class="reference internal" href="http://docs.mongodb.org/manual/reference/aggregation/cmp/#_S_cmp" title="$cmp"><tt class="xref agg agg-expression docutils literal"><span class="pre">$cmp</span></tt></a> for a case sensitive comparison.</p>
+</div>
+</dd></dl>
+
+<dl class="expression">
+<dt id="_S_substr">
+<tt class="descname">$substr</tt><a class="headerlink" href="#_S_substr" title="Permalink to this definition">¶</a></dt>
+<dd><p><a class="reference internal" href="http://docs.mongodb.org/manual/reference/aggregation/substr/#_S_substr" title="$substr"><tt class="xref agg agg-expression docutils literal"><span class="pre">$substr</span></tt></a> takes a string and two numbers. The first
+number represents the number of bytes in the string to skip,
+and the second number specifies the number of bytes to return
+from the string.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last"><a class="reference internal" href="http://docs.mongodb.org/manual/reference/aggregation/substr/#_S_substr" title="$substr"><tt class="xref agg agg-expression docutils literal"><span class="pre">$substr</span></tt></a> is not encoding aware and if used
+improperly may produce a result string containing an invalid UTF-8
+character sequence.</p>
+</div>
+</dd></dl>
+
+<dl class="expression">
+<dt id="_S_toLower">
+<tt class="descname">$toLower</tt><a class="headerlink" href="#_S_toLower" title="Permalink to this definition">¶</a></dt>
+<dd><p>Takes a single string and converts that string to lowercase,
+returning the result. All uppercase letters become lowercase.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last"><a class="reference internal" href="http://docs.mongodb.org/manual/reference/aggregation/toLower/#_S_toLower" title="$toLower"><tt class="xref agg agg-expression docutils literal"><span class="pre">$toLower</span></tt></a> may not make sense when applied to glyphs outside
+the Roman alphabet.</p>
+</div>
+</dd></dl>
+
+<dl class="expression">
+<dt id="_S_toUpper">
+<tt class="descname">$toUpper</tt><a class="headerlink" href="#_S_toUpper" title="Permalink to this definition">¶</a></dt>
+<dd><p>Takes a single string and converts that string to uppercase,
+returning the result. All lowercase letters become uppercase.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last"><a class="reference internal" href="http://docs.mongodb.org/manual/reference/aggregation/toUpper/#_S_toUpper" title="$toUpper"><tt class="xref agg agg-expression docutils literal"><span class="pre">$toUpper</span></tt></a> may not make sense when applied to glyphs outside
+the Roman alphabet.</p>
+</div>
+</dd></dl>
+
+</div>
+<div class="section" id="date-operators">
+<h3>Date Operators<a class="headerlink" href="#date-operators" title="Permalink to this headline">¶</a></h3>
+<p>All date operators take a “Date” typed value as a single
+argument and return a number.</p>
+<dl class="expression">
+<dt id="_S_dayOfYear">
+<tt class="descname">$dayOfYear</tt><a class="headerlink" href="#_S_dayOfYear" title="Permalink to this definition">¶</a></dt>
+<dd><p>Takes a date and returns the day of the year as a number
+between 1 and 366.</p>
+</dd></dl>
+
+<dl class="expression">
+<dt id="_S_dayOfMonth">
+<tt class="descname">$dayOfMonth</tt><a class="headerlink" href="#_S_dayOfMonth" title="Permalink to this definition">¶</a></dt>
+<dd><p>Takes a date and returns the day of the month as a number
+between 1 and 31.</p>
+</dd></dl>
+
+<dl class="expression">
+<dt id="_S_dayOfWeek">
+<tt class="descname">$dayOfWeek</tt><a class="headerlink" href="#_S_dayOfWeek" title="Permalink to this definition">¶</a></dt>
+<dd><p>Takes a date and returns the day of the week as a number
+between 1 (Sunday) and 7 (Saturday.)</p>
+</dd></dl>
+
+<dl class="expression">
+<dt id="_S_year">
+<tt class="descname">$year</tt><a class="headerlink" href="#_S_year" title="Permalink to this definition">¶</a></dt>
+<dd><p>Takes a date and returns the full year.</p>
+</dd></dl>
+
+<dl class="expression">
+<dt id="_S_month">
+<tt class="descname">$month</tt><a class="headerlink" href="#_S_month" title="Permalink to this definition">¶</a></dt>
+<dd><p>Takes a date and returns the month as a number between 1 and 12.</p>
+</dd></dl>
+
+<dl class="expression">
+<dt id="_S_week">
+<tt class="descname">$week</tt><a class="headerlink" href="#_S_week" title="Permalink to this definition">¶</a></dt>
+<dd><p>Takes a date and returns the week of the year as a number
+between 0 and 53.</p>
+<p>Weeks begin on Sundays, and week 1 begins with the first Sunday
+of the year. Days preceding the first Sunday of the year are in
+week 0. This behavior is the same as the “<tt class="docutils literal"><span class="pre">%U</span></tt>” operator to the
+<tt class="docutils literal"><span class="pre">strftime</span></tt> standard library function.</p>
+</dd></dl>
+
+<dl class="expression">
+<dt id="_S_hour">
+<tt class="descname">$hour</tt><a class="headerlink" href="#_S_hour" title="Permalink to this definition">¶</a></dt>
+<dd><p>Takes a date and returns the hour between 0 and 23.</p>
+</dd></dl>
+
+<dl class="expression">
+<dt id="_S_minute">
+<tt class="descname">$minute</tt><a class="headerlink" href="#_S_minute" title="Permalink to this definition">¶</a></dt>
+<dd><p>Takes a date and returns the minute between 0 and 59.</p>
+</dd></dl>
+
+<dl class="expression">
+<dt id="_S_second">
+<tt class="descname">$second</tt><a class="headerlink" href="#_S_second" title="Permalink to this definition">¶</a></dt>
+<dd><p>Takes a date and returns the second between 0 and 59, but can be 60
+to account for leap seconds.</p>
+</dd></dl>
+
+</div>
+<div class="section" id="conditional-expressions">
+<h3>Conditional Expressions<a class="headerlink" href="#conditional-expressions" title="Permalink to this headline">¶</a></h3>
+<dl class="expression">
+<dt id="_S_cond">
+<tt class="descname">$cond</tt><a class="headerlink" href="#_S_cond" title="Permalink to this definition">¶</a></dt>
+<dd><p>Use the <a class="reference internal" href="http://docs.mongodb.org/manual/reference/aggregation/cond/#_S_cond" title="$cond"><tt class="xref agg agg-expression docutils literal"><span class="pre">$cond</span></tt></a> operator with the following syntax:</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="p">{</span> <span class="nx">$cond</span><span class="o">:</span> <span class="p">[</span> <span class="o">&lt;</span><span class="kr">boolean</span><span class="o">-</span><span class="nx">expression</span><span class="o">&gt;</span><span class="p">,</span> <span class="o">&lt;</span><span class="kc">true</span><span class="o">-</span><span class="k">case</span><span class="o">&gt;</span><span class="p">,</span> <span class="o">&lt;</span><span class="kc">false</span><span class="o">-</span><span class="k">case</span><span class="o">&gt;</span> <span class="p">]</span> <span class="p">}</span>
+</pre></div>
+</div>
+<p>Takes an array with three expressions, where the first expression
+evaluates to a Boolean value. If the first expression evaluates to true,
+<a class="reference internal" href="http://docs.mongodb.org/manual/reference/aggregation/cond/#_S_cond" title="$cond"><tt class="xref agg agg-expression docutils literal"><span class="pre">$cond</span></tt></a> returns the value of the second expression. If the
+first expression evaluates to false, <a class="reference internal" href="http://docs.mongodb.org/manual/reference/aggregation/cond/#_S_cond" title="$cond"><tt class="xref agg agg-expression docutils literal"><span class="pre">$cond</span></tt></a> evaluates and
+returns the third expression.</p>
+</dd></dl>
+
+<dl class="expression">
+<dt id="_S_ifNull">
+<tt class="descname">$ifNull</tt><a class="headerlink" href="#_S_ifNull" title="Permalink to this definition">¶</a></dt>
+<dd><p>Use the <a class="reference internal" href="http://docs.mongodb.org/manual/reference/aggregation/ifNull/#_S_ifNull" title="$ifNull"><tt class="xref agg agg-expression docutils literal"><span class="pre">$ifNull</span></tt></a> operator with the following syntax:</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="p">{</span> <span class="nx">$ifNull</span><span class="o">:</span> <span class="p">[</span> <span class="o">&lt;</span><span class="nx">expression</span><span class="o">&gt;</span><span class="p">,</span> <span class="o">&lt;</span><span class="nx">replacement</span><span class="o">-</span><span class="k">if</span><span class="o">-</span><span class="kc">null</span><span class="o">&gt;</span> <span class="p">]</span> <span class="p">}</span>
+</pre></div>
+</div>
+<p>Takes an array with two expressions. <a class="reference internal" href="http://docs.mongodb.org/manual/reference/aggregation/ifNull/#_S_ifNull" title="$ifNull"><tt class="xref agg agg-expression docutils literal"><span class="pre">$ifNull</span></tt></a> returns
+the first expression if it evaluates to a non-null
+value. Otherwise, <a class="reference internal" href="http://docs.mongodb.org/manual/reference/aggregation/ifNull/#_S_ifNull" title="$ifNull"><tt class="xref agg agg-expression docutils literal"><span class="pre">$ifNull</span></tt></a> returns the second
+expression’s value.</p>
+</dd></dl>
+
+</div>
+</div>
+</div>
+
+
+<div id="btnv">
+<ul id="btnvl">
+<li id="btnvpr"><a href="http://docs.mongodb.org/manual/tutorial/aggregation-examples/" title="Previous Section: Aggregation Framework Examples">&lt; &nbsp; Aggregation Framework Examples</a></li>
+<li id="btnvup"><a href="http://docs.mongodb.org/manual/aggregation/" title="Parent Section: Aggregation">/\&nbsp; Aggregation</a></li>
+<li id="btnvnx"><a href="http://docs.mongodb.org/manual/applications/map-reduce/" title="Next Section: Map-Reduce">Map-Reduce &nbsp;&gt;</a></li>
+</ul>
+</div>
+</div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper"><h3><a href="http://docs.mongodb.org/manual/contents/">MongoDB Manual</a>
+
+<small><a href="http://docs.mongodb.org/manual/genindex/">(Index)</a></small>
+
+</h3>
+
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="http://docs.mongodb.org/manual/installation/">Installing MongoDB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://docs.mongodb.org/manual/administration/">Administration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://docs.mongodb.org/manual/security/">Security</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://docs.mongodb.org/manual/crud/">Core MongoDB Operations (CRUD)</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="http://docs.mongodb.org/manual/aggregation/">Aggregation</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="http://docs.mongodb.org/manual/applications/aggregation/">Aggregation Framework</a></li>
+<li class="toctree-l2"><a class="reference internal" href="http://docs.mongodb.org/manual/tutorial/aggregation-examples/">Aggregation Framework Examples</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="">Aggregation Framework Reference</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#pipeline">Pipeline</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#expressions">Expressions</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#group-operators"><tt class="docutils literal"><span class="pre">$group</span></tt> Operators</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#boolean-operators">Boolean Operators</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#comparison-operators">Comparison Operators</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#arithmetic-operators">Arithmetic Operators</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#string-operators">String Operators</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#date-operators">Date Operators</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#conditional-expressions">Conditional Expressions</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="http://docs.mongodb.org/manual/applications/map-reduce/">Map-Reduce</a></li>
+<li class="toctree-l2"><a class="reference internal" href="http://docs.mongodb.org/manual/reference/simple-aggregation/">Simple Aggregation Methods and Commands</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="http://docs.mongodb.org/manual/indexes/">Indexes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://docs.mongodb.org/manual/replication/">Replication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://docs.mongodb.org/manual/sharding/">Sharding</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://docs.mongodb.org/manual/applications/">Application Development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://docs.mongodb.org/manual/mongo/">Using the <tt class="docutils literal"><span class="pre">mongo</span></tt> Shell</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://docs.mongodb.org/manual/use-cases/">Use Cases</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://docs.mongodb.org/manual/tutorial/">MongoDB Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://docs.mongodb.org/manual/faq/">Frequently Asked Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://docs.mongodb.org/manual/reference/">Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://docs.mongodb.org/manual/about/">About MongoDB Documentation</a></li>
+</ul>
+
+<h3 style="padding-bottom: 1em;"><a href="http://www.mongodb.org/about/">MongoDB.org</a></h3>
+<h3 style="padding-bottom: 1em;"><a href="http://docs.mongodb.org/ecosystem/">MongoDB Ecosystem</a></h3><h3>Formats</h3>
+<ul class="this-page-menu">
+  <li><a href="http://docs.mongodb.org/master/single/">MongoDB Manual, Single HTML Page</a></li>
+  <li><a href="http://docs.mongodb.org/master/MongoDB-Manual-master.pdf" rel="nofollow">MongoDB Manual, PDF Format</a></li>
+  <li><a href="http://docs.mongodb.org/master/MongoDB-Manual-master.epub" rel="nofollow">MongoDB Manual, ePub Format</a></li>
+</ul><h3>MongoDB Resources</h3>
+
+<ul>
+ <li><strong>Getting Started</strong>
+   <ul>
+     <li><a href="http://www.mongodb.org/about/introduction">Introduction</a></li>
+     <li><a href="http://www.mongodb.org/downloads">Downloads</a></li>
+   </ul>
+ </li>
+ <li><strong><a href="http://www.mongodb.org/about/community">Community</a> and <a href="http://docs.mongodb.org/ecosystem/">Ecosystem</a></strong>
+   <ul>
+     <li><a href="http://www.10gen.com/">10gen</a></li>
+     <li><a href="http://www.10gen.com/events">MongoDB Events</a></li>
+     <li><a href="http://planet.mongodb.org/">Planet MongoDB</a></li>
+     <li><a href="http://mongodb.org/about/community/masters">MongoDB Masters</a></li>
+     <li><a href="http://www.10gen.com/presentations">Slides and Video</a></li>
+     <li><a href="http://docs.mongodb.org/ecosystem/platforms/">Hosting Center</a></li>
+     <li><a href="http://docs.mongodb.org/ecosystem/platforms/windows">Windows</a></li>
+     <li><a href="http://www.10gen.com/products/mms/">MongoDB Monitoring Service</a> (<a href="http://mms.10gen.com/help/">docs</a>)</li>
+     <li><a href="http://docs.mongodb.org/ecosystem/tools/administration-interfaces/">Administrative Interfaces</a></li>
+     <li><a href="http://www.10gen.com/books/">MongoDB Books</a></li>
+   </ul>
+ </li>
+ <li><strong><a href="http://docs.mongodb.org/ecosystem/drivers/">Drivers</a></strong>
+   <ul>
+     <li><a href="http://docs.mongodb.org/ecosystem/drivers/javascript">JavaScript</a> (<a href="http://api.mongodb.org/js/current">docs</a>)</li>
+     <li><a href="http://docs.mongodb.org/ecosystem/drivers/python">Python</a> (<a href="http://api.mongodb.org/python/current">docs</a>)</li>
+     <li><a href="http://docs.mongodb.org/ecosystem/drivers/ruby">Ruby</a> (<a href="http://api.mongodb.org/ruby/current">docs</a>)</li>
+     <li><a href="http://docs.mongodb.org/ecosystem/drivers/php">PHP</a> (<a href="http://php.net/mongo/">docs</a>)</li>
+     <li><a href="http://docs.mongodb.org/ecosystem/drivers/perl">Perl</a> (<a href="http://api.mongodb.org/perl/current/">docs</a>)</li>
+     <li><a href="http://docs.mongodb.org/ecosystem/drivers/java">Java</a> (<a href="http://api.mongodb.org/java/current">docs</a>)</li>
+     <li><a href="http://docs.mongodb.org/ecosystem/drivers/scala">Scala</a> (<a href="http://api.mongodb.org/scala/casbah/current/">docs</a>)</li>
+     <li><a href="http://docs.mongodb.org/ecosystem/drivers/csharp">C#</a> (<a href="http://api.mongodb.org/csharp/current/">docs</a>)</li>
+     <li><a href="http://docs.mongodb.org/ecosystem/drivers/c">C</a> (<a href="http://api.mongodb.org/c/current/">docs</a>)</li>
+     <li><a href="http://docs.mongodb.org/ecosystem/drivers/cpp">C++</a> (<a href="http://api.mongodb.org/cplusplus/current/">docs</a>)</li>
+     <li><a href="http://hackage.haskell.org/package/mongoDB">Haskell</a> (<a href="http://api.mongodb.org/haskell">docs</a>)</li>
+     <li><a href="http://docs.mongodb.org/ecosystem/drivers/erlang">Erlang</a> (<a href="http://api.mongodb.org/erlang">docs</a>)</li>
+   </ul>
+ </li>
+</ul>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+  <div class="footer">
+    <p>
+       © <a href="">Copyright</a> 2011-2013, 10gen, Inc. 
+       MongoDB®, Mongo®, and the leaf logo are registered trademarks of 10gen, Inc.
+    </p>
+  </div><script type="text/javascript">
+var _gaq = _gaq || [];
+var pluginUrl = (('https:' == document.location.protocol) ? 'https://ssl.' : 'http://www.') + 'google-analytics.com/plugins/ga/inpage_linkid.js';
+_gaq.push(['_require', 'inpage_linkid', pluginUrl]);
+_gaq.push(['_setAccount', 'UA-7301842-8']);
+_gaq.push(['_setDomainName', 'docs.mongodb.org']);
+_gaq.push(['_trackPageview']);
+(function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0];
+        s.parentNode.insertBefore(ga, s);
+        })();
+</script>
+
+<script type="text/javascript">
+document.write(unescape("%3Cscript src='" + document.location.protocol + "//munchkin.marketo.net/munchkin.js' type='text/javascript'%3E%3C/script%3E"));
+</script><script src="Aggregation%20Framework%20Reference%20%E2%80%94%20MongoDB%20Manual_files/munchkin.htm" type="text/javascript"></script>
+<script>try { mktoMunchkin("017-HGS-593"); } catch(e) {}</script><script type="text/javascript">
+jQuery.ajax({
+    url: "https://jira.mongodb.org/s/en_US-bxctp1/782/6/1.2.4/_/download/batch/com.atlassian.jira.collector.plugin.jira-issue-collector-plugin:issuecollector-embededjs/com.atlassian.jira.collector.plugin.jira-issue-collector-plugin:issuecollector-embededjs.js?collectorId=298ba4e7",
+    type: "get",
+    cache: true,
+    dataType: "script"
+});
+window.ATL_JQ_PAGE_PROPS =  {
+"triggerFunction": function(showCollectorDialog) {
+jQuery("#jirafeedback").click(function(e) {e.preventDefault();showCollectorDialog();});
+jQuery("#jirafooter").click(function(e) {e.preventDefault();showCollectorDialog();});
+}};
+</script>
+
+<table class="gstl_0 gssb_c" style="width: 129px; display: none; top: 70px; left: 751px; position: absolute;" cellpadding="0" cellspacing="0"><tbody><tr><td class="gssb_f"></td><td style="width: 100%;" class="gssb_e"></td></tr></tbody></table><div style="display: none;" id="atlwdg-blanket" class="atlwdg-blanket"></div><div class="atlwdg-popup atlwdg-box-shadow atlwdg-hidden" id="atlwdg-container"></div></body></html>

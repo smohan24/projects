@@ -1,0 +1,438 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head>
+    <title>FAQ: Concurrency — MongoDB Manual</title>
+
+    <link rel="shortcut icon" href="http://media.mongodb.org/favicon.ico">
+    <meta name="robots" content="index">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <link rel="canonical" href="http://docs.mongodb.org/manual/faq/concurrency">
+
+    
+    
+    <link rel="stylesheet" href="FAQ%20%20Concurrency%20%E2%80%94%20MongoDB%20Manual_files/mongodb-docs.css" type="text/css">
+    <link rel="stylesheet" href="FAQ%20%20Concurrency%20%E2%80%94%20MongoDB%20Manual_files/pygments.css" type="text/css">
+      
+    <script src="FAQ%20%20Concurrency%20%E2%80%94%20MongoDB%20Manual_files/cse.js" async="" type="text/javascript"></script><script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '2.2.2',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '',
+        HAS_SOURCE:  false
+      };
+    </script>
+    <script type="text/javascript" src="FAQ%20%20Concurrency%20%E2%80%94%20MongoDB%20Manual_files/jquery.js"></script>
+    <script type="text/javascript" src="FAQ%20%20Concurrency%20%E2%80%94%20MongoDB%20Manual_files/underscore.js"></script>
+    <script type="text/javascript" src="FAQ%20%20Concurrency%20%E2%80%94%20MongoDB%20Manual_files/doctools.js"></script>
+      <link rel="search" type="application/opensearchdescription+xml" href="http://docs.mongodb.org/osd.xml" title="MongoDB Help">
+<link rel="author" title="About these documents" href="http://docs.mongodb.org/manual/about/">
+<link rel="top" title="MongoDB Manual" href="http://docs.mongodb.org/manual/">
+<link rel="up" title="Frequently Asked Questions" href="http://docs.mongodb.org/manual/faq/">
+<link rel="next" title="FAQ: Sharding with MongoDB" href="http://docs.mongodb.org/manual/faq/sharding/">
+<link rel="prev" title="FAQ: The mongo Shell" href="http://docs.mongodb.org/manual/faq/mongo/">
+<!-- Put the following javascript before the closing </head> tag. -->
+<script>
+  (function() {
+    var cx = '017213726194841070573:WMX6838984';
+    var gcse = document.createElement('script'); gcse.type = 'text/javascript'; gcse.async = true;
+    gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+        '//www.google.com/cse/cse.js?cx=' + cx;
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(gcse, s);
+  })();
+</script>
+  <script type="text/javascript" src="FAQ%20%20Concurrency%20%E2%80%94%20MongoDB%20Manual_files/jsapi"></script><link rel="stylesheet" href="FAQ%20%20Concurrency%20%E2%80%94%20MongoDB%20Manual_files/defaulten.css" type="text/css"><link rel="stylesheet" href="FAQ%20%20Concurrency%20%E2%80%94%20MongoDB%20Manual_files/default.css" type="text/css"><script src="FAQ%20%20Concurrency%20%E2%80%94%20MongoDB%20Manual_files/defaulten.js" type="text/javascript"></script><script src="FAQ%20%20Concurrency%20%E2%80%94%20MongoDB%20Manual_files/search.js" type="text/javascript"></script><style type="text/css">
+.gsc-control-cse {
+font-family: Arial, sans-serif;
+border-color: #FFFFFF;
+background-color: #FFFFFF;
+}
+.gsc-control-cse .gsc-table-result {
+font-family: Arial, sans-serif;
+}
+input.gsc-input, .gsc-input-box, .gsc-input-box-hover, .gsc-input-box-focus {
+border-color: #D9D9D9;
+}
+input.gsc-search-button, input.gsc-search-button:hover, input.gsc-search-button:focus {
+border-color: #5AAC41;
+background-color: #5AAC41;
+background-image: none;
+filter: none;
+}
+.gsc-tabHeader.gsc-tabhInactive {
+border-color: #CCCCCC;
+background-color: #FFFFFF;
+}
+.gsc-tabHeader.gsc-tabhActive {
+border-color: #CCCCCC;
+border-bottom-color: #FFFFFF;
+background-color: #FFFFFF;
+}
+.gsc-tabsArea {
+border-color: #CCCCCC;
+}
+.gsc-webResult.gsc-result,
+.gsc-results .gsc-imageResult {
+border-color: #FFFFFF;
+background-color: #FFFFFF;
+}
+.gsc-webResult.gsc-result:hover,
+.gsc-imageResult:hover {
+border-color: #FFFFFF;
+background-color: #FFFFFF;
+}
+.gs-webResult.gs-result a.gs-title:link,
+.gs-webResult.gs-result a.gs-title:link b,
+.gs-imageResult a.gs-title:link,
+.gs-imageResult a.gs-title:link b {
+color: #1155CC;
+}
+.gs-webResult.gs-result a.gs-title:visited,
+.gs-webResult.gs-result a.gs-title:visited b,
+.gs-imageResult a.gs-title:visited,
+.gs-imageResult a.gs-title:visited b {
+color: #1155CC;
+}
+.gs-webResult.gs-result a.gs-title:hover,
+.gs-webResult.gs-result a.gs-title:hover b,
+.gs-imageResult a.gs-title:hover,
+.gs-imageResult a.gs-title:hover b {
+color: #1155CC;
+}
+.gs-webResult.gs-result a.gs-title:active,
+.gs-webResult.gs-result a.gs-title:active b,
+.gs-imageResult a.gs-title:active,
+.gs-imageResult a.gs-title:active b {
+color: #1155CC;
+}
+.gsc-cursor-page {
+color: #1155CC;
+}
+a.gsc-trailing-more-results:link {
+color: #1155CC;
+}
+.gs-webResult .gs-snippet,
+.gs-imageResult .gs-snippet,
+.gs-fileFormatType {
+color: #333333;
+}
+.gs-webResult div.gs-visibleUrl,
+.gs-imageResult div.gs-visibleUrl {
+color: #009933;
+}
+.gs-webResult div.gs-visibleUrl-short {
+color: #009933;
+}
+.gs-webResult div.gs-visibleUrl-short {
+display: none;
+}
+.gs-webResult div.gs-visibleUrl-long {
+display: block;
+}
+.gs-promotion div.gs-visibleUrl-short {
+display: none;
+}
+.gs-promotion div.gs-visibleUrl-long {
+display: block;
+}
+.gsc-cursor-box {
+border-color: #FFFFFF;
+}
+.gsc-results .gsc-cursor-box .gsc-cursor-page {
+border-color: #CCCCCC;
+background-color: #FFFFFF;
+color: #1155CC;
+}
+.gsc-results .gsc-cursor-box .gsc-cursor-current-page {
+border-color: #CCCCCC;
+background-color: #FFFFFF;
+color: #1155CC;
+}
+.gsc-webResult.gsc-result.gsc-promotion {
+border-color: #F6F6F6;
+background-color: #F6F6F6;
+}
+.gsc-completion-title {
+color: #1155CC;
+}
+.gsc-completion-snippet {
+color: #333333;
+}
+.gs-promotion a.gs-title:link,
+.gs-promotion a.gs-title:link *,
+.gs-promotion .gs-snippet a:link {
+color: #1155CC;
+}
+.gs-promotion a.gs-title:visited,
+.gs-promotion a.gs-title:visited *,
+.gs-promotion .gs-snippet a:visited {
+color: #1155CC;
+}
+.gs-promotion a.gs-title:hover,
+.gs-promotion a.gs-title:hover *,
+.gs-promotion .gs-snippet a:hover {
+color: #1155CC;
+}
+.gs-promotion a.gs-title:active,
+.gs-promotion a.gs-title:active *,
+.gs-promotion .gs-snippet a:active {
+color: #1155CC;
+}
+.gs-promotion .gs-snippet,
+.gs-promotion .gs-title .gs-promotion-title-right,
+.gs-promotion .gs-title .gs-promotion-title-right * {
+color: #333333;
+}
+.gs-promotion .gs-visibleUrl,
+.gs-promotion .gs-visibleUrl-short {
+color: #009933;
+}
+.gsc-input input.gsc-input {
+background: none repeat scroll 0% 0% white !important;
+}
+</style></head>
+  <body>
+<div id="top-right">
+        <div class="user-right">
+                <ul id="header-menu-bar" class="ajs-menu-bar">
+                <li class="normal"><a target="_blank" href="http://groups.google.com/group/mongodb-user">Forums</a></li>
+                <li class="normal"><a target="_blank" href="http://blog.mongodb.org/">Blog</a></li>
+                <li class="normal"><a href="http://www.mongodb.org/downloads">Download</a></li>
+                <li class="normal"><a href="http://docs.mongodb.org/ecosystem/drivers/">Drivers</a></li>
+                <li class="normal"><a href="http://www.10gen.com/events">Events</a></li>
+                <li class="normal last"><a class="last" href="http://docs.mongodb.org/manual/meta/translation">Translations</a></li>
+                </ul>
+        </div>
+</div>
+<div id="header-db" class="spread">
+        <div class="split">
+                <div id="logo">
+                        <div><a href="http://docs.mongodb.org/manual/"><img class="logo" src="FAQ%20%20Concurrency%20%E2%80%94%20MongoDB%20Manual_files/logo-mongodb.png" alt="MongoDB Logo"></a></div>
+                </div>
+        </div>
+
+<div class="search-db"><gcse:searchbox></gcse:searchbox></div>
+<div id="etp">
+<ul>
+<li><a href="https://github.com/mongodb/docs/blob/master/source/faq/concurrency.txt" target="_blank" title="Edit faq/concurrency.txt on github">Edit this Page</a></li>
+<li><a href="http://github.com/mongodb/docs" target="_blank" title="Fork the documentation on GitHub and contribute.">GitHub</a></li>
+<li><a href="https://jira.mongodb.org/secure/CreateIssueDetails%21init.jspa?pid=10380&amp;issuetype=4&amp;priority=4&amp;summary=Comment+on%3a+%22faq/concurrency%2Etxt%22" target="_blank" title="Report a problem with faq/concurrency.txt on Jira">Report a problem</a></li>
+</ul>
+</div>
+</div>  
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            <div id="cse-results"><gcse:searchresults></gcse:searchresults></div>
+            
+  <div class="section" id="faq-concurrency">
+<h1>FAQ: Concurrency<a class="headerlink" href="#faq-concurrency" title="Permalink to this headline">¶</a></h1>
+<p class="versionchanged">
+<span class="versionmodified">Changed in version 2.2.</span></p>
+<p>MongoDB allows multiple clients to read and write a single corpus of
+data using a locking system to ensure that all clients receive a
+consistent view of the data <em>and</em> to prevent multiple applications
+from modifying the exact same pieces of data at the same time. Locks
+help guarantee that all writes to a single document occur either in
+full or not at all.</p>
+<div class="contents local topic" id="frequently-asked-questions">
+<p class="topic-title first">Frequently Asked Questions:</p>
+<ul class="simple">
+<li><a class="reference internal" href="#what-type-of-locking-does-mongodb-use" id="id2">What type of locking does MongoDB use?</a></li>
+<li><a class="reference internal" href="#how-granular-are-locks-in-mongodb" id="id3">How granular are locks in MongoDB?</a></li>
+<li><a class="reference internal" href="#how-do-i-see-the-status-of-locks-on-my-mongod-instances" id="id4">How do I see the status of locks on my </a><a class="reference internal" href="http://docs.mongodb.org/manual/reference/mongod/#mongod" title="mongod"><tt class="xref mongodb mongodb-program docutils literal"><span class="pre">mongod</span></tt></a> instances?</li>
+<li><a class="reference internal" href="#does-a-read-or-write-operation-ever-yield-the-lock" id="id5">Does a read or write operation ever yield the lock?</a></li>
+<li><a class="reference internal" href="#which-operations-lock-the-database" id="id6">Which operations lock the database?</a></li>
+<li><a class="reference internal" href="#which-administrative-commands-lock-the-database" id="id7">Which administrative commands lock the database?</a></li>
+<li><a class="reference internal" href="#does-a-mongodb-operation-ever-lock-more-than-one-database" id="id8">Does a MongoDB operation ever lock more than one database?</a></li>
+<li><a class="reference internal" href="#how-does-sharding-affect-concurrency" id="id9">How does sharding affect concurrency?</a></li>
+<li><a class="reference internal" href="#how-does-concurrency-affect-a-replica-set-primary" id="id10">How does concurrency affect a replica set primary?</a></li>
+<li><a class="reference internal" href="#how-does-concurrency-affect-secondaries" id="id11">How does concurrency affect secondaries?</a></li>
+<li><a class="reference internal" href="#what-kind-of-concurrency-does-mongodb-provide-for-javascript-operations" id="id12">What kind of concurrency does MongoDB provide for JavaScript operations?</a></li>
+</ul>
+</div>
+<div class="admonition-see-also admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference external" href="http://www.10gen.com/presentations/concurrency-internals-mongodb-2-2">Presentation on Concurrency and Internals in 2.2</a></p>
+</div>
+<div class="section" id="what-type-of-locking-does-mongodb-use">
+<span id="faq-concurrency-locking"></span><h2>What type of locking does MongoDB use?<a class="headerlink" href="#what-type-of-locking-does-mongodb-use" title="Permalink to this headline">¶</a></h2>
+<p>MongoDB uses a readers-writer <a class="footnote-reference" href="#multi-reader-lock-names" id="id1">[1]</a> lock that
+allows concurrent reads access to a database but gives exclusive
+access to a single write operation.</p>
+<p>When a read lock exists, many read operations may use this lock. However, when
+a write lock exists, a single write operation holds the lock
+exclusively, and no other read <em>or</em> write operations may share the lock.</p>
+<p>Locks are “writer greedy,” which means writes have preference over
+reads. When both a read and write are waiting for a lock, MongoDB
+grants the lock to the write.</p>
+<table class="docutils footnote" frame="void" id="multi-reader-lock-names" rules="none">
+<colgroup><col class="label"><col></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id1">[1]</a></td><td>You may be familiar with a
+“readers-writer” lock as “multi-reader” or “shared exclusive”
+lock. See the Wikipedia page on <a class="reference external" href="http://en.wikipedia.org/wiki/Readers%E2%80%93writer_lock">Readers-Writer Locks</a> for
+more information.</td></tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="how-granular-are-locks-in-mongodb">
+<h2>How granular are locks in MongoDB?<a class="headerlink" href="#how-granular-are-locks-in-mongodb" title="Permalink to this headline">¶</a></h2>
+<p class="versionchanged">
+<span class="versionmodified">Changed in version 2.2.</span></p>
+<p>Beginning with version 2.2, MongoDB implements locks on a per-database
+basis for most read and write operations. Some global operations,
+typically short lived operations involving multiple databases, still
+require a global “instance” wide lock. Before 2.2, there is only one
+“global” lock per <a class="reference internal" href="http://docs.mongodb.org/manual/reference/mongod/#mongod" title="mongod"><tt class="xref mongodb mongodb-program docutils literal"><span class="pre">mongod</span></tt></a> instance.</p>
+<p>For example, if you have six databases and one takes a write lock, the
+other five are still available for read and write.</p>
+</div>
+<div class="section" id="how-do-i-see-the-status-of-locks-on-my-mongod-instances">
+<h2>How do I see the status of locks on my <a class="reference internal" href="http://docs.mongodb.org/manual/reference/mongod/#mongod" title="mongod"><tt class="xref mongodb mongodb-program docutils literal"><span class="pre">mongod</span></tt></a> instances?<a class="headerlink" href="#how-do-i-see-the-status-of-locks-on-my-mongod-instances" title="Permalink to this headline">¶</a></h2>
+<p>For reporting on lock utilization information on locks, use any of the
+following methods:</p>
+<ul class="simple">
+<li><a class="reference internal" href="http://docs.mongodb.org/manual/reference/method/db.serverStatus/#db.serverStatus" title="db.serverStatus"><tt class="xref mongodb mongodb-method docutils literal"><span class="pre">db.serverStatus()</span></tt></a>,</li>
+<li><a class="reference internal" href="http://docs.mongodb.org/manual/reference/method/db.currentOp/#db.currentOp" title="db.currentOp"><tt class="xref mongodb mongodb-method docutils literal"><span class="pre">db.currentOp()</span></tt></a>,</li>
+<li><a class="reference internal" href="http://docs.mongodb.org/manual/reference/mongotop/"><em>mongotop</em></a>,</li>
+<li><a class="reference internal" href="http://docs.mongodb.org/manual/reference/mongostat/"><em>mongostat</em></a>, and/or</li>
+<li>the <a class="reference external" href="http://mms.10gen.com/">MongoDB Monitoring Service (MMS)</a></li>
+</ul>
+<p>Specifically, the <tt class="xref mongodb mongodb-data docutils literal"><span class="pre">locks</span></tt> document in the <a class="reference internal" href="http://docs.mongodb.org/manual/reference/server-status/"><em>output of
+serverStatus</em></a>, or the <a class="reference internal" href="http://docs.mongodb.org/manual/reference/current-op/#currentOp.locks" title="currentOp.locks"><tt class="xref mongodb mongodb-data docutils literal"><span class="pre">locks</span></tt></a> field
+in the <a class="reference internal" href="http://docs.mongodb.org/manual/reference/current-op/"><em>current operation reporting</em></a>
+provides insight into the type of locks and amount of lock
+contention in your <a class="reference internal" href="http://docs.mongodb.org/manual/reference/mongod/#mongod" title="mongod"><tt class="xref mongodb mongodb-program docutils literal"><span class="pre">mongod</span></tt></a> instance.</p>
+<p>To terminate an operation, use <a class="reference internal" href="http://docs.mongodb.org/manual/reference/method/db.killOp/#db.killOp" title="db.killOp"><tt class="xref mongodb mongodb-method docutils literal"><span class="pre">db.killOp()</span></tt></a>.</p>
+</div>
+<div class="section" id="does-a-read-or-write-operation-ever-yield-the-lock">
+<span id="faq-concurrency-yielding"></span><h2>Does a read or write operation ever yield the lock?<a class="headerlink" href="#does-a-read-or-write-operation-ever-yield-the-lock" title="Permalink to this headline">¶</a></h2>
+<p class="versionadded">
+<span class="versionmodified">New in version 2.0.</span></p>
+<p>A read and write operations will yield their locks if the
+<a class="reference internal" href="http://docs.mongodb.org/manual/reference/mongod/#mongod" title="mongod"><tt class="xref mongodb mongodb-program docutils literal"><span class="pre">mongod</span></tt></a> receives a <a class="reference internal" href="http://docs.mongodb.org/manual/reference/glossary/#term-page-fault"><em class="xref std std-term">page fault</em></a> <em>or</em> fetches data that
+is unlikely to be in memory. Yielding allows other operations that
+only need to access documents that are already in memory to complete
+while <a class="reference internal" href="http://docs.mongodb.org/manual/reference/mongod/#mongod" title="mongod"><tt class="xref mongodb mongodb-program docutils literal"><span class="pre">mongod</span></tt></a> loads documents into memory.</p>
+<p>Additionally, write operations that affect multiple documents
+(i.e. <a class="reference internal" href="http://docs.mongodb.org/manual/reference/method/db.collection.update/#db.collection.update" title="db.collection.update"><tt class="xref mongodb mongodb-method docutils literal"><span class="pre">update()</span></tt></a> with the <tt class="docutils literal"><span class="pre">multi</span></tt>
+parameter,) will yield periodically to allow read operations during
+these log write operations. Similarly, long running read locks will
+yield periodically to ensure that write operations have the
+opportunity to complete.</p>
+<p class="versionchanged">
+<span class="versionmodified">Changed in version 2.2: </span>The use of yielding expanded greatly in MongoDB 2.2. Including the
+“yield for page fault.” MongoDB tracks the contents of memory and
+predicts whether data is available before performing a read. If
+MongoDB predicts that the data is not in memory a read operation
+yields its lock while MongoDB loads the data to memory. Once data
+is available in memory, the read will reacquire the lock to
+completes the operation.</p>
+</div>
+<div class="section" id="which-operations-lock-the-database">
+<span id="faq-concurrency-operations-locks"></span><h2>Which operations lock the database?<a class="headerlink" href="#which-operations-lock-the-database" title="Permalink to this headline">¶</a></h2>
+<p class="versionchanged">
+<span class="versionmodified">Changed in version 2.2.</span></p>
+<p>The following table lists common database operations and the types of
+locks they use.</p>
+<table class="docutils" border="1">
+<colgroup>
+<col width="44%">
+<col width="56%">
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Operation</th>
+<th class="head">Lock Type</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Issue a query</td>
+<td>Read lock</td>
+</tr>
+<tr class="row-odd"><td>Get more data from a <a class="reference internal" href="http://docs.mongodb.org/manual/reference/glossary/#term-cursor"><em class="xref std std-term">cursor</em></a></td>
+<td>Read lock</td>
+</tr>
+<tr class="row-even"><td>Insert data</td>
+<td>Write lock</td>
+</tr>
+<tr class="row-odd"><td>Remove data</td>
+<td>Write lock</td>
+</tr>
+<tr class="row-even"><td>Update data</td>
+<td>Write lock</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="http://docs.mongodb.org/manual/reference/glossary/#term-map-reduce"><em class="xref std std-term">Map-reduce</em></a></td>
+<td>Read lock and write lock, unless operations are specified as
+non-atomic. Portions of map-reduce jobs can run concurrently.</td>
+</tr>
+<tr class="row-even"><td>Create an index</td>
+<td>Building an index in the foreground, which is the default, locks
+the database for extended periods of time.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="http://docs.mongodb.org/manual/reference/method/db.eval/#db.eval" title="db.eval"><tt class="xref mongodb mongodb-method docutils literal"><span class="pre">db.eval()</span></tt></a></td>
+<td>Write lock. <a class="reference internal" href="http://docs.mongodb.org/manual/reference/method/db.eval/#db.eval" title="db.eval"><tt class="xref mongodb mongodb-method docutils literal"><span class="pre">db.eval()</span></tt></a> blocks all other JavaScript
+processes.</td>
+</tr>
+<tr class="row-even"><td><tt class="xref mongodb mongodb-dbcommand docutils literal"><span class="pre">eval</span></tt></td>
+<td>Write lock. If used with the <tt class="docutils literal"><span class="pre">nolock</span></tt> lock option, the
+<tt class="xref mongodb mongodb-dbcommand docutils literal"><span class="pre">eval</span></tt> option does not take a write lock and
+cannot write data to the database.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="http://docs.mongodb.org/manual/reference/method/db.collection.aggregate/#db.collection.aggregate" title="db.collection.aggregate"><tt class="xref mongodb mongodb-method docutils literal"><span class="pre">aggregate()</span></tt></a></td>
+<td>Read lock</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="which-administrative-commands-lock-the-database">
+<h2>Which administrative commands lock the database?<a class="headerlink" href="#which-administrative-commands-lock-the-database" title="Permalink to this headline">¶</a></h2>
+<p>Certain administrative commands can exclusively lock the database for
+extended periods of time. In some deployments, for large databases,
+you may consider taking the
+the <a class="reference internal" href="http://docs.mongodb.org/manual/reference/mongod/#mongod" title="mongod"><tt class="xref mongodb mongodb-program docutils literal"><span class="pre">mongod</span></tt></a> instance offline so that clients are not affected.
+For example, if a <a class="reference internal" href="http://docs.mongodb.org/manual/reference/mongod/#mongod" title="mongod"><tt class="xref mongodb mongodb-program docutils literal"><span class="pre">mongod</span></tt></a> is part of a <a class="reference internal" href="http://docs.mongodb.org/manual/reference/glossary/#term-replica-set"><em class="xref std std-term">replica set</em></a>,
+take the <a class="reference internal" href="http://docs.mongodb.org/manual/reference/mongod/#mongod" title="mongod"><tt class="xref mongodb mongodb-program docutils literal"><span class="pre">mongod</span></tt></a> offline and let other members of the set
+service load while maintenance is in progress.</p>
+<p>The following administrative operations require an exclusive
+(i.e. write) lock to a the database for extended periods:</p>
+<ul class="simple">
+<li><a class="reference internal" href="http://docs.mongodb.org/manual/reference/method/db.collection.ensureIndex/#db.collection.ensureIndex" title="db.collection.ensureIndex"><tt class="xref mongodb mongodb-method docutils literal"><span class="pre">db.collection.ensureIndex()</span></tt></a>, when issued
+<em>without</em> setting <tt class="docutils literal"><span class="pre">background</span></tt> to <tt class="docutils literal"><span class="pre">true</span></tt>,</li>
+<li><a class="reference internal" href="http://docs.mongodb.org/manual/reference/command/reIndex/#reIndex" title="reIndex"><tt class="xref mongodb mongodb-dbcommand docutils literal"><span class="pre">reIndex</span></tt></a>,</li>
+<li><tt class="xref mongodb mongodb-dbcommand docutils literal"><span class="pre">compact</span></tt>,</li>
+<li><a class="reference internal" href="http://docs.mongodb.org/manual/reference/method/db.repairDatabase/#db.repairDatabase" title="db.repairDatabase"><tt class="xref mongodb mongodb-method docutils literal"><span class="pre">db.repairDatabase()</span></tt></a>,</li>
+<li><a class="reference internal" href="http://docs.mongodb.org/manual/reference/method/db.createCollection/#db.createCollection" title="db.createCollection"><tt class="xref mongodb mongodb-method docutils literal"><span class="pre">db.createCollection()</span></tt></a>, when creating a very large
+(i.e. many gigabytes) capped collection,</li>
+<li><a class="reference internal" href="http://docs.mongodb.org/manual/reference/method/db.collection.validate/#db.collection.validate" title="db.collection.validate"><tt class="xref mongodb mongodb-method docutils literal"><span class="pre">db.collection.validate()</span></tt></a>, and</li>
+<li><a class="reference internal" href="http://docs.mongodb.org/manual/reference/method/db.copyDatabase/#db.copyDatabase" title="db.copyDatabase"><tt class="xref mongodb mongodb-method docutils literal"><span class="pre">db.copyDatabase()</span></tt></a>. This operation may lock all
+databases. See <a class="reference internal" href="#faq-concurrency-lock-multiple-dbs"><em>Does a MongoDB operation ever lock more than one database?</em></a>.</li>
+</ul>
+<p>The <a class="reference internal" href="http://docs.mongodb.org/manual/reference/method/db.collection.group/#db.collection.group" title="db.collection.group"><tt class="xref mongodb mongodb-method docutils literal"><span class="pre">db.collection.group()</span></tt></a> operation takes a read lock and does
+not allow any other threads to execute JavaScript while it is running.</p>
+<p>The following administrative commands lock the database but only hold
+the lock for a very short time:</p>
+<ul class="simple">
+<li><a class="reference internal" href="http://docs.mongodb.org/manual/reference/method/db.collection.dropIndex/#db.collection.dropIndex" title="db.collection.dropIndex"><tt class="xref mongodb mongodb-method docutils literal"><span class="pre">db.collection.dropIndex()</span></tt></a>,</li>
+<li><a class="reference internal" href="http://docs.mongodb.org/manual/reference/method/db.getLastError/#db.getLastError" title="db.getLastError"><tt class="xref mongodb mongodb-method docutils literal"><span class="pre">db.getLastError()</span></tt></a>,</li>
+<li><a class="reference internal" href="http://docs.mongodb.org/manual/reference/method/db.isMaster/#db.isMaster" title="db.isMaster"><tt class="xref mongodb mongodb-method docutils literal"><span class="pre">db.isMaster()</span></tt></a>,</li>
+<li><a class="reference internal" href="http://docs.mongodb.org/manual/reference/method/rs.status/#rs.status" title="rs.status"><tt class="xref mongodb mongodb-method docutils literal"><span class="pre">rs.status()</span></tt></a> (i.e. <a class="reference internal" href="http://docs.mongodb.org/manual/reference/command/replSetGetStatus/#replSetGetStatus" title="replSetGetStatus"><tt class="xref mongodb mongodb-dbcommand docutils literal"><span class="pre">replSetGetStatus</span></tt></a>,)</li>
+<li><a class="reference internal" href="http://docs.mongodb.org/manual/reference/method/db.serverStatus/#db.serverStatus" title="db.serverStatus"><tt class="xref mongodb mongodb-method docutils literal"><span class="pre">db.serverStatus()</span></tt></a>,</li>
+<li><a class="reference internal" href="http://docs.mongodb.org/manual/reference/method/db.auth/#db.auth" title="db.auth"><tt class="xref mongodb mongodb-method docutils literal"><span class="pre">db.auth()</span></tt></a>, and</li>
+<li><a class="reference internal" href="http://docs.mongodb.org/manual/reference/method/db.addUser/#db.addUser" title="db.addUser"><tt class="xref mongodb mongodb-method docutils literal"><span class="pre">db.addUser()</span></tt></a>.</li>
+</ul>
+</div>
+<div class="section" id="does-a-mongodb-operation-ever-lock-more-than-one-database">
+<span id="faq-concurrency-lock-multiple-dbs"></span><h2>Does a MongoDB operation ever lock more than one database?<a class="headerlink" href="#does-a-mongodb-operation-ever-lock-more-than-one-database" title="Permalink to this headline">¶</a></h2>
+<p>The following MongoDB operations lock multiple databases:</p>
+<ul class="simple">
+<li><a class="reference internal" href="http://docs.mongodb.org/manual/reference/method/db.copyDatabase/#db.copyDatabase" title="db.copyDatabase"><tt class="xref mongodb mongodb-method docutils literal"><span class="pre">db.copyDatabase()</span></tt></a> must lock the entire <a class="reference internal" href="http://docs.mongodb.org/manual/reference/mongod/#mongod" title="mongod"><tt class="xref mongodb mongodb-program docutils literal"><span class="pre">mongod</span></tt></a>
+instance at once.</li>
+<li><a class="reference internal" href="http://docs.mongodb.org/manual/reference/glossary/#term-journal"><em class="xref std std-term">Journaling</em></a>, which is an internal operation, locks
+all databases for short intervals. All databases share a single
+journal.</li>
+<li><a class="reference internal" href="http://docs.mongodb.org/manual/administration/security/#security-authentication"><em>User authentication</em></a> locks the
+<tt class="docutils literal"><span class="pre">admin</span></tt> database as well as the database the user is accessing.</li>
+<li>All writes to a replica set’s <a class="reference internal" href="http://docs.mongodb.org/manual/reference/glossary/#term-primary"><em class="xref std std-term">primary</em></a> lock both the database
+receiving the writes and the <tt class="docutils literal"><span class="pre">local</span></tt> database. The lock for the
+<tt class="docutils literal"></tt></li></ul></div></div></div></div></div></div></body></html>

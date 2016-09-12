@@ -1,0 +1,528 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head>
+    <title>FAQ: The mongo Shell — MongoDB Manual</title>
+
+    <link rel="shortcut icon" href="http://media.mongodb.org/favicon.ico">
+    <meta name="robots" content="index">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <link rel="canonical" href="http://docs.mongodb.org/manual/faq/mongo">
+
+    
+    
+    <link rel="stylesheet" href="FAQ%20%20The%20mongo%20Shell%20%E2%80%94%20MongoDB%20Manual_files/mongodb-docs.css" type="text/css">
+    <link rel="stylesheet" href="FAQ%20%20The%20mongo%20Shell%20%E2%80%94%20MongoDB%20Manual_files/pygments.css" type="text/css">
+      
+    <script id="undefined" src="FAQ%20%20The%20mongo%20Shell%20%E2%80%94%20MongoDB%20Manual_files/inpage_linkid.js" async="" type="text/javascript"></script><script src="FAQ%20%20The%20mongo%20Shell%20%E2%80%94%20MongoDB%20Manual_files/ga.js" async="" type="text/javascript"></script><script src="FAQ%20%20The%20mongo%20Shell%20%E2%80%94%20MongoDB%20Manual_files/cse.js" async="" type="text/javascript"></script><script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '2.2.2',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '',
+        HAS_SOURCE:  false
+      };
+    </script>
+    <script type="text/javascript" src="FAQ%20%20The%20mongo%20Shell%20%E2%80%94%20MongoDB%20Manual_files/jquery.js"></script>
+    <script type="text/javascript" src="FAQ%20%20The%20mongo%20Shell%20%E2%80%94%20MongoDB%20Manual_files/underscore.js"></script>
+    <script type="text/javascript" src="FAQ%20%20The%20mongo%20Shell%20%E2%80%94%20MongoDB%20Manual_files/doctools.js"></script>
+      <link rel="search" type="application/opensearchdescription+xml" href="http://docs.mongodb.org/osd.xml" title="MongoDB Help">
+<link rel="author" title="About these documents" href="http://docs.mongodb.org/manual/about/">
+<link rel="top" title="MongoDB Manual" href="http://docs.mongodb.org/manual/">
+<link rel="up" title="Frequently Asked Questions" href="http://docs.mongodb.org/manual/faq/">
+<link rel="next" title="FAQ: Concurrency" href="http://docs.mongodb.org/manual/faq/concurrency/">
+<link rel="prev" title="FAQ: MongoDB for Application Developers" href="http://docs.mongodb.org/manual/faq/developers/">
+<!-- Put the following javascript before the closing </head> tag. -->
+<script>
+  (function() {
+    var cx = '017213726194841070573:WMX6838984';
+    var gcse = document.createElement('script'); gcse.type = 'text/javascript'; gcse.async = true;
+    gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+        '//www.google.com/cse/cse.js?cx=' + cx;
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(gcse, s);
+  })();
+</script>
+  <style type="text/css">.atlwdg-blanket {background:#000;height:100%;left:0;opacity:.5;position:fixed;top:0;width:100%;z-index:1000000;}
+.atlwdg-popup {background:#fff;border:1px solid #666;position:fixed;top:50%;left:50%;z-index:10000011;}
+.atlwdg-popup.atlwdg-box-shadow {-moz-box-shadow:10px 10px 20px rgba(0,0,0,0.5);-webkit-box-shadow:10px 10px 20px rgba(0,0,0,0.5);box-shadow:10px 10px 20px rgba(0,0,0,0.5);background-color:#fff;}
+.atlwdg-hidden {display:none;}
+.atlwdg-trigger {position: fixed; background: #013466; padding: 5px;border: 2px solid white;border-top: none; font-weight: bold; color: white; display:block;white-space:nowrap;text-decoration:none; font-family:arial, FreeSans, Helvetica, sans-serif;font-size:12px;box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5);-webkit-box-shadow:5px 5px 10px rgba(0, 0, 0, 0.5); -moz-box-shadow:5px 5px 10px rgba(0, 0, 0, 0.5);border-radius: 0 0 5px 5px; -moz-border-radius: 0 0 5px 5px;}
+a.atlwdg-trigger {text-decoration:none;}
+.atlwdg-trigger.atlwdg-TOP {left: 45%;top:0; }
+.atlwdg-trigger.atlwdg-RIGHT {left:100%; top:40%; -webkit-transform-origin:top left; -webkit-transform: rotate(90deg); -moz-transform: rotate(90deg); -moz-transform-origin:top left;-ms-transform: rotate(90deg); -ms-transform-origin:top left; }
+.atlwdg-trigger.atlwdg-SUBTLE { right:0; bottom:0; border: 1px solid #ccc; border-bottom: none; border-right: none; background-color: #f5f5f5; color: #444; font-size: 11px; padding: 6px; box-shadow: -1px -1px 2px rgba(0, 0, 0, 0.5); border-radius: 2px 0 0 0; }
+.atlwdg-loading {position:absolute;top:220px;left:295px;}</style><script type="text/javascript" src="FAQ%20%20The%20mongo%20Shell%20%E2%80%94%20MongoDB%20Manual_files/jsapi"></script><link rel="stylesheet" href="FAQ%20%20The%20mongo%20Shell%20%E2%80%94%20MongoDB%20Manual_files/defaulten.css" type="text/css"><link rel="stylesheet" href="FAQ%20%20The%20mongo%20Shell%20%E2%80%94%20MongoDB%20Manual_files/default.css" type="text/css"><script src="FAQ%20%20The%20mongo%20Shell%20%E2%80%94%20MongoDB%20Manual_files/defaulten.js" type="text/javascript"></script><script src="FAQ%20%20The%20mongo%20Shell%20%E2%80%94%20MongoDB%20Manual_files/search.js" type="text/javascript"></script><style type="text/css">
+.gsc-control-cse {
+font-family: Arial, sans-serif;
+border-color: #FFFFFF;
+background-color: #FFFFFF;
+}
+.gsc-control-cse .gsc-table-result {
+font-family: Arial, sans-serif;
+}
+input.gsc-input, .gsc-input-box, .gsc-input-box-hover, .gsc-input-box-focus {
+border-color: #D9D9D9;
+}
+input.gsc-search-button, input.gsc-search-button:hover, input.gsc-search-button:focus {
+border-color: #5AAC41;
+background-color: #5AAC41;
+background-image: none;
+filter: none;
+}
+.gsc-tabHeader.gsc-tabhInactive {
+border-color: #CCCCCC;
+background-color: #FFFFFF;
+}
+.gsc-tabHeader.gsc-tabhActive {
+border-color: #CCCCCC;
+border-bottom-color: #FFFFFF;
+background-color: #FFFFFF;
+}
+.gsc-tabsArea {
+border-color: #CCCCCC;
+}
+.gsc-webResult.gsc-result,
+.gsc-results .gsc-imageResult {
+border-color: #FFFFFF;
+background-color: #FFFFFF;
+}
+.gsc-webResult.gsc-result:hover,
+.gsc-imageResult:hover {
+border-color: #FFFFFF;
+background-color: #FFFFFF;
+}
+.gs-webResult.gs-result a.gs-title:link,
+.gs-webResult.gs-result a.gs-title:link b,
+.gs-imageResult a.gs-title:link,
+.gs-imageResult a.gs-title:link b {
+color: #1155CC;
+}
+.gs-webResult.gs-result a.gs-title:visited,
+.gs-webResult.gs-result a.gs-title:visited b,
+.gs-imageResult a.gs-title:visited,
+.gs-imageResult a.gs-title:visited b {
+color: #1155CC;
+}
+.gs-webResult.gs-result a.gs-title:hover,
+.gs-webResult.gs-result a.gs-title:hover b,
+.gs-imageResult a.gs-title:hover,
+.gs-imageResult a.gs-title:hover b {
+color: #1155CC;
+}
+.gs-webResult.gs-result a.gs-title:active,
+.gs-webResult.gs-result a.gs-title:active b,
+.gs-imageResult a.gs-title:active,
+.gs-imageResult a.gs-title:active b {
+color: #1155CC;
+}
+.gsc-cursor-page {
+color: #1155CC;
+}
+a.gsc-trailing-more-results:link {
+color: #1155CC;
+}
+.gs-webResult .gs-snippet,
+.gs-imageResult .gs-snippet,
+.gs-fileFormatType {
+color: #333333;
+}
+.gs-webResult div.gs-visibleUrl,
+.gs-imageResult div.gs-visibleUrl {
+color: #009933;
+}
+.gs-webResult div.gs-visibleUrl-short {
+color: #009933;
+}
+.gs-webResult div.gs-visibleUrl-short {
+display: none;
+}
+.gs-webResult div.gs-visibleUrl-long {
+display: block;
+}
+.gs-promotion div.gs-visibleUrl-short {
+display: none;
+}
+.gs-promotion div.gs-visibleUrl-long {
+display: block;
+}
+.gsc-cursor-box {
+border-color: #FFFFFF;
+}
+.gsc-results .gsc-cursor-box .gsc-cursor-page {
+border-color: #CCCCCC;
+background-color: #FFFFFF;
+color: #1155CC;
+}
+.gsc-results .gsc-cursor-box .gsc-cursor-current-page {
+border-color: #CCCCCC;
+background-color: #FFFFFF;
+color: #1155CC;
+}
+.gsc-webResult.gsc-result.gsc-promotion {
+border-color: #F6F6F6;
+background-color: #F6F6F6;
+}
+.gsc-completion-title {
+color: #1155CC;
+}
+.gsc-completion-snippet {
+color: #333333;
+}
+.gs-promotion a.gs-title:link,
+.gs-promotion a.gs-title:link *,
+.gs-promotion .gs-snippet a:link {
+color: #1155CC;
+}
+.gs-promotion a.gs-title:visited,
+.gs-promotion a.gs-title:visited *,
+.gs-promotion .gs-snippet a:visited {
+color: #1155CC;
+}
+.gs-promotion a.gs-title:hover,
+.gs-promotion a.gs-title:hover *,
+.gs-promotion .gs-snippet a:hover {
+color: #1155CC;
+}
+.gs-promotion a.gs-title:active,
+.gs-promotion a.gs-title:active *,
+.gs-promotion .gs-snippet a:active {
+color: #1155CC;
+}
+.gs-promotion .gs-snippet,
+.gs-promotion .gs-title .gs-promotion-title-right,
+.gs-promotion .gs-title .gs-promotion-title-right * {
+color: #333333;
+}
+.gs-promotion .gs-visibleUrl,
+.gs-promotion .gs-visibleUrl-short {
+color: #009933;
+}
+.gsc-input input.gsc-input {
+background: none repeat scroll 0% 0% white !important;
+}
+</style><style type="text/css">.gsfe_a{border:1px solid #b9b9b9;border-top-color:#a0a0a0;box-shadow:inset 0px 1px 2px rgba(0,0,0,0.1);-moz-box-shadow:inset 0px 1px 2px rgba(0,0,0,0.1);-webkit-box-shadow:inset 0px 1px 2px rgba(0,0,0,0.1);}.gsfe_b{border:1px solid #4d90fe;outline:none;box-shadow:inset 0px 1px 2px rgba(0,0,0,0.3);-moz-box-shadow:inset 0px 1px 2px rgba(0,0,0,0.3);-webkit-box-shadow:inset 0px 1px 2px rgba(0,0,0,0.3);}.gssb_c{border:0;position:absolute;z-index:989}.gssb_e{border:1px solid #ccc;border-top-color:#d9d9d9;box-shadow:0 2px 4px rgba(0,0,0,0.2);-moz-box-shadow:0 2px 4px rgba(0,0,0,0.2);cursor:default}.gssb_f{visibility:hidden;white-space:nowrap}.gssb_k{border:0;display:block;position:absolute;top:0;z-index:988}.gsdd_a{border:none!important}.gsib_a{width:100%;padding:4px 6px 0}.gsib_a,.gsib_b{vertical-align:top}.gssb_a{padding:0 7px}.gssb_a,.gssb_a td{white-space:nowrap;overflow:hidden;line-height:22px}#gssb_b{font-size:11px;color:#36c;text-decoration:none}#gssb_b:hover{font-size:11px;color:#36c;text-decoration:underline}.gssb_g{text-align:center;padding:8px 0 7px;position:relative}.gssb_h{font-size:15px;height:28px;margin:0.2em}.gssb_i{background:#eee}.gss_ifl{visibility:hidden;padding-left:5px}.gssb_i .gss_ifl{visibility:visible}a.gssb_j{font-size:13px;color:#36c;text-decoration:none;line-height:100%}a.gssb_j:hover{text-decoration:underline}.gssb_l{height:1px;background-color:#e5e5e5}.gssb_m{color:#000;background:#fff}.gscsep_a{display:none}.gsq_a{padding:0}.gscb_a{display:inline-block;font:27px/13px arial,sans-serif}.gsst_a .gscb_a{color:#a1b9ed;cursor:pointer}.gsst_a:hover .gscb_a,.gsst_a:focus .gscb_a{color:#36c}.gsst_a{display:inline-block}.gsst_a{cursor:pointer;padding:0 4px}.gsst_a:hover{text-decoration:none!important}.gsst_b{font-size:16px;padding:0 2px;user-select:none;-moz-user-select:none;white-space:nowrap}.gsst_e{opacity:0.55;}.gsst_a:hover .gsst_e,.gsst_a:focus .gsst_e{opacity:0.72;}.gsst_a:active .gsst_e{opacity:1;}.gsst_f{background:white;text-align:left}.gsst_g{background-color:white;border:1px solid #ccc;border-top-color:#d9d9d9;box-shadow:0 2px 4px rgba(0,0,0,0.2);-moz-box-shadow:0 2px 4px rgba(0,0,0,0.2);margin:-1px -3px;padding:0 6px}.gsst_h{background-color:white;height:1px;margin-bottom:-1px;position:relative;top:-1px}.gssb_a{padding:0 9px}.gsib_a{padding-right:8px;padding-left:8px}.gsst_a{padding-top:3px}.gssb_e{border:0}.gssb_l{margin:5px 0}.gssb_c .gsc-completion-container{position:static}.gssb_c{z-index:5000}.gsc-completion-container table{background:transparent;font-size:inherit;font-family:inherit}.gssb_c > tbody > tr,.gssb_c > tbody > tr > td,.gssb_d,.gssb_d > tbody > tr,.gssb_d > tbody > tr > td,.gssb_e,.gssb_e > tbody > tr,.gssb_e > tbody > tr > td{padding:0;margin:0;border:0}.gssb_a table,.gssb_a table tr,.gssb_a table tr td{padding:0;margin:0;border:0}</style></head>
+  <body>
+<div id="top-right">
+        <div class="user-right">
+                <ul id="header-menu-bar" class="ajs-menu-bar">
+                <li class="normal"><a target="_blank" href="http://groups.google.com/group/mongodb-user">Forums</a></li>
+                <li class="normal"><a target="_blank" href="http://blog.mongodb.org/">Blog</a></li>
+                <li class="normal"><a href="http://www.mongodb.org/downloads">Download</a></li>
+                <li class="normal"><a href="http://docs.mongodb.org/ecosystem/drivers/">Drivers</a></li>
+                <li class="normal"><a href="http://www.10gen.com/events">Events</a></li>
+                <li class="normal last"><a class="last" href="http://docs.mongodb.org/manual/meta/translation">Translations</a></li>
+                </ul>
+        </div>
+</div>
+<div id="header-db" class="spread">
+        <div class="split">
+                <div id="logo">
+                        <div><a href="http://docs.mongodb.org/manual/"><img class="logo" src="FAQ%20%20The%20mongo%20Shell%20%E2%80%94%20MongoDB%20Manual_files/logo-mongodb.png" alt="MongoDB Logo"></a></div>
+                </div>
+        </div>
+
+<div class="search-db"><div dir="ltr" id="___gcse_0"><form accept-charset="utf-8" class="gsc-search-box gsc-search-box-tools"><table class="gsc-search-box" cellpadding="0" cellspacing="0"><tbody><tr><td class="gsc-input"><div id="gsc-iw-id1" class="gsc-input-box"><table class="gstl_0 " id="gs_id0" style="width: 100%; padding: 0px;" cellpadding="0" cellspacing="0"><tbody><tr><td class="gsib_a" id="gs_tti0"><input spellcheck="false" dir="ltr" id="gsc-i-id1" style="width: 100%; padding: 0px; border: medium none; margin: 0px; height: auto; outline: medium none;" title="search" name="search" class="gsc-input" size="10" autocomplete="off" type="text"></td><td class="gsib_b"><div dir="ltr" id="gs_st0" class="gsst_b"><a style="display: none;" href="javascript:void(0)" class="gsst_a"><span id="gs_cb0" class="gscb_a">×</span></a></div></td></tr></tbody></table></div></td><td class="gsc-search-button"><input title="search" class="gsc-search-button gsc-search-button-v2" src="FAQ%20%20The%20mongo%20Shell%20%E2%80%94%20MongoDB%20Manual_files/search_box_icon.png" type="image"></td><td class="gsc-clear-button"><div title="clear results" class="gsc-clear-button">&nbsp;</div></td></tr></tbody></table><table class="gsc-branding" cellpadding="0" cellspacing="0"><tbody><tr style="display: none;"><td class="gsc-branding-user-defined"></td><td class="gsc-branding-text"><div class="gsc-branding-text">powered by</div></td><td class="gsc-branding-img"><img class="gsc-branding-img" src="FAQ%20%20The%20mongo%20Shell%20%E2%80%94%20MongoDB%20Manual_files/small-logo.png"></td></tr></tbody></table></form></div></div>
+<div id="etp">
+<ul>
+<li><a href="https://github.com/mongodb/docs/blob/master/source/faq/mongo.txt" target="_blank" title="Edit faq/mongo.txt on github">Edit this Page</a></li>
+<li><a href="http://github.com/mongodb/docs" target="_blank" title="Fork the documentation on GitHub and contribute.">GitHub</a></li>
+<li><a href="https://jira.mongodb.org/secure/CreateIssueDetails%21init.jspa?pid=10380&amp;issuetype=4&amp;priority=4&amp;summary=Comment+on%3a+%22faq/mongo%2Etxt%22" target="_blank" title="Report a problem with faq/mongo.txt on Jira">Report a problem</a></li>
+</ul>
+</div>
+</div>  
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            <div id="cse-results"><div id="___gcse_1"><div class="gsc-control-cse gsc-control-cse-en"><div dir="ltr" class="gsc-control-wrapper-cse"><div class="gsc-results-wrapper-nooverlay"><div class="gsc-tabsAreaInvisible"><div class="gsc-tabHeader gsc-inline-block gsc-tabhActive">Custom Search</div><span class="gs-spacer"> </span></div><div class="gsc-tabsAreaInvisible"></div><div class="gsc-above-wrapper-area-invisible"><table class="gsc-above-wrapper-area-container" cellpadding="0" cellspacing="0"><tbody><tr><td class="gsc-result-info-container"><div class="gsc-result-info-invisible"></div></td></tr></tbody></table></div><div class="gsc-adBlockInvisible"></div><div class="gsc-wrapper"><div class="gsc-adBlockInvisible"></div><div class="gsc-resultsbox-invisible"><div class="gsc-resultsRoot gsc-tabData gsc-tabdActive"><table class="gsc-resultsHeader" cellpadding="0" cellspacing="0"><tbody><tr><td class="gsc-twiddleRegionCell"><div class="gsc-twiddle"><div class="gsc-title">Web</div></div><div class="gsc-stats"></div><div class="gsc-results-selector gsc-all-results-active"><div title="show one result" class="gsc-result-selector gsc-one-result">&nbsp;</div><div title="show more results" class="gsc-result-selector gsc-more-results">&nbsp;</div><div title="show all results" class="gsc-result-selector gsc-all-results">&nbsp;</div></div></td><td class="gsc-configLabelCell"></td></tr></tbody></table><div><div class="gsc-expansionArea"></div></div></div></div></div></div></div></div></div></div>
+            
+  <div class="section" id="faq-the-mongo-shell">
+<h1>FAQ: The <tt class="docutils literal"><span class="pre">mongo</span></tt> Shell<a class="headerlink" href="#faq-the-mongo-shell" title="Permalink to this headline">¶</a></h1>
+<div class="contents local topic" id="frequently-asked-questions">
+<p class="topic-title first">Frequently Asked Questions:</p>
+<ul class="simple">
+<li><a class="reference internal" href="#how-can-i-enter-multi-line-operations-in-the-mongo-shell" id="id1">How can I enter multi-line operations in the <tt class="docutils literal"><span class="pre">mongo</span></tt> shell?</a></li>
+<li><a class="reference internal" href="#how-can-i-access-to-different-databases-temporarily" id="id2">How can I access to different databases temporarily?</a></li>
+<li><a class="reference internal" href="#does-the-mongo-shell-support-tab-completion-and-other-keyboard-shortcuts" id="id3">Does the <tt class="docutils literal"><span class="pre">mongo</span></tt> shell support tab completion and other keyboard shortcuts?</a></li>
+<li><a class="reference internal" href="#how-can-i-customize-the-mongo-shell-prompt" id="id4">How can I customize the <tt class="docutils literal"><span class="pre">mongo</span></tt> shell prompt?</a></li>
+<li><a class="reference internal" href="#can-i-edit-long-shell-operations-with-an-external-text-editor" id="id5">Can I edit long shell operations with an external text editor?</a></li>
+</ul>
+</div>
+<div class="section" id="how-can-i-enter-multi-line-operations-in-the-mongo-shell">
+<span id="mongo-shell-tips"></span><h2>How can I enter multi-line operations in the <tt class="docutils literal"><span class="pre">mongo</span></tt> shell?<a class="headerlink" href="#how-can-i-enter-multi-line-operations-in-the-mongo-shell" title="Permalink to this headline">¶</a></h2>
+<p>If you end a line with an open parenthesis (<tt class="docutils literal"><span class="pre">'('</span></tt>), an open brace
+(<tt class="docutils literal"><span class="pre">'{'</span></tt>), or an open bracket (<tt class="docutils literal"><span class="pre">'['</span></tt>), then the subsequent lines start
+with ellipsis (<tt class="docutils literal"><span class="pre">"..."</span></tt>) until the you enter the corresponding closing
+parenthesis (<tt class="docutils literal"><span class="pre">')'</span></tt>), the closing brace (<tt class="docutils literal"><span class="pre">'}'</span></tt>) or the closing
+bracket (<tt class="docutils literal"><span class="pre">']'</span></tt>). The <a class="reference internal" href="http://docs.mongodb.org/manual/reference/mongo/#mongo" title="mongo"><tt class="xref mongodb mongodb-program docutils literal"><span class="pre">mongo</span></tt></a> shell waits for the closing
+parenthesis, closing brace, or the closing bracket before evaluating
+the code, as in the following example:</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="o">&gt;</span> <span class="k">if</span> <span class="p">(</span> <span class="nx">x</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="p">)</span> <span class="p">{</span>
+<span class="p">...</span> <span class="nx">count</span><span class="o">++</span><span class="p">;</span>
+<span class="p">...</span> <span class="nx">print</span> <span class="p">(</span><span class="nx">x</span><span class="p">);</span>
+<span class="p">...</span> <span class="p">}</span>
+</pre></div>
+</div>
+<p>You can exit the line continuation mode if you enter two blank
+lines, as in the following example:</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="o">&gt;</span> <span class="k">if</span> <span class="p">(</span><span class="nx">x</span> <span class="o">&gt;</span> <span class="mi">0</span>
+<span class="p">...</span>
+<span class="p">...</span>
+<span class="o">&gt;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="how-can-i-access-to-different-databases-temporarily">
+<span id="mongo-shell-getsiblingdb"></span><h2>How can I access to different databases temporarily?<a class="headerlink" href="#how-can-i-access-to-different-databases-temporarily" title="Permalink to this headline">¶</a></h2>
+<p>You can use <a class="reference internal" href="http://docs.mongodb.org/manual/reference/method/db.getSiblingDB/#db.getSiblingDB" title="db.getSiblingDB"><tt class="xref mongodb mongodb-method docutils literal"><span class="pre">db.getSiblingDB()</span></tt></a> method to access another
+database without switching databases, as in the following example which
+first switches to the <tt class="docutils literal"><span class="pre">test</span></tt> database and then accesses the
+<tt class="docutils literal"><span class="pre">sampleDB</span></tt> database from the <tt class="docutils literal"><span class="pre">test</span></tt> database:</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="nx">use</span> <span class="nx">test</span>
+
+<span class="nx">db</span><span class="p">.</span><span class="nx">getSiblingDB</span><span class="p">(</span><span class="s1">'sampleDB'</span><span class="p">).</span><span class="nx">getCollectionNames</span><span class="p">();</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="does-the-mongo-shell-support-tab-completion-and-other-keyboard-shortcuts">
+<span id="mongo-shell-keyboard-shortcuts"></span><h2>Does the <tt class="docutils literal"><span class="pre">mongo</span></tt> shell support tab completion and other keyboard shortcuts?<a class="headerlink" href="#does-the-mongo-shell-support-tab-completion-and-other-keyboard-shortcuts" title="Permalink to this headline">¶</a></h2>
+<p>The <a class="reference internal" href="http://docs.mongodb.org/manual/reference/mongo/#mongo" title="mongo"><tt class="xref mongodb mongodb-program docutils literal"><span class="pre">mongo</span></tt></a> shell supports keyboard shortcuts. For example,</p>
+<ul>
+<li><p class="first">Use the up/down arrow keys to scroll through command history. See
+<a class="reference internal" href="http://docs.mongodb.org/manual/reference/mongo/#mongo-dbshell-file"><em>.dbshell</em></a> documentation for more
+information on the <tt class="docutils literal"><span class="pre">.dbshell</span></tt> file.</p>
+</li>
+<li><p class="first">Use <tt class="docutils literal"><span class="pre">&lt;Tab&gt;</span></tt> to autocomplete or to list the completion
+possibilities, as in the following example which uses <tt class="docutils literal"><span class="pre">&lt;Tab&gt;</span></tt> to
+complete the method name starting with the letter <tt class="docutils literal"><span class="pre">'c'</span></tt>:</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="nx">db</span><span class="p">.</span><span class="nx">myCollection</span><span class="p">.</span><span class="nx">c</span><span class="o">&lt;</span><span class="nx">Tab</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>Because there are many collection methods starting with the letter
+<tt class="docutils literal"><span class="pre">'c'</span></tt>, the <tt class="docutils literal"><span class="pre">&lt;Tab&gt;</span></tt> will list the various methods that start with
+<tt class="docutils literal"><span class="pre">'c'</span></tt>.</p>
+</li>
+</ul>
+<p>For a full list of the shortcuts, see <a class="reference internal" href="http://docs.mongodb.org/manual/reference/mongo/#mongo-keyboard-shortcuts"><em>Shell Keyboard Shortcuts</em></a></p>
+</div>
+<div class="section" id="how-can-i-customize-the-mongo-shell-prompt">
+<h2>How can I customize the <tt class="docutils literal"><span class="pre">mongo</span></tt> shell prompt?<a class="headerlink" href="#how-can-i-customize-the-mongo-shell-prompt" title="Permalink to this headline">¶</a></h2>
+<p class="versionadded">
+<span class="versionmodified">New in version 1.9.</span></p>
+<p>You can change the <a class="reference internal" href="http://docs.mongodb.org/manual/reference/mongo/#mongo" title="mongo"><tt class="xref mongodb mongodb-program docutils literal"><span class="pre">mongo</span></tt></a> shell prompt by setting the
+<tt class="docutils literal"><span class="pre">prompt</span></tt> variable. This makes it possible to display additional
+information in the prompt.</p>
+<p>Set <tt class="docutils literal"><span class="pre">prompt</span></tt> to any string or arbitrary JavaScript code that returns
+a string, consider the following examples:</p>
+<ul>
+<li><p class="first">Set the shell prompt to display the hostname and the database issued:</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="kd">var</span> <span class="nx">host</span> <span class="o">=</span> <span class="nx">db</span><span class="p">.</span><span class="nx">serverStatus</span><span class="p">().</span><span class="nx">host</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">prompt</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span> <span class="k">return</span> <span class="nx">db</span><span class="o">+</span><span class="s2">"@"</span><span class="o">+</span><span class="nx">host</span><span class="o">+</span><span class="s2">"&gt; "</span><span class="p">;</span> <span class="p">}</span>
+</pre></div>
+</div>
+<p>The <a class="reference internal" href="http://docs.mongodb.org/manual/reference/mongo/#mongo" title="mongo"><tt class="xref mongodb mongodb-program docutils literal"><span class="pre">mongo</span></tt></a> shell prompt should now reflect the new prompt:</p>
+<div class="highlight-none"><div class="highlight"><pre>test@my-machine.local&gt;
+</pre></div>
+</div>
+</li>
+<li><p class="first">Set the shell prompt to display the database statistics:</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="kd">var</span> <span class="nx">prompt</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+                <span class="k">return</span> <span class="s2">"Uptime:"</span><span class="o">+</span><span class="nx">db</span><span class="p">.</span><span class="nx">serverStatus</span><span class="p">().</span><span class="nx">uptime</span><span class="o">+</span><span class="s2">" Documents:"</span><span class="o">+</span><span class="nx">db</span><span class="p">.</span><span class="nx">stats</span><span class="p">().</span><span class="nx">objects</span><span class="o">+</span><span class="s2">" &gt; "</span><span class="p">;</span>
+             <span class="p">}</span>
+</pre></div>
+</div>
+<p>The <a class="reference internal" href="http://docs.mongodb.org/manual/reference/mongo/#mongo" title="mongo"><tt class="xref mongodb mongodb-program docutils literal"><span class="pre">mongo</span></tt></a> shell prompt should now reflect the new prompt:</p>
+<div class="highlight-none"><div class="highlight"><pre>Uptime:1052 Documents:25024787 &gt;
+</pre></div>
+</div>
+</li>
+</ul>
+<p>You can add the logic for the prompt in the <a class="reference internal" href="http://docs.mongodb.org/manual/reference/mongo/#mongo-mongorc-file"><em>.mongorc.js</em></a> file to set the prompt each time you start up the
+<a class="reference internal" href="http://docs.mongodb.org/manual/reference/mongo/#mongo" title="mongo"><tt class="xref mongodb mongodb-program docutils literal"><span class="pre">mongo</span></tt></a> shell.</p>
+</div>
+<div class="section" id="can-i-edit-long-shell-operations-with-an-external-text-editor">
+<h2>Can I edit long shell operations with an external text editor?<a class="headerlink" href="#can-i-edit-long-shell-operations-with-an-external-text-editor" title="Permalink to this headline">¶</a></h2>
+<p>You can use your own editor in the <a class="reference internal" href="http://docs.mongodb.org/manual/reference/mongo/#mongo" title="mongo"><tt class="xref mongodb mongodb-program docutils literal"><span class="pre">mongo</span></tt></a> shell by setting
+the <span class="target" id="index-0"></span><a class="reference internal" href="http://docs.mongodb.org/manual/reference/mongo/#envvar-EDITOR"><tt class="xref std std-envvar docutils literal"><span class="pre">EDITOR</span></tt></a> environment variable before starting the
+<a class="reference internal" href="http://docs.mongodb.org/manual/reference/mongo/#mongo" title="mongo"><tt class="xref mongodb mongodb-program docutils literal"><span class="pre">mongo</span></tt></a> shell. Once in the <a class="reference internal" href="http://docs.mongodb.org/manual/reference/mongo/#mongo" title="mongo"><tt class="xref mongodb mongodb-program docutils literal"><span class="pre">mongo</span></tt></a> shell, you can
+edit with the specified editor by typing <tt class="docutils literal"><span class="pre">edit</span> <span class="pre">&lt;variable&gt;</span></tt> or <tt class="docutils literal"><span class="pre">edit</span>
+<span class="pre">&lt;function&gt;</span></tt>, as in the following example:</p>
+<ol class="arabic">
+<li><p class="first">Set the <span class="target" id="index-1"></span><a class="reference internal" href="http://docs.mongodb.org/manual/reference/mongo/#envvar-EDITOR"><tt class="xref std std-envvar docutils literal"><span class="pre">EDITOR</span></tt></a> variable from the command line prompt:</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="nx">EDITOR</span><span class="o">=</span><span class="nx">vim</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">Start the <a class="reference internal" href="http://docs.mongodb.org/manual/reference/mongo/#mongo" title="mongo"><tt class="xref mongodb mongodb-program docutils literal"><span class="pre">mongo</span></tt></a> shell:</p>
+<div class="highlight-sh"><div class="highlight"><pre>mongo
+</pre></div>
+</div>
+</li>
+<li><p class="first">Define a function <tt class="docutils literal"><span class="pre">myFunction</span></tt>:</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="kd">function</span> <span class="nx">myFunction</span> <span class="p">()</span> <span class="p">{</span> <span class="p">}</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">Edit the function using your editor:</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="nx">edit</span> <span class="nx">myFunction</span>
+</pre></div>
+</div>
+<p>The command should open the <tt class="docutils literal"><span class="pre">vim</span></tt> edit session. Remember to save
+your changes.</p>
+</li>
+<li><p class="first">Type <tt class="docutils literal"><span class="pre">myFunction</span></tt> to see the function definition:</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="nx">myFunction</span>
+</pre></div>
+</div>
+<p>The result should be the changes from your saved edit:</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="kd">function</span> <span class="nx">myFunction</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">print</span><span class="p">(</span><span class="s2">"This was edited"</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</li>
+</ol>
+</div>
+</div>
+
+
+<div id="btnv">
+<ul id="btnvl">
+<li id="btnvpr"><a href="http://docs.mongodb.org/manual/faq/developers/" title="Previous Section: FAQ: MongoDB for Application Developers">&lt; &nbsp; FAQ: MongoDB for Application Developers</a></li>
+<li id="btnvup"><a href="http://docs.mongodb.org/manual/faq/" title="Parent Section: Frequently Asked Questions">/\&nbsp; Frequently Asked Questions</a></li>
+<li id="btnvnx"><a href="http://docs.mongodb.org/manual/faq/concurrency/" title="Next Section: FAQ: Concurrency">FAQ: Concurrency &nbsp;&gt;</a></li>
+</ul>
+</div>
+</div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper"><h3><a href="http://docs.mongodb.org/manual/contents/">MongoDB Manual</a>
+
+<small><a href="http://docs.mongodb.org/manual/genindex/">(Index)</a></small>
+
+</h3>
+
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="http://docs.mongodb.org/manual/installation/">Installing MongoDB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://docs.mongodb.org/manual/administration/">Administration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://docs.mongodb.org/manual/security/">Security</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://docs.mongodb.org/manual/crud/">Core MongoDB Operations (CRUD)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://docs.mongodb.org/manual/aggregation/">Aggregation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://docs.mongodb.org/manual/indexes/">Indexes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://docs.mongodb.org/manual/replication/">Replication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://docs.mongodb.org/manual/sharding/">Sharding</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://docs.mongodb.org/manual/applications/">Application Development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://docs.mongodb.org/manual/mongo/">Using the <tt class="docutils literal"><span class="pre">mongo</span></tt> Shell</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://docs.mongodb.org/manual/use-cases/">Use Cases</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://docs.mongodb.org/manual/tutorial/">MongoDB Tutorials</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="http://docs.mongodb.org/manual/faq/">Frequently Asked Questions</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="http://docs.mongodb.org/manual/faq/fundamentals/">FAQ: MongoDB Fundamentals</a></li>
+<li class="toctree-l2"><a class="reference internal" href="http://docs.mongodb.org/manual/faq/developers/">FAQ: MongoDB for Application Developers</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="">FAQ: The <tt class="docutils literal"><span class="pre">mongo</span></tt> Shell</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#how-can-i-enter-multi-line-operations-in-the-mongo-shell">How can I enter multi-line operations in the <tt class="docutils literal"><span class="pre">mongo</span></tt> shell?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#how-can-i-access-to-different-databases-temporarily">How can I access to different databases temporarily?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#does-the-mongo-shell-support-tab-completion-and-other-keyboard-shortcuts">Does the <tt class="docutils literal"><span class="pre">mongo</span></tt> shell support tab completion and other keyboard shortcuts?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#how-can-i-customize-the-mongo-shell-prompt">How can I customize the <tt class="docutils literal"><span class="pre">mongo</span></tt> shell prompt?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#can-i-edit-long-shell-operations-with-an-external-text-editor">Can I edit long shell operations with an external text editor?</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="http://docs.mongodb.org/manual/faq/concurrency/">FAQ: Concurrency</a></li>
+<li class="toctree-l2"><a class="reference internal" href="http://docs.mongodb.org/manual/faq/sharding/">FAQ: Sharding with MongoDB</a></li>
+<li class="toctree-l2"><a class="reference internal" href="http://docs.mongodb.org/manual/faq/replica-sets/">FAQ: Replica Sets and Replication in MongoDB</a></li>
+<li class="toctree-l2"><a class="reference internal" href="http://docs.mongodb.org/manual/faq/storage/">FAQ: MongoDB Storage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="http://docs.mongodb.org/manual/faq/indexes/">FAQ: Indexes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="http://docs.mongodb.org/manual/faq/diagnostics/">FAQ: MongoDB Diagnostics</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="http://docs.mongodb.org/manual/reference/">Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://docs.mongodb.org/manual/about/">About MongoDB Documentation</a></li>
+</ul>
+
+<h3 style="padding-bottom: 1em;"><a href="http://www.mongodb.org/about/">MongoDB.org</a></h3>
+<h3 style="padding-bottom: 1em;"><a href="http://docs.mongodb.org/ecosystem/">MongoDB Ecosystem</a></h3><h3>Formats</h3>
+<ul class="this-page-menu">
+  <li><a href="http://docs.mongodb.org/master/single/">MongoDB Manual, Single HTML Page</a></li>
+  <li><a href="http://docs.mongodb.org/master/MongoDB-Manual-master.pdf" rel="nofollow">MongoDB Manual, PDF Format</a></li>
+  <li><a href="http://docs.mongodb.org/master/MongoDB-Manual-master.epub" rel="nofollow">MongoDB Manual, ePub Format</a></li>
+</ul><h3>MongoDB Wiki</h3>
+
+<ul>
+ <li><strong>Getting Started</strong>
+   <ul>
+     <li><a href="http://www.mongodb.org/about/introduction">Introduction</a></li>
+     <li><a href="http://www.mongodb.org/downloads">Downloads</a></li>
+   </ul>
+ </li>
+ <li><strong><a href="http://www.mongodb.org/about/community">Community</a> and <a href="http://docs.mongodb.org/ecosystem/">Ecosystem</a></strong>
+   <ul>
+     <li><a href="http://www.10gen.com/">10gen</a></li>
+     <li><a href="http://www.10gen.com/events">MongoDB Events</a></li>
+     <li><a href="http://planet.mongodb.org/">Planet MongoDB</a></li>
+     <li><a href="http://mongodb.org/about/community/masters">MongoDB Masters</a></li>
+     <li><a href="http://www.10gen.com/presentations">Slides and Video</a></li>
+     <li><a href="http://docs.mongodb.org/ecosystem/platforms/">Hosting Center</a></li>
+     <li><a href="http://docs.mongodb.org/ecosystem/platforms/windows">Windows</a></li>
+     <li><a href="http://www.10gen.com/products/mms/">MongoDB Monitoring Service</a> (<a href="http://mms.10gen.com/help/">docs</a>)</li>
+     <li><a href="http://docs.mongodb.org/ecosystem/tools/administration-interfaces/">Administrative Interfaces</a></li>
+     <li><a href="http://www.10gen.com/books/">MongoDB Books</a></li>
+   </ul>
+ </li>
+ <li><strong><a href="http://docs.mongodb.org/ecosystem/drivers/">Drivers</a></strong>
+   <ul>
+     <li><a href="http://docs.mongodb.org/ecosystem/drivers/javascript">JavaScript</a> (<a href="http://api.mongodb.org/js/current">docs</a>)</li>
+     <li><a href="http://docs.mongodb.org/ecosystem/drivers/python">Python</a> (<a href="http://api.mongodb.org/python/current">docs</a>)</li>
+     <li><a href="http://docs.mongodb.org/ecosystem/drivers/ruby">Ruby</a> (<a href="http://api.mongodb.org/ruby/current">docs</a>)</li>
+     <li><a href="http://docs.mongodb.org/ecosystem/drivers/php">PHP</a> (<a href="http://php.net/mongo/">docs</a>)</li>
+     <li><a href="http://docs.mongodb.org/ecosystem/drivers/perl">Perl</a> (<a href="http://api.mongodb.org/perl/current/">docs</a>)</li>
+     <li><a href="http://docs.mongodb.org/ecosystem/drivers/java">Java</a> (<a href="http://api.mongodb.org/java/current">docs</a>)</li>
+     <li><a href="http://api.mongodb.org/scala/casbah/current/">Scala</a> (<a href="http://api.mongodb.org/scala/casbah/current/">docs</a>)</li>
+<!-- <li><a href="http://docs.mongodb.org/ecosystem/drivers/scala">Scala</a> (<a href="http://api.mongodb.org/scala/casbah/current/">docs</a>)</li> -->
+     <li><a href="http://docs.mongodb.org/ecosystem/drivers/csharp">C#</a> (<a href="http://api.mongodb.org/csharp/current/">docs</a>)</li>
+     <li><a href="http://docs.mongodb.org/ecosystem/drivers/c">C</a> (<a href="http://api.mongodb.org/c/current/">docs</a>)</li>
+     <li><a href="http://docs.mongodb.org/ecosystem/drivers/cpp">C++</a> (<a href="http://api.mongodb.org/cplusplus/current/">docs</a>)</li>
+     <li><a href="http://docs.mongodb.org/ecosystem/drivers/haskell">Haskell</a> (<a href="http://api.mongodb.org/haskell">docs</a>)</li>
+     <li><a href="http://docs.mongodb.org/ecosystem/drivers/erlang">Erlang</a> (<a href="http://api.mongodb.org/erlang">docs</a>)</li>
+   </ul>
+ </li>
+</ul>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+  <div class="footer">
+    <p>
+       © <a href="">Copyright</a> 2011-2013, 10gen, Inc. 
+       MongoDB®, Mongo®, and the leaf logo are registered trademarks of 10gen, Inc.
+    </p>
+  </div><script type="text/javascript">
+var _gaq = _gaq || [];
+var pluginUrl = (('https:' == document.location.protocol) ? 'https://ssl.' : 'http://www.') + 'google-analytics.com/plugins/ga/inpage_linkid.js';
+_gaq.push(['_require', 'inpage_linkid', pluginUrl]);
+_gaq.push(['_setAccount', 'UA-7301842-8']);
+_gaq.push(['_setDomainName', 'docs.mongodb.org']);
+_gaq.push(['_trackPageview']);
+(function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0];
+        s.parentNode.insertBefore(ga, s);
+        })();
+</script>
+
+<script type="text/javascript">
+document.write(unescape("%3Cscript src='" + document.location.protocol + "//munchkin.marketo.net/munchkin.js' type='text/javascript'%3E%3C/script%3E"));
+</script><script src="FAQ%20%20The%20mongo%20Shell%20%E2%80%94%20MongoDB%20Manual_files/munchkin.htm" type="text/javascript"></script>
+<script>try { mktoMunchkin("017-HGS-593"); } catch(e) {}</script><script type="text/javascript">
+jQuery.ajax({
+    url: "https://jira.mongodb.org/s/en_US-bxctp1/782/6/1.2.4/_/download/batch/com.atlassian.jira.collector.plugin.jira-issue-collector-plugin:issuecollector-embededjs/com.atlassian.jira.collector.plugin.jira-issue-collector-plugin:issuecollector-embededjs.js?collectorId=298ba4e7",
+    type: "get",
+    cache: true,
+    dataType: "script"
+});
+window.ATL_JQ_PAGE_PROPS =  {
+"triggerFunction": function(showCollectorDialog) {
+jQuery("#jirafeedback").click(function(e) {e.preventDefault();showCollectorDialog();});
+jQuery("#jirafooter").click(function(e) {e.preventDefault();showCollectorDialog();});
+}};
+</script>
+
+<div style="display: none;" id="atlwdg-blanket" class="atlwdg-blanket"></div><div class="atlwdg-popup atlwdg-box-shadow atlwdg-hidden" id="atlwdg-container"></div><table class="gstl_0 gssb_c" style="width: 129px; display: none; top: 70px; left: 879px; position: absolute;" cellpadding="0" cellspacing="0"><tbody><tr><td class="gssb_f"></td><td style="width: 100%;" class="gssb_e"></td></tr></tbody></table></body></html>

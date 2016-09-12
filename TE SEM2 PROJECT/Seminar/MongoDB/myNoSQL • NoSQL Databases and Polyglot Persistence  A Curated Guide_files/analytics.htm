@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html><head>
+        <title>Tumblr</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="robots" content="noindex, nofollow">
+        <link rel="icon" href="http://assets.tumblr.com/images/favicon.gif?2" type="image/gif">
+
+        <script src="analytics_data/beacon.htm" async=""></script><script src="myNoSQL%20%E2%80%A2%20NoSQL%20Databases%20and%20Polyglot%20Persistence%20%20A%20Curated%20Guide_files/ga.js" async="" type="text/javascript"></script><script type="text/javascript">
+            function get_url_var(get_var) {
+                var vars = [];
+                var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
+                    vars[key] = value;
+                });
+
+                if (get_var) {
+                    if (typeof vars[get_var] == 'undefined') {
+                        return;
+                    }
+
+                    return vars[get_var];
+                }
+
+                return vars;
+            }
+
+            /* Tumblr.PostMessageListener -- Copied from tumblelog_src.js */
+            Tumblr = {};
+            Tumblr.PostMessageListener = (function(){
+                return {
+                    initialize : function(callback){
+                        callback = callback || function(){};
+                        // http://davidwalsh.name/window-iframe
+                        // Create IE + others compatible event handler
+                        var eventMethod = window.addEventListener ? "addEventListener" : "attachEvent";
+                        var eventer = window[eventMethod];
+                        var messageEvent = eventMethod == "attachEvent" ? "onmessage" : "message";
+                        // Listen to message from child window
+                        eventer(messageEvent,function(e) {
+                            var message = e.data.split(';');
+                            callback(message, e.origin);
+                        },false);
+                    }
+                };
+            })();
+
+            function handle_post_message(message, origin) {
+                if (message[0] === 'openInMobileApp') {
+                    var post_id = parseInt(message[1]),
+                        custom_event = ['_trackEvent', 'Mobile', 'Clicked', 'Open in Mobile App', post_id ];
+
+                    _gaq.push(custom_event);
+
+                    parent.postMessage('openInMobileAppSuccess' + ';' + post_id, message[2]);
+                }
+            }
+
+            var _gaq = [['_setAccount', 'UA-97144-8'], ['_trackPageview', get_url_var('custom')]];
+
+            (function() {
+                var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+                ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+                var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+                Tumblr.PostMessageListener.initialize(handle_post_message);
+            })();
+
+            var _comscore = _comscore || [];
+            _comscore.push(
+                { c1: "2", c2: 15742520 }
+            );
+            (function(){ var s = document.createElement("script"), el = document.getElementsByTagName("script")[0]; s.async = true; s.src = (document.location.protocol == "https:" ? "https://sb" : "http://b") + ".scorecardresearch.com/beacon.js"; el.parentNode.insertBefore(s, el); })();
+        </script>
+        <noscript><img src="http://b.scorecardresearch.com/p?c1=2&c2=15742520&cv=2.0&cj=1" /></noscript>
+    </head>
+    <body>
+    
+</body></html>

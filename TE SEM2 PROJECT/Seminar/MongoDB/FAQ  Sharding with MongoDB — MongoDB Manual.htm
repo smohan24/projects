@@ -1,0 +1,570 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head>
+    <title>FAQ: Sharding with MongoDB — MongoDB Manual</title>
+
+    <link rel="shortcut icon" href="http://media.mongodb.org/favicon.ico">
+    <meta name="robots" content="index">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <link rel="canonical" href="http://docs.mongodb.org/manual/faq/sharding">
+
+    
+    
+    <link rel="stylesheet" href="FAQ%20%20Sharding%20with%20MongoDB%20%E2%80%94%20MongoDB%20Manual_files/mongodb-docs.css" type="text/css">
+    <link rel="stylesheet" href="FAQ%20%20Sharding%20with%20MongoDB%20%E2%80%94%20MongoDB%20Manual_files/pygments.css" type="text/css">
+      
+    <script src="FAQ%20%20Sharding%20with%20MongoDB%20%E2%80%94%20MongoDB%20Manual_files/cse.js" async="" type="text/javascript"></script><script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '2.2.2',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '',
+        HAS_SOURCE:  false
+      };
+    </script>
+    <script type="text/javascript" src="FAQ%20%20Sharding%20with%20MongoDB%20%E2%80%94%20MongoDB%20Manual_files/jquery.js"></script>
+    <script type="text/javascript" src="FAQ%20%20Sharding%20with%20MongoDB%20%E2%80%94%20MongoDB%20Manual_files/underscore.js"></script>
+    <script type="text/javascript" src="FAQ%20%20Sharding%20with%20MongoDB%20%E2%80%94%20MongoDB%20Manual_files/doctools.js"></script>
+      <link rel="search" type="application/opensearchdescription+xml" href="http://docs.mongodb.org/osd.xml" title="MongoDB Help">
+<link rel="author" title="About these documents" href="http://docs.mongodb.org/manual/about/">
+<link rel="top" title="MongoDB Manual" href="http://docs.mongodb.org/manual/">
+<link rel="up" title="Frequently Asked Questions" href="http://docs.mongodb.org/manual/faq/">
+<link rel="next" title="FAQ: Replica Sets and Replication in MongoDB" href="http://docs.mongodb.org/manual/faq/replica-sets/">
+<link rel="prev" title="FAQ: Concurrency" href="http://docs.mongodb.org/manual/faq/concurrency/">
+<!-- Put the following javascript before the closing </head> tag. -->
+<script>
+  (function() {
+    var cx = '017213726194841070573:WMX6838984';
+    var gcse = document.createElement('script'); gcse.type = 'text/javascript'; gcse.async = true;
+    gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+        '//www.google.com/cse/cse.js?cx=' + cx;
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(gcse, s);
+  })();
+</script>
+  <script type="text/javascript" src="FAQ%20%20Sharding%20with%20MongoDB%20%E2%80%94%20MongoDB%20Manual_files/jsapi"></script><link rel="stylesheet" href="FAQ%20%20Sharding%20with%20MongoDB%20%E2%80%94%20MongoDB%20Manual_files/defaulten.css" type="text/css"><link rel="stylesheet" href="FAQ%20%20Sharding%20with%20MongoDB%20%E2%80%94%20MongoDB%20Manual_files/default.css" type="text/css"><script src="FAQ%20%20Sharding%20with%20MongoDB%20%E2%80%94%20MongoDB%20Manual_files/defaulten.js" type="text/javascript"></script><script src="FAQ%20%20Sharding%20with%20MongoDB%20%E2%80%94%20MongoDB%20Manual_files/search.js" type="text/javascript"></script><style type="text/css">
+.gsc-control-cse {
+font-family: Arial, sans-serif;
+border-color: #FFFFFF;
+background-color: #FFFFFF;
+}
+.gsc-control-cse .gsc-table-result {
+font-family: Arial, sans-serif;
+}
+input.gsc-input, .gsc-input-box, .gsc-input-box-hover, .gsc-input-box-focus {
+border-color: #D9D9D9;
+}
+input.gsc-search-button, input.gsc-search-button:hover, input.gsc-search-button:focus {
+border-color: #5AAC41;
+background-color: #5AAC41;
+background-image: none;
+filter: none;
+}
+.gsc-tabHeader.gsc-tabhInactive {
+border-color: #CCCCCC;
+background-color: #FFFFFF;
+}
+.gsc-tabHeader.gsc-tabhActive {
+border-color: #CCCCCC;
+border-bottom-color: #FFFFFF;
+background-color: #FFFFFF;
+}
+.gsc-tabsArea {
+border-color: #CCCCCC;
+}
+.gsc-webResult.gsc-result,
+.gsc-results .gsc-imageResult {
+border-color: #FFFFFF;
+background-color: #FFFFFF;
+}
+.gsc-webResult.gsc-result:hover,
+.gsc-imageResult:hover {
+border-color: #FFFFFF;
+background-color: #FFFFFF;
+}
+.gs-webResult.gs-result a.gs-title:link,
+.gs-webResult.gs-result a.gs-title:link b,
+.gs-imageResult a.gs-title:link,
+.gs-imageResult a.gs-title:link b {
+color: #1155CC;
+}
+.gs-webResult.gs-result a.gs-title:visited,
+.gs-webResult.gs-result a.gs-title:visited b,
+.gs-imageResult a.gs-title:visited,
+.gs-imageResult a.gs-title:visited b {
+color: #1155CC;
+}
+.gs-webResult.gs-result a.gs-title:hover,
+.gs-webResult.gs-result a.gs-title:hover b,
+.gs-imageResult a.gs-title:hover,
+.gs-imageResult a.gs-title:hover b {
+color: #1155CC;
+}
+.gs-webResult.gs-result a.gs-title:active,
+.gs-webResult.gs-result a.gs-title:active b,
+.gs-imageResult a.gs-title:active,
+.gs-imageResult a.gs-title:active b {
+color: #1155CC;
+}
+.gsc-cursor-page {
+color: #1155CC;
+}
+a.gsc-trailing-more-results:link {
+color: #1155CC;
+}
+.gs-webResult .gs-snippet,
+.gs-imageResult .gs-snippet,
+.gs-fileFormatType {
+color: #333333;
+}
+.gs-webResult div.gs-visibleUrl,
+.gs-imageResult div.gs-visibleUrl {
+color: #009933;
+}
+.gs-webResult div.gs-visibleUrl-short {
+color: #009933;
+}
+.gs-webResult div.gs-visibleUrl-short {
+display: none;
+}
+.gs-webResult div.gs-visibleUrl-long {
+display: block;
+}
+.gs-promotion div.gs-visibleUrl-short {
+display: none;
+}
+.gs-promotion div.gs-visibleUrl-long {
+display: block;
+}
+.gsc-cursor-box {
+border-color: #FFFFFF;
+}
+.gsc-results .gsc-cursor-box .gsc-cursor-page {
+border-color: #CCCCCC;
+background-color: #FFFFFF;
+color: #1155CC;
+}
+.gsc-results .gsc-cursor-box .gsc-cursor-current-page {
+border-color: #CCCCCC;
+background-color: #FFFFFF;
+color: #1155CC;
+}
+.gsc-webResult.gsc-result.gsc-promotion {
+border-color: #F6F6F6;
+background-color: #F6F6F6;
+}
+.gsc-completion-title {
+color: #1155CC;
+}
+.gsc-completion-snippet {
+color: #333333;
+}
+.gs-promotion a.gs-title:link,
+.gs-promotion a.gs-title:link *,
+.gs-promotion .gs-snippet a:link {
+color: #1155CC;
+}
+.gs-promotion a.gs-title:visited,
+.gs-promotion a.gs-title:visited *,
+.gs-promotion .gs-snippet a:visited {
+color: #1155CC;
+}
+.gs-promotion a.gs-title:hover,
+.gs-promotion a.gs-title:hover *,
+.gs-promotion .gs-snippet a:hover {
+color: #1155CC;
+}
+.gs-promotion a.gs-title:active,
+.gs-promotion a.gs-title:active *,
+.gs-promotion .gs-snippet a:active {
+color: #1155CC;
+}
+.gs-promotion .gs-snippet,
+.gs-promotion .gs-title .gs-promotion-title-right,
+.gs-promotion .gs-title .gs-promotion-title-right * {
+color: #333333;
+}
+.gs-promotion .gs-visibleUrl,
+.gs-promotion .gs-visibleUrl-short {
+color: #009933;
+}
+.gsc-input input.gsc-input {
+background: none repeat scroll 0% 0% white !important;
+}
+</style></head>
+  <body>
+<div id="top-right">
+        <div class="user-right">
+                <ul id="header-menu-bar" class="ajs-menu-bar">
+                <li class="normal"><a target="_blank" href="http://groups.google.com/group/mongodb-user">Forums</a></li>
+                <li class="normal"><a target="_blank" href="http://blog.mongodb.org/">Blog</a></li>
+                <li class="normal"><a href="http://www.mongodb.org/downloads">Download</a></li>
+                <li class="normal"><a href="http://docs.mongodb.org/ecosystem/drivers/">Drivers</a></li>
+                <li class="normal"><a href="http://www.10gen.com/events">Events</a></li>
+                <li class="normal last"><a class="last" href="http://docs.mongodb.org/manual/meta/translation">Translations</a></li>
+                </ul>
+        </div>
+</div>
+<div id="header-db" class="spread">
+        <div class="split">
+                <div id="logo">
+                        <div><a href="http://docs.mongodb.org/manual/"><img class="logo" src="FAQ%20%20Sharding%20with%20MongoDB%20%E2%80%94%20MongoDB%20Manual_files/logo-mongodb.png" alt="MongoDB Logo"></a></div>
+                </div>
+        </div>
+
+<div class="search-db"><gcse:searchbox></gcse:searchbox></div>
+<div id="etp">
+<ul>
+<li><a href="https://github.com/mongodb/docs/blob/master/source/faq/sharding.txt" target="_blank" title="Edit faq/sharding.txt on github">Edit this Page</a></li>
+<li><a href="http://github.com/mongodb/docs" target="_blank" title="Fork the documentation on GitHub and contribute.">GitHub</a></li>
+<li><a href="https://jira.mongodb.org/secure/CreateIssueDetails%21init.jspa?pid=10380&amp;issuetype=4&amp;priority=4&amp;summary=Comment+on%3a+%22faq/sharding%2Etxt%22" target="_blank" title="Report a problem with faq/sharding.txt on Jira">Report a problem</a></li>
+</ul>
+</div>
+</div>  
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            <div id="cse-results"><gcse:searchresults></gcse:searchresults></div>
+            
+  <div class="section" id="faq-sharding-with-mongodb">
+<h1>FAQ: Sharding with MongoDB<a class="headerlink" href="#faq-sharding-with-mongodb" title="Permalink to this headline">¶</a></h1>
+<p>This document answers common questions about horizontal scaling
+using MongoDB’s <a class="reference internal" href="http://docs.mongodb.org/manual/reference/glossary/#term-sharding"><em class="xref std std-term">sharding</em></a>.</p>
+<p>If you don’t find the answer you’re looking for, check
+the <a class="reference internal" href="http://docs.mongodb.org/manual/faq/"><em>complete list of FAQs</em></a> or post your question to the
+<a class="reference external" href="https://groups.google.com/forum/?fromgroups#%21forum/mongodb-user">MongoDB User Mailing List</a>.</p>
+<div class="contents local topic" id="frequently-asked-questions">
+<p class="topic-title first">Frequently Asked Questions:</p>
+<ul class="simple">
+<li><a class="reference internal" href="#is-sharding-appropriate-for-a-new-deployment" id="id1">Is sharding appropriate for a new deployment?</a></li>
+<li><a class="reference internal" href="#how-does-sharding-work-with-replication" id="id2">How does sharding work with replication?</a></li>
+<li><a class="reference internal" href="#can-i-change-the-shard-key-after-sharding-a-collection" id="id3">Can I change the shard key after sharding a collection?</a></li>
+<li><a class="reference internal" href="#what-happens-to-unsharded-collections-in-sharded-databases" id="id4">What happens to unsharded collections in sharded databases?</a></li>
+<li><a class="reference internal" href="#how-does-mongodb-distribute-data-across-shards" id="id5">How does MongoDB distribute data across shards?</a></li>
+<li><a class="reference internal" href="#what-happens-if-a-client-updates-a-document-in-a-chunk-during-a-migration" id="id6">What happens if a client updates a document in a chunk during a migration?</a></li>
+<li><a class="reference internal" href="#what-happens-to-queries-if-a-shard-is-inaccessible-or-slow" id="id7">What happens to queries if a shard is inaccessible or slow?</a></li>
+<li><a class="reference internal" href="#how-does-mongodb-distribute-queries-among-shards" id="id8">How does MongoDB distribute queries among shards?</a></li>
+<li><a class="reference internal" href="#how-does-mongodb-sort-queries-in-sharded-environments" id="id9">How does MongoDB sort queries in sharded environments?</a></li>
+<li><a class="reference internal" href="#how-does-mongodb-ensure-unique-id-field-values-when-using-a-shard-key-other-than-id" id="id10">How does MongoDB ensure unique <tt class="docutils literal"><span class="pre">_id</span></tt> field values when using a shard key <em>other</em> than <tt class="docutils literal"><span class="pre">_id</span></tt>?</a></li>
+<li><a class="reference internal" href="#i-ve-enabled-sharding-and-added-a-second-shard-but-all-the-data-is-still-on-one-server-why" id="id11">I’ve enabled sharding and added a second shard, but all the data is still on one server. Why?</a></li>
+<li><a class="reference internal" href="#is-it-safe-to-remove-old-files-in-the-movechunk-directory" id="id12">Is it safe to remove old files in the <tt class="docutils literal"><span class="pre">moveChunk</span></tt> directory?</a></li>
+<li><a class="reference internal" href="#how-does-mongos-use-connections" id="id13">How does <tt class="docutils literal"><span class="pre">mongos</span></tt> use connections?</a></li>
+<li><a class="reference internal" href="#why-does-mongos-hold-connections-open" id="id14">Why does <tt class="docutils literal"><span class="pre">mongos</span></tt> hold connections open?</a></li>
+<li><a class="reference internal" href="#where-does-mongodb-report-on-connections-used-by-mongos" id="id15">Where does MongoDB report on connections used by <tt class="docutils literal"><span class="pre">mongos</span></tt>?</a></li>
+<li><a class="reference internal" href="#what-does-writebacklisten-in-the-log-mean" id="id16">What does <tt class="docutils literal"><span class="pre">writebacklisten</span></tt> in the log mean?</a></li>
+<li><a class="reference internal" href="#how-should-administrators-deal-with-failed-migrations" id="id17">How should administrators deal with failed migrations?</a></li>
+<li><a class="reference internal" href="#what-is-the-process-for-moving-renaming-or-changing-the-number-of-config-servers" id="id18">What is the process for moving, renaming, or changing the number of config servers?</a></li>
+<li><a class="reference internal" href="#when-do-the-mongos-servers-detect-config-server-changes" id="id19">When do the <tt class="docutils literal"><span class="pre">mongos</span></tt> servers detect config server changes?</a></li>
+<li><a class="reference internal" href="#is-it-possible-to-quickly-update-mongos-servers-after-updating-a-replica-set-configuration" id="id20">Is it possible to quickly update <tt class="docutils literal"><span class="pre">mongos</span></tt> servers after updating a replica set configuration?</a></li>
+<li><a class="reference internal" href="#what-does-the-maxconns-setting-on-mongos-do" id="id21">What does the <tt class="docutils literal"><span class="pre">maxConns</span></tt> setting on <tt class="docutils literal"><span class="pre">mongos</span></tt> do?</a></li>
+<li><a class="reference internal" href="#how-do-indexes-impact-queries-in-sharded-systems" id="id22">How do indexes impact queries in sharded systems?</a></li>
+<li><a class="reference internal" href="#can-shard-keys-be-randomly-generated" id="id23">Can shard keys be randomly generated?</a></li>
+<li><a class="reference internal" href="#can-shard-keys-have-a-non-uniform-distribution-of-values" id="id24">Can shard keys have a non-uniform distribution of values?</a></li>
+<li><a class="reference internal" href="#can-you-shard-on-the-id-field" id="id25">Can you shard on the <tt class="docutils literal"><span class="pre">_id</span></tt> field?</a></li>
+<li><a class="reference internal" href="#can-shard-key-be-in-ascending-order-like-dates-or-timestamps" id="id26">Can shard key be in ascending order, like dates or timestamps?</a></li>
+<li><a class="reference internal" href="#what-do-movechunk-commit-failed-errors-mean" id="id27">What do <tt class="docutils literal"><span class="pre">moveChunk</span> <span class="pre">commit</span> <span class="pre">failed</span></tt> errors mean?</a></li>
+</ul>
+</div>
+<div class="section" id="is-sharding-appropriate-for-a-new-deployment">
+<h2>Is sharding appropriate for a new deployment?<a class="headerlink" href="#is-sharding-appropriate-for-a-new-deployment" title="Permalink to this headline">¶</a></h2>
+<p>Sometimes.</p>
+<p>If your data set fits on a single servers, you should begin
+with an unsharded deployment.</p>
+<p>Converting an unsharded database to a <a class="reference internal" href="http://docs.mongodb.org/manual/reference/glossary/#term-sharded-cluster"><em class="xref std std-term">sharded cluster</em></a> is easy
+and seamless, so there is <em>little advantage</em> in configuring sharding
+while your data set is small.</p>
+<p>Still, all production deployments should use <a class="reference internal" href="http://docs.mongodb.org/manual/reference/glossary/#term-replication"><em class="xref std std-term">replica sets</em></a> to provide high availability and disaster recovery.</p>
+</div>
+<div class="section" id="how-does-sharding-work-with-replication">
+<h2>How does sharding work with replication?<a class="headerlink" href="#how-does-sharding-work-with-replication" title="Permalink to this headline">¶</a></h2>
+<p>To use replication with sharding, deploy each <a class="reference internal" href="http://docs.mongodb.org/manual/reference/glossary/#term-shard"><em class="xref std std-term">shard</em></a> as a
+<a class="reference internal" href="http://docs.mongodb.org/manual/reference/glossary/#term-replica-set"><em class="xref std std-term">replica set</em></a>.</p>
+</div>
+<div class="section" id="can-i-change-the-shard-key-after-sharding-a-collection">
+<span id="faq-change-shard-key"></span><h2>Can I change the shard key after sharding a collection?<a class="headerlink" href="#can-i-change-the-shard-key-after-sharding-a-collection" title="Permalink to this headline">¶</a></h2>
+<p>No.</p>
+<p>There is no automatic support in MongoDB for changing a shard key
+after sharding a collection. This reality underscores
+the important of choosing a good <a class="reference internal" href="http://docs.mongodb.org/manual/core/sharded-clusters/#shard-key"><em>shard key</em></a>. If you
+<em>must</em> change a shard key after sharding a collection, the best option
+is to:</p>
+<ul class="simple">
+<li>dump all data from MongoDB into an external format.</li>
+<li>drop the original sharded collection.</li>
+<li>configure sharding using a more ideal shard key.</li>
+<li><a class="reference internal" href="http://docs.mongodb.org/manual/tutorial/manage-chunks-in-sharded-cluster/#sharding-administration-pre-splitting"><em>pre-split</em></a> the shard
+key range to ensure initial even distribution.</li>
+<li>restore the dumped data into MongoDB.</li>
+</ul>
+<p>See <a class="reference internal" href="http://docs.mongodb.org/manual/reference/command/shardCollection/#shardCollection" title="shardCollection"><tt class="xref mongodb mongodb-dbcommand docutils literal"><span class="pre">shardCollection</span></tt></a>, <a class="reference internal" href="http://docs.mongodb.org/manual/reference/method/sh.shardCollection/#sh.shardCollection" title="sh.shardCollection"><tt class="xref mongodb mongodb-method docutils literal"><span class="pre">sh.shardCollection()</span></tt></a>,
+<a class="reference internal" href="http://docs.mongodb.org/manual/administration/sharded-clusters/"><em>Sharded Cluster Administration</em></a>, the <a class="reference internal" href="http://docs.mongodb.org/manual/core/sharded-cluster-internals/#sharding-internals-shard-keys"><em>Shard Key</em></a> section in the
+<a class="reference internal" href="http://docs.mongodb.org/manual/core/sharded-cluster-internals/"><em>Sharded Cluster Internals and Behaviors</em></a> document,
+<a class="reference internal" href="http://docs.mongodb.org/manual/tutorial/deploy-shard-cluster/"><em>Deploy a Sharded Cluster</em></a>, and <a class="reference external" href="https://jira.mongodb.org/browse/SERVER-4000">SERVER-4000</a> for
+more information.</p>
+</div>
+<div class="section" id="what-happens-to-unsharded-collections-in-sharded-databases">
+<h2>What happens to unsharded collections in sharded databases?<a class="headerlink" href="#what-happens-to-unsharded-collections-in-sharded-databases" title="Permalink to this headline">¶</a></h2>
+<p>In the current implementation, all databases in a <a class="reference internal" href="http://docs.mongodb.org/manual/reference/glossary/#term-sharded-cluster"><em class="xref std std-term">sharded
+cluster</em></a> have a “primary <a class="reference internal" href="http://docs.mongodb.org/manual/reference/glossary/#term-shard"><em class="xref std std-term">shard</em></a>.” All unsharded
+collection within that database will reside on the same shard.</p>
+</div>
+<div class="section" id="how-does-mongodb-distribute-data-across-shards">
+<h2>How does MongoDB distribute data across shards?<a class="headerlink" href="#how-does-mongodb-distribute-data-across-shards" title="Permalink to this headline">¶</a></h2>
+<p>Sharding must be specifically enabled on a collection. After enabling
+sharding on the collection, MongoDB will assign various ranges of
+collection data to the different shards in the cluster. The cluster
+automatically corrects imbalances between shards by migrating ranges
+of data from one shard to another.</p>
+</div>
+<div class="section" id="what-happens-if-a-client-updates-a-document-in-a-chunk-during-a-migration">
+<h2>What happens if a client updates a document in a chunk during a migration?<a class="headerlink" href="#what-happens-if-a-client-updates-a-document-in-a-chunk-during-a-migration" title="Permalink to this headline">¶</a></h2>
+<p>The <a class="reference internal" href="http://docs.mongodb.org/manual/reference/mongos/#mongos" title="mongos"><tt class="xref mongodb mongodb-program docutils literal"><span class="pre">mongos</span></tt></a> routes the operation to the “old” shard, where
+it will succeed immediately. Then the <a class="reference internal" href="http://docs.mongodb.org/manual/reference/glossary/#term-shard"><em class="xref std std-term">shard</em></a> <a class="reference internal" href="http://docs.mongodb.org/manual/reference/mongod/#mongod" title="mongod"><tt class="xref mongodb mongodb-program docutils literal"><span class="pre">mongod</span></tt></a>
+instances will replicate the modification to the “new” shard before
+the <a class="reference internal" href="http://docs.mongodb.org/manual/reference/glossary/#term-sharded-cluster"><em class="xref std std-term">sharded cluster</em></a> updates that chunk’s “ownership,” which
+effectively finalizes the migration process.</p>
+</div>
+<div class="section" id="what-happens-to-queries-if-a-shard-is-inaccessible-or-slow">
+<h2>What happens to queries if a shard is inaccessible or slow?<a class="headerlink" href="#what-happens-to-queries-if-a-shard-is-inaccessible-or-slow" title="Permalink to this headline">¶</a></h2>
+<p>If a <a class="reference internal" href="http://docs.mongodb.org/manual/reference/glossary/#term-shard"><em class="xref std std-term">shard</em></a> is inaccessible or unavailable, queries will return
+with an error.</p>
+<p>However, a client may set the <tt class="docutils literal"><span class="pre">partial</span></tt> query bit, which will then
+return results from all available shards, regardless of whether a
+given shard is unavailable.</p>
+<p>If a shard is responding slowly, <a class="reference internal" href="http://docs.mongodb.org/manual/reference/mongos/#mongos" title="mongos"><tt class="xref mongodb mongodb-program docutils literal"><span class="pre">mongos</span></tt></a> will merely wait
+for the shard to return results.</p>
+</div>
+<div class="section" id="how-does-mongodb-distribute-queries-among-shards">
+<h2>How does MongoDB distribute queries among shards?<a class="headerlink" href="#how-does-mongodb-distribute-queries-among-shards" title="Permalink to this headline">¶</a></h2>
+<p class="versionchanged">
+<span class="versionmodified">Changed in version 2.0.</span></p>
+<p>The exact method for distributing queries to <a class="reference internal" href="http://docs.mongodb.org/manual/reference/glossary/#term-shard"><em class="xref std std-term">shards</em></a> in a
+<a class="reference internal" href="http://docs.mongodb.org/manual/reference/glossary/#term-sharded-cluster"><em class="xref std std-term">cluster</em></a> depends on the nature of the query and the configuration of
+the sharded cluster. Consider a sharded collection, using the
+<a class="reference internal" href="http://docs.mongodb.org/manual/reference/glossary/#term-shard-key"><em class="xref std std-term">shard key</em></a> <tt class="docutils literal"><span class="pre">user_id</span></tt>, that has <tt class="docutils literal"><span class="pre">last_login</span></tt> and
+<tt class="docutils literal"><span class="pre">email</span></tt> attributes:</p>
+<ul>
+<li><p class="first">For a query that selects one or more values for the <tt class="docutils literal"><span class="pre">user_id</span></tt>
+key:</p>
+<p><a class="reference internal" href="http://docs.mongodb.org/manual/reference/mongos/#mongos" title="mongos"><tt class="xref mongodb mongodb-program docutils literal"><span class="pre">mongos</span></tt></a> determines which shard or shards contains the
+relevant data, based on the cluster metadata, and directs a query to
+the required shard or shards, and returns those results to the
+client.</p>
+</li>
+<li><p class="first">For a query that selects <tt class="docutils literal"><span class="pre">user_id</span></tt> and also performs a sort:</p>
+<p><a class="reference internal" href="http://docs.mongodb.org/manual/reference/mongos/#mongos" title="mongos"><tt class="xref mongodb mongodb-program docutils literal"><span class="pre">mongos</span></tt></a> can make a straightforward translation of this
+operation into a number of queries against the relevant shards,
+ordered by <tt class="docutils literal"><span class="pre">user_id</span></tt>. When the sorted queries return from all
+shards, the <a class="reference internal" href="http://docs.mongodb.org/manual/reference/mongos/#mongos" title="mongos"><tt class="xref mongodb mongodb-program docutils literal"><span class="pre">mongos</span></tt></a> merges the sorted results and returns
+the complete result to the client.</p>
+</li>
+<li><p class="first">For queries that select on <tt class="docutils literal"><span class="pre">last_login</span></tt>:</p>
+<p>These queries must run on all shards: <a class="reference internal" href="http://docs.mongodb.org/manual/reference/mongos/#mongos" title="mongos"><tt class="xref mongodb mongodb-program docutils literal"><span class="pre">mongos</span></tt></a> must
+parallelize the query over the shards and perform a merge-sort on
+the <tt class="docutils literal"><span class="pre">email</span></tt> of the documents found.</p>
+</li>
+</ul>
+</div>
+<div class="section" id="how-does-mongodb-sort-queries-in-sharded-environments">
+<h2>How does MongoDB sort queries in sharded environments?<a class="headerlink" href="#how-does-mongodb-sort-queries-in-sharded-environments" title="Permalink to this headline">¶</a></h2>
+<p>If you call the <a class="reference internal" href="http://docs.mongodb.org/manual/reference/method/cursor.sort/#cursor.sort" title="cursor.sort"><tt class="xref mongodb mongodb-method docutils literal"><span class="pre">cursor.sort()</span></tt></a> method on a query in a sharded
+environment, the <a class="reference internal" href="http://docs.mongodb.org/manual/reference/mongod/#mongod" title="mongod"><tt class="xref mongodb mongodb-program docutils literal"><span class="pre">mongod</span></tt></a> for each shard will sort its
+results, and the <a class="reference internal" href="http://docs.mongodb.org/manual/reference/mongos/#mongos" title="mongos"><tt class="xref mongodb mongodb-program docutils literal"><span class="pre">mongos</span></tt></a> merges each shard’s results before returning
+them to the client.</p>
+</div>
+<div class="section" id="how-does-mongodb-ensure-unique-id-field-values-when-using-a-shard-key-other-than-id">
+<h2>How does MongoDB ensure unique <tt class="docutils literal"><span class="pre">_id</span></tt> field values when using a shard key <em>other</em> than <tt class="docutils literal"><span class="pre">_id</span></tt>?<a class="headerlink" href="#how-does-mongodb-ensure-unique-id-field-values-when-using-a-shard-key-other-than-id" title="Permalink to this headline">¶</a></h2>
+<p>If you do not use <tt class="docutils literal"><span class="pre">_id</span></tt> as the shard key, then your
+application/client layer must be responsible for keeping the <tt class="docutils literal"><span class="pre">_id</span></tt>
+field unique. It is problematic for collections to have duplicate
+<tt class="docutils literal"><span class="pre">_id</span></tt> values.</p>
+<p>If you’re not sharding your collection by the <tt class="docutils literal"><span class="pre">_id</span></tt> field, then you
+should be sure to store a globally unique identifier in that
+field. The default <a class="reference external" href="http://www.mongodb.org/display/DOCS/Object+IDs">BSON ObjectID</a> works well in
+this case.</p>
+</div>
+<div class="section" id="i-ve-enabled-sharding-and-added-a-second-shard-but-all-the-data-is-still-on-one-server-why">
+<h2>I’ve enabled sharding and added a second shard, but all the data is still on one server. Why?<a class="headerlink" href="#i-ve-enabled-sharding-and-added-a-second-shard-but-all-the-data-is-still-on-one-server-why" title="Permalink to this headline">¶</a></h2>
+<p>First, ensure that you’ve declared a <a class="reference internal" href="http://docs.mongodb.org/manual/reference/glossary/#term-shard-key"><em class="xref std std-term">shard key</em></a> for your
+collection. Until you have configured the shard key, MongoDB will not
+create <a class="reference internal" href="http://docs.mongodb.org/manual/reference/glossary/#term-chunk"><em class="xref std std-term">chunks</em></a>, and <a class="reference internal" href="http://docs.mongodb.org/manual/reference/glossary/#term-sharding"><em class="xref std std-term">sharding</em></a> will not occur.</p>
+<p>Next, keep in mind that the default chunk size is 64 MB. As a result,
+in most situations, the collection needs at least 64 MB before a
+migration will occur.</p>
+<p>Additionally, the system which balances chunks among the servers
+attempts to avoid superfluous migrations. Depending on the number of
+shards, your shard key, and the amount of data, systems often require
+at least 10 chunks of data to trigger migrations.</p>
+<p>You can run <a class="reference internal" href="http://docs.mongodb.org/manual/reference/method/db.printShardingStatus/#db.printShardingStatus" title="db.printShardingStatus"><tt class="xref mongodb mongodb-method docutils literal"><span class="pre">db.printShardingStatus()</span></tt></a> to see all the chunks
+present in your cluster.</p>
+</div>
+<div class="section" id="is-it-safe-to-remove-old-files-in-the-movechunk-directory">
+<h2>Is it safe to remove old files in the <tt class="docutils literal"><span class="pre">moveChunk</span></tt> directory?<a class="headerlink" href="#is-it-safe-to-remove-old-files-in-the-movechunk-directory" title="Permalink to this headline">¶</a></h2>
+<p>Yes. <a class="reference internal" href="http://docs.mongodb.org/manual/reference/mongod/#mongod" title="mongod"><tt class="xref mongodb mongodb-program docutils literal"><span class="pre">mongod</span></tt></a> creates these files as backups during normal
+<a class="reference internal" href="http://docs.mongodb.org/manual/reference/glossary/#term-shard"><em class="xref std std-term">shard</em></a> balancing operations.</p>
+<p>Once these migrations are complete, you may delete these files.</p>
+<p>You can set <a class="reference internal" href="http://docs.mongodb.org/manual/reference/configuration-options/#noMoveParanoia" title="noMoveParanoia"><tt class="xref mongodb mongodb-setting docutils literal"><span class="pre">noMoveParanoia</span></tt></a> to <tt class="docutils literal"><span class="pre">true</span></tt> to disable this
+behavior.</p>
+</div>
+<div class="section" id="how-does-mongos-use-connections">
+<h2>How does <tt class="docutils literal"><span class="pre">mongos</span></tt> use connections?<a class="headerlink" href="#how-does-mongos-use-connections" title="Permalink to this headline">¶</a></h2>
+<p>Each client maintains a connection to a <a class="reference internal" href="http://docs.mongodb.org/manual/reference/mongos/#mongos" title="mongos"><tt class="xref mongodb mongodb-program docutils literal"><span class="pre">mongos</span></tt></a> instance.
+Each <a class="reference internal" href="http://docs.mongodb.org/manual/reference/mongos/#mongos" title="mongos"><tt class="xref mongodb mongodb-program docutils literal"><span class="pre">mongos</span></tt></a> instance maintains a pool of connections to the
+members of a replica set supporting the sharded cluster.  Clients use
+connections between <a class="reference internal" href="http://docs.mongodb.org/manual/reference/mongos/#mongos" title="mongos"><tt class="xref mongodb mongodb-program docutils literal"><span class="pre">mongos</span></tt></a> and <a class="reference internal" href="http://docs.mongodb.org/manual/reference/mongod/#mongod" title="mongod"><tt class="xref mongodb mongodb-program docutils literal"><span class="pre">mongod</span></tt></a> instances
+one at a time. Requests are not multiplexed or pipelined. When client
+requests complete, the <a class="reference internal" href="http://docs.mongodb.org/manual/reference/mongos/#mongos" title="mongos"><tt class="xref mongodb mongodb-program docutils literal"><span class="pre">mongos</span></tt></a> returns the connection to the
+pool.</p>
+<p>See the <a class="reference internal" href="http://docs.mongodb.org/manual/administration/ulimit/#system-resource-utilization"><em>System Resource Utilization</em></a> section of the
+<a class="reference internal" href="http://docs.mongodb.org/manual/administration/ulimit/"><em>Linux ulimit Settings</em></a> document.</p>
+</div>
+<div class="section" id="why-does-mongos-hold-connections-open">
+<h2>Why does <tt class="docutils literal"><span class="pre">mongos</span></tt> hold connections open?<a class="headerlink" href="#why-does-mongos-hold-connections-open" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference internal" href="http://docs.mongodb.org/manual/reference/mongos/#mongos" title="mongos"><tt class="xref mongodb mongodb-program docutils literal"><span class="pre">mongos</span></tt></a> uses a set of connection pools to communicate with
+each <a class="reference internal" href="http://docs.mongodb.org/manual/reference/glossary/#term-shard"><em class="xref std std-term">shard</em></a>.  These pools do not shrink when the number of
+clients decreases.</p>
+<p>This can lead to an unused <a class="reference internal" href="http://docs.mongodb.org/manual/reference/mongos/#mongos" title="mongos"><tt class="xref mongodb mongodb-program docutils literal"><span class="pre">mongos</span></tt></a> with a large number
+of open connections. If the <a class="reference internal" href="http://docs.mongodb.org/manual/reference/mongos/#mongos" title="mongos"><tt class="xref mongodb mongodb-program docutils literal"><span class="pre">mongos</span></tt></a> is no longer in use,
+it is safe to restart the process to close existing connections.</p>
+</div>
+<div class="section" id="where-does-mongodb-report-on-connections-used-by-mongos">
+<h2>Where does MongoDB report on connections used by <tt class="docutils literal"><span class="pre">mongos</span></tt>?<a class="headerlink" href="#where-does-mongodb-report-on-connections-used-by-mongos" title="Permalink to this headline">¶</a></h2>
+<p>Connect to the <a class="reference internal" href="http://docs.mongodb.org/manual/reference/mongos/#mongos" title="mongos"><tt class="xref mongodb mongodb-program docutils literal"><span class="pre">mongos</span></tt></a> with the <a class="reference internal" href="http://docs.mongodb.org/manual/reference/mongo/#mongo" title="mongo"><tt class="xref mongodb mongodb-program docutils literal"><span class="pre">mongo</span></tt></a> shell, and
+run the following command:</p>
+<div class="highlight-sh"><div class="highlight"><pre>db._adminCommand<span class="o">(</span><span class="s2">"connPoolStats"</span><span class="o">)</span>;
+</pre></div>
+</div>
+</div>
+<div class="section" id="what-does-writebacklisten-in-the-log-mean">
+<h2>What does <tt class="docutils literal"><span class="pre">writebacklisten</span></tt> in the log mean?<a class="headerlink" href="#what-does-writebacklisten-in-the-log-mean" title="Permalink to this headline">¶</a></h2>
+<p>The writeback listener is a process that opens a long poll to relay
+writes back from a <a class="reference internal" href="http://docs.mongodb.org/manual/reference/mongod/#mongod" title="mongod"><tt class="xref mongodb mongodb-program docutils literal"><span class="pre">mongod</span></tt></a> or <a class="reference internal" href="http://docs.mongodb.org/manual/reference/mongos/#mongos" title="mongos"><tt class="xref mongodb mongodb-program docutils literal"><span class="pre">mongos</span></tt></a> after
+migrations to make sure they have not gone to the wrong server.  The
+writeback listener sends writes back to the correct server if
+necessary.</p>
+<p>These messages are a key part of the sharding infrastructure and should
+not cause concern.</p>
+</div>
+<div class="section" id="how-should-administrators-deal-with-failed-migrations">
+<h2>How should administrators deal with failed migrations?<a class="headerlink" href="#how-should-administrators-deal-with-failed-migrations" title="Permalink to this headline">¶</a></h2>
+<p>Failed migrations require no administrative intervention. Chunk moves are
+consistent and deterministic.</p>
+<p>If a migration fails to complete for some reason, the <a class="reference internal" href="http://docs.mongodb.org/manual/reference/glossary/#term-cluster"><em class="xref std std-term">cluster</em></a>
+will retry the operation. When the migration completes successfully,
+the data will reside only on the new shard.</p>
+</div>
+<div class="section" id="what-is-the-process-for-moving-renaming-or-changing-the-number-of-config-servers">
+<h2>What is the process for moving, renaming, or changing the number of config servers?<a class="headerlink" href="#what-is-the-process-for-moving-renaming-or-changing-the-number-of-config-servers" title="Permalink to this headline">¶</a></h2>
+<div class="admonition-see admonition seealso">
+<p class="first admonition-title">See</p>
+<p class="last">The wiki page that describes this process: “<a class="reference external" href="http://www.mongodb.org/display/DOCS/Changing+Config+Servers">Changing Configuration Servers</a>.”</p>
+</div>
+</div>
+<div class="section" id="when-do-the-mongos-servers-detect-config-server-changes">
+<h2>When do the <tt class="docutils literal"><span class="pre">mongos</span></tt> servers detect config server changes?<a class="headerlink" href="#when-do-the-mongos-servers-detect-config-server-changes" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference internal" href="http://docs.mongodb.org/manual/reference/mongos/#mongos" title="mongos"><tt class="xref mongodb mongodb-program docutils literal"><span class="pre">mongos</span></tt></a> instances maintain a cache of the <a class="reference internal" href="http://docs.mongodb.org/manual/reference/glossary/#term-config-database"><em class="xref std std-term">config
+database</em></a> that holds the metadata for the <a class="reference internal" href="http://docs.mongodb.org/manual/reference/glossary/#term-sharded-cluster"><em class="xref std std-term">sharded cluster</em></a>. This
+metadata includes the mapping of <a class="reference internal" href="http://docs.mongodb.org/manual/reference/glossary/#term-chunk"><em class="xref std std-term">chunks</em></a> to
+<a class="reference internal" href="http://docs.mongodb.org/manual/reference/glossary/#term-shard"><em class="xref std std-term">shards</em></a>.</p>
+<p><a class="reference internal" href="http://docs.mongodb.org/manual/reference/mongos/#mongos" title="mongos"><tt class="xref mongodb mongodb-program docutils literal"><span class="pre">mongos</span></tt></a> updates its cache lazily by issuing a request to a
+shard and discovering that its metadata is out of date.  There is no
+way to control this behavior from the client, but you can run the
+<a class="reference internal" href="http://docs.mongodb.org/manual/reference/command/flushRouterConfig/#flushRouterConfig" title="flushRouterConfig"><tt class="xref mongodb mongodb-dbcommand docutils literal"><span class="pre">flushRouterConfig</span></tt></a> command against any <a class="reference internal" href="http://docs.mongodb.org/manual/reference/mongos/#mongos" title="mongos"><tt class="xref mongodb mongodb-program docutils literal"><span class="pre">mongos</span></tt></a>
+to force it to refresh its cache.</p>
+</div>
+<div class="section" id="is-it-possible-to-quickly-update-mongos-servers-after-updating-a-replica-set-configuration">
+<h2>Is it possible to quickly update <tt class="docutils literal"><span class="pre">mongos</span></tt> servers after updating a replica set configuration?<a class="headerlink" href="#is-it-possible-to-quickly-update-mongos-servers-after-updating-a-replica-set-configuration" title="Permalink to this headline">¶</a></h2>
+<p>The <a class="reference internal" href="http://docs.mongodb.org/manual/reference/mongos/#mongos" title="mongos"><tt class="xref mongodb mongodb-program docutils literal"><span class="pre">mongos</span></tt></a> instances will detect these changes without
+intervention over time. However, if you want to force the
+<a class="reference internal" href="http://docs.mongodb.org/manual/reference/mongos/#mongos" title="mongos"><tt class="xref mongodb mongodb-program docutils literal"><span class="pre">mongos</span></tt></a> to reload its configuration, run the
+<a class="reference internal" href="http://docs.mongodb.org/manual/reference/command/flushRouterConfig/#flushRouterConfig" title="flushRouterConfig"><tt class="xref mongodb mongodb-dbcommand docutils literal"><span class="pre">flushRouterConfig</span></tt></a> command against to each
+<a class="reference internal" href="http://docs.mongodb.org/manual/reference/mongos/#mongos" title="mongos"><tt class="xref mongodb mongodb-program docutils literal"><span class="pre">mongos</span></tt></a> directly.</p>
+</div>
+<div class="section" id="what-does-the-maxconns-setting-on-mongos-do">
+<h2>What does the <tt class="docutils literal"><span class="pre">maxConns</span></tt> setting on <tt class="docutils literal"><span class="pre">mongos</span></tt> do?<a class="headerlink" href="#what-does-the-maxconns-setting-on-mongos-do" title="Permalink to this headline">¶</a></h2>
+<p>The <a class="reference internal" href="http://docs.mongodb.org/manual/reference/configuration-options/#maxConns" title="maxConns"><tt class="xref mongodb mongodb-setting docutils literal"><span class="pre">maxConns</span></tt></a> option limits the number of connections
+accepted by <a class="reference internal" href="http://docs.mongodb.org/manual/reference/mongos/#mongos" title="mongos"><tt class="xref mongodb mongodb-program docutils literal"><span class="pre">mongos</span></tt></a>.</p>
+<p>If your client driver or application creates a large number of
+connections but allows them to time out rather than closing them
+explicitly, then it might make sense to limit the number of
+connections at the <a class="reference internal" href="http://docs.mongodb.org/manual/reference/mongos/#mongos" title="mongos"><tt class="xref mongodb mongodb-program docutils literal"><span class="pre">mongos</span></tt></a> layer.</p>
+<p>Set <a class="reference internal" href="http://docs.mongodb.org/manual/reference/configuration-options/#maxConns" title="maxConns"><tt class="xref mongodb mongodb-setting docutils literal"><span class="pre">maxConns</span></tt></a> to a value slightly higher than the
+maximum number of connections that the client creates, or the maximum
+size of the connection pool. This setting prevents the
+<a class="reference internal" href="http://docs.mongodb.org/manual/reference/mongos/#mongos" title="mongos"><tt class="xref mongodb mongodb-program docutils literal"><span class="pre">mongos</span></tt></a> from causing connection spikes on the individual
+<a class="reference internal" href="http://docs.mongodb.org/manual/reference/glossary/#term-shard"><em class="xref std std-term">shards</em></a>. Spikes like these may disrupt the operation
+and memory allocation of the <a class="reference internal" href="http://docs.mongodb.org/manual/reference/glossary/#term-sharded-cluster"><em class="xref std std-term">sharded cluster</em></a>.</p>
+</div>
+<div class="section" id="how-do-indexes-impact-queries-in-sharded-systems">
+<h2>How do indexes impact queries in sharded systems?<a class="headerlink" href="#how-do-indexes-impact-queries-in-sharded-systems" title="Permalink to this headline">¶</a></h2>
+<p>If the query does not include the <a class="reference internal" href="http://docs.mongodb.org/manual/reference/glossary/#term-shard-key"><em class="xref std std-term">shard key</em></a>, the
+<a class="reference internal" href="http://docs.mongodb.org/manual/reference/mongos/#mongos" title="mongos"><tt class="xref mongodb mongodb-program docutils literal"><span class="pre">mongos</span></tt></a> must send the query to all shards as a
+“scatter/gather” operation. Each shard will, in turn, use <em>either</em> the
+shard key index or another more efficient index to fulfill the query.</p>
+<p>If the query includes multiple sub-expressions that reference the
+fields indexed by the shard key <em>and</em> the secondary index, the
+<a class="reference internal" href="http://docs.mongodb.org/manual/reference/mongos/#mongos" title="mongos"><tt class="xref mongodb mongodb-program docutils literal"><span class="pre">mongos</span></tt></a> can route the queries to a specific shard and the
+shard will use the index that will allow it to fulfill most
+efficiently. See <a class="reference external" href="http://www.mongodb.org/download/attachments/2097354/how+queries+work+with+sharding.pdf">this document</a>
+for more information.</p>
+</div>
+<div class="section" id="can-shard-keys-be-randomly-generated">
+<h2>Can shard keys be randomly generated?<a class="headerlink" href="#can-shard-keys-be-randomly-generated" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference internal" href="http://docs.mongodb.org/manual/reference/glossary/#term-shard-key"><em class="xref std std-term">Shard keys</em></a> can be random. Random keys ensure
+optimal distribution of data across the cluster.</p>
+<p><a class="reference internal" href="http://docs.mongodb.org/manual/reference/glossary/#term-sharded-cluster"><em class="xref std std-term">Sharded clusters</em></a>, attempt to route queries to
+<em>specific</em> shards when queries include the shard key as a parameter,
+because these directed queries are more efficient. In many cases,
+random keys can make it difficult to direct queries to specific
+shards.</p>
+</div>
+<div class="section" id="can-shard-keys-have-a-non-uniform-distribution-of-values">
+<h2>Can shard keys have a non-uniform distribution of values?<a class="headerlink" href="#can-shard-keys-have-a-non-uniform-distribution-of-values" title="Permalink to this headline">¶</a></h2>
+<p>Yes. There is no requirement that documents be evenly distributed by
+the shard key.</p>
+<p>However, documents that have the shard key <em>must</em> reside in the same
+<em>chunk</em> and therefore on the same server. If your sharded data set has
+too many documents with the exact same shard key you will not be able
+to distribute <em>those</em> documents across your sharded cluster.</p>
+</div>
+<div class="section" id="can-you-shard-on-the-id-field">
+<h2>Can you shard on the <tt class="docutils literal"><span class="pre">_id</span></tt> field?<a class="headerlink" href="#can-you-shard-on-the-id-field" title="Permalink to this headline">¶</a></h2>
+<p>You can use any field for the shard key. The <tt class="docutils literal"><span class="pre">_id</span></tt> field is a common
+shard key.</p>
+<p>Be aware that <tt class="docutils literal"><span class="pre">ObjectId()</span></tt> values, which are the default value of
+the <tt class="docutils literal"><span class="pre">_id</span></tt> field, increment as a timestamp. As a result, when used as
+a shard key, all new documents inserted into the collection will
+initially belong to the same chunk on a single shard. Although the
+system will eventually divide this chunk and migrate its contents to
+distribute data more evenly, at any moment the cluster can only direct
+insert operations at a single shard. This can limit the throughput of
+inserts. If most of your write operations are updates or read
+operations rather than inserts, this limitation should not impact
+your performance. However, if you have a high insert volume, this may
+be a limitation.</p>
+</div>
+<div class="section" id="can-shard-key-be-in-ascending-order-like-dates-or-timestamps">
+<h2>Can shard key be in ascending order, like dates or timestamps?<a class="headerlink" href="#can-shard-key-be-in-ascending-order-like-dates-or-timestamps" title="Permalink to this headline">¶</a></h2>
+<p>If you insert documents with monotonically increasing shard keys, all
+inserts will initially belong to the same <a class="reference internal" href="http://docs.mongodb.org/manual/reference/glossary/#term-chunk"><em class="xref std std-term">chunk</em></a> on a single
+<a class="reference internal" href="http://docs.mongodb.org/manual/reference/glossary/#term-shard"><em class="xref std std-term">shard</em></a>. Although the system will eventually divide this chunk
+and migrate its contents to distribute data more evenly, at any moment
+the cluster can only direct insert operations at a single shard. This
+can limit the throughput of inserts.</p>
+<p>If most of your write operations are updates or read operations
+rather than inserts, this limitation should not impact your
+performance. However, if you have a high insert volume, a
+monotonically increasing shard key may be a limitation.</p>
+<p>To address this issue, you can use a field with a value that stores
+the hash of a key with an ascending value. While you can compute a
+hashed value in your application and include this value in your
+documents for use as a shard key, the <a class="reference external" href="https://jira.mongodb.org/browse/SERVER-2001">SERVER-2001</a> issue will
+implement this capability within MongoDB.</p>
+</div>
+<div class="section" id="what-do-movechunk-commit-failed-errors-mean">
+<h2>What do <tt class="docutils literal"><span class="pre">moveChunk</span> <span class="pre">commit</span> <span class="pre">failed</span></tt> errors mean?<a class="headerlink" href="#what-do-movechunk-commit-failed-errors-mean" title="Permalink to this headline">¶</a></h2>
+<p>Consider the following error message:</p>
+<div class="highlight-none"><div class="highlight"><pre>ERROR: moveChunk commit failed: version is at &lt;n&gt;|&lt;nn&gt; instead of &lt;N&gt;|&lt;NN&gt;" and "ERROR: TERMINATING"
+</pre></div>
+</div>
+<p><a class="reference internal" href="http://docs.mongodb.org/manual/reference/mongod/#mongod" title="mongod"><tt class="xref mongodb mongodb-program docutils literal"><span class="pre">mongod</span></tt></a> issues this message if, during a <a class="reference internal" href="http://docs.mongodb.org/manual/core/sharded-cluster-internals/#sharding-chunk-migration"><em>chunk
+migration</em></a>, the <a class="reference internal" href="http://docs.mongodb.org/manual/reference/glossary/#term-shard"></a></p></div></div></div></div></div></div></body></html>

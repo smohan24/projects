@@ -1,0 +1,29 @@
+{
+
+var google_ads = new Array();
+var google_ad;
+var google_radlinks = new Array();
+var google_radlink;
+var google_info = new Object();
+google_ad = new Object(); 
+google_ad.n = 1; 
+google_ad.type = "text"; 
+google_ad.bidtype = "CPC"; 
+google_ad.targeting_type = "contextual"; 
+google_ad.url = "http://www.googleadservices.com/pagead/aclk?sa=L&amp;ai=CblazGTtjUIr0FqTAigfdyICACM_S0Y4D96jjo0HAjbcBEAEgnJjpHlC91IX-_f____8BYOXq5oO8DqAB6fec6APIAQGpAgZTBNPxEFQ-qAMBqgSOAU_QzuRHtql4kYPROWWGZ3aoHGiHXuQ526ranZjOfO1KF46LCu1H_IJwZSsHomRQHR1EPg3_ZAv0VNNnz8F0yse_SZwXBqA1y6PyU-0RIEw6U2goyAGbuIq68pDYWjjLJTMtY3MVudqg_RIPP059t4IxujX0aj4chPsUsQOLDuJnq-lSiTUpIrkxbdA1Iq2IBgE&amp;num=1&amp;cid=5Gid86aabd3pgcn1cA-W8eYO&amp;sig=AOD64_3qevX_hXBnFlvUZbOKop-uhkcMfg&amp;client=ca-barnesandnoble_js&amp;adurl=http://www.tradus.com/pen-drive-flash-usb-transcend-sandisk-kingston/t/7694/cSk%3FAvailability%3Dtrue%26Sort%3Dfs_uc_sell_price:asc"; 
+google_ad.visible_url = "www.tradus.com"; 
+google_ad.line1 = "Pen Drives: Up to 84% Off"; 
+google_ad.line2 = "Latest Pen Drives Starting @Rs. 193"; 
+google_ad.line3 = "Save on Branded PenDrives. Buy Now!"; 
+google_ad.regionname = ""; 
+google_ads[0] = google_ad; 
+google_info.feedback_url = "http://www.google.com/url?ct\x3dabg\x26q\x3dhttps://www.google.com/adsense/support/bin/request.py%3Fcontact%3Dabg_afc%26url%3Dhttp://www.barnesandnoble.com/w/to-the-moon-and-back-jill-mansell/1100076247%26gl%3DIN%26hl%3Den%26client%3Dca-barnesandnoble_js%26ai0%3DCblazGTtjUIr0FqTAigfdyICACM_S0Y4D96jjo0HAjbcBEAEgnJjpHlC91IX-_f____8BYOXq5oO8DqAB6fec6APIAQGpAgZTBNPxEFQ-qAMBqgSOAU_QzuRHtql4kYPROWWGZ3aoHGiHXuQ526ranZjOfO1KF46LCu1H_IJwZSsHomRQHR1EPg3_ZAv0VNNnz8F0yse_SZwXBqA1y6PyU-0RIEw6U2goyAGbuIq68pDYWjjLJTMtY3MVudqg_RIPP059t4IxujX0aj4chPsUsQOLDuJnq-lSiTUpIrkxbdA1Iq2IBgE\x26usg\x3dAFQjCNHtjie9lqX8dMinPg04QCgAh4ZQFQ";
+var google_attribution_text = "Sponsored Links";
+var google_is_rtl = false;
+if (window.google_ad_request_done) {
+google_ad_request_done(google_ads);
+}
+if (window.google_radlink_request_done) {
+google_radlink_request_done(google_radlinks);
+}
+}

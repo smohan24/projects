@@ -1,0 +1,33 @@
+alter table user_db rename mob_no to mob;
+
+rename user_db to usertab;
+
+update books set copies = 20 where bid in (select bid from books where copies = 0)
+
+select * from books order by copies;
+
+update books set copies = copies - qty where cart.bid = books.bid;
+
+select * from cart where a = To_Char(tdate, 'mon') order by tdate desc;
+
+select * from books where bkname like '%bkname.txt%' or author like '%bkauthor.txt%';
+
+insert into bill values(user_id, sysdate, (select sum(total) from temp));
+
+select * from books where copies IN (select min(copies) from books);
+
+select category, count(bk_id) "Count" from books group by category;
+
+update books set b.copies = b.copies - c.qty from books b, cart c where c.bid = b.bid;
+
+select category, sum(copies) from books group by category having sum(copies) = (select min(sum(copies)) from books group by category);
+
+select * from user_db where exists (select cid from bill where bill.cid = user_db.id;
+
+create synonym bookscopy for books;
+
+create view view_books AS (select bk_id, bkname, price, discount from books);
+
+select * from view_books where price IN (select min(price) from books);
+
+select * from user_tab INNER JOIN bill ON user_db.id = bill.id;

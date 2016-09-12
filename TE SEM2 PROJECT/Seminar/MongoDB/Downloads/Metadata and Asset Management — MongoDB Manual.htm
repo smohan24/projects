@@ -1,0 +1,447 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head>
+    <title>Metadata and Asset Management — MongoDB Manual</title>
+
+    <link rel="shortcut icon" href="http://media.mongodb.org/favicon.ico">
+    <meta name="robots" content="index">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <link rel="canonical" href="http://docs.mongodb.org/manual/use-cases/metadata-and-asset-management">
+
+    
+    
+    <link rel="stylesheet" href="Metadata%20and%20Asset%20Management%20%E2%80%94%20MongoDB%20Manual_files/mongodb-docs.css" type="text/css">
+    <link rel="stylesheet" href="Metadata%20and%20Asset%20Management%20%E2%80%94%20MongoDB%20Manual_files/pygments.css" type="text/css">
+      
+    <script src="Metadata%20and%20Asset%20Management%20%E2%80%94%20MongoDB%20Manual_files/cse.js" async="" type="text/javascript"></script><script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '2.2.3',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '',
+        HAS_SOURCE:  false
+      };
+    </script>
+    <script type="text/javascript" src="Metadata%20and%20Asset%20Management%20%E2%80%94%20MongoDB%20Manual_files/jquery.js"></script>
+    <script type="text/javascript" src="Metadata%20and%20Asset%20Management%20%E2%80%94%20MongoDB%20Manual_files/underscore.js"></script>
+    <script type="text/javascript" src="Metadata%20and%20Asset%20Management%20%E2%80%94%20MongoDB%20Manual_files/doctools.js"></script>
+      <link rel="search" type="application/opensearchdescription+xml" href="http://docs.mongodb.org/osd.xml" title="MongoDB Help">
+<link rel="author" title="About these documents" href="http://docs.mongodb.org/manual/about/">
+<link rel="top" title="MongoDB Manual" href="http://docs.mongodb.org/manual/">
+<link rel="up" title="Use Cases" href="http://docs.mongodb.org/manual/use-cases/">
+<link rel="next" title="Storing Comments" href="http://docs.mongodb.org/manual/use-cases/storing-comments/">
+<link rel="prev" title="Category Hierarchy" href="http://docs.mongodb.org/manual/use-cases/category-hierarchy/">
+<!-- Put the following javascript before the closing </head> tag. -->
+<script>
+  (function() {
+    var cx = '017213726194841070573:WMX6838984';
+    var gcse = document.createElement('script'); gcse.type = 'text/javascript'; gcse.async = true;
+    gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+        '//www.google.com/cse/cse.js?cx=' + cx;
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(gcse, s);
+  })();
+</script>
+  <script type="text/javascript" src="Metadata%20and%20Asset%20Management%20%E2%80%94%20MongoDB%20Manual_files/jsapi"></script><link rel="stylesheet" href="Metadata%20and%20Asset%20Management%20%E2%80%94%20MongoDB%20Manual_files/defaulten.css" type="text/css"><link rel="stylesheet" href="Metadata%20and%20Asset%20Management%20%E2%80%94%20MongoDB%20Manual_files/default.css" type="text/css"><script src="Metadata%20and%20Asset%20Management%20%E2%80%94%20MongoDB%20Manual_files/defaulten.js" type="text/javascript"></script><script src="Metadata%20and%20Asset%20Management%20%E2%80%94%20MongoDB%20Manual_files/search.js" type="text/javascript"></script><style type="text/css">
+.gsc-control-cse {
+font-family: Arial, sans-serif;
+border-color: #FFFFFF;
+background-color: #FFFFFF;
+}
+.gsc-control-cse .gsc-table-result {
+font-family: Arial, sans-serif;
+}
+input.gsc-input, .gsc-input-box, .gsc-input-box-hover, .gsc-input-box-focus {
+border-color: #D9D9D9;
+}
+input.gsc-search-button, input.gsc-search-button:hover, input.gsc-search-button:focus {
+border-color: #5AAC41;
+background-color: #5AAC41;
+background-image: none;
+filter: none;
+}
+.gsc-tabHeader.gsc-tabhInactive {
+border-color: #CCCCCC;
+background-color: #FFFFFF;
+}
+.gsc-tabHeader.gsc-tabhActive {
+border-color: #CCCCCC;
+border-bottom-color: #FFFFFF;
+background-color: #FFFFFF;
+}
+.gsc-tabsArea {
+border-color: #CCCCCC;
+}
+.gsc-webResult.gsc-result,
+.gsc-results .gsc-imageResult {
+border-color: #FFFFFF;
+background-color: #FFFFFF;
+}
+.gsc-webResult.gsc-result:hover,
+.gsc-imageResult:hover {
+border-color: #FFFFFF;
+background-color: #FFFFFF;
+}
+.gs-webResult.gs-result a.gs-title:link,
+.gs-webResult.gs-result a.gs-title:link b,
+.gs-imageResult a.gs-title:link,
+.gs-imageResult a.gs-title:link b {
+color: #1155CC;
+}
+.gs-webResult.gs-result a.gs-title:visited,
+.gs-webResult.gs-result a.gs-title:visited b,
+.gs-imageResult a.gs-title:visited,
+.gs-imageResult a.gs-title:visited b {
+color: #1155CC;
+}
+.gs-webResult.gs-result a.gs-title:hover,
+.gs-webResult.gs-result a.gs-title:hover b,
+.gs-imageResult a.gs-title:hover,
+.gs-imageResult a.gs-title:hover b {
+color: #1155CC;
+}
+.gs-webResult.gs-result a.gs-title:active,
+.gs-webResult.gs-result a.gs-title:active b,
+.gs-imageResult a.gs-title:active,
+.gs-imageResult a.gs-title:active b {
+color: #1155CC;
+}
+.gsc-cursor-page {
+color: #1155CC;
+}
+a.gsc-trailing-more-results:link {
+color: #1155CC;
+}
+.gs-webResult .gs-snippet,
+.gs-imageResult .gs-snippet,
+.gs-fileFormatType {
+color: #333333;
+}
+.gs-webResult div.gs-visibleUrl,
+.gs-imageResult div.gs-visibleUrl {
+color: #009933;
+}
+.gs-webResult div.gs-visibleUrl-short {
+color: #009933;
+}
+.gs-webResult div.gs-visibleUrl-short {
+display: none;
+}
+.gs-webResult div.gs-visibleUrl-long {
+display: block;
+}
+.gs-promotion div.gs-visibleUrl-short {
+display: none;
+}
+.gs-promotion div.gs-visibleUrl-long {
+display: block;
+}
+.gsc-cursor-box {
+border-color: #FFFFFF;
+}
+.gsc-results .gsc-cursor-box .gsc-cursor-page {
+border-color: #CCCCCC;
+background-color: #FFFFFF;
+color: #1155CC;
+}
+.gsc-results .gsc-cursor-box .gsc-cursor-current-page {
+border-color: #CCCCCC;
+background-color: #FFFFFF;
+color: #1155CC;
+}
+.gsc-webResult.gsc-result.gsc-promotion {
+border-color: #F6F6F6;
+background-color: #F6F6F6;
+}
+.gsc-completion-title {
+color: #1155CC;
+}
+.gsc-completion-snippet {
+color: #333333;
+}
+.gs-promotion a.gs-title:link,
+.gs-promotion a.gs-title:link *,
+.gs-promotion .gs-snippet a:link {
+color: #1155CC;
+}
+.gs-promotion a.gs-title:visited,
+.gs-promotion a.gs-title:visited *,
+.gs-promotion .gs-snippet a:visited {
+color: #1155CC;
+}
+.gs-promotion a.gs-title:hover,
+.gs-promotion a.gs-title:hover *,
+.gs-promotion .gs-snippet a:hover {
+color: #1155CC;
+}
+.gs-promotion a.gs-title:active,
+.gs-promotion a.gs-title:active *,
+.gs-promotion .gs-snippet a:active {
+color: #1155CC;
+}
+.gs-promotion .gs-snippet,
+.gs-promotion .gs-title .gs-promotion-title-right,
+.gs-promotion .gs-title .gs-promotion-title-right * {
+color: #333333;
+}
+.gs-promotion .gs-visibleUrl,
+.gs-promotion .gs-visibleUrl-short {
+color: #009933;
+}
+.gsc-input input.gsc-input {
+background: none repeat scroll 0% 0% white !important;
+}
+</style></head>
+  <body>
+<div id="top-right">
+        <div class="user-right">
+                <ul id="header-menu-bar" class="ajs-menu-bar">
+                <li class="normal"><a target="_blank" href="http://groups.google.com/group/mongodb-user">Forums</a></li>
+                <li class="normal"><a target="_blank" href="http://blog.mongodb.org/">Blog</a></li>
+                <li class="normal"><a href="http://www.mongodb.org/downloads">Download</a></li>
+                <li class="normal"><a href="http://docs.mongodb.org/ecosystem/drivers/">Drivers</a></li>
+                <li class="normal"><a href="http://www.10gen.com/events">Events</a></li>
+                <li class="normal last"><a class="last" href="http://docs.mongodb.org/manual/meta/translation">Translations</a></li>
+                </ul>
+        </div>
+</div>
+<div id="header-db" class="spread">
+        <div class="split">
+                <div id="logo">
+                        <div><a href="http://docs.mongodb.org/manual/"><img class="logo" src="Metadata%20and%20Asset%20Management%20%E2%80%94%20MongoDB%20Manual_files/logo-mongodb.png" alt="MongoDB Logo"></a></div>
+                </div>
+        </div>
+
+<div class="search-db"><gcse:searchbox></gcse:searchbox></div>
+<div id="etp">
+<ul>
+<li><a href="https://github.com/mongodb/docs/blob/master/source/use-cases/metadata-and-asset-management.txt" target="_blank" title="Edit use-cases/metadata-and-asset-management.txt on github">Edit this Page</a></li>
+<li><a href="http://github.com/mongodb/docs" target="_blank" title="Fork the documentation on GitHub and contribute.">GitHub</a></li>
+<li><a href="https://jira.mongodb.org/secure/CreateIssueDetails%21init.jspa?pid=10380&amp;issuetype=4&amp;priority=4&amp;summary=Comment+on%3a+%22use-cases/metadata-and-asset-management%2Etxt%22" target="_blank" title="Report a problem with use-cases/metadata-and-asset-management.txt on Jira">Report a problem</a></li>
+</ul>
+</div>
+</div>  
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            <div id="cse-results"><gcse:searchresults></gcse:searchresults></div>
+            
+  <div class="section" id="metadata-and-asset-management">
+<h1>Metadata and Asset Management<a class="headerlink" href="#metadata-and-asset-management" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
+<p>This document describes the design and pattern of a content management
+system using MongoDB modeled on the popular <a class="reference external" href="http://www.drupal.org/">Drupal</a>
+CMS.</p>
+<div class="section" id="problem">
+<h3>Problem<a class="headerlink" href="#problem" title="Permalink to this headline">¶</a></h3>
+<p>You are designing a content management system (CMS) and you want to
+use MongoDB to store the content of your sites.</p>
+</div>
+<div class="section" id="solution">
+<h3>Solution<a class="headerlink" href="#solution" title="Permalink to this headline">¶</a></h3>
+<p>To build this system you will use MongoDB’s flexible schema to store
+all content “nodes” in a single collection regardless of type. This
+guide will provide prototype schema and describe common operations for
+the following primary node types:</p>
+<dl class="docutils">
+<dt><strong>Basic Page</strong></dt>
+<dd>Basic pages are useful for displaying infrequently-changing text
+such as an ‘about’ page. With a basic page, the salient information
+is the title and the content.</dd>
+<dt><strong>Blog entry</strong></dt>
+<dd>Blog entries record a “stream” of posts from users on the CMS and
+store title, author, content, and date as relevant information.</dd>
+<dt><strong>Photo</strong></dt>
+<dd>Photos participate in photo galleries, and store title,
+description, author, and date along with the actual photo binary
+data.</dd>
+</dl>
+<p>This solution does not describe schema or process for storing or using
+navigational and organizational information.</p>
+</div>
+<div class="section" id="schema">
+<h3>Schema<a class="headerlink" href="#schema" title="Permalink to this headline">¶</a></h3>
+<p>Although <a class="reference internal" href="http://docs.mongodb.org/manual/reference/glossary/#term-document"><em class="xref std std-term">documents</em></a> in the <tt class="docutils literal"><span class="pre">nodes</span></tt> collection
+contain content of different types, all documents have a similar
+structure and a set of common fields. Consider the following
+prototype document for a “basic page” node type:</p>
+<div class="highlight-javascript"><pre>{
+    _id: ObjectId(…),
+    nonce: ObjectId(…),
+    metadata: {
+        type: 'basic-page'
+        section: 'my-photos',
+        slug: 'about',
+        title: 'About Us',
+        created: ISODate(...),
+        author: { _id: ObjectId(…), name: 'Rick' },
+        tags: [ ... ],
+        detail: { text: '# About Us\n…' }
+    }
+}</pre>
+</div>
+<p>Most fields are descriptively titled. The <tt class="docutils literal"><span class="pre">section</span></tt> field identifies
+groupings of items, as in a photo gallery, or a particular blog . The
+<tt class="docutils literal"><span class="pre">slug</span></tt> field holds a URL-friendly unique representation of the node,
+usually that is unique within its section for generating URLs.</p>
+<p>All documents also have a <tt class="docutils literal"><span class="pre">detail</span></tt> field that varies with the
+document type. For the basic page above, the detail field might hold
+the text of the page. For a blog entry, the <tt class="docutils literal"><span class="pre">detail</span></tt> field might
+hold a sub-document. Consider the following prototype:</p>
+<div class="highlight-javascript"><pre>{
+    …
+    metadata: {
+        …
+        type: 'blog-entry',
+        section: 'my-blog',
+        slug: '2012-03-noticed-the-news',
+        …
+        detail: {
+            publish_on: ISODate(…),
+            text: 'I noticed the news from Washington today…'
+        }
+    }
+}</pre>
+</div>
+<p>Photos require a different approach. Because photos can be potentially
+larger than these documents, it’s important to separate the binary photo
+storage from the nodes metadata.</p>
+<p><a class="reference internal" href="http://docs.mongodb.org/manual/reference/glossary/#term-gridfs"><em class="xref std std-term">GridFS</em></a> provides the ability to store larger files in MongoDB.
+GridFS stores data in two collections, in this case,
+<tt class="docutils literal"><span class="pre">cms.assets.files</span></tt>, which stores metadata, and <tt class="docutils literal"><span class="pre">cms.assets.chunks</span></tt>
+which stores the data itself. Consider the following prototype
+document from the <tt class="docutils literal"><span class="pre">cms.assets.files</span></tt> collection:</p>
+<div class="highlight-javascript"><pre>{
+    _id: ObjectId(…),
+    length: 123...,
+    chunkSize: 262144,
+    uploadDate: ISODate(…),
+    contentType: 'image/jpeg',
+    md5: 'ba49a...',
+    metadata: {
+        nonce: ObjectId(…),
+        slug: '2012-03-invisible-bicycle',
+        type: 'photo',
+        section: 'my-album',
+        title: 'Kitteh',
+        created: ISODate(…),
+        author: { _id: ObjectId(…), name: 'Jared' },
+        tags: [ … ],
+        detail: {
+            filename: 'kitteh_invisible_bike.jpg',
+            resolution: [ 1600, 1600 ], … }
+    }
+}</pre>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">This document embeds the basic node document fields, which allows
+you to use the same code to manipulate nodes, regardless of type.</p>
+</div>
+</div>
+</div>
+<div class="section" id="operations">
+<h2>Operations<a class="headerlink" href="#operations" title="Permalink to this headline">¶</a></h2>
+<p>This section outlines a number of common operations for building and
+interacting with the metadata and asset layer of the cms for all node
+types.  All examples in this document use the Python programming
+language and the <a class="reference external" href="http://api.mongodb.org/python/current">PyMongo</a> <a class="reference internal" href="http://docs.mongodb.org/manual/reference/glossary/#term-driver"><em class="xref std std-term">driver</em></a> for
+MongoDB, but you can implement this system using any language you
+choose.</p>
+<div class="section" id="create-and-edit-content-nodes">
+<h3>Create and Edit Content Nodes<a class="headerlink" href="#create-and-edit-content-nodes" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="procedure">
+<h4>Procedure<a class="headerlink" href="#procedure" title="Permalink to this headline">¶</a></h4>
+<p>The most common operations inside of a CMS center on creating and
+editing content. Consider the following
+<a class="reference external" href="http://api.mongodb.org/python/current/api/pymongo/collection.html#pymongo.collection.Collection.insert" title="(in PyMongo v2.4.2)"><tt class="xref py py-meth docutils literal"><span class="pre">insert()</span></tt></a>
+operation:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">db</span><span class="o">.</span><span class="n">cms</span><span class="o">.</span><span class="n">nodes</span><span class="o">.</span><span class="n">insert</span><span class="p">({</span>
+    <span class="s">'nonce'</span><span class="p">:</span> <span class="n">ObjectId</span><span class="p">(),</span>
+    <span class="s">'metadata'</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s">'section'</span><span class="p">:</span> <span class="s">'myblog'</span><span class="p">,</span>
+        <span class="s">'slug'</span><span class="p">:</span> <span class="s">'2012-03-noticed-the-news'</span><span class="p">,</span>
+        <span class="s">'type'</span><span class="p">:</span> <span class="s">'blog-entry'</span><span class="p">,</span>
+        <span class="s">'title'</span><span class="p">:</span> <span class="s">'Noticed in the News'</span><span class="p">,</span>
+        <span class="s">'created'</span><span class="p">:</span> <span class="n">datetime</span><span class="o">.</span><span class="n">utcnow</span><span class="p">(),</span>
+        <span class="s">'author'</span><span class="p">:</span> <span class="p">{</span> <span class="s">'id'</span><span class="p">:</span> <span class="n">user_id</span><span class="p">,</span> <span class="s">'name'</span><span class="p">:</span> <span class="s">'Rick'</span> <span class="p">},</span>
+        <span class="s">'tags'</span><span class="p">:</span> <span class="p">[</span> <span class="s">'news'</span><span class="p">,</span> <span class="s">'musings'</span> <span class="p">],</span>
+        <span class="s">'detail'</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s">'publish_on'</span><span class="p">:</span> <span class="n">datetime</span><span class="o">.</span><span class="n">utcnow</span><span class="p">(),</span>
+            <span class="s">'text'</span><span class="p">:</span> <span class="s">'I noticed the news from Washington today…'</span> <span class="p">}</span>
+        <span class="p">}</span>
+     <span class="p">})</span>
+</pre></div>
+</div>
+<p>Once inserted, your application must have some way of preventing
+multiple concurrent updates. The schema uses the special <tt class="docutils literal"><span class="pre">nonce</span></tt>
+field to help detect concurrent edits. By using the <tt class="docutils literal"><span class="pre">nonce</span></tt> field in
+the query portion of the <a class="reference external" href="http://api.mongodb.org/python/current/api/pymongo/collection.html#pymongo.collection.Collection.update" title="(in PyMongo v2.4.2)"><tt class="xref py py-meth docutils literal"><span class="pre">update</span></tt></a>
+operation, the application will generate an error if there is an
+editing collision. Consider the following <a class="reference external" href="http://api.mongodb.org/python/current/api/pymongo/collection.html#pymongo.collection.Collection.update" title="(in PyMongo v2.4.2)"><tt class="xref py py-meth docutils literal"><span class="pre">update</span></tt></a></p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">def</span> <span class="nf">update_text</span><span class="p">(</span><span class="n">section</span><span class="p">,</span> <span class="n">slug</span><span class="p">,</span> <span class="n">nonce</span><span class="p">,</span> <span class="n">text</span><span class="p">):</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">cms</span><span class="o">.</span><span class="n">nodes</span><span class="o">.</span><span class="n">update</span><span class="p">(</span>
+        <span class="p">{</span> <span class="s">'metadata.section'</span><span class="p">:</span> <span class="n">section</span><span class="p">,</span>
+          <span class="s">'metadata.slug'</span><span class="p">:</span> <span class="n">slug</span><span class="p">,</span>
+          <span class="s">'nonce'</span><span class="p">:</span> <span class="n">nonce</span> <span class="p">},</span>
+        <span class="p">{</span> <span class="s">'$set'</span><span class="p">:{</span><span class="s">'metadata.detail.text'</span><span class="p">:</span> <span class="n">text</span><span class="p">,</span> <span class="s">'nonce'</span><span class="p">:</span> <span class="n">ObjectId</span><span class="p">()</span> <span class="p">}</span> <span class="p">},</span>
+        <span class="n">w</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">result</span><span class="p">[</span><span class="s">'updatedExisting'</span><span class="p">]:</span>
+        <span class="k">raise</span> <span class="n">ConflictError</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>You may  also want to perform metadata edits to the item such as adding
+tags:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">db</span><span class="o">.</span><span class="n">cms</span><span class="o">.</span><span class="n">nodes</span><span class="o">.</span><span class="n">update</span><span class="p">(</span>
+    <span class="p">{</span> <span class="s">'metadata.section'</span><span class="p">:</span> <span class="n">section</span><span class="p">,</span> <span class="s">'metadata.slug'</span><span class="p">:</span> <span class="n">slug</span> <span class="p">},</span>
+    <span class="p">{</span> <span class="s">'$addToSet'</span><span class="p">:</span> <span class="p">{</span> <span class="s">'tags'</span><span class="p">:</span> <span class="p">{</span> <span class="s">'$each'</span><span class="p">:</span> <span class="p">[</span> <span class="s">'interesting'</span><span class="p">,</span> <span class="s">'funny'</span> <span class="p">]</span> <span class="p">}</span> <span class="p">}</span> <span class="p">})</span>
+</pre></div>
+</div>
+<p>In this example the <a class="reference internal" href="http://docs.mongodb.org/manual/reference/operator/addToSet/#_S_addToSet" title="$addToSet"><tt class="xref mongodb mongodb-operator docutils literal"><span class="pre">$addToSet</span></tt></a> operator will only add
+values to the <tt class="docutils literal"><span class="pre">tags</span></tt> field if they do not already exist in the
+<tt class="docutils literal"><span class="pre">tags</span></tt> array, there’s no need to supply or update the nonce.</p>
+</div>
+<div class="section" id="index-support">
+<h4>Index Support<a class="headerlink" href="#index-support" title="Permalink to this headline">¶</a></h4>
+<p>To support updates and queries on the <tt class="docutils literal"><span class="pre">metadata.section</span></tt>, and
+<tt class="docutils literal"><span class="pre">metadata.slug</span></tt>, fields <em>and</em> to ensure that two editors don’t
+create two documents with the same section name or slug. Use the
+following operation at the Python/PyMongo console:</p>
+<div class="highlight-pycon"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">db</span><span class="o">.</span><span class="n">cms</span><span class="o">.</span><span class="n">nodes</span><span class="o">.</span><span class="n">ensure_index</span><span class="p">([</span>
+<span class="gp">... </span>   <span class="p">(</span><span class="s">'metadata.section'</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="s">'metadata.slug'</span><span class="p">,</span> <span class="mi">1</span><span class="p">)],</span> <span class="n">unique</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The <tt class="docutils literal"><span class="pre">unique=True</span></tt> option prevents to documents from colliding. If
+you want an index to support queries on the above fields and the
+<tt class="docutils literal"><span class="pre">nonce</span></tt> field create the following index:</p>
+<div class="highlight-pycon"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">db</span><span class="o">.</span><span class="n">cms</span><span class="o">.</span><span class="n">nodes</span><span class="o">.</span><span class="n">ensure_index</span><span class="p">([</span>
+<span class="gp">... </span>   <span class="p">(</span><span class="s">'metadata.section'</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="s">'metadata.slug'</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="s">'nonce'</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span> <span class="p">])</span>
+</pre></div>
+</div>
+<p>However, in most cases, the first index will be sufficient to support
+these operations.</p>
+</div>
+</div>
+<div class="section" id="upload-a-photo">
+<h3>Upload a Photo<a class="headerlink" href="#upload-a-photo" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id1">
+<h4>Procedure<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h4>
+<p>To update a photo object, use the following operation, which builds
+upon the basic update procedure:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">def</span> <span class="nf">upload_new_photo</span><span class="p">(</span>
+    <span class="n">input_file</span><span class="p">,</span> <span class="n">section</span><span class="p">,</span> <span class="n">slug</span><span class="p">,</span> <span class="n">title</span><span class="p">,</span> <span class="n">author</span><span class="p">,</span> <span class="n">tags</span><span class="p">,</span> <span class="n">details</span><span class="p">):</span>
+    <span class="n">fs</span> <span class="o">=</span> <span class="n">GridFS</span><span class="p">(</span><span class="n">db</span><span class="p">,</span> <span class="s">'cms.assets'</span><span class="p">)</span>
+    <span class="k">with</span> <span class="n">fs</span><span class="o">.</span><span class="n">new_file</span><span class="p">(</span>
+        <span class="n">content_type</span><span class="o">=</span><span class="s">'image/jpeg'</span><span class="p">,</span>
+        <span class="n">metadata</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span>
+            <span class="nb">type</span><span class="o">=</span><span class="s">'photo'</span><span class="p">,</span>
+            <span class="n">locked</span><span class="o">=</span><span class="n">datetime</span><span class="o">.</span><span class="n">utcnow</span><span class="p">(),</span>
+            <span class="n">section</span><span class="o">=</span><span class="n">section</span><span class="p">,</span>
+            <span class="n">slug</span><span class="o">=</span><span class="n">slug</span><span class="p">,</span>
+            <span class="n">title</span><span class="o">=</span><span class="n">title</span><span class="p">,</span>
+            <span class="n">created</span><span class="o">=</span><span class="n">datetime</span><span class="o">.</span><span class="n">utcnow</span><span class="p">(),</span>
+            <span class="n">author</span><span class="o">=</span><span class="n">author</span><span class="p">,</span>
+            <span class="n">tags</span><span class="o">=</span><span class="n">tags</span><span class="p">,</span>
+            <span class="n">detail</span><span class="o">=</span><span class="n">detail</span><span class="p">))</span> <span class="k">as</span> <span class="n">upload_file</span><span class="p">:</span>
+        <span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+            <span class="n">chunk</span> <span class="o">=</span> <span class="n">input_file</span></pre></div></div></div></div></div></div></div></div></div></div></body></html>

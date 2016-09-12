@@ -1,0 +1,1182 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:fb="http://www.facebook.com/2008/fbml"><head profile="http://gmpg.org/xfn/11"><link media="all" href="http://ct5.addthis.com/static/r07/widget103.css" type="text/css" rel="stylesheet"><script src="http://search.twitter.com/search.json?q=CompuwareAPM&amp;callback=TWTR.Widget.receiveCallback_1&amp;rpp=30&amp;clientsource=TWITTERINC_WIDGET&amp;include_entities=true&amp;result_type=filtered&amp;1360037569539=cachebust" type="text/javascript"></script>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="generator" content="WordPress 3.4.2">
+
+<title>  NoSQL or RDBMS? – Are we asking the right questions? about:performance</title>
+
+<script async="" src="NoSQL%20or%20RDBMS%20%20%E2%80%93%20Are%20we%20asking%20the%20right%20questions%20%20about%20performance_files/cbgapi.loaded_0"></script><script gapi_processed="true" src="NoSQL%20or%20RDBMS%20%20%E2%80%93%20Are%20we%20asking%20the%20right%20questions%20%20about%20performance_files/plusone.js" async="" type="text/javascript"></script><script src="NoSQL%20or%20RDBMS%20%20%E2%80%93%20Are%20we%20asking%20the%20right%20questions%20%20about%20performance_files/ga.js" async="" type="text/javascript"></script><script type="text/javascript" src="NoSQL%20or%20RDBMS%20%20%E2%80%93%20Are%20we%20asking%20the%20right%20questions%20%20about%20performance_files/jquery.js"></script>
+
+<link rel="stylesheet" href="NoSQL%20or%20RDBMS%20%20%E2%80%93%20Are%20we%20asking%20the%20right%20questions%20%20about%20performance_files/style.css" type="text/css" media="screen">
+<link rel="SHORTCUT ICON" href="http://apmblog.compuware.com/favicon.ico">
+<link rel="alternate" type="application/rss+xml" title="about:performance RSS Feed" href="http://apmblog.compuware.com/feed/">
+<link rel="pingback" href="http://apmblog.compuware.com/xmlrpc.php">
+<link rel="alternate" type="application/rss+xml" title="about:performance » NoSQL or RDBMS? – Are we asking the right questions? Comments Feed" href="http://apmblog.compuware.com/2011/10/05/nosql-or-rdbms-are-we-asking-the-right-questions/feed/">
+<link rel="stylesheet" id="wp-syntax-css-css" href="NoSQL%20or%20RDBMS%20%20%E2%80%93%20Are%20we%20asking%20the%20right%20questions%20%20about%20performance_files/wp-syntax.css" type="text/css" media="all">
+<link rel="stylesheet" id="wp-lightbox-2.min.css-css" href="NoSQL%20or%20RDBMS%20%20%E2%80%93%20Are%20we%20asking%20the%20right%20questions%20%20about%20performance_files/lightbox.css" type="text/css" media="all">
+<script type="text/javascript" src="NoSQL%20or%20RDBMS%20%20%E2%80%93%20Are%20we%20asking%20the%20right%20questions%20%20about%20performance_files/jquery_002.js"></script>
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="http://apmblog.compuware.com/xmlrpc.php?rsd">
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="http://cdn.dynatrace.com/apmblog/wp-includes/wlwmanifest.xml"> 
+<link rel="prev" title="Benchmarking Best Practices Used by Top Performers in Web Performance and Mobile Site Performance" href="http://apmblog.compuware.com/2011/09/30/benchmarking-best-practices-used-by-top-performers-in-web-performance-and-mobile-site-performance/">
+<link rel="next" title="Gomez Data in Action – Cloud Performance Data Released" href="http://apmblog.compuware.com/2011/10/06/cloud-performance-data-released/">
+<meta name="generator" content="WordPress 3.4.2">
+<link rel="canonical" href="http://apmblog.compuware.com/2011/10/05/nosql-or-rdbms-are-we-asking-the-right-questions/">
+<link rel="shortlink" href="http://apmblog.compuware.com/?p=4145">
+
+<!-- Bad Behavior 2.2.10 run time: 4.538 ms -->
+<script type="text/javascript">
+<!--
+function bb2_addLoadEvent(func) {
+	var oldonload = window.onload;
+	if (typeof window.onload != 'function') {
+		window.onload = func;
+	} else {
+		window.onload = function() {
+			oldonload();
+			func();
+		}
+	}
+}
+
+bb2_addLoadEvent(function() {
+	for ( i=0; i < document.forms.length; i++ ) {
+		if (document.forms[i].method == 'post') {
+			var myElement = document.createElement('input');
+			myElement.setAttribute('type', 'hidden');
+			myElement.name = 'bb2_screener_';
+			myElement.value = '1360037507 115.119.224.66';
+			document.forms[i].appendChild(myElement);
+		}
+	}
+});
+// --></script>
+		<meta name="framework" content="Alkivia Framework 0.8">
+
+
+ <meta property="og:title" content="about:performance">
+    <meta property="og:site_name" content="Application Performance, Scalability and Architecture">
+
+    
+    <meta property="og:image" content="http://cdn.dynatrace.com/apmblog/wp-content/social-header.png">
+    
+    <meta property="og:type" content="blog">
+   
+
+<script type="text/javascript" src="NoSQL%20or%20RDBMS%20%20%E2%80%93%20Are%20we%20asking%20the%20right%20questions%20%20about%20performance_files/dtagent50_bjnp3_5104.js" data-dtconfig="rid=RID_1582811759|rpid=559041839|domain=compuware.com|tp=100,50,3|bandwidth=300"></script><div id="_atssh" style="visibility: hidden; height: 1px; width: 1px; position: absolute; z-index: 100000;"><iframe style="height: 1px; width: 1px; position: absolute; z-index: 100000; border: 0px none; left: 0px; top: 0px;" title="AddThis utility frame" id="_atssh311"></iframe></div><script src="NoSQL%20or%20RDBMS%20%20%E2%80%93%20Are%20we%20asking%20the%20right%20questions%20%20about%20performance_files/core064.js" type="text/javascript"></script><link type="text/css" rel="stylesheet" href="NoSQL%20or%20RDBMS%20%20%E2%80%93%20Are%20we%20asking%20the%20right%20questions%20%20about%20performance_files/widget.css"><style type="text/css">#twtr-widget-1 .twtr-avatar { display: none; } #twtr-widget-1 .twtr-tweet-text { margin-left: 0; }</style><!-- begin SI CAPTCHA Anti-Spam - comment form style --><style type="text/css">div#captchaImgDiv { display:block; }.captchaSizeDivSmall { width:175px; height:45px; padding-top:10px; }.captchaSizeDivLarge { width:250px; height:60px; padding-top:10px; }img#si_image_com,#si_image_reg,#si_image_log,#si_image_side_login { border-style:none; margin:0; padding-right:5px; float:left; }.captchaImgRefresh { border-style:none; margin:0; vertical-align:bottom; }div#captchaInputDiv { display:block; padding-top:15px; padding-bottom:5px; }label#captcha_code_label { margin:0; }input#captcha_code { width:65px; }</style><!-- end SI CAPTCHA Anti-Spam - comment form style --><style type="text/css">#twtr-widget-1 .twtr-doc,                      #twtr-widget-1 .twtr-hd a,                      #twtr-widget-1 h3,                      #twtr-widget-1 h4 {            background-color: #DCDCDC !important;            color: #ffffff !important;          }          #twtr-widget-1 .twtr-tweet a {            color: #1985b5 !important;          }          #twtr-widget-1 .twtr-bd, #twtr-widget-1 .twtr-timeline i a,           #twtr-widget-1 .twtr-bd p {            color: #444444 !important;          }          #twtr-widget-1 .twtr-new-results,           #twtr-widget-1 .twtr-results-inner,           #twtr-widget-1 .twtr-timeline {            background: #fff !important;          }</style><script src="NoSQL%20or%20RDBMS%20%20%E2%80%93%20Are%20we%20asking%20the%20right%20questions%20%20about%20performance_files/core064.js" type="text/javascript"></script></head>
+
+<body>
+<div id="fb-embed"><script src="NoSQL%20or%20RDBMS%20%20%E2%80%93%20Are%20we%20asking%20the%20right%20questions%20%20about%20performance_files/all.js" async=""></script></div>
+<script>
+window.fbAsyncInit = function() { FB.init({status: true, cookie: true, xfbml: true}); };
+(function() {
+    var e = document.createElement('script'); e.async = true;
+    e.src = document.location.protocol +
+    '//connect.facebook.net/en_US/all.js';
+    document.getElementById('fb-embed').appendChild(e);
+    }());
+</script>
+
+
+<div id="page">
+	<div id="header">
+		<div class="header_wrapper">
+		
+		<a href="http://apmblog.compuware.com/">
+		<div class="apm-header-wrapper">
+		<div class="apm-header"></div>
+		</div>
+		</a>
+		
+		<div class="apm-nav">
+			<div class="apm-nav-link " style="width:138px;">
+				<a href="http://apmblog.compuware.com/tag/3rd-party,web,ajax,euex,webperf/">User Experience</a>
+			</div>
+			
+			<div class="apm-nav-link " style="width:76px;">
+				<a href="http://apmblog.compuware.com/tag/cloud,virtualization">Cloud</a>
+			</div>
+			
+			<div class="apm-nav-link " style="width:138px;">
+				<a href="http://apmblog.compuware.com/tag/devops,production,agile">Agile &amp; DevOps</a>
+			</div>
+			
+			<div class="apm-nav-link " style="width:80px;">
+				<a href="http://apmblog.compuware.com/tag/mobile,tablet">Mobile</a>
+			</div>
+			
+			<div class="apm-nav-link " style="width:170px;">
+				<a href="http://apmblog.compuware.com/tag/testing,continuous-integration,automation,load-testing">Lifecycle Automation</a>
+			</div>	
+			
+			<div class="apm-nav-link " style="width:95px;">
+				<a href="http://apmblog.compuware.com/tag/java,dotnet,tuning,datacenter,mainframe,database,FDI,network">Datacenter</a>
+			</div>
+			
+			<div class="apm-nav-link " style="width:154px;border:none;">
+				<a href="http://apmblog.compuware.com/tag/analyst,business-impact,magic-quadrant,custsat">Business Impact</a>
+			</div>
+			
+			<div class="apm-clear"></div>
+		
+		</div>
+		
+		
+                        
+		</div>
+	</div>
+                        <script type="text/javascript">
+                        var dzone_style = '2';  
+                        var dzone_url = 'http://apmblog.compuware.com/2011/10/05/nosql-or-rdbms-are-we-asking-the-right-questions/';   
+                        $.fn.dZone = function(){
+                            
+                            $(this).each(function(){
+                                var write_string = '<iframe src="http://widgets.dzone.com/links/widgets/zoneit.html?t=';
+                                write_string += window.dzone_style ? window.dzone_style : '1';
+                                write_string += '&url=';
+                                
+                                if (window.dzone_url){
+                                    write_string += encodeURIComponent(dzone_url);
+                                }else{
+                                    write_string += encodeURIComponent(window.location);                
+                                }  
+                                
+                                if (window.dzone_title){
+                                    write_string += '&title=' + encodeURIComponent(dzone_title);
+                                }else{
+                                    write_string += '&title=' + encodeURIComponent(document.title);
+                                } 
+                                    
+                                if (window.dzone_blurb){
+                                    write_string += '&description=' + encodeURIComponent(dzone_blurb);
+                                } 
+                                
+                                if (window.dzone_style == '2'){
+                                    write_string += '" height="25" width="155" scrolling="no" frameborder="0"></iframe>';
+                                }else{
+                                    write_string += '" height="70" width="50" scrolling="no" frameborder="0"></iframe>';
+                                } 
+                                    
+
+                                $(this).html(write_string);            
+                                
+                            });
+                            
+                        }
+                        
+
+                        $(document).ready(function(){
+                            $(".dzonewidget").dZone();
+                            
+                        });
+
+                        </script>
+
+<div id="container">        
+    <div id="main">
+        <div class="strongheader">
+            <a href="http://apmblog.compuware.com/">&lt; Home</a>
+        </div>       
+
+                
+        <script language="javascript">$('.cloud').each(function(item) { item.className += 'act'; });</script>        
+        
+        
+        <div class="post" id="post-" 4145"="">
+
+            <div class="title single">
+                <div class="fold"></div>
+                <div class="blogdate">
+                    <span class="day">
+                        5                    </span>
+                    <span class="month">
+                        Oct                    </span>
+                </div>
+                <h2>
+                    NoSQL or RDBMS? – Are we asking the right questions?                </h2>
+            </div><!-- end title -->
+
+            <div class="grid threecol blogsubtext">
+                <div class="col">
+                    <a href="http://blog.dynatrace.com/the-authors/" title="Visit Michael Kopp’s website" rel="author external">Michael Kopp</a>                </div>
+                <div class="col">
+                    &nbsp;
+                </div>
+                <div class="col right">
+                    <a href="http://apmblog.compuware.com/2011/10/05/nosql-or-rdbms-are-we-asking-the-right-questions/#comments">
+                        16 comments                    </a>
+                </div>
+            </div>
+
+            <div class="entry">
+
+                <div>
+                
+				<!-- AddThis Button BEGIN -->
+				<div style="float:left;margin:5px 0px;width:100%;">
+				<a class="addthis_button_facebook_like" fb:like:layout="box_count"></a>
+				<a class="addthis_button_tweet" tw:count="vertical"></a>
+				<a class="addthis_button_google_plusone" g:plusone:size="tall"></a>
+				<a class="addthis_button_linkedin_counter" li:counter="top"></a>
+				<div class="dzonewidget" style="margin-top:43px;"><iframe src="NoSQL%20or%20RDBMS%20%20%E2%80%93%20Are%20we%20asking%20the%20right%20questions%20%20about%20performance_files/zoneit_002.htm" frameborder="0" height="25" scrolling="no" width="155"></iframe></div>
+				</div>
+								<script type="text/javascript" src="NoSQL%20or%20RDBMS%20%20%E2%80%93%20Are%20we%20asking%20the%20right%20questions%20%20about%20performance_files/addthis_widget.js"></script>
+				<!-- AddThis Button END -->
+
+                   <div style="clear:both;"></div>
+                </div>
+	
+
+
+                <p><!-- 		@page { margin: 2cm } 		P { margin-bottom: 0.21cm } 		H2 { margin-bottom: 0.21cm } 		H2.western { font-family: "Arial", sans-serif; font-size: 14pt; font-style: italic } 		H2.cjk { font-family: "DejaVu Sans"; font-size: 14pt; font-style: italic } 		H2.ctl { font-family: "DejaVu Sans"; font-size: 14pt; font-style: italic } --></p>
+<p>Most articles on the topic of NoSQL are around the theme of RDBMS vs.
+ NoSQL. DBA’s are defending RDBMS by stating that NoSQL solutions are 
+all dumb immature data stores without any standards. Many NoSQL 
+proponents react with the argument that RDMBS does not scale and that 
+today everybody needs to deal with huge amounts of data.</p>
+<p>I think NoSQL is sold short here. Yes Big Data plays a big role, it 
+is not the primary driver in all NoSQL solutions. There are no 
+standards, because there really is no NoSQL solution, but different 
+types of solutions that cater for different use cases. In fact nearly 
+all of them state that theirs is not a replacement for a traditional 
+RDBMS! When we compare RDBMS against them we need to do so on a use case
+ basis. There are very good reasons for choosing an RDBMS as long as the
+ amount of data is not prohibitive. There are however equally good 
+reason not to do so and choose one of the following solution types</p>
+<ul>
+<li>Distributed Key Value Stores</li>
+<li>Distributed Column Family Stores</li>
+<li>(Distributed) Document Databases</li>
+<li>Graph Databases</li>
+</ul>
+<p>It has to be said however that there are very simple and specific 
+reasons as to why traditional RDBMS solutions cannot scale beyond a 
+handful of database nodes and even that is painful. However before we 
+look at why NoSQL solutions tend not to have that problem, we will take a
+ look why and when you should choose an RDBMS and when you shouldn’t.</p>
+<h2>When and Why you (should) choose an RDBMS</h2>
+<p>While data durability is an important aspect of an RDBMS it is not a 
+differentiator compared to other solutions. So I will concentrate first 
+and foremost on unique features of an RDBMS that also have impact on the
+ application design and performance.</p>
+<ul>
+<li>Table based</li>
+<li>Relations between distinct Table Entities and Rows (the R in RDBMS)</li>
+<li>Referential Integrity</li>
+<li>ACID Transactions</li>
+<li>Arbitrary Queries and Joins</li>
+</ul>
+<p>If you really need all or most of these features than an RDBMS is 
+certainly right for you, although the level of data you have might force
+ you in another direction. But do you really them, let’s look closer?</p>
+<p>The table based nature of RDBMS is not a real feature, it is just the
+ way it stores data. While I can think of usecases that specifically 
+benefit from this, most of them are simple in nature (think of excel 
+spreadsheets). That nature however requires a relational concept between
+ rows and tables in order to make up complex entities.</p>
+<p>&nbsp;</p>
+<p><a href="http://blog.dynatrace.com/2011/10/05/nosql-or-rdbms-are-we-asking-the-right-questions/entity/" rel="attachment wp-att-4181"><img class="size-full wp-image-4181" title="Datamodel showing two different kinds of relationshios" src="NoSQL%20or%20RDBMS%20%20%E2%80%93%20Are%20we%20asking%20the%20right%20questions%20%20about%20performance_files/entity.png" alt="Datamodel showing two different kinds of relationshios" height="129" width="575"></a></p>
+<p>There are genuine relations between otherwise standalone entities 
+(like one person being married to another) and relationships that really
+ define hierarchical context or ownership of some sort (A room is always
+ part of a house). The first one is a real feature, the second is a 
+result of the storage nature. It can be argued that a Document (e.g. an 
+XML) stores such a “relation” more naturally because the House Document 
+contains the Room instead of having the Room as a separate document.</p>
+<p>Referential Integrity is really one of the corner stones of an RDBMS,
+ it ensures logical consistency of my domain model. Not only does it 
+ensure consistency within a certain logical entity (which might span 
+multiple rows/tables) but more importantly cross entity consistency. If 
+you access the same data via different applications and need to enforce 
+integrity at the central location this is the way to go. We could check 
+this in the application as well, but the database often acts as the 
+final authority of consistency.<strong> </strong></p>
+<p>The final aspect of consistency comes in the form of ACID 
+transactions. It ensures that either all my changes are consistent seen 
+by others in their entirety, or the none of my changes is committed at 
+all. Consistency really is the hallmark of an RDBMS. However we often 
+set commit points for other reasons than consistency. How often did I 
+use a bulk update for the simple reason of increased performance? In 
+many cases I did not care about the visibility of those changes, but 
+just wanted to have them done fast. In other cases we would deliberately
+ commit more often in order to decrease locking and increase 
+concurrency. The question is do I care whether Peter shows up as married
+ while Alice is still seen as unmarried? The government for sure does, 
+Facebook on the other hand does not!</p>
+<pre>SELECT count(e.isbn) AS "number of books", p.name AS publisher
+FROM editions AS e INNER JOIN
+ publishers AS p ON (e.publisher_id = p.id)
+GROUP BY p.name;</pre>
+<p>The final defining feature of an RDBMS is its ability to execute 
+arbitrary queries: SQL Selects. Very often NoSQL is understood as not 
+being able to execute queries. While this is not true it is true that 
+RDBMS solutions do offer a far superior query language. Especially the 
+ability to group and join data from unrelated entities into a new view 
+on the data is something that makes an RDBMS a powerful tool. If you 
+business is defined by the underlying structured data and you need the 
+ability to ask different questions all the time than this is a key 
+reason to use an RDBMS.</p>
+<p>However if you know how to access the data in advance, or you need to
+ change your application in case you want to access it differently, then
+ a lot of that advantage is overkill.</p>
+<h2>Why an RDBMS might not be right for you</h2>
+<p>These features come at the price of complexity in terms of datamodel,
+ storage, data retrieval and administration. And as we will see shortly a
+ builtin limit for horizontal scalability. If you do not need any or 
+most of the features you should not use an RDMBS.</p>
+<ul>
+<li>If you just want to store your application entities in a persistent 
+and consistent way then an RDBMS is overkill. A Key Value Store might be
+ perfect for you. Note that the Value can be a complex entity in itself!</li>
+<li>If you have hierarchical application objects and need some query 
+capability into them then any of the NoSQL solutions might be a fit. 
+With an RDBMS you can use ORM to achieve the same, but at the cost of 
+adding complexity to hide complexity.</li>
+<li>If you ever tried to store large trees or networks you will know 
+that an RDBMS is not the best solution here. Depending on your other 
+needs a Graph database might suit you.</li>
+<li>You are running in the Cloud and need to run a distributed database 
+for durability and availability. This is what dynamo and big table based
+ datastores were built fore. RDBMS on the other hand do not well here.</li>
+<li>You might already use a dataware house for your analytics. This is 
+not to disimilar form a Column Family database. If your data grows to 
+large to be processed on a single machine, you might look into hadoop or
+ any other solution that supports distributed Map/Reduce.</li>
+</ul>
+<p>There are many scenarios where fully ACID driven relational table 
+based database is simply not the best option or simplest option to go 
+with. Now that we got that out of the way, let’s look at the big one, 
+amount of data and scalability.</p>
+<h2>Why an RDBMS does not scale and many NoSQL solutions do</h2>
+<p>The real problem with RDBMS is the horizontal distribution of load 
+and data. The fact is that RDBMS solutions can not easily achieve 
+automatic data sharding. Data Sharding would require distinct data 
+entities that can be distributed and processed independently. An ACID 
+based relational database cannot do that due to its table based nature. 
+This is where NoSQL solutions differ greatly. They do not distribute a 
+logical entity across multiple tables, it’s always stored in one place. A
+ logical entity can be anything from a simple value, to a complex object
+ or even a full JSON document. They do not enforce referential integrity
+ between these logical entities. They only enforce consistency inside a 
+single entity and sometimes not even that.</p>
+<div id="attachment_4184" class="wp-caption aligncenter" style="width: 610px"><a href="http://blog.dynatrace.com/2011/10/05/nosql-or-rdbms-are-we-asking-the-right-questions/nosql/" rel="attachment wp-att-4184"><img class="size-medium wp-image-4184" title="NoSQL differs to RDBMS in the way entities get distributed and that no consistency is enforced across those entities" src="NoSQL%20or%20RDBMS%20%20%E2%80%93%20Are%20we%20asking%20the%20right%20questions%20%20about%20performance_files/NoSQL-600x311.png" alt="NoSQL differs to RDBMS in the way entities get distributed and that no consistency is enforced across those entities" height="311" width="600"></a><p class="wp-caption-text">NoSQL differs to RDBMS in the way entities get distributed and that no consistency is enforced across those entities</p></div>
+<p>This is what allows them to automatically distribute data across a 
+large number of database nodes and also write them independently. If I 
+were to write 20 entities to a database cluster with 3 nodes, chances 
+are I can evenly spread the writes across all of them. The database does
+ not need to synchronize between the nodes for that to happen and there 
+is no need for a two phase commit, with the visible effect that Client 
+one might see changes on Node 1 before Client 2 has written all 20 
+entities. A distributed RDBMS solution on the other hand needs to 
+enforce ACID consistency across all three nodes. That means that Client 1
+ will either not see any changes until all three nodes acknowledged a 
+two phase commit or will be blocked until that happened. In addition to 
+that synchronization the RDBMS also needs to read data from other nodes 
+in order to ensure referential integrity, all that happens during the 
+transaction and blocks Client 2. NoSQL solutions do no such thing for 
+the most part.</p>
+<p>The fact that such a solution can scale horizontally also means that 
+it can leverage its distributed nature for high availability. This is 
+very important in the cloud, where every single node might fail at any 
+moment.</p>
+<p>Another key factor is these solutions do not allow joins and groups 
+across entities, as that would not be possible in a scalable way if your
+ data ranges in the millions and is distributed across 10 nodes or more.
+ I think this is something that a lot of us have trouble with. We have 
+to start thinking about how to access data and store it accordingly and 
+not the other way around.</p>
+<p>So it is true that NoSQL solutions lack some of the features that 
+define an RDBMS solution. They do so for the reason of scalability. That
+ does however not mean that they are dump datastores, Document, Column 
+Family and Graph databases are far from unstructured and simple.</p>
+<h2>What about Application Performance?</h2>
+<p>The fact that all these solutions scale in principle, does however 
+not mean that they do so in practice or that your application will 
+perform better because of it! Indeed the overall performance depends to a
+ very large degree on choosing the right implementation for your use 
+case. Key/Value stores are very simple, but you can still use them 
+wrong. Column Family Stores are very interesting and also very different
+ from a table based design. Due to this it is easy to have a bad data 
+model design and this will kill your performance.</p>
+<p>Besides the obvious factors of disk I/O, network and caching (which 
+you must of course take into consideration), both application 
+performance and scalability depend heavily on the data itself; more 
+specifically on the distribution across the database cluster. This is 
+something that you need to monitor in live systems and take into 
+consideration during the design phase as well. I will talk more about 
+this and specific implementations in the coming months.</p>
+<p>There is one other factor that will play a key role in the choice 
+between NoSQL and more traditional databases. Companies are used to 
+RDBMS, they have experts and DBAs for them. NoSQL is new and not well 
+understood yet. The administration is different. Performance tuning and 
+anlysis is different, as are the problem patterns that we see. More 
+importantly performance and setup are more than ever governed by the 
+applications that use them and not by index tuning.</p>
+<p>Application Performance Management as a discipline is well equipped 
+to deal with this. In fact by looking at the end-to-end application 
+performance it can handle the different NoSQL solutions just like any 
+other database, actually as we have seen in my <a title="Cassandra Write Performance – A quick look inside" href="http://blog.dynatrace.com/2011/09/20/cassandra-write-performance-a-quick-look-inside/">last blog</a> we can often do better!</p>
+
+
+               
+                <script type="text/javascript" language="javascript">
+
+
+                    function sendToMkto() {
+                        mktoMunchkinFunction(
+                            'associateLead',
+                            {
+                                Email: decodeURIComponent(""),
+                                LeadSource: 'Blog',
+                                Blog_Emails__c: 'true'
+                            },
+                            '75555da692588fb04e3c24029e378bc6677a2273'
+                    );
+                    
+                    }
+
+                    function register() {
+                    	sendToMkto();
+                   	 	Effect.toggle('thanks','appear');
+                    }
+                    function validate() {
+                    	var email = $("#email").val();
+                   		 if (email != null && email.length != 0 && email.indexOf("@")!=-1) {
+                            return true;
+                        }
+                        
+                        
+                        Effect.toggle('valerror','appear');
+                        return false;
+                    }
+    
+                </script>
+
+				
+			<div>
+                
+				<div style="float:left;margin:5px 0px;width:100%;">
+				<a class="addthis_button_facebook_like" fb:like:layout="box_count"></a>
+				<a class="addthis_button_tweet" tw:count="vertical"></a>
+				<a class="addthis_button_google_plusone" g:plusone:size="tall"></a>
+				<a class="addthis_button_linkedin_counter" li:counter="top"></a>
+				<div class="dzonewidget" style="margin-top:43px;"><iframe src="NoSQL%20or%20RDBMS%20%20%E2%80%93%20Are%20we%20asking%20the%20right%20questions%20%20about%20performance_files/zoneit_002.htm" frameborder="0" height="25" scrolling="no" width="155"></iframe></div>
+				</div>
+
+					<div style="clear:both;"></div>
+               </div>
+
+
+
+                
+                <div style="clear:both">
+                                    </div>
+
+                
+                
+                <div style="clear:both;"></div>
+
+            </div><!-- end entry -->
+
+            <!-- end info -->
+        </div>
+
+
+        
+
+        <!-- end post -->
+
+
+
+        
+
+    </div>
+
+
+
+
+    <div id="sidebar">
+	<ul>
+
+        <li id="search">
+            <form method="get" action="http://apmblog.compuware.com" id="searchform">
+                <input onblur="if (this.value == '') {this.value = 'Search';}" onfocus="if (this.value == 'Search') {this.value = '';}" value="Search" class="searchinput" name="s" id="searchinput" type="text">
+                <input value="" id="searchsubmit" type="submit">
+	        </form>
+        </li>
+        
+        
+        <li class="widget widget_text" style="background-color:#fff;border:none;padding-top:12px;">
+        
+        <div style="float:left;margin:10px 5px 0px 0px">
+        Connect:
+        </div>
+        
+        <a href="http://apmblog.compuware.com/feed" target="new">
+        	<img src="NoSQL%20or%20RDBMS%20%20%E2%80%93%20Are%20we%20asking%20the%20right%20questions%20%20about%20performance_files/rss.png">
+        </a>
+        
+        <a href="https://twitter.com/CompuwareAPM" target="new">
+        	<img src="NoSQL%20or%20RDBMS%20%20%E2%80%93%20Are%20we%20asking%20the%20right%20questions%20%20about%20performance_files/twitter.png">
+        </a>
+        
+        <a href="https://www.facebook.com/compuwareAPM" target="new">
+        	<img src="NoSQL%20or%20RDBMS%20%20%E2%80%93%20Are%20we%20asking%20the%20right%20questions%20%20about%20performance_files/facebook.htm">
+        </a>        
+        
+        <a href="http://www.linkedin.com/groups?home=&amp;gid=1868499&amp;trk=anet_ug_hm" target="new">
+        	<img src="NoSQL%20or%20RDBMS%20%20%E2%80%93%20Are%20we%20asking%20the%20right%20questions%20%20about%20performance_files/linkedin.png">
+        </a> 
+        
+        <a href="https://plus.google.com/114060198744409894673/posts" target="new">
+        	<img src="NoSQL%20or%20RDBMS%20%20%E2%80%93%20Are%20we%20asking%20the%20right%20questions%20%20about%20performance_files/google.png">
+        </a>
+        
+        <a href="http://www.youtube.com/user/compuware" target="new">
+        	<img src="NoSQL%20or%20RDBMS%20%20%E2%80%93%20Are%20we%20asking%20the%20right%20questions%20%20about%20performance_files/youtube.png">
+        </a>           
+        
+        <div style="clear:both"></div>     
+        
+        </li>
+        
+        
+        <li class="widget widget_text" style="background:none;border:none;padding:0">
+
+
+            <script type="text/javascript" src="NoSQL%20or%20RDBMS%20%20%E2%80%93%20Are%20we%20asking%20the%20right%20questions%20%20about%20performance_files/widget.js"></script>
+            <script type="text/javascript">
+                new TWTR.Widget({
+                version: 2,
+                type: 'search',
+                rpp:30,
+                search: 'CompuwareAPM',
+                interval: 10000,
+                /*subject: 'Latest dynaTrace Tweets',*/
+                width: 297,
+                height: 90,
+                theme: {
+                shell: {
+                background: '#DCDCDC',
+                color: '#ffffff'
+                },
+                tweets: {
+                background: '#fff',
+                color: '#444444',
+                links: '#1985b5'
+                }
+                },
+                features: {
+                scrollbar: false,
+                loop: true,
+                live: true,
+                hashtags: true,
+                timestamp: true,
+                avatars: false,
+                behavior: 'default'
+                }
+                }).render().start();
+            </script><div class="twtr-widget" id="twtr-widget-1"><div class="twtr-doc" style="width: 297px;">            <div class="twtr-hd"><h3><a target="_blank" style="color:#ffffff" href="https://twitter.com/search/CompuwareAPM"></a></h3>                      <h4><a target="_blank" style="color:#ffffff" href="https://twitter.com/search/CompuwareAPM"></a></h4>             </div>            <div class="twtr-bd">              <div class="twtr-timeline" style="height: 100px;">                <div class="twtr-tweets">                  <div class="twtr-reference-tweet"></div>                  <!-- tweets show here -->                </div>              </div>            </div>            <div class="twtr-ft">              <div><a target="_blank" href="https://twitter.com/"><img alt="" src="NoSQL%20or%20RDBMS%20%20%E2%80%93%20Are%20we%20asking%20the%20right%20questions%20%20about%20performance_files/widget-bird.htm"></a>                <span><a target="_blank" class="twtr-join-conv" style="color:#ffffff" href="https://twitter.com/search/CompuwareAPM">Join the conversation</a></span>              </div>            </div>          </div></div>
+
+
+
+
+        </li>
+		<li id="widget_sp_image-6" class="widget widget_sp_image"><a class="widget_sp_image-image-link" href="http://javabook.compuware.com/" target="_blank"><img src="NoSQL%20or%20RDBMS%20%20%E2%80%93%20Are%20we%20asking%20the%20right%20questions%20%20about%20performance_files/banner-java.png" style="max-width: 298px;max-height: 140px;" class="aligncenter" alt="Java Enterprise Performance, available free to read online or download - read it now!"></a></li>
+<li id="widget_sp_image-3" class="widget widget_sp_image"><a class="widget_sp_image-image-link" href="http://offers2.compuware.com/Request_Demo_APM_Enterprise.html?utm_source=apm%2Bblog&amp;utm_medium=banner&amp;utm_campaign=dT%2Bfree%2Btrial" target="_blank"><img src="NoSQL%20or%20RDBMS%20%20%E2%80%93%20Are%20we%20asking%20the%20right%20questions%20%20about%20performance_files/dT-FreeTrial-blog-button.png" style="max-width: 298px;max-height: 140px;" alt="dynaTrace Free Trial"></a></li>
+<li id="widget_sp_image-4" class="widget widget_sp_image"><a class="widget_sp_image-image-link" href="http://www.gomez.com/website-performance-test/" target="_self"><img src="NoSQL%20or%20RDBMS%20%20%E2%80%93%20Are%20we%20asking%20the%20right%20questions%20%20about%20performance_files/banner-instant-test.png" style="max-width: 298px;max-height: 141px;" class="aligncenter" alt="How good is your web performance? Take an instant test now!"></a></li>
+<li id="text-3" class="widget widget_text"><h2 class="widgettitle">Our Authors</h2>
+			<div class="textwidget"><a href="http://apmblog.compuware.com/the-authors/">Learn more about our authors</a>
+</div>
+		</li>
+<li id="linkcat-2" class="widget widget_links"><h2 class="widgettitle">Blogroll</h2>
+
+	<ul class="xoxo blogroll">
+<li><a href="http://www.bitcurrent.com/">Bitcurrent (Alistar Croll)</a></li>
+<li><a href="http://cloudcomputing.sys-con.com/">Cloud Computing Journal</a></li>
+<li><a href="http://cloudcomputing.ulitzer.com/">Cloud Computing on Ulitzer</a></li>
+<li><a href="http://www.cnbc.com/id/15837640">CNBC TechCheck</a></li>
+<li><a href="http://bdimuccio.wordpress.com/">DataViews</a></li>
+<li><a href="http://blogs.forrester.com/mike_gualtieri">Forrester's Mike Gualtieri's Blog</a></li>
+<li><a href="http://gigaom.com/category/oms-posts/?utm_source=gigaom&amp;utm_medium=navigation">GigaOm</a></li>
+<li><a href="http://www.stevesouders.com/blog/">High Performance Web Sites</a></li>
+<li><a href="http://insidetechtalk.com/" title="A blend of opinions, news and thought provoking questions from geniuses inside the technology industry. ">InsideTechTalk</a></li>
+<li><a href="http://www.networkmonitoringblog.com/">Network Monitoring</a></li>
+<li><a href="http://newestindustry.org/">Newest Industry</a></li>
+<li><a href="http://www.pcmag.com/business/">PC Magazine @ Work</a></li>
+<li><a href="http://www.perfplanet.com/">Planet Performance</a></li>
+<li><a href="http://www.changepoint-blog.net/">Professional Services &amp; PPM Matters</a></li>
+<li><a href="http://readwrite.com/">ReadWrite</a></li>
+<li><a href="http://thomaslah.wordpress.com/">Service Visions</a></li>
+<li><a href="http://www.storefrontbacktalk.com/">StorefrontBacktalk</a></li>
+<li><a href="http://www.watchingwebsites.com/">Watching Websites</a></li>
+
+	</ul>
+</li>
+
+<li id="widget_sp_image-5" class="widget widget_sp_image"><a class="widget_sp_image-image-link" href="http://www.compuware.com/application-performance-management" target="_blank"><img src="NoSQL%20or%20RDBMS%20%20%E2%80%93%20Are%20we%20asking%20the%20right%20questions%20%20about%20performance_files/CpwrAPM_294x82.png" style="max-width: 294px;max-height: 82px;" class="aligncenter" alt="Compuware APM Business Unit"></a></li>
+<li id="widget_sp_image-2" class="widget widget_sp_image"><a class="widget_sp_image-image-link" href="http://www.compuware.com/" target="_self"><img src="NoSQL%20or%20RDBMS%20%20%E2%80%93%20Are%20we%20asking%20the%20right%20questions%20%20about%20performance_files/Compuware_Logo_w_Tagline_150w.png" style="max-width: 150px;max-height: 91px;" class="alignright" alt="Compuware, the Technology Performance Company"></a></li>
+		
+	</ul><!-- end ul -->
+</div><!-- end sidebar -->        <div id="main" class="comments" style="margin-top:12px;border-top:0">
+
+        
+<!-- You can start editing here. -->
+
+<div class="strongheader">
+    <div class="grid twocol">
+        <div class="col">
+            <a name="comments"></a> Comments
+        </div>
+
+        <div class="col right">
+            16 comments yet        </div>
+    </div>
+</div>
+
+	<ol class="commentlist">
+
+	
+		<li class="alt" id="comment-59751">
+        <div class="grid">
+            <div class="col" style="width:12%">
+        <div>
+            <img alt="" src="NoSQL%20or%20RDBMS%20%20%E2%80%93%20Are%20we%20asking%20the%20right%20questions%20%20about%20performance_files/135778a5692c473e62cab2ee8f03d1e4.htm" class="avatar avatar-32 photo" height="32" width="32">        </div>
+            </div>
+            <div class="col" style="width:88%">
+			<div class="top">                
+                <a href="http://adfhowto.blogspot.com/" rel="external nofollow" class="url">Spyros Doulgeridis</a><span class="time"> @ <a href="#comment-59751" title="">2011-10-05 12:36</a></span>
+            </div>
+			
+			
+			<div class="body">
+								<p>Very interesting post! </p>
+<p>I will just add the way Oracle feels about NoSQL by quoting the final phrase of its White Paper on May 2011:<br>
+“Go for the tried and true path. Don’t be risking your data on NoSQL databases.”</p>
+<p>Of course this is end by the time it will purchase a NoSQL DB and start reconsidering <img src="NoSQL%20or%20RDBMS%20%20%E2%80%93%20Are%20we%20asking%20the%20right%20questions%20%20about%20performance_files/icon_smile.gif" alt=":)" class="wp-smiley"> </p>
+<p>You can find the white paper here <a href="https://docs.google.com/viewer?a=v&amp;q=cache:G4pI4ZOkzWYJ:www.oracle.com/technetwork/database/debunking-nosql-twp-399992.pdf+oracle+debunking+nosql&amp;hl=en&amp;gl=uk&amp;pid=bl&amp;srcid=ADGEESiaUPuEdyJ9cnDc_GzgsfsNq6UytDZeO5f0pgDJyUeo7x-xfe2W091nseq4s1cIl9lZ79jmGT0TRpE5PF8svROWbJSjcbrm6TXb2AWfM2TaAa6Z80dEupN3oSFzZG6y9mWBsgTd&amp;sig=AHIEtbSXOrH6n87xP4yC4bqqMaLHSMBBNg"></a><a href="https://docs.google.com/viewer?a=v&amp;q=cache:G4pI4ZOkzWYJ:www.oracle.com/technetwork/database/debunking-nosql-twp-399992.pdf+oracle+debunking+nosql&amp;hl=en&amp;gl=uk&amp;pid=bl&amp;srcid=ADGEESiaUPuEdyJ9cnDc_GzgsfsNq6UytDZeO5f0pgDJyUeo7x-xfe2W091nseq4s1cIl9lZ79jmGT0TRpE5PF8svROWbJSjcbrm6TXb2AWfM2TaAa6Z80dEupN3oSFzZG6y9mWBsgTd&amp;sig=AHIEtbSXOrH6n87xP4yC4bqqMaLHSMBBNg">https://docs.google.com/viewer?a=v&amp;q=cache:G4pI4ZOkzWYJ:www.oracle.com/technetwork/database/debunking-nosql-twp-399992.pdf+oracle+debunking+nosql&amp;hl=en&amp;gl=uk&amp;pid=bl&amp;srcid=ADGEESiaUPuEdyJ9cnDc_GzgsfsNq6UytDZeO5f0pgDJyUeo7x-xfe2W091nseq4s1cIl9lZ79jmGT0TRpE5PF8svROWbJSjcbrm6TXb2AWfM2TaAa6Z80dEupN3oSFzZG6y9mWBsgTd&amp;sig=AHIEtbSXOrH6n87xP4yC4bqqMaLHSMBBNg</a></p>
+			</div>
+            </div>
+        </div>
+		</li>
+
+	
+	
+		<li id="comment-59753">
+        <div class="grid">
+            <div class="col" style="width:12%">
+        <div>
+            <img alt="" src="NoSQL%20or%20RDBMS%20%20%E2%80%93%20Are%20we%20asking%20the%20right%20questions%20%20about%20performance_files/a39a488014fe971be4e9de964a59aea1.htm" class="avatar avatar-32 photo" height="32" width="32">        </div>
+            </div>
+            <div class="col" style="width:88%">
+			<div class="top">                
+                <a href="http://blog.dynatrace.com/the-authors/" rel="external nofollow" class="url">Michael Kopp</a><span class="time"> @ <a href="#comment-59753" title="">2011-10-05 13:14</a></span>
+            </div>
+			
+			
+			<div class="body">
+								<p>Thanks, I agree with your sentiment. Their point of view is 
+of course understandable, they are a vendor. For many cases oracle is 
+working perfectly, that will not change. Other cases are better (and 
+cheaper) served with an alternative.</p>
+			</div>
+            </div>
+        </div>
+		</li>
+
+	
+	
+		<li class="alt" id="comment-59772">
+        <div class="grid">
+            <div class="col" style="width:12%">
+        <div>
+            <img alt="" src="NoSQL%20or%20RDBMS%20%20%E2%80%93%20Are%20we%20asking%20the%20right%20questions%20%20about%20performance_files/a39a488014fe971be4e9de964a59aea1.htm" class="avatar avatar-32 photo" height="32" width="32">        </div>
+            </div>
+            <div class="col" style="width:88%">
+			<div class="top">                
+                <a href="http://blog.dynatrace.com/the-authors/" rel="external nofollow" class="url">Michael Kopp</a><span class="time"> @ <a href="#comment-59772" title="">2011-10-07 08:16</a></span>
+            </div>
+			
+			
+			<div class="body">
+								<p>Oracle now has a NoSQL so they changed their mind <img src="NoSQL%20or%20RDBMS%20%20%E2%80%93%20Are%20we%20asking%20the%20right%20questions%20%20about%20performance_files/icon_wink.gif" alt=";-)" class="wp-smiley"> </p>
+<p><a href="http://www.infoq.com/news/2011/10/Oracle-NoSQL-Database"></a><a href="http://www.infoq.com/news/2011/10/Oracle-NoSQL-Database">http://www.infoq.com/news/2011/10/Oracle-NoSQL-Database</a></p>
+			</div>
+            </div>
+        </div>
+		</li>
+
+	
+	
+		<li id="comment-60318">
+        <div class="grid">
+            <div class="col" style="width:12%">
+        <div>
+            <img alt="" src="NoSQL%20or%20RDBMS%20%20%E2%80%93%20Are%20we%20asking%20the%20right%20questions%20%20about%20performance_files/16efe1e2ac0e305fd7fff10bd96b9ef1.htm" class="avatar avatar-32 photo" height="32" width="32">        </div>
+            </div>
+            <div class="col" style="width:88%">
+			<div class="top">                
+                <a href="http://hjg.com.ar/" rel="external nofollow" class="url">hernan</a><span class="time"> @ <a href="#comment-60318" title="">2011-12-05 18:30</a></span>
+            </div>
+			
+			
+			<div class="body">
+								<p>Not to be pedantic, but I don’t think the word “relation” in 
+the text has much to do with “relational” databases: “Relations between 
+distinct Table Entities and Rows (the R in RDBMS)”<br>
+In the RDB Model, the “relation” corresponds to what mere mortals calls a “table”. See eg <a href="http://en.wikipedia.org/wiki/Relation_%28database%29"></a><a href="http://en.wikipedia.org/wiki/Relation_">http://en.wikipedia.org/wiki/Relation_</a>(database)</p>
+			</div>
+            </div>
+        </div>
+		</li>
+
+	
+	
+		<li class="alt" id="comment-60319">
+        <div class="grid">
+            <div class="col" style="width:12%">
+        <div>
+            <img alt="" src="NoSQL%20or%20RDBMS%20%20%E2%80%93%20Are%20we%20asking%20the%20right%20questions%20%20about%20performance_files/16efe1e2ac0e305fd7fff10bd96b9ef1.htm" class="avatar avatar-32 photo" height="32" width="32">        </div>
+            </div>
+            <div class="col" style="width:88%">
+			<div class="top">                
+                <a href="http://hjg.com.ar/" rel="external nofollow" class="url">hernan</a><span class="time"> @ <a href="#comment-60319" title="">2011-12-05 18:31</a></span>
+            </div>
+			
+			
+			<div class="body">
+								<p>The commenting system ate the url, here it goes again:<br>
+<a href="http://goo.gl/KD1Zv"></a><a href="http://goo.gl/KD1Zv">http://goo.gl/KD1Zv</a></p>
+			</div>
+            </div>
+        </div>
+		</li>
+
+	
+	
+		<li id="comment-60324">
+        <div class="grid">
+            <div class="col" style="width:12%">
+        <div>
+            <img alt="" src="NoSQL%20or%20RDBMS%20%20%E2%80%93%20Are%20we%20asking%20the%20right%20questions%20%20about%20performance_files/a39a488014fe971be4e9de964a59aea1.htm" class="avatar avatar-32 photo" height="32" width="32">        </div>
+            </div>
+            <div class="col" style="width:88%">
+			<div class="top">                
+                <a href="http://blog.dynatrace.com/the-authors/" rel="external nofollow" class="url">Michael Kopp</a><span class="time"> @ <a href="#comment-60324" title="">2011-12-05 20:34</a></span>
+            </div>
+			
+			
+			<div class="body">
+								<p>purely scientific that might be right. a modern rdbms however
+ is defined by references and their enforcements –&gt; constraints and 
+consistency. in this context the r in rdbms is talking about those 
+references between rows which is defined by the relational table model.</p>
+			</div>
+            </div>
+        </div>
+		</li>
+
+	
+	
+		<li class="alt" id="comment-60328">
+        <div class="grid">
+            <div class="col" style="width:12%">
+        <div>
+            <img alt="" src="NoSQL%20or%20RDBMS%20%20%E2%80%93%20Are%20we%20asking%20the%20right%20questions%20%20about%20performance_files/16efe1e2ac0e305fd7fff10bd96b9ef1.htm" class="avatar avatar-32 photo" height="32" width="32">        </div>
+            </div>
+            <div class="col" style="width:88%">
+			<div class="top">                
+                <a href="http://hjg.com.ar/" rel="external nofollow" class="url">hernan</a><span class="time"> @ <a href="#comment-60328" title="">2011-12-05 20:49</a></span>
+            </div>
+			
+			
+			<div class="body">
+								<p>“in this context the r in rdbms is talking about those references between rows which is defined by the relational table model.”<br>
+I’m sorry, that does not make sense to me.  You are obviously thinking 
+of relationships, not relations;  which is very natural and pertinent 
+for your explanation – but my point is that the R in RDBM=”Relational 
+data base model” does NOT mean (in any “context”) relationship, it means
+ relation, which is a very different thing. </p>
+<p><a href="http://stackoverflow.com/questions/5208295/relation-versus-relationship-in-rdbms-sql"></a><a href="http://stackoverflow.com/questions/5208295/relation-versus-relationship-in-rdbms-sql">http://stackoverflow.com/questions/5208295/relation-versus-relationship-in-rdbms-sql</a></p>
+<p><a href="http://openquery.com/blog/rdbms-terminology-relations-vs-relationships"></a><a href="http://openquery.com/blog/rdbms-terminology-relations-vs-relationships">http://openquery.com/blog/rdbms-terminology-relations-vs-relationships</a></p>
+<p><a href="http://explainextended.com/2009/08/23/what-is-a-relational-database/"></a><a href="http://explainextended.com/2009/08/23/what-is-a-relational-database/">http://explainextended.com/2009/08/23/what-is-a-relational-database/</a></p>
+			</div>
+            </div>
+        </div>
+		</li>
+
+	
+	
+		<li id="comment-60331">
+        <div class="grid">
+            <div class="col" style="width:12%">
+        <div>
+            <img alt="" src="NoSQL%20or%20RDBMS%20%20%E2%80%93%20Are%20we%20asking%20the%20right%20questions%20%20about%20performance_files/a39a488014fe971be4e9de964a59aea1.htm" class="avatar avatar-32 photo" height="32" width="32">        </div>
+            </div>
+            <div class="col" style="width:88%">
+			<div class="top">                
+                <a href="http://blog.dynatrace.com/the-authors/" rel="external nofollow" class="url">Michael Kopp</a><span class="time"> @ <a href="#comment-60331" title="">2011-12-05 21:04</a></span>
+            </div>
+			
+			
+			<div class="body">
+								<p>all right i give up. i was talking about relationships (I’m 
+mortal too). i have always considered the referential aspect the most 
+defining. but of course we did have rdbms even before we had references.</p>
+<p>even so, while i should change the wording to be precise, the point made here is valid  is it not?</p>
+			</div>
+            </div>
+        </div>
+		</li>
+
+	
+	
+		<li class="alt" id="comment-60487">
+        <div class="grid">
+            <div class="col" style="width:12%">
+        <div>
+            <img alt="" src="NoSQL%20or%20RDBMS%20%20%E2%80%93%20Are%20we%20asking%20the%20right%20questions%20%20about%20performance_files/b3caa7f00c6529c9a3bf3c926ab7125f.htm" class="avatar avatar-32 photo" height="32" width="32">        </div>
+            </div>
+            <div class="col" style="width:88%">
+			<div class="top">                
+                soap00023<span class="time"> @ <a href="#comment-60487" title="">2011-12-25 07:21</a></span>
+            </div>
+			
+			
+			<div class="body">
+								<p>Their point of view is of course understandable, they are a 
+vendor. For many cases oracle is working perfectly, that will not 
+change. In this context the r in rdbms is talking about those references
+ between rows.<br>
+<a href="http://www.nexiumvsprilosec.net/nexium-over-the-counter">nexium over the counter</a></p>
+			</div>
+            </div>
+        </div>
+		</li>
+
+	
+	
+		<li id="comment-60608">
+        <div class="grid">
+            <div class="col" style="width:12%">
+        <div>
+            <img alt="" src="NoSQL%20or%20RDBMS%20%20%E2%80%93%20Are%20we%20asking%20the%20right%20questions%20%20about%20performance_files/a2c84a51162066e6ce60652ce1e9a55e.htm" class="avatar avatar-32 photo" height="32" width="32">        </div>
+            </div>
+            <div class="col" style="width:88%">
+			<div class="top">                
+                jobs<span class="time"> @ <a href="#comment-60608" title="">2012-01-05 11:23</a></span>
+            </div>
+			
+			
+			<div class="body">
+								<p>Took me time to read all the comments, but I really enjoyed 
+the article. It proved to be very useful to me and I am sure to all the 
+commenters here! It’s always nice when you. <a href="http://www.itjobsdelhi.net/">IT jobs</a></p>
+			</div>
+            </div>
+        </div>
+		</li>
+
+	
+	
+		<li class="alt" id="comment-60609">
+        <div class="grid">
+            <div class="col" style="width:12%">
+        <div>
+            <img alt="" src="NoSQL%20or%20RDBMS%20%20%E2%80%93%20Are%20we%20asking%20the%20right%20questions%20%20about%20performance_files/a2c84a51162066e6ce60652ce1e9a55e.htm" class="avatar avatar-32 photo" height="32" width="32">        </div>
+            </div>
+            <div class="col" style="width:88%">
+			<div class="top">                
+                jobs<span class="time"> @ <a href="#comment-60609" title="">2012-01-05 11:28</a></span>
+            </div>
+			
+			
+			<div class="body">
+								<p>I wonder how you got so good. HaHa! This is really a 
+fascinating blog, lots of stuff that I can get into. One thing I just 
+want to say is that your design is so perfect! <a href="http://banksjobs.co/">bank career</a></p>
+			</div>
+            </div>
+        </div>
+		</li>
+
+	
+	
+		<li id="comment-60610">
+        <div class="grid">
+            <div class="col" style="width:12%">
+        <div>
+            <img alt="" src="NoSQL%20or%20RDBMS%20%20%E2%80%93%20Are%20we%20asking%20the%20right%20questions%20%20about%20performance_files/a2c84a51162066e6ce60652ce1e9a55e.htm" class="avatar avatar-32 photo" height="32" width="32">        </div>
+            </div>
+            <div class="col" style="width:88%">
+			<div class="top">                
+                jobs<span class="time"> @ <a href="#comment-60610" title="">2012-01-05 11:29</a></span>
+            </div>
+			
+			
+			<div class="body">
+								<p>I found the perfect place for my needs. Contains wonderful 
+and useful messages. I have read most of them and has a lot of them. 
+Door Lintels To me, he’s doing the great work.<a href="http://www.thefreshersworld.net/">Freshersworld</a></p>
+			</div>
+            </div>
+        </div>
+		</li>
+
+	
+	
+		<li class="alt" id="comment-60760">
+        <div class="grid">
+            <div class="col" style="width:12%">
+        <div>
+            <img alt="" src="NoSQL%20or%20RDBMS%20%20%E2%80%93%20Are%20we%20asking%20the%20right%20questions%20%20about%20performance_files/5d04d02bc658a233208a7dc53f398b17.htm" class="avatar avatar-32 photo" height="32" width="32">        </div>
+            </div>
+            <div class="col" style="width:88%">
+			<div class="top">                
+                kumar<span class="time"> @ <a href="#comment-60760" title="">2012-01-18 11:22</a></span>
+            </div>
+			
+			
+			<div class="body">
+								<p>A perfect info source. Thanks for taking the time to discuss 
+this, I feel strongly about it and love learning more on this topic.<a href="http://www.geiger-pool.de/">Geiger Pool</a></p>
+			</div>
+            </div>
+        </div>
+		</li>
+
+	
+	
+		<li id="comment-60817">
+        <div class="grid">
+            <div class="col" style="width:12%">
+        <div>
+            <img alt="" src="NoSQL%20or%20RDBMS%20%20%E2%80%93%20Are%20we%20asking%20the%20right%20questions%20%20about%20performance_files/bd5dfbbc6eff1da2486d09f643ecd310.htm" class="avatar avatar-32 photo" height="32" width="32">        </div>
+            </div>
+            <div class="col" style="width:88%">
+			<div class="top">                
+                Sunit Joshi<span class="time"> @ <a href="#comment-60817" title="">2012-01-27 18:13</a></span>
+            </div>
+			
+			
+			<div class="body">
+								<p>Nicely detailed, to-the-point article which explained things in a simple way. Thanks for putting this up.</p>
+			</div>
+            </div>
+        </div>
+		</li>
+
+	
+	
+		<li class="alt" id="comment-64708">
+        <div class="grid">
+            <div class="col" style="width:12%">
+        <div>
+            <img alt="" src="NoSQL%20or%20RDBMS%20%20%E2%80%93%20Are%20we%20asking%20the%20right%20questions%20%20about%20performance_files/e0f7052db070b9f3685419bc02fbc479.htm" class="avatar avatar-32 photo" height="32" width="32">        </div>
+            </div>
+            <div class="col" style="width:88%">
+			<div class="top">                
+                Jan<span class="time"> @ <a href="#comment-64708" title="">2012-09-18 03:18</a></span>
+            </div>
+			
+			
+			<div class="body">
+								<p>I’m confused as hell by this NoSql stuff, so my brother wrote a comparison about them: <a href="http://www.kammerath.co.uk/nosql-on-the-spot.html"></a><a href="http://www.kammerath.co.uk/nosql-on-the-spot.html">http://www.kammerath.co.uk/nosql-on-the-spot.html</a>
+ . Still today my sites run MySql, although a custom-made software I 
+did, and I always thought about moving parts or all of it to NoSql, but 
+yet don’t know…</p>
+			</div>
+            </div>
+        </div>
+		</li>
+
+	
+	
+		<li id="comment-73438">
+        <div class="grid">
+            <div class="col" style="width:12%">
+        <div>
+            <img alt="" src="NoSQL%20or%20RDBMS%20%20%E2%80%93%20Are%20we%20asking%20the%20right%20questions%20%20about%20performance_files/f83cae4263bcc3b6bd53a6fec996b251.htm" class="avatar avatar-32 photo" height="32" width="32">        </div>
+            </div>
+            <div class="col" style="width:88%">
+			<div class="top">                
+                <a href="http://www.trackerbird.com/" rel="external nofollow" class="url">Clifford Farrugia</a><span class="time"> @ <a href="#comment-73438" title="">2012-11-07 12:08</a></span>
+            </div>
+			
+			
+			<div class="body">
+								<p>I have recently written a post regarding our experience with 
+MongoDB in regards to performance during the past 18 months. You may 
+read it here: <a href="http://blog.trackerbird.com/content/mongodb-performance-pitfalls-behind-the-scenes/"></a><a href="http://blog.trackerbird.com/content/mongodb-performance-pitfalls-behind-the-scenes/">http://blog.trackerbird.com/content/mongodb-performance-pitfalls-behind-the-scenes/</a></p>
+			</div>
+            </div>
+        </div>
+		</li>
+
+	
+	
+	</ol>
+
+ 
+
+
+<div id="commentform">
+<h3 id="respond">Add your comment now</h3>
+
+
+<form action="http://apmblog.compuware.com/wp-comments-post.php" method="post" id="commentform">
+
+
+<p><input name="author" id="author" size="25" tabindex="1" class="comment_input" type="text">
+<label for="author">Name (required)</label></p>
+
+<p><input name="email" id="email" size="25" tabindex="2" class="comment_input" type="text">
+<label for="email">Email (Will NOT be published) (required)</label></p>
+
+<p><input name="url" id="url" size="25" tabindex="3" class="comment_input" type="text">
+<label for="url">URL</label></p>
+
+
+<!--<p><small><strong>XHTML:</strong> You can use these tags: &lt;a href=&quot;&quot; title=&quot;&quot;&gt; &lt;abbr title=&quot;&quot;&gt; &lt;acronym title=&quot;&quot;&gt; &lt;b&gt; &lt;blockquote cite=&quot;&quot;&gt; &lt;cite&gt; &lt;code&gt; &lt;del datetime=&quot;&quot;&gt; &lt;em&gt; &lt;i&gt; &lt;q cite=&quot;&quot;&gt; &lt;strike&gt; &lt;strong&gt; </small></p>-->
+
+<p><textarea name="comment" id="comment" cols="25" rows="5" tabindex="4" class="message_input"></textarea><div id="captchaImgDiv">
+
+<div class="captchaSizeDivLarge"><img id="si_image_com" class="si-captcha" src="NoSQL%20or%20RDBMS%20%20%E2%80%93%20Are%20we%20asking%20the%20right%20questions%20%20about%20performance_files/securimage_show.png" alt="CAPTCHA Image" title="CAPTCHA Image" height="60" width="175">
+    <input id="si_code_com" name="si_code_com" value="5TiAyJqityQdhs4k" type="hidden">
+    <div id="si_refresh_com">
+<a href="#" rel="nofollow" title="Refresh Image" onclick="si_captcha_refresh('si_image_com','com','/wp-content/plugins/si-captcha-for-wordpress/captcha','http://apmblog.compuware.com/wp-content/plugins/si-captcha-for-wordpress/captcha/securimage_show.php?si_form_id=com&amp;prefix='); return false;">
+      <img class="captchaImgRefresh" src="NoSQL%20or%20RDBMS%20%20%E2%80%93%20Are%20we%20asking%20the%20right%20questions%20%20about%20performance_files/refresh.png" alt="Refresh Image" onclick="this.blur();" height="20" width="22"></a>
+  </div>
+  </div>
+<div id="captchaInputDiv"><input id="captcha_code" name="captcha_code" tabindex="4" aria-required="true" type="text">
+ <label id="captcha_code_label" for="captcha_code">CAPTCHA Code</label><span class="required"> *</span>
+ </div>
+</div></p>
+
+<p class="right"><input name="submit" id="submit" tabindex="5" value="Submit" class="button" type="submit">
+<input name="comment_post_ID" value="4145" type="hidden">
+
+</p>
+      <script type="text/javascript">
+          var sUrlInput = document.getElementById("comment");
+                  var oParent = sUrlInput.parentNode;
+          var sSubstitue = document.getElementById("captchaImgDiv");
+                  oParent.appendChild(sSubstitue, sUrlInput);
+      </script>
+            <noscript>
+          <style type='text/css'>#submit {display:none;}</style><br />           <input name="submit" type="submit" id="submit-alt" tabindex="6" value="Submit Comment" />
+          </noscript>
+  <p style="display: none;"><input id="akismet_comment_nonce" name="akismet_comment_nonce" value="0ca9b70a75" type="hidden"></p>
+
+	<p style="clear: both;" class="subscribe-to-comments">
+	<input name="subscribe" id="subscribe" value="subscribe" style="width: auto;" type="checkbox">
+	<label for="subscribe">Notify me of followup comments via e-mail</label>
+	</p>
+
+
+<p></p>
+
+</form>
+</div>
+
+
+
+        
+        
+    </div><!-- end main -->
+
+   
+
+</div><!-- end container -->
+
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-11755577-14']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+
+
+<!-- Marketo -->
+
+<!-- Marketo end -->
+
+
+
+
+<!-- widgets -->
+
+
+
+<script type="text/javascript" src="NoSQL%20or%20RDBMS%20%20%E2%80%93%20Are%20we%20asking%20the%20right%20questions%20%20about%20performance_files/widgets.htm"></script>
+<script src="NoSQL%20or%20RDBMS%20%20%E2%80%93%20Are%20we%20asking%20the%20right%20questions%20%20about%20performance_files/in.htm" type="text/javascript"></script>
+<script type="text/javascript">
+// Google Plus -
+(function() {
+var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+po.src = '//apis.google.com/js/plusone.js';
+var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+})();
+</script>
+<!-- -->
+
+
+
+
+<script type="text/javascript" src="NoSQL%20or%20RDBMS%20%20%E2%80%93%20Are%20we%20asking%20the%20right%20questions%20%20about%20performance_files/si_captcha.js"></script>
+<script type="text/javascript">
+//<![CDATA[
+var si_captcha_styles = "\
+<!-- begin SI CAPTCHA Anti-Spam - comment form style -->\
+<style type='text/css'>\
+div#captchaImgDiv { display:block; }\
+.captchaSizeDivSmall { width:175px; height:45px; padding-top:10px; }\
+.captchaSizeDivLarge { width:250px; height:60px; padding-top:10px; }\
+img#si_image_com,#si_image_reg,#si_image_log,#si_image_side_login { border-style:none; margin:0; padding-right:5px; float:left; }\
+.captchaImgRefresh { border-style:none; margin:0; vertical-align:bottom; }\
+div#captchaInputDiv { display:block; padding-top:15px; padding-bottom:5px; }\
+label#captcha_code_label { margin:0; }\
+input#captcha_code { width:65px; }\
+</style>\
+<!-- end SI CAPTCHA Anti-Spam - comment form style -->\
+";
+jQuery(document).ready(function($) {
+$('head').append(si_captcha_styles);
+});
+//]]>
+</script>
+<script type="text/javascript">
+/* <![CDATA[ */
+var JQLBSettings = {"fitToScreen":"1","resizeSpeed":"200","displayDownloadLink":"1","navbarOnTop":"0","loopImages":"","resizeCenter":"","marginSize":"0","linkTarget":"_self","help":"","prevLinkTitle":"previous image","nextLinkTitle":"next image","prevLinkText":"\u00ab Previous","nextLinkText":"Next \u00bb","closeTitle":"close image gallery","image":"Image ","of":" of ","download":"Download"};
+var JQLBSettings = {"fitToScreen":"1","resizeSpeed":"200","displayDownloadLink":"1","navbarOnTop":"0","loopImages":"","resizeCenter":"","marginSize":"0","linkTarget":"_self","help":"","prevLinkTitle":"previous image","nextLinkTitle":"next image","prevLinkText":"\u00ab Previous","nextLinkText":"Next \u00bb","closeTitle":"close image gallery","image":"Image ","of":" of ","download":"Download"};
+/* ]]> */
+</script>
+<script type="text/javascript" src="NoSQL%20or%20RDBMS%20%20%E2%80%93%20Are%20we%20asking%20the%20right%20questions%20%20about%20performance_files/wp-lightbox-2.js"></script>
+</div>
+
+<!-- MUNCHKIN CODE 11/2012 -->
+<script type="text/javascript">       
+      <!--
+      document.write("<scr"+"ipt type='text/javascript' src='");
+      if(document.location.protocol == 'https:') {
+        document.write("https://ssl-munchkin.marketo.net/munchkin.js'><\/scr"+"ipt>");
+      } else {
+        document.write("http://munchkin.marketo.net/munchkin.js'><\/scr"+"ipt>");
+      }
+      -->
+    </script><script type="text/javascript" src="NoSQL%20or%20RDBMS%20%20%E2%80%93%20Are%20we%20asking%20the%20right%20questions%20%20about%20performance_files/munchkin.htm"></script>
+    <script type="text/javascript">
+    try {
+        mktoMunchkin("352-NVO-562");
+    } catch (err) { }         
+</script>
+
+
+
+</body></html>

@@ -1,0 +1,575 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head>
+    <title>Glossary — MongoDB Manual</title>
+
+    <link rel="shortcut icon" href="http://media.mongodb.org/favicon.ico">
+    <meta name="robots" content="index">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <link rel="canonical" href="http://docs.mongodb.org/manual/reference/glossary">
+
+    
+    
+    <link rel="stylesheet" href="Glossary%20%E2%80%94%20MongoDB%20Manual_files/mongodb-docs.css" type="text/css">
+    <link rel="stylesheet" href="Glossary%20%E2%80%94%20MongoDB%20Manual_files/pygments.css" type="text/css">
+      
+    <script src="Glossary%20%E2%80%94%20MongoDB%20Manual_files/cse.js" async="" type="text/javascript"></script><script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '2.2.2',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '',
+        HAS_SOURCE:  false
+      };
+    </script>
+    <script type="text/javascript" src="Glossary%20%E2%80%94%20MongoDB%20Manual_files/jquery.js"></script>
+    <script type="text/javascript" src="Glossary%20%E2%80%94%20MongoDB%20Manual_files/underscore.js"></script>
+    <script type="text/javascript" src="Glossary%20%E2%80%94%20MongoDB%20Manual_files/doctools.js"></script>
+      <link rel="search" type="application/opensearchdescription+xml" href="http://docs.mongodb.org/osd.xml" title="MongoDB Help">
+<link rel="author" title="About these documents" href="http://docs.mongodb.org/manual/about/">
+<link rel="top" title="MongoDB Manual" href="http://docs.mongodb.org/manual/">
+<link rel="up" title="Reference" href="http://docs.mongodb.org/manual/reference/">
+<link rel="next" title="Release Notes for MongoDB 2.2" href="http://docs.mongodb.org/manual/release-notes/2.2/">
+<link rel="prev" title="MongoDB Extended JSON" href="http://docs.mongodb.org/manual/reference/mongodb-extended-json/">
+<!-- Put the following javascript before the closing </head> tag. -->
+<script>
+  (function() {
+    var cx = '017213726194841070573:WMX6838984';
+    var gcse = document.createElement('script'); gcse.type = 'text/javascript'; gcse.async = true;
+    gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+        '//www.google.com/cse/cse.js?cx=' + cx;
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(gcse, s);
+  })();
+</script>
+  <script type="text/javascript" src="Glossary%20%E2%80%94%20MongoDB%20Manual_files/jsapi"></script><link rel="stylesheet" href="Glossary%20%E2%80%94%20MongoDB%20Manual_files/defaulten.css" type="text/css"><link rel="stylesheet" href="Glossary%20%E2%80%94%20MongoDB%20Manual_files/default.css" type="text/css"><script src="Glossary%20%E2%80%94%20MongoDB%20Manual_files/defaulten.js" type="text/javascript"></script><script src="Glossary%20%E2%80%94%20MongoDB%20Manual_files/search.js" type="text/javascript"></script><style type="text/css">
+.gsc-control-cse {
+font-family: Arial, sans-serif;
+border-color: #FFFFFF;
+background-color: #FFFFFF;
+}
+.gsc-control-cse .gsc-table-result {
+font-family: Arial, sans-serif;
+}
+input.gsc-input, .gsc-input-box, .gsc-input-box-hover, .gsc-input-box-focus {
+border-color: #D9D9D9;
+}
+input.gsc-search-button, input.gsc-search-button:hover, input.gsc-search-button:focus {
+border-color: #5AAC41;
+background-color: #5AAC41;
+background-image: none;
+filter: none;
+}
+.gsc-tabHeader.gsc-tabhInactive {
+border-color: #CCCCCC;
+background-color: #FFFFFF;
+}
+.gsc-tabHeader.gsc-tabhActive {
+border-color: #CCCCCC;
+border-bottom-color: #FFFFFF;
+background-color: #FFFFFF;
+}
+.gsc-tabsArea {
+border-color: #CCCCCC;
+}
+.gsc-webResult.gsc-result,
+.gsc-results .gsc-imageResult {
+border-color: #FFFFFF;
+background-color: #FFFFFF;
+}
+.gsc-webResult.gsc-result:hover,
+.gsc-imageResult:hover {
+border-color: #FFFFFF;
+background-color: #FFFFFF;
+}
+.gs-webResult.gs-result a.gs-title:link,
+.gs-webResult.gs-result a.gs-title:link b,
+.gs-imageResult a.gs-title:link,
+.gs-imageResult a.gs-title:link b {
+color: #1155CC;
+}
+.gs-webResult.gs-result a.gs-title:visited,
+.gs-webResult.gs-result a.gs-title:visited b,
+.gs-imageResult a.gs-title:visited,
+.gs-imageResult a.gs-title:visited b {
+color: #1155CC;
+}
+.gs-webResult.gs-result a.gs-title:hover,
+.gs-webResult.gs-result a.gs-title:hover b,
+.gs-imageResult a.gs-title:hover,
+.gs-imageResult a.gs-title:hover b {
+color: #1155CC;
+}
+.gs-webResult.gs-result a.gs-title:active,
+.gs-webResult.gs-result a.gs-title:active b,
+.gs-imageResult a.gs-title:active,
+.gs-imageResult a.gs-title:active b {
+color: #1155CC;
+}
+.gsc-cursor-page {
+color: #1155CC;
+}
+a.gsc-trailing-more-results:link {
+color: #1155CC;
+}
+.gs-webResult .gs-snippet,
+.gs-imageResult .gs-snippet,
+.gs-fileFormatType {
+color: #333333;
+}
+.gs-webResult div.gs-visibleUrl,
+.gs-imageResult div.gs-visibleUrl {
+color: #009933;
+}
+.gs-webResult div.gs-visibleUrl-short {
+color: #009933;
+}
+.gs-webResult div.gs-visibleUrl-short {
+display: none;
+}
+.gs-webResult div.gs-visibleUrl-long {
+display: block;
+}
+.gs-promotion div.gs-visibleUrl-short {
+display: none;
+}
+.gs-promotion div.gs-visibleUrl-long {
+display: block;
+}
+.gsc-cursor-box {
+border-color: #FFFFFF;
+}
+.gsc-results .gsc-cursor-box .gsc-cursor-page {
+border-color: #CCCCCC;
+background-color: #FFFFFF;
+color: #1155CC;
+}
+.gsc-results .gsc-cursor-box .gsc-cursor-current-page {
+border-color: #CCCCCC;
+background-color: #FFFFFF;
+color: #1155CC;
+}
+.gsc-webResult.gsc-result.gsc-promotion {
+border-color: #F6F6F6;
+background-color: #F6F6F6;
+}
+.gsc-completion-title {
+color: #1155CC;
+}
+.gsc-completion-snippet {
+color: #333333;
+}
+.gs-promotion a.gs-title:link,
+.gs-promotion a.gs-title:link *,
+.gs-promotion .gs-snippet a:link {
+color: #1155CC;
+}
+.gs-promotion a.gs-title:visited,
+.gs-promotion a.gs-title:visited *,
+.gs-promotion .gs-snippet a:visited {
+color: #1155CC;
+}
+.gs-promotion a.gs-title:hover,
+.gs-promotion a.gs-title:hover *,
+.gs-promotion .gs-snippet a:hover {
+color: #1155CC;
+}
+.gs-promotion a.gs-title:active,
+.gs-promotion a.gs-title:active *,
+.gs-promotion .gs-snippet a:active {
+color: #1155CC;
+}
+.gs-promotion .gs-snippet,
+.gs-promotion .gs-title .gs-promotion-title-right,
+.gs-promotion .gs-title .gs-promotion-title-right * {
+color: #333333;
+}
+.gs-promotion .gs-visibleUrl,
+.gs-promotion .gs-visibleUrl-short {
+color: #009933;
+}
+.gsc-input input.gsc-input {
+background: none repeat scroll 0% 0% white !important;
+}
+</style></head>
+  <body>
+<div id="top-right">
+        <div class="user-right">
+                <ul id="header-menu-bar" class="ajs-menu-bar">
+                <li class="normal"><a target="_blank" href="http://groups.google.com/group/mongodb-user">Forums</a></li>
+                <li class="normal"><a target="_blank" href="http://blog.mongodb.org/">Blog</a></li>
+                <li class="normal"><a href="http://www.mongodb.org/downloads">Download</a></li>
+                <li class="normal"><a href="http://docs.mongodb.org/ecosystem/drivers/">Drivers</a></li>
+                <li class="normal"><a href="http://www.10gen.com/events">Events</a></li>
+                <li class="normal last"><a class="last" href="http://docs.mongodb.org/manual/meta/translation">Translations</a></li>
+                </ul>
+        </div>
+</div>
+<div id="header-db" class="spread">
+        <div class="split">
+                <div id="logo">
+                        <div><a href="http://docs.mongodb.org/manual/"><img class="logo" src="Glossary%20%E2%80%94%20MongoDB%20Manual_files/logo-mongodb.png" alt="MongoDB Logo"></a></div>
+                </div>
+        </div>
+
+<div class="search-db"><gcse:searchbox></gcse:searchbox></div>
+<div id="etp">
+<ul>
+<li><a href="https://github.com/mongodb/docs/blob/master/source/reference/glossary.txt" target="_blank" title="Edit reference/glossary.txt on github">Edit this Page</a></li>
+<li><a href="http://github.com/mongodb/docs" target="_blank" title="Fork the documentation on GitHub and contribute.">GitHub</a></li>
+<li><a href="https://jira.mongodb.org/secure/CreateIssueDetails%21init.jspa?pid=10380&amp;issuetype=4&amp;priority=4&amp;summary=Comment+on%3a+%22reference/glossary%2Etxt%22" target="_blank" title="Report a problem with reference/glossary.txt on Jira">Report a problem</a></li>
+</ul>
+</div>
+</div>  
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            <div id="cse-results"><gcse:searchresults></gcse:searchresults></div>
+            
+  <div class="section" id="glossary">
+<h1>Glossary<a class="headerlink" href="#glossary" title="Permalink to this headline">¶</a></h1>
+<dl class="glossary docutils">
+<dt id="term-cmd">$cmd</dt>
+<dd>A virtual <a class="reference internal" href="#term-collection"><em class="xref std std-term">collection</em></a> that exposes <a class="reference internal" href="#term-mongodb"><em class="xref std std-term">MongoDB</em></a>‘s
+<a class="reference internal" href="#term-database-command"><em class="xref std std-term">database commands</em></a>.</dd>
+<dt id="term-id">_id</dt>
+<dd>A field containing a unique ID, typically a BSON <a class="reference internal" href="#term-objectid"><em class="xref std std-term">ObjectId</em></a>.
+If not specified, this value is automatically assigned
+upon the creation of a new document. You can think of the
+<tt class="docutils literal"><span class="pre">_id</span></tt> as the document’s <a class="reference internal" href="#term-primary-key"><em class="xref std std-term">primary key</em></a>.</dd>
+<dt id="term-accumulator">accumulator</dt>
+<dd>An <a class="reference internal" href="#term-expression"><em class="xref std std-term">expression</em></a> in the <a class="reference internal" href="#term-aggregation-framework"><em class="xref std std-term">aggregation framework</em></a> that
+maintains state between documents in the <a class="reference internal" href="#term-aggregation"><em class="xref std std-term">aggregation</em></a>
+<a class="reference internal" href="#term-pipeline"><em class="xref std std-term">pipeline</em></a>. See: <a class="reference internal" href="http://docs.mongodb.org/manual/reference/aggregation/group/#_S_group" title="$group"><tt class="xref agg agg-pipeline docutils literal"><span class="pre">$group</span></tt></a> for a list of
+accumulator operations.</dd>
+<dt id="term-admin-database">admin database</dt>
+<dd>A privileged database named <tt class="docutils literal"><span class="pre">admin</span></tt>. Users must have access
+to this database to run certain administrative commands.
+See <a class="reference internal" href="http://docs.mongodb.org/manual/tutorial/use-database-commands/#admin-command"><em>administrative commands</em></a>
+for more information
+and <a class="reference internal" href="http://docs.mongodb.org/manual/reference/commands/#admin-commands"><em>Administration Commands</em></a> for a list of these commands.</dd>
+<dt id="term-aggregation">aggregation</dt>
+<dd>Any of a variety of operations that reduce and summarize large
+sets of data. SQL’s <tt class="docutils literal"><span class="pre">GROUP</span></tt> and MongoDB’s map-reduce are two
+examples of aggregation functions.</dd>
+<dt id="term-aggregation-framework">aggregation framework</dt>
+<dd><p class="first">The MongoDB aggregation framework provides a means to calculate
+aggregate values without having to use <a class="reference internal" href="#term-map-reduce"><em class="xref std std-term">map-reduce</em></a>.</p>
+<div class="admonition-see-also last admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="http://docs.mongodb.org/manual/applications/aggregation/"><em>Aggregation Framework</em></a>.</p>
+</div>
+</dd>
+<dt id="term-arbiter">arbiter</dt>
+<dd><p class="first">A member of a <a class="reference internal" href="#term-replica-set"><em class="xref std std-term">replica set</em></a> that exists solely to vote
+in <a class="reference internal" href="#term-election"><em class="xref std std-term">elections</em></a>. Arbiters do not replicate data.</p>
+<div class="admonition-see-also last admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="http://docs.mongodb.org/manual/administration/replica-sets/#replica-set-delayed-members"><em>Delayed Members</em></a></p>
+</div>
+</dd>
+<dt id="term-balancer">balancer</dt>
+<dd>An internal MongoDB process that runs in the context of a
+<a class="reference internal" href="#term-sharded-cluster"><em class="xref std std-term">sharded cluster</em></a> and manages the splitting and
+migration of <a class="reference internal" href="#term-chunk"><em class="xref std std-term">chunks</em></a>. Administrators must disable
+the balancer for all maintenance operations on a sharded cluster.</dd>
+<dt id="term-box">box</dt>
+<dd>MongoDB’s <a class="reference internal" href="#term-geospatial"><em class="xref std std-term">geospatial</em></a> indexes and querying system
+allow you to build queries around rectangles on two-dimensional
+coordinate systems. These queries use the <a class="reference internal" href="http://docs.mongodb.org/manual/reference/operator/box/#_S_box" title="$box"><tt class="xref mongodb mongodb-operator docutils literal"><span class="pre">$box</span></tt></a>
+operator to define a shape using the lower-left
+and the upper-right coordinates.</dd>
+<dt id="term-bson">BSON</dt>
+<dd><p class="first">A serialization format used to store documents and make remote
+procedure calls in MongoDB. “BSON” is a portmanteau of the words
+“binary” and “JSON”. Think of BSON as a binary representation
+of JSON (JavaScript Object Notation) documents. For a detailed spec,
+see <a class="reference external" href="http://bsonspec.org/">bsonspec.org</a>.</p>
+<div class="admonition-see-also last admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last">The <a class="reference internal" href="http://docs.mongodb.org/manual/administration/import-export/#bson-json-type-conversion-fidelity"><em>Data Type Fidelity</em></a>
+section.</p>
+</div>
+</dd>
+<dt id="term-bson-types">BSON types</dt>
+<dd><p class="first">The set of types supported by the <a class="reference internal" href="#term-bson"><em class="xref std std-term">BSON</em></a> serialization
+format. The following types are available:</p>
+<table class="last docutils" border="1">
+<colgroup>
+<col width="70%">
+<col width="30%">
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><strong>Type</strong></td>
+<td><strong>Number</strong></td>
+</tr>
+<tr class="row-even"><td>Double</td>
+<td>1</td>
+</tr>
+<tr class="row-odd"><td>String</td>
+<td>2</td>
+</tr>
+<tr class="row-even"><td>Object</td>
+<td>3</td>
+</tr>
+<tr class="row-odd"><td>Array</td>
+<td>4</td>
+</tr>
+<tr class="row-even"><td>Binary data</td>
+<td>5</td>
+</tr>
+<tr class="row-odd"><td>Object id</td>
+<td>7</td>
+</tr>
+<tr class="row-even"><td>Boolean</td>
+<td>8</td>
+</tr>
+<tr class="row-odd"><td>Date</td>
+<td>9</td>
+</tr>
+<tr class="row-even"><td>Null</td>
+<td>10</td>
+</tr>
+<tr class="row-odd"><td>Regular Expression</td>
+<td>11</td>
+</tr>
+<tr class="row-even"><td>JavaScript</td>
+<td>13</td>
+</tr>
+<tr class="row-odd"><td>Symbol</td>
+<td>14</td>
+</tr>
+<tr class="row-even"><td>JavaScript (with scope)</td>
+<td>15</td>
+</tr>
+<tr class="row-odd"><td>32-bit integer</td>
+<td>16</td>
+</tr>
+<tr class="row-even"><td>Timestamp</td>
+<td>17</td>
+</tr>
+<tr class="row-odd"><td>64-bit integer</td>
+<td>18</td>
+</tr>
+<tr class="row-even"><td>Min key</td>
+<td>255</td>
+</tr>
+<tr class="row-odd"><td>Max key</td>
+<td>127</td>
+</tr>
+</tbody>
+</table>
+</dd>
+<dt id="term-btree">btree</dt>
+<dd>A data structure used by most database management systems
+for to store indexes. MongoDB uses b-trees for its indexes.</dd>
+<dt id="term-cap-theorem">CAP Theorem</dt>
+<dd>Given three properties of computing systems, consistency,
+availability, and partition tolerance, a distributed computing
+system can provide any two of these features, but never all
+three.</dd>
+<dt id="term-capped-collection">capped collection</dt>
+<dd><p class="first">A fixed-sized <a class="reference internal" href="#term-collection"><em class="xref std std-term">collection</em></a>. Once they reach
+their fixed size, capped collections automatically overwrite
+their oldest entries. MongoDB’s <a class="reference internal" href="#term-oplog"><em class="xref std std-term">oplog</em></a> replication mechanism depends on
+capped collections.  Developers may also use capped collections in their
+applications.</p>
+<div class="admonition-see-also last admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last">The <a class="reference internal" href="http://docs.mongodb.org/manual/core/capped-collections/"><em>Capped Collections</em></a> page.</p>
+</div>
+</dd>
+<dt id="term-checksum">checksum</dt>
+<dd>A calculated value used to ensure data integrity.
+The <a class="reference internal" href="#term-md5"><em class="xref std std-term">md5</em></a> algorithm is sometimes used as a checksum.</dd>
+<dt id="term-chunk">chunk</dt>
+<dd>In the context of a <a class="reference internal" href="#term-sharded-cluster"><em class="xref std std-term">sharded cluster</em></a>, a chunk is a contiguous
+range of <a class="reference internal" href="#term-shard-key"><em class="xref std std-term">shard key</em></a> values assigned to a particular <a class="reference internal" href="#term-shard"><em class="xref std std-term">shard</em></a>.
+By default, chunks are 64 megabytes or less. When they grow beyond the
+configured chunk size, a <a class="reference internal" href="http://docs.mongodb.org/manual/reference/mongos/#mongos" title="mongos"><tt class="xref mongodb mongodb-program docutils literal"><span class="pre">mongos</span></tt></a> splits the chunk into
+two chunks.</dd>
+<dt id="term-circle">circle</dt>
+<dd>MongoDB’s <a class="reference internal" href="#term-geospatial"><em class="xref std std-term">geospatial</em></a> indexes and querying system
+allow you to build queries around circles on two-dimensional
+coordinate systems. These queries use the <a class="reference internal" href="http://docs.mongodb.org/manual/reference/operator/within/#_S_within" title="$within"><tt class="xref mongodb mongodb-operator docutils literal"><span class="pre">$within</span></tt></a> operator
+and the <a class="reference internal" href="http://docs.mongodb.org/manual/reference/operator/center/#_S_center" title="$center"><tt class="xref mongodb mongodb-operator docutils literal"><span class="pre">$center</span></tt></a> operator to define a circle using the center
+and the radius of the circle.</dd>
+<dt id="term-client">client</dt>
+<dd>The application layer that uses a database for data persistence
+and storage. <a class="reference internal" href="#term-driver"><em class="xref std std-term">Drivers</em></a> provide the interface
+level between the application layer and the database server.</dd>
+<dt id="term-cluster">cluster</dt>
+<dd>A set of <a class="reference internal" href="http://docs.mongodb.org/manual/reference/mongod/#mongod" title="mongod"><tt class="xref mongodb mongodb-program docutils literal"><span class="pre">mongod</span></tt></a> instances running in
+conjunction to increase database availability and
+performance. See <a class="reference internal" href="#term-sharding"><em class="xref std std-term">sharding</em></a> and <a class="reference internal" href="#term-replication"><em class="xref std std-term">replication</em></a> for
+more information on the two different approaches to clustering with
+MongoDB.</dd>
+<dt id="term-collection">collection</dt>
+<dd><p class="first">Collections are groupings of <a class="reference internal" href="#term-bson"><em class="xref std std-term">BSON</em></a> <a class="reference internal" href="#term-document"><em class="xref std std-term">documents</em></a>. Collections do not enforce a schema, but they are
+otherwise mostly analogous to <a class="reference internal" href="#term-rdbms"><em class="xref std std-term">RDBMS</em></a> tables.</p>
+<p>The documents within a collection may not need the exact same
+set of fields, but typically all documents in a collection have
+a similar or related purpose for an application.</p>
+<p>All collections exist within a single <a class="reference internal" href="#term-database"><em class="xref std std-term">database</em></a>. The
+namespace within a database for collections are flat.</p>
+<p class="last">See <a class="reference internal" href="http://docs.mongodb.org/manual/faq/developers/#faq-dev-namespace"><em>What is a namespace in MongoDB?</em></a> and <a class="reference internal" href="http://docs.mongodb.org/manual/core/document/"><em>BSON Documents</em></a> for more
+information.</p>
+</dd>
+<dt id="term-compound-index">compound index</dt>
+<dd>An <a class="reference internal" href="#term-index"><em class="xref std std-term">index</em></a> consisting of two or more keys. See
+<a class="reference internal" href="http://docs.mongodb.org/manual/core/indexes/"><em>Indexing Overview</em></a> for more information.</dd>
+<dt id="term-config-database">config database</dt>
+<dd>One of three <a class="reference internal" href="http://docs.mongodb.org/manual/reference/mongod/#mongod" title="mongod"><tt class="xref mongodb mongodb-program docutils literal"><span class="pre">mongod</span></tt></a> instances that store all of the
+metadata associated with a <a class="reference internal" href="#term-sharded-cluster"><em class="xref std std-term">sharded cluster</em></a>.</dd>
+<dt id="term-control-script">control script</dt>
+<dd>A simple shell script, typically located in the <tt class="docutils literal"><span class="pre">/etc/rc.d</span></tt> or
+<tt class="docutils literal"><span class="pre">/etc/init.d</span></tt> directory and used by the system’s initialization
+process to start, restart and stop a <a class="reference internal" href="#term-daemon"><em class="xref std std-term">daemon</em></a> process.</dd>
+<dt id="term-101">control script</dt>
+<dd>A script used by a UNIX-like operating system to start, stop,
+or restart a <a class="reference internal" href="#term-daemon"><em class="xref std std-term">daemon</em></a> process. On most systems,
+you can find these scripts in the <tt class="docutils literal"><span class="pre">/etc/init.d/</span></tt> or
+<tt class="docutils literal"><span class="pre">/etc/rc.d/</span></tt> directories.</dd>
+<dt id="term-crud">CRUD</dt>
+<dd>Create, read, update, and delete. The fundamental operations
+of any database.</dd>
+<dt id="term-csv">CSV</dt>
+<dd>A text-based data format consisting of comma-separated values.
+This format is commonly used to exchange database between relational
+databases, since the format is well-suited to tabular data. You can
+import CSV files using <a class="reference internal" href="http://docs.mongodb.org/manual/reference/mongoimport/#mongoimport" title="mongoimport"><tt class="xref mongodb mongodb-program docutils literal"><span class="pre">mongoimport</span></tt></a>.</dd>
+<dt id="term-cursor">cursor</dt>
+<dd>In MongoDB, a cursor is a pointer to the result set of a
+<a class="reference internal" href="#term-query"><em class="xref std std-term">query</em></a>, that clients can iterate through to retrieve
+results. By default, cursors will timeout after 10 minutes of
+inactivity.</dd>
+<dt id="term-daemon">daemon</dt>
+<dd>The conventional name for a background, non-interactive
+process.</dd>
+<dt id="term-data-center-awareness">data-center awareness</dt>
+<dd><p class="first">A property that allows clients to address members in a system to
+based upon their location.</p>
+<p><a class="reference internal" href="#term-replica-set"><em class="xref std std-term">Replica sets</em></a> implement data-center
+awareness using <a class="reference internal" href="#term-tag"><em class="xref std std-term">tagging</em></a>.</p>
+<div class="admonition-see-also last admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><tt class="xref mongodb mongodb-data docutils literal"><span class="pre">members[n].tags</span></tt> and
+<a class="reference internal" href="http://docs.mongodb.org/manual/reference/replica-configuration/#replica-set-configuration-tag-sets"><em>Tag Sets</em></a> for more
+information about tagging and replica sets.</p>
+</div>
+</dd>
+<dt id="term-database">database</dt>
+<dd>A physical container for <a class="reference internal" href="#term-collection"><em class="xref std std-term">collections</em></a>.
+Each database gets its own set of files on the file
+system. A single MongoDB server typically servers multiple
+databases.</dd>
+<dt id="term-database-command">database command</dt>
+<dd><p class="first">Any MongoDB operation other than an insert, update, remove,
+or query. MongoDB exposes commands as queries
+against the special <a class="reference internal" href="#term-cmd"><em class="xref std std-term">$cmd</em></a> collection. For
+example, the implementation of <tt class="xref mongodb mongodb-dbcommand docutils literal"><span class="pre">count</span></tt> for MongoDB is
+a command.</p>
+<div class="admonition-see-also last admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="http://docs.mongodb.org/manual/reference/commands/"><em>Database Commands Quick Reference</em></a> for a full list of
+database commands in MongoDB</p>
+</div>
+</dd>
+<dt id="term-database-profiler">database profiler</dt>
+<dd><p class="first">A tool that, when enabled, keeps a record on all long-running
+operations in a database’s <tt class="docutils literal"><span class="pre">system.profile</span></tt> collection. The
+profiler is most often used to diagnose slow queries.</p>
+<div class="admonition-see-also last admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="http://docs.mongodb.org/manual/administration/monitoring/#database-profiling"><em>Monitoring Database Systems</em></a>.</p>
+</div>
+</dd>
+<dt id="term-dbpath">dbpath</dt>
+<dd><p class="first">Refers to the location of MongoDB’s data file storage. The
+default <a class="reference internal" href="http://docs.mongodb.org/manual/reference/configuration-options/#dbpath" title="dbpath"><tt class="xref mongodb mongodb-setting docutils literal"><span class="pre">dbpath</span></tt></a> is <tt class="docutils literal"><span class="pre">/data/db</span></tt>. Other common data
+paths include <tt class="docutils literal"><span class="pre">/srv/mongodb</span></tt> and <tt class="docutils literal"><span class="pre">/var/lib/mongodb</span></tt>.</p>
+<div class="admonition-see-also last admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="http://docs.mongodb.org/manual/reference/configuration-options/#dbpath" title="dbpath"><tt class="xref mongodb mongodb-setting docutils literal"><span class="pre">dbpath</span></tt></a> or <a class="reference internal" href="http://docs.mongodb.org/manual/reference/mongod/#cmdoption-mongod--dbpath"><em class="xref std std-option">--dbpath</em></a>.</p>
+</div>
+</dd>
+<dt id="term-delayed-member">delayed member</dt>
+<dd><p class="first">A member of a <a class="reference internal" href="#term-replica-set"><em class="xref std std-term">replica set</em></a> that cannot become primary and
+applies operations at a specified delay. This delay is useful
+for protecting data from human error (i.e. unintentionally
+deleted databases) or updates that have unforeseen effects on
+the production database.</p>
+<div class="admonition-see-also last admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="http://docs.mongodb.org/manual/administration/replica-sets/#replica-set-delayed-members"><em>Delayed Members</em></a></p>
+</div>
+</dd>
+<dt id="term-diagnostic-log">diagnostic log</dt>
+<dd><p class="first"><a class="reference internal" href="http://docs.mongodb.org/manual/reference/mongod/#mongod" title="mongod"><tt class="xref mongodb mongodb-program docutils literal"><span class="pre">mongod</span></tt></a> can create a verbose log of operations with
+the <a class="reference internal" href="http://docs.mongodb.org/manual/reference/mongod/#cmdoption-mongod--diaglog"><em class="xref std std-option">mongod --diaglog</em></a> option or through the
+<a class="reference internal" href="http://docs.mongodb.org/manual/reference/command/diagLogging/#diagLogging" title="diagLogging"><tt class="xref mongodb mongodb-dbcommand docutils literal"><span class="pre">diagLogging</span></tt></a> command.  The <a class="reference internal" href="http://docs.mongodb.org/manual/reference/mongod/#mongod" title="mongod"><tt class="xref mongodb mongodb-program docutils literal"><span class="pre">mongod</span></tt></a> creates
+this log in
+the directory specified to <a class="reference internal" href="http://docs.mongodb.org/manual/reference/mongod/#cmdoption-mongod--dbpath"><em class="xref std std-option">mongod --dbpath</em></a>.  The name
+of the is <tt class="file docutils literal"><span class="pre">diaglog.&lt;time</span> <span class="pre">in</span> <span class="pre">hex&gt;</span></tt>, where
+“<tt class="docutils literal"><span class="pre">&lt;time-in-hex&gt;</span></tt>” reflects the initiation time of logging as a hexadecimal string.</p>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">Setting the diagnostic level to <tt class="docutils literal"><span class="pre">0</span></tt> will cause <a class="reference internal" href="http://docs.mongodb.org/manual/reference/mongod/#mongod" title="mongod"><tt class="xref mongodb mongodb-program docutils literal"><span class="pre">mongod</span></tt></a>
+to stop writing data to the <a class="reference internal" href="#term-diagnostic-log"><em class="xref std std-term">diagnostic log</em></a> file. However,
+the <a class="reference internal" href="http://docs.mongodb.org/manual/reference/mongod/#mongod" title="mongod"><tt class="xref mongodb mongodb-program docutils literal"><span class="pre">mongod</span></tt></a> instance will continue to keep the file open,
+even if it is no longer writing data to the file.  If you want to
+rename, move, or delete the diagnostic log you must cleanly shut
+down the <a class="reference internal" href="http://docs.mongodb.org/manual/reference/mongod/#mongod" title="mongod"><tt class="xref mongodb mongodb-program docutils literal"><span class="pre">mongod</span></tt></a> instance before doing so.</p>
+</div>
+<div class="admonition-see-also last admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="http://docs.mongodb.org/manual/reference/mongod/#cmdoption-mongod--diaglog"><em class="xref std std-option">mongod --diaglog</em></a>,
+<a class="reference internal" href="http://docs.mongodb.org/manual/reference/configuration-options/#diaglog" title="diaglog"><tt class="xref mongodb mongodb-setting docutils literal"><span class="pre">diaglog</span></tt></a>, and <a class="reference internal" href="http://docs.mongodb.org/manual/reference/command/diagLogging/#diagLogging" title="diagLogging"><tt class="xref mongodb mongodb-dbcommand docutils literal"><span class="pre">diagLogging</span></tt></a>.</p>
+</div>
+</dd>
+<dt id="term-document">document</dt>
+<dd>A record in a MongoDB collection, and the basic unit of data
+in MongoDB. Documents are analogous to JSON objects, but exist in
+the database in a more type-rich format known as <a class="reference internal" href="#term-bson"><em class="xref std std-term">BSON</em></a>.</dd>
+<dt id="term-dot-notation">dot notation</dt>
+<dd><p class="first">MongoDB uses the <em>dot notation</em> to access the elements of an array and
+to access the fields of a subdocument.</p>
+<p>To access an element of an array by the zero-based index position, you
+concatenate the array name with the dot (<tt class="docutils literal"><span class="pre">.</span></tt>) and zero-based index
+position:</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="s1">'&lt;array&gt;.&lt;index&gt;'</span>
+</pre></div>
+</div>
+<p>To access a field of a subdocument with <em>dot-notation</em>, you concatenate
+the subdocument name with the dot (<tt class="docutils literal"><span class="pre">.</span></tt>) and the field name:</p>
+<div class="last highlight-javascript"><div class="highlight"><pre><span class="s1">'&lt;subdocument&gt;.&lt;field&gt;'</span>
+</pre></div>
+</div>
+</dd>
+<dt id="term-draining">draining</dt>
+<dd><p class="first">The process of removing or “shedding” <a class="reference internal" href="#term-chunk"><em class="xref std std-term">chunks</em></a>
+from one <a class="reference internal" href="#term-shard"><em class="xref std std-term">shard</em></a> to another. Administrators must drain
+shards before removing them from the cluster.</p>
+<div class="admonition-see-also last admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="http://docs.mongodb.org/manual/reference/command/removeShard/#removeShard" title="removeShard"><tt class="xref mongodb mongodb-dbcommand docutils literal"><span class="pre">removeShard</span></tt></a>, <a class="reference internal" href="#term-sharding"><em class="xref std std-term">sharding</em></a>.</p>
+</div>
+</dd>
+<dt id="term-driver">driver</dt>
+<dd><p class="first">A client implementing the communication protocol required for talking
+to a server. The MongoDB drivers provide language-idiomatic
+methods for interfacing with MongoDB.</p>
+<div class="admonition-see-also last admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="http://docs.mongodb.org/manual/applications/drivers/"><em>MongoDB Drivers and Client Libraries</em></a></p>
+</div>
+</dd>
+<dt id="term-election">election</dt>
+<dd><p class="first">In the context of <a class="reference internal" href="#term-replica-set"><em class="xref std std-term">replica sets</em></a>, an election
+is the process by which members of a replica set select
+primaries on startup and in the event of failures.</p>
+<div class="admonition-see-also last admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="http://docs.mongodb.org/manual/core/replication/#replica-set-elections"><em>Replica Set Elections</em></a> and <a class="reference internal" href="#term-priority"><em class="xref std std-term">priority</em></a>.</p>
+</div>
+</dd>
+</dl></div></div></div></div></div></body></html>

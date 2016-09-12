@@ -1,0 +1,446 @@
+body {
+background-color:#FFF!important;
+background-image:none!important;
+font-family:arial!important;
+color:#333;
+font-size:13px;
+}
+
+i,cite,em,var,address {
+font-style:normal!important;
+}
+
+#wrap {
+background:#FFF url('http://iprofs.files.wordpress.com/2011/02/bg-header.gif') repeat-x 0 110px!important;
+padding:0!important;
+}
+
+#header {
+background:transparent url('http://iprofs.files.wordpress.com/2011/02/iprofs-icon-logo1.gif') no-repeat -8px 13px;
+border-bottom:solid 0 #CCC!important;
+height:70px!important;
+}
+
+#navigation {
+background:transparent!important;
+width:100%;
+border-bottom:solid 0 #000!important;
+}
+
+#navigation ul#menus {
+width:950px;
+display:inline;
+margin:0 auto;
+}
+
+#searchbox {
+float:left;
+display:inline;
+background:none!important;
+width:260px;
+margin:0;
+padding:11px 5px!important;
+}
+
+#searchbox .textfield {
+background:#FFF!important;
+font-size:16px;
+color:#999!important;
+font-family:Arial;
+width:215px;
+-moz-border-radius:10px;
+border-radius:10px;
+border:solid 1px #CCC;
+padding:5px;
+}
+
+#searchbox .textfield:hover {
+color:#E32219!important;
+}
+
+#searchbox .textfield:active,#searchbox .textfield:focus {
+outline:0;
+background:#EEE none;
+display:block;
+color:#E32219!important;
+border:solid 1px #DDD;
+-moz-box-shadow:0 0 5px #7A1F10;
+-webkit-box-shadow:0 0 5px #7A1F10;
+box-shadow:0 0 5px #7A1F10;
+}
+
+#searchbox .button {
+background:transparent url('http://iprofs.files.wordpress.com/2011/02/zoek-button.gif') no-repeat top center;
+height:28px;
+width:30px;
+}
+
+#searchbox .searchtip {
+background:#CCC;
+color:#000;
+}
+
+#container {
+width:950px;
+margin:0 auto;
+}
+
+#content {
+background:transparent none!important;
+padding-top:0;
+}
+
+#caption {
+padding-left:65px!important;
+font-size:40px;
+}
+
+#caption #tagline {
+display:none;
+visibility:hidden;
+}
+
+#feedrss abbr {
+border-bottom:solid 0 #FFF!important;
+}
+
+#title a {
+font-family:arial!important;
+color:#E32219!important;
+font-size:35px;
+letter-spacing:-2px;
+}
+
+#tagline {
+border-top:0!important;
+}
+
+h1,h2,h3,h4,h5,h6 {
+font-weight:bold;
+}
+
+a {
+color:#7A1F10!important;
+font-weight:bold;
+}
+
+a:hover {
+color:#E32219!important;
+text-decoration:none!important;
+}
+
+.post h2 a.title {
+color:#000!important;
+line-height:35px;
+font-size:30px!important;
+letter-spacing:-1px;
+}
+
+.post h2 a.title:hover {
+color:#E32219!important;
+}
+
+.post h2 {
+font-family:Arial;
+font-size:40px;
+color:#000;
+letter-spacing:-1px;
+font-weight:bold!important;
+margin-top:0;
+margin-bottom:10px;
+border-bottom:solid 3px #000!important;
+padding:5px 0;
+}
+
+.post .content {
+line-height:20px;
+}
+
+.post .content h1 {
+font-family:Arial!important;
+font-size:20px!important;
+color:#000!important;
+letter-spacing:-1px;
+font-weight:bold!important;
+margin-top:25px;
+margin-bottom:10px;
+border-bottom:solid 1px #000!important;
+padding:5px 0;
+}
+
+.post .content h2 {
+font-family:Georgia!important;
+font-size:20px!important;
+color:#000!important;
+border-bottom:solid 0 #FFF!important;
+margin-top:20px;
+margin-bottom:0;
+letter-spacing:-1px;
+}
+
+.post .content h3 {
+font-family:Georgia!important;
+font-size:15px!important;
+color:#E32219!important;
+border-bottom:solid 0 #FFF!important;
+margin-top:10px;
+margin-bottom:0;
+line-height:25px!important;
+}
+
+.post .info {
+border-bottom:solid 3px #DDD;
+padding-bottom:5px;
+margin:5px 0;
+}
+
+h3 {
+font-size:25px;
+font-family:Georgia!important;
+color:#000!important;
+margin-top:15px;
+margin-bottom:10px;
+}
+
+#sidebar h3 {
+color:#000!important;
+font-size:25px!important;
+padding-bottom:10px;
+margin-bottom:10px;
+margin-top:0;
+border-bottom:solid 1px #000;
+}
+
+#sidebar li {
+background:#F0F0F0 url('http://iprofs.files.wordpress.com/2011/02/bg-widget.jpg') repeat-x bottom left;
+color:#7A1F10;
+list-style:none;
+border:solid 1px #DDD;
+margin:5px 0;
+padding:5px;
+}
+
+#sidebar .tweets li {
+color:#666;
+line-height:20px;
+list-style:none;
+font-family:Georgia;
+font-style:italic;
+font-size:13px;
+margin:0 0 5px;
+}
+
+#sidebar .tweets li a.timesince {
+font-family:Arial;
+font-style:normal;
+display:block;
+font-weight:bold;
+margin-top:5px;
+padding-top:5px;
+text-align:right;
+}
+
+#sidebar {
+background:#FFF!important;
+border-left:solid 0 #CCC;
+margin-top:10px;
+}
+
+#sidebar .widget {
+padding-left:20px!important;
+padding-right:0!important;
+margin:0!important;
+}
+
+#sidebar .widget ul {
+padding:0!important;
+}
+
+#sidebar .widget_feeds {
+width:105px;
+float:right;
+height:auto;
+margin-top:0!important;
+padding:0!important;
+}
+
+#subscribe ul {
+width:92px!important;
+}
+
+#subscribe li a {
+padding:0!important;
+}
+
+#sidebar .widget_twitter h3 a {
+color:#000!important;
+}
+
+.widget_author_grid ul li {
+padding:5px 13px!important;
+}
+
+#powered {
+display:none!important;
+}
+
+#themeinfo {
+display:none!important;
+}
+
+#menus li a {
+background:none!important;
+font-size:16px;
+color:#7A1F10!important;
+font-weight:normal!important;
+margin:11px 0 0 3px !important;
+padding:0 8px!important;
+}
+
+#menus li a:hover {
+color:#E32219!important;
+}
+
+#menus li a.home {
+background:transparent url('http://iprofs.files.wordpress.com/2011/02/homeicon.gif') no-repeat center center!important;
+width:35px;
+}
+
+#main {
+background:none!important;
+width:645px!important;
+padding:13px 0 20px!important;
+}
+
+blockquote,pre {
+overflow:hidden;
+background:#F0F0F0;
+word-wrap:break-word;
+margin:25px 0;
+padding:8px 12px 8px 5px;
+}
+
+#centersidebar,#northsidebar .widget,#southsidebar .widget {
+background:none!important;
+}
+
+#postpath {
+background:#FFF none;
+border-bottom:solid 1px #666;
+color:#666;
+font-size:13px;
+padding:10px 0;
+}
+
+#postpath a {
+padding:10px 0;
+}
+
+.boxcaption {
+background:#FFF!important;
+border-bottom:solid 6px #000;
+padding:0!important;
+}
+
+.boxcaption h3 {
+font-size:40px;
+font-family:Arial!important;
+letter-spacing:-2px;
+color:#000!important;
+margin:5px 0;
+}
+
+.box {
+background:none!important;
+margin-bottom:10px;
+font-size:18px;
+color:#E32219;
+padding:10px 0;
+}
+
+#footer {
+height:160px;
+background:#E1E1E1 url('http://iprofs.files.wordpress.com/2011/03/bg-footer.jpg') repeat-x top center!important;
+text-align:center;
+width:100%;
+position:absolute;
+left:0;
+right:0;
+margin:0 auto;
+}
+
+.messagebox,.errorbox {
+background:#EEE!important;
+}
+
+.recentcommentsavatar td.recentcommentsavatarend {
+background:#EEE;
+border:solid 1px #FFF;
+}
+
+.recentcommentsavatar tr {
+display:block;
+border-bottom:solid 1px #CCC;
+padding:5px 0;
+}
+
+#sidebar #author_grid ul li {
+margin:3px!important;
+}
+
+#comment {
+width:640px;
+}
+
+#commentlist {
+background:#FCFCFC;
+border:1px solid #CCC;
+margin:0;
+padding:0;
+}
+
+.comment .info {
+width:520px;
+}
+
+.comment .pic,.comment .name {
+width:75px;
+padding:0 5px;
+}
+
+#respond #submit {
+background:#7A1F10 url('http://iprofs.files.wordpress.com/2011/02/bg-button.jpg') repeat-x bottom left;
+border:solid 0 #FFF;
+color:#FFF;
+font-size:12px;
+padding:10px 15px;
+}
+
+#respond #submit:hover {
+color:#FFF;
+background:#E32219;
+border:solid 0 #FFF;
+padding:10px 15px;
+}
+
+.post .under {
+color:#FFF;
+margin:20px 0!important;
+}
+
+.post .under span a {
+font-weight:bold!important;
+background:#EEE!important;
+border:solid 1px #DDD;
+-moz-border-radius:5px!important;
+-webkit-border-radius:5px!important;
+border-radius:5px!important;
+margin:5px 0!important;
+padding:5px 10px!important;
+}
+
+.post .under span a:hover {
+background:#7A1F10!important;
+color:#FFF!important;
+border:solid 1px #7A1F10;
+}

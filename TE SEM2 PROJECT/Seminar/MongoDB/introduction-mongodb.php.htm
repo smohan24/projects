@@ -1,0 +1,677 @@
+<!DOCTYPE html>
+<html xmlns:fb="facebook.com/2008/fbml" lang="en"><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>MongoDb Tutorial - w3resource</title>
+<meta name="Keywords" content="MongoDB, Tutorial, w3resource">
+<meta name="Description" content=" MongoDb tutorial of w3resource is a comprehensive tutorial to learn NoSql database. MongoDb is a Open Source database and used to store data for very high performance applications.">
+<meta property="og:title" content="MongoDb Tutorial - w3resource">	
+	<meta property="og:description" content="MongoDb tutorial of w3resource is a comprehensive tutorial to learn NoSql database. MongoDb is a Open Source database and used to store data for very high performance applications.">
+	<meta property="og:type" content="tutorial">
+	<meta property="og:url" content="http://www.w3resource.com/mongodb/introduction-mongodb.php">
+	<meta property="og:image" content="//www.w3resource.com/includes/mongodb-images/large__5745780202.jpg">
+	<meta property="og:site_name" content="w3resource">
+
+	<!-- Le styles -->
+    <link href="introduction-mongodb.php_files/bootstrap.css" rel="stylesheet">
+	
+    <link href="introduction-mongodb.php_files/bootstrap-responsive.css" rel="stylesheet">
+	<link rel="stylesheet" href="introduction-mongodb.php_files/SyntaxHighlighter.css" type="text/css">
+	<link rel="stylesheet" href="introduction-mongodb.php_files/jquery-ui.css">
+       <link type="text/css" rel="stylesheet" href="introduction-mongodb.php_files/jquery.css">
+	<!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <!-- Le fav and touch icons -->
+    <link rel="shortcut icon" href="http://www.w3resource.com/images/favicon.png">
+    <link rel="apple-touch-icon" href="http://www.w3resource.com/mongodb/images/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="http://www.w3resource.com/mongodb/images/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="http://www.w3resource.com/mongodb/images/apple-touch-icon-114x114.png">
+	<link rel="alternate" href="http://www.w3resource.com/feed/rss.xml" title="My RSS feed" type="application/rss+xml">
+    <!-- Place this tag in your head or just before your close body tag --> <script src="a_data/ga.js" async="" type="text/javascript"></script><script gapi_processed="true" src="introduction-mongodb.php_files/plusone_002.js" async="" type="text/javascript"></script><script async="" src="introduction-mongodb.php_files/cbgapi.loaded_1"></script><script src="introduction-mongodb.php_files/widgets.htm" id="twitter-wjs"></script><script gapi_processed="true" src="introduction-mongodb.php_files/plusone_002.js" async="" type="text/javascript"></script><script async="" src="introduction-mongodb.php_files/cbgapi.loaded_0"></script><script gapi_processed="true" type="text/javascript" src="introduction-mongodb.php_files/plusone.js"></script>
+    <link href="https://plus.google.com/115926626994522158963" rel="publisher">
+    <link type="text/css" rel="stylesheet" href="introduction-mongodb.php_files/SyntaxHighlighter.htm">
+   <script src="introduction-mongodb.php_files/bsa.htm" async="" type="text/javascript"></script><script src="introduction-mongodb.php_files/embed.js" async="" type="text/javascript"></script><script charset="UTF-8" async="" src="introduction-mongodb.php_files/alfie.js"></script></head>
+
+  <body onload="get_title();noad();">
+  <!-- BuySellAds.com Ad Code -->
+<script type="text/javascript">
+(function(){
+  var bsa = document.createElement('script');
+     bsa.type = 'text/javascript';
+     bsa.async = true;
+     bsa.src = '//s3.buysellads.com/ac/bsa.js';
+  (document.getElementsByTagName('head')[0]||document.getElementsByTagName('body')[0]).appendChild(bsa);
+})();
+
+</script>
+<!-- End BuySellAds.com Ad Code -->
+<div id="fb-root"><script async="" src="introduction-mongodb.php_files/all.js"></script></div> <script>  
+ window.fbAsyncInit = function() {
+     FB.init({
+       appId  : '125991034235141',
+       status : true, // check login status
+       cookie : true, // enable cookies to allow the server to access the session
+       xfbml  : true,  // parse XFBML
+      channelUrl  : 'http://www.w3resource.com/channel.php' // custom channel
+     });   }; 
+
+   (function() {
+     var e = document.createElement('script');
+     e.src = document.location.protocol + '//connect.facebook.net/en_US/all.js';
+     e.async = true;
+     document.getElementById('fb-root').appendChild(e);
+ }());</script>
+    <nav>
+    <div class="navbar navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container-fluid">
+          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </a>
+          <a class="brand" href="http://www.w3resource.com/">w3resource</a>
+          <div class="nav-collapse">
+            <ul class="nav">
+              <li class="active"><a href="http://www.w3resource.com/" itemscope="" itemtype="http://schema.org/WebPageElement/SiteNavigationElement">Home</a></li>
+			  <li class="dropdown active">  
+                        <a class="dropdown-toggle" id="dLabel" role="button" data-toggle="dropdown" data-target="#" href="#">Frontend<b class="caret"></b></a>  
+                        <ul class="dropdown-menu">  
+                            <li><a href="http://www.w3resource.com/html/HTML-tutorials.php" itemscope="" itemtype="http://schema.org/WebPageElement/SiteNavigationElement">HTML</a></li>  
+                            <li><a href="http://www.w3resource.com/css/CSS-tutorials.php" itemscope="" itemtype="http://schema.org/WebPageElement/SiteNavigationElement">CSS</a></li>  
+                            <li><a href="http://www.w3resource.com/javascript/javascript.php" itemscope="" itemtype="http://schema.org/WebPageElement/SiteNavigationElement">JavaScript</a></li>  
+                            <li><a href="http://www.w3resource.com/html5/introduction.php" itemscope="" itemtype="http://schema.org/WebPageElement/SiteNavigationElement">HTML5</a></li>  
+							<li><a href="http://www.w3resource.com/schema.org/introduction.php" itemscope="" itemtype="http://schema.org/WebPageElement/SiteNavigationElement">Schema.org</a></li>
+							<li><a href="http://www.w3resource.com/phpjs/use-php-functions-in-javascript.php" itemscope="" itemtype="http://schema.org/WebPageElement/SiteNavigationElement">php.js</a></li>
+							<li><a href="http://www.w3resource.com/twitter-bootstrap/tutorial.php" itemscope="" itemtype="http://schema.org/WebPageElement/SiteNavigationElement">Twitter Bootstrap</a></li>
+							<li><a href="http://www.w3resource.com/zurb-foundation3/introduction.php" itemscope="" itemtype="http://schema.org/WebPageElement/SiteNavigationElement">Zurb Foundation 3</a></li>
+                        </ul>  
+                    </li>  
+              <li class="dropdown active">  
+                        <a class="dropdown-toggle" id="dLabel1" role="button" data-toggle="dropdown" data-target="#" href="#">Backend<b class="caret"></b></a>  
+                        <ul class="dropdown-menu">
+<li><a href="http://www.w3resource.com/java-tutorial/" itemscope="" itemtype="http://schema.org/WebPageElement/SiteNavigationElement">Java</a></li>   
+                            <li><a href="http://www.w3resource.com/php/php-home.php" itemscope="" itemtype="http://schema.org/WebPageElement/SiteNavigationElement">PHP</a></li>  
+                            <li><a href="http://www.w3resource.com/python/python-tutorial.php" itemscope="" itemtype="http://schema.org/WebPageElement/SiteNavigationElement">Python</a></li>  
+                            <li><a href="http://www.w3resource.com/node.js/node.js-tutorials.php" itemscope="" itemtype="http://schema.org/WebPageElement/SiteNavigationElement">Node.js</a></li> 
+							<li class="divider"></li>
+							<li><a href="http://www.w3resource.com/c-programming/programming-in-c.php" itemscope="" itemtype="http://schema.org/WebPageElement/SiteNavigationElement">C Programming</a></li> 
+                        </ul>  
+                    </li>  
+               <li class="dropdown active">  
+                        <a class="dropdown-toggle" id="dLabel2" role="button" data-toggle="dropdown" data-target="#" href="#">SQL &amp; RDBMS<b class="caret"></b></a>  
+                        <ul class="dropdown-menu">  
+                            <li><a href="http://www.w3resource.com/sql/tutorials.php" itemscope="" itemtype="http://schema.org/WebPageElement/SiteNavigationElement">SQL</a></li>  
+                            <li><a href="http://www.w3resource.com/mysql/mysql-tutorials.php" itemscope="" itemtype="http://schema.org/WebPageElement/SiteNavigationElement">MySQL</a></li>  
+                            <li><a href="http://www.w3resource.com/PostgreSQL/tutorial.php" itemscope="" itemtype="http://schema.org/WebPageElement/SiteNavigationElement">PostgreSQL</a></li>  
+                        </ul>  
+                </li>  
+				<li class="dropdown active">  
+                        <a class="dropdown-toggle" id="dLabel3" role="button" data-toggle="dropdown" data-target="#" href="#">NoSQL<b class="caret"></b></a>  
+                        <ul class="dropdown-menu">  
+                            <li><a href="http://www.w3resource.com/mongodb/nosql.php" itemscope="" itemtype="http://schema.org/WebPageElement/SiteNavigationElement">NoSQL</a></li>  
+                            <li><a href="http://www.w3resource.com/mongodb/introduction-mongodb.php" itemscope="" itemtype="http://schema.org/WebPageElement/SiteNavigationElement">MongoDB</a></li>  
+                       </ul>  
+                </li>  
+			 	<li class="dropdown active">  
+                        <a class="dropdown-toggle" id="dLabel4" role="button" data-toggle="dropdown" data-target="#" href="#">Data-interchange format<b class="caret"></b></a>  
+                        <ul class="dropdown-menu">  
+                            <li><a href="http://www.w3resource.com/JSON/introduction.php" itemscope="" itemtype="http://schema.org/WebPageElement/SiteNavigationElement">JSON</a></li>  
+                            <li><a href="http://www.w3resource.com/xml/xml.php" itemscope="" itemtype="http://schema.org/WebPageElement/SiteNavigationElement">XML</a></li>  
+                       </ul>  
+				</li><li class="dropdown active">  
+                        <a class="dropdown-toggle" id="dLabel5" role="button" data-toggle="dropdown" data-target="#" href="#">API &amp; Tools<b class="caret"></b></a>  
+                        <ul class="dropdown-menu">  
+                            <li><a href="http://www.w3resource.com/API/google-plus/tutorial.php" itemscope="" itemtype="http://schema.org/WebPageElement/SiteNavigationElement">Google+ API</a></li> 
+							<li class="divider"></li>
+			    <li><a href="http://www.w3resource.com/ajax/introduction.php" itemscope="" itemtype="http://schema.org/WebPageElement/SiteNavigationElement">Ajax</a></li> 
+							<li class="divider"></li>
+                            <li><a href="http://www.w3resource.com/web-development-tools/firebug-tutorials.php" itemscope="" itemtype="http://schema.org/WebPageElement/SiteNavigationElement">Firebug</a></li> 
+							<li><a href="http://www.w3resource.com/web-development-tools/webP.php" itemscope="" itemtype="http://schema.org/WebPageElement/SiteNavigationElement">WebP</a></li>
+							<li><a href="http://www.w3resource.com/web-development-tools/useful-web-development-tools.php" itemscope="" itemtype="http://schema.org/WebPageElement/SiteNavigationElement">Useful tools</a></li> 
+                       </ul>  
+                </li>
+				<li class="dropdown active">  
+                        <a class="dropdown-toggle" id="dLabel6" role="button" data-toggle="dropdown" data-target="#" href="#">Video Tutorials<b class="caret"></b></a>  
+                        <ul class="dropdown-menu">  
+                            <li><a href="http://www.w3resource.com/video-tutorial/javascript/list-of-tutorial.php" itemscope="" itemtype="http://schema.org/WebPageElement/SiteNavigationElement">JavaScript</a></li> 
+							<li class="divider"></li>
+                            <li><a href="http://www.w3resource.com/video-tutorial/php/some-basics-of-php.php" itemscope="" itemtype="http://schema.org/WebPageElement/SiteNavigationElement">PHP</a></li> 
+						</ul>  
+                </li>  	
+				<!--				
+			<li class="dropdown active" style="border-left: 2px orange groove;">  
+                        <a class="dropdown-toggle" id="dLabel7" role="button" data-toggle="dropdown" data-target="#" href="#">Books<b class="caret"></b></a>  
+                        <ul class="dropdown-menu">  
+                            <li><a href="#" itemscope itemtype='http://schema.org/WebPageElement/SiteNavigationElement'>JavaScript</a></li> 
+							<li><a href="#" itemscope itemtype='http://schema.org/WebPageElement/SiteNavigationElement'>PHP</a></li> 
+						</ul>  
+            </li>  	
+			<li class="dropdown active">  
+                        <a class="dropdown-toggle" id="dLabel8" role="button" data-toggle="dropdown" data-target="#" href="#">Tools<b class="caret"></b></a>  
+                        <ul class="dropdown-menu">  
+                            <li><a href="#" itemscope itemtype='http://schema.org/WebPageElement/SiteNavigationElement'>JavaScript</a></li> 
+							<li><a href="#" itemscope itemtype='http://schema.org/WebPageElement/SiteNavigationElement'>PHP</a></li> 
+						</ul>  
+            </li> 
+			<li class="dropdown active">  
+                        <a class="dropdown-toggle" id="dLabel9" role="button" data-toggle="dropdown" data-target="#" href="#">Jobs<b class="caret"></b></a>  
+                        <ul class="dropdown-menu">  
+                            <li><a href="#" itemscope itemtype='http://schema.org/WebPageElement/SiteNavigationElement'>JavaScript</a></li> 
+							<li><a href="#" itemscope itemtype='http://schema.org/WebPageElement/SiteNavigationElement'>PHP</a></li> 
+						</ul>  
+            </li>  
+			<li class="dropdown active">  
+                        <a class="dropdown-toggle" id="dLabel10" role="button" data-toggle="dropdown" data-target="#" href="#">Shop<b class="caret"></b></a>  
+                        <ul class="dropdown-menu">  
+                            <li><a href="#" itemscope itemtype='http://schema.org/WebPageElement/SiteNavigationElement'>JavaScript</a></li> 
+							<li><a href="#" itemscope itemtype='http://schema.org/WebPageElement/SiteNavigationElement'>PHP</a></li> 
+						</ul>  
+            </li> 
+			-->
+			</ul> 	
+			</div><!--/.nav-collapse -->
+		</div>
+      </div>
+    </div>
+	</nav>
+    <div class="container-fluid">
+	<div class="row-fluid" style="margin-top: -10px">
+	    <div class="span3 top-block1">
+		<p><a href="http://www.w3resource.com/"><img src="introduction-mongodb.php_files/logo.png" alt="w3resource logo" height="78" width="150"></a></p>
+		</div>
+		<div class="span8 top-block1">
+		<!-- BuySellAds Zone Code -->
+<div id="bsap_1274312" class="bsarocks bsap_733e3bd13b1dc12a3aa96bfd71419ebc"></div>
+<!-- End BuySellAds Zone Code -->
+		</div>
+      </div>
+	<!--body -->
+	<hr class="separator">
+	<div class="row-fluid">
+        <div class="span2">
+          <div class="well sidebar-nav">
+			<nav>		  
+            <ul class="nav nav-list"><li><a href="http://www.w3resource.com/index.php" itemscope="" itemtype="http://schema.org/WebPageElement/SiteNavigationElement">Home</a></li><li class="nav-header">▼MongoDb Tutorials</li><li><a href="http://www.w3resource.com/mongodb/nosql.php" itemscope="" itemtype="http://schema.org/WebPageElement/SiteNavigationElement"> Introduction to NoSQL</a></li><li class="active"><a href="http://www.w3resource.com/mongodb/introduction-mongodb.php" itemscope="" itemtype="http://schema.org/WebPageElement/SiteNavigationElement">Introduction to MongoDB</a></li><li><a href="http://www.w3resource.com/mongodb/installation-windows.php" itemscope="" itemtype="http://schema.org/WebPageElement/SiteNavigationElement"> Install MongoDb on Windows</a></li><li><a href="http://www.w3resource.com/mongodb/installation-Linux.php" itemscope="" itemtype="http://schema.org/WebPageElement/SiteNavigationElement"> Install MongoDb on Linux</a></li><li><a href="http://www.w3resource.com/mongodb/databases-documents-collections.php" itemscope="" itemtype="http://schema.org/WebPageElement/SiteNavigationElement"> Databases, Documents, Collections</a></li><li><a href="http://www.w3resource.com/mongodb/connections.php" itemscope="" itemtype="http://schema.org/WebPageElement/SiteNavigationElement"> MongoDB connections</a></li><li><a href="http://www.w3resource.com/mongodb/install-php-driver.php" itemscope="" itemtype="http://schema.org/WebPageElement/SiteNavigationElement"> Install PHP driver</a></li><li><a href="http://www.w3resource.com/mongodb/insert-data-into-MongoDB.php" itemscope="" itemtype="http://schema.org/WebPageElement/SiteNavigationElement"> Insert data into MongoDB</a></li><li><a href="http://www.w3resource.com/mongodb/update-data-into-mongodb.php" itemscope="" itemtype="http://schema.org/WebPageElement/SiteNavigationElement"> Update data to MongoDb</a></li><li><a href="http://www.w3resource.com/mongodb/mongodb-remove-collection.php" itemscope="" itemtype="http://schema.org/WebPageElement/SiteNavigationElement"> Remove data to MongoDb</a></li><li><a href="http://www.w3resource.com/mongodb/mongodb-queries-from-collection.php" itemscope="" itemtype="http://schema.org/WebPageElement/SiteNavigationElement"> Queries</a></li><li><a href="http://www.w3resource.com/mongodb/mongodb-conditional-operators.php" itemscope="" itemtype="http://schema.org/WebPageElement/SiteNavigationElement"> MongoDB operators</a></li><li><a href="http://www.w3resource.com/mongodb/mongodb-count-cursor-method.php" itemscope="" itemtype="http://schema.org/WebPageElement/SiteNavigationElement"> MongoDB count() cursor method</a></li></ul>			</nav>
+          </div><!--/.well -->
+        </div><!--/span-->
+        <div class="span7">
+          <div class="row-fluid">
+            <div class="span12">
+			 <!-- content goes here -->
+			  <article itemscope="" itemtype="http://schema.org/CreativeWork/Tutorial">
+			  <header>
+			  <img src="introduction-mongodb.php_files/large__5745780202.jpg" alt="Mongodb Tutorial Introduction" class="h1_img">
+			  <h1>Introduction to MongoDb</h1>
+			  </header>
+			 <span class="social-heading">
+<!-- Place this tag where you want the share button to render. -->
+<div id="___plus_0" style="height: 15px; display: inline-block; text-indent: 0pt; margin: 0pt; padding: 0pt; background: none repeat scroll 0% 0% transparent; border-style: none; float: none; line-height: normal; font-size: 1px; vertical-align: baseline; width: 76px;"><iframe title="+Share" data-gapiattached="true" allowtransparency="true" src="introduction-mongodb.php_files/sharebutton.htm" name="I0_1363604115438" id="I0_1363604115438" vspace="0" tabindex="0" style="position: static; top: 0pt; width: 76px; margin: 0px; border-style: none; left: 0pt; visibility: visible; height: 15px;" marginwidth="0" marginheight="0" hspace="0" frameborder="0" scrolling="no" width="100%"></iframe></div>
+
+<!-- Place this tag after the last share tag. -->
+<script type="text/javascript">
+  (function() {
+    var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+    po.src = 'https://apis.google.com/js/plusone.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+  })();
+</script>
+<div class="fb-like" data-send="false" data-layout="button_count" data-width="100" data-show-faces="false" style="margin: 0 10px 0 10px"></div>
+<a href="https://twitter.com/share" class="twitter-share-button">Tweet</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+<script>
+function get_title() {
+var title = document.getElementsByTagName('title')[0];
+var titletxt = title.innerHTML;
+var txtNode = document.createTextNode(titletxt);
+document.getElementById('rating_title').appendChild(txtNode);
+}
+</script>
+</span>
+<div itemscope="" itemtype="http://data-vocabulary.org/Review-aggregate" style="margin-top: 20px;">
+    <img src="introduction-mongodb.php_files/rating.png" alt="rating" style="vertical-align: middle; margin-bottom: 5px;"> <span itemprop="itemreviewed" id="rating_title"></span> has average rating <span itemprop="rating" itemscope="" itemtype="http://data-vocabulary.org/Rating">
+    <span itemprop="average">6</span>
+      out of <span itemprop="best">10.</span>
+    </span>
+    Total <span itemprop="votes">37</span> users rated.
+    </div> 
+<p><span class="prev"><a href="http://www.w3resource.com/mongodb/nosql.php" onclick="_gaq.push(['_trackEvent'," 'nextpreviuos',="" 'click',="" 'next="" previous']);="">&lt;&lt;Previous</a></span><span class="next-up"><a href="http://www.w3resource.com/mongodb/installation-windows.php" onclick="_gaq.push(['_trackEvent'," 'nextpreviuos',="" 'click',="" 'next="" previous']);="">Next&gt;&gt;</a></span></p> 
+
+
+
+
+
+			 <h2 itemscope="" itemtype="http://schema.org/WebPageElement/Heading">
+What is MongoDb</h2>
+			 <p><em>MongoDb</em> is a Open Source database written in C++.</p>
+         	 <p>If the load increases, by adding more nodes (such as a computer), the performance can be retained.</p>
+         	 <p>It can be used to store data for very high performance applications (for example Foursquare is using it in production).</p>
+         	 <p style="text-align:center"><img src="introduction-mongodb.php_files/mongodb-logo.png" alt="MongoDB Logo"></p>
+         	 <p>MongoDb stores data as documents. So it is a <em>document oriented database</em>.</p>
+         	 <p class="code">FirstName="Arun", Address="St. Xavier's Road", Spouse=[{Name:"Kiran"}], Children=[{Name:"Rihit", Age:8}]. <br>
+         	   FirstName="Sameer",Address="8 Gandhi Road".</p>
+         	 <p>Notice there are two different documents (separated by "."). Storing data in this fashion is called as <em>document oriented database</em>. <em>MongoDb</em> is a document oriented database.</p>
+         	 <h2 itemscope="" itemtype="http://schema.org/WebPageElement/Heading">
+Key Features</h2>
+         	 <p>Since MongoDb offers a <em>Document oriented storage</em>, It is simple and easily programmable.</p>
+         	 <p>You can set an index on any attribute of a MongoDb record 
+(as FirstName="Sameer",Address="8 Gandhi Road"), with respect to which, a
+ record can be sort quickly and ordered.</p>
+         	 <p>You can set mirror across local as well as wide area networks, which makes it easily scalable.</p>
+         	 <p>If load increases (more storage space, more processing 
+power), it can be distributed to other nodes across computer networks. 
+This is called as <em>sharding</em>.</p>
+         	 <p>MongoDb supports rich query to fetch data from the database.</p>
+         	 <p>MongoDb supports replacing an entire document (database) or some specific fields with it's update() command.</p>
+         	 <p>MongoDb supports Map/Reduce framework for batch processing
+ of data and aggregation operation. Here is brief of how Map/Reduce 
+works : </p>
+         	 <p>Map : A master node takes an input. Splits it into smaller sections. Sends it to the associated nodes.</p>
+         	 <p>These nodes may perform the same operation in turn to send
+ those smaller section of input to other nodes. It process the problem 
+(taken as input) and sends it back to the Master Node.</p>
+         	 <p>Reduce : The master node aggregates those results to find the output.</p>
+         	 <p><em>GridFS</em> specification of MongoDb supports storage of very large files.</p>
+         	 <p>MongoDb supports various programming languages like C, C# 
+and .NET, C++, Erlang, Haskell, Java, Javascript, Perl, PHP, Python, 
+Ruby, Scala (via Casbah).</p>
+         	 <p>It supports Server-side JavaScript execution. Which allows
+ a developer to use a single programming language for both client and 
+server side code.</p>
+         	 <p>MongoDb is easily installable.</p>
+         	 <h2 itemscope="" itemtype="http://schema.org/WebPageElement/Heading">
+History</h2>
+         	 <p>Development of MongoDB began in October 2007 by 10gen. The first public release was in February 2009.</p>
+         	 <h2 itemscope="" itemtype="http://schema.org/WebPageElement/Heading">
+Obtain MongoDb</h2>
+         	 <p>You can download MongoDb from http://www.mongodb.org/downloads. As of this writing, it supports following platforms: </p>
+         	 <p>OS X 32-bit</p>
+         	 <p>OS X 64-bit</p>
+         	 <p>Linux 32-bit</p>
+         	 <p>Linux 64-bit</p>
+         	 <p>Windows 32-bit</p>
+         	 <p>Windows 64-bit</p>
+         	 <p>Solaris i86pc</p>
+         	 <p>Solaris 64</p>
+         	 <p>You can download the source and install MongoDb from that too.</p>
+         	 <h2 itemscope="" itemtype="http://schema.org/WebPageElement/Heading">Tools</h2>
+         	 <p>There are several tools available for managing MongoDB.</p>
+         	 <h2 class="subheading" itemscope="" itemtype="http://schema.org/WebPageElement/Heading">Monitoring</h2>
+         	 <p>Network and System monitoring tool Munin has a plugin available for MongoDB.</p>
+         	 <p>Distributes high-performance system monitoring tool Gangila has a plugin available for MongoDB.</p>
+         	 <p>Open source web based graphic tool Cacti, used to graph 
+CPU load, network bandwidth utilization, has a plugin available for 
+MongoDB.</p>
+         	 <h2 class="subheading" itemscope="" itemtype="http://schema.org/WebPageElement/Heading">
+GUI</h2>
+         	 <p>Fang of Mongo is a web-based user interface built with Django and jQuery.</p>
+         	 <p>Futon4Mongo is a clone of the CouchDB Futon web interface for MongoDB.</p>
+         	 <p>Mongo3 is a Ruby-based interface.</p>
+         	 <p>MongoHub is a native OS X application for managing MongoDB.</p>
+         	 <p>Opricot is a browser-based MongoDB shell written in PHP.</p>
+         	 <p>phpMoAdmin is a PHP based MongoDb management tool.</p>
+         	 <p>MongoVUE is a Windows based GUI to work with MongoDB.</p>
+         	 <p>RockMongo is a PHP based MongoDB administration GUI tool.</p>
+         	 <h2 itemscope="" itemtype="http://schema.org/WebPageElement/Heading">
+MongoDB in production</h2>
+         	 <p>Here is a list of a few MongoDB production deployment : </p>
+         	 <p>Craiglist uses MongoDb to archive there billions of records.</p>
+         	 <p>FourSquare, a location based social networking site, uses MongoDb to shrade there data over a number of machines on Amazon EC2.</p>
+         	 <p>Shutterfly, an Internet-based social expression and 
+personal publishing service, uses MongoDb for  various persistent data 
+storage requirements.</p>
+         	 <p>bit.ly, a web based url shortening service, uses MongoDb for storing their data.</p>
+         	 <p>spike.com, a MTV Network's associate, uses MongoDB.</p>
+         	 <p>Intuit, a large provider of software and services for 
+small businesses and individuals, uses MongoDB to track user engagement 
+and activity in real-time across its network of websites for small 
+businesses.</p>
+         	 <p>sourceforge.net, a site to find, create and publish Open Source Software for free, uses MongoDB for back-end storage.</p>
+         	 <p>etsy.com, a site to buy and sell handmade items, uses MongoDB.</p>
+         	 <p>The New York Times, one of the leading online news portal,
+ is using MongoDB in a form-building application for photo submissions.</p>
+         	 <p>CERN, the prestigious particle Physics research institute, uses MongoDB for Large Hadron Collider data.</p>
+         	 <h2 itemscope="" itemtype="http://schema.org/WebPageElement/Heading">
+What you will learn</h2>
+         	 <p><em>w3resource's MongoDb tutorial</em> is first of it's 
+kind on internet. This is a comprehensive tutorial on MongoDb, covering 
+hundreds of examples on how to use it with PHP.</p>
+         	 <p>After reading this tutorial, you will be able to install and develop Web base applications using MongoDB</p>
+			  </article>
+			  <p>photo credit: <a href="http://www.flickr.com/photos/sooey/5745780202/" rel="nofollow external">junyaogura</a> via <a href="http://photopin.com/" rel="nofollow external">photopin</a> <a href="http://creativecommons.org/licenses/by/2.0/" rel="nofollow external">cc</a></p>
+<!--content ends here -->
+<!-- code before footer starts -->
+<p><span class="prev"><a href="http://www.w3resource.com/mongodb/nosql.php" onclick="_gaq.push(['_trackEvent'," 'nextpreviuos',="" 'click',="" 'next="" previous']);="">&lt;&lt;Previous</a></span><span class="next"><a href="http://www.w3resource.com/mongodb/installation-windows.php" onclick="_gaq.push(['_trackEvent'," 'nextpreviuos',="" 'click',="" 'next="" previous']);="">Next&gt;&gt;</a></span></p><aside>
+<div class="row-fluid" style="text-align:center">
+<div class="span12" id="adsense_336X280">
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-2153208817642134";
+/* 300X250_bellow_content */
+google_ad_slot = "4616214717";
+google_ad_width = 300;
+google_ad_height = 250;
+//-->
+</script>
+<script type="text/javascript" src="introduction-mongodb.php_files/show_ads.htm">
+</script>
+</div>
+</div>
+</aside>
+<div class="row-fluid well">
+<div class="span6">
+<h2>Rate this tutorial</h2>
+    <!--<form id="rating_form" style="float:right;">
+	<label for="amount">Rating:</label>
+    <input type="text" id="amount" style="border: 0; color: #f6931f; font-weight: bold;" readonly />
+	</form>
+<div id="slider-vertical" style="height: 100px;" onmouseup="rat_val()"></div>
+-->
+<div style="overflow: auto;" id="example-1" onclick="rat_val()"><div class="jquery-ratings-star"></div><div class="jquery-ratings-star"></div><div class="jquery-ratings-star"></div><div class="jquery-ratings-star"></div><div class="jquery-ratings-star"></div><div class="jquery-ratings-star"></div><div class="jquery-ratings-star"></div><div class="jquery-ratings-star"></div><div class="jquery-ratings-star"></div><div class="jquery-ratings-star"></div></div> <br>
+    Your Rating: <span id="example-rating-1">not set</span>
+    <br><br>
+<h2>Share this tutorial</h2>
+<p><!-- Place this tag where you want the +1 button to render. -->
+</p><div id="___plusone_0" style="height: 24px; width: 300px; display: inline-block; text-indent: 0pt; margin: 0pt; padding: 0pt; background: none repeat scroll 0% 0% transparent; border-style: none; float: none; line-height: normal; font-size: 1px; vertical-align: baseline;"><iframe title="+1" data-gapiattached="true" allowtransparency="true" src="introduction-mongodb.php_files/fastbutton.htm" name="I0_1363604118430" id="I0_1363604118430" vspace="0" tabindex="0" style="position: static; top: 0pt; width: 300px; margin: 0px; border-style: none; left: 0pt; visibility: visible; height: 24px;" marginwidth="0" marginheight="0" hspace="0" frameborder="0" scrolling="no" width="100%"></iframe></div><p></p>
+<p></p><div class="fb-like" data-send="false" data-width="100" data-show-faces="false"></div><p></p>
+<p><a href="https://twitter.com/share" class="twitter-share-button">Tweet</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script></p>
+<p><!--~~~~~~~~~~~~~~~~~~~~~~~ required HTML -->
+<a class="delicious-button">
+<!-- {
+	button:'wide'
+} -->
+Save on Delicious
+</a>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+</p>
+<p><script type="IN/Share"></script><script src="introduction-mongodb.php_files/in.htm" type="text/javascript"></script></p>
+<p><a href="http://feeds.feedburner.com/W3resource"><img src="introduction-mongodb.php_files/rss_32.png" alt="RSS Feed" style="vertical-align: middle;"> Subscribe to our feed</a></p>
+<!--
+<h3>Subscribe to our NewsLetter:</h3>
+<iframe src="../../includes/newsletter.html" style="border: none"></iframe>
+-->
+</div>
+<div class="span6">
+<h2>Continue reading</h2>
+<p><a href="http://www.w3resource.com/mongodb/installation-windows.php">Install MongoDb on Windows</a></p><p><a href="http://www.w3resource.com/mongodb/installation-Linux.php">Install MongoDb on Linux</a></p><p><a href="http://www.w3resource.com/mongodb/databases-documents-collections.php">Databases, Documents, Collections</a></p><p><a href="http://www.w3resource.com/mongodb/connections.php">MongoDB connections</a></p><p><a href="http://www.w3resource.com/mongodb/install-php-driver.php">Install PHP driver</a></p><h3>Looking for some other tutorial?</h3>
+<form class="search" style="font-size:11px;" method="get" name="searchform" action="http://www.google.com/search" target="_blank">
+    <input name="sitesearch" value="www.w3resource.com" type="hidden">
+  <input style="width: 200px; margin: 0px;" name="as_q" size="20" value="Search w3resource tutorials" type="text">
+<input title="Search" class="btn btn-success" value="Search" type="submit">
+</form>
+<h2>Recent Updates</h2>
+<p><a href="http://www.w3resource.com/ajax/working-with-PHP-and-MySQL.php">Working with Ajax, PHP and MySQL</a></p>
+<p><a href="http://www.w3resource.com/ajax/introduction.php">Ajax Tutorial</a></p>
+<p><a href="http://www.w3resource.com/zurb-foundation3/reveal.php">Create Responsive Image and Content Slider with Orbit</a></p>
+<p><a href="http://www.w3resource.com/python/python-tutorial.php">Python 3.2 Tutorial</a></p>
+<p><a href="http://www.w3resource.com/twitter-bootstrap/responsive-design.php">Responsive Web Design with Twitter Bootstrap</a></p>
+</div>
+</div>
+<div class="row-fluid" style="text-align:center">
+<div class="span12">
+<hr>
+
+<div id="disqus_thread" itemscope="" itemtype="http://schema.org/CreativeWork/Comment"><iframe verticalscrolling="no" horizontalscrolling="no" src="introduction-mongodb.php_files/a.htm" style="width: 100%; border: medium none; overflow: hidden; height: 520px;" role="application" allowtransparency="true" data-disqus-uid="1" id="dsq1" frameborder="0" scrolling="no" width="100%"></iframe><iframe src="introduction-mongodb.php_files/client.htm" style="width: 100%; border: medium none; overflow: hidden; display: none;" role="application" allowtransparency="true" data-disqus-uid="3" id="dsq3" frameborder="0" width="100%"></iframe></div>
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+    var disqus_shortname = 'w3r'; // required: replace example with your forum shortname
+
+    // The following are highly recommended additional parameters. Remove the slashes in front to use.
+    // var disqus_identifier = 'unique_dynamic_id_1234';
+    // var disqus_url = 'http://example.com/permalink-to-page.html';
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+</div>
+</div>
+<!-- code before footer ends -->
+            </div>
+            <!--/span-->
+          </div><!--/row-->
+        </div><!--/span-->
+		<aside><div class="span3">
+		<div class="row-fluid">
+		<div class="span12" style="margin-bottom: 10px;">
+		<!-- BuySellAds Zone Code -->
+		<div id="bsap_1278169" class="bsarocks bsap_733e3bd13b1dc12a3aa96bfd71419ebc"></div>
+		<!-- End BuySellAds Zone Code -->		
+		</div>
+		</div>
+		
+		<div class="row-fluid">
+		<div class="span12" style="text-align: center; margin-bottom: 10px;" id="adsense_160X600">
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-2153208817642134";
+/* new-right-bar-ad */
+google_ad_slot = "4198495955";
+google_ad_width = 160;
+google_ad_height = 600;
+//-->
+</script>
+<script type="text/javascript" src="introduction-mongodb.php_files/show_ads.htm">
+</script>
+		</div>
+		</div>
+
+<div class="row-fluid">
+
+<div class="span12" style="text-align: center" id="adsense_300X250">
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-2153208817642134";
+/* new-ad-right-1 */
+google_ad_slot = "9357854564";
+google_ad_width = 300;
+google_ad_height = 250;
+//-->
+</script>
+<script type="text/javascript" src="introduction-mongodb.php_files/show_ads.htm">
+</script>
+
+		</div>
+		</div>
+
+		</div>
+      </aside></div><!--/row, body close-->
+
+		<hr>
+      <footer>
+	  <div class="row-fluid">
+	  <div class="span3"><p><a href="http://www.w3resource.com/"><img src="introduction-mongodb.php_files/logo.png" alt="w3resource logo" itemscope="" itemtype="http://schema.org/WebPageElement/SiteNavigationElement"></a></p>
+	 <p><a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US"><img alt="Creative Commons License" style="border-width: 0pt;" src="introduction-mongodb.php_files/88x31.png"></a><br>This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US">Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License</a>.</p>
+<p>© w3resource.com 2012-13.</p></div>
+	  <div class="span3 foot">
+	  <h3>Policy</h3>
+	  <ul>
+	  <li><a href="http://www.w3resource.com/disclaimer.php" itemscope="" itemtype="http://schema.org/WebPageElement/SiteNavigationElement">Disclaimer</a></li>
+	  <li><a href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US" itemscope="" itemtype="http://schema.org/WebPageElement/SiteNavigationElement">Copyright</a></li>
+	  <li><a href="http://www.w3resource.com/privacy.php" itemscope="" itemtype="http://schema.org/WebPageElement/SiteNavigationElement">Privacy</a></li>
+	  </ul>
+	  </div>
+	  <div class="span3 foot">
+	  <h3>Company</h3>
+	  <ul>
+	  <li><a href="http://www.w3resource.com/about.php" itemscope="" itemtype="http://schema.org/WebPageElement/SiteNavigationElement">About</a></li>
+	  <li><a href="http://www.w3resource.com/contact.php" itemscope="" itemtype="http://schema.org/WebPageElement/SiteNavigationElement">Contact</a></li>
+	  <li><a href="http://www.w3resource.com/feedback.php" itemscope="" itemtype="http://schema.org/WebPageElement/SiteNavigationElement">Feedback</a></li>
+	  </ul>
+	  </div>
+	  <div class="span3 foot">
+	  <h3>Community</h3>
+	  <ul>
+	  <li><a href="http://www.facebook.com/pages/w3resourcecom/170652839643402" itemscope="" itemtype="http://schema.org/WebPageElement/SiteNavigationElement">Facebook</a></li>
+	  <li><a href="https://plus.google.com/115926626994522158963?prsrc=3" itemscope="" itemtype="http://schema.org/WebPageElement/SiteNavigationElement">Google+</a></li>
+	  <li><a href="http://www.twitter.com/w3resource" itemscope="" itemtype="http://schema.org/WebPageElement/SiteNavigationElement">Twitter</a></li>
+	  <li><a href="http://in.linkedin.com/in/w3resource" itemscope="" itemtype="http://schema.org/WebPageElement/SiteNavigationElement">Linkedin</a></li>
+	  </ul>
+	  </div>
+	  <!--
+	  <div class="span2 foot">
+	  <h3>Work</h3>
+	  <ul>
+	  <li><a href="//www.w3resource.com/disclaimer.php" itemscope itemtype='http://schema.org/WebPageElement/SiteNavigationElement'>Tutorials</a></li>
+	  <li><a href="//www.w3resource.com/contact.php" itemscope itemtype='http://schema.org/WebPageElement/SiteNavigationElement'>Tools</a></li>
+	  <li><a href="//www.w3resource.com/feedback.php" itemscope itemtype='http://schema.org/WebPageElement/SiteNavigationElement'>Books</a></li>
+	  <li><a href="//www.w3resource.com/feedback.php" itemscope itemtype='http://schema.org/WebPageElement/SiteNavigationElement'>Jobs</a></li>
+	  <li><a href="//www.w3resource.com/feedback.php" itemscope itemtype='http://schema.org/WebPageElement/SiteNavigationElement'>Shop</a></li>
+	  </ul>
+	  </div>
+	  
+	  <div class="span2 foot">
+	  <h3>Advertise</h3>
+	  <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.</p>
+	  </div>
+	  -->
+      </div></footer>
+	 
+	 
+	 </div><!--/.fluid-container-->
+    
+    <!-- Le javascript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="introduction-mongodb.php_files/jquery.js"></script>
+	<script src="introduction-mongodb.php_files/bootstrap.js"></script>
+    <script src="introduction-mongodb.php_files/jquery_002.js"></script>
+    <script src="introduction-mongodb.php_files/example.js"></script>
+	<!--<script src="//www.w3resource.com/includes/bootstrap-transition.js"></script>
+    <script src="//www.w3resource.com/includes/bootstrap-alert.js"></script>
+    <script src="//www.w3resource.com/includes/bootstrap-modal.js"></script>
+    <script src="//www.w3resource.com/includes/bootstrap-dropdown.js"></script>
+    <script src="//www.w3resource.com/includes/bootstrap-scrollspy.js"></script>
+    <script src="//www.w3resource.com/includes/bootstrap-tab.js"></script>
+    <script src="//www.w3resource.com/includes/bootstrap-tooltip.js"></script>
+    <script src="//www.w3resource.com/includes/bootstrap-popover.js"></script>
+    <script src="//www.w3resource.com/includes/bootstrap-button.js"></script>
+    <!--<script src="//www.w3resource.com/includes/bootstrap-collapse.js"></script>
+    <script src="//www.w3resource.com/includes/bootstrap-carousel.js"></script>
+    <script src="//www.w3resource.com/includes/bootstrap-typeahead.js"></script>-->
+    <script type="text/javascript">  
+        $('.dropdown-toggle').dropdown();
+   </script>
+
+<!-- Add-in CSS for syntax highlighting -->
+<script src="introduction-mongodb.php_files/shCore.txt" type="text/javascript"></script>
+<script src="introduction-mongodb.php_files/shBrushCss.txt" type="text/javascript"></script>
+<script src="introduction-mongodb.php_files/shBrushJScript.txt" type="text/javascript"></script>
+<script src="introduction-mongodb.php_files/shBrushPhp.txt" type="text/javascript"></script>
+<script src="introduction-mongodb.php_files/shBrushPython.txt" type="text/javascript"></script>
+<script src="introduction-mongodb.php_files/shBrushSql.txt" type="text/javascript"></script>
+<script src="introduction-mongodb.php_files/shBrushXml.txt" type="text/javascript"></script>
+<script src="introduction-mongodb.php_files/shBrushJava.txt" type="text/javascript"></script>
+<script src="introduction-mongodb.php_files/shBrushC.htm" type="text/javascript"></script>
+
+<!-- Add-in Script for syntax highlighting -->
+<script language="javascript">dp.SyntaxHighlighter;dp.SyntaxHighlighter.HighlightAll('code');</script>
+<!-- Place this tag after the last +1 button tag. -->
+<script type="text/javascript">
+  (function() {
+    var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+    po.src = 'https://apis.google.com/js/plusone.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+  })();
+</script>
+<!--~~~~~~~~~~~~~~~~~ Include these JS files once: jQuery then plugin -->
+<!--<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>-->
+<script type="text/javascript" src="introduction-mongodb.php_files/jquery.htm"></script>
+<!---~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+<!--for rating system -->
+    
+    <script src="introduction-mongodb.php_files/jquery-ui.js"></script>
+    <script>
+   /* $(function() {
+        $( "#slider-vertical" ).slider({
+            orientation: "vertical",
+            range: "min",
+            min: 0,
+            max: 10,
+            value: 6,
+            slide: function( event, ui ) {
+                $( "#amount" ).val( ui.value );
+            }
+        });
+        $( "#amount" ).val( $( "#slider-vertical" ).slider( "value" ) );
+    });
+    */
+    </script>
+	<script>
+	function rat_val(){
+        if(document.getElementById("example-rating-1").innerHTML != 'not set'){
+	 var rating_val = document.getElementById("example-rating-1").innerHTML;
+         var url = $(location).attr('href');
+	 var title = $("title").text();
+	 var xhr = new XMLHttpRequest();
+	 var data = "rating_value=" + rating_val + "&title=" + title + "&url=" + url;
+	 xhr.open("POST", "../../includes/bottom-new.php", true); 
+     xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");                  
+     xhr.send(data);
+	}
+       }
+    </script>
+		<script>
+	var screenAvileWidth = window.screen.availWidth;
+	if(screenAvileWidth = 1024)
+	{
+	var att= document.createAttribute("style");
+	att.value="margin-top: 60px";
+	document.getElementById("1024-specific").setAttributeNode(att);
+	}
+	</script>
+	<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-21234995-1']);
+  _gaq.push(['_trackPageview']);
+//setTimeout("_gaq.push(['_trackEvent', '59_seconds', 'read'])",59000);
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+<!-- FOR IP DATA -->
+<script src="http://j.maxmind.com/app/country.js" charset="ISO-8859-1" type="text/javascript"></script>
+<script src="http://j.maxmind.com/app/geoip.js" charset="ISO-8859-1" type="text/javascript"></script>
+<script>
+function user_data()  
+{  
+var city, region_name, postal_code, contry_name, latitude, longitude, page, title;
+city = geoip_city();
+region_name = geoip_region_name();
+postal_code = geoip_postal_code();
+country_name = geoip_country_name();
+latitude = geoip_latitude();
+longitude = geoip_longitude();
+page = window.location;
+var xhr;  
+ if (window.XMLHttpRequest) { // Mozilla, Safari, ...  
+    xhr = new XMLHttpRequest();  
+} else if (window.ActiveXObject) { // IE 8 and older  
+    xhr = new ActiveXObject("Microsoft.XMLHTTP");  
+}  
+
+var data = "city=" + city + "&region_name=" + region_name + "&postal_code=" + postal_code + "&country_name=" + country_name + "&latitude=" + latitude +
+ "&longitude="  + longitude;  
+
+xhr.open("POST", page, true);   
+xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");                    
+xhr.send(data); 
+}
+window.onload = user_data;  
+</script>
+
+<!--script for next and previous -->
+
+
+
+  
+</body></html>

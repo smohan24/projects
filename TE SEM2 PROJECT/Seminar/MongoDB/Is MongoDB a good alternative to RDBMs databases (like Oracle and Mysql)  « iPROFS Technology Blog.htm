@@ -1,0 +1,1063 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head profile="http://gmpg.org/xfn/11">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Is MongoDB a good alternative to RDBMs databases (like Oracle and Mysql)? « iPROFS Technology Blog</title>
+
+<link rel="stylesheet" href="Is%20MongoDB%20a%20good%20alternative%20to%20RDBMs%20databases%20%28like%20Oracle%20and%20Mysql%29%20%20%C2%AB%20iPROFS%20Technology%20Blog_files/style.css" type="text/css" media="screen">
+
+<script type="text/javascript" async="" src="Is%20MongoDB%20a%20good%20alternative%20to%20RDBMs%20databases%20%28like%20Oracle%20and%20Mysql%29%20%20%C2%AB%20iPROFS%20Technology%20Blog_files/quant.js"></script><script type="text/javascript" src="Is%20MongoDB%20a%20good%20alternative%20to%20RDBMs%20databases%20%28like%20Oracle%20and%20Mysql%29%20%20%C2%AB%20iPROFS%20Technology%20Blog_files/base.js"></script>
+<script type="text/javascript" src="Is%20MongoDB%20a%20good%20alternative%20to%20RDBMs%20databases%20%28like%20Oracle%20and%20Mysql%29%20%20%C2%AB%20iPROFS%20Technology%20Blog_files/menu.js"></script>
+
+<link rel="pingback" href="http://blog.iprofs.nl/xmlrpc.php">
+<meta name="google-site-verification" content="-2wT4S-KmvdhMlW_VESIyk9IYIcq6tTEWe0OstHix9w">
+		<script src="Is%20MongoDB%20a%20good%20alternative%20to%20RDBMs%20databases%20%28like%20Oracle%20and%20Mysql%29%20%20%C2%AB%20iPROFS%20Technology%20Blog_files/remote-login.php" type="text/javascript"></script>
+		<script type="text/javascript">
+		/* <![CDATA[ */
+			if ( 'function' === typeof WPRemoteLogin ) {
+				document.cookie = "wordpress_test_cookie=test; path=/";
+				if ( document.cookie.match( /(;|^)\s*wordpress_test_cookie\=/ ) ) {
+					WPRemoteLogin();
+				}
+			}
+		/* ]]> */
+		</script>
+		<link rel="alternate" type="application/rss+xml" title="iPROFS Technology Blog » Feed" href="http://blog.iprofs.nl/feed/">
+<link rel="alternate" type="application/rss+xml" title="iPROFS Technology Blog » Comments Feed" href="http://blog.iprofs.nl/comments/feed/">
+<link rel="alternate" type="application/rss+xml" title="iPROFS Technology Blog » Is MongoDB a good alternative to RDBMs databases (like Oracle and&nbsp;Mysql)? Comments Feed" href="http://blog.iprofs.nl/2011/11/25/is-mongodb-a-good-alternative-to-rdbms-databases-like-oracle-and-mysql/feed/">
+<script type="text/javascript">
+/* <![CDATA[ */
+function addLoadEvent(func){var oldonload=window.onload;if(typeof window.onload!='function'){window.onload=func;}else{window.onload=function(){oldonload();func();}}}
+/* ]]> */
+</script>
+<link rel="stylesheet" id="all-css-0" href="Is%20MongoDB%20a%20good%20alternative%20to%20RDBMs%20databases%20%28like%20Oracle%20and%20Mysql%29%20%20%C2%AB%20iPROFS%20Technology%20Blog_files/a.css" type="text/css" media="all">
+<script type="text/javascript">
+/* <![CDATA[ */
+var LoggedOutFollow = {"invalid_email":"Your subscription did not succeed, please try again with a valid email address."};
+/* ]]> */
+</script>
+<script type="text/javascript" src="Is%20MongoDB%20a%20good%20alternative%20to%20RDBMs%20databases%20%28like%20Oracle%20and%20Mysql%29%20%20%C2%AB%20iPROFS%20Technology%20Blog_files/a.js"></script>
+<link rel="stylesheet" id="all-css-0" href="Is%20MongoDB%20a%20good%20alternative%20to%20RDBMs%20databases%20%28like%20Oracle%20and%20Mysql%29%20%20%C2%AB%20iPROFS%20Technology%20Blog_files/style_002.css" type="text/css" media="all">
+<!--[if lt IE 8]>
+<link rel='stylesheet' id='highlander-comments-ie7-css'  href='http://s2.wp.com/wp-content/mu-plugins/highlander-comments/style-ie7.css?m=1351637563g&#038;ver=20110606' type='text/css' media='all' />
+<![endif]-->
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="http://iprofs.wordpress.com/xmlrpc.php?rsd">
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="http://iprofs.wordpress.com/wp-includes/wlwmanifest.xml"> 
+<link rel="prev" title="Java, Google Maps and the&nbsp;null-pointer" href="http://blog.iprofs.nl/2011/11/25/java-google-maps-and-the-null-pointer/">
+<link rel="next" title="3, 2, 1, Go! A CountdownLatch in&nbsp;practice" href="http://blog.iprofs.nl/2011/11/28/3-2-1-go-a-countdownlatch-in-practice/">
+<meta name="generator" content="WordPress.com">
+<link rel="canonical" href="http://blog.iprofs.nl/2011/11/25/is-mongodb-a-good-alternative-to-rdbms-databases-like-oracle-and-mysql/">
+<link rel="shortlink" href="http://wp.me/pTAkp-o1">
+<link rel="alternate" type="application/json+oembed" href="http://public-api.wordpress.com/oembed/1.0/?format=json&amp;url=http%3A%2F%2Fblog.iprofs.nl%2F2011%2F11%2F25%2Fis-mongodb-a-good-alternative-to-rdbms-databases-like-oracle-and-mysql%2F&amp;for=wpcom-auto-discovery"><link rel="alternate" type="application/xml+oembed" href="http://public-api.wordpress.com/oembed/1.0/?format=xml&amp;url=http%3A%2F%2Fblog.iprofs.nl%2F2011%2F11%2F25%2Fis-mongodb-a-good-alternative-to-rdbms-databases-like-oracle-and-mysql%2F&amp;for=wpcom-auto-discovery">
+<!-- Jetpack Open Graph Tags -->
+<meta property="og:type" content="article">
+<meta property="og:title" content="Is MongoDB a good alternative to RDBMs databases (like Oracle and Mysql)?">
+<meta property="og:url" content="http://blog.iprofs.nl/2011/11/25/is-mongodb-a-good-alternative-to-rdbms-databases-like-oracle-and-mysql/">
+<meta property="og:description" content="During the 10th Devoxx at Antwerp a presentation was given about MongoDB by Brendan McAdams from 10Gen. This was one of the presentations during this event which I attended. I have to say I was ple...">
+<meta property="og:site_name" content="iPROFS Technology Blog">
+<meta name="twitter:site" content="@wordpressdotcom">
+<meta name="twitter:card" content="summary">
+<link rel="shortcut icon" type="image/x-icon" href="http://s2.wp.com/i/favicon.ico?m=1311976023g" sizes="16x16 24x24 32x32 48x48">
+<link rel="icon" type="image/x-icon" href="http://s2.wp.com/i/favicon.ico?m=1311976023g" sizes="16x16 24x24 32x32 48x48">
+<link rel="apple-touch-icon-precomposed" href="http://s0.wp.com/i/webclip.png?m=1355642671g">
+<link rel="openid.server" href="http://iprofs.wordpress.com/?openidserver=1">
+<link rel="openid.delegate" href="http://iprofs.wordpress.com/">
+<link rel="search" type="application/opensearchdescription+xml" href="http://blog.iprofs.nl/osd.xml" title="iPROFS Technology Blog">
+<link rel="search" type="application/opensearchdescription+xml" href="http://wordpress.com/opensearch.xml" title="WordPress.com">
+		<style>
+		/* <![CDATA[ */
+		/* Block: reblog */
+		
+		.reblog-from img                   { margin: 0 10px 0 0; vertical-align: middle; padding: 0; border: 0; }
+		.reblogger-note img.avatar         { float: left; padding: 0; border: 0; }
+		.reblogger-note-content            { margin: 0 0 20px; }
+		.reblog-post .wpcom-enhanced-excerpt-content { border-left: 3px solid #eee; padding-left: 15px; }
+		.reblog-post ul.thumb-list         { display: block; list-style: none; margin: 2px 0; padding: 0; clear: both; }
+		.reblog-post ul.thumb-list li      { display: inline; margin: 0; padding: 0 1px; border: 0; }
+		.reblog-post ul.thumb-list li a    { margin: 0; padding: 0; border: 0; }
+		.reblog-post ul.thumb-list li img  { margin: 0; padding: 0; border: 0; }
+		
+		.reblog-post .wpcom-enhanced-excerpt { clear: both; }
+		
+		.reblog-post .wpcom-enhanced-excerpt address,
+		.reblog-post .wpcom-enhanced-excerpt li,
+		.reblog-post .wpcom-enhanced-excerpt h1,
+		.reblog-post .wpcom-enhanced-excerpt h2,
+		.reblog-post .wpcom-enhanced-excerpt h3,
+		.reblog-post .wpcom-enhanced-excerpt h4,
+		.reblog-post .wpcom-enhanced-excerpt h5,
+		.reblog-post .wpcom-enhanced-excerpt h6,
+		.reblog-post .wpcom-enhanced-excerpt p { font-size: 100% !important; }
+		
+		.reblog-post .wpcom-enhanced-excerpt blockquote,
+		.reblog-post .wpcom-enhanced-excerpt pre,
+		.reblog-post .wpcom-enhanced-excerpt code,
+		.reblog-post .wpcom-enhanced-excerpt q { font-size: 98% !important; }
+		
+
+		/* ]]> */		
+		</style>
+		<style type="text/css">.recentcomments a{display:inline !important;padding: 0 !important;margin: 0 !important;}</style>
+<style type="text/css">
+.widget_twitter li {
+	word-wrap: break-word;
+}
+</style>
+<meta name="application-name" content="iPROFS Technology Blog"><meta name="msapplication-window" content="width=device-width;height=device-height"><meta name="msapplication-tooltip" content="Java, Content Management and Portals"><meta name="msapplication-task" content="name=Subscribe;action-uri=http://blog.iprofs.nl/feed/;icon-uri=http://s2.wp.com/i/favicon.ico"><meta name="msapplication-task" content="name=Sign up for a free blog;action-uri=http://wordpress.com/signup/;icon-uri=http://s2.wp.com/i/favicon.ico"><meta name="msapplication-task" content="name=WordPress.com Support;action-uri=http://support.wordpress.com/;icon-uri=http://s2.wp.com/i/favicon.ico"><meta name="msapplication-task" content="name=WordPress.com Forums;action-uri=http://forums.wordpress.com/;icon-uri=http://s2.wp.com/i/favicon.ico"><meta name="title" content="Is MongoDB a good alternative to RDBMs databases (like Oracle and&nbsp;Mysql)? | iPROFS Technology Blog on WordPress.com">
+<meta name="description" content="During the 10th Devoxx at Antwerp a presentation was given about MongoDB by Brendan McAdams from 10Gen. This was one of the presentations during this event which I attended. I have to say I was pleasantly surprised by the ease of use and the features of this product. MongoDB is a NoSQL (non-relational, next-generation operational…">
+<style type="text/css" media="screen">
+.widget_author_grid ul { overflow: hidden; }
+.widget_author_grid ul li { background: none !important; clear: none !important; float: left !important; margin: 0 -5px -3px 0 !important; padding: 0 8px 6px 0 !important; border: none !important; list-style: none !important; }
+.widget_author_grid ul li a { background: none !important; margin: 0 !important; padding: 0 !important; border: 0 !important; }
+.widget_author_grid .avatar { vertical-align: middle; }
+</style>
+
+<style type="text/css">
+table.recentcommentsavatar img.avatar {border: 0px; margin:0;}
+table.recentcommentsavatar a {border: 0px !important;background-color: transparent !important}
+td.recentcommentsavatartop {padding:0px 0px 1px 0px;margin:0px; }
+td.recentcommentsavatarend {padding:0px 0px 1px 0px;margin:0px; }
+td.recentcommentstexttop { border: none !important;padding:0px 0px 0px 10px;}
+td.recentcommentstextend { border: none !important;padding:0px 0px 2px 10px;}
+</style>
+<script type="text/javascript" src="Is%20MongoDB%20a%20good%20alternative%20to%20RDBMs%20databases%20%28like%20Oracle%20and%20Mysql%29%20%20%C2%AB%20iPROFS%20Technology%20Blog_files/google_service.htm">
+</script>
+<script type="text/javascript">
+GS_googleAddAdSenseService("ca-pub-3443918307802676");
+GS_googleEnableAllServices();
+</script>
+<script type="text/javascript">
+GA_googleAddSlot("ca-pub-3443918307802676", "wpcom_below_post");
+</script>
+<script type="text/javascript">
+GA_googleFetchAds();
+</script>
+		<link rel="stylesheet" id="custom-css-css" type="text/css" href="Is%20MongoDB%20a%20good%20alternative%20to%20RDBMs%20databases%20%28like%20Oracle%20and%20Mysql%29%20%20%C2%AB%20iPROFS%20Technology%20Blog_files/a_002.css">
+		<script type="text/javascript"> 
+	window.google_analytics_uacct = "UA-52447-2"; 
+</script>
+
+<script type="text/javascript">
+	var _gaq = _gaq || [];
+	_gaq.push(['_setAccount', 'UA-52447-2']);
+	_gaq.push(['_setDomainName', 'none']);
+	_gaq.push(['_setAllowLinker', true]);
+	_gaq.push(['_initData']);
+	_gaq.push(['_trackPageview']);
+
+	(function() {
+		var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+		ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+		(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ga);
+	})();
+</script><script src="Is%20MongoDB%20a%20good%20alternative%20to%20RDBMs%20databases%20%28like%20Oracle%20and%20Mysql%29%20%20%C2%AB%20iPROFS%20Technology%20Blog_files/ga.js" async="" type="text/javascript"></script>
+</head>
+
+<body class="single single-post postid-1489 single-format-standard typekit-enabled highlander-enabled highlander-light">
+<!-- wrap START -->
+<div id="wrap">
+
+<!-- container START -->
+<div id="container">
+
+<!-- header START -->
+<div id="header">
+
+	<!-- banner START -->
+		<!-- banner END -->
+
+	<div id="caption">
+		<h1 id="title"><a href="http://blog.iprofs.nl/">iPROFS Technology Blog</a></h1>
+		<div id="tagline">Java, Content Management and Portals</div>
+	</div>
+
+	<div class="fixed"></div>
+</div>
+<!-- header END -->
+
+<!-- navigation START -->
+<div id="navigation">
+	<!-- menus START -->
+	<ul id="menus">
+	<li class="page_item"><a class="home" title="Home" href="http://blog.iprofs.nl/">Home</a></li>
+		<li class="cat-item cat-item-641922"><a href="http://blog.iprofs.nl/category/android/" title="View all posts filed under Android">Android</a>
+</li>
+	<li class="cat-item cat-item-69816"><a href="http://blog.iprofs.nl/category/cloud/" title="View all posts filed under Cloud">Cloud</a>
+</li>
+	<li class="cat-item cat-item-199864"><a href="http://blog.iprofs.nl/category/frontend/" title="View all posts filed under Frontend">Frontend</a>
+</li>
+	<li class="cat-item cat-item-37563670"><a href="http://blog.iprofs.nl/category/hippo-2/" title="View all posts filed under Hippo">Hippo</a>
+</li>
+	<li class="cat-item cat-item-32"><a href="http://blog.iprofs.nl/category/infrastructure/" title="View all posts filed under Infrastructure">Infrastructure</a>
+</li>
+	<li class="cat-item cat-item-34773229"><a href="http://blog.iprofs.nl/category/iprofs/" title="View all posts filed under iPROFS">iPROFS</a>
+</li>
+	<li class="cat-item cat-item-1017"><a href="http://blog.iprofs.nl/category/java/" title="View all posts filed under Java">Java</a>
+</li>
+	<li class="cat-item cat-item-34939378"><a href="http://blog.iprofs.nl/category/javascript-2/" title="View all posts filed under Javascript">Javascript</a>
+</li>
+	<li class="cat-item cat-item-43650197"><a href="http://blog.iprofs.nl/category/liferay-2/" title="View all posts filed under Liferay">Liferay</a>
+</li>
+	<li class="cat-item cat-item-46805"><a href="http://blog.iprofs.nl/category/scrum/" title="View all posts filed under Scrum">Scrum</a>
+</li>
+	<li class="cat-item cat-item-801"><a href="http://blog.iprofs.nl/category/security/" title="View all posts filed under Security">Security</a>
+</li>
+	<li><a class="lastmenu" href="javascript:void(0);"></a></li>
+</ul>
+
+	<!-- menus END -->
+
+	<!-- searchbox START -->
+	<div id="searchbox">
+		<form action="http://blog.iprofs.nl" method="get">
+			<div class="content">
+				<input class="textfield searchtip" name="s" size="24" value="Type text to search here..." type="text">
+				<input class="button" value="" type="submit">
+			</div>
+		</form>
+	</div>
+<script type="text/javascript">
+//<![CDATA[
+	var searchbox = MGJS.$("searchbox");
+	var searchtxt = MGJS.getElementsByClassName("textfield", "input", searchbox)[0];
+	var searchbtn = MGJS.getElementsByClassName("button", "input", searchbox)[0];
+	var tiptext = "Type text to search here...";
+	if(searchtxt.value == "" || searchtxt.value == tiptext) {
+		searchtxt.className += " searchtip";
+		searchtxt.value = tiptext;
+	}
+	searchtxt.onfocus = function(e) {
+		if(searchtxt.value == tiptext) {
+			searchtxt.value = "";
+			searchtxt.className = searchtxt.className.replace(" searchtip", "");
+		}
+	}
+	searchtxt.onblur = function(e) {
+		if(searchtxt.value == "") {
+			searchtxt.className += " searchtip";
+			searchtxt.value = tiptext;
+		}
+	}
+	searchbtn.onclick = function(e) {
+		if(searchtxt.value == "" || searchtxt.value == tiptext) {
+			return false;
+		}
+	}
+//]]>
+</script>
+	<!-- searchbox END -->
+
+	<div class="fixed"></div>
+</div>
+<!-- navigation END -->
+
+<!-- content START -->
+<div id="content">
+
+	<!-- main START -->
+	<div id="main">
+
+
+	<div id="postpath">
+		<a title="Go to homepage" href="http://blog.iprofs.nl/">Home</a>
+		 &gt; <a href="http://blog.iprofs.nl/category/cloud/" title="View all posts in Cloud" rel="category tag">Cloud</a>, <a href="http://blog.iprofs.nl/category/infrastructure/" title="View all posts in Infrastructure" rel="category tag">Infrastructure</a>		 &gt; Is MongoDB a good alternative to RDBMs databases (like Oracle and&nbsp;Mysql)?	</div>
+
+	<div id="post-1489" class="post-1489 post type-post status-publish format-standard hentry category-cloud category-infrastructure tag-database tag-devoxx tag-mongodb tag-nosql">
+		<h2>Is MongoDB a good alternative to RDBMs databases (like Oracle and&nbsp;Mysql)?</h2>
+		<div class="info">
+			<span class="date">25/11/2011</span>
+			<span class="author"><a href="http://blog.iprofs.nl/author/gmollema/" title="Posts by Gijs Mollema" rel="author">Gijs Mollema</a></span>										<span class="addcomment"><a href="#respond">Leave a comment</a></span>
+				<span class="comments"><a href="#comments">Go to comments</a></span>
+						<div class="fixed"></div>
+		</div>
+		<div class="content">
+			<p>During the 10th Devoxx at Antwerp a presentation was given about MongoDB by Brendan McAdams from 10Gen.<br>
+This was one of the presentations during this event which I attended. I 
+have to say I was pleasantly surprised by the ease of use and the 
+features of this product. MongoDB is a NoSQL (non-relational, 
+next-generation operational datastore and databases) database which is a
+ schema-less database having huge advantages over most current existing 
+RDBM databases.</p>
+<p>The main pros of MongoDB can be divided in the following three:</p>
+<ul>
+<li>Flexibility</li>
+<li>Performance</li>
+<li>Scalability</li>
+</ul>
+<p>The aim of this article is to give an idea of this product, by giving
+ an overview of advantages and disadvantages. Next, I will give some 
+pointers to take into consideration in order to determine if this type 
+of database is suitable for a specific situation or not. At the end of 
+this article I will provide the link to the presentation that was given,
+ providing more details (like example models &amp; queries).<span id="more-1489"></span></p>
+<p><strong>Advantages </strong></p>
+<ul>
+<li>Schema-less<br>
+This is ideal for flexible data model altering. It is easy to declare \ 
+extend \ alter extra fields to the data model, and optional non used 
+(nulled) fields take no space.  Using RDBM databases one must run 
+scripts first in order to update the model. In this case it can be done 
+through coding and no scripting is needed.</li>
+<li>Structure of a single object is clearer<br>
+The structure of the model is in json and the structure is directly clear instead of deriving it from a table structure.</li>
+<li>No sql or hibernate queries (complex joins).<br>
+The nice thing about MongoDb is that the operations are easy to use 
+(without any sql of course) and are key / value based.  Easy expression 
+language operators (i,e, $gt, $lt, ) can be used and usage of indexes 
+&amp; cursors is possible.</li>
+<li>Tuning<br>
+You can choose what level of consistency you want depending on the value
+ of the data (e.g. faster performance = fire and forget inserts to 
+MongoDB, slower performance = wait till  insert has been replicated to 
+multiple nodes before returning)</li>
+<li>Ease of scale-out<br>
+Scale reads by using replica sets. Scale writes by using sharding (auto 
+balancing). Just fire up another machine and away you go.  Adding more 
+machines causes your working set to be distributed over all the 
+machines.</li>
+<li>Conversion \ mapping of application objects to database objects not needed.</li>
+<li>Uses internal memory for storing the (windowed) working set, enabling faster access of data.</li>
+</ul>
+<p><strong>Disadvantages</strong></p>
+<ul>
+<li>If something crashes while it’s updating ‘table-contents’ – you loose all your data.<br>
+Repair takes a lot of time, but usually ends up in 50-90% data loss if 
+you aren’t lucky. So only way to be fully secure is to have 2 replicas 
+in different data centers.</li>
+<li>Indexes take up a lot of RAM. They are B-tree indexes and if you have many, you can run out of system resources really fast.</li>
+<li>Data size in MongoDB is typically higher due to e.g. each document has field names stored it</li>
+<li>Less flexibility with more complex querying (e.g. no joins)</li>
+<li>No support for transactions – certain atomic operations are supported, at a single document level</li>
+<li>At the moment Map/Reduce (e.g. to do aggregations/data analysis) is 
+OK, but not blisteringly fast. So if that’s required, something like 
+Hadoop may need to be added into the mix</li>
+</ul>
+<p><strong>Well suited for the following situations</strong></p>
+<ul>
+<li>Scaling out</li>
+<li>Caching</li>
+<li>High volume traffic</li>
+</ul>
+<p><strong>Less suited for the following situations</strong></p>
+<ul>
+<li>High transactional&nbsp; applications</li>
+<li>Ad-hoc business intelligence</li>
+<li>Problems which require a sql solution</li>
+</ul>
+<p><strong>Summary </strong><br>
+Of course, using a NoSQL technology like MongoDB involves some 
+trade-offs and a different mindset than the traditional RDBMS. The main 
+advantages as mentioned before are flexibility, scalability and 
+performance. As the noSQL principle looks promising it is not (yet) the 
+holy grail and therefor currently cannot replace the RDBMs for each 
+situation. It is a different type of database which can be a solution, 
+based on the requirements of the situation. It will not replace RDBMs 
+databases but it I reckon it might run well side-by-side in the future 
+(delegating model / functionality at which MongoDB is good at).</p>
+<p>To get more information on MongoDB please follow this link to see the presentation that was given this week: <a title="link to presentation" href="http://speakerdeck.com/u/bwmcadams/p/mongodb-devoxx-2011-workshop">link to presentation </a><br>
+It contains more in depth information as well as some neat query examples and code examples.</p>
+
+<div class="wpadvert" style="position: relative; width:300px; text-align: center; padding: 0; margin: 10px auto; overflow: hidden; clear: both;">
+<a style="position: absolute; text-align: left; display: block; font: 9px/1 sans-serif; text-decoration: underline;" href="http://en.wordpress.com/about-these-ads/" rel="nofollow">About these ads</a>
+<script type="text/javascript">
+		var wpcom_adclk_hovering = false;
+		var wpcom_adclk_recorded = false;
+		var wpcom_adclk_theme = "INove";
+		var wpcom_adclk_slot = "wpcom_below_post";
+		var wpcom_adclk_network = ( typeof wpcom_adclk_network === "undefined" ) ? "" : wpcom_adclk_network ;
+
+		jQuery(document).ready( function() {
+			function wpcom_adclk_hover_yes() { wpcom_adclk_hovering = true; }
+			function wpcom_adclk_hover_no() { wpcom_adclk_hovering = false; }
+			jQuery(".wpadvert").click(wpcom_adclk_click);
+			jQuery(".wpadvert iframe").hover( wpcom_adclk_hover_yes, wpcom_adclk_hover_no );
+			jQuery(".wpadvert object").hover( wpcom_adclk_hover_yes, wpcom_adclk_hover_no );
+
+			jQuery(window).blur( function() {
+				if ( wpcom_adclk_hovering ) { wpcom_adclk_click(); }
+			});
+		});
+
+		function wpcom_adclk_impression() {
+			var stat_gif = document.location.protocol + "//stats.wordpress.com/g.gif?v=wpcom-no-pv";
+			stat_gif += "&x_ads_imp_theme=" + wpcom_adclk_theme;
+			stat_gif += "&x_ads_imp_placement="+wpcom_adclk_slot;
+			stat_gif += "&x_ads_imp_network=" + wpcom_adclk_network;
+			stat_gif += "&x_ads_imp_theme_network="+wpcom_adclk_theme+"_"+wpcom_adclk_network;
+			new Image().src = stat_gif + "&baba=" + Math.random();
+			return true;
+		}
+
+		function wpcom_adclk_click() {
+			if (wpcom_adclk_recorded) { return true; } // no double counting
+			var stat_gif = document.location.protocol + "//stats.wordpress.com/g.gif?v=wpcom-no-pv";
+			stat_gif += "&x_ads_click_theme=" + wpcom_adclk_theme;
+			stat_gif += "&x_ads_click_placement="+wpcom_adclk_slot;
+			stat_gif += "&x_ads_click_network=" + wpcom_adclk_network;
+			stat_gif += "&x_ads_click_theme_network="+wpcom_adclk_theme+"_"+wpcom_adclk_network;
+
+			new Image().src = stat_gif + "&baba=" + Math.random();
+			wpcom_adclk_recorded = true;
+			var now=new Date(); var end=now.getTime()+250;
+			while(true){now=new Date();if(now.getTime()>end){break;}}
+			return true;
+		}
+	
+GA_googleAddAttr("AdOpt", "1");
+GA_googleAddAttr("Origin", "other");
+GA_googleAddAttr("LangId", "1");
+GA_googleAddAttr("Domain", "blog.iprofs.nl");
+GA_googleAddAttr("BlogId", "13247689");
+GA_googleAddAttr("Autotag", "technology");
+GA_googleAddAttr("Tag", "cloud");
+GA_googleAddAttr("Tag", "infrastructure");
+GA_googleAddAttr("Tag", "database");
+GA_googleAddAttr("Tag", "devoxx");
+GA_googleAddAttr("Tag", "mongodb");
+GA_googleAddAttr("Tag", "nosql");
+GA_googleAddAttr("theme_bg", "ffffff");
+GA_googleAddAttr("theme_border", "eeeeee");
+GA_googleAddAttr("theme_text", "555555");
+GA_googleAddAttr("theme_link", "2970A6");
+GA_googleAddAttr("theme_url", "c8c7c7");
+GA_googleAddAdSensePageAttr("google_page_url", "http://blog.iprofs.nl/2011/11/25/is-mongodb-a-good-alternative-to-rdbms-databases-like-oracle-and-mysql/");
+GA_googleFillSlot("wpcom_below_post");
+</script>
+</div>
+<style type="text/css">
+div.wpadvert>div { margin-top: 1em; }
+</style>
+<script type="text/javascript">
+jQuery( window ).load( function() {
+    if ( jQuery(".wpadvert script[src*='shareth.ru']").length > 0 || jQuery(".wpadvert .sharethrough-placement").length > 0 ) {
+        jQuery( '.wpadvert' ).css( 'width', '400px' );
+    }
+setTimeout(function(){if(typeof GS_googleAddAdSenseService !== 'function'){new Image().src=document.location.protocol+"//stats.wordpress.com/g.gif?v=wpcom-no-pv&x_noads=adblock&baba="+Math.random()}},100);
+} );
+</script>
+<div id="jp-post-flair" class="sharedaddy sd-rating-enabled sd-sharing-enabled"><div class="sd-block sd-rating"><h3 class="sd-title">Rate this:</h3><div class="pd-rating" id="pd_rating_holder_1849557_post_1489"></div></div><div class="sharedaddy sd-sharing-enabled"><div class="robots-nocontent sd-block sd-social sd-social-icon-text sd-sharing"><h3 class="sd-title">Share this:</h3><div class="sd-content"><ul><li class="share-print"><a rel="nofollow" class="share-print sd-button share-icon" href="http://blog.iprofs.nl/2011/11/25/is-mongodb-a-good-alternative-to-rdbms-databases-like-oracle-and-mysql/#print" title="Click to print"><span>Print</span></a></li><li class="share-google-plus-1"><a rel="nofollow" class="share-google-plus-1 sd-button share-icon" href="http://blog.iprofs.nl/2011/11/25/is-mongodb-a-good-alternative-to-rdbms-databases-like-oracle-and-mysql/?share=google-plus-1" title="Click to share on Google+" id="sharing-google-1489"><span>Google +1</span></a></li><li class="share-twitter"><a rel="nofollow" class="share-twitter sd-button share-icon" href="http://blog.iprofs.nl/2011/11/25/is-mongodb-a-good-alternative-to-rdbms-databases-like-oracle-and-mysql/?share=twitter" title="Click to share on Twitter" id="sharing-twitter-1489"><span>Twitter</span></a></li><li class="share-facebook"><a rel="nofollow" class="share-facebook sd-button share-icon" href="http://blog.iprofs.nl/2011/11/25/is-mongodb-a-good-alternative-to-rdbms-databases-like-oracle-and-mysql/?share=facebook" title="Share on Facebook" id="sharing-facebook-1489"><span>Facebook</span></a></li><li><a href="#" class="sharing-anchor sd-button share-more"><span>More</span></a></li><li class="share-end"></li></ul><div class="sharing-hidden"><div class="inner" style="display: none;"><ul><li class="share-digg"><a rel="nofollow" class="share-digg sd-button share-icon" href="http://blog.iprofs.nl/2011/11/25/is-mongodb-a-good-alternative-to-rdbms-databases-like-oracle-and-mysql/?share=digg" title="Click to Digg this post"><span>Digg</span></a></li><li class="share-reddit"><a rel="nofollow" class="share-reddit sd-button share-icon" href="http://blog.iprofs.nl/2011/11/25/is-mongodb-a-good-alternative-to-rdbms-databases-like-oracle-and-mysql/?share=reddit" title="Click to share on Reddit"><span>Reddit</span></a></li><li class="share-end"></li><li class="share-stumbleupon"><a rel="nofollow" class="share-stumbleupon sd-button share-icon" href="http://blog.iprofs.nl/2011/11/25/is-mongodb-a-good-alternative-to-rdbms-databases-like-oracle-and-mysql/?share=stumbleupon" title="Click to share on StumbleUpon"><span>StumbleUpon</span></a></li><li class="share-email"><a rel="nofollow" class="share-email sd-button share-icon" href="http://blog.iprofs.nl/2011/11/25/is-mongodb-a-good-alternative-to-rdbms-databases-like-oracle-and-mysql/?share=email" title="Click to email this to a friend"><span>Email</span></a></li><li class="share-end"></li><li class="share-linkedin"><a rel="nofollow" class="share-linkedin sd-button share-icon" href="http://blog.iprofs.nl/2011/11/25/is-mongodb-a-good-alternative-to-rdbms-databases-like-oracle-and-mysql/?share=linkedin" title="Click to share on LinkedIn" id="sharing-linkedin-1489"><span>LinkedIn</span></a></li><li class="share-end"></li></ul></div></div><div class="sharing-clear"></div></div></div></div></div>						<div class="fixed"></div>
+		</div>
+		<div class="under">
+			<span><span class="categories">Categories: </span><a href="http://blog.iprofs.nl/category/cloud/" title="View all posts in Cloud" rel="category tag">Cloud</a>, <a href="http://blog.iprofs.nl/category/infrastructure/" title="View all posts in Infrastructure" rel="category tag">Infrastructure</a></span>
+			<span><span class="tags">Tags: </span><a href="http://blog.iprofs.nl/tag/database/" rel="tag">database</a>, <a href="http://blog.iprofs.nl/tag/devoxx/" rel="tag">devoxx</a>, <a href="http://blog.iprofs.nl/tag/mongodb/" rel="tag">Mongodb</a>, <a href="http://blog.iprofs.nl/tag/nosql/" rel="tag">nosql</a></span>
+		</div>
+		<div class="fixed"></div>
+	</div>
+
+	
+<script type="text/javascript" src="Is%20MongoDB%20a%20good%20alternative%20to%20RDBMs%20databases%20%28like%20Oracle%20and%20Mysql%29%20%20%C2%AB%20iPROFS%20Technology%20Blog_files/comment.js"></script>
+
+
+
+<div id="comments">
+
+<div id="cmtswitcher">
+			<a id="commenttab" class="curtab" href="javascript:void(0);" onclick="MGJS.switchTab('thecomments,commentnavi', 'thetrackbacks', 'commenttab', 'curtab', 'trackbacktab', 'tab');">Comments (1)</a>
+		<a id="trackbacktab" class="tab" href="javascript:void(0);" onclick="MGJS.switchTab('thetrackbacks', 'thecomments,commentnavi', 'trackbacktab', 'curtab', 'commenttab', 'tab');">Trackbacks (0)</a>
+				<span class="addcomment"><a href="#respond">Leave a comment</a></span>
+				<span class="addtrackback"><a href="http://blog.iprofs.nl/2011/11/25/is-mongodb-a-good-alternative-to-rdbms-databases-like-oracle-and-mysql/trackback/">Trackback</a></span>
+		<div class="fixed"></div>
+</div>
+
+<div id="commentlist">
+	<!-- comments START -->
+	<ol id="thecomments">
+		<li class="comment even thread-even depth-1 regularcomment highlander-comment" id="comment-302">
+		<div class="author">
+			<div class="pic">
+				<img alt="" src="Is%20MongoDB%20a%20good%20alternative%20to%20RDBMs%20databases%20%28like%20Oracle%20and%20Mysql%29%20%20%C2%AB%20iPROFS%20Technology%20Blog_files/picture.htm" class="avatar avatar-32" height="32" width="32">			</div>
+			<div class="name">
+									<a id="commentauthor-302" class="url" href="http://www.facebook.com/jungandreas" rel="external nofollow">Andreas Jung</a>
+							</div>
+		</div>
+
+		<div class="info">
+			<div class="date">
+				20/12/2011 at 06:37					 | <a href="#comment-302">#1</a>
+			</div>
+			<div class="act">
+				<a class="comment-reply-link" href="http://blog.iprofs.nl/2011/11/25/is-mongodb-a-good-alternative-to-rdbms-databases-like-oracle-and-mysql/?replytocom=302#respond" onclick='return addComment.moveForm("comment-302", "302", "respond", "1489")'>Reply</a> | 				<a href="javascript:void(0);" onclick="MGJS_CMT.quote('commentauthor-302', 'comment-302', 'commentbody-302', 'comment');">Quote</a>
+							</div>
+			<div class="fixed"></div>
+			<div class="content">
+				
+				<div id="commentbody-302">
+					<p>Nobody ever claimed that noSQL databases are intended to replace
+ RDBMS system. MongoDB is yet another tool in the toolbox of developers.
+ Use the right tool for each project. Only programmers morons use one 
+tool for all and everything (intentionally or just because they don’t 
+know better).</p>
+				</div>
+			</div>
+		</div>
+		<div class="fixed"></div>
+	</li>
+
+	</ol>
+	<!-- comments END -->
+
+
+	<!-- trackbacks START -->
+			<ol id="thetrackbacks">
+							<li class="messagebox">
+					No trackbacks yet.				</li>
+
+					</ol>
+		<div class="fixed"></div>
+	<!-- trackbacks END -->
+</div>
+
+</div>
+
+
+								<div id="respond">
+				<h3 id="reply-title">Leave a Reply <small><a rel="nofollow" id="cancel-comment-reply-link" href="http://blog.iprofs.nl/2011/11/25/is-mongodb-a-good-alternative-to-rdbms-databases-like-oracle-and-mysql/#respond" style="display:none;">Cancel reply</a></small></h3>
+									<form action="http://blog.iprofs.nl/wp-comments-post.php" method="post" id="commentform">
+																										
+
+
+												
+<input name="hc_post_as" id="hc_post_as" value="guest" type="hidden">
+
+<div class="comment-form-field comment-textarea">
+	
+	<div id="comment-form-comment"><textarea style="height: 10px;" placeholder="Enter your comment here..." id="comment" name="comment"></textarea></div>
+</div>
+
+<div style="display: none;" id="comment-form-identity">
+
+	<div id="comment-form-nascar">
+		<p>Fill in your details below or click an icon to log in:</p>
+		<ul>
+			<li class="selected" style="display:none;">
+				<a href="#comment-form-guest" id="postas-guest" title="Guest">
+					<span></span>
+				</a>
+			</li>
+			<li>
+				<a href="#comment-form-load-service:WordPress.com" id="postas-wordpress" title="WordPress.com">
+					<span></span>
+				</a>
+			</li>
+			<li>
+				<a href="#comment-form-load-service:Twitter" id="postas-twitter" title="Twitter">
+					<span></span>
+				</a>
+			</li>
+			<li>
+				<a href="#comment-form-load-service:Facebook" id="postas-facebook" title="Facebook">
+					<span></span>
+				</a>
+			</li>
+		</ul>
+	</div>
+
+	<div id="comment-form-guest" class="comment-form-service selected">
+		<div class="comment-form-padder">
+			<div class="comment-form-avatar">
+<a href="https://gravatar.com/site/signup/" target="_blank">				<img src="Is%20MongoDB%20a%20good%20alternative%20to%20RDBMs%20databases%20%28like%20Oracle%20and%20Mysql%29%20%20%C2%AB%20iPROFS%20Technology%20Blog_files/ad516503a11cd5ca435acc9bb6523536.htm" alt="Gravatar" class="no-grav" width="25">
+</a>			</div>
+
+				<div class="comment-form-fields">
+				<div class="comment-form-field comment-form-email">
+					<label for="email">Email <span class="required">(required)</span> <span class="nopublish">(Address never made public)</span></label>
+					<div class="comment-form-input"><input id="email" name="email" type="email"></div>
+				</div>
+				<div class="comment-form-field comment-form-author">
+					<label for="author">Name <span class="required">(required)</span></label>
+					<div class="comment-form-input"><input id="author" name="author" type="text"></div>
+				</div>
+				<div class="comment-form-field comment-form-url">
+					<label for="url">Website</label>
+					<div class="comment-form-input"><input id="url" name="url" type="text"></div>
+				</div> 
+			</div>
+	
+		</div>
+	</div>
+
+	<div id="comment-form-wordpress" class="comment-form-service">
+		<div class="comment-form-padder">
+			<div class="comment-form-avatar">
+				<img src="Is%20MongoDB%20a%20good%20alternative%20to%20RDBMs%20databases%20%28like%20Oracle%20and%20Mysql%29%20%20%C2%AB%20iPROFS%20Technology%20Blog_files/wplogo.png" alt="WordPress.com Logo" class="no-grav" width="25">
+			</div>
+
+				<div class="comment-form-fields">
+				<input name="wp_avatar" id="wordpress-avatar" class="comment-meta-wordpress" value="" type="hidden">
+				<input name="wp_user_id" id="wordpress-user_id" class="comment-meta-wordpress" value="" type="hidden">
+				<input name="wp_access_token" id="wordpress-access_token" class="comment-meta-wordpress" value="" type="hidden">
+				<p class="comment-form-posting-as pa-wordpress"><strong></strong> You are commenting using your WordPress.com account. <span class="comment-form-log-out">(&nbsp;<a href="javascript:HighlanderComments.doExternalLogout(%20'wordpress'%20);">Log&nbsp;Out</a>&nbsp;/&nbsp;<a href="#" onclick="javascript:HighlanderComments.switchAccount();return false;">Change</a>&nbsp;)</span></p>
+			</div>
+	
+		</div>
+	</div>
+
+	<div id="comment-form-twitter" class="comment-form-service">
+		<div class="comment-form-padder">
+			<div class="comment-form-avatar">
+				<img src="Is%20MongoDB%20a%20good%20alternative%20to%20RDBMs%20databases%20%28like%20Oracle%20and%20Mysql%29%20%20%C2%AB%20iPROFS%20Technology%20Blog_files/ad516503a11cd5ca435acc9bb6523536.htm" alt="Twitter picture" class="no-grav" width="25">
+			</div>
+
+				<div class="comment-form-fields">
+				<input name="twitter_avatar" id="twitter-avatar" class="comment-meta-twitter" value="" type="hidden">
+				<input name="twitter_user_id" id="twitter-user_id" class="comment-meta-twitter" value="" type="hidden">
+				<input name="twitter_access_token" id="twitter-access_token" class="comment-meta-twitter" value="" type="hidden">
+				<p class="comment-form-posting-as pa-twitter"><strong></strong> You are commenting using your Twitter account. <span class="comment-form-log-out">(&nbsp;<a href="javascript:HighlanderComments.doExternalLogout(%20'twitter'%20);">Log&nbsp;Out</a>&nbsp;/&nbsp;<a href="#" onclick="javascript:HighlanderComments.switchAccount();return false;">Change</a>&nbsp;)</span></p>
+			</div>
+	
+		</div>
+	</div>
+
+	<div id="comment-form-facebook" class="comment-form-service">
+		<div class="comment-form-padder">
+			<div class="comment-form-avatar">
+				<img src="Is%20MongoDB%20a%20good%20alternative%20to%20RDBMs%20databases%20%28like%20Oracle%20and%20Mysql%29%20%20%C2%AB%20iPROFS%20Technology%20Blog_files/ad516503a11cd5ca435acc9bb6523536.htm" alt="Facebook photo" class="no-grav" width="25">
+			</div>
+
+				<div class="comment-form-fields">
+				<input name="fb_avatar" id="facebook-avatar" class="comment-meta-facebook" value="" type="hidden">
+				<input name="fb_user_id" id="facebook-user_id" class="comment-meta-facebook" value="" type="hidden">
+				<input name="fb_access_token" id="facebook-access_token" class="comment-meta-facebook" value="" type="hidden">
+				<p class="comment-form-posting-as pa-facebook"><strong></strong> You are commenting using your Facebook account. <span class="comment-form-log-out">(&nbsp;<a href="javascript:HighlanderComments.doExternalLogout(%20'facebook'%20);">Log&nbsp;Out</a>&nbsp;/&nbsp;<a href="#" onclick="javascript:HighlanderComments.switchAccount();return false;">Change</a>&nbsp;)</span></p>
+			</div>
+	
+		</div>
+	</div>
+
+
+	<div id="comment-form-load-service" class="comment-form-service">
+		<div class="comment-form-posting-as-cancel"><a href="javascript:HighlanderComments.cancelExternalWindow();">Cancel</a></div>
+		<p>Connecting to %s</p>
+	</div>
+	
+	
+</div>
+
+<script type="text/javascript">
+jQuery(document).ready(function(){
+	var input = document.createElement( 'input' ),
+	    comment = jQuery( '#comment' );
+
+	if ( 'placeholder' in input ) {
+		comment.attr( 'placeholder', jQuery( '.comment-textarea label' ).remove().text() );
+	}
+
+	// Expando Mode: start small, then auto-resize on first click + text length
+	jQuery( '#comment-form-identity' ).hide();
+	jQuery( '#comment-form-subscribe' ).hide();
+	jQuery( '#commentform .form-submit' ).hide();
+
+	comment.css( { 'height':'10px' } ).one( 'focus', function() {
+		var timer = setInterval( HighlanderComments.resizeCallback, 10 )
+		jQuery( this ).animate( { 'height': HighlanderComments.initialHeight } ).delay( 100 ).queue( function(n) { clearInterval( timer ); HighlanderComments.resizeCallback(); n(); } );
+		jQuery( '#comment-form-identity' ).slideDown();
+		jQuery( '#comment-form-subscribe' ).slideDown();
+		jQuery( '#commentform .form-submit' ).slideDown();
+	});
+});
+</script>
+
+<div style="display: none;" id="comment-form-subscribe"> 
+	<p class="comment-subscription-form"><input name="subscribe" id="subscribe" value="subscribe" style="width: auto;" tabindex="6" type="checkbox"> <label class="subscribe-label" id="subscribe-label" for="subscribe" style="display: inline;">Notify me of follow-up comments via email.</label></p></div>
+
+												<p style="display: none;" class="form-submit">
+							<input name="submit" id="comment-submit" value="Post Comment" type="submit">
+							<input name="comment_post_ID" value="1489" id="comment_post_ID" type="hidden">
+<input name="comment_parent" id="comment_parent" value="0" type="hidden">
+						</p>
+						
+<input name="genseq" value="1359961056" type="hidden">
+<p style="display: none;"><input id="akismet_comment_nonce" name="akismet_comment_nonce" value="20afec3b55" type="hidden"></p><script type="text/javascript" src="Is%20MongoDB%20a%20good%20alternative%20to%20RDBMs%20databases%20%28like%20Oracle%20and%20Mysql%29%20%20%C2%AB%20iPROFS%20Technology%20Blog_files/form.js"></script>
+<p style="display: none;"><input id="ak_js" name="ak_js" value="1359961114492" type="hidden"></p>					</form>
+							</div><!-- #respond -->
+			<div style="clear: both"></div>			
+	
+
+	<div id="postnavi">
+		<span class="prev"><a href="http://blog.iprofs.nl/2011/11/28/3-2-1-go-a-countdownlatch-in-practice/" rel="next">3, 2, 1, Go! A CountdownLatch in&nbsp;practice</a></span>
+		<span class="next"><a href="http://blog.iprofs.nl/2011/11/25/java-google-maps-and-the-null-pointer/" rel="prev">Java, Google Maps and the&nbsp;null-pointer</a></span>
+		<div class="fixed"></div>
+	</div>
+
+
+	</div>
+	<!-- main END -->
+
+	
+<!-- sidebar START -->
+<div id="sidebar">
+
+<!-- sidebar north START -->
+<div id="northsidebar" class="sidebar">
+
+	<!-- feeds -->
+	<div class="widget widget_feeds">
+		<div class="content">
+			<div id="subscribe-feeds"><a rel="external nofollow" id="feedrss" title="Subscribe to this blog..." href="http://blog.iprofs.nl/feed/"><abbr title="Really Simple Syndication">RSS</abbr> feed</a><ul style="visibility: hidden; display: block;" id="feed_readers"><li id="google_reader"><a rel="external nofollow" class="reader" title="Subscribe with Google" href="http://fusion.google.com/add?feedurl=http://blog.iprofs.nl/feed/"><span>Google</span></a></li><li id="youdao_reader"><a rel="external nofollow" class="reader" title="Subscribe with Youdao" href="http://reader.youdao.com/#url=http://blog.iprofs.nl/feed/"><span>Youdao</span></a></li><li id="xianguo_reader"><a rel="external nofollow" class="reader" title="Subscribe with Xian Guo" href="http://www.xianguo.com/subscribe.php?url=http://blog.iprofs.nl/feed/"><span>Xian Guo</span></a></li><li id="zhuaxia_reader"><a rel="external nofollow" class="reader" title="Subscribe with Zhua Xia" href="http://www.zhuaxia.com/add_channel.php?url=http://blog.iprofs.nl/feed/"><span>Zhua Xia</span></a></li><li id="yahoo_reader"><a rel="external nofollow" class="reader" title="Subscribe with My Yahoo!" href="http://add.my.yahoo.com/rss?url=http://blog.iprofs.nl/feed/"><span>My Yahoo!</span></a></li><li id="newsgator_reader"><a rel="external nofollow" class="reader" title="Subscribe with newsgator" href="http://www.newsgator.com/ngs/subscriber/subfext.aspx?url=http://blog.iprofs.nl/feed/"><span>newsgator</span></a></li><li id="bloglines_reader"><a rel="external nofollow" class="reader" title="Subscribe with Bloglines" href="http://www.bloglines.com/sub/http://blog.iprofs.nl/feed/"><span>Bloglines</span></a></li><li id="inezha_reader"><a rel="external nofollow" class="reader last" title="Subscribe with iNezha" href="http://inezha.com/add?url=http://blog.iprofs.nl/feed/"><span>iNezha</span></a></li></ul></div>
+
+			<!-- twitter -->
+			
+			<div class="fixed"></div>
+		</div>
+	</div>
+
+	<!-- showcase -->
+	
+<div id="text-3" class="widget widget_text"><h3>iPROFS</h3>			<div class="textwidget"><a href="http://www.iprofs.nl/">iPROFS</a> corporate website</div>
+		</div>		<div id="recent-posts-3" class="widget widget_recent_entries">		<h3>Recent Posts</h3>		<ul>
+					<li>
+				<a href="http://blog.iprofs.nl/2013/01/29/hibernate4-schema-generation-ddl-from-annotated-entities/" title="Hibernate4 schema generation (ddl) from annotated&nbsp;entities">Hibernate4 schema generation (ddl) from annotated&nbsp;entities</a>
+						</li>
+					<li>
+				<a href="http://blog.iprofs.nl/2012/12/14/global-day-of-coderetreat-2012-at-iprofs/" title="Global Day of Coderetreat 2012 at&nbsp;iPROFS">Global Day of Coderetreat 2012 at&nbsp;iPROFS</a>
+						</li>
+					<li>
+				<a href="http://blog.iprofs.nl/2012/12/02/code-retreat/" title="Code&nbsp;Retreat">Code&nbsp;Retreat</a>
+						</li>
+					<li>
+				<a href="http://blog.iprofs.nl/2012/11/28/devox-2012-conference-day-3/" title="Devox 2012 – Conference day&nbsp;3">Devox 2012 – Conference day&nbsp;3</a>
+						</li>
+					<li>
+				<a href="http://blog.iprofs.nl/2012/11/28/devoxx-2012-conference-day-2/" title="Devoxx 2012 – Conference day&nbsp;2">Devoxx 2012 – Conference day&nbsp;2</a>
+						</li>
+				</ul>
+		</div>	<div id="recent-comments" class="widget widget_recent_comments">		<h3>Recent Comments</h3>		<table class="recentcommentsavatar" border="0" cellpadding="0" cellspacing="0"><tbody><tr><td title="vaibhav" class="recentcommentsavatartop" style="height:48px; width:48px"><img alt="" src="Is%20MongoDB%20a%20good%20alternative%20to%20RDBMs%20databases%20%28like%20Oracle%20and%20Mysql%29%20%20%C2%AB%20iPROFS%20Technology%20Blog_files/b130701f8363cfbd6f860fa62776759f.htm" class="avatar avatar-48" height="48" width="48"></td><td class="recentcommentstexttop">vaibhav on <a href="http://blog.iprofs.nl/2012/09/06/creating-word-documents-with-docx4j/#comment-921">Creating Word documents with…</a></td></tr><tr><td title="Pavan" class="recentcommentsavatarend" style="height:48px; width:48px"><img alt="" src="Is%20MongoDB%20a%20good%20alternative%20to%20RDBMs%20databases%20%28like%20Oracle%20and%20Mysql%29%20%20%C2%AB%20iPROFS%20Technology%20Blog_files/5af6a4123731ae7fecd73ed7e4d84ba7.htm" class="avatar avatar-48" height="48" width="48"></td><td class="recentcommentstextend">Pavan on <a href="http://blog.iprofs.nl/2012/09/06/creating-word-documents-with-docx4j/#comment-912">Creating Word documents with…</a></td></tr><tr><td title="bhasker" class="recentcommentsavatarend" style="height:48px; width:48px"><img alt="" src="Is%20MongoDB%20a%20good%20alternative%20to%20RDBMs%20databases%20%28like%20Oracle%20and%20Mysql%29%20%20%C2%AB%20iPROFS%20Technology%20Blog_files/fd5b5d89a669ff7c4b82549a2c771d66.htm" class="avatar avatar-48" height="48" width="48"></td><td class="recentcommentstextend">bhasker on <a href="http://blog.iprofs.nl/2012/10/22/adding-images-and-layout-to-your-docx4j-generated-word-documents-part-1/#comment-903">Adding images and layout to yo…</a></td></tr><tr><td title="lvdpal" class="recentcommentsavatarend" style="height:48px; width:48px"><img alt="" src="Is%20MongoDB%20a%20good%20alternative%20to%20RDBMs%20databases%20%28like%20Oracle%20and%20Mysql%29%20%20%C2%AB%20iPROFS%20Technology%20Blog_files/54cdc75590b54d20a4ae3b0b04f55b6b.htm" class="avatar avatar-48" height="48" width="48"></td><td class="recentcommentstextend">lvdpal on <a href="http://blog.iprofs.nl/2012/10/22/adding-images-and-layout-to-your-docx4j-generated-word-documents-part-1/#comment-902">Adding images and layout to yo…</a></td></tr><tr><td title="bhasker" class="recentcommentsavatarend" style="height:48px; width:48px"><img alt="" src="Is%20MongoDB%20a%20good%20alternative%20to%20RDBMs%20databases%20%28like%20Oracle%20and%20Mysql%29%20%20%C2%AB%20iPROFS%20Technology%20Blog_files/fd5b5d89a669ff7c4b82549a2c771d66.htm" class="avatar avatar-48" height="48" width="48"></td><td class="recentcommentstextend">bhasker on <a href="http://blog.iprofs.nl/2012/09/06/creating-word-documents-with-docx4j/#comment-901">Creating Word documents with…</a></td></tr></tbody></table>
+	</div><div id="wp_tag_cloud" class="widget wp_widget_tag_cloud"><h3>Tags</h3><div style="overflow:hidden"><a href="http://blog.iprofs.nl/tag/agile-2/" class="tag-link-35000742" title="7 topics" style="font-size: 22pt;">agile</a>
+<a href="http://blog.iprofs.nl/tag/amazon/" class="tag-link-6602" title="2 topics" style="font-size: 8pt;">amazon</a>
+<a href="http://blog.iprofs.nl/tag/android-2/" class="tag-link-15948407" title="6 topics" style="font-size: 20.333333333333pt;">android</a>
+<a href="http://blog.iprofs.nl/tag/beanstalk/" class="tag-link-1980937" title="2 topics" style="font-size: 8pt;">beanstalk</a>
+<a href="http://blog.iprofs.nl/tag/clean-code/" class="tag-link-5876158" title="2 topics" style="font-size: 8pt;">clean code</a>
+<a href="http://blog.iprofs.nl/tag/cms/" class="tag-link-646" title="2 topics" style="font-size: 8pt;">CMS</a>
+<a href="http://blog.iprofs.nl/tag/concurrency/" class="tag-link-214618" title="3 topics" style="font-size: 12pt;">concurrency</a>
+<a href="http://blog.iprofs.nl/tag/conference/" class="tag-link-33525" title="2 topics" style="font-size: 8pt;">conference</a>
+<a href="http://blog.iprofs.nl/tag/configuration/" class="tag-link-45809" title="2 topics" style="font-size: 8pt;">configuration</a>
+<a href="http://blog.iprofs.nl/tag/craftsmanship/" class="tag-link-157834" title="3 topics" style="font-size: 12pt;">craftsmanship</a>
+<a href="http://blog.iprofs.nl/tag/database/" class="tag-link-475" title="2 topics" style="font-size: 8pt;">database</a>
+<a href="http://blog.iprofs.nl/tag/devoxx/" class="tag-link-13573165" title="2 topics" style="font-size: 8pt;">devoxx</a>
+<a href="http://blog.iprofs.nl/tag/docx/" class="tag-link-1263007" title="3 topics" style="font-size: 12pt;">docx</a>
+<a href="http://blog.iprofs.nl/tag/docx4j/" class="tag-link-29657382" title="3 topics" style="font-size: 12pt;">docx4j</a>
+<a href="http://blog.iprofs.nl/tag/environment/" class="tag-link-184" title="2 topics" style="font-size: 8pt;">environment</a>
+<a href="http://blog.iprofs.nl/tag/google-maps/" class="tag-link-51334" title="2 topics" style="font-size: 8pt;">google maps</a>
+<a href="http://blog.iprofs.nl/tag/gps/" class="tag-link-3169" title="2 topics" style="font-size: 8pt;">gps</a>
+<a href="http://blog.iprofs.nl/tag/hibernate/" class="tag-link-17907" title="3 topics" style="font-size: 12pt;">Hibernate</a>
+<a href="http://blog.iprofs.nl/tag/hippo/" class="tag-link-183524" title="2 topics" style="font-size: 8pt;">hippo</a>
+<a href="http://blog.iprofs.nl/tag/hippo-cms/" class="tag-link-16151911" title="2 topics" style="font-size: 8pt;">Hippo CMS</a>
+<a href="http://blog.iprofs.nl/tag/html5-css3/" class="tag-link-31176206" title="2 topics" style="font-size: 8pt;">html5 css3</a>
+<a href="http://blog.iprofs.nl/tag/java-2/" class="tag-link-2549795" title="6 topics" style="font-size: 20.333333333333pt;">java</a>
+<a href="http://blog.iprofs.nl/tag/jaxb/" class="tag-link-569456" title="2 topics" style="font-size: 8pt;">JAXB</a>
+<a href="http://blog.iprofs.nl/tag/jboss/" class="tag-link-12943" title="4 topics" style="font-size: 15.333333333333pt;">jboss</a>
+<a href="http://blog.iprofs.nl/tag/jdbc/" class="tag-link-12920" title="2 topics" style="font-size: 8pt;">jdbc</a>
+<a href="http://blog.iprofs.nl/tag/jdk/" class="tag-link-321679" title="2 topics" style="font-size: 8pt;">jdk</a>
+<a href="http://blog.iprofs.nl/tag/junit/" class="tag-link-102270" title="3 topics" style="font-size: 12pt;">junit</a>
+<a href="http://blog.iprofs.nl/tag/liferay/" class="tag-link-169661" title="2 topics" style="font-size: 8pt;">liferay</a>
+<a href="http://blog.iprofs.nl/tag/log4j/" class="tag-link-102269" title="2 topics" style="font-size: 8pt;">log4j</a>
+<a href="http://blog.iprofs.nl/tag/logging/" class="tag-link-62087" title="2 topics" style="font-size: 8pt;">logging</a>
+<a href="http://blog.iprofs.nl/tag/maven/" class="tag-link-47862" title="6 topics" style="font-size: 20.333333333333pt;">maven</a>
+<a href="http://blog.iprofs.nl/tag/mockito/" class="tag-link-3992763" title="3 topics" style="font-size: 12pt;">mockito</a>
+<a href="http://blog.iprofs.nl/tag/mongodb/" class="tag-link-21954763" title="2 topics" style="font-size: 8pt;">Mongodb</a>
+<a href="http://blog.iprofs.nl/tag/nosql/" class="tag-link-22319505" title="2 topics" style="font-size: 8pt;">nosql</a>
+<a href="http://blog.iprofs.nl/tag/play/" class="tag-link-3858" title="3 topics" style="font-size: 12pt;">Play</a>
+<a href="http://blog.iprofs.nl/tag/quickstart/" class="tag-link-1431644" title="2 topics" style="font-size: 8pt;">quickstart</a>
+<a href="http://blog.iprofs.nl/tag/scrum-2/" class="tag-link-35076770" title="5 topics" style="font-size: 18pt;">scrum</a>
+<a href="http://blog.iprofs.nl/tag/spring/" class="tag-link-9486" title="6 topics" style="font-size: 20.333333333333pt;">spring</a>
+<a href="http://blog.iprofs.nl/tag/tdd/" class="tag-link-76604" title="5 topics" style="font-size: 18pt;">tdd</a>
+<a href="http://blog.iprofs.nl/tag/test/" class="tag-link-8" title="2 topics" style="font-size: 8pt;">test</a>
+<a href="http://blog.iprofs.nl/tag/testing/" class="tag-link-12" title="7 topics" style="font-size: 22pt;">testing</a>
+<a href="http://blog.iprofs.nl/tag/unittest/" class="tag-link-639723" title="4 topics" style="font-size: 15.333333333333pt;">unittest</a>
+<a href="http://blog.iprofs.nl/tag/unittesting/" class="tag-link-1076313" title="2 topics" style="font-size: 8pt;">unittesting</a>
+<a href="http://blog.iprofs.nl/tag/wicket/" class="tag-link-152581" title="4 topics" style="font-size: 15.333333333333pt;">Wicket</a>
+<a href="http://blog.iprofs.nl/tag/word/" class="tag-link-162" title="3 topics" style="font-size: 12pt;">word</a></div></div><div id="author_grid" class="widget widget_author_grid">	<h3>Authors</h3>	<ul>
+		<li>
+			<a href="http://blog.iprofs.nl/author/rnabuurs/"> <img alt="" src="Is%20MongoDB%20a%20good%20alternative%20to%20RDBMs%20databases%20%28like%20Oracle%20and%20Mysql%29%20%20%C2%AB%20iPROFS%20Technology%20Blog_files/70ca722bfb335b614674f7f0f3e71349.htm" class="avatar avatar-32" height="32" width="32"></a>
+		</li>
+		<li>
+			<a href="http://blog.iprofs.nl/author/mcbeelen/"> <img alt="" src="Is%20MongoDB%20a%20good%20alternative%20to%20RDBMs%20databases%20%28like%20Oracle%20and%20Mysql%29%20%20%C2%AB%20iPROFS%20Technology%20Blog_files/1634a2815d3a7b9aeaa62ed403410c53.htm" class="avatar avatar-32" height="32" width="32"></a>
+		</li>
+		<li>
+			<a href="http://blog.iprofs.nl/author/bbakker/"> <img alt="" src="Is%20MongoDB%20a%20good%20alternative%20to%20RDBMs%20databases%20%28like%20Oracle%20and%20Mysql%29%20%20%C2%AB%20iPROFS%20Technology%20Blog_files/05f19becc7ad97834399ff6e6af8c54b.htm" class="avatar avatar-32" height="32" width="32"></a>
+		</li>
+		<li>
+			<a href="http://blog.iprofs.nl/author/ronaldharing/"> <img alt="" src="Is%20MongoDB%20a%20good%20alternative%20to%20RDBMs%20databases%20%28like%20Oracle%20and%20Mysql%29%20%20%C2%AB%20iPROFS%20Technology%20Blog_files/b0f484d4939b0d337e983df9dad39922.htm" class="avatar avatar-32" height="32" width="32"></a>
+		</li>
+		<li>
+			<a href="http://blog.iprofs.nl/author/geertp/"> <img alt="" src="Is%20MongoDB%20a%20good%20alternative%20to%20RDBMs%20databases%20%28like%20Oracle%20and%20Mysql%29%20%20%C2%AB%20iPROFS%20Technology%20Blog_files/af07cb09600338cc67d4ea33a841ed72.htm" class="avatar avatar-32" height="32" width="32"></a>
+		</li>
+		<li>
+			<a href="http://blog.iprofs.nl/author/leomekenkamp/"> <img alt="" src="Is%20MongoDB%20a%20good%20alternative%20to%20RDBMs%20databases%20%28like%20Oracle%20and%20Mysql%29%20%20%C2%AB%20iPROFS%20Technology%20Blog_files/852bf7a822ae000c6dcd90419e13748d.htm" class="avatar avatar-32" height="32" width="32"></a>
+		</li>
+		<li>
+			<a href="http://blog.iprofs.nl/author/rutgerpuntnet/"> <img alt="" src="Is%20MongoDB%20a%20good%20alternative%20to%20RDBMs%20databases%20%28like%20Oracle%20and%20Mysql%29%20%20%C2%AB%20iPROFS%20Technology%20Blog_files/0a327aebf82d089a143058db536ede21.htm" class="avatar avatar-32" height="32" width="32"></a>
+		</li>
+		<li>
+			<a href="http://blog.iprofs.nl/author/sdudzin/"> <img alt="" src="Is%20MongoDB%20a%20good%20alternative%20to%20RDBMs%20databases%20%28like%20Oracle%20and%20Mysql%29%20%20%C2%AB%20iPROFS%20Technology%20Blog_files/13f5e45514989e026263f609868729e7.htm" class="avatar avatar-32" height="32" width="32"></a>
+		</li>
+		<li>
+			<a href="http://blog.iprofs.nl/author/hhazewinkel/"> <img alt="" src="Is%20MongoDB%20a%20good%20alternative%20to%20RDBMs%20databases%20%28like%20Oracle%20and%20Mysql%29%20%20%C2%AB%20iPROFS%20Technology%20Blog_files/d2e5d50d10a3a382abc103dba89f8010.htm" class="avatar avatar-32" height="32" width="32"></a>
+		</li>
+		<li>
+			<a href="http://blog.iprofs.nl/author/ruudriet/"> <img alt="" src="Is%20MongoDB%20a%20good%20alternative%20to%20RDBMs%20databases%20%28like%20Oracle%20and%20Mysql%29%20%20%C2%AB%20iPROFS%20Technology%20Blog_files/731c91ff7561fca4f806f8ba7b5a8e61.htm" class="avatar avatar-32" height="32" width="32"></a>
+		</li>
+		<li>
+			<a href="http://blog.iprofs.nl/author/jknoops/"> <img alt="" src="Is%20MongoDB%20a%20good%20alternative%20to%20RDBMs%20databases%20%28like%20Oracle%20and%20Mysql%29%20%20%C2%AB%20iPROFS%20Technology%20Blog_files/e61e8ec3023c86e07ff87b2605062362.htm" class="avatar avatar-32" height="32" width="32"></a>
+		</li>
+		<li>
+			<a href="http://blog.iprofs.nl/author/ddukker/"> <img alt="" src="Is%20MongoDB%20a%20good%20alternative%20to%20RDBMs%20databases%20%28like%20Oracle%20and%20Mysql%29%20%20%C2%AB%20iPROFS%20Technology%20Blog_files/3967f00eb4f142cd81560ea46eb4206b.htm" class="avatar avatar-32" height="32" width="32"></a>
+		</li>
+		<li>
+			<a href="http://blog.iprofs.nl/author/gmollema/"> <img alt="" src="Is%20MongoDB%20a%20good%20alternative%20to%20RDBMs%20databases%20%28like%20Oracle%20and%20Mysql%29%20%20%C2%AB%20iPROFS%20Technology%20Blog_files/db555633482addc742f52b1aea9752c1.htm" class="avatar avatar-32" height="32" width="32"></a>
+		</li>
+		<li>
+			<a href="http://blog.iprofs.nl/author/lvdpal/"> <img alt="" src="Is%20MongoDB%20a%20good%20alternative%20to%20RDBMs%20databases%20%28like%20Oracle%20and%20Mysql%29%20%20%C2%AB%20iPROFS%20Technology%20Blog_files/54cdc75590b54d20a4ae3b0b04f55b6b_002.htm" class="avatar avatar-32" height="32" width="32"></a>
+		</li>
+		<li>
+			<a href="http://blog.iprofs.nl/author/avanderark/"> <img alt="" src="Is%20MongoDB%20a%20good%20alternative%20to%20RDBMs%20databases%20%28like%20Oracle%20and%20Mysql%29%20%20%C2%AB%20iPROFS%20Technology%20Blog_files/e1292a0e5d7ed0aa46161723a93c00a9.htm" class="avatar avatar-32" height="32" width="32"></a>
+		</li>
+		<li>
+			<a href="http://blog.iprofs.nl/author/dmgress/"> <img alt="" src="Is%20MongoDB%20a%20good%20alternative%20to%20RDBMs%20databases%20%28like%20Oracle%20and%20Mysql%29%20%20%C2%AB%20iPROFS%20Technology%20Blog_files/fa6e4b7501e15e1c2094900dd41f1a16.htm" class="avatar avatar-32" height="32" width="32"></a>
+		</li>
+		<li>
+			<a href="http://blog.iprofs.nl/author/jsnoeij/"> <img alt="" src="Is%20MongoDB%20a%20good%20alternative%20to%20RDBMs%20databases%20%28like%20Oracle%20and%20Mysql%29%20%20%C2%AB%20iPROFS%20Technology%20Blog_files/674aa99135b12c65a0327c6cdf904df3.htm" class="avatar avatar-32" height="32" width="32"></a>
+		</li>
+		<li>
+			<a href="http://blog.iprofs.nl/author/adben/"> <img alt="" src="Is%20MongoDB%20a%20good%20alternative%20to%20RDBMs%20databases%20%28like%20Oracle%20and%20Mysql%29%20%20%C2%AB%20iPROFS%20Technology%20Blog_files/1cf0d23c16636bc6b415e0731551b202.htm" class="avatar avatar-32" height="32" width="32"></a>
+		</li>
+		<li>
+			<a href="http://blog.iprofs.nl/author/dvanschuppen/"> <img alt="" src="Is%20MongoDB%20a%20good%20alternative%20to%20RDBMs%20databases%20%28like%20Oracle%20and%20Mysql%29%20%20%C2%AB%20iPROFS%20Technology%20Blog_files/988c236a82917c46a4dec37f7a8a8ac6.htm" class="avatar avatar-32" height="32" width="32"></a>
+		</li>
+	</ul>
+</div><div id="twitter-3" class="widget widget_twitter"><h3><a href="http://twitter.com/iprofs">iPROFS Tweets</a></h3><ul class="tweets">
+			<li>
+				Our <a href="http://twitter.com/search?q=%23Scrum">#Scrum</a> workshop @<a href="http://twitter.com/Portbase">Portbase</a> this month went great! The first 20 RT's will receive a deck of <a href="http://twitter.com/search?q=%23iPROFS">#iPROFS</a>... <a href="http://fb.me/2cke3WTHK"> fb.me/2cke3WTHK</a> 				<a href="http://twitter.com/iprofs/statuses/297283913011822592" class="timesince">2&nbsp;days&nbsp;ago</a>
+			</li>
+
+			
+			<li>
+				Tomorrow we welcome @<a href="http://twitter.com/joanneboerstoel">joanneboerstoel</a> as our new <a href="http://twitter.com/search?q=%23ScrumMaster">#ScrumMaster</a>. We are looking foward to it! 				<a href="http://twitter.com/iprofs/statuses/296956655604752384" class="timesince">3&nbsp;days&nbsp;ago</a>
+			</li>
+
+			
+			<li>
+				Hibernate4 schema generation (ddl) from annotated entities <a href="http://wp.me/pTAkp-G2"> wp.me/pTAkp-G2</a> 				<a href="http://twitter.com/iprofs/statuses/296291133854715905" class="timesince">5&nbsp;days&nbsp;ago</a>
+			</li>
+
+			
+			<li>
+				@<a href="http://twitter.com/marjanstraathof">marjanstraathof</a> @<a href="http://twitter.com/PaulvanTamTam">PaulvanTamTam</a> @<a href="http://twitter.com/adjankodde">adjankodde</a> Gefeliciteerd met jullie vermelding in <a href="http://twitter.com/search?q=%23Emerce100">#Emerce100</a> 				<a href="http://twitter.com/iprofs/statuses/294810974991568898" class="timesince">1&nbsp;week&nbsp;ago</a>
+			</li>
+
+			
+			<li>
+				<a href="http://twitter.com/search?q=%23iPROFS">#iPROFS</a> in <a href="http://twitter.com/search?q=%23emerce100">#emerce100</a> again! RT for a free Emerce100 magazine and we'll send one to you! <a href="http://fb.me/16NS3BDri"> fb.me/16NS3BDri</a> 				<a href="http://twitter.com/iprofs/statuses/294789941563641857" class="timesince">1&nbsp;week&nbsp;ago</a>
+			</li>
+
+			</ul></div><div id="linkcat-1356" class="widget widget_links"><h3>Blogroll</h3>
+	<ul class="xoxo blogroll">
+<li><a href="http://www.iprofs.nl/" title="IPROFS Company Website">IPROFS website</a></li>
+<li><a href="http://www.nljug.org/">NLJUG</a></li>
+<li><a href="http://www.infoq.com/">InfoQ</a></li>
+<li><a href="http://www.java.net/">java.net</a></li>
+<li><a href="http://www.youtube.com/user/GoogleTechTalks">Google TechTalks</a></li>
+<li><a href="http://www.parleys.com/">Parleys.com</a></li>
+
+	</ul>
+</div>
+	</div>
+</div>
+<!-- sidebar END -->
+	<div class="fixed"></div>
+</div>
+<!-- content END -->
+
+<!-- footer START -->
+<div id="footer">
+	<a id="gotop" href="#" onclick="MGJS.goTop();return false;">Top</a>
+	<a id="powered" href="http://wordpress.com/">WordPress</a>
+	<div id="themeinfo">
+		<a href="http://wordpress.com/?ref=footer" rel="generator">Blog at WordPress.com</a>. Theme: <a href="http://theme.wordpress.com/credits/blog.iprofs.nl/" title="Learn more about how this site is customized with the Custom Design upgrade">Customized INove</a> by <a href="http://www.neoease.com/" rel="designer">NeoEase</a>.	</div>
+</div>
+<!-- footer END -->
+
+</div>
+<!-- container END -->
+</div>
+<!-- wrap END -->
+
+
+<script type="text/javascript">
+var _qevents = _qevents || [], wpcomQuantcastData = {"qacct":"p-18-mFEk4J448M","labels":",language.en,type.wpcom,posttag.database,posttag.devoxx,posttag.mongodb,posttag.nosql,as"};
+function wpcomQuantcastPixel( labels, options ) {
+	var i, defaults = wpcomQuantcastData, data = { event: 'ajax' };
+
+	labels  = labels  || '';
+	options = options || {};
+
+	if ( typeof labels != 'string' )
+		options = labels;
+
+	for ( i in defaults ) {
+		data[i] = defaults[i];
+	}
+
+	for ( i in options ) {
+		data[i] = options[i];
+	}
+
+	if ( data.labels ) {
+		data.labels += ',' + labels;
+	} else {
+		data.labels = labels;
+	}
+
+	_qevents.push( data );
+};
+(function() {var elem = document.createElement('script');elem.src = (document.location.protocol == "https:" ? "https://secure" : "http://edge") + ".quantserve.com/quant.js";elem.async = true;elem.type = "text/javascript";var scpt = document.getElementsByTagName('script')[0];scpt.parentNode.insertBefore(elem, scpt);  })();
+_qevents.push( wpcomQuantcastData );
+</script>
+<noscript><div style="display: none;"><img src="//pixel.quantserve.com/pixel/p-18-mFEk4J448M.gif?labels=%2Clanguage.en%2Ctype.wpcom%2Cposttag.database%2Cposttag.devoxx%2Cposttag.mongodb%2Cposttag.nosql%2Cas" height="1" width="1" alt="" /></div></noscript>
+
+<script type="text/javascript" src="Is%20MongoDB%20a%20good%20alternative%20to%20RDBMs%20databases%20%28like%20Oracle%20and%20Mysql%29%20%20%C2%AB%20iPROFS%20Technology%20Blog_files/gprofiles.htm"></script>
+<script type="text/javascript">
+/* <![CDATA[ */
+var WPGroHo = {"my_hash":""};
+/* ]]> */
+</script>
+<script type="text/javascript" src="Is%20MongoDB%20a%20good%20alternative%20to%20RDBMs%20databases%20%28like%20Oracle%20and%20Mysql%29%20%20%C2%AB%20iPROFS%20Technology%20Blog_files/wpgroho.js"></script>
+<script>jQuery(document).ready(function($){ Gravatar.profile_cb = function( h, d ) { WPGroHo.syncProfileData( h, d );	}; Gravatar.my_hash = WPGroHo.my_hash; Gravatar.init( 'body', '#wp-admin-bar-my-account' ); });</script>	<div style="display:none">
+	<div class="grofile-hash-map-302db24de03cf31217361bff44b3f168">
+	</div>
+	<div class="grofile-hash-map-b130701f8363cfbd6f860fa62776759f">
+	</div>
+	<div class="grofile-hash-map-5af6a4123731ae7fecd73ed7e4d84ba7">
+	</div>
+	<div class="grofile-hash-map-fd5b5d89a669ff7c4b82549a2c771d66">
+	</div>
+	<div class="grofile-hash-map-54cdc75590b54d20a4ae3b0b04f55b6b">
+	</div>
+	</div>
+<script type="text/javascript">
+/* <![CDATA[ */
+var HighlanderComments = {"loggingInText":"Logging In\u2026","submittingText":"Posting Comment\u2026","postCommentText":"Post Comment","connectingToText":"Connecting to %s","commentingAsText":"%1$s: You are commenting using your %2$s account.","logoutText":"Log Out","loginText":"Log In","connectURL":"http:\/\/iprofs.wordpress.com\/public.api\/connect\/?action=request","logoutURL":"http:\/\/iprofs.wordpress.com\/wp-login.php?action=logout&_wpnonce=44e4bc17fd","homeURL":"http:\/\/blog.iprofs.nl\/","postID":"1489","gravDefault":"identicon","enterACommentError":"Please enter a comment","enterEmailError":"Please enter your email address here","invalidEmailError":"Invalid email address","enterAuthorError":"Please enter your name here","gravatarFromEmail":"This picture will show whenever you leave a comment. Click to customize it.","logInToExternalAccount":"Log in to use details from one of these accounts.","change":"Change","changeAccount":"Change Account","comment_registration":"0","userIsLoggedIn":"","isJetpack":"0"};
+/* ]]> */
+</script>
+<script type="text/javascript" src="Is%20MongoDB%20a%20good%20alternative%20to%20RDBMs%20databases%20%28like%20Oracle%20and%20Mysql%29%20%20%C2%AB%20iPROFS%20Technology%20Blog_files/script.js"></script>
+
+	<div style="bottom: -262px;" id="bit" class="loggedout-follow-normal">
+		<a class="bsub" href="javascript:void(0)"><span id="bsub-text">Follow</span></a>
+		<div id="bitsubscribe">
+
+					<h3><label for="loggedout-follow-field">Follow “iPROFS Technology Blog”</label></h3>
+
+			<form action="https://subscribe.wordpress.com" method="post" accept-charset="utf-8" id="loggedout-follow">
+			<p>Get every new post delivered to your Inbox.</p>
+
+			<p id="loggedout-follow-error" style="display: none;"></p>
+
+						<p class="bit-follow-count">Join 155 other followers</p>
+			<p><input name="email" style="width: 95%; padding: 1px 2px" value="Enter your email address" onfocus='this.value=(this.value=="Enter your email address") ? "" : this.value;' onblur='this.value=(this.value=="") ? "Enter email address" : this.value;' id="loggedout-follow-field" type="email"></p>
+
+			<input name="action" value="subscribe" type="hidden">
+			<input name="blog_id" value="13247689" type="hidden">
+			<input name="source" value="http://blog.iprofs.nl/2011/11/25/is-mongodb-a-good-alternative-to-rdbms-databases-like-oracle-and-mysql/" type="hidden">
+			<input name="sub-type" value="loggedout-follow" type="hidden">
+
+			<input id="_wpnonce" name="_wpnonce" value="8e65ed88aa" type="hidden"><input name="_wp_http_referer" value="/2011/11/25/is-mongodb-a-good-alternative-to-rdbms-databases-like-oracle-and-mysql/" type="hidden">
+			<p id="bsub-subscribe-button"><input value="Sign me up" type="submit"></p>
+			</form>
+					<div id="bsub-credit"><a href="http://wordpress.com/signup/?ref=lof">Powered by WordPress.com</a></div>
+		</div><!-- #bitsubscribe -->
+	</div><!-- #bit -->
+<script type="text/javascript" charset="UTF-8" id="polldaddyRatings"><!--//--><![CDATA[//><!--
+PDRTJS_settings_1849557_post_1489={"id":1849557,"unique_id":"wp-post-1489","title":"Is%20MongoDB%20a%20good%20alternative%20to%20RDBMs%20databases%20%28like%20Oracle%20and%26nbsp%3BMysql%29%3F","permalink":"http:\/\/blog.iprofs.nl\/2011\/11\/25\/is-mongodb-a-good-alternative-to-rdbms-databases-like-oracle-and-mysql\/","item_id":"_post_1489"}; if ( typeof PDRTJS_RATING !== 'undefined' ){if ( typeof PDRTJS_1849557_post_1489 == 'undefined' ){PDRTJS_1849557_post_1489 = new PDRTJS_RATING( PDRTJS_settings_1849557_post_1489 );}}
+//--><!]]></script><script type="text/javascript" charset="UTF-8" src="Is%20MongoDB%20a%20good%20alternative%20to%20RDBMs%20databases%20%28like%20Oracle%20and%20Mysql%29%20%20%C2%AB%20iPROFS%20Technology%20Blog_files/rating.htm"></script>
+	<script type="text/javascript">
+		WPCOM_sharing_counts = {"http:\/\/blog.iprofs.nl\/2011\/11\/25\/is-mongodb-a-good-alternative-to-rdbms-databases-like-oracle-and-mysql\/":1489}	</script>
+<script type="text/javascript" src="Is%20MongoDB%20a%20good%20alternative%20to%20RDBMs%20databases%20%28like%20Oracle%20and%20Mysql%29%20%20%C2%AB%20iPROFS%20Technology%20Blog_files/sharing.js"></script>
+		<script type="text/javascript">
+		jQuery(document).on( 'ready post-load', function(){
+			jQuery( 'a.share-google-plus-1' ).on( 'click', function() {
+				window.open( jQuery(this).attr( 'href' ), 'wpcomgoogle-plus-1', 'menubar=1,resizable=1,width=600,height=600' );
+				return false;
+			});
+		});
+		</script>
+				<script type="text/javascript">
+		jQuery(document).on( 'ready post-load', function(){
+			jQuery( 'a.share-twitter' ).on( 'click', function() {
+				window.open( jQuery(this).attr( 'href' ), 'wpcomtwitter', 'menubar=1,resizable=1,width=600,height=350' );
+				return false;
+			});
+		});
+		</script>
+				<script type="text/javascript">
+		jQuery(document).on( 'ready post-load', function(){
+			jQuery( 'a.share-facebook' ).on( 'click', function() {
+				window.open( jQuery(this).attr( 'href' ), 'wpcomfacebook', 'menubar=1,resizable=1,width=600,height=400' );
+				return false;
+			});
+		});
+		</script>
+			<div id="sharing_email" style="display: none;">
+		<form action="/2011/11/25/is-mongodb-a-good-alternative-to-rdbms-databases-like-oracle-and-mysql/" method="post">
+			<label for="target_email">Send to Email Address</label>
+			<input name="target_email" id="target_email" type="text">
+
+			
+				<label for="source_name">Your Name</label>
+				<input name="source_name" id="source_name" type="text">
+
+				<label for="source_email">Your Email Address</label>
+				<input name="source_email" id="source_email" type="text">
+
+			
+			<div class="recaptcha" id="sharing_recaptcha"></div><input name="recaptcha_public_key" id="recaptcha_public_key" value="6LcYW8MSAAAAADBAuEH9yaPcF7lWh11Iq62ZKtoo" type="hidden">
+			<img style="float: right; display: none" class="loading" src="Is%20MongoDB%20a%20good%20alternative%20to%20RDBMs%20databases%20%28like%20Oracle%20and%20Mysql%29%20%20%C2%AB%20iPROFS%20Technology%20Blog_files/loading.gif" alt="loading" height="16" width="16">
+			<input value="Send Email" class="sharing_send" type="submit">
+			<a href="#cancel" class="sharing_cancel">Cancel</a>
+
+			<div class="errors errors-1" style="display: none;">
+				Post was not sent - check your email addresses!			</div>
+
+			<div class="errors errors-2" style="display: none;">
+				Email check failed, please try again			</div>
+
+			<div class="errors errors-3" style="display: none;">
+				Sorry, your blog cannot share posts by email.			</div>
+		</form>
+	</div>
+		<script type="text/javascript">
+		jQuery(document).on( 'ready post-load', function(){
+			jQuery( 'a.share-linkedin' ).on( 'click', function() {
+				window.open( jQuery(this).attr( 'href' ), 'wpcomlinkedin', 'menubar=1,resizable=1,width=580,height=450' );
+				return false;
+			});
+		});
+		</script>
+		<script type="text/javascript" src="Is%20MongoDB%20a%20good%20alternative%20to%20RDBMs%20databases%20%28like%20Oracle%20and%20Mysql%29%20%20%C2%AB%20iPROFS%20Technology%20Blog_files/widgets.htm"></script>
+<script type="text/javascript" src="Is%20MongoDB%20a%20good%20alternative%20to%20RDBMs%20databases%20%28like%20Oracle%20and%20Mysql%29%20%20%C2%AB%20iPROFS%20Technology%20Blog_files/devicepx.js"></script>
+<script type="text/javascript">
+// <![CDATA[
+(function() {
+try{
+  if ( window.external &&'msIsSiteMode' in window.external) {
+    if (window.external.msIsSiteMode()) {
+      var jl = document.createElement('script');
+      jl.type='text/javascript';
+      jl.async=true;
+      jl.src='/wp-content/plugins/ie-sitemode/custom-jumplist.php';
+      var s = document.getElementsByTagName('script')[0];
+      s.parentNode.insertBefore(jl, s);
+    }
+  }
+}catch(e){}
+})();
+// ]]>
+</script><script src="Is%20MongoDB%20a%20good%20alternative%20to%20RDBMs%20databases%20%28like%20Oracle%20and%20Mysql%29%20%20%C2%AB%20iPROFS%20Technology%20Blog_files/w.js" type="text/javascript"></script>
+<script type="text/javascript">
+st_go({'blog':'13247689','v':'wpcom','tz':'1','user_id':'0','post':'1489','subd':'iprofs'});
+ex_go({'crypt':'UE5XaGUuOTlwaD85flAmcm1mcmZsaDhkV11YdWtpP0NsWnVkPS9sL0ViLndld3AsdkJ1cXFURjg1cGtGSHViTHptdXMsP3N1LFZDckQrSltCTTdEajFNODA9OUZSOERXWk1KLWVmYkdhY1VEP18sQTJGa0Z6Y2wmW0hvW09FP3pIb1p8fHFCXUkvNnFHR2t5Rk4uNHgyLjhIZzItRGR6fGQ9c3V2cz9LcEZPcERwcFJCM0NfWSslLVZjeWFkUy41P1U0ak5jQl1qZSVbJiVDU1YrUT1YMUJSLlkucDBjUGIxYnxfVUhRY3JOMWJGc298VltybkJdVEdkNFpDMj1qTnB4W1hTTlZ3S25PTyZ8OTdqYm5XTTlnVX4='});
+addLoadEvent(function(){linktracker_init('13247689',1489);});
+	</script><img id="wpstats" src="Is%20MongoDB%20a%20good%20alternative%20to%20RDBMs%20databases%20%28like%20Oracle%20and%20Mysql%29%20%20%C2%AB%20iPROFS%20Technology%20Blog_files/g.gif" alt=""><img id="wpstats2" src="Is%20MongoDB%20a%20good%20alternative%20to%20RDBMs%20databases%20%28like%20Oracle%20and%20Mysql%29%20%20%C2%AB%20iPROFS%20Technology%20Blog_files/g_002.gif" alt="" style="display:none">
+<noscript><img src="http://stats.wordpress.com/b.gif?v=noscript" style="height:0px;width:0px;overflow:hidden" alt="" /></noscript>
+
+
+
+</body></html>

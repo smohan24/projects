@@ -1,0 +1,48 @@
+Abstract of MongoDB
+
+ 
+
+. From "hu mongo us" . Document-oriented database, not relational . Schema free . Manages hierarchical collection of BSON (bee-son) documents . Written in C++ . Has an official driver for C# with support from 10gen . Scalable with high-performance (scales horizontally) . Designed to address today's workloads . BASE rather than ACID compliant . Replication . Part of the " NoSQL " class of DBMS . Website with list of all features - http://www.mongodb.org/
+
+Why are these interesting?
+
+. New requirements are arising in environments where we have higher volumes of data with high operation rates, agile development and cloud computing. This reflects the growing interactivity of applications which are becoming more networked and social, driving more requests to the database where high-performance DBMS such as MongoDB become favorable. . Not requiring a schema or migration scripts before you add data makes it fit well with agile development approaches. Each time you complete new features, the schema of your database often needs to change. If the database is large, this can mean a slow process.
+
+ACID
+
+. Relational databases make the ACID promise: - Atomicity - a transaction is all or nothing - Consistency - only valid data is written to the database - Isolation - pretend all transactions are happening serially and the data is correct - Durability - what you write is what you get . The problem is ACID can give you too much, it trips you up when you are trying to scale a system across multiple nodes. . Down time is unacceptable so your system needs to be reliable. Reliability requires multiple nodes to handle machine failures. . To make scalable systems that can handle lots and lots of reads and writes you need many more nodes. . Once you try to scale ACID across many machines you hit problems with network failures and delays. The algorithms don't work in a distributed environment at any acceptable speed.
+
+CAP
+
+. If you can't have all of the ACID guarantees it turns out you can have two of the following three characteristics: - Consistency - your data is correct all the time. What you write is what you read. - Availability - you can read and write and write your data all the time - Partition Tolerance - if one or more nodes fails the system still works and becomes consistent when the system comes on-line. . In distributed systems, network partitioning is inevitable and must be tolerated, so essential CAP means that we cannot have both consistency and 100% availability. 
+
+" If the network is broken, your database won't work. " 
+
+
+
+ RDBMS vs NoSQL Data Flow Architecture
+Recently I had an interesting conversation with someone who is an expert in Oracle Database on the difference between RDBMS and a NoSQL Database. There are a lot of differences, but the data flow is as shown below in those systems.
+
+ 
+In a traditional RDBMS, the data is first written to the database, then to the memory. When the memory reaches a certain threshold, it's written to the Logs. The Log files are used for recovering in case of server crash. In RDBMS before returning a success on an insert/update to the client, the data has to be validated against the predefined schema, indexes created and other things which makes it a bit slow compared to the NoSQL approach discussed below.
+
+In case of a NoSQL database like HBase, the data is first written to the Log (WAL), then to the memory. When the memory reaches a certain threshold, it's written to the Database. Before returning a success for a put call, the data has to be just written to the Log file, there is no need for the data to be written to the Database and validated against the schema.
+
+Log files (first step in NoSQL) are just appended at the end and is much faster than writing to the Database (first step in RDBMS). The NoSQL data flow discussed above gives a higher threshold/rate during data inserts/updates in case of NoSQL Databases when compared to RDBMS.
+
+
+
+http://mongodb.turbolinux.org/tag/report
+
+http://mongodb.turbolinux.org/tutorials/mongodb-seminar-report-pdf-ppt/
+
+http://ebookdatabase.net/m/mongodb-php-pdf
+
+https://www.google.co.in/search?q=google.com&ie=utf-8&oe=utf-8&aq=t&rls=org.mozilla:en-US:official&client=firefox-a&source=hp&channel=np#hl=en&client=firefox-a&hs=dXv&tbo=d&rls=org.mozilla:en-US%3Aofficial&channel=np&sclient=psy-ab&q=mongodb+architecture+ppt&oq=mongodb+architecture+&gs_l=serp.1.0.0l3j0i30.547458.547458.3.550186.1.1.0.0.0.0.246.246.2-1.1.0.les%3B..0.0...1c.1.2.serp.MwfwySRPLmA&pbx=1&bav=on.2,or.r_gc.r_pw.r_qf.&bvm=bv.41867550,d.bmk&fp=728805b6204cca56&biw=1152&bih=725
+
+
+http://www.slideshare.net/tiendung/benefits-of-using-mongodb-reduce-complexity-adapt-to-changes
+
+rdbms vs nosql - Relational Database Vs NoSQL - YouTube
+
+mondodb database - video

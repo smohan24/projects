@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+	body 
+	{
+		background-color:#FFFF99;
+	}
+	.normal 
+	{
+		border:4px solid #000000;
+	}
+	.sel	
+	{
+		border:4px solid #ff0000;
+	}
+</style>
+
+<script type="text/javascript">
+	var lastsel = 0;
+	function SelectImage(id) 
+	{
+	if (lastsel > 0) 
+	{
+		document.getElementById(lastsel).className = "normal";
+	}
+	document.getElementById(id).className = "sel";
+	var srcnam = document.getElementById(id).src;
+	document.getElementById(0).src = srcnam;
+	lastsel = id;
+	}
+	function LoadTrigger()
+	{
+		SelectImage(1);
+	}
+	window.onload = LoadTrigger;
+</script>
+
+</head>
+<body>
+<div align=center>
+</div>
+<table border=0 align=center>
+	<tr><td valign=top>
+	<td width=15> </td>
+	<img id=0 src="" width=400 height=300>
+	</tr>
+<tr>
+<td>	<img id=1 class="normal" src="C:/te folder/cnl/html/3.jpg" width=100 onmousemove="SelectImage(1)"></td>
+<td>	<img id=2 class="normal" src="C:/te folder/cnl/html/1.png" width=120 onmousemove="SelectImage(2)"></td>
+<td>	<img id=3 class="normal" src="C:/te folder/cnl/html/2.png" width=100 onmousemove="SelectImage(3)"></td>
+</tr>
+
+</table>
+
+<br><br><br>
+
+</body>
+</html>

@@ -1,0 +1,670 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head>
+    <title>Data Modeling Considerations for MongoDB Applications — MongoDB Manual</title>
+
+    <link rel="shortcut icon" href="http://media.mongodb.org/favicon.ico">
+    <meta name="robots" content="index">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <link rel="canonical" href="http://docs.mongodb.org/manual/core/data-modeling">
+
+    
+    
+    <link rel="stylesheet" href="Data%20Modeling%20Considerations%20for%20MongoDB%20Applications%20%E2%80%94%20MongoDB%20Manual_files/mongodb-docs.css" type="text/css">
+    <link rel="stylesheet" href="Data%20Modeling%20Considerations%20for%20MongoDB%20Applications%20%E2%80%94%20MongoDB%20Manual_files/pygments.css" type="text/css">
+      
+    <script id="undefined" src="Data%20Modeling%20Considerations%20for%20MongoDB%20Applications%20%E2%80%94%20MongoDB%20Manual_files/inpage_linkid.js" async="" type="text/javascript"></script><script src="Data%20Modeling%20Considerations%20for%20MongoDB%20Applications%20%E2%80%94%20MongoDB%20Manual_files/ga.js" async="" type="text/javascript"></script><script src="Data%20Modeling%20Considerations%20for%20MongoDB%20Applications%20%E2%80%94%20MongoDB%20Manual_files/cse.js" async="" type="text/javascript"></script><script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '2.2.2',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '',
+        HAS_SOURCE:  false
+      };
+    </script>
+    <script type="text/javascript" src="Data%20Modeling%20Considerations%20for%20MongoDB%20Applications%20%E2%80%94%20MongoDB%20Manual_files/jquery.js"></script>
+    <script type="text/javascript" src="Data%20Modeling%20Considerations%20for%20MongoDB%20Applications%20%E2%80%94%20MongoDB%20Manual_files/underscore.js"></script>
+    <script type="text/javascript" src="Data%20Modeling%20Considerations%20for%20MongoDB%20Applications%20%E2%80%94%20MongoDB%20Manual_files/doctools.js"></script>
+      <link rel="search" type="application/opensearchdescription+xml" href="http://docs.mongodb.org/osd.xml" title="MongoDB Help">
+<link rel="author" title="About these documents" href="http://docs.mongodb.org/manual/about/">
+<link rel="top" title="MongoDB Manual" href="http://docs.mongodb.org/manual/">
+<link rel="up" title="Core MongoDB Operations (CRUD)" href="http://docs.mongodb.org/manual/crud/">
+<link rel="next" title="BSON Documents" href="http://docs.mongodb.org/manual/core/document/">
+<link rel="prev" title="Write Operations" href="http://docs.mongodb.org/manual/core/write-operations/">
+<!-- Put the following javascript before the closing </head> tag. -->
+<script>
+  (function() {
+    var cx = '017213726194841070573:WMX6838984';
+    var gcse = document.createElement('script'); gcse.type = 'text/javascript'; gcse.async = true;
+    gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+        '//www.google.com/cse/cse.js?cx=' + cx;
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(gcse, s);
+  })();
+</script>
+  <script type="text/javascript" src="Data%20Modeling%20Considerations%20for%20MongoDB%20Applications%20%E2%80%94%20MongoDB%20Manual_files/jsapi"></script><link rel="stylesheet" href="Data%20Modeling%20Considerations%20for%20MongoDB%20Applications%20%E2%80%94%20MongoDB%20Manual_files/defaulten.css" type="text/css"><link rel="stylesheet" href="Data%20Modeling%20Considerations%20for%20MongoDB%20Applications%20%E2%80%94%20MongoDB%20Manual_files/default.css" type="text/css"><script src="Data%20Modeling%20Considerations%20for%20MongoDB%20Applications%20%E2%80%94%20MongoDB%20Manual_files/defaulten.js" type="text/javascript"></script><script src="Data%20Modeling%20Considerations%20for%20MongoDB%20Applications%20%E2%80%94%20MongoDB%20Manual_files/search.js" type="text/javascript"></script><style type="text/css">
+.gsc-control-cse {
+font-family: Arial, sans-serif;
+border-color: #FFFFFF;
+background-color: #FFFFFF;
+}
+.gsc-control-cse .gsc-table-result {
+font-family: Arial, sans-serif;
+}
+input.gsc-input, .gsc-input-box, .gsc-input-box-hover, .gsc-input-box-focus {
+border-color: #D9D9D9;
+}
+input.gsc-search-button, input.gsc-search-button:hover, input.gsc-search-button:focus {
+border-color: #5AAC41;
+background-color: #5AAC41;
+background-image: none;
+filter: none;
+}
+.gsc-tabHeader.gsc-tabhInactive {
+border-color: #CCCCCC;
+background-color: #FFFFFF;
+}
+.gsc-tabHeader.gsc-tabhActive {
+border-color: #CCCCCC;
+border-bottom-color: #FFFFFF;
+background-color: #FFFFFF;
+}
+.gsc-tabsArea {
+border-color: #CCCCCC;
+}
+.gsc-webResult.gsc-result,
+.gsc-results .gsc-imageResult {
+border-color: #FFFFFF;
+background-color: #FFFFFF;
+}
+.gsc-webResult.gsc-result:hover,
+.gsc-imageResult:hover {
+border-color: #FFFFFF;
+background-color: #FFFFFF;
+}
+.gs-webResult.gs-result a.gs-title:link,
+.gs-webResult.gs-result a.gs-title:link b,
+.gs-imageResult a.gs-title:link,
+.gs-imageResult a.gs-title:link b {
+color: #1155CC;
+}
+.gs-webResult.gs-result a.gs-title:visited,
+.gs-webResult.gs-result a.gs-title:visited b,
+.gs-imageResult a.gs-title:visited,
+.gs-imageResult a.gs-title:visited b {
+color: #1155CC;
+}
+.gs-webResult.gs-result a.gs-title:hover,
+.gs-webResult.gs-result a.gs-title:hover b,
+.gs-imageResult a.gs-title:hover,
+.gs-imageResult a.gs-title:hover b {
+color: #1155CC;
+}
+.gs-webResult.gs-result a.gs-title:active,
+.gs-webResult.gs-result a.gs-title:active b,
+.gs-imageResult a.gs-title:active,
+.gs-imageResult a.gs-title:active b {
+color: #1155CC;
+}
+.gsc-cursor-page {
+color: #1155CC;
+}
+a.gsc-trailing-more-results:link {
+color: #1155CC;
+}
+.gs-webResult .gs-snippet,
+.gs-imageResult .gs-snippet,
+.gs-fileFormatType {
+color: #333333;
+}
+.gs-webResult div.gs-visibleUrl,
+.gs-imageResult div.gs-visibleUrl {
+color: #009933;
+}
+.gs-webResult div.gs-visibleUrl-short {
+color: #009933;
+}
+.gs-webResult div.gs-visibleUrl-short {
+display: none;
+}
+.gs-webResult div.gs-visibleUrl-long {
+display: block;
+}
+.gs-promotion div.gs-visibleUrl-short {
+display: none;
+}
+.gs-promotion div.gs-visibleUrl-long {
+display: block;
+}
+.gsc-cursor-box {
+border-color: #FFFFFF;
+}
+.gsc-results .gsc-cursor-box .gsc-cursor-page {
+border-color: #CCCCCC;
+background-color: #FFFFFF;
+color: #1155CC;
+}
+.gsc-results .gsc-cursor-box .gsc-cursor-current-page {
+border-color: #CCCCCC;
+background-color: #FFFFFF;
+color: #1155CC;
+}
+.gsc-webResult.gsc-result.gsc-promotion {
+border-color: #F6F6F6;
+background-color: #F6F6F6;
+}
+.gsc-completion-title {
+color: #1155CC;
+}
+.gsc-completion-snippet {
+color: #333333;
+}
+.gs-promotion a.gs-title:link,
+.gs-promotion a.gs-title:link *,
+.gs-promotion .gs-snippet a:link {
+color: #1155CC;
+}
+.gs-promotion a.gs-title:visited,
+.gs-promotion a.gs-title:visited *,
+.gs-promotion .gs-snippet a:visited {
+color: #1155CC;
+}
+.gs-promotion a.gs-title:hover,
+.gs-promotion a.gs-title:hover *,
+.gs-promotion .gs-snippet a:hover {
+color: #1155CC;
+}
+.gs-promotion a.gs-title:active,
+.gs-promotion a.gs-title:active *,
+.gs-promotion .gs-snippet a:active {
+color: #1155CC;
+}
+.gs-promotion .gs-snippet,
+.gs-promotion .gs-title .gs-promotion-title-right,
+.gs-promotion .gs-title .gs-promotion-title-right * {
+color: #333333;
+}
+.gs-promotion .gs-visibleUrl,
+.gs-promotion .gs-visibleUrl-short {
+color: #009933;
+}
+.gsc-input input.gsc-input {
+background: none repeat scroll 0% 0% white !important;
+}
+</style><style type="text/css">.gsfe_a{border:1px solid #b9b9b9;border-top-color:#a0a0a0;box-shadow:inset 0px 1px 2px rgba(0,0,0,0.1);-moz-box-shadow:inset 0px 1px 2px rgba(0,0,0,0.1);-webkit-box-shadow:inset 0px 1px 2px rgba(0,0,0,0.1);}.gsfe_b{border:1px solid #4d90fe;outline:none;box-shadow:inset 0px 1px 2px rgba(0,0,0,0.3);-moz-box-shadow:inset 0px 1px 2px rgba(0,0,0,0.3);-webkit-box-shadow:inset 0px 1px 2px rgba(0,0,0,0.3);}.gssb_c{border:0;position:absolute;z-index:989}.gssb_e{border:1px solid #ccc;border-top-color:#d9d9d9;box-shadow:0 2px 4px rgba(0,0,0,0.2);-moz-box-shadow:0 2px 4px rgba(0,0,0,0.2);cursor:default}.gssb_f{visibility:hidden;white-space:nowrap}.gssb_k{border:0;display:block;position:absolute;top:0;z-index:988}.gsdd_a{border:none!important}.gsib_a{width:100%;padding:4px 6px 0}.gsib_a,.gsib_b{vertical-align:top}.gssb_a{padding:0 7px}.gssb_a,.gssb_a td{white-space:nowrap;overflow:hidden;line-height:22px}#gssb_b{font-size:11px;color:#36c;text-decoration:none}#gssb_b:hover{font-size:11px;color:#36c;text-decoration:underline}.gssb_g{text-align:center;padding:8px 0 7px;position:relative}.gssb_h{font-size:15px;height:28px;margin:0.2em}.gssb_i{background:#eee}.gss_ifl{visibility:hidden;padding-left:5px}.gssb_i .gss_ifl{visibility:visible}a.gssb_j{font-size:13px;color:#36c;text-decoration:none;line-height:100%}a.gssb_j:hover{text-decoration:underline}.gssb_l{height:1px;background-color:#e5e5e5}.gssb_m{color:#000;background:#fff}.gscsep_a{display:none}.gsq_a{padding:0}.gscb_a{display:inline-block;font:27px/13px arial,sans-serif}.gsst_a .gscb_a{color:#a1b9ed;cursor:pointer}.gsst_a:hover .gscb_a,.gsst_a:focus .gscb_a{color:#36c}.gsst_a{display:inline-block}.gsst_a{cursor:pointer;padding:0 4px}.gsst_a:hover{text-decoration:none!important}.gsst_b{font-size:16px;padding:0 2px;user-select:none;-moz-user-select:none;white-space:nowrap}.gsst_e{opacity:0.55;}.gsst_a:hover .gsst_e,.gsst_a:focus .gsst_e{opacity:0.72;}.gsst_a:active .gsst_e{opacity:1;}.gsst_f{background:white;text-align:left}.gsst_g{background-color:white;border:1px solid #ccc;border-top-color:#d9d9d9;box-shadow:0 2px 4px rgba(0,0,0,0.2);-moz-box-shadow:0 2px 4px rgba(0,0,0,0.2);margin:-1px -3px;padding:0 6px}.gsst_h{background-color:white;height:1px;margin-bottom:-1px;position:relative;top:-1px}.gssb_a{padding:0 9px}.gsib_a{padding-right:8px;padding-left:8px}.gsst_a{padding-top:3px}.gssb_e{border:0}.gssb_l{margin:5px 0}.gssb_c .gsc-completion-container{position:static}.gssb_c{z-index:5000}.gsc-completion-container table{background:transparent;font-size:inherit;font-family:inherit}.gssb_c > tbody > tr,.gssb_c > tbody > tr > td,.gssb_d,.gssb_d > tbody > tr,.gssb_d > tbody > tr > td,.gssb_e,.gssb_e > tbody > tr,.gssb_e > tbody > tr > td{padding:0;margin:0;border:0}.gssb_a table,.gssb_a table tr,.gssb_a table tr td{padding:0;margin:0;border:0}</style><style type="text/css">.atlwdg-blanket {background:#000;height:100%;left:0;opacity:.5;position:fixed;top:0;width:100%;z-index:1000000;}
+.atlwdg-popup {background:#fff;border:1px solid #666;position:fixed;top:50%;left:50%;z-index:10000011;}
+.atlwdg-popup.atlwdg-box-shadow {-moz-box-shadow:10px 10px 20px rgba(0,0,0,0.5);-webkit-box-shadow:10px 10px 20px rgba(0,0,0,0.5);box-shadow:10px 10px 20px rgba(0,0,0,0.5);background-color:#fff;}
+.atlwdg-hidden {display:none;}
+.atlwdg-trigger {position: fixed; background: #013466; padding: 5px;border: 2px solid white;border-top: none; font-weight: bold; color: white; display:block;white-space:nowrap;text-decoration:none; font-family:arial, FreeSans, Helvetica, sans-serif;font-size:12px;box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5);-webkit-box-shadow:5px 5px 10px rgba(0, 0, 0, 0.5); -moz-box-shadow:5px 5px 10px rgba(0, 0, 0, 0.5);border-radius: 0 0 5px 5px; -moz-border-radius: 0 0 5px 5px;}
+a.atlwdg-trigger {text-decoration:none;}
+.atlwdg-trigger.atlwdg-TOP {left: 45%;top:0; }
+.atlwdg-trigger.atlwdg-RIGHT {left:100%; top:40%; -webkit-transform-origin:top left; -webkit-transform: rotate(90deg); -moz-transform: rotate(90deg); -moz-transform-origin:top left;-ms-transform: rotate(90deg); -ms-transform-origin:top left; }
+.atlwdg-trigger.atlwdg-SUBTLE { right:0; bottom:0; border: 1px solid #ccc; border-bottom: none; border-right: none; background-color: #f5f5f5; color: #444; font-size: 11px; padding: 6px; box-shadow: -1px -1px 2px rgba(0, 0, 0, 0.5); border-radius: 2px 0 0 0; }
+.atlwdg-loading {position:absolute;top:220px;left:295px;}</style></head>
+  <body>
+<div id="top-right">
+        <div class="user-right">
+                <ul id="header-menu-bar" class="ajs-menu-bar">
+                <li class="normal"><a target="_blank" href="http://groups.google.com/group/mongodb-user">Forums</a></li>
+                <li class="normal"><a target="_blank" href="http://blog.mongodb.org/">Blog</a></li>
+                <li class="normal"><a href="http://www.mongodb.org/downloads">Download</a></li>
+                <li class="normal"><a href="http://docs.mongodb.org/ecosystem/drivers/">Drivers</a></li>
+                <li class="normal"><a href="http://www.10gen.com/events">Events</a></li>
+                <li class="normal last"><a class="last" href="http://docs.mongodb.org/manual/meta/translation">Translations</a></li>
+                </ul>
+        </div>
+</div>
+<div id="header-db" class="spread">
+        <div class="split">
+                <div id="logo">
+                        <div><a href="http://docs.mongodb.org/manual/"><img class="logo" src="Data%20Modeling%20Considerations%20for%20MongoDB%20Applications%20%E2%80%94%20MongoDB%20Manual_files/logo-mongodb.png" alt="MongoDB Logo"></a></div>
+                </div>
+        </div>
+
+<div class="search-db"><div dir="ltr" id="___gcse_0"><form accept-charset="utf-8" class="gsc-search-box gsc-search-box-tools"><table class="gsc-search-box" cellpadding="0" cellspacing="0"><tbody><tr><td class="gsc-input"><div id="gsc-iw-id1" class="gsc-input-box"><table class="gstl_0 " id="gs_id0" style="width: 100%; padding: 0px;" cellpadding="0" cellspacing="0"><tbody><tr><td class="gsib_a" id="gs_tti0"><input spellcheck="false" dir="ltr" id="gsc-i-id1" style="width: 100%; padding: 0px; border: medium none; margin: 0px; height: auto; outline: medium none;" title="search" name="search" class="gsc-input" size="10" autocomplete="off" type="text"></td><td class="gsib_b"><div dir="ltr" id="gs_st0" class="gsst_b"><a style="display: none;" href="javascript:void(0)" class="gsst_a"><span id="gs_cb0" class="gscb_a">×</span></a></div></td></tr></tbody></table></div></td><td class="gsc-search-button"><input title="search" class="gsc-search-button gsc-search-button-v2" src="Data%20Modeling%20Considerations%20for%20MongoDB%20Applications%20%E2%80%94%20MongoDB%20Manual_files/search_box_icon.png" type="image"></td><td class="gsc-clear-button"><div title="clear results" class="gsc-clear-button">&nbsp;</div></td></tr></tbody></table><table class="gsc-branding" cellpadding="0" cellspacing="0"><tbody><tr style="display: none;"><td class="gsc-branding-user-defined"></td><td class="gsc-branding-text"><div class="gsc-branding-text">powered by</div></td><td class="gsc-branding-img"><img class="gsc-branding-img" src="Data%20Modeling%20Considerations%20for%20MongoDB%20Applications%20%E2%80%94%20MongoDB%20Manual_files/small-logo.png"></td></tr></tbody></table></form></div></div>
+<div id="etp">
+<ul>
+<li><a href="https://github.com/mongodb/docs/blob/master/source/core/data-modeling.txt" target="_blank" title="Edit core/data-modeling.txt on github">Edit this Page</a></li>
+<li><a href="http://github.com/mongodb/docs" target="_blank" title="Fork the documentation on GitHub and contribute.">GitHub</a></li>
+<li><a href="https://jira.mongodb.org/secure/CreateIssueDetails%21init.jspa?pid=10380&amp;issuetype=4&amp;priority=4&amp;summary=Comment+on%3a+%22core/data-modeling%2Etxt%22" target="_blank" title="Report a problem with core/data-modeling.txt on Jira">Report a problem</a></li>
+</ul>
+</div>
+</div>  
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            <div id="cse-results"><div id="___gcse_1"><div class="gsc-control-cse gsc-control-cse-en"><div dir="ltr" class="gsc-control-wrapper-cse"><div class="gsc-results-wrapper-nooverlay"><div class="gsc-tabsAreaInvisible"><div class="gsc-tabHeader gsc-inline-block gsc-tabhActive">Custom Search</div><span class="gs-spacer"> </span></div><div class="gsc-tabsAreaInvisible"></div><div class="gsc-above-wrapper-area-invisible"><table class="gsc-above-wrapper-area-container" cellpadding="0" cellspacing="0"><tbody><tr><td class="gsc-result-info-container"><div class="gsc-result-info-invisible"></div></td></tr></tbody></table></div><div class="gsc-adBlockInvisible"></div><div class="gsc-wrapper"><div class="gsc-adBlockInvisible"></div><div class="gsc-resultsbox-invisible"><div class="gsc-resultsRoot gsc-tabData gsc-tabdActive"><table class="gsc-resultsHeader" cellpadding="0" cellspacing="0"><tbody><tr><td class="gsc-twiddleRegionCell"><div class="gsc-twiddle"><div class="gsc-title">Web</div></div><div class="gsc-stats"></div><div class="gsc-results-selector gsc-all-results-active"><div title="show one result" class="gsc-result-selector gsc-one-result">&nbsp;</div><div title="show more results" class="gsc-result-selector gsc-more-results">&nbsp;</div><div title="show all results" class="gsc-result-selector gsc-all-results">&nbsp;</div></div></td><td class="gsc-configLabelCell"></td></tr></tbody></table><div><div class="gsc-expansionArea"></div></div></div></div></div></div></div></div></div></div>
+            
+  <div class="section" id="data-modeling-considerations-for-mongodb-applications">
+<h1>Data Modeling Considerations for MongoDB Applications<a class="headerlink" href="#data-modeling-considerations-for-mongodb-applications" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
+<p>Data in MongoDB has a <em>flexible schema</em>. <a class="reference internal" href="http://docs.mongodb.org/manual/reference/glossary/#term-collection"><em class="xref std std-term">Collections</em></a> do not enforce <a class="reference internal" href="http://docs.mongodb.org/manual/reference/glossary/#term-document"><em class="xref std std-term">document</em></a> structure. This means
+that:</p>
+<ul class="simple">
+<li>documents in the same collection do not need to have the same set of
+fields or structure, and</li>
+<li>common fields in a collection’s documents may hold different types
+of data.</li>
+</ul>
+<p>Each document only needs to contain relevant fields to the entity or
+object that the document represents. In practice, <em>most</em> documents in a
+collection share a similar structure. Schema flexibility means that
+you can model your documents in MongoDB so that they can closely
+resemble and reflect application-level objects.</p>
+<p>As in all data modeling, when developing data models (i.e. <em>schema
+designs,</em>) for MongoDB you must consider the inherent properties and
+requirements of the application objects and the relationships between
+application objects. MongoDB data models must also reflect:</p>
+<ul class="simple">
+<li>how data will grow and change over time, and</li>
+<li>the kinds of queries your application will perform.</li>
+</ul>
+<p>These considerations and requirements force developers to make a
+number of multi-factored decisions when modeling data, including:</p>
+<ul>
+<li><p class="first">normalization and de-normalization.</p>
+<p>These decisions reflect degree to which the data model should store
+related pieces of data in a single document <strong>or</strong> should the data
+model describe relationships using <a class="reference internal" href="http://docs.mongodb.org/manual/applications/database-references/"><em>references</em></a> between documents.</p>
+</li>
+<li><p class="first"><a class="reference internal" href="http://docs.mongodb.org/manual/applications/indexes/"><em>indexing strategy</em></a>.</p>
+</li>
+<li><p class="first">representation of data in arrays in <a class="reference internal" href="http://docs.mongodb.org/manual/reference/glossary/#term-bson"><em class="xref std std-term">BSON</em></a>.</p>
+</li>
+</ul>
+<p>Although a number of data models may be functionally equivalent for a
+given application; however, different data models may have significant
+impacts on MongoDB and applications performance.</p>
+<p>This document provides a high level overview of these data modeling
+decisions and factors. In addition, consider, the
+<a class="reference internal" href="#data-modeling-examples"><em>Data Modeling Patterns and Examples</em></a> section which provides more concrete
+examples of all the discussed patterns.</p>
+</div>
+<div class="section" id="data-modeling-decisions">
+<span id="id1"></span><h2>Data Modeling Decisions<a class="headerlink" href="#data-modeling-decisions" title="Permalink to this headline">¶</a></h2>
+<p>Data modeling decisions involve determining how to structure the
+documents to model the data effectively. The primary decision is
+whether to <a class="reference internal" href="#data-modeling-embedding"><em>embed</em></a> or to <a class="reference internal" href="#data-modeling-referencing"><em>use
+references</em></a>.</p>
+<div class="section" id="embedding">
+<span id="data-modeling-embedding"></span><h3>Embedding<a class="headerlink" href="#embedding" title="Permalink to this headline">¶</a></h3>
+<p>To de-normalize data, store two related pieces of data in a single
+<a class="reference internal" href="http://docs.mongodb.org/manual/reference/glossary/#term-document"><em class="xref std std-term">document</em></a>.</p>
+<p>Operations within a document are less expensive for the server than
+operations that involve multiple documents.</p>
+<p>In general, use embedded data models when:</p>
+<ul class="simple">
+<li>you have “contains” relationships between entities. See
+<a class="reference internal" href="http://docs.mongodb.org/manual/tutorial/model-embedded-one-to-one-relationships-between-documents/#data-modeling-example-one-to-one"><em>Model Embedded One-to-One Relationships Between Documents</em></a>.</li>
+<li>you have one-to-many relationships where the “many” objects always
+appear with or are viewed in the context of their parent documents.
+See <a class="reference internal" href="http://docs.mongodb.org/manual/tutorial/model-embedded-one-to-many-relationships-between-documents/#data-modeling-example-one-to-many"><em>Model Embedded One-to-Many Relationships Between Documents</em></a>.</li>
+</ul>
+<p>Embedding provides the following benefits:</p>
+<ul class="simple">
+<li>generally better performance for read operations.</li>
+<li>the ability to request and retrieve related data in a single
+database operation.</li>
+</ul>
+<p>Embedding related data in documents, can lead to situations where
+documents grow after creation. Document growth can impact write
+performance and lead to data fragmentation. Furthermore, documents in
+MongoDB must be smaller than the <a class="reference internal" href="http://docs.mongodb.org/manual/reference/limits/#BSON%20Document%20Size" title="BSON Document Size"><tt class="xref mongodb mongodb-limit docutils literal"><span class="pre">maximum</span> <span class="pre">BSON</span> <span class="pre">document</span> <span class="pre">size</span></tt></a>. For larger documents, consider using
+<a class="reference internal" href="http://docs.mongodb.org/manual/applications/gridfs/"><em>GridFS</em></a>.</p>
+<p>For examples in accessing embedded documents, see
+<a class="reference internal" href="http://docs.mongodb.org/manual/core/read-operations/#read-operations-subdocuments"><em>Subdocuments</em></a>.</p>
+<div class="admonition-see-also admonition seealso">
+<p class="first admonition-title">See also</p>
+<ul class="last simple">
+<li><a class="reference internal" href="http://docs.mongodb.org/manual/reference/glossary/#term-dot-notation"><em class="xref std std-term">dot notation</em></a> for information on “reaching into” embedded
+sub-documents.</li>
+<li><a class="reference internal" href="http://docs.mongodb.org/manual/core/read-operations/#read-operations-arrays"><em>Arrays</em></a> for more examples on accessing arrays</li>
+<li><a class="reference internal" href="http://docs.mongodb.org/manual/core/read-operations/#read-operations-subdocuments"><em>Subdocuments</em></a> for more examples on accessing
+subdocuments</li>
+</ul>
+</div>
+</div>
+<div class="section" id="referencing">
+<span id="data-modeling-referencing"></span><h3>Referencing<a class="headerlink" href="#referencing" title="Permalink to this headline">¶</a></h3>
+<p>To normalize data, store <a class="reference internal" href="http://docs.mongodb.org/manual/applications/database-references/"><em>references</em></a> between two documents to indicate
+a relationship between the data represented in each document.</p>
+<p>In general, use normalized data models:</p>
+<ul class="simple">
+<li>when embedding would result in duplication of data but would not
+provide sufficient read performance advantages to outweigh the
+implications of the duplication.</li>
+<li>to represent more complex many-to-many relationships.</li>
+<li>to model large hierarchical data sets. See <a class="reference internal" href="http://docs.mongodb.org/manual/tutorial/model-tree-structures/#data-modeling-trees"><em>Model Tree Structures in MongoDB</em></a>.</li>
+</ul>
+<p>Referencing provides more flexibility than embedding; however, to
+resolve the references, client-side applications must issue follow-up
+queries. In other words, using references requires more roundtrips to
+the server.</p>
+<p>See <a class="reference internal" href="http://docs.mongodb.org/manual/tutorial/model-referenced-one-to-many-relationships-between-documents/#data-modeling-publisher-and-books"><em>Model Referenced One-to-Many Relationships Between Documents</em></a> for an example of
+referencing.</p>
+</div>
+<div class="section" id="atomicity">
+<span id="data-modeling-atomicity"></span><h3>Atomicity<a class="headerlink" href="#atomicity" title="Permalink to this headline">¶</a></h3>
+<p>MongoDB only provides atomic operations on the level of a single
+document. <a class="footnote-reference" href="#record-atomicity" id="id2">[1]</a> As a result needs for atomic operations influence decisions
+to use embedded or referenced relationships when modeling data for
+MongoDB.</p>
+<p>Embed fields that need to be modified together atomically in the same
+document. See <a class="reference internal" href="http://docs.mongodb.org/manual/tutorial/model-data-for-atomic-operations/#data-modeling-atomic-operation"><em>Model Data for Atomic Operations</em></a> for an example of
+atomic updates within a single document.</p>
+<table class="docutils footnote" frame="void" id="record-atomicity" rules="none">
+<colgroup><col class="label"><col></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id2">[1]</a></td><td>Document-level atomic operations include all
+operations within a single MongoDB document record: operations that
+affect multiple sub-documents within that single record are still
+atomic.</td></tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="section" id="operational-considerations">
+<h2>Operational Considerations<a class="headerlink" href="#operational-considerations" title="Permalink to this headline">¶</a></h2>
+<p>In addition to normalization and normalization concerns, a number of
+other operational factors help shape data modeling decisions in
+MongoDB. These factors include:</p>
+<ul class="simple">
+<li>data lifecycle management,</li>
+<li>number of collections and</li>
+<li>indexing requirements,</li>
+<li>sharding, and</li>
+<li>managing document growth.</li>
+</ul>
+<p>These factors implications for database and application performance
+as well as future maintenance and development costs.</p>
+<div class="section" id="data-lifecycle-management">
+<h3>Data Lifecycle Management<a class="headerlink" href="#data-lifecycle-management" title="Permalink to this headline">¶</a></h3>
+<p>Data modeling decisions should also take data lifecycle management into
+consideration.</p>
+<p>The <a class="reference internal" href="http://docs.mongodb.org/manual/tutorial/expire-data/"><em>Time to Live or TTL feature</em></a> of
+collections expires documents after a period of time. Consider using
+the TTL feature if your application requires some data to persist in
+the database for a limited period of time.</p>
+<p>Additionally, if your application only uses recently inserted
+documents consider <a class="reference internal" href="http://docs.mongodb.org/manual/core/capped-collections/"><em>Capped Collections</em></a>.  Capped
+collections provide <em>first-in-first-out</em> (FIFO) management of inserted
+documents and optimized to support operations that insert and read
+documents based on insertion order.</p>
+</div>
+<div class="section" id="large-number-of-collections">
+<span id="data-model-large-number-of-collections"></span><h3>Large Number of Collections<a class="headerlink" href="#large-number-of-collections" title="Permalink to this headline">¶</a></h3>
+<p>In certain situations, you might choose to store information in several
+collections rather than in a single collection.</p>
+<p>Consider a sample collection <tt class="docutils literal"><span class="pre">logs</span></tt> that stores log documents for
+various environment and applications. The <tt class="docutils literal"><span class="pre">logs</span></tt> collection contains
+documents of the following form:</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="p">{</span> <span class="nx">log</span><span class="o">:</span> <span class="s2">"dev"</span><span class="p">,</span> <span class="nx">ts</span><span class="o">:</span> <span class="p">...,</span> <span class="nx">info</span><span class="o">:</span> <span class="p">...</span> <span class="p">}</span>
+<span class="p">{</span> <span class="nx">log</span><span class="o">:</span> <span class="s2">"debug"</span><span class="p">,</span> <span class="nx">ts</span><span class="o">:</span> <span class="p">...,</span> <span class="nx">info</span><span class="o">:</span> <span class="p">...}</span>
+</pre></div>
+</div>
+<p>If the total number of documents is low you may group documents into
+collection by type. For logs, consider maintaining distinct log
+collections, such as <tt class="docutils literal"><span class="pre">logs.dev</span></tt> and <tt class="docutils literal"><span class="pre">logs.debug</span></tt>. The <tt class="docutils literal"><span class="pre">logs.dev</span></tt>
+collection would contain only the documents related to the dev
+environment.</p>
+<p>Generally, having large number of collections has no significant
+performance penalty and results in very good performance. Distinct
+collections are very important for high-throughput batch processing.</p>
+<p>When using models that have a large number of collections, consider
+the following behaviors:</p>
+<ul class="simple">
+<li>Each collection has a certain minimum overhead of a few kilobytes.</li>
+<li>Each index, including the index on <tt class="docutils literal"><span class="pre">_id</span></tt>, requires at least 8KB of
+data space.</li>
+</ul>
+<p>A single <tt class="docutils literal"><span class="pre">&lt;database&gt;.ns</span></tt> file stores all meta-data for each
+<a class="reference internal" href="http://docs.mongodb.org/manual/reference/glossary/#term-database"><em class="xref std std-term">database</em></a>. Each index and collection has its own entry in the
+namespace file, MongoDB places <a class="reference internal" href="http://docs.mongodb.org/manual/reference/limits/#Size%20of%20Namespace%20File" title="Size of Namespace File"><tt class="xref mongodb mongodb-limit docutils literal"><span class="pre">limits</span> <span class="pre">on</span> <span class="pre">the</span> <span class="pre">size</span> <span class="pre">of</span> <span class="pre">namespace</span>
+<span class="pre">files.</span></tt></a>.</p>
+<p>Because of <a class="reference internal" href="http://docs.mongodb.org/manual/reference/limits/#Number%20of%20Namespaces" title="Number of Namespaces"><tt class="xref mongodb mongodb-limit docutils literal"><span class="pre">limits</span> <span class="pre">on</span> <span class="pre">namespaces</span></tt></a>, you
+may wish to know the current number of namespaces in order to determine
+how many additional namespaces the database can support, as in the
+following example:</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="nx">db</span><span class="p">.</span><span class="nx">system</span><span class="p">.</span><span class="nx">namespaces</span><span class="p">.</span><span class="nx">count</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>The <tt class="docutils literal"><span class="pre">&lt;database&gt;.ns</span></tt> file defaults to 16 MB. To change
+the size of the <tt class="docutils literal"><span class="pre">&lt;database&gt;.ns</span></tt> file, pass a new size to
+<a class="reference internal" href="http://docs.mongodb.org/manual/reference/mongod/#cmdoption-mongod--nssize"><em class="xref std std-option">--nssize option &lt;new size MB&gt;</em></a> on server
+start.</p>
+<p>The <a class="reference internal" href="http://docs.mongodb.org/manual/reference/mongod/#cmdoption-mongod--nssize"><em class="xref std std-option">--nssize</em></a> sets the size for <em>new</em>
+<tt class="docutils literal"><span class="pre">&lt;database&gt;.ns</span></tt> files. For existing databases, after starting up the
+server with <a class="reference internal" href="http://docs.mongodb.org/manual/reference/mongod/#cmdoption-mongod--nssize"><em class="xref std std-option">--nssize</em></a>, run the
+<a class="reference internal" href="http://docs.mongodb.org/manual/reference/method/db.repairDatabase/#db.repairDatabase" title="db.repairDatabase"><tt class="xref mongodb mongodb-dbcommand docutils literal"><span class="pre">db.repairDatabase()</span></tt></a> command from the <a class="reference internal" href="http://docs.mongodb.org/manual/reference/mongo/#mongo" title="mongo"><tt class="xref mongodb mongodb-program docutils literal"><span class="pre">mongo</span></tt></a>
+shell.</p>
+</div>
+<div class="section" id="indexes">
+<h3>Indexes<a class="headerlink" href="#indexes" title="Permalink to this headline">¶</a></h3>
+<p>Create indexes to support common queries. Generally, indexes and index
+use in MongoDB correspond to indexes and index use in relational
+database: build indexes on fields that appear often in queries and for
+all operations that return sorted results. MongoDB automatically
+creates a unique index on the <tt class="docutils literal"><span class="pre">_id</span></tt> field.</p>
+<p>As you create indexes, consider the following behaviors of indexes:</p>
+<ul class="simple">
+<li>Each index requires at least 8KB of data space.</li>
+<li>Adding an index has some negative performance impact for write
+operations. For collections with high write-to-read ratio, indexes
+are expensive as each insert must add keys to each index.</li>
+<li>Collections with high proportion of read operations to write
+operations often benefit from additional indexes. Indexes do not
+affect un-indexed read operations.</li>
+</ul>
+<p>See <a class="reference internal" href="http://docs.mongodb.org/manual/applications/indexes/"><em>Indexing Strategies</em></a> for more information on determining
+indexes. Additionally, the MongoDB <a class="reference internal" href="http://docs.mongodb.org/manual/tutorial/manage-the-database-profiler/"><em>database profiler</em></a> may help identify
+inefficient queries.</p>
+</div>
+<div class="section" id="sharding">
+<h3>Sharding<a class="headerlink" href="#sharding" title="Permalink to this headline">¶</a></h3>
+<p><a class="reference internal" href="http://docs.mongodb.org/manual/reference/glossary/#term-sharding"><em class="xref std std-term">Sharding</em></a> allows users to <a class="reference internal" href="http://docs.mongodb.org/manual/reference/glossary/#term-partition"><em class="xref std std-term">partition</em></a> a
+<a class="reference internal" href="http://docs.mongodb.org/manual/reference/glossary/#term-collection"><em class="xref std std-term">collection</em></a> within a database to distribute the collection’s
+documents across a number of <a class="reference internal" href="http://docs.mongodb.org/manual/reference/mongod/#mongod" title="mongod"><tt class="xref mongodb mongodb-program docutils literal"><span class="pre">mongod</span></tt></a> instances or
+<a class="reference internal" href="http://docs.mongodb.org/manual/reference/glossary/#term-shard"><em class="xref std std-term">shards</em></a>.</p>
+<p>The shard key determines how MongoDB distributes data among shards in
+a sharded collection. Selecting the proper <a class="reference internal" href="http://docs.mongodb.org/manual/core/sharded-clusters/#shard-key"><em>shard key</em></a> has significant implications for performance.</p>
+<p>See <a class="reference internal" href="http://docs.mongodb.org/manual/core/sharded-clusters/"><em>Sharded Cluster Overview</em></a> for more information on sharding and
+the selection of the <a class="reference internal" href="http://docs.mongodb.org/manual/core/sharded-clusters/#shard-key"><em>shard key</em></a>.</p>
+</div>
+<div class="section" id="document-growth">
+<h3>Document Growth<a class="headerlink" href="#document-growth" title="Permalink to this headline">¶</a></h3>
+<p>Certain updates to documents can increase the document size, such as
+pushing elements to an array and adding new fields. If the document
+size exceeds the allocated space for that document, MongoDB relocates
+the document on disk. This internal relocation can be both time and
+resource consuming.</p>
+<p>Although MongoDB automatically provides padding to minimize the
+occurrence of relocations, you may still need to manually handle
+document growth. Refer to <a class="reference internal" href="http://docs.mongodb.org/manual/use-cases/pre-aggregated-reports/"><em>Pre-Aggregated Reports</em></a> for
+an example of the <em>Pre-allocation</em> approach to handle document growth.</p>
+</div>
+</div>
+<div class="section" id="data-modeling-patterns-and-examples">
+<span id="data-modeling-examples"></span><h2>Data Modeling Patterns and Examples<a class="headerlink" href="#data-modeling-patterns-and-examples" title="Permalink to this headline">¶</a></h2>
+<p>The following documents provide overviews of various data modeling
+patterns and common schema design considerations:</p>
+<ul class="simple">
+<li><a class="reference internal" href="http://docs.mongodb.org/manual/tutorial/model-embedded-one-to-one-relationships-between-documents/"><em>Model Embedded One-to-One Relationships Between Documents</em></a></li>
+<li><a class="reference internal" href="http://docs.mongodb.org/manual/tutorial/model-embedded-one-to-many-relationships-between-documents/"><em>Model Embedded One-to-Many Relationships Between Documents</em></a></li>
+<li><a class="reference internal" href="http://docs.mongodb.org/manual/tutorial/model-referenced-one-to-many-relationships-between-documents/"><em>Model Referenced One-to-Many Relationships Between Documents</em></a></li>
+<li><a class="reference internal" href="http://docs.mongodb.org/manual/tutorial/model-data-for-atomic-operations/"><em>Model Data for Atomic Operations</em></a></li>
+<li><a class="reference internal" href="http://docs.mongodb.org/manual/tutorial/model-tree-structures-with-parent-references/"><em>Model Tree Structures with Parent References</em></a></li>
+<li><a class="reference internal" href="http://docs.mongodb.org/manual/tutorial/model-tree-structures-with-child-references/"><em>Model Tree Structures with Child References</em></a></li>
+<li><a class="reference internal" href="http://docs.mongodb.org/manual/tutorial/model-tree-structures-with-materialized-paths/"><em>Model Tree Structures with Materialized Paths</em></a></li>
+<li><a class="reference internal" href="http://docs.mongodb.org/manual/tutorial/model-tree-structures-with-nested-sets/"><em>Model Tree Structures with Nested Sets</em></a></li>
+</ul>
+<p>For more information and examples of real-world data modeling,
+consider the following external resources:</p>
+<ul class="simple">
+<li><a class="reference external" href="http://www.10gen.com/presentations/mongodb-melbourne-2012/schema-design-example">Schema Design by Example</a></li>
+<li><a class="reference external" href="http://blog.fiesta.cc/post/11319522700/walkthrough-mongodb-data-modeling">Walkthrough MongoDB Data Modeling</a></li>
+<li><a class="reference external" href="http://oreilly.com/catalog/0636920018391">Document Design for MongoDB</a></li>
+<li><a class="reference external" href="http://dmerr.tumblr.com/post/6633338010/schemaless">Dynamic Schema Blog Post</a></li>
+<li><a class="reference external" href="http://www.mongodb.org/display/DOCS/MongoDB%20Data%20Modeling%20and%20Rails">MongoDB Data Modeling and Rails</a></li>
+<li><a class="reference external" href="http://github.com/banker/newsmonger/blob/master/app/models/comment.rb">Ruby Example of Materialized Paths</a></li>
+<li><a class="reference external" href="http://seancribbs.com/tech/2009/09/28/modeling-a-tree-in-a-document-database">Sean Cribs Blog Post</a>
+which was the source for much of the <a class="reference internal" href="http://docs.mongodb.org/manual/tutorial/model-tree-structures/#data-modeling-trees"><em>Model Tree Structures in MongoDB</em></a> content.</li>
+</ul>
+</div>
+</div>
+
+
+<div id="btnv">
+<ul id="btnvl">
+<li id="btnvpr"><a href="http://docs.mongodb.org/manual/core/write-operations/" title="Previous Section: Write Operations">&lt; &nbsp; Write Operations</a></li>
+<li id="btnvup"><a href="http://docs.mongodb.org/manual/crud/" title="Parent Section: Core MongoDB Operations (CRUD)">/\&nbsp; Core MongoDB Operations (CRUD)</a></li>
+<li id="btnvnx"><a href="http://docs.mongodb.org/manual/core/document/" title="Next Section: BSON Documents">BSON Documents &nbsp;&gt;</a></li>
+</ul>
+</div>
+</div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper"><h3><a href="http://docs.mongodb.org/manual/contents/">MongoDB Manual</a>
+
+<small><a href="http://docs.mongodb.org/manual/genindex/">(Index)</a></small>
+
+</h3>
+
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="http://docs.mongodb.org/manual/installation/">Installing MongoDB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://docs.mongodb.org/manual/administration/">Administration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://docs.mongodb.org/manual/security/">Security</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="http://docs.mongodb.org/manual/crud/">Core MongoDB Operations (CRUD)</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="http://docs.mongodb.org/manual/crud/#read-and-write-operations-in-mongodb">Read and Write Operations in MongoDB</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="http://docs.mongodb.org/manual/crud/#document-orientation-concepts">Document Orientation Concepts</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="">Data Modeling Considerations for MongoDB Applications</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#overview">Overview</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#data-modeling-decisions">Data Modeling Decisions</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="#embedding">Embedding</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#referencing">Referencing</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#atomicity">Atomicity</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#operational-considerations">Operational Considerations</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="#data-lifecycle-management">Data Lifecycle Management</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#large-number-of-collections">Large Number of Collections</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#indexes">Indexes</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#sharding">Sharding</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#document-growth">Document Growth</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#data-modeling-patterns-and-examples">Data Modeling Patterns and Examples</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="http://docs.mongodb.org/manual/core/document/">BSON Documents</a></li>
+<li class="toctree-l3"><a class="reference internal" href="http://docs.mongodb.org/manual/core/object-id/">ObjectId</a></li>
+<li class="toctree-l3"><a class="reference internal" href="http://docs.mongodb.org/manual/applications/database-references/">Database References</a></li>
+<li class="toctree-l3"><a class="reference internal" href="http://docs.mongodb.org/manual/applications/gridfs/">GridFS</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="http://docs.mongodb.org/manual/crud/#crud-operations-for-mongodb">CRUD Operations for MongoDB</a></li>
+<li class="toctree-l2"><a class="reference internal" href="http://docs.mongodb.org/manual/crud/#data-modeling-patterns">Data Modeling Patterns</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="http://docs.mongodb.org/manual/aggregation/">Aggregation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://docs.mongodb.org/manual/indexes/">Indexes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://docs.mongodb.org/manual/replication/">Replication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://docs.mongodb.org/manual/sharding/">Sharding</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://docs.mongodb.org/manual/applications/">Application Development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://docs.mongodb.org/manual/mongo/">Using the <tt class="docutils literal"><span class="pre">mongo</span></tt> Shell</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://docs.mongodb.org/manual/use-cases/">Use Cases</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://docs.mongodb.org/manual/tutorial/">MongoDB Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://docs.mongodb.org/manual/faq/">Frequently Asked Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://docs.mongodb.org/manual/reference/">Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://docs.mongodb.org/manual/about/">About MongoDB Documentation</a></li>
+</ul>
+
+<h3 style="padding-bottom: 1em;"><a href="http://www.mongodb.org/about/">MongoDB.org</a></h3>
+<h3 style="padding-bottom: 1em;"><a href="http://docs.mongodb.org/ecosystem/">MongoDB Ecosystem</a></h3><h3>Formats</h3>
+<ul class="this-page-menu">
+  <li><a href="http://docs.mongodb.org/master/single/">MongoDB Manual, Single HTML Page</a></li>
+  <li><a href="http://docs.mongodb.org/master/MongoDB-Manual-master.pdf" rel="nofollow">MongoDB Manual, PDF Format</a></li>
+  <li><a href="http://docs.mongodb.org/master/MongoDB-Manual-master.epub" rel="nofollow">MongoDB Manual, ePub Format</a></li>
+</ul><h3>MongoDB Wiki</h3>
+
+<ul>
+ <li><strong>Getting Started</strong>
+   <ul>
+     <li><a href="http://www.mongodb.org/about/introduction">Introduction</a></li>
+     <li><a href="http://www.mongodb.org/downloads">Downloads</a></li>
+   </ul>
+ </li>
+ <li><strong><a href="http://www.mongodb.org/about/community">Community</a> and <a href="http://docs.mongodb.org/ecosystem/">Ecosystem</a></strong>
+   <ul>
+     <li><a href="http://www.10gen.com/">10gen</a></li>
+     <li><a href="http://www.10gen.com/events">MongoDB Events</a></li>
+     <li><a href="http://planet.mongodb.org/">Planet MongoDB</a></li>
+     <li><a href="http://mongodb.org/about/community/masters">MongoDB Masters</a></li>
+     <li><a href="http://www.10gen.com/presentations">Slides and Video</a></li>
+     <li><a href="http://docs.mongodb.org/ecosystem/platforms/">Hosting Center</a></li>
+     <li><a href="http://docs.mongodb.org/ecosystem/platforms/windows">Windows</a></li>
+     <li><a href="http://www.10gen.com/products/mms/">MongoDB Monitoring Service</a> (<a href="http://mms.10gen.com/help/">docs</a>)</li>
+     <li><a href="http://docs.mongodb.org/ecosystem/tools/administration-interfaces/">Administrative Interfaces</a></li>
+     <li><a href="http://www.10gen.com/books/">MongoDB Books</a></li>
+   </ul>
+ </li>
+ <li><strong><a href="http://docs.mongodb.org/ecosystem/drivers/">Drivers</a></strong>
+   <ul>
+     <li><a href="http://docs.mongodb.org/ecosystem/drivers/javascript">JavaScript</a> (<a href="http://api.mongodb.org/js/current">docs</a>)</li>
+     <li><a href="http://docs.mongodb.org/ecosystem/drivers/python">Python</a> (<a href="http://api.mongodb.org/python/current">docs</a>)</li>
+     <li><a href="http://docs.mongodb.org/ecosystem/drivers/ruby">Ruby</a> (<a href="http://api.mongodb.org/ruby/current">docs</a>)</li>
+     <li><a href="http://docs.mongodb.org/ecosystem/drivers/php">PHP</a> (<a href="http://php.net/mongo/">docs</a>)</li>
+     <li><a href="http://docs.mongodb.org/ecosystem/drivers/perl">Perl</a> (<a href="http://api.mongodb.org/perl/current/">docs</a>)</li>
+     <li><a href="http://docs.mongodb.org/ecosystem/drivers/java">Java</a> (<a href="http://api.mongodb.org/java/current">docs</a>)</li>
+     <li><a href="http://api.mongodb.org/scala/casbah/current/">Scala</a> (<a href="http://api.mongodb.org/scala/casbah/current/">docs</a>)</li>
+<!-- <li><a href="http://docs.mongodb.org/ecosystem/drivers/scala">Scala</a> (<a href="http://api.mongodb.org/scala/casbah/current/">docs</a>)</li> -->
+     <li><a href="http://docs.mongodb.org/ecosystem/drivers/csharp">C#</a> (<a href="http://api.mongodb.org/csharp/current/">docs</a>)</li>
+     <li><a href="http://docs.mongodb.org/ecosystem/drivers/c">C</a> (<a href="http://api.mongodb.org/c/current/">docs</a>)</li>
+     <li><a href="http://docs.mongodb.org/ecosystem/drivers/cpp">C++</a> (<a href="http://api.mongodb.org/cplusplus/current/">docs</a>)</li>
+     <li><a href="http://docs.mongodb.org/ecosystem/drivers/haskell">Haskell</a> (<a href="http://api.mongodb.org/haskell">docs</a>)</li>
+     <li><a href="http://docs.mongodb.org/ecosystem/drivers/erlang">Erlang</a> (<a href="http://api.mongodb.org/erlang">docs</a>)</li>
+   </ul>
+ </li>
+</ul>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+  <div class="footer">
+    <p>
+       © <a href="">Copyright</a> 2011-2013, 10gen, Inc. 
+       MongoDB®, Mongo®, and the leaf logo are registered trademarks of 10gen, Inc.
+    </p>
+  </div><script type="text/javascript">
+var _gaq = _gaq || [];
+var pluginUrl = (('https:' == document.location.protocol) ? 'https://ssl.' : 'http://www.') + 'google-analytics.com/plugins/ga/inpage_linkid.js';
+_gaq.push(['_require', 'inpage_linkid', pluginUrl]);
+_gaq.push(['_setAccount', 'UA-7301842-8']);
+_gaq.push(['_setDomainName', 'docs.mongodb.org']);
+_gaq.push(['_trackPageview']);
+(function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0];
+        s.parentNode.insertBefore(ga, s);
+        })();
+</script>
+
+<script type="text/javascript">
+document.write(unescape("%3Cscript src='" + document.location.protocol + "//munchkin.marketo.net/munchkin.js' type='text/javascript'%3E%3C/script%3E"));
+</script><script src="Data%20Modeling%20Considerations%20for%20MongoDB%20Applications%20%E2%80%94%20MongoDB%20Manual_files/munchkin.htm" type="text/javascript"></script>
+<script>try { mktoMunchkin("017-HGS-593"); } catch(e) {}</script><script type="text/javascript">
+jQuery.ajax({
+    url: "https://jira.mongodb.org/s/en_US-bxctp1/782/6/1.2.4/_/download/batch/com.atlassian.jira.collector.plugin.jira-issue-collector-plugin:issuecollector-embededjs/com.atlassian.jira.collector.plugin.jira-issue-collector-plugin:issuecollector-embededjs.js?collectorId=298ba4e7",
+    type: "get",
+    cache: true,
+    dataType: "script"
+});
+window.ATL_JQ_PAGE_PROPS =  {
+"triggerFunction": function(showCollectorDialog) {
+jQuery("#jirafeedback").click(function(e) {e.preventDefault();showCollectorDialog();});
+jQuery("#jirafooter").click(function(e) {e.preventDefault();showCollectorDialog();});
+}};
+</script>
+
+<table class="gstl_0 gssb_c" style="width: 129px; display: none; top: 70px; left: 879px; position: absolute;" cellpadding="0" cellspacing="0"><tbody><tr><td class="gssb_f"></td><td style="width: 100%;" class="gssb_e"></td></tr></tbody></table><div style="display: none;" id="atlwdg-blanket" class="atlwdg-blanket"></div><div class="atlwdg-popup atlwdg-box-shadow atlwdg-hidden" id="atlwdg-container"></div></body></html>

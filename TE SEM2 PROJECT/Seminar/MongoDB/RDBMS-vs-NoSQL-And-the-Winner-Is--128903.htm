@@ -1,0 +1,974 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xml:lang="en-US" xmlns="http://www.w3.org/1999/xhtml" lang="en-US"><head id="Head"><meta content="text/html; charset=UTF-8" http-equiv="Content-Type"><meta content="text/javascript" http-equiv="Content-Script-Type"><meta content="text/css" http-equiv="Content-Style-Type"><meta id="MetaDescription" name="DESCRIPTION" content="Some companies have successfully implemented NoSQL on a enterprise scale, but does that mean it works better than relational database management systems (RDBMSs) in all cases?"><meta id="MetaCopyright" name="COPYRIGHT" content="Copyright 2011 by Penton Media"><meta id="MetaAuthor" name="AUTHOR" content="SQL Server Pro"><meta name="RESOURCE-TYPE" content="DOCUMENT"><meta name="DISTRIBUTION" content="GLOBAL"><meta id="MetaRobots" name="ROBOTS" content="INDEX, FOLLOW"><meta name="REVISIT-AFTER" content="1 DAYS"><meta name="RATING" content="GENERAL"><meta http-equiv="PAGE-ENTER" content="RevealTrans(Duration=0,Transition=1)"><style id="StylePlaceholder" type="text/css"></style><link href="RDBMS-vs-NoSQL-And-the-Winner-Is--128903_files/DependencyHandler.css" type="text/css" rel="stylesheet"><script async="" src="RDBMS-vs-NoSQL-And-the-Winner-Is--128903_files/cbgapi.loaded_0"></script><script src="RDBMS-vs-NoSQL-And-the-Winner-Is--128903_files/ga.js" async="" type="text/javascript"></script><script src="RDBMS-vs-NoSQL-And-the-Winner-Is--128903_files/DependencyHandler.js" type="text/javascript"></script>
+	<script type="text/javascript" language="javascript" src="RDBMS-vs-NoSQL-And-the-Winner-Is--128903_files/mbox.js"></script><style>.mboxDefault { visibility:hidden; }</style>
+<link rel="SHORTCUT ICON" href="http://www.sqlmag.com/Portals/1/favicon.ico" type="image/x-icon">
+
+          <script type="text/javascript">
+            var _gaq = _gaq || [];
+            _gaq.push(['_setAccount', 'UA-15420463-1']);
+            _gaq.push(['_setDomainName', 'www.sqlmag.com']);
+            _gaq.push(['_setAllowHash', false]);
+            
+
+            _gaq.push(['_trackPageview']);
+
+            (function() {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+            })();
+          </script>
+
+        <link rel="canonical" href="http://www.sqlmag.com/article/sql-server/RDBMS-vs-NoSQL-And-the-Winner-Is--128903"><script>var dartrnum=Math.floor(Math.random() * 100000);</script><title>
+	RDBMS vs. NoSQL: And the Winner Is . . .
+</title></head>
+<body id="Body">
+    <!-- Omniture: SiteCatalyst code -->
+<script type="text/javascript"><!-- 
+var s_account = "pentonsqlmag";
+//--></script>
+<script language="JavaScript" type="text/javascript" src="RDBMS-vs-NoSQL-And-the-Winner-Is--128903_files/demandbase_call.js"></script><script type="text/javascript" src="RDBMS-vs-NoSQL-And-the-Winner-Is--128903_files/ip.htm"></script>
+<script language="JavaScript" type="text/javascript" src="RDBMS-vs-NoSQL-And-the-Winner-Is--128903_files/omniture.js"></script>
+<script language="JavaScript" type="text/javascript"><!--
+s=s_gi(s_account);
+s.prop2 = "sqlmag.com";
+s.prop6 = "articles";
+s.eVar6 = "D=c6";
+s.prop7 = "D=g";
+s.prop8 = "128903";
+s.prop9 = "Brian Moran";
+s.prop10 = "no publishdate";
+s.eVar10 = "D=c10";
+s.prop11 = "Unauthenticated User";
+s.prop12 = "Unauthenticated|Registered Users";
+s.prop13 = "unauthenticated";
+s.prop14 = "SQL Server";
+s.eVar14 = "D=c14";
+s.prop15 = "Database Administration|Database Administrator|Database Developer|SQL Server|Web Administration";
+s.prop16 = "View";
+s.prop20 = "10 28 2010";
+s.eVar20 = "D=c20";
+s.eVar1 = "D=pageName";
+s.eVar2 = "r";
+s.channel = "SQL Server";
+s.pageName = "SQL Server : RDBMS vs. NoSQL: And the Winner Is . . .";
+s.linkInternalFilters="javascript:,sqlmag.com";
+s.trackingServer="metrics.sqlmag.com";
+s.trackingServerSecure="smetrics.sqlmag.com";
+/************* DO NOT ALTER ANYTHING BELOW THIS LINE ! **************/
+var s_code=s.t();if(s_code)document.write(s_code)//--></script>
+<script language="JavaScript" type="text/javascript"><!--
+if(navigator.appVersion.indexOf('MSIE')>=0)document.write(unescape('%3C')+'\!-'+'-')
+//--></script><noscript><a href="http://www.omniture.com" title="Web Analytics"><img src="http://metrics.sqlmag.com/b/ss/pentonsqlmag/1/H.11--NS/0"
+height="1" width="1" border="0" alt="" /></a></noscript>
+<!-- End SiteCatalyst code -->
+
+    <form method="post" action="/Default.aspx?TabId=461&amp;topic=RDBMS-vs-NoSQL-And-the-Winner-Is--128903&amp;catpath=sql-server" id="Form" enctype="multipart/form-data">
+<div class="aspNetHidden">
+<input name="StylesheetManager_TSSM" id="StylesheetManager_TSSM" value="" type="hidden">
+<input name="ScriptManager_TSM" id="ScriptManager_TSM" value=";;System.Web.Extensions, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35:en:387126a6-cbc0-46b4-b6ca-c8de25a0044f:ea597d4b:b25378d2" type="hidden">
+<input name="__EVENTTARGET" id="__EVENTTARGET" value="" type="hidden">
+<input name="__EVENTARGUMENT" id="__EVENTARGUMENT" value="" type="hidden">
+<input name="__VIEWSTATE" id="__VIEWSTATE" value="/wEPDwUKLTk3ODQzNzU0Ng9kFgZmDxYCHgRUZXh0BXk8IURPQ1RZUEUgaHRtbCBQVUJMSUMgIi0vL1czQy8vRFREIFhIVE1MIDEuMCBUcmFuc2l0aW9uYWwvL0VOIiAiaHR0cDovL3d3dy53My5vcmcvVFIveGh0bWwxL0RURC94aHRtbDEtdHJhbnNpdGlvbmFsLmR0ZCI+ZAIBD2QWDgIEDxYCHgdWaXNpYmxlaGQCBQ8WAh4HY29udGVudAWvAVNvbWUgY29tcGFuaWVzIGhhdmUgc3VjY2Vzc2Z1bGx5IGltcGxlbWVudGVkIE5vU1FMIG9uIGEgZW50ZXJwcmlzZSBzY2FsZSwgYnV0IGRvZXMgdGhhdCBtZWFuIGl0IHdvcmtzIGJldHRlciB0aGFuIHJlbGF0aW9uYWwgZGF0YWJhc2UgbWFuYWdlbWVudCBzeXN0ZW1zIChSREJNU3MpIGluIGFsbCBjYXNlcz9kAgYPFgQfAmQfAWhkAgcPFgIfAgUeQ29weXJpZ2h0IDIwMTEgYnkgUGVudG9uIE1lZGlhZAIIDxYEHwJkHwFoZAIJDxYCHwIFDlNRTCBTZXJ2ZXIgUHJvZAIMDxYCHwIFDUlOREVYLCBGT0xMT1dkAgIPZBYCAgMPZBYEZg9kFgJmDw8WAh8BaGQWBgICDxBkZBYBZmQCAw8PFgIfAWhkZAIFD2QWBgIBD2QWAgIBD2QWAmYPZBYCZg9kFg4CCw9kFgICAw8QZGQWAGQCDQ9kFgICAw8QZGQWAGQCEQ9kFgJmDxQrAAJkZBYEZg8PFgQeCENzc0NsYXNzBQlyY2JIZWFkZXIeBF8hU0ICAmRkAgEPDxYEHwMFCXJjYkZvb3Rlch8EAgJkZAIXDxBkZBYAZAIdDxBkZBYAZAIhDxBkZBYAZAIlDxBkZBYAZAIDD2QWBAIXD2QWBgIHDxBkZBYAZAILDxBkZBYAZAINDxBkZBYAZAIbD2QWBgIHDxBkZBYAZAIJDxBkZBYAZAINDxQrAAJkZBYEZg8PFgQfAwUJcmNiSGVhZGVyHwQCAmRkAgEPDxYEHwMFCXJjYkZvb3Rlch8EAgJkZAIFDw8WAh8BaGQWBAINDw8WAh8BaGRkAhEPZBYCZg8QZGQWAGQCCA9kFgJmD2QWGmYPZBYCZg8PFgQfAAUIUmVnaXN0ZXIeC05hdmlnYXRlVXJsBXVodHRwOi8vd3d3LnNxbG1hZy5jb20vcmVnaXN0cmF0aW9uP3JldHVybnVybD0lMjUyZmFydGljbGUlMjUyZnNxbC1zZXJ2ZXIlMjUyZnJkYm1zLXZzLW5vc3FsLWFuZC10aGUtd2lubmVyLWlzLS0xMjg5MDNkZAIBD2QWBGYPDxYIHwMFCmFjdGlvbl9idG4fAAUHU2lnbiBpbh8FBWhodHRwOi8vd3d3LnNxbG1hZy5jb20vbG9nb24/cmV0dXJudXJsPSUyZmFydGljbGUlMmZzcWwtc2VydmVyJTJmcmRibXMtdnMtbm9zcWwtYW5kLXRoZS13aW5uZXItaXMtLTEyODkwMx8EAgJkZAICDw8WBh8DBQphY3Rpb25fYnRuHwQCAh8BaGRkAgQPZBYCZg8WAh4FY2xhc3MFNERubk1vZHVsZSBEbm5Nb2R1bGUtUFVfRG91YmxlQ2xpY2tBZHMgRG5uTW9kdWxlLTQ1NzkWAgIBD2QWAgICDxYCHwYFDEROTkFsaWdubGVmdBYCAgEPD2QWAh8GBSVETk5Nb2R1bGVDb250ZW50IE1vZFBVRG91YmxlQ2xpY2tBZHNDZAIFD2QWAmYPFgIfBgUsRG5uTW9kdWxlIERubk1vZHVsZS1ETk5fSFRNTCBEbm5Nb2R1bGUtMjMxODUWAgIBD2QWAgICD2QWAgIBDw9kFgIfBgUcRE5OTW9kdWxlQ29udGVudCBNb2RETk5IVE1MQ2QCBg8WAh8GBRxUb3BDb250ZW50Q2xhc3MgRE5ORW1wdHlQYW5lZAIHD2QWBGYPFgIfBgU8RG5uTW9kdWxlIERubk1vZHVsZS1QZW50b25Nb2pvLUNvbnRlbnRWaWV3ZXIgRG5uTW9kdWxlLTE3MjI2FgICAQ9kFgICAg9kFgICAg8PZBYCHwYFLEROTk1vZHVsZUNvbnRlbnQgTW9kUGVudG9uTW9qb0NvbnRlbnRWaWV3ZXJDZAIBDxYCHwYFPERubk1vZHVsZSBEbm5Nb2R1bGUtUGVudG9uTW9qby1Db250ZW50Vmlld2VyIERubk1vZHVsZS0xNzIyNxYCAgEPZBYCAgIPZBYCAgEPD2QWAh8GBSxETk5Nb2R1bGVDb250ZW50IE1vZFBlbnRvbk1vam9Db250ZW50Vmlld2VyQxYCAgEPZBYEAgMPDxYCHwFoZBYEZg8UKwADZGRkZAIFDxQrAANkFgIeC0N1cnJlbnRHdWlkBSQ2YzQyMDlkMS00YzBlLTQ2M2UtOTFiMi0wNjNiN2M2ODdjZjgUKwADZGRkZAIFD2QWAgIBDxYEHgRocmVmBVovQ29udGVudDEvY3RsL2xvZ2luP3JldHVybnVybD0vYXJ0aWNsZS9zcWwtc2VydmVyL1JEQk1TLXZzLU5vU1FMLUFuZC10aGUtV2lubmVyLUlzLS0xMjg5MDMeB29uY2xpY2sFoAFyZXR1cm4gZG5uTW9kYWwuc2hvdygnL0NvbnRlbnQxL2N0bC9sb2dpbj9yZXR1cm51cmw9L2FydGljbGUvc3FsLXNlcnZlci9SREJNUy12cy1Ob1NRTC1BbmQtdGhlLVdpbm5lci1Jcy0tMTI4OTAzJnBvcFVwPXRydWUnLC8qc2hvd1JldHVybiovdHJ1ZSwzMDAsNjUwLHRydWUsJycpZAIID2QWCGYPFgIfBgUsRG5uTW9kdWxlIERubk1vZHVsZS1ETk5fSFRNTCBEbm5Nb2R1bGUtMjM4MjIWAgIBD2QWAgICD2QWAgIBDw9kFgIfBgUcRE5OTW9kdWxlQ29udGVudCBNb2RETk5IVE1MQ2QCAQ8WAh8GBTREbm5Nb2R1bGUgRG5uTW9kdWxlLVBVX0RvdWJsZUNsaWNrQWRzIERubk1vZHVsZS01MjI1FgICAQ9kFgICAg8WAh8GBQ5ETk5BbGlnbmNlbnRlchYCAgEPD2QWAh8GBSVETk5Nb2R1bGVDb250ZW50IE1vZFBVRG91YmxlQ2xpY2tBZHNDZAICDxYCHwYFM0Rubk1vZHVsZSBEbm5Nb2R1bGUtUFVfRm9ydW1TdW1tYXJ5IERubk1vZHVsZS0yMzIzNxYCAgEPZBYCAgIPZBYCAgEPD2QWAh8GBSNETk5Nb2R1bGVDb250ZW50IE1vZFBVRm9ydW1TdW1tYXJ5QxYCAgEPZBYCZg8WAh8ABbsGPHVsPjxsaT48YSBocmVmPSJodHRwOi8vd3d3LnNxbG1hZy5jb20vZm9ydW1zL2FmdC85ODgwMiI+QWJvdXQgU1FMPC9hPjxiciAvPkhlbGxvIGFsbCxJIGFtIG5ldyBhbmQgSSB3b3VsZCBsaWtlIHRvIGFzayB0aGF0IHdoYXQgYXJlIHRoZSBiZW5lZml0cyBvZiBzcWwgdHJhaW5pbmcsIHdoYXQgYWxsIHRvcGkuLi48L2xpPjxsaT48YSBocmVmPSJodHRwOi8vd3d3LnNxbG1hZy5jb20vZm9ydW1zL2FmdC85ODc5OCI+RGV0ZXJtaW5lIGlmIGxvZyBiYWNrdXAgcmVxdWlyZWQ8L2E+PGJyIC8+SSBoYXZlIGJhY2t1cHMgb24gYSBGVUxMIHJlY292ZXJ5IG1vZGVsIGRhdGFiYXNlIHJ1bm5pbmcgZGFpbHkgKGZ1bGwpIGFuZCBldmVyeSAxNSBtaW51dGVzIChsb2cpLiBJcy4uLjwvbGk+PGxpPjxhIGhyZWY9Imh0dHA6Ly93d3cuc3FsbWFnLmNvbS9mb3J1bXMvYWZ0Lzk4Nzg5Ij5BbmRyb2lkIFBob3RvIFJlY292ZXJ5LS1Ib3cgVG8gSW5mb3JtYXRpb248L2E+PGJyIC8+IOKAnCBBbnkgd2F5IHRvIHBlcmZvcm0gIGFuZHJvaWQgcGhvbmUgcmVjb3ZlcnkgID8gSSBoYWQgYSBwaG90byBvZiBtZSBhbmQgbXkgZnJpZW5kLCBub3cgaGUgaXMgaW4gYW5vLi4uPC9saT48bGk+PGEgaHJlZj0iaHR0cDovL3d3dy5zcWxtYWcuY29tL2ZvcnVtcy9hZnQvOTg3ODIiPlRyaWNrIHRvIFJlY292ZXIgRGF0YSBmcm9tIEZsYXNoIERyaXZlIGluIE1pbnV0ZXM8L2E+PGJyIC8+SSBoYXZlIGEgNEcgZmxhc2ggZHJpdmUgdGhhdCBJIGhhdmUgYmFja2VkIHVwIHNvbWUgZGF0YSBvbiBpdCBhYm91dCA0IHdlZWtzIGFnby4gU29tZSBkYXlzIGFnbyBJIGRlbC4uLjwvbGk+PC91bD5kAgMPFgIfBgU0RG5uTW9kdWxlIERubk1vZHVsZS1QVV9Eb3VibGVDbGlja0FkcyBEbm5Nb2R1bGUtNjM3NhYCAgEPZBYCAgIPZBYCAgEPD2QWAh8GBSVETk5Nb2R1bGVDb250ZW50IE1vZFBVRG91YmxlQ2xpY2tBZHNDZAIJD2QWAmYPFgIfBgU0RG5uTW9kdWxlIERubk1vZHVsZS1QVV9Eb3VibGVDbGlja0FkcyBEbm5Nb2R1bGUtNjM3OBYCAgEPZBYCAgIPFgIfBgUORE5OQWxpZ25jZW50ZXIWAgIBDw9kFgIfBgUlRE5OTW9kdWxlQ29udGVudCBNb2RQVURvdWJsZUNsaWNrQWRzQ2QCCg8WAh8GBRFib3gxIEROTkVtcHR5UGFuZWQCCw8WAh8GBRFib3gyIEROTkVtcHR5UGFuZWQCDA8WAh8GBRFib3gzIEROTkVtcHR5UGFuZWQCDQ8WAh8GBSFzdWItZm9vdGVyLXBhbmUgcGFuZSBETk5FbXB0eVBhbmVkAg8PDxYCHglVc2VyUm9sZXMFFFVuYXV0aGVudGljYXRlZCBVc2VyZGQYBAUeX19Db250cm9sc1JlcXVpcmVQb3N0QmFja0tleV9fFgEFLGRubiRjdHIxNzIyNiRDb250ZW50VmlldyRidG5FbWFpbEFGcmllbmRTZW5kBRpSaWJib25CYXIkRWRpdFBhZ2UkU2tpbkxzdA8UKwACZWVkBRZSaWJib25CYXIkQWRkTW9kJGN0bDAyDxQrAAJlZWQFH2RubiRjdHIxNzIyNyRDb21tZW50JHJhZENhcHRjaGEPFCsAAgUkNmM0MjA5ZDEtNGMwZS00NjNlLTkxYjItMDYzYjdjNjg3Y2Y4BgAAAAAAAAAAZOWjTsMiIkCoIPAUz5BlmAZfk6NC" type="hidden">
+</div>
+
+<script type="text/javascript">
+//<![CDATA[
+var theForm = document.forms['Form'];
+if (!theForm) {
+    theForm = document.Form;
+}
+function __doPostBack(eventTarget, eventArgument) {
+    if (!theForm.onsubmit || (theForm.onsubmit() != false)) {
+        theForm.__EVENTTARGET.value = eventTarget;
+        theForm.__EVENTARGUMENT.value = eventArgument;
+        theForm.submit();
+    }
+}
+//]]>
+</script>
+
+
+<script src="RDBMS-vs-NoSQL-And-the-Winner-Is--128903_files/WebResource.js" type="text/javascript"></script>
+
+<script type="text/javascript" src="RDBMS-vs-NoSQL-And-the-Winner-Is--128903_files/StandardMenu.js"></script>
+<script src="RDBMS-vs-NoSQL-And-the-Winner-Is--128903_files/Telerik.js" type="text/javascript"></script>
+<div class="aspNetHidden">
+
+	<input name="__EVENTVALIDATION" id="__EVENTVALIDATION" value="/wEWBwKC6vDRCQLCutGWBgL/yqv2CQLc5o7VCwKur9i4AQL+5PGyAgLR9YnYDmP0UPGNLQpXN5Fw0upy3TDzc/ux" type="hidden">
+</div><script type="text/javascript">
+//<![CDATA[
+Sys.WebForms.PageRequestManager._initialize('ScriptManager', 'Form', [], [], [], 90, '');
+//]]>
+</script>
+
+        <script src="RDBMS-vs-NoSQL-And-the-Winner-Is--128903_files/DependencyHandler_002.js" type="text/javascript"></script>
+        
+        
+
+<script type="text/javascript" language="javascript" src="RDBMS-vs-NoSQL-And-the-Winner-Is--128903_files/skin.js"></script>
+<script>
+ $(document).ready(function() {
+$(".item:contains('subscribe') > a").attr('href', '/subscribe/tabid/444/List/1/CategoryID/249/Level/a/Default.aspx?code=WP211XHB ');
+ });
+</script> 
+<div class="page-wrapper">
+  <div class="header">
+    <div class="top-bar">
+      <ul>
+        <li class="first"><a href="http://www.sqlmag.com/"><span class="active">SQL Server Mag</span> </a></li>
+      </ul>
+    </div>
+    <div class="logo-area">
+      <div class="logo-padding">
+        <div class="logo">
+          <span><a href="http://www.sqlmag.com/">SQL Server Magazine</a></span>
+          <p>The Smart Guide to Building World-Class Applications</p>
+        </div>
+
+<ul class="utility-nav">
+<li class="firstUtility"><a href="http://www.sqlmag.com/subscribe/tabid/444/List/1/CategoryID/249/Level/a/Default.aspx?code=WP211XHA"><img src="RDBMS-vs-NoSQL-And-the-Winner-Is--128903_files/subscribebutton.gif" alt="subscribe" title="subscribe" border="0" height="20" width="153"></a></li>
+<li><a href="http://www.sqlmag.com/rss.aspx"><img src="RDBMS-vs-NoSQL-And-the-Winner-Is--128903_files/rss.gif" alt="" title="subscribe to the RSS feed"></a></li>
+<li><a href="http://twitter.com/SQLServerMag" target="_blank"><img src="RDBMS-vs-NoSQL-And-the-Winner-Is--128903_files/twit.gif" alt="" title="follow us on Twitter"></a></li>
+<li><a href="http://www.facebook.com/home.php#/pages/SQL-Server-Magazine/45327783518?ref=ts" target="_blank"><img src="RDBMS-vs-NoSQL-And-the-Winner-Is--128903_files/fb.gif" alt="" title="follow us on Facebook"></a></li>
+<li class="last"><a href="http://www.linkedin.com/groups?home=&amp;gid=4362291&amp;trk=anet_ug_hm" target="_blank"><img src="RDBMS-vs-NoSQL-And-the-Winner-Is--128903_files/linkedin.gif" alt="" title="follow us on LinkedIn"></a></li>
+</ul>
+
+        <ul class="login-box">
+          <li class="firstUtility"><a href="http://www.sqlmag.com/aboutus/whyjoin.aspx">Why Join</a>&nbsp;&nbsp;|</li>
+          <li><a href="http://www.sqlmag.com/myaccount.aspx">My Account</a>&nbsp;&nbsp;|</li>
+          <li class="last"><a id="dnn_dnnuser_registerLink" class="SkinObject" href="http://www.sqlmag.com/registration?returnurl=%252farticle%252fsql-server%252frdbms-vs-nosql-and-the-winner-is--128903">Register</a>&nbsp;&nbsp;|</li>
+          <li class="firstUtility"><a id="dnn_dnnlogin_loginLink" class="action_btn" href="http://www.sqlmag.com/logon?returnurl=%2farticle%2fsql-server%2frdbms-vs-nosql-and-the-winner-is--128903">Sign in</a>
+</li>
+        </ul>
+
+        <div class="search-box"> 
+         <div class="search">
+          <table border="0" cellpadding="0" cellspacing="0">
+	<tbody><tr>
+		<td nowrap="nowrap">
+		    <span id="dnn_xsOpenSearch_lblSearch"></span>
+			<input name="txtSolrSearchQuery" maxlength="200" id="txtSolrSearchQuery" class="xsTxtSearch" value="Search" onblur="if(this.value=='') this.value=this.defaultValue;" onfocus="if(this.value==this.defaultValue) {this.value='';}" onkeypress="return searchSkinKeyDown(event);" type="text">
+<!--		    <select name="selectSite" id="selectSite">
+	<option selected="selected" value="Electronic Design">Electronic Design</option>
+
+	<option value="Electronic Design Europe">Electronic Design Europe</option>
+
+</select>-->
+                    <a id="dnn_xsOpenSearch_lnkGo" class="action_btn" href="javascript:searchBoxSearch()">Search</a>
+		</td>
+	</tr>
+</tbody></table>
+
+<script type="text/javascript">
+	function searchBoxSearch()
+	{
+		var url = "/home/search.aspx";       
+		window.location = url+"?query=" + document.forms[0].txtSolrSearchQuery.value;
+	}
+	
+	function searchSkinKeyDown(e) {
+        if (e.keyCode == 13)  
+	{	
+	        searchBoxSearch();
+		return false;
+	}
+	else if(e.which == 13)
+	{
+	        searchBoxSearch();
+	}
+	return true;
+    }
+</script>
+          </div>
+          <div class="doc-id browseByNav">            
+			Browse By: <a href="http://www.sqlmag.com/authors.aspx">Author</a> | <a href="http://www.sqlmag.com/issues.aspx">Issue</a>
+          </div>
+        </div>
+      </div><!-- logo-area -->
+    </div>
+    </div>
+    <div class="top-nav">
+            <div class="nav-bar"><!-- DDRmenu v02.00.01 - DNNStandard template --><div id="dnnMenu">
+    <ul class="topLevel">
+	    
+	<li class="item first haschild">
+		
+			<a href="http://www.sqlmag.com/"><div>home</div></a>
+		
+            <div class="subLevel">
+			    <ul>
+				    
+	<li class="item first last">
+		
+			<a href="http://www.sqlmag.com/home/search"><div><img src="RDBMS-vs-NoSQL-And-the-Winner-Is--128903_files/StandardLI.png"><span>search</span></div></a>
+		
+	</li>
+
+			    </ul>
+            </div>
+		
+	</li>
+
+	<li class="item haschild">
+		
+			<a><div>Topics</div></a>
+		
+            <div class="subLevel">
+			    <ul>
+				    
+	<li class="item first">
+		
+			<a href="http://www.sqlmag.com/topics/business-intelligence"><div><img src="RDBMS-vs-NoSQL-And-the-Winner-Is--128903_files/StandardLI.png"><span>Business Intelligence</span></div></a>
+		
+	</li>
+
+	<li class="item haschild">
+		
+			<a href="http://www.sqlmag.com/topics/database-administration"><div><img src="RDBMS-vs-NoSQL-And-the-Winner-Is--128903_files/StandardLI.png"><span>Database Administration</span></div></a>
+		
+            <div class="subLevelRight">
+			    <ul>
+				    
+	<li class="item first last">
+		
+			<a href="http://www.sqlmag.com/topics/database-administration/kevin-kline-thoughts-from-a-sql-server-old-timer"><div><img src="RDBMS-vs-NoSQL-And-the-Winner-Is--128903_files/StandardLI.png"><span>Kevin Kline: Thoughts from a SQL Server Old Timer</span></div></a>
+		
+	</li>
+
+			    </ul>
+            </div>
+		
+	</li>
+
+	<li class="item">
+		
+			<a href="http://www.sqlmag.com/topics/database-development"><div><img src="RDBMS-vs-NoSQL-And-the-Winner-Is--128903_files/StandardLI.png"><span>Database Development</span></div></a>
+		
+	</li>
+
+	<li class="item last">
+		
+			<a href="http://www.sqlmag.com/topics/t-sql-powershell-scripting"><div><img src="RDBMS-vs-NoSQL-And-the-Winner-Is--128903_files/StandardLI.png"><span>T-SQL &amp; PowerShell Scripting</span></div></a>
+		
+	</li>
+
+			    </ul>
+            </div>
+		
+	</li>
+
+	<li class="item">
+		
+			<a href="http://www.sqlmag.com/news"><div>news</div></a>
+		
+	</li>
+
+	<li class="item haschild">
+		
+			<a href="http://www.sqlmag.com/blogs"><div>blogs</div></a>
+		
+            <div class="subLevel">
+			    <ul>
+				    
+	<li class="item first">
+		
+			<a href="http://www.sqlmag.com/blogcontent/seriespath/leap-think-54"><div><img src="RDBMS-vs-NoSQL-And-the-Winner-Is--128903_files/StandardLI.png"><span>L.E.A.P Think</span></div></a>
+		
+	</li>
+
+	<li class="item">
+		
+			<a href="http://www.sqlmag.com/blogcontent/seriespath/practical-sql-server-45"><div><img src="RDBMS-vs-NoSQL-And-the-Winner-Is--128903_files/StandardLI.png"><span>Practical SQL Server</span></div></a>
+		
+	</li>
+
+	<li class="item">
+		
+			<a href="http://www.sqlmag.com/blogcontent/seriespath/puzzled-by-t-sql-blog-15"><div><img src="RDBMS-vs-NoSQL-And-the-Winner-Is--128903_files/StandardLI.png"><span>Puzzled by T-SQL</span></div></a>
+		
+	</li>
+
+	<li class="item">
+		
+			<a href="http://www.sqlmag.com/blogcontent/seriespath/sql-select-blog-22"><div><img src="RDBMS-vs-NoSQL-And-the-Winner-Is--128903_files/StandardLI.png"><span>SQL Select</span></div></a>
+		
+	</li>
+
+	<li class="item">
+		
+			<a href="http://www.sqlmag.com/blogcontent/seriespath/sql-server-bi-blog-17"><div><img src="RDBMS-vs-NoSQL-And-the-Winner-Is--128903_files/StandardLI.png"><span>SQL Server BI</span></div></a>
+		
+	</li>
+
+	<li class="item">
+		
+			<a href="http://www.sqlmag.com/blogcontent/seriespath/sql-server-questions-answered-28"><div><img src="RDBMS-vs-NoSQL-And-the-Winner-Is--128903_files/StandardLI.png"><span>SQL Server Questions Answered</span></div></a>
+		
+	</li>
+
+	<li class="item">
+		
+			<a href="http://www.sqlmag.com/blogcontent/seriespath/tool-time-blog-16"><div><img src="RDBMS-vs-NoSQL-And-the-Winner-Is--128903_files/StandardLI.png"><span>Tool Time</span></div></a>
+		
+	</li>
+
+	<li class="item last">
+		
+			<a href="http://www.sqlmag.com/blogcontent/seriespath/troubleshooting-sql-server-storage-problems-51"><div><img src="RDBMS-vs-NoSQL-And-the-Winner-Is--128903_files/StandardLI.png"><span>Troubleshooting SQL Server Storage Problems</span></div></a>
+		
+	</li>
+
+			    </ul>
+            </div>
+		
+	</li>
+
+	<li class="item">
+		
+			<a href="http://www.sqlmag.com/forums"><div>Forums</div></a>
+		
+	</li>
+
+	<li class="item haschild">
+		
+			<a><div>products &amp; reviews</div></a>
+		
+            <div class="subLevel">
+			    <ul>
+				    
+	<li class="item first">
+		
+			<a href="http://www.windowsitpro.com/awards.aspx"><div><img src="RDBMS-vs-NoSQL-And-the-Winner-Is--128903_files/StandardLI.png"><span>awards central</span></div></a>
+		
+	</li>
+
+	<li class="item">
+		
+			<a href="http://www.sqlmag.com/products-reviews/buyers-guide"><div><img src="RDBMS-vs-NoSQL-And-the-Winner-Is--128903_files/StandardLI.png"><span>buyer's guide</span></div></a>
+		
+	</li>
+
+	<li class="item last">
+		
+			<a href="http://www.sqlmag.com/products-reviews/reviews"><div><img src="RDBMS-vs-NoSQL-And-the-Winner-Is--128903_files/StandardLI.png"><span>reviews</span></div></a>
+		
+	</li>
+
+			    </ul>
+            </div>
+		
+	</li>
+
+	<li class="item">
+		
+			<a href="http://www.sqlmag.com/newsletters/subscribenl"><div>newsletters</div></a>
+		
+	</li>
+
+	<li class="item haschild">
+		
+			<a href="http://www.sqlmag.com/events"><div>Events</div></a>
+		
+            <div class="subLevel">
+			    <ul>
+				    
+	<li class="item first">
+		
+			<a href="http://www.sqlmag.com/Events/tabid/437/type/4/conferences-workshops.aspx"><div><img src="RDBMS-vs-NoSQL-And-the-Winner-Is--128903_files/StandardLI.png"><span>Conferences &amp; Workshops</span></div></a>
+		
+	</li>
+
+	<li class="item">
+		
+			<a href="http://elearning.left-brain.com/"><div><img src="RDBMS-vs-NoSQL-And-the-Winner-Is--128903_files/StandardLI.png"><span>eLearning Seminars</span></div></a>
+		
+	</li>
+
+	<li class="item">
+		
+			<a href="http://www.sqlmag.com/events/tabid/437/type/1/roadshows.aspx"><div><img src="RDBMS-vs-NoSQL-And-the-Winner-Is--128903_files/StandardLI.png"><span>Roadshows</span></div></a>
+		
+	</li>
+
+	<li class="item">
+		
+			<a href="http://www.sqlmag.com/events/tabid/437/type/5/virtual-events.aspx"><div><img src="RDBMS-vs-NoSQL-And-the-Winner-Is--128903_files/StandardLI.png"><span>Virtual Events</span></div></a>
+		
+	</li>
+
+	<li class="item last">
+		
+			<a href="http://www.sqlmag.com/events/type/3/web-seminars"><div><img src="RDBMS-vs-NoSQL-And-the-Winner-Is--128903_files/StandardLI.png"><span>Web Seminars</span></div></a>
+		
+	</li>
+
+			    </ul>
+            </div>
+		
+	</li>
+
+	<li class="item haschild">
+		
+			<a href="http://www.sqlmag.com/resources"><div>resources</div></a>
+		
+            <div class="subLevel">
+			    <ul>
+				    
+	<li class="item first">
+		
+			<a href="http://www.sqlmag.com/resources/ebooks"><div><img src="RDBMS-vs-NoSQL-And-the-Winner-Is--128903_files/StandardLI.png"><span>ebooks</span></div></a>
+		
+	</li>
+
+	<li class="item">
+		
+			<a href="http://www.sqlmag.com/resources/essential-guides"><div><img src="RDBMS-vs-NoSQL-And-the-Winner-Is--128903_files/StandardLI.png"><span>essential guides</span></div></a>
+		
+	</li>
+
+	<li class="item">
+		
+			<a href="http://www.sqlmag.com/resources/on-demand-web-seminars"><div><img src="RDBMS-vs-NoSQL-And-the-Winner-Is--128903_files/StandardLI.png"><span>On-Demand Web Seminars</span></div></a>
+		
+	</li>
+
+	<li class="item">
+		
+			<a href="http://www.sqlmag.com/resources/podcasts"><div><img src="RDBMS-vs-NoSQL-And-the-Winner-Is--128903_files/StandardLI.png"><span>podcasts</span></div></a>
+		
+	</li>
+
+	<li class="item">
+		
+			<a href="http://www.sqlmag.com/resources/tip-guides"><div><img src="RDBMS-vs-NoSQL-And-the-Winner-Is--128903_files/StandardLI.png"><span>tip guides</span></div></a>
+		
+	</li>
+
+	<li class="item">
+		
+			<a href="http://www.sqlmag.com/resources/trials-downloads"><div><img src="RDBMS-vs-NoSQL-And-the-Winner-Is--128903_files/StandardLI.png"><span>trials &amp; downloads</span></div></a>
+		
+	</li>
+
+	<li class="item last">
+		
+			<a href="http://www.sqlmag.com/resources/white-papers"><div><img src="RDBMS-vs-NoSQL-And-the-Winner-Is--128903_files/StandardLI.png"><span>white papers</span></div></a>
+		
+	</li>
+
+			    </ul>
+            </div>
+		
+	</li>
+
+	<li class="item haschild">
+		
+			<a><div>more</div></a>
+		
+            <div class="subLevel">
+			    <ul>
+				    
+	<li class="item first haschild">
+		
+			<a><div><img src="RDBMS-vs-NoSQL-And-the-Winner-Is--128903_files/StandardLI.png"><span>HP Microsoft</span></div></a>
+		
+            <div class="subLevelRight">
+			    <ul>
+				    
+	<li class="item first">
+		
+			<a href="http://www.hp-microsoft-infrastructure-to-applications.com/converged-applications"><div><img src="RDBMS-vs-NoSQL-And-the-Winner-Is--128903_files/StandardLI.png"><span>Converged Applications</span></div></a>
+		
+	</li>
+
+	<li class="item last">
+		
+			<a href="http://www.hp-microsoft-infrastructure-to-applications.com/expert-blogs/converged-applications"><div><img src="RDBMS-vs-NoSQL-And-the-Winner-Is--128903_files/StandardLI.png"><span>Converged Applications Blog</span></div></a>
+		
+	</li>
+
+			    </ul>
+            </div>
+		
+	</li>
+
+	<li class="item last">
+		
+			<a href="http://www.sqlmag.com/microsoftuk.aspx"><div><img src="RDBMS-vs-NoSQL-And-the-Winner-Is--128903_files/StandardLI.png"><span>Microsoft UK</span></div></a>
+		
+	</li>
+
+			    </ul>
+            </div>
+		
+	</li>
+
+	<li class="item last">
+		
+			<a href="http://www.sqlmag.com/subscribe/tabid/444/List/1/CategoryID/249/Level/a/Default.aspx?code=WP211XHB"><div>subscribe</div></a>
+		
+	</li>
+
+    </ul>
+</div>
+
+
+</div>
+    </div> <!-- top-nav -->
+  </div> <!-- header -->
+  <div class="content-wrapper">
+    <div id="dnn_AdPaneTopLeft" class="TopAdL"><div class="DnnModule DnnModule-PU_DoubleClickAds DnnModule-4579"><a name="4579"></a>
+<div id="dnn_ctr4579_ContentPane" class="DNNAlignleft"><!-- Start_Module_4579 --><div id="dnn_ctr4579_ModuleContent" class="DNNModuleContent ModPUDoubleClickAdsC">
+	<div id="ad728_1" class="ad-banner">
+<script>
+document.write('<script src="http://ad.doubleclick.net/adj/sql.home/database;abr=!webtv;page=/article/sql-server/RDBMS-vs-NoSQL-And-the-Winner-Is--128903;t=databaseadministration;t=webadministration;t=databaseadministrator;t=databasedeveloper;t=sqlserver;dcopt=ist;sz=468x60,728x90;tile=1;pos=728_1;ord=' + dartrnum + '"><\/script>');
+</script><script src="RDBMS-vs-NoSQL-And-the-Winner-Is--128903_files/RDBMS-vs-NoSQL-And-the-Winner-Is--128903_004.htm"></script>
+</div>
+<noscript><a href="http://ad.doubleclick.net/jump/sql.home/database;page=/article/sql-server/RDBMS-vs-NoSQL-And-the-Winner-Is--128903;t=databaseadministration;t=webadministration;t=databaseadministrator;t=databasedeveloper;t=sqlserver;dcopt=ist;sz=468x60,728x90;tile=1;pos=728_1;ord=123456">
+<img src="http://ad.doubleclick.net/ad/sql.home/database;page=/article/sql-server/RDBMS-vs-NoSQL-And-the-Winner-Is--128903;t=databaseadministration;t=webadministration;t=databaseadministrator;t=databasedeveloper;t=sqlserver;dcopt=ist;sz=468x60,728x90;tile=1;pos=728_1;ord=123456"></a></noscript>
+</div><!-- End_Module_4579 --></div></div></div>
+    <div id="dnn_AdPaneTopRight" class="TopAdR"><div class="DnnModule DnnModule-DNN_HTML DnnModule-23185"><a name="23185"></a>
+<div id="dnn_ctr23185_ContentPane"><!-- Start_Module_23185 --><div id="dnn_ctr23185_ModuleContent" class="DNNModuleContent ModDNNHTMLC">
+	
+<div id="dnn_ctr23185_HtmlModule_lblContent" class="Normal">
+	<a href="http://www.sqlmag.com/subscribe/tabid/444/List/1/CategoryID/149/Level/a/Default.aspx?code=WP2119SB" target="_blank"><img alt="" style="border: 0px solid;" src="RDBMS-vs-NoSQL-And-the-Winner-Is--128903_files/SQLSub2_205x90.gif"></a>
+</div>
+
+</div><!-- End_Module_23185 --></div></div></div>
+    <div class="clear"></div>
+    <div class="multiColumn">
+    	<div id="dnn_TopContentPane" class="TopContentClass DNNEmptyPane"></div>
+		<div id="dnn_ContentPane" class="WideCol"><div class="DnnModule DnnModule-PentonMojo-ContentViewer DnnModule-17226"><a name="17226"></a>
+<div id="dnn_ctr17226_ContentPane"><!-- Start_Module_17226 --><span class="Normal"><div id="article"><div id="dnn_ctr17226_ModuleContent" class="DNNModuleContent ModPentonMojoContentViewerC">
+	
+
+
+
+<div id="dnn_ctr17226_ContentView_pnlArticle">
+		
+	<div id="divTxt" class="lxTdivEmailAFriend">
+		<div id="sendtoafriendthanks" class="SendBox" style="display:none;">
+			<br>
+			<p style="valign:top">
+				Thank you for recommending "SQL Server Pro is the leading 
+independent community for DBAs and developers who build and manage 
+Microsoft SQL Server database applications. ". <br>Your recommendation has been successfully processed.
+			</p>
+		</div>
+
+		<div class="SendBox" id="sendtoafriendform" style="display: none;">
+			
+			<div id="divEmailAFriend">
+
+				<div class="emailAFriendSender">                    
+					<label for="SenderName"> Your Name: *</label>            
+					<input name="dnn$ctr17226$ContentView$txtSenderName" maxlength="255" id="dnn_ctr17226_ContentView_txtSenderName" class="required" type="text">					
+					<label for="SenderEmail"> Your Email: *</label>
+					<input name="dnn$ctr17226$ContentView$txtSenderEmail" maxlength="320" id="dnn_ctr17226_ContentView_txtSenderEmail" class="requiredemail" type="text">                        
+				</div>
+				<p><input class="btn_addfriend" src="RDBMS-vs-NoSQL-And-the-Winner-Is--128903_files/btn_addfriend.gif" value="Add a Friend" type="image"></p>           
+				<div id="emailAFriendRecipient">
+					<div class="emailAFriendRow">
+						<strong><p class="emailAFriendNumber">Friend 1</p></strong>
+						<label for="txtRecipientName1">Name: *</label>                                    
+						<input name="txtRecipientName1" maxlength="255" class="required" type="text">                    
+
+						<label for="txtRecipientEmail1">Email: *</label>                        
+						<input name="txtRecipientEMail1" maxlength="320" class="requiredemail" type="text">                    
+					</div>                    
+				</div>
+			</div>
+
+			<input id="EmailAFriendCount" name="EmailAFriendCount" value="1" type="hidden">
+
+			<input name="dnn$ctr17226$ContentView$btnEmailAFriendSend" id="dnn_ctr17226_ContentView_btnEmailAFriendSend" class="btnEmailAFriendSend" src="RDBMS-vs-NoSQL-And-the-Winner-Is--128903_files/btn_send.gif" type="image">  
+					  
+		</div>
+	</div>
+
+	<div class="articleControls">
+<span class="kicker">October 28, 2010 11:00 AM</span>
+<h1 style="margin: 0pt;" id="articleTitle">RDBMS vs. NoSQL: And the Winner Is . . .</h1>
+<span class="issueInfo"></span>
+<div class="clear"></div>
+<img src="RDBMS-vs-NoSQL-And-the-Winner-Is--128903_files/5086182.jpg" border="0">
+
+<!--<div class="ArticleTools">
+  <ul>
+    <li> &nbsp;</li>
+    <li class="reprints">
+      <a href="http://license.icopyright.net/3.7009?icx_id=128903"
+      target="_blank">reprints</a>
+    </li>
+    <li class="email">
+      <a href="#">Email</a>
+    </li>
+    <li class="print">
+      <a href="/print/sql-server/RDBMS-vs-NoSQL-And-the-Winner-Is--128903" target="_blank">
+      Print</a>
+    </li>
+    <li class="comments">
+      <a href="#Rate">Comments</a>
+    </li>
+  </ul>
+  <div class="AverageRating">Rating:
+  <img src="/images/rating3.gif"/>(27)</div>
+</div> -->
+
+<div class="articleInfo"><a href="http://www.sqlmag.com/author/5086182/BrianMoran">Brian Moran</a></div>
+<div class="kicker">SQL Server Pro</div>
+<div class="kicker">InstantDoc ID #128903</div>
+<div class="clear"></div></div>
+
+<div>
+    <div style="float:left;"><a href="http://twitter.com/share" class="twitter-share-button" data-count="horizontal" data-via="sqlservermag" data-related="windowsitpro">Tweet</a><script type="text/javascript" src="RDBMS-vs-NoSQL-And-the-Winner-Is--128903_files/widgets.htm"></script></div>
+
+	<div style="float:left;padding-right:12px;">
+		<script src="RDBMS-vs-NoSQL-And-the-Winner-Is--128903_files/in.htm" type="text/javascript"></script>
+		<script type="IN/Share" data-counter="right"></script>
+	</div>
+
+	<div style="float:left;">
+	<script gapi_processed="true" type="text/javascript" src="RDBMS-vs-NoSQL-And-the-Winner-Is--128903_files/plusone.js"></script>
+	<div id="___plusone_0" style="height: 20px; width: 90px; display: inline-block; text-indent: 0px; margin: 0px; padding: 0px; background: none repeat scroll 0% 0% transparent; border-style: none; float: none; line-height: normal; font-size: 1px; vertical-align: baseline;"><iframe title="+1" data-gapiattached="true" allowtransparency="true" src="RDBMS-vs-NoSQL-And-the-Winner-Is--128903_files/fastbutton.htm" name="I0_1360037679589" id="I0_1360037679589" vspace="0" tabindex="0" style="position: static; top: 0px; width: 90px; margin: 0px; border-style: none; left: 0px; visibility: visible; height: 20px;" marginwidth="0" marginheight="0" hspace="0" frameborder="0" scrolling="no" width="100%"></iframe></div>
+	</div>
+    
+	<div style="float:left"><iframe src="RDBMS-vs-NoSQL-And-the-Winner-Is--128903_files/like.xhtml" style="border:none; width:80px; height:32px" frameborder="0" scrolling="no"></iframe></div>
+</div>
+<div class="clear"></div>
+
+<div class="">  </div>
+
+<div class="KonaBody"><p>In April, I wrote a column called “<a href="http://www.sqlmag.com/article/sql-server/Could-Unstructured-Data-Management-Technology-Replace-the-Relational-Database-Someday-.aspx" target="_blank">Could Unstructured Data Management Technology Replace the Relational Database Someday?</a>” I’ve included my opening and closing remarks as a quick reminder and level set for this month’s commentary.</p>
+<p>I opened “<a href="http://www.sqlmag.com/article/sql-server/Could-Unstructured-Data-Management-Technology-Replace-the-Relational-Database-Someday-.aspx" target="_blank">Could Unstructured Data Management Technology Replace the Relational Database Someday?</a>”
+ with “I’m going to say something that will make many of you mad and 
+wonder if I’m a complete idiot—maybe someday we won’t need relational 
+databases. Let me be clear about a few things before going further. 
+First, I don’t think we’re anywhere close to saying “Thanks Mr. 
+Relational Database, but we don’t need you anymore.” Second, I’ve known 
+the basic rules of normalization longer than some of you have been 
+alive. Trust me, I get databases. But maybe, just maybe, technology is 
+reaching the point in which some data management paradigms that used to 
+be shoehorned into a relational database no longer need to be. Here’s 
+what got me thinking these crazy and heretical thoughts.”</p>
+<p>I closed the commentary with “I don’t think bit buckets will ever 
+replace “real” databases. Locking, concurrency, high availability, one 
+version of the truth, and a few semesters worth of other database topics
+ make me believe we will always need databases. Will databases always be
+ relational? Does it matter? I suspect many problems in the database 
+world will always be best described using relational math and set 
+theory. However, many database pros are at risk of having their heads in
+ the sand when it comes to some of the newer trends involving 
+unstructured data, including, but not limited to, SharePoint. It’s time 
+to pay attention. Your users and customers are.”</p>
+<p>I’m embarrassed to say that I was talking about the NoSQL movement 
+without even knowing that the term “NoSQL” had been coined. I decided to
+ revisit this topic because I’ve heard and learned more about the NoSQL 
+movement. You’ll find a large amount of content that explores NoSQL. The
+ following two articles do a nice job of summing up the main issues with
+ respect to NoSQL: “<a href="http://www.computerworld.com/s/article/9135086/No_to_SQL_Anti_database_movement_gains_steam_?taxonomyId=173&amp;pageNumber=1" target="_blank">No to SQL? Anti-database movement gains steam</a>” and “<a href="http://bigdatamatters.com/bigdatamatters/2009/07/nosql-vs-rdbms.html" target="_blank">NoSQL – the new wave against RDBMS</a>."</p>
+<p>NoSQL posits say that traditional relational database management 
+systems (RDBMSs) can’t scale and are too expensive to meet the enormous 
+performance needs of modern web-based architectures for a Web 2.0 world.
+ Instead, “web scale” applications using NoSQL have custom, proprietary 
+data sources or perhaps a NoSQL database engine (and I use the term 
+“database engine” lightly) such as MongoDB. Effectively, all of these 
+NoSQL approaches avoid joins and avoid writing to disk as much as 
+possible. Some would argue that they aren’t even databases in the 
+traditional sense of the word and are simply highly distributed 
+key/value stores mostly doing their processing in memory.</p>
+<p>Unfortunately, many of the NoSQL-related articles I’ve read recently 
+are consistently beating the drum that traditional RBDMS engines are 
+fundamentally non-scalable and that NoSQL is ordained as the wave of the
+ future web processing. I disagree. The NoSQL and RDBMS camps each have 
+compelling pros and cons and each can meet a wide variety of business 
+needs. Neither side is 100 percent right or wrong as is true in most 
+techno-religious debates.</p>
+<p>NoSQL got its start with the likes of Amazon and Google. Traditional 
+RDBMS solutions at the time didn’t meet these companies’ performance 
+needs or would have been prohibitively expensive to implement based on 
+licensing costs even if it was possible to build out. This led to the 
+growth of several open-source NoSQL approaches that do indeed offer very
+ impressive performance numbers. However, don’t expect the same breadth 
+of features and certain basics such as guaranteed atomic transactions. 
+But you know what, sometimes that’s OK, as several case studies 
+referenced in the articles I previously mentioned point out.</p>
+<p>My primary beef with the NoSQL camp is the position that RBDMSs can’t
+ scale. That simply isn’t true for 99.99 percent or more of the data 
+processing world. It seems like folks who suggest NoSQL or nothing are 
+in danger of throwing out the baby with the bath water by suggesting 
+that NoSQL is always the answer and that it’s a foregone conclusion that
+ NoSQL will eventually stamp out the relational data model.</p>
+<p>Are companies such as Google, Amazon, and Adobe dumb? Their market 
+caps suggest quite the opposite and they all use high-profile NoSQL 
+solutions for different needs. Clearly there are cases in which NoSQL 
+solves business problems. Aside from the few cases in which petabytes of
+ data simply won’t flow efficiently through a traditional RBDMS, I think
+ the more compelling cases for NoSQL are cost and ease of use. Free is 
+pretty compelling compared to potentially millions of dollars in 
+licensing fees paid to Microsoft, Oracle, or other mainstream RBDMS 
+providers as long as the solution meets all of your business needs. 
+&nbsp;On the ease of use side, NoSQL advocates will point to the 
+long-held position that there tends to be an impedance mismatch between 
+the set-based approaches of an RDBMS and the procedural style that 
+computer programs are actually written in. I suspect that each of these 
+dynamics will force traditional RDBMS providers to be more innovative in
+ their offerings and price points, which is ultimately good for 
+everyone.</p>
+<p>Long live relational databases? Long live NoSQL? This debate is far 
+from over, and both camps have a long and healthy product life cycle 
+ahead of them. Expand your horizons and don’t be afraid to test your 
+assumptions regardless of which camp you’re in today.</p></div>
+<input id="frmContentID" name="frmContentID" value="128903" type="hidden">
+
+<div class="mojoRatings"><span class="star-rating-control"><div style="display: none;" class="rating-cancel"><a title="Cancel Rating"></a></div><div class="star-rating rater-0 mojoStar star-rating-applied star-rating-live"><a title="1">1</a></div><div class="star-rating rater-0 mojoStar star-rating-applied star-rating-live"><a title="2">2</a></div><div class="star-rating rater-0 mojoStar star-rating-applied star-rating-live"><a title="3">3</a></div><div class="star-rating rater-0 mojoStar star-rating-applied star-rating-live"><a title="4">4</a></div><div class="star-rating rater-0 mojoStar star-rating-applied star-rating-live"><a title="5">5</a></div></span><input style="display: none;" name="mojoStar" class="mojoStar star-rating-applied" value="1" type="radio"><input style="display: none;" name="mojoStar" class="mojoStar star-rating-applied" value="2" type="radio"><input style="display: none;" name="mojoStar" class="mojoStar star-rating-applied" value="3" type="radio"><input style="display: none;" name="mojoStar" class="mojoStar star-rating-applied" value="4" type="radio"><input style="display: none;" name="mojoStar" class="mojoStar star-rating-applied" value="5" type="radio"></div><br><br>
+
+<div class="pagerWrapper" align="center"></div>
+
+
+<div><h4>Related Content:</h4><br><ul class="content_relatedcontent"><li><a href="http://www.sqlmag.com/article/database-development/NoSQL-No-Way--125778">NoSQL? No Way!</a></li><li><a href="http://www.sqlmag.com/article/sql-server/scalearc-idb-144912">ScaleArc iDB 2.0</a></li><li><a href="http://www.sqlmag.com/article/sql-server/trouble-with-type-tables-144314">The Trouble with Type Tables</a></li><li><a href="http://www.sqlmag.com/article/sql-server/monitoring-sql-server-sharepoint-bi-components-144315">Monitoring SQL Server and SharePoint BI Components</a></li><li><a href="http://www.sqlmag.com/whitepaper/sql-server/sql-server-disaster-recovery-step-step-145134">SQL Server Disaster Recovery Step by Step</a></li></ul></div>
+
+<div class="bottomArticleTools">
+  <p>ARTICLE TOOLS</p>
+  <ul>
+    <li class="reprints">
+      <a href="http://wrightsmedia.com/sites/penton/it-developer" target="_blank">reprints</a>
+    </li>
+    <li class="email">
+      <a onclick="document.getElementById('SendToAFriend').style.display='block';return false;" href="#">Email</a>
+    </li>
+    <li class="print">
+      <a href="http://www.sqlmag.com/print/sql-server/RDBMS-vs-NoSQL-And-the-Winner-Is--128903" target="_blank">
+      Print</a>
+    </li>
+    <li class="comments">
+      <a href="#Rate">Comments</a>
+    </li>
+  </ul>
+</div>
+	<div class="clear"></div>
+
+	</div>
+
+
+
+
+
+
+</div><span class="Normal"></span></div></span><!-- End_Module_17226 --></div></div><div class="DnnModule DnnModule-PentonMojo-ContentViewer DnnModule-17227"><a name="17227"></a>
+<div id="dnn_ctr17227_ContentPane"><!-- Start_Module_17227 --><div id="dnn_ctr17227_ModuleContent" class="DNNModuleContent ModPentonMojoContentViewerC">
+	
+
+<div class="commentWrap">
+    <a name="commentsAnchor"></a>
+    <div class="header">
+   <div class="left">
+     <div class="quantity">Comments</div>
+            <div class="addCommentWrap"><a href="#commentAnchor" class="addComment">Add A Comment</a></div>
+            <div class="clear"></div>
+        </div>
+        <div class="clear"></div>
+	</div>	
+	<ul class="commentlist"><li class="comment">
+<div>
+ <div class="commentmeta">
+  <div class="commentuser">merriman</div>
+  <div class="commentdate">3 years ago<br>Oct 28, 2010</div>
+ </div>
+ <div class="commenttext">
+  <p>To me the key is it isn't "one size fits all" any more.  Many 
+readers already use special tools for data warehousing and business 
+intelligence.  Why not add one more tool to the toolbox?<br><br>NoSQL is
+ not a 100% replacement for relational everytime. For example, ad hoc 
+reporting. With relational, one designs the data model (in theory) 
+independent of the use case. Thus any query in the future, even one not 
+envisioned, will be at least medium easy to write. NoSQL is different. 
+With MongoDB you design your schema for your bread-and-butter use case. 
+ This means that use case, the one that happens all day long, will be 
+super fast. But an ad hoc unanticipated query while still doable is not 
+quite as easy.<br><br>SQL+relational give us a standard between clients 
+and server. Want to connect to data warehouse with crystal reports or 
+business objects?  SQL+relational gives us a clean intermediary. But 
+when writing custom applications that are new code, this is less a 
+concern: we are likely using some object framework anyway. It really 
+depends on the use case.<br><br>Relational can scale, but with caveats. 
+For reporting it can scale: there we have a few very expensive queries, 
+so easy to distribute them to all nodes; we don't have many writes to 
+the database, mostly reads.  For online processing scaling is harder.  
+We might need to do something like scale vertically.  I have not seen 
+good horizontal scaling on commodity hardware for online processing with
+ RDBMS systems.  Also a potential caveat would be that the most scalable
+ products in that space do not have open source versions available.<br><br>For
+ me, it's not all about scale.  Flexible schemas create great agility 
+for rapid development. I see a lot of developers with only one or two 
+servers who use MongoDB because they can code faster and make revisions 
+faster.<br><br>So don't throw everything out, just add one more tool. 
+Pick a first project, do a prototype, see what happens.  I think one 
+will be pleasantly surprised!<br><br>dwight/mongodb</p>
+ </div>
+</div>
+</li></ul>
+<div class="pagerWrapper"> 
+</div>
+    <div class="clear"></div>
+    <a name="commentAnchor"></a>
+    
+    <div id="dnn_ctr17227_Comment_panelAnonymous">
+		
+        <a name="Rate"></a>You must
+        <a href="http://www.sqlmag.com/Content1/ctl/login?returnurl=/article/sql-server/RDBMS-vs-NoSQL-And-the-Winner-Is--128903" id="dnn_ctr17227_Comment_anchorLogin" onclick="return dnnModal.show('/Content1/ctl/login?returnurl=/article/sql-server/RDBMS-vs-NoSQL-And-the-Winner-Is--128903&amp;popUp=true',/*showReturn*/true,300,650,true,'')">log on</a>
+        before posting a comment.
+        <br>
+        <br>
+        Are you a new visitor?
+        <a id="dnn_ctr17227_Comment_dnnRegister" href="http://www.sqlmag.com/registration.aspx">Register Here</a>
+    
+	</div>
+</div>
+<input name="dnn$ctr17227$Comment$hiddenNoRatings" id="dnn_ctr17227_Comment_hiddenNoRatings" type="hidden">
+</div><!-- End_Module_17227 --></div></div></div>
+   		<div id="dnn_RightPane" class="ThinCol"><div class="DnnModule DnnModule-DNN_HTML DnnModule-23822"><a name="23822"></a>
+<div id="dnn_ctr23822_ContentPane"><!-- Start_Module_23822 --><div id="dnn_ctr23822_ModuleContent" class="DNNModuleContent ModDNNHTMLC">
+	
+<div id="dnn_ctr23822_HtmlModule_lblContent" class="Normal">
+	<div class="clear"></div>
+<div><iframe src="RDBMS-vs-NoSQL-And-the-Winner-Is--128903_files/Subscribe-SQLServerPro-eNewsletter.htm" frameborder="0" height="180" width="340"></iframe></div>
+</div>
+
+</div><!-- End_Module_23822 --></div></div><div class="DnnModule DnnModule-PU_DoubleClickAds DnnModule-5225"><a name="5225"></a>
+<div id="dnn_ctr5225_ContentPane" class="DNNAligncenter"><!-- Start_Module_5225 --><div id="dnn_ctr5225_ModuleContent" class="DNNModuleContent ModPUDoubleClickAdsC">
+	<div id="ad300_1" class="ad-square300">
+<script>
+document.write('<script src="http://ad.doubleclick.net/adj/sql.home/database;abr=!webtv;page=/article/sql-server/RDBMS-vs-NoSQL-And-the-Winner-Is--128903;t=databaseadministration;t=webadministration;t=databaseadministrator;t=databasedeveloper;t=sqlserver;sz=300x250,336x280;tile=2;pos=300_1;ord=' + dartrnum + '"><\/script>');
+</script><script src="RDBMS-vs-NoSQL-And-the-Winner-Is--128903_files/RDBMS-vs-NoSQL-And-the-Winner-Is--128903.htm"></script>
+</div>
+<noscript><a href="http://ad.doubleclick.net/jump/sql.home/database;page=/article/sql-server/RDBMS-vs-NoSQL-And-the-Winner-Is--128903;t=databaseadministration;t=webadministration;t=databaseadministrator;t=databasedeveloper;t=sqlserver;sz=300x250,336x280;tile=2;pos=300_1;ord=123456">
+<img src="http://ad.doubleclick.net/ad/sql.home/database;page=/article/sql-server/RDBMS-vs-NoSQL-And-the-Winner-Is--128903;t=databaseadministration;t=webadministration;t=databaseadministrator;t=databasedeveloper;t=sqlserver;sz=300x250,336x280;tile=2;pos=300_1;ord=123456"></a></noscript>
+</div><!-- End_Module_5225 --></div></div><div class="DnnModule DnnModule-PU_ForumSummary DnnModule-23237"><a name="23237"></a>
+<div class="communityForumsWrap">
+	<div class="communityForumsHeader">
+    	<div><img src="RDBMS-vs-NoSQL-And-the-Winner-Is--128903_files/communityForumsHeader.gif"></div>
+    </div>
+	<div class="communityForumsContent">
+		<div id="dnn_ctr23237_ContentPane"><!-- Start_Module_23237 --><div id="dnn_ctr23237_ModuleContent" class="DNNModuleContent ModPUForumSummaryC">
+	<ul><li><a href="http://www.sqlmag.com/forums/aft/98802">About SQL</a><br>Hello all,I am new and I would like to ask that what are the benefits of sql training, what all topi...</li><li><a href="http://www.sqlmag.com/forums/aft/98798">Determine if log backup required</a><br>I have backups on a FULL recovery model database running daily (full) and every 15 minutes (log). Is...</li><li><a href="http://www.sqlmag.com/forums/aft/98789">Android Photo Recovery--How To Information</a><br> “ Any way to perform  android phone recovery  ? I had a photo of me and my friend, now he is in ano...</li><li><a href="http://www.sqlmag.com/forums/aft/98782">Trick to Recover Data from Flash Drive in Minutes</a><br>I have a 4G flash drive that I have backed up some data on it about 4 weeks ago. Some days ago I del...</li></ul>
+
+</div><!-- End_Module_23237 --></div>
+    </div>
+</div></div><div class="DnnModule DnnModule-PU_DoubleClickAds DnnModule-6376"><a name="6376"></a>
+<div id="dnn_ctr6376_ContentPane"><!-- Start_Module_6376 --><div id="dnn_ctr6376_ModuleContent" class="DNNModuleContent ModPUDoubleClickAdsC">
+	<div id="ad300_2" class="ad-square300">
+<script>
+document.write('<script src="http://ad.doubleclick.net/adj/sql.home/database;abr=!webtv;page=/article/sql-server/RDBMS-vs-NoSQL-And-the-Winner-Is--128903;t=databaseadministration;t=webadministration;t=databaseadministrator;t=databasedeveloper;t=sqlserver;sz=300x250,336x280;tile=3;pos=300_2;ord=' + dartrnum + '"><\/script>');
+</script><script src="RDBMS-vs-NoSQL-And-the-Winner-Is--128903_files/RDBMS-vs-NoSQL-And-the-Winner-Is--128903_002.htm"></script>
+</div>
+<noscript><a href="http://ad.doubleclick.net/jump/sql.home/database;page=/article/sql-server/RDBMS-vs-NoSQL-And-the-Winner-Is--128903;t=databaseadministration;t=webadministration;t=databaseadministrator;t=databasedeveloper;t=sqlserver;sz=300x250,336x280;tile=3;pos=300_2;ord=123456">
+<img src="http://ad.doubleclick.net/ad/sql.home/database;page=/article/sql-server/RDBMS-vs-NoSQL-And-the-Winner-Is--128903;t=databaseadministration;t=webadministration;t=databaseadministrator;t=databasedeveloper;t=sqlserver;sz=300x250,336x280;tile=3;pos=300_2;ord=123456"></a></noscript>
+</div><!-- End_Module_6376 --></div></div></div>
+		<div class="clear"></div>
+    </div>
+      
+    </div> <!-- left-col -->
+    <div class="bottom-block">
+      <div class="content-padding">
+        <div id="dnn_BottomContent" class="bottom-pane pane"><div class="DnnModule DnnModule-PU_DoubleClickAds DnnModule-6378"><a name="6378"></a>
+<div id="dnn_ctr6378_ContentPane" class="DNNAligncenter"><!-- Start_Module_6378 --><div id="dnn_ctr6378_ModuleContent" class="DNNModuleContent ModPUDoubleClickAdsC">
+	<div id="ad728_2" class="ad-banner">
+<script>
+document.write('<script src="http://ad.doubleclick.net/adj/sql.home/database;abr=!webtv;page=/article/sql-server/RDBMS-vs-NoSQL-And-the-Winner-Is--128903;t=databaseadministration;t=webadministration;t=databaseadministrator;t=databasedeveloper;t=sqlserver;sz=468x60,728x90;tile=4;pos=728_2;ord=' + dartrnum + '"><\/script>');
+</script><script src="RDBMS-vs-NoSQL-And-the-Winner-Is--128903_files/RDBMS-vs-NoSQL-And-the-Winner-Is--128903_003.htm"></script>
+</div>
+<noscript><a href="http://ad.doubleclick.net/jump/sql.home/database;page=/article/sql-server/RDBMS-vs-NoSQL-And-the-Winner-Is--128903;t=databaseadministration;t=webadministration;t=databaseadministrator;t=databasedeveloper;t=sqlserver;sz=468x60,728x90;tile=4;pos=728_2;ord=123456">
+<img src="http://ad.doubleclick.net/ad/sql.home/database;page=/article/sql-server/RDBMS-vs-NoSQL-And-the-Winner-Is--128903;t=databaseadministration;t=webadministration;t=databaseadministrator;t=databasedeveloper;t=sqlserver;sz=468x60,728x90;tile=4;pos=728_2;ord=123456"></a></noscript>
+</div><!-- End_Module_6378 --></div></div></div>
+        <div id="ContentBottom">
+            <div id="dnn_ContentBoxOne" class="box1 DNNEmptyPane"></div>
+            <div id="dnn_ContentBoxTwo" class="box2 DNNEmptyPane"></div>
+            <div id="dnn_ContentBoxThree" class="box3 DNNEmptyPane"></div>
+            <div class="clear"></div>
+        </div>       
+      </div>
+    </div>
+   <!-- content-wrapper -->
+  <div class="footer">
+    <div class="sub-footer">
+      <div class="content-padding">
+        <div id="dnn_SubFooterPane" class="sub-footer-pane pane DNNEmptyPane"></div>
+      </div>
+    </div>
+    <div class="main-footer">
+      <div class="content-padding">
+        <p class="footer-sql-logo"><a href="">SQL Server Magazine</a></p>
+        <ul class="footer-enternal-links">
+            <li><a target="_blank" href="http://devproconnections.com/">Dev Pro</a></li>
+            <li><a target="_blank" href="http://ittv.net/">ITTV</a></li>
+            <li><a target="_blank" href="http://left-brain.com/">Left-Brain</a></li>
+            <li><a target="_blank" href="http://sharepointproconnections.com/">SharePointPro</a></li>
+            <li><a target="_blank" href="http://sqlmag.com/">SQL Server Pro</a></li>
+            <li><a target="_blank" href="http://winsupersite.com/">SuperSite for Windows</a></li>
+            <li><a href="http://www.windowsitpro.com/">Windows IT Pro</a></li>
+        </ul>
+        <p class="copyright">© 2013 Penton Media, Inc.</p>
+        <ul class="footer-nav">
+            <li><a href="http://www.sqlmag.com/">Home</a></li>
+            <li><a href="http://www.sqlmag.com/aboutus.aspx">About Us</a></li>
+            <li><a href="http://www.pentonmarketingservices.com/technology/services/advertising">Advertise</a></li>
+            <li><a href="http://www.sqlmag.com/aboutus/contactus.aspx">Customer Service</a></li>                
+            <li><a href="http://www.penton.com/PrivacyStatement.aspx" target="_blank">Privacy Statement</a></li>
+            <li><a href="http://www.sqlmag.com/subscribe/tabid/444/List/1/CategoryID/99/Level/a/Default.aspx?code=WP211XFT"><span class="linkfocus">Subscribe/Renew</span></a></li>
+            <li><a href="http://www.penton.com/TermsofUse/tabid/71/Default.aspx" target="_blank">Terms Of Use</a></li>
+        </ul>
+      </div>
+      <div class="clear"></div>
+      <div id="windowsTrademark"><p>Windows is a trademark of the 
+Microsoft group of companies. Windows IT Pro is used by Penton Media 
+Inc. under license from owner.</p></div>
+    </div>
+  </div>
+ <!-- page-wrapper -->
+
+
+
+
+
+
+<script type="text/javascript" language="JavaScript" src="RDBMS-vs-NoSQL-And-the-Winner-Is--128903_files/elqCfg.js"></script>
+<script type="text/javascript" language="JavaScript" src="RDBMS-vs-NoSQL-And-the-Winner-Is--128903_files/elqImg.js"></script><layer hidden="true"><img src="RDBMS-vs-NoSQL-And-the-Winner-Is--128903_files/svrGP.htm" border="0" height="1" width="1"></layer>
+
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script><script src="RDBMS-vs-NoSQL-And-the-Winner-Is--128903_files/ga.js" type="text/javascript"></script>
+<script type="text/javascript">
+try {
+var pageTracker = _gat._getTracker("UA-15420463-1");
+pageTracker._trackPageview();
+} catch(err) {}</script>
+
+
+
+        <input name="ScrollTop" id="ScrollTop" type="hidden">
+        <input name="__dnnVariable" id="__dnnVariable" type="hidden">
+        
+    
+<script type="text/javascript" src="RDBMS-vs-NoSQL-And-the-Winner-Is--128903_files/initWidgets.js"></script></form>
+    
+    
+    <script type="text/javascript">
+        //<![CDATA[
+        
+        //This code is to force a refresh of browser cache
+        //in case an old version of dnn.js is loaded
+        //It should be removed as soon as .js versioning is added
+        jQuery(document).ready(function () {
+            if (navigator.userAgent.indexOf(" Chrome/") == -1) {
+                if ((typeof dnnJscriptVersion === 'undefined' || dnnJscriptVersion !== "6.0.0") && typeof dnn !== 'undefined') {
+                    window.location.reload(true);
+                }
+            }
+        });
+         //]]>
+    </script>
+
+<div style="display: none;" id="cboxOverlay"></div><div style="display: none;" class="" id="colorbox"><div id="cboxWrapper"><div><div style="float: left;" id="cboxTopLeft"></div><div style="float: left;" id="cboxTopCenter"></div><div style="float: left;" id="cboxTopRight"></div></div><div style="clear: left;"><div style="float: left;" id="cboxMiddleLeft"></div><div style="float: left;" id="cboxContent"><div style="width: 0px; height: 0px; overflow: hidden; float: left;" id="cboxLoadedContent"></div><div style="float: left;" id="cboxLoadingOverlay"></div><div style="float: left;" id="cboxLoadingGraphic"></div><div style="float: left;" id="cboxTitle"></div><div style="float: left;" id="cboxCurrent"></div><div style="float: left;" id="cboxNext"></div><div style="float: left;" id="cboxPrevious"></div><div style="float: left;" id="cboxSlideshow"></div><div style="float: left;" id="cboxClose"></div></div><div style="float: left;" id="cboxMiddleRight"></div></div><div style="clear: left;"><div style="float: left;" id="cboxBottomLeft"></div><div style="float: left;" id="cboxBottomCenter"></div><div style="float: left;" id="cboxBottomRight"></div></div></div><div style="position: absolute; width: 9999px; visibility: hidden; display: none;"></div></div></body></html>

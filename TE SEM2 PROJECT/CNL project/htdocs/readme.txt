@@ -1,0 +1,12 @@
+If you ignore this text, you WILL be told to refer back to it if you ask a question in the PHPGeek forums. How nicely will depend on the respondant. 
+
+This installer sets up a PHP server environment on your Windows machine. This software is provided under a variety of free software licenses. All of them allow you to freely redistribute this software as you received it. They do NOT all allow commercial redistribution. This installer only installs the core applications. There are various modules available to extend the functionality at phpgeek.com. Please direct any support questions first to the FAQ at phpgeek.com and second to the support forums at that same site. Due to the high volume of email I receive, I do NOT provide any support by email and any support requests by email will be deleted without a response.
+
+Also, keep in mind that while this software is free, it does consume time, energy and financial resources to develop and support it. Please consider making a donation or buying some of the branded merchandise available at phpgeek.com.
+
+GETTING STARTED
+The software will be installed to c:\apache. Under that directory are all of the components including Apache, PHP and MySQL. Apache and MySQL are servers that need to be started in order for them to function. They operate in the background to do their jobs. There are shortcuts in the PHPTriad folder in your start menu to start both. Once Apache is started, it will remain open in a DOS window. MySQL will flash a DOS window and go away. You can check to see if MySQL is running by doing a CTRL-ALT-DEL and looking for a mysqld* process running.
+
+Once both servers are started, go to http://localhost or http://127.0.0.1. These are the loopback addresses for your local computer and are the addresses you can use to test your PHP applications. http://localhost is mapped to c:\apache\htdocs. Individual files in that directory will be available at http://localhost/filename.ext. Any directories you create under c:\apache\htdocs will also be reflected in the URL as well. c:\apache\htdocs\directory will be accessed at http://localhost/directory/.
+
+There are more details available when you load http://localhost for the first time.

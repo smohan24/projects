@@ -1,0 +1,184 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>Domino's Ads India | Dominos Advertisement | Domino's Pizza Ads</title>
+        <meta name="keywords" content="dominos advertisement, domino's ads, domino's ads india, dominos ads campaigns, domino's pizza ads, domino's pizza ads india" />
+        <meta name="description" content="Watch domino's ads, domino's pizza ads, latest dominos ads campaigns and other dominos advertisement here." />
+        <link rel="stylesheet" href="http://www.dominos.co.in/theme/front/css/brand-style.css?ver=4" />
+        <script type="text/javascript" src="http://www.dominos.co.in/theme/front/js/brand-common.js"></script>        
+        <!-- Google Analytics Starts-->
+        <script type="text/javascript">
+    
+            var _gaq = _gaq || [];
+            _gaq.push(['_setAccount', 'UA-23400696-1']);
+            _gaq.push(['_setDomainName', '.dominos.co.in']);
+            _gaq.push(['_trackPageview']);
+    
+            _gaq.push(['t2._setAccount', 'UA-28585730-1']);
+            _gaq.push(['t2._trackPageview']);
+    
+            (function() {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+
+        </script>
+        <!-- Google Analytics Ends-->
+        <script src="http://www.dominos.co.in/theme/front/js/advertisement.js?ver=1" type="text/javascript"></script>                <script type="text/javascript">window.Modernizr || document.write('<script type="text/javascript" src="http://www.dominos.co.in/theme/front/js/modernizr.js"><\/script>')</script>
+        <!--[if lt IE 7 ]>
+       <html lang="en" dir="ltr" class="ie ie6">
+       <![endif]-->
+        <!--[if IE 7 ]>
+        <html lang="en" dir="ltr" class="ie ie7">
+        <![endif]-->
+        <!--[if IE 8 ]>
+        <html lang="en" dir="ltr" class="ie ie8">
+        <![endif]-->
+        <!--[if IE 9 ]>
+        <html lang="en" dir="ltr" class="ie ie9">
+        <![endif]-->
+        <!--[if gt IE 9]>
+        <html lang="en" dir="ltr" class="ie">
+        <![endif]-->
+        <!--[if !IE]>
+        <html lang="en" dir="ltr">
+           <![endif]-->
+    </head>
+    <body style="overflow: hidden">
+        <div id="msg_dialog" title="message"></div>
+        <div id="err_dialog" title="error"></div>
+                <div id="main-wrapper">
+            <div id="right_sideBorder">
+                                <section id="left-main-section1">
+                    <nav class="main-nav">
+    <ul class="clearfix">
+                                    <li class="sub-menu1 selected"><a href="http://www.dominos.co.in/about-us">ABOUT US</a>
+                    <ul>
+                                                    <li><a  href="http://www.dominos.co.in/about-us">Domino's In India</a></li>
+                                                    <li><a  href="http://www.dominos.co.in/dominos-india-awards">Domino's India Awards</a></li>
+                                                    <li><a  href="http://www.dominos.co.in/dominos-international">Dominos International</a></li>
+                                                    <li><a  href="http://www.dominos.co.in/vision">Vision</a></li>
+                                                    <li><a  href="http://www.dominos.co.in/milestones">Milestone</a></li>
+                                            </ul>
+                </li> 
+                                                <li class="sub-menu1 selected"><a href="http://www.dominos.co.in/menu">MENU</a>
+                    <ul>
+                                                    <li><a  href="http://www.dominos.co.in/menu/veg-pizzas">Veg Pizzas</a></li>
+                                                    <li><a  href="http://www.dominos.co.in/menu/non-veg-pizzas">Non Veg Pizzas</a></li>
+                                                    <li><a  href="http://www.dominos.co.in/menu/side-orders">Side Orders</a></li>
+                                                    <li><a  href="http://www.dominos.co.in/menu/beverages">Beverages</a></li>
+                                                    <li><a  href="http://www.dominos.co.in/menu/choice-of-crusts">Choice Of Crusts</a></li>
+                                                    <li><a  href="http://www.dominos.co.in/menu/choice-of-toppings">Choice Of Toppings</a></li>
+                                                    <li><a  href="http://www.dominos.co.in/menu/pizza-mania-combos">Pizza Mania Combos</a></li>
+                                            </ul>
+                </li> 
+                                                <li><a  href="http://www.dominos.co.in/locator">LOCATION</a></li>
+                                                <li class="sub-menu1 selected"><a href="http://www.dominos.co.in/great-deals">GREAT DEALS</a>
+                    <ul>
+                                                    <li><a  href="http://www.dominos.co.in/great-deals/online-deals">online deals</a></li>
+                                                    <li><a  href="http://www.dominos.co.in/great-deals/in-store-deals">in store deals</a></li>
+                                                    <li><a  href="http://www.dominos.co.in/great-deals/wow-club">wow club offer</a></li>
+                                                    <li><a  href="http://www.dominos.co.in/great-deals/gift-vouchers">gift vouchers</a></li>
+                                            </ul>
+                </li> 
+                                                <li><a  href="http://www.dominos.co.in/great-deals/gift-vouchers">GIFT VOUCHERS</a></li>
+                                                <li><a  href="http://www.dominos.co.in/feedback">CALL US</a></li>
+                                                <li><a  href="http://dominos.co.in/blog/">BLOG</a></li>
+                                                <li><a  href="http://www.jubilantfoodworks.com/investors/">INVESTORS</a></li>
+                                                <li><a class="selected" href="http://www.dominos.co.in/advertisement">ADS</a></li>
+                        </ul>
+</nav>
+                    <section class="main-content clearfix">
+            <div class="breadcrum"><a href="http://www.dominos.co.in/">Home</a>Advertisement</div>
+            <script type="text/javascript">
+        var allAds = ["nmn16YwK1Rk","LcRbBUQpY4I","q1469NWMqfg","T4veG_PcMRY","TT2-VsZIKG8","CElBgOxlsRY","qsHKvxlm48E","PXk89ZTggtY","mdc1UM0c0QQ","RWs5nB4VXys","ZeGADv6U3Gw","BEUoFhauvps","tiAJjcuLU0k","SJOiEyBxT7Q","BO-Kv-SfUmA","oe52RfiI_c8","qqPC2U4Iv1Y"];
+    </script>
+    <div class="detailed-menu-main clearfix">
+        <section class="main-content clearfix">
+            <section class="ads-main">
+                <div class="ad-display">
+                    <div id="video_box" class="video-box">
+                        <div class="fade-bg"></div><span class="hover"></span>
+                        <img id="youtube_video_image" width="400px" height="300px" src="http://img.youtube.com/vi/nmn16YwK1Rk/hqdefault.jpg"/>
+                    </div>
+                    <div class="next-prev">
+                        <a href="#" class="prev-arrow">PREV</a>
+                        <a href="#" class="next-arrow">NEXT</a>
+                    </div>
+                </div>
+                <div class="ad-lists">
+                    <ul>
+                                                <li><a class="youtube_list" href="#"><img src="http://img.youtube.com/vi/nmn16YwK1Rk/1.jpg" width="30px" height="20px" /> <span id="adVideo_nmn16YwK1Rk" class="active" >New Cheesy Boloroni Pizza</span></a></li>
+                                                <li><a class="youtube_list" href="#"><img src="http://img.youtube.com/vi/LcRbBUQpY4I/1.jpg" width="30px" height="20px" /> <span id="adVideo_LcRbBUQpY4I"  >New Taco Indiana</span></a></li>
+                                                <li><a class="youtube_list" href="#"><img src="http://img.youtube.com/vi/q1469NWMqfg/1.jpg" width="30px" height="20px" /> <span id="adVideo_q1469NWMqfg"  >YEH HAI RISHTON KA TIME</span></a></li>
+                                                <li><a class="youtube_list" href="#"><img src="http://img.youtube.com/vi/T4veG_PcMRY/1.jpg" width="30px" height="20px" /> <span id="adVideo_T4veG_PcMRY"  >Stuffed Garlic Bread</span></a></li>
+                                                <li><a class="youtube_list" href="#"><img src="http://img.youtube.com/vi/TT2-VsZIKG8/1.jpg" width="30px" height="20px" /> <span id="adVideo_TT2-VsZIKG8"  >Domino's Pizza Mania at 39 with New Toppings</span></a></li>
+                                                <li><a class="youtube_list" href="#"><img src="http://img.youtube.com/vi/CElBgOxlsRY/1.jpg" width="30px" height="20px" /> <span id="adVideo_CElBgOxlsRY"  >Thirty Minutes Mein Khushiyon Ki Home Delivery</span></a></li>
+                                                <li><a class="youtube_list" href="#"><img src="http://img.youtube.com/vi/qsHKvxlm48E/1.jpg" width="30px" height="20px" /> <span id="adVideo_qsHKvxlm48E"  >Mexican Wrap and Pasta Italiano</span></a></li>
+                                                <li><a class="youtube_list" href="#"><img src="http://img.youtube.com/vi/PXk89ZTggtY/1.jpg" width="30px" height="20px" /> <span id="adVideo_PXk89ZTggtY"  >Pizza Mania-School Kids</span></a></li>
+                                                <li><a class="youtube_list" href="#"><img src="http://img.youtube.com/vi/mdc1UM0c0QQ/1.jpg" width="30px" height="20px" /> <span id="adVideo_mdc1UM0c0QQ"  >Pasta</span></a></li>
+                                                <li><a class="youtube_list" href="#"><img src="http://img.youtube.com/vi/RWs5nB4VXys/1.jpg" width="30px" height="20px" /> <span id="adVideo_RWs5nB4VXys"  >Pizza Mania Guruji</span></a></li>
+                                                <li><a class="youtube_list" href="#"><img src="http://img.youtube.com/vi/ZeGADv6U3Gw/1.jpg" width="30px" height="20px" /> <span id="adVideo_ZeGADv6U3Gw"  >Cheese Burst</span></a></li>
+                                                <li><a class="youtube_list" href="#"><img src="http://img.youtube.com/vi/BEUoFhauvps/1.jpg" width="30px" height="20px" /> <span id="adVideo_BEUoFhauvps"  >Pizza Mania Kids</span></a></li>
+                                                <li><a class="youtube_list" href="#"><img src="http://img.youtube.com/vi/tiAJjcuLU0k/1.jpg" width="30px" height="20px" /> <span id="adVideo_tiAJjcuLU0k"  >Chinese Pizza</span></a></li>
+                                                <li><a class="youtube_list" href="#"><img src="http://img.youtube.com/vi/SJOiEyBxT7Q/1.jpg" width="30px" height="20px" /> <span id="adVideo_SJOiEyBxT7Q"  >30min or Free</span></a></li>
+                                                <li><a class="youtube_list" href="#"><img src="http://img.youtube.com/vi/BO-Kv-SfUmA/1.jpg" width="30px" height="20px" /> <span id="adVideo_BO-Kv-SfUmA"  >Butterscotch Mousse Cake</span></a></li>
+                                                <li><a class="youtube_list" href="#"><img src="http://img.youtube.com/vi/oe52RfiI_c8/1.jpg" width="30px" height="20px" /> <span id="adVideo_oe52RfiI_c8"  >New Pasta</span></a></li>
+                                                <li><a class="youtube_list" href="#"><img src="http://img.youtube.com/vi/qqPC2U4Iv1Y/1.jpg" width="30px" height="20px" /> <span id="adVideo_qqPC2U4Iv1Y"  >3 cheese pizza 40 sec</span></a></li>
+                                            </ul>
+                </div>
+            </section>
+
+        </section>
+    </div>
+</section>
+<section class="download-strip clearfix">
+    <section class="bottom-links">
+        <a class="selected" href="javascript:void(0);">TV Commercials</a> 
+
+    </section>
+    <section class="go-to-home-menu" style="margin-top: 16px;"><a href="http://www.dominos.co.in">Return to <br>home page</a></section>
+</section>                </section>
+                <aside class="right-section" id="right_panel">
+    <div class="theme-light clearfix">
+        <div id="slider" class="nivoSlider">
+                                        <img  src="http://www.dominos.co.in/files/upload/f726e8d36d522484fa53648a7b9cd687_1347560570.jpg" link="http://pizzaonline.dominos.co.in/apps" alt="Domino's Mobile App" />
+                    </div>
+    </div>
+    <section class="whats-new">
+                <img src="http://www.dominos.co.in/theme/front/images/whats-new-head.png" alt="whats new head"/>
+        <a href="http://www.dominos.co.in/menu/choice-of-crusts/cheesy-boloroni"><img src="http://www.dominos.co.in/files/whats_new/35a4e89fed03e5aa5446021d3e15d064-1355135475-218x114.JPG" alt="whats new"/></a>
+            </section>
+    <section class="company-logos">
+        <a href="http://www.dominos.co.in/"><img src="http://www.dominos.co.in/theme/front/images/dominos-logo-right-sec.gif" alt="Dominos"/></a>
+        <a target="_blank" href="http://www.jubilantfoodworks.com/"><img src="http://www.dominos.co.in/theme/front/images/jubilant-logo-right-sec.jpg" alt="Jubilant Food Works" /></a>
+    </section>
+    <div class="home-copy"></div>
+</aside>            </div>
+            <div class="copyright">All rights reserved. Copyright &copy; Jubilant FoodWorks Ltd. | <a href="http://www.dominos.co.in/disclaimer">Disclaimer</a> | <a href="http://www.dominos.co.in/privacy-policy">Privacy Policy</a></div>        
+        </div>
+                <!-- Advertiser 'BLAZAR- (UNIT OF QUASAR MEDIA PVT LTD) - JUBILANT FOODWORKS LTD',  Include user in segment 'Site Retargeting Pixel' - DO NOT MODIFY THIS PIXEL IN ANY WAY -->
+        <img src="http://ad.yieldmanager.com/pixel?id=1338851&amp;t=2" width="1" height="1" alt="" />
+        <!-- End of segment tag -->
+        <!-- Google Code for Visitors of Dominos Website Remarketing List -->
+        <script type="text/javascript">
+        /* <![CDATA[ */  
+        var google_conversion_id = 972223377;
+        var google_conversion_language = "en"; 
+        var google_conversion_format = "3"; 
+        var google_conversion_color = "666666";
+        var google_conversion_label = "4TXkCK-5zwIQkefLzwM"; 
+        var google_conversion_value = 0;  
+        /* ]]> */
+        </script>
+        <script type="text/javascript" src="http://www.googleadservices.com/pagead/conversion.js"></script>
+        <noscript> 
+            <div style="display:inline;">  
+                <img height="1" width="1" style="border-style:none;" src="http://www.googleadservices.com/pagead/conversion/972223377/?label=4TXkCK-5zwIQkefLzwM&amp;guid=ON&amp;script=0" alt="" />
+            </div> 
+        </noscript>
+    </body>
+</html>

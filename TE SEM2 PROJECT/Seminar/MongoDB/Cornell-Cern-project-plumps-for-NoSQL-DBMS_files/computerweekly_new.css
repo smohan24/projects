@@ -1,0 +1,128 @@
+/*! Tue May 22 22:13:00 EDT 2012 */
+.siteName:after { content: 'ComputerWeekly'; }
+#headerLogo a { background-image: url(../images/computerweekly/redesign2/headerLogo.png); top: 16px; width: 320px; height: 56px; }
+
+a.viewAll, li.viewAll a, a.callToAction, .mmContent .viewAll a, #mteExpandedContent .listTypeInlinePipe a, a.listTypeCollapsibleOpenAll,
+.listTypePagination li a.currentPage, #parentTopicNav a, .pageListSort a.activeSort, .listTypeToc li a, .showMoreButton a,
+.photoGalleryHeader h2.photoTitle, .promoContentHeader { color: #cc3333 !important; }
+.currentThumbnail { border-color: #cc3333; }
+.primaryButton, .primaryButton:active, .primaryButton:hover, .primaryButton:focus, input.primaryButton[type="submit"],
+input.primaryButton[type="button"], input.primaryButton[type="reset"], .megaMenu ul li.mmNavItemFocus, .articleHiddenPanelButton a { background-color: #cc3333; }
+
+#headerTechtargetLogo, input.navigationSearchSubmitButton, #contentTools li a, #floatingToolbar a, a.poweredBy, .poweredBy a, .downloadThis a span, 
+.secondaryButton span.icon, .leadStory .tracer, .listTypeTabHorizontal span, .showMoreButton span, #newsletterWidgetExpand, span.tooltipText, 
+.paginationNav .paginationPrevious span, .paginationNav .paginationNext span, .paginationNav .paginationPrevious a, .listTypeTab li.selected span, 
+.paginationNav .paginationNext a, #byline .authorEmail a, .paginationNavigation .pageNext, .paginationNavigation .pagePrevious,
+.inputCombo .inputComboSubmit, #newsletterWidgetExpand, .sliderConrols a, .carouselPagination a, .filmstripPrevious, .filmstripNext, 
+.photoGalleryHeader .photoGalleryPagination a, .photoGalleryBody .photoGalleryPagination span, .photoGalleryFooter .photoEnlarge span, .photoGalleryCaption .photoGalleryPagination a,
+#byline .authorEmail, .emailOptin h4 span, input.emailOptinFormEmailAddressSubmit, .articleCol1 .emailOptin h4 span, #membershipLinks #mlEmailAlerts span, input.mlOptinFormEmailAddressSubmit { background-image: url(../images/computerweekly/redesign2/spriteGlobalCw.png); }
+
+#article .listTypeTab li.selected span { background-position: -178px -65px; } /* ? */
+
+.listTypeCollapsible > li.hasChildTopics { background-image: url(../images/computerweekly/redesign/iconArrowColorSecondaryLargeSouth.png); }
+.open .listTypeCollapsibleContent .listTypeCollapsibleClose { background-image: url(../images/computerweekly/redesign/iconArrowColorSecondaryLargeNorth.png); }
+
+#content { background: #f0f8fb; }
+#header { background: #fff; }
+#headerLogo { background-image: none; background-color: #fff; }
+.navigationSearch { height: 39px; width: 228px; position: relative; padding-right: 2px; border-right: 1px dotted #999; }
+input.navigationSearchBox { color: #ccc; margin: 6px 0 0 0; }
+input.navigationSearchSubmitButton { height: 39px; width: 40px; left: -5px; top: -1px; background-position: 0 -111px; }
+#headerNavigation, #footerNavigation { border-bottom: 1px solid #506784; border-top: 1px solid #506784; background: #506784; padding: 0; margin: 0; height: 41px; filter: none; }
+#headerNavigationCompress, #footerNavigationCompress { background: #506784; }
+#headerNavigation .mmContent, #footerNavigation .mmContent { border-color: #506784; }
+#headerNavigation .mmContent { top: 42px; }
+#footerNavigation .mmContent { bottom: 42px; }
+.megaMenu .mmNavItem { border-right: 1px dotted #999; height: 41px; }
+.megaMenu .mmNavItem:first-child { border-left: 1px dotted #999; }
+.megaMenu .mmNavItem .mmNavLink { top: 5px; }
+h1, h2, h3, h4, h5, h6 { color: #74b6c9; }
+a:link, a:hover, a:active { color: #506784; }
+a:visited { color: #74b6c9; }
+.decorationTopLeft, .decorationBottomRight { display: none; }
+#headline h1, #articleBody h1, #articleBody h2, .mmContent ul li h5, #tipSeriesToc h4  { color: #666; }
+.sliderThumbnailText .storySummary { color: #74b6c9; }
+#breadcrumbs { margin: 0 0 5px; }
+#breadcrumbs ul, #breadcrumbs ul a { color: #506784; }
+#breadcrumbs ul li:before { color: #cc3333; }
+#home .articleSection h3, #home .articleColumns h3 { color: #74b6c9; }
+#membershipLinks li, #membershipLinks a { color: #666; }
+.contributorName { color: #cc3333; }
+.splashBodyShowButton span { display: block; position: absolute; height: 20px; width: 20px; background-color: red; left: 0; }
+#article { z-index: 1;  }
+#byline {width:180px;}
+#eyebrow p { font-weight: bold; color: #74b6c9; }
+#headline h1 { color: #666; font-weight: normal; }
+#subhead h2 { color: #666; }
+/* #relatedSites h5 { color: #cc3333; font-weight: normal; } */
+.editorialSplash .splashHeader { background-image: none; padding: 10px; border: 1px solid #b1b1b1; background-color: #fff; border-bottom: none; }
+.editorialSplash .splashHeader h4 { color: #cc3333; padding: 0; }
+.splashBody { padding-top: 0; border-top: none; }
+.splashBody .listTypeTooltip li,
+.splashBody .listTypeBlogroll li,
+.splashBody .listTypeNoBullet li { border-bottom: 1px dotted #999; margin-bottom: 0; padding: 8px 4px; }
+.splashBody .listTypeTooltip li:first-child,
+.splashBody .listTypeBlogroll li:first-child,
+.splashBody .listTypeNoBullet li:first-child { border-top: 1px dotted #999; }
+.splashBody .listTypeTooltip li { padding: 8px 4px 8px 24px; }
+.splashBody .listTypeTooltip li:nth-child(2n+1),
+.splashBody .listTypeBlogroll li:nth-child(2n+1), 
+.splashBody .listTypeNoBullet li:nth-child(2n+1) { background-color: #eef4f8; }
+.splashBody .listTypeBlogroll:first-child { margin-bottom: -1px; }
+.splashBody2Cols .listTypeBlogroll li { border: none !important; background-color: transparent !important; }
+.splashBody li.viewAll { border: none; text-align: center; padding:  10px 0 0; background-color: transparent !important; }
+.splashBody li a { font-weight: bold; }
+.splashBody .listTypeTooltip li span.tooltipText { top: .8em; left: 6px; }
+.splashBody .listTypeAlpha li { border: none; }
+.adSplash { border: none; background-color: transparent; }
+#featuredWhitepapers .splashHeader h4 { color: #74b6c9; }
+#featuredWhitepapers li { background-color: #fff !important; }
+#home .editorialSplash .splashHeader h4  { color: #74b6c9; padding-bottom: 10px; }
+.listTypeTab li a { color: #666; } 
+.listTypeTab li.selected a { background-color: #eef4f8; }
+
+.listTypeTabHorizontal li.selected a { background-color: #eef4f8; }
+a:focus { background-color: #eef4f8; }
+
+.listTypeStorySlider li .storySummary { color: #74b6c9; } 
+.megaMenu .mmNavItem .mmNavLink .mmNavLinkEyebrow { color: #74b6c9; margin-bottom: 2px; } 
+.listTypeStorySlider li, .listTypeVideoSlider li { margin-right: 8px; } /* ?? */
+
+#footerMiscLinks ul li { margin-left: 30px; }
+*:first-child+html #footerMiscLinks ul li { margin-left: 27px; }
+#footerMiscLinks ul li a { color: #506784; }
+.splashBody h5 { border: none; color: #74b6c9; }
+.splashBody .listTypeCollapsible h5 a { font-weight: bold; color: #506784; }
+.splashBody .listTypeCollapsibleOpenAll { right: 10px; }
+.mmContent ul.mmContentLinkList li { border-top: none; }
+.currentThumbnail { border-color: #c33; }
+.leadStoryTypeInteractive .leadStoryStage { border-color: #c33; }
+.photoIndex { color: #c33; }
+
+#relatedContent { border-top: 1px dotted #999; padding-top: 20px; }
+#relatedContent > h4 { border-bottom: none; color: #cc3333; margin-bottom: 15px; }
+#relatedContentShow, #relatedContentHide { padding: 0; }
+#relatedContentShow h4, #relatedContentHide h4 { color: #999; margin-bottom: 10px; }
+
+/* jobs page */
+#splashJobsLocationMap p { text-align: center; }
+.cwbrowse a { padding: 0 8px 0 0; font-size: 11px; text-align:center; }
+.cwbrowse_links a { padding: 0 30px 0 0; }
+.CWJobs-124x44 { overflow: hidden; margin: 0; padding: 1em 0 1.5em; list-style: none; }
+.CWJobs-124x44 li { margin-right:1.1em; padding:0; width:124px; height:44px; border:1px solid #ccc; float:left; }
+
+.emailOptin h4, .articleCol1 .emailOptin h4 {color:#000;}
+.emailOptin h4 span {background-position:-135px -112px;}
+.articleCol1 .emailOptin h4 span {background-position:-155px -112px;}
+
+#membershipLinks #mlEmailAlerts span {background-position:-156px -113px;}
+#membershipLinks #mlEmailAlerts .mlOptin {box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.5);}
+#membershipLinks #mlEmailAlerts .mlOptin p strong {color:#000;}
+
+/* reg */
+.registration #headerLogoBand { background: transparent url(../images/global/redesign/headerTechtargetLogoBlack.png) no-repeat 100% 50% !important; }
+.registration #header, .magRegistration #header {border-bottom:1px solid #506784;}
+.registration #headerLogo {background-color:transparent;}
+.registration h2, .registration h3 {color:#000;}
+
+.premiumContentPromo {z-index:2;}

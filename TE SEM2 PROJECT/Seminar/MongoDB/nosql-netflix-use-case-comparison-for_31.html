@@ -1,0 +1,2179 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html dir="ltr"><head>
+<meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+<script async="" src="nosql-netflix-use-case-comparison-for_31_files/cbgapi.loaded_1"></script><script async="" src="nosql-netflix-use-case-comparison-for_31_files/cbgapi.loaded_0"></script><script type="text/javascript">(function() { var b=window,e="jstiming",g="tick";(function(){function d(a){this.t={};this.tick=function(a,d,c){c=void 0!=c?c:(new Date).getTime();this.t[a]=[c,d]};this[g]("start",null,a)}var a=new d;b.jstiming={Timer:d,load:a};if(b.performance&&b.performance.timing){var a=b.performance.timing,c=b[e].load,f=a.navigationStart,a=a.responseStart;0<f&&a>=f&&(c[g]("_wtsrt",void 0,f),c[g]("wtsrt_","_wtsrt",a),c[g]("tbsd_","wtsrt_"))}try{a=null,b.chrome&&b.chrome.csi&&(a=Math.floor(b.chrome.csi().pageT),c&&0<f&&(c[g]("_tbnd",void 0,b.chrome.csi().startE),
+c[g]("tbnd_","_tbnd",f))),null==a&&b.gtbExternal&&(a=b.gtbExternal.pageT()),null==a&&b.external&&(a=b.external.pageT,c&&0<f&&(c[g]("_tbnd",void 0,b.external.startE),c[g]("tbnd_","_tbnd",f))),a&&(b[e].pt=a)}catch(l){}})();b.tickAboveFold=function(d){var a=0;if(d.offsetParent){do a+=d.offsetTop;while(d=d.offsetParent)}d=a;750>=d&&b[e].load[g]("aft")};var h=!1;function k(){h||(h=!0,b[e].load[g]("firstScrollTime"))}b.addEventListener?b.addEventListener("scroll",k,!1):b.attachEvent("onscroll",k);
+ })();</script>
+<meta content="true" name="MSSmartTagsPreventParsing">
+<meta content="blogger" name="generator">
+<link href="http://perfcap.blogspot.in/favicon.ico" rel="icon" type="image/x-icon">
+<link href="http://perfcap.blogspot.com/2010/10/nosql-netflix-use-case-comparison-for_31.html" rel="canonical">
+<link rel="alternate" type="application/atom+xml" title="Adrian Cockcroft's Blog - Atom" href="http://perfcap.blogspot.com/feeds/posts/default">
+<link rel="alternate" type="application/rss+xml" title="Adrian Cockcroft's Blog - RSS" href="http://perfcap.blogspot.com/feeds/posts/default?alt=rss">
+<link rel="service.post" type="application/atom+xml" title="Adrian Cockcroft's Blog - Atom" href="http://www.blogger.com/feeds/7434008/posts/default">
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="http://www.blogger.com/rsd.g?blogID=7434008">
+<link rel="alternate" type="application/atom+xml" title="Adrian Cockcroft's Blog - Atom" href="http://perfcap.blogspot.com/feeds/4142906401694795007/comments/default">
+<!--[if IE]> <script> (function() { var html5 = ("abbr,article,aside,audio,canvas,datalist,details," + "figure,footer,header,hgroup,mark,menu,meter,nav,output," + "progress,section,time,video").split(','); for (var i = 0; i < html5.length; i++) { document.createElement(html5[i]); } try { document.execCommand('BackgroundImageCache', false, true); } catch(e) {} })(); </script> <![endif]-->
+<title>Adrian Cockcroft's Blog: NoSQL Netflix Use Case Comparison for MongoDB</title>
+<link type="text/css" rel="stylesheet" href="nosql-netflix-use-case-comparison-for_31_files/169485293-widget_css_bundle.htm">
+<link type="text/css" rel="stylesheet" href="nosql-netflix-use-case-comparison-for_31_files/authorization.htm">
+<style id="page-skin-1" type="text/css"><!--
+/*
+-----------------------------------------------------
+Blogger Template Style Sheet
+Name:     Scribe
+Date:     27 Feb 2004
+Updated by: Blogger Team
+------------------------------------------------------ */
+/*
+Variable definitions
+====================
+<Variable name="textColor" description="Text Color" type="color"
+default="#29303b">
+<Variable name="postTitleColor" description="Post Title Color" type="color"
+default="#1b0431">
+<Variable name="linkColor" description="Link Color" type="color"
+default="#473624">
+<Variable name="visitedLinkColor" description="Visited Link Color" type="color"
+default="#956839">
+<Variable name="pageHeaderColor" description="Blog Title Color" type="color"
+default="#612e00">
+<Variable name="blogDescriptionColor" description="Blog Description Color"
+type="color" default="#29303B">
+<Variable name="sidebarHeaderColor" description="Sidebar Title Color"
+type="color"
+default="#211104">
+<Variable name="bodyFont" description="Text Font"
+type="font"
+default="normal normal 100% Georgia, Times New Roman,Sans-Serif;">
+<Variable name="headerFont" description="Sidebar Title Font"
+type="font"
+default="normal normal 150% Georgia, Times New Roman,sans-serif">
+<Variable name="pageTitleFont" description="Blog Title Font"
+type="font"
+default="normal normal 225% Georgia, Times New Roman,sans-serif">
+<Variable name="blogDescriptionFont" description="Blog Description Font"
+type="font"
+default="italic normal 100% Georgia, Times New Roman, sans-serif">
+<Variable name="startSide" description="Start side in blog language"
+type="automatic" default="left">
+<Variable name="endSide" description="End side in blog language"
+type="automatic" default="right">
+*/
+/* Defaults
+----------------------------------------------- */
+body {
+margin:0;
+padding:0;
+font-size: small;
+text-align:center;
+color:#29303b;
+line-height:1.3em;
+background:#483521 url("http://www2.blogblog.com/scribe/bg.gif") repeat;
+}
+blockquote {
+font-style:italic;
+padding:0 32px;
+line-height:1.6;
+margin-top:0;
+margin-right:0;
+margin-bottom:.6em;
+margin-left:0;
+}
+p {
+margin:0;
+padding:0;
+}
+abbr, acronym {
+cursor:help;
+font-style:normal;
+}
+code {
+font-size: 90%;
+white-space:normal;
+color:#666;
+}
+hr {display:none;}
+img {border:0;}
+/* Link styles */
+a:link {
+color:#473624;
+text-decoration:underline;
+}
+a:visited {
+color: #956839;
+text-decoration:underline;
+}
+a:hover {
+color: #956839;
+text-decoration:underline;
+}
+a:active {
+color: #956839;
+}
+/* Layout
+----------------------------------------------- */
+#outer-wrapper {
+background-color:#473624;
+border-left:1px solid #332A24;
+border-right:1px solid #332A24;
+width:700px;
+margin:0px auto;
+padding:8px;
+text-align:center;
+font: normal normal 100% Georgia, Times New Roman,Sans-Serif;;
+}
+#main-top {
+width:700px;
+height:49px;
+background:#FFF3DB url("http://www2.blogblog.com/scribe/bg_paper_top.jpg") no-repeat top left;
+margin:0px;
+padding:0px;
+display:block;
+}
+#main-bot {
+width:700px;
+height:81px;
+background:#FFF3DB url("http://www.blogblog.com/scribe/bg_paper_bot.jpg") no-repeat top left;
+margin:0;
+padding:0;
+display:block;
+}
+#wrap2 {
+width:700px;
+background:#FFF3DB url("http://www1.blogblog.com/scribe/bg_paper_mid.jpg") repeat-y;
+margin-top: -14px;
+margin-right: 0px;
+margin-bottom: 0px;
+margin-left: 0px;
+text-align:left;
+display:block;
+}
+#wrap3 {
+padding:0 50px;
+}
+.Header {
+}
+h1 {
+margin:0;
+padding-top:0;
+padding-right:0;
+padding-bottom:6px;
+padding-left:0;
+font: normal normal 225% Georgia, Times New Roman,sans-serif;
+color: #612e00;
+}
+h1 a:link {
+text-decoration:none;
+color: #612e00;
+}
+h1 a:visited {
+text-decoration:none;
+}
+h1 a:hover {
+border:0;
+text-decoration:none;
+}
+.Header .description {
+margin:0;
+padding:0;
+line-height:1.5em;
+color: #29303B;
+font: italic normal 100% Georgia, Times New Roman, sans-serif;
+}
+#sidebar-wrapper {
+clear:left;
+}
+#main {
+width:430px;
+float:right;
+padding:8px 0;
+margin:0;
+word-wrap: break-word; /* fix for long text breaking sidebar float in IE */
+overflow: hidden;     /* fix for long non-text content breaking IE sidebar float */
+}
+#sidebar {
+width:150px;
+float:left;
+padding:8px 0;
+margin:0;
+word-wrap: break-word; /* fix for long text breaking sidebar float in IE */
+overflow: hidden;     /* fix for long non-text content breaking IE sidebar float */
+}
+#footer {
+clear:both;
+background:url("http://www.blogblog.com/scribe/divider.gif") no-repeat top left;
+padding-top:10px;
+_padding-top:6px; /* IE Windows target */
+}
+#footer p {
+line-height:1.5em;
+font-size:75%;
+}
+/* Typography :: Main entry
+----------------------------------------------- */
+h2.date-header {
+font-weight:normal;
+text-transform:uppercase;
+letter-spacing:.1em;
+font-size:90%;
+margin:0;
+padding:0;
+}
+.post {
+margin-top:8px;
+margin-right:0;
+margin-bottom:24px;
+margin-left:0;
+}
+.post h3 {
+font-weight:normal;
+font-size:140%;
+color:#1b0431;
+margin:0;
+padding:0;
+}
+.post h3 a {
+color: #1b0431;
+}
+.post-body p {
+line-height:1.5em;
+margin-top:0;
+margin-right:0;
+margin-bottom:.6em;
+margin-left:0;
+}
+.post-footer {
+font-family: Verdana, sans-serif;
+font-size:74%;
+border-top:1px solid #BFB186;
+padding-top:6px;
+}
+.post-footer a {
+margin-right: 6px;
+}
+.post ul {
+margin:0;
+padding:0;
+}
+.post li {
+line-height:1.5em;
+list-style:none;
+background:url("http://www.blogblog.com/scribe/list_icon.gif") no-repeat left .3em;
+vertical-align:top;
+padding-top: 0;
+padding-right: 0;
+padding-bottom: .6em;
+padding-left: 17px;
+margin:0;
+}
+.feed-links {
+clear: both;
+line-height: 2.5em;
+}
+#blog-pager-newer-link {
+float: left;
+}
+#blog-pager-older-link {
+float: right;
+}
+#blog-pager {
+text-align: center;
+}
+/* Typography :: Sidebar
+----------------------------------------------- */
+.sidebar h2 {
+margin:0;
+padding:0;
+color:#211104;
+font: normal normal 150% Georgia, Times New Roman,sans-serif;
+}
+.sidebar h2 img {
+margin-bottom:-4px;
+}
+.sidebar .widget {
+font-size:86%;
+margin-top:6px;
+margin-right:0;
+margin-bottom:12px;
+margin-left:0;
+padding:0;
+line-height: 1.4em;
+}
+.sidebar ul li {
+list-style: none;
+margin:0;
+}
+.sidebar ul {
+margin-left: 0;
+padding-left: 0;
+}
+/* Comments
+----------------------------------------------- */
+#comments {}
+#comments h4 {
+font-weight:normal;
+font-size:120%;
+color:#29303B;
+margin:0;
+padding:0;
+}
+#comments-block {
+line-height:1.5em;
+}
+.comment-author {
+background:url("http://www.blogblog.com/scribe/list_icon.gif") no-repeat 2px .35em;
+margin:.5em 0 0;
+padding-top:0;
+padding-right:0;
+padding-bottom:0;
+padding-left:20px;
+font-weight:bold;
+}
+.comment-body {
+margin:0;
+padding-top:0;
+padding-right:0;
+padding-bottom:0;
+padding-left:20px;
+}
+.comment-body p {
+font-size:100%;
+margin-top:0;
+margin-right:0;
+margin-bottom:.2em;
+margin-left:0;
+}
+.comment-footer {
+color:#29303B;
+font-size:74%;
+margin:0 0 10px;
+padding-top:0;
+padding-right:0;
+padding-bottom:.75em;
+padding-left:20px;
+}
+.comment-footer a:link {
+color:#473624;
+text-decoration:underline;
+}
+.comment-footer a:visited {
+color:#716E6C;
+text-decoration:underline;
+}
+.comment-footer a:hover {
+color:#956839;
+text-decoration:underline;
+}
+.comment-footer a:active {
+color:#956839;
+text-decoration:none;
+}
+.deleted-comment {
+font-style:italic;
+color:gray;
+}
+/* Profile
+----------------------------------------------- */
+#main .profile-data {
+display:inline;
+}
+.profile-datablock, .profile-textblock {
+margin-top:0;
+margin-right:0;
+margin-bottom:4px;
+margin-left:0;
+}
+.profile-data {
+margin:0;
+padding-top:0;
+padding-right:8px;
+padding-bottom:0;
+padding-left:0;
+text-transform:uppercase;
+letter-spacing:.1em;
+font-size:90%;
+color:#211104;
+}
+.profile-img {
+float: left;
+margin-top: 0;
+margin-right: 5px;
+margin-bottom: 5px;
+margin-left: 0;
+border:1px solid #A2907D;
+padding:2px;
+}
+#header .widget, #main .widget {
+margin-bottom:12px;
+padding-bottom:12px;
+}
+#header {
+background:url("http://www.blogblog.com/scribe/divider.gif") no-repeat bottom left;
+}
+/** Page structure tweaks for layout editor wireframe */
+body#layout #outer-wrapper {
+margin-top: 0;
+padding-top: 0;
+}
+body#layout #wrap2,
+body#layout #wrap3 {
+margin-top: 0;
+}
+body#layout #main-top {
+display:none;
+}
+
+--></style>
+<script type="text/javascript">var a=navigator,b="userAgent",c="indexOf",f="&m=1",g="(^|&)m=",h="?",k="?m=1";function l(){var d=window.location.href,e=d.split(h);switch(e.length){case 1:return d+k;case 2:return 0<=e[1].search(g)?null:d+f;default:return null}}if(-1!=a[b][c]("Mobile")&&-1!=a[b][c]("WebKit")&&-1==a[b][c]("iPad")||-1!=a[b][c]("Opera Mini")||-1!=a[b][c]("IEMobile")){var m=l();m&&window.location.replace(m)};
+</script><script type="text/javascript">
+if (window.jstiming) window.jstiming.load.tick('headEnd');
+</script><script src="nosql-netflix-use-case-comparison-for_31_files/google_top_exp.js" type="text/javascript"></script><style>.gc-bubbleDefault{background-color:transparent !important;text-align:left;padding:0 !important;margin:0 !important;border:0 !important;table-layout:auto !important}.gc-reset{background-color:transparent !important;border:0 !important;padding:0 !important;margin:0 !important;text-align:left}.pls-bubbleTop{border-bottom:1px solid #ccc !important}.pls-topTail,.pls-vertShimLeft,.pls-contentLeft{background-image:url(//ssl.gstatic.com/s2/oz/images/stars/po/bubblev1/border_3.gif) !important}.pls-topTail{background-repeat:repeat-x !important;background-position:bottom !important}.pls-vertShim{background-color:#fff !important;text-align:right}.pls-vertShimLeft{background-repeat:repeat-y !important;background-position:right !important;height:4px}.pls-vertShimRight{height:4px}.pls-confirm-container .pls-vertShim{background-color:#fff3c2 !important}.pls-contentWrap{background-color:#fff !important;position:relative !important;vertical-align:top}.pls-contentLeft{background-repeat:repeat-y;background-position:right;vertical-align:top}.pls-dropRight{background-image:url(//ssl.gstatic.com/s2/oz/images/stars/po/bubblev1/bubbleDropR_3.png) !important;background-repeat:repeat-y !important;vertical-align:top}.pls-vert,.pls-tailleft,.pls-dropTR .pls-dropBR,.pls-dropBL,.pls-vert img{vertical-align:top}.pls-dropBottom{background-image:url(//ssl.gstatic.com/s2/oz/images/stars/po/bubblev1/bubbleDropB_3.png) !important;background-repeat:repeat-x !important;width:100%;vertical-align:top}.pls-topLeft{background:inherit !important;text-align:right;vertical-align:bottom}.pls-topRight{background:inherit !important;text-align:left;vertical-align:bottom}.pls-bottomLeft{background:inherit !important;text-align:right}.pls-bottomRight{background:inherit !important;text-align:left;vertical-align:top}.pls-tailtop,.pls-tailright,.pls-tailbottom,.pls-tailleft{display:none;position:relative}.pls-tailbottom,.pls-tailtop,.pls-tailright,.pls-tailleft,.pls-dropTR,.pls-dropBR,.pls-dropBL{background-image:url(//ssl.gstatic.com/s2/oz/images/stars/po/bubblev1/bubbleSprite_3.png) !important;background-repeat:no-repeat}.pls-tailbottom{background-position:-23px 0}.pls-confirm-container .pls-tailbottom{background-position:-23px -10px}.pls-tailtop{background-position:-19px -20px}.pls-tailright{background-position:0 0}.pls-tailleft{background-position:-10px 0}.pls-tailtop{vertical-align:top}.gc-bubbleDefault td{line-height:0;font-size:0}.pls-topLeft img,.pls-topRight img,.pls-tailbottom{vertical-align:bottom}.pls-bottomLeft img,.bubbleDropTR,.pls-dropBottomL img,.pls-dropBottom img,.pls-dropBottomR img,.pls-bottomLeft{vertical-align:top}.pls-dropTR{background-position:0 -22px}.pls-dropBR{background-position:0 -27px}.pls-dropBL{background-position:0 -16px}.pls-spacertop,.pls-spacerright,.pls-spacerbottom,.pls-spacerleft{position:static !important}.pls-spinner{bottom:0;position:absolute;left:0;margin:auto;right:0;top:0}</style><link href="nosql-netflix-use-case-comparison-for_31_files/blog-widget.css" type="text/css" rel="stylesheet"></head>
+<body>
+<div class="navbar section" id="navbar"><div class="widget Navbar" id="Navbar1"><script type="text/javascript">
+    function setAttributeOnload(object, attribute, val) {
+      if(window.addEventListener) {
+        window.addEventListener('load',
+          function(){ object[attribute] = val; }, false);
+      } else {
+        window.attachEvent('onload', function(){ object[attribute] = val; });
+      }
+    }
+  </script>
+<div id="navbar-iframe-container"><iframe src="nosql-netflix-use-case-comparison-for_31_files/navbar.htm" name="navbar-iframe" id="navbar-iframe" vspace="0" tabindex="0" style="" marginwidth="0" marginheight="0" hspace="0" frameborder="0" scrolling="no" width="100%"></iframe></div>
+<script gapi_processed="true" type="text/javascript" src="nosql-netflix-use-case-comparison-for_31_files/plusone.js"></script>
+<script type="text/javascript">
+        gapi.load("iframes-styles-bubble", function() {
+          if (window.iframes && iframes.open) {
+            iframes.open(
+                '//www.blogger.com/navbar.g?targetBlogID\0757434008\46blogName\75Adrian+Cockcroft\47s+Blog\46publishMode\75PUBLISH_MODE_BLOGSPOT\46navbarType\75TAN\46layoutType\75LAYOUTS\46searchRoot\75http://perfcap.blogspot.com/search\46blogLocale\75en_US\46v\0752\46homepageUrl\75http://perfcap.blogspot.com/\46targetPostID\0754142906401694795007\46blogPostOrPageUrl\75http://perfcap.blogspot.com/2010/10/nosql-netflix-use-case-comparison-for_31.html\46vt\0752649367636424977709',
+                {
+                  container: "navbar-iframe-container",
+                  id: "navbar-iframe"
+                },
+                {
+                });
+          }
+        });
+      </script><script type="text/javascript">
+(function() {
+var script = document.createElement('script');
+script.type = 'text/javascript';
+script.src = '//pagead2.googlesyndication.com/pagead/js/google_top_exp.js';
+var head = document.getElementsByTagName('head')[0];
+if (head) {
+head.appendChild(script);
+}})();
+</script>
+</div></div>
+<div id="outer-wrapper">
+<div id="main-top"></div>
+<!-- placeholder for image -->
+<div id="wrap2"><div id="wrap3">
+<div class="header section" id="header"><div class="widget Header" id="Header1">
+<div id="header-inner">
+<div class="titlewrapper">
+<h1 class="title">
+<a href="http://perfcap.blogspot.in/">Adrian Cockcroft's Blog</a>
+</h1>
+</div>
+<div class="descriptionwrapper">
+<p class="description"><span>This site contains my thoughts on 
+performance tools, cloud architecture and capacity planning since 2004. 
+It also covers anything else I find interesting, like cars, iPhone apps,
+ and strange complex music... I don't post here often, but I tweet a lot
+ @adrianco</span></p>
+</div>
+</div>
+</div></div>
+<div id="crosscol-wrapper" style="text-align:center">
+<div class="crosscol section" id="crosscol"></div>
+</div>
+<div id="sidebar-wrapper">
+<div class="sidebar section" id="sidebar"><div class="widget AdSense" id="AdSense1">
+<div class="widget-content">
+<script type="text/javascript"><!--
+google_ad_client="pub-4892855426305845";
+google_ad_host="pub-1556223355139109";
+google_ad_host_channel="00000";
+google_ad_width=120;
+google_ad_height=600;
+google_ad_format="120x600_as";
+google_ad_type="text";
+google_color_border="FFFFFF";
+google_color_bg="FFFFFF";
+google_color_link="29303B";
+google_color_url="473624";
+google_color_text="1B0431";
+//--></script>
+<script type="text/javascript" src="nosql-netflix-use-case-comparison-for_31_files/show_ads.htm">
+</script>
+<div class="clear"></div>
+<span class="widget-item-control">
+<span class="item-control blog-admin">
+<a class="quickedit" href="http://www.blogger.com/rearrange?blogID=7434008&amp;widgetType=AdSense&amp;widgetId=AdSense1&amp;action=editWidget&amp;sectionId=sidebar" onclick='return _WidgetManager._PopupConfig(document.getElementById("AdSense1"));' target="configAdSense1" title="Edit">
+<img alt="" src="nosql-netflix-use-case-comparison-for_31_files/icon18_wrench_allbkg.png" height="18" width="18">
+</a>
+</span>
+</span>
+<div class="clear"></div>
+</div>
+</div><div class="widget HTML" id="HTML3">
+<div class="widget-content">
+<script src="nosql-netflix-use-case-comparison-for_31_files/x69zm9im38.js" type="text/javascript"> </script>
+</div>
+<div class="clear"></div>
+<span class="widget-item-control">
+<span class="item-control blog-admin">
+<a class="quickedit" href="http://www.blogger.com/rearrange?blogID=7434008&amp;widgetType=HTML&amp;widgetId=HTML3&amp;action=editWidget&amp;sectionId=sidebar" onclick='return _WidgetManager._PopupConfig(document.getElementById("HTML3"));' target="configHTML3" title="Edit">
+<img alt="" src="nosql-netflix-use-case-comparison-for_31_files/icon18_wrench_allbkg.png" height="18" width="18">
+</a>
+</span>
+</span>
+<div class="clear"></div>
+</div><div class="widget BlogArchive" id="BlogArchive1">
+<h2>Archive</h2>
+<div class="widget-content">
+<div id="ArchiveList">
+<div id="BlogArchive1_ArchiveList">
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+          ►&nbsp;
+        
+</span>
+</a>
+<a class="post-count-link" href="http://perfcap.blogspot.in/search?updated-min=2013-01-01T00:00:00-08:00&amp;updated-max=2014-01-01T00:00:00-08:00&amp;max-results=2">2013</a>
+<span class="post-count" dir="ltr">(2)</span>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+          ►&nbsp;
+        
+</span>
+</a>
+<a class="post-count-link" href="http://perfcap.blogspot.in/2013_01_01_archive.html">January</a>
+<span class="post-count" dir="ltr">(2)</span>
+</li>
+</ul>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+          ►&nbsp;
+        
+</span>
+</a>
+<a class="post-count-link" href="http://perfcap.blogspot.in/search?updated-min=2012-01-01T00:00:00-08:00&amp;updated-max=2013-01-01T00:00:00-08:00&amp;max-results=9">2012</a>
+<span class="post-count" dir="ltr">(9)</span>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+          ►&nbsp;
+        
+</span>
+</a>
+<a class="post-count-link" href="http://perfcap.blogspot.in/2012_11_01_archive.html">November</a>
+<span class="post-count" dir="ltr">(2)</span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+          ►&nbsp;
+        
+</span>
+</a>
+<a class="post-count-link" href="http://perfcap.blogspot.in/2012_10_01_archive.html">October</a>
+<span class="post-count" dir="ltr">(1)</span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+          ►&nbsp;
+        
+</span>
+</a>
+<a class="post-count-link" href="http://perfcap.blogspot.in/2012_09_01_archive.html">September</a>
+<span class="post-count" dir="ltr">(1)</span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+          ►&nbsp;
+        
+</span>
+</a>
+<a class="post-count-link" href="http://perfcap.blogspot.in/2012_06_01_archive.html">June</a>
+<span class="post-count" dir="ltr">(1)</span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+          ►&nbsp;
+        
+</span>
+</a>
+<a class="post-count-link" href="http://perfcap.blogspot.in/2012_04_01_archive.html">April</a>
+<span class="post-count" dir="ltr">(1)</span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+          ►&nbsp;
+        
+</span>
+</a>
+<a class="post-count-link" href="http://perfcap.blogspot.in/2012_03_01_archive.html">March</a>
+<span class="post-count" dir="ltr">(2)</span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+          ►&nbsp;
+        
+</span>
+</a>
+<a class="post-count-link" href="http://perfcap.blogspot.in/2012_01_01_archive.html">January</a>
+<span class="post-count" dir="ltr">(1)</span>
+</li>
+</ul>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+          ►&nbsp;
+        
+</span>
+</a>
+<a class="post-count-link" href="http://perfcap.blogspot.in/search?updated-min=2011-01-01T00:00:00-08:00&amp;updated-max=2012-01-01T00:00:00-08:00&amp;max-results=8">2011</a>
+<span class="post-count" dir="ltr">(8)</span>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+          ►&nbsp;
+        
+</span>
+</a>
+<a class="post-count-link" href="http://perfcap.blogspot.in/2011_12_01_archive.html">December</a>
+<span class="post-count" dir="ltr">(1)</span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+          ►&nbsp;
+        
+</span>
+</a>
+<a class="post-count-link" href="http://perfcap.blogspot.in/2011_09_01_archive.html">September</a>
+<span class="post-count" dir="ltr">(2)</span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+          ►&nbsp;
+        
+</span>
+</a>
+<a class="post-count-link" href="http://perfcap.blogspot.in/2011_08_01_archive.html">August</a>
+<span class="post-count" dir="ltr">(1)</span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+          ►&nbsp;
+        
+</span>
+</a>
+<a class="post-count-link" href="http://perfcap.blogspot.in/2011_03_01_archive.html">March</a>
+<span class="post-count" dir="ltr">(3)</span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+          ►&nbsp;
+        
+</span>
+</a>
+<a class="post-count-link" href="http://perfcap.blogspot.in/2011_02_01_archive.html">February</a>
+<span class="post-count" dir="ltr">(1)</span>
+</li>
+</ul>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate expanded">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy toggle-open">▼&nbsp;</span>
+</a>
+<a class="post-count-link" href="http://perfcap.blogspot.in/search?updated-min=2010-01-01T00:00:00-08:00&amp;updated-max=2011-01-01T00:00:00-08:00&amp;max-results=50">2010</a>
+<span class="post-count" dir="ltr">(51)</span>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+          ►&nbsp;
+        
+</span>
+</a>
+<a class="post-count-link" href="http://perfcap.blogspot.in/2010_12_01_archive.html">December</a>
+<span class="post-count" dir="ltr">(1)</span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+          ►&nbsp;
+        
+</span>
+</a>
+<a class="post-count-link" href="http://perfcap.blogspot.in/2010_11_01_archive.html">November</a>
+<span class="post-count" dir="ltr">(3)</span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate expanded">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy toggle-open">▼&nbsp;</span>
+</a>
+<a class="post-count-link" href="http://perfcap.blogspot.in/2010_10_01_archive.html">October</a>
+<span class="post-count" dir="ltr">(6)</span>
+<ul class="posts">
+<li><a href="http://perfcap.blogspot.in/2010/10/nosql-netflix-use-case-comparison-for_31.html">NoSQL Netflix Use Case Comparison for MongoDB</a></li>
+<li><a href="http://perfcap.blogspot.in/2010/10/nosql-netflix-use-case-comparison-for.html">NoSQL Netflix Use Case Comparison for Cassandra</a></li>
+<li><a href="http://perfcap.blogspot.in/2010/10/comparing-nosql-availability-models.html">Comparing NoSQL Availability Models</a></li>
+<li><a href="http://perfcap.blogspot.in/2010/10/netflix-in-cloud.html">Netflix in the Cloud</a></li>
+<li><a href="http://perfcap.blogspot.in/2010/10/time-for-some-climate-action-on-101010.html">Time for some climate action on 10/10/10</a></li>
+<li><a href="http://perfcap.blogspot.in/2010/10/more-solar-power.html">More solar power</a></li>
+</ul>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+          ►&nbsp;
+        
+</span>
+</a>
+<a class="post-count-link" href="http://perfcap.blogspot.in/2010_09_01_archive.html">September</a>
+<span class="post-count" dir="ltr">(1)</span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+          ►&nbsp;
+        
+</span>
+</a>
+<a class="post-count-link" href="http://perfcap.blogspot.in/2010_08_01_archive.html">August</a>
+<span class="post-count" dir="ltr">(5)</span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+          ►&nbsp;
+        
+</span>
+</a>
+<a class="post-count-link" href="http://perfcap.blogspot.in/2010_07_01_archive.html">July</a>
+<span class="post-count" dir="ltr">(2)</span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+          ►&nbsp;
+        
+</span>
+</a>
+<a class="post-count-link" href="http://perfcap.blogspot.in/2010_05_01_archive.html">May</a>
+<span class="post-count" dir="ltr">(3)</span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+          ►&nbsp;
+        
+</span>
+</a>
+<a class="post-count-link" href="http://perfcap.blogspot.in/2010_04_01_archive.html">April</a>
+<span class="post-count" dir="ltr">(9)</span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+          ►&nbsp;
+        
+</span>
+</a>
+<a class="post-count-link" href="http://perfcap.blogspot.in/2010_03_01_archive.html">March</a>
+<span class="post-count" dir="ltr">(13)</span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+          ►&nbsp;
+        
+</span>
+</a>
+<a class="post-count-link" href="http://perfcap.blogspot.in/2010_02_01_archive.html">February</a>
+<span class="post-count" dir="ltr">(5)</span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+          ►&nbsp;
+        
+</span>
+</a>
+<a class="post-count-link" href="http://perfcap.blogspot.in/2010_01_01_archive.html">January</a>
+<span class="post-count" dir="ltr">(3)</span>
+</li>
+</ul>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+          ►&nbsp;
+        
+</span>
+</a>
+<a class="post-count-link" href="http://perfcap.blogspot.in/search?updated-min=2009-01-01T00:00:00-08:00&amp;updated-max=2010-01-01T00:00:00-08:00&amp;max-results=50">2009</a>
+<span class="post-count" dir="ltr">(58)</span>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+          ►&nbsp;
+        
+</span>
+</a>
+<a class="post-count-link" href="http://perfcap.blogspot.in/2009_12_01_archive.html">December</a>
+<span class="post-count" dir="ltr">(4)</span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+          ►&nbsp;
+        
+</span>
+</a>
+<a class="post-count-link" href="http://perfcap.blogspot.in/2009_10_01_archive.html">October</a>
+<span class="post-count" dir="ltr">(4)</span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+          ►&nbsp;
+        
+</span>
+</a>
+<a class="post-count-link" href="http://perfcap.blogspot.in/2009_09_01_archive.html">September</a>
+<span class="post-count" dir="ltr">(4)</span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+          ►&nbsp;
+        
+</span>
+</a>
+<a class="post-count-link" href="http://perfcap.blogspot.in/2009_08_01_archive.html">August</a>
+<span class="post-count" dir="ltr">(2)</span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+          ►&nbsp;
+        
+</span>
+</a>
+<a class="post-count-link" href="http://perfcap.blogspot.in/2009_07_01_archive.html">July</a>
+<span class="post-count" dir="ltr">(8)</span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+          ►&nbsp;
+        
+</span>
+</a>
+<a class="post-count-link" href="http://perfcap.blogspot.in/2009_06_01_archive.html">June</a>
+<span class="post-count" dir="ltr">(4)</span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+          ►&nbsp;
+        
+</span>
+</a>
+<a class="post-count-link" href="http://perfcap.blogspot.in/2009_05_01_archive.html">May</a>
+<span class="post-count" dir="ltr">(5)</span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+          ►&nbsp;
+        
+</span>
+</a>
+<a class="post-count-link" href="http://perfcap.blogspot.in/2009_04_01_archive.html">April</a>
+<span class="post-count" dir="ltr">(4)</span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+          ►&nbsp;
+        
+</span>
+</a>
+<a class="post-count-link" href="http://perfcap.blogspot.in/2009_03_01_archive.html">March</a>
+<span class="post-count" dir="ltr">(1)</span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+          ►&nbsp;
+        
+</span>
+</a>
+<a class="post-count-link" href="http://perfcap.blogspot.in/2009_02_01_archive.html">February</a>
+<span class="post-count" dir="ltr">(5)</span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+          ►&nbsp;
+        
+</span>
+</a>
+<a class="post-count-link" href="http://perfcap.blogspot.in/2009_01_01_archive.html">January</a>
+<span class="post-count" dir="ltr">(17)</span>
+</li>
+</ul>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+          ►&nbsp;
+        
+</span>
+</a>
+<a class="post-count-link" href="http://perfcap.blogspot.in/search?updated-min=2008-01-01T00:00:00-08:00&amp;updated-max=2009-01-01T00:00:00-08:00&amp;max-results=25">2008</a>
+<span class="post-count" dir="ltr">(25)</span>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+          ►&nbsp;
+        
+</span>
+</a>
+<a class="post-count-link" href="http://perfcap.blogspot.in/2008_12_01_archive.html">December</a>
+<span class="post-count" dir="ltr">(3)</span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+          ►&nbsp;
+        
+</span>
+</a>
+<a class="post-count-link" href="http://perfcap.blogspot.in/2008_11_01_archive.html">November</a>
+<span class="post-count" dir="ltr">(1)</span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+          ►&nbsp;
+        
+</span>
+</a>
+<a class="post-count-link" href="http://perfcap.blogspot.in/2008_10_01_archive.html">October</a>
+<span class="post-count" dir="ltr">(1)</span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+          ►&nbsp;
+        
+</span>
+</a>
+<a class="post-count-link" href="http://perfcap.blogspot.in/2008_09_01_archive.html">September</a>
+<span class="post-count" dir="ltr">(2)</span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+          ►&nbsp;
+        
+</span>
+</a>
+<a class="post-count-link" href="http://perfcap.blogspot.in/2008_08_01_archive.html">August</a>
+<span class="post-count" dir="ltr">(2)</span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+          ►&nbsp;
+        
+</span>
+</a>
+<a class="post-count-link" href="http://perfcap.blogspot.in/2008_07_01_archive.html">July</a>
+<span class="post-count" dir="ltr">(3)</span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+          ►&nbsp;
+        
+</span>
+</a>
+<a class="post-count-link" href="http://perfcap.blogspot.in/2008_06_01_archive.html">June</a>
+<span class="post-count" dir="ltr">(1)</span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+          ►&nbsp;
+        
+</span>
+</a>
+<a class="post-count-link" href="http://perfcap.blogspot.in/2008_05_01_archive.html">May</a>
+<span class="post-count" dir="ltr">(3)</span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+          ►&nbsp;
+        
+</span>
+</a>
+<a class="post-count-link" href="http://perfcap.blogspot.in/2008_04_01_archive.html">April</a>
+<span class="post-count" dir="ltr">(1)</span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+          ►&nbsp;
+        
+</span>
+</a>
+<a class="post-count-link" href="http://perfcap.blogspot.in/2008_03_01_archive.html">March</a>
+<span class="post-count" dir="ltr">(4)</span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+          ►&nbsp;
+        
+</span>
+</a>
+<a class="post-count-link" href="http://perfcap.blogspot.in/2008_02_01_archive.html">February</a>
+<span class="post-count" dir="ltr">(3)</span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+          ►&nbsp;
+        
+</span>
+</a>
+<a class="post-count-link" href="http://perfcap.blogspot.in/2008_01_01_archive.html">January</a>
+<span class="post-count" dir="ltr">(1)</span>
+</li>
+</ul>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+          ►&nbsp;
+        
+</span>
+</a>
+<a class="post-count-link" href="http://perfcap.blogspot.in/search?updated-min=2007-01-01T00:00:00-08:00&amp;updated-max=2008-01-01T00:00:00-08:00&amp;max-results=50">2007</a>
+<span class="post-count" dir="ltr">(59)</span>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+          ►&nbsp;
+        
+</span>
+</a>
+<a class="post-count-link" href="http://perfcap.blogspot.in/2007_12_01_archive.html">December</a>
+<span class="post-count" dir="ltr">(6)</span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+          ►&nbsp;
+        
+</span>
+</a>
+<a class="post-count-link" href="http://perfcap.blogspot.in/2007_11_01_archive.html">November</a>
+<span class="post-count" dir="ltr">(4)</span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+          ►&nbsp;
+        
+</span>
+</a>
+<a class="post-count-link" href="http://perfcap.blogspot.in/2007_10_01_archive.html">October</a>
+<span class="post-count" dir="ltr">(3)</span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+          ►&nbsp;
+        
+</span>
+</a>
+<a class="post-count-link" href="http://perfcap.blogspot.in/2007_09_01_archive.html">September</a>
+<span class="post-count" dir="ltr">(1)</span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+          ►&nbsp;
+        
+</span>
+</a>
+<a class="post-count-link" href="http://perfcap.blogspot.in/2007_07_01_archive.html">July</a>
+<span class="post-count" dir="ltr">(3)</span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+          ►&nbsp;
+        
+</span>
+</a>
+<a class="post-count-link" href="http://perfcap.blogspot.in/2007_06_01_archive.html">June</a>
+<span class="post-count" dir="ltr">(8)</span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+          ►&nbsp;
+        
+</span>
+</a>
+<a class="post-count-link" href="http://perfcap.blogspot.in/2007_05_01_archive.html">May</a>
+<span class="post-count" dir="ltr">(5)</span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+          ►&nbsp;
+        
+</span>
+</a>
+<a class="post-count-link" href="http://perfcap.blogspot.in/2007_04_01_archive.html">April</a>
+<span class="post-count" dir="ltr">(6)</span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+          ►&nbsp;
+        
+</span>
+</a>
+<a class="post-count-link" href="http://perfcap.blogspot.in/2007_03_01_archive.html">March</a>
+<span class="post-count" dir="ltr">(5)</span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+          ►&nbsp;
+        
+</span>
+</a>
+<a class="post-count-link" href="http://perfcap.blogspot.in/2007_02_01_archive.html">February</a>
+<span class="post-count" dir="ltr">(8)</span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+          ►&nbsp;
+        
+</span>
+</a>
+<a class="post-count-link" href="http://perfcap.blogspot.in/2007_01_01_archive.html">January</a>
+<span class="post-count" dir="ltr">(10)</span>
+</li>
+</ul>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+          ►&nbsp;
+        
+</span>
+</a>
+<a class="post-count-link" href="http://perfcap.blogspot.in/search?updated-min=2006-01-01T00:00:00-08:00&amp;updated-max=2007-01-01T00:00:00-08:00&amp;max-results=37">2006</a>
+<span class="post-count" dir="ltr">(37)</span>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+          ►&nbsp;
+        
+</span>
+</a>
+<a class="post-count-link" href="http://perfcap.blogspot.in/2006_12_01_archive.html">December</a>
+<span class="post-count" dir="ltr">(1)</span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+          ►&nbsp;
+        
+</span>
+</a>
+<a class="post-count-link" href="http://perfcap.blogspot.in/2006_11_01_archive.html">November</a>
+<span class="post-count" dir="ltr">(8)</span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+          ►&nbsp;
+        
+</span>
+</a>
+<a class="post-count-link" href="http://perfcap.blogspot.in/2006_10_01_archive.html">October</a>
+<span class="post-count" dir="ltr">(3)</span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+          ►&nbsp;
+        
+</span>
+</a>
+<a class="post-count-link" href="http://perfcap.blogspot.in/2006_09_01_archive.html">September</a>
+<span class="post-count" dir="ltr">(2)</span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+          ►&nbsp;
+        
+</span>
+</a>
+<a class="post-count-link" href="http://perfcap.blogspot.in/2006_08_01_archive.html">August</a>
+<span class="post-count" dir="ltr">(4)</span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+          ►&nbsp;
+        
+</span>
+</a>
+<a class="post-count-link" href="http://perfcap.blogspot.in/2006_07_01_archive.html">July</a>
+<span class="post-count" dir="ltr">(1)</span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+          ►&nbsp;
+        
+</span>
+</a>
+<a class="post-count-link" href="http://perfcap.blogspot.in/2006_06_01_archive.html">June</a>
+<span class="post-count" dir="ltr">(6)</span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+          ►&nbsp;
+        
+</span>
+</a>
+<a class="post-count-link" href="http://perfcap.blogspot.in/2006_05_01_archive.html">May</a>
+<span class="post-count" dir="ltr">(1)</span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+          ►&nbsp;
+        
+</span>
+</a>
+<a class="post-count-link" href="http://perfcap.blogspot.in/2006_04_01_archive.html">April</a>
+<span class="post-count" dir="ltr">(2)</span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+          ►&nbsp;
+        
+</span>
+</a>
+<a class="post-count-link" href="http://perfcap.blogspot.in/2006_03_01_archive.html">March</a>
+<span class="post-count" dir="ltr">(6)</span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+          ►&nbsp;
+        
+</span>
+</a>
+<a class="post-count-link" href="http://perfcap.blogspot.in/2006_02_01_archive.html">February</a>
+<span class="post-count" dir="ltr">(2)</span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+          ►&nbsp;
+        
+</span>
+</a>
+<a class="post-count-link" href="http://perfcap.blogspot.in/2006_01_01_archive.html">January</a>
+<span class="post-count" dir="ltr">(1)</span>
+</li>
+</ul>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+          ►&nbsp;
+        
+</span>
+</a>
+<a class="post-count-link" href="http://perfcap.blogspot.in/search?updated-min=2005-01-01T00:00:00-08:00&amp;updated-max=2006-01-01T00:00:00-08:00&amp;max-results=32">2005</a>
+<span class="post-count" dir="ltr">(32)</span>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+          ►&nbsp;
+        
+</span>
+</a>
+<a class="post-count-link" href="http://perfcap.blogspot.in/2005_12_01_archive.html">December</a>
+<span class="post-count" dir="ltr">(1)</span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+          ►&nbsp;
+        
+</span>
+</a>
+<a class="post-count-link" href="http://perfcap.blogspot.in/2005_10_01_archive.html">October</a>
+<span class="post-count" dir="ltr">(4)</span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+          ►&nbsp;
+        
+</span>
+</a>
+<a class="post-count-link" href="http://perfcap.blogspot.in/2005_09_01_archive.html">September</a>
+<span class="post-count" dir="ltr">(1)</span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+          ►&nbsp;
+        
+</span>
+</a>
+<a class="post-count-link" href="http://perfcap.blogspot.in/2005_08_01_archive.html">August</a>
+<span class="post-count" dir="ltr">(1)</span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+          ►&nbsp;
+        
+</span>
+</a>
+<a class="post-count-link" href="http://perfcap.blogspot.in/2005_07_01_archive.html">July</a>
+<span class="post-count" dir="ltr">(2)</span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+          ►&nbsp;
+        
+</span>
+</a>
+<a class="post-count-link" href="http://perfcap.blogspot.in/2005_06_01_archive.html">June</a>
+<span class="post-count" dir="ltr">(1)</span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+          ►&nbsp;
+        
+</span>
+</a>
+<a class="post-count-link" href="http://perfcap.blogspot.in/2005_05_01_archive.html">May</a>
+<span class="post-count" dir="ltr">(4)</span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+          ►&nbsp;
+        
+</span>
+</a>
+<a class="post-count-link" href="http://perfcap.blogspot.in/2005_04_01_archive.html">April</a>
+<span class="post-count" dir="ltr">(5)</span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+          ►&nbsp;
+        
+</span>
+</a>
+<a class="post-count-link" href="http://perfcap.blogspot.in/2005_03_01_archive.html">March</a>
+<span class="post-count" dir="ltr">(10)</span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+          ►&nbsp;
+        
+</span>
+</a>
+<a class="post-count-link" href="http://perfcap.blogspot.in/2005_02_01_archive.html">February</a>
+<span class="post-count" dir="ltr">(3)</span>
+</li>
+</ul>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+          ►&nbsp;
+        
+</span>
+</a>
+<a class="post-count-link" href="http://perfcap.blogspot.in/search?updated-min=2004-01-01T00:00:00-08:00&amp;updated-max=2005-01-01T00:00:00-08:00&amp;max-results=3">2004</a>
+<span class="post-count" dir="ltr">(3)</span>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+          ►&nbsp;
+        
+</span>
+</a>
+<a class="post-count-link" href="http://perfcap.blogspot.in/2004_07_01_archive.html">July</a>
+<span class="post-count" dir="ltr">(1)</span>
+</li>
+</ul>
+<ul class="hierarchy">
+<li class="archivedate collapsed">
+<a class="toggle" href="javascript:void(0)">
+<span class="zippy">
+
+          ►&nbsp;
+        
+</span>
+</a>
+<a class="post-count-link" href="http://perfcap.blogspot.in/2004_06_01_archive.html">June</a>
+<span class="post-count" dir="ltr">(2)</span>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div class="clear"></div>
+<span class="widget-item-control">
+<span class="item-control blog-admin">
+<a class="quickedit" href="http://www.blogger.com/rearrange?blogID=7434008&amp;widgetType=BlogArchive&amp;widgetId=BlogArchive1&amp;action=editWidget&amp;sectionId=sidebar" onclick='return _WidgetManager._PopupConfig(document.getElementById("BlogArchive1"));' target="configBlogArchive1" title="Edit">
+<img alt="" src="nosql-netflix-use-case-comparison-for_31_files/icon18_wrench_allbkg.png" height="18" width="18">
+</a>
+</span>
+</span>
+<div class="clear"></div>
+</div>
+</div><div class="widget HTML" id="HTML4">
+<div class="widget-content">
+<!--WEBBOT bot="HTMLMarkup" startspan ALT="Site Meter" -->
+<script language="JavaScript" type="text/javascript"></script>
+<script language="JavaScript" type="text/javascript">var site="sm8perfcap"</script>
+<a id="idSiteMeterHREF" href="http://www.sitemeter.com/stats.asp?site=sm8perfcap" target="_top"><img src="nosql-netflix-use-case-comparison-for_31_files/meter.gif" alt="Site Meter" border="0"></a><iframe src="nosql-netflix-use-case-comparison-for_31_files/a.htm" frameborder="0" height="0" width="0"></iframe><script language="JavaScript1.2" src="nosql-netflix-use-case-comparison-for_31_files/counter.js" type="text/javascript">
+</script>
+<noscript>
+<a href="http://sm8.sitemeter.com/stats.asp?site=sm8perfcap" target="_top">
+<img border="0" alt="Site Meter" src="http://sm8.sitemeter.com/meter.asp?site=sm8perfcap"/></a>
+</noscript>
+
+<!--WEBBOT bot="HTMLMarkup" Endspan -->
+</div>
+<div class="clear"></div>
+<span class="widget-item-control">
+<span class="item-control blog-admin">
+<a class="quickedit" href="http://www.blogger.com/rearrange?blogID=7434008&amp;widgetType=HTML&amp;widgetId=HTML4&amp;action=editWidget&amp;sectionId=sidebar" onclick='return _WidgetManager._PopupConfig(document.getElementById("HTML4"));' target="configHTML4" title="Edit">
+<img alt="" src="nosql-netflix-use-case-comparison-for_31_files/icon18_wrench_allbkg.png" height="18" width="18">
+</a>
+</span>
+</span>
+<div class="clear"></div>
+</div></div>
+</div>
+<div class="main section" id="main"><div class="widget Blog" id="Blog1">
+<div class="blog-posts hfeed">
+<!-- google_ad_section_start(name=default) -->
+
+          <div class="date-outer">
+        
+<h2 class="date-header"><span>Sunday, October 31, 2010</span></h2>
+
+          <div class="date-posts">
+        
+<div class="post-outer">
+<div class="post hentry" itemprop="blogPost" itemscope="itemscope" itemtype="http://schema.org/BlogPosting">
+<meta content="7434008" itemprop="blogId">
+<meta content="4142906401694795007" itemprop="postId">
+<a name="4142906401694795007"></a>
+<h3 class="post-title entry-title" itemprop="name">
+NoSQL Netflix Use Case Comparison for MongoDB
+</h3>
+<div class="post-header">
+<div class="post-header-line-1"></div>
+</div>
+<div class="post-body entry-content" id="post-body-4142906401694795007" itemprop="description articleBody">
+<span class="Apple-style-span" style="font-size:medium;">Roger Bodamer @rogerb from </span><a href="http://www.10gen.com/"><span class="Apple-style-span" style="font-size:medium;">10gen.com</span></a><span class="Apple-style-span" style="font-size:medium;"> kindly provided a set of answers for MongoDB  that I have interspersed with the questions below. The original set of questions </span><a href="http://perfcap.blogspot.com/2010/10/comparing-nosql-availability-models.html"><span class="Apple-style-span" style="font-size:medium;">are posted here</span></a><span class="Apple-style-span" style="font-size:medium;">.
+ Each NoSQL contender will get their own blog post with answers, when 
+there are enough to be interesting, I will write some summary 
+comparisons. If you have answers or would like to suggest additional 
+questions, comment here, tweet me @adrianco or blog it yourself.<br><br></span><div><b><span class="Apple-style-span" style="font-size:medium;">Use Case Scenario for Comparison Across NoSQL Contenders </span></b></div><span class="Apple-style-span" style="font-size:medium;">While
+ each NoSQL contender has different strengths and will be used for 
+different things, we need a basis for comparison across them, so that we
+ understand the differences in behavior. Here is a sample scenario that I
+ am publishing to put to each vendor to get their answers and will post 
+the results here. The example is non-trivial and is based on a 
+simplified Netflix related scenario that is applicable to any web 
+service that reliably collects data from users via an API. I assume that
+ is running on AWS and use that terminology, but the concepts are 
+generic.<br><br></span><span class="Apple-style-span"><b><span class="Apple-style-span" style="font-size:medium;">Use Case</span></b></span><span class="Apple-style-span"><span class="Apple-style-span" style="font-size:medium;"><br></span></span><span class="Apple-style-span" style="font-size:medium;">A
+ TV based device calls the API to add a movie to its favorites list 
+(like the Netflix instant queue, but I have simplified the concept 
+here), then reads back the entire list to ensure it is showing the 
+current state. The API does not use cookies, and the load balancer 
+(Amazon Elastic Load Balancer) is round robin, so the second request 
+goes to a different API server, that happens to be in a different Amazon
+ Availability Zone, and needs to respond with the modified list.</span><div><span class="Apple-style-span" style="font-size:medium;"><br></span><b><span class="Apple-style-span" style="font-size:medium;">Favorites Storage<br></span></b><span class="Apple-style-span" style="font-size:medium;">Favorites
+ store is implemented using a NoSQL mechanism that persistently stores a
+ single key=user value=movielist record on writes, and returns the 
+movielist on reads.<br><br></span><b><span class="Apple-style-span" style="font-size:medium;">Question 1: Availability Zones<br></span></b><span class="Apple-style-span" style="font-size:medium;">When
+ an API reads and writes to a queue store using the NoSQL mechanism, is 
+the traffic routing Availability Zone aware? Are reads satisfied 
+locally, or spread over all zones, is the initial write local or spread 
+over the zones, is the write replication zone aware so data is 
+replicated to more than one zone?<br></span></div><div><p style="margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Consolas"><span class="Apple-style-span" style="font-family:'times new roman';"><span class="Apple-style-span" style="font-size:medium;"><i></i></span></span></p><blockquote><p style="margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Consolas"><span class="Apple-style-span" style="font-family:'times new roman';"><i><span class="Apple-style-span" style="font-size:medium;">Let's assume for discussion purposes that we are using MongoDB across </span></i></span><span class="Apple-style-span" style="font-family:'times new roman';"><i><span class="Apple-style-span" style="font-size:medium;">three availability zones in a region.  We would have a replica set </span></i></span><span class="Apple-style-span" style="font-family:'times new roman';"><i><span class="Apple-style-span" style="font-size:medium;">member in each of the three zones.  One member will be elected primary </span></i></span><span class="Apple-style-span" style="font-family:'times new roman';"><i><span class="Apple-style-span" style="font-size:medium;">at a given point in time.</span></i></span></p> <p style="margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Consolas; min-height: 15.0px"><span class="Apple-style-span" style="font-family:'times new roman';"><i><span class="Apple-style-span" style="font-size:medium;"><br></span></i></span></p> <p style="margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Consolas"><span class="Apple-style-span" style="font-family:'times new roman';"><i><span class="Apple-style-span" style="font-size:medium;">All writes will be sent to the primary, and then propagate to </span></i></span><span class="Apple-style-span" style="font-family:'times new roman';"><i><span class="Apple-style-span" style="font-size:medium;">secondaries from there.  Thus, writes are often inter-zone.  However </span></i></span><span class="Apple-style-span" style="font-family:'times new roman';"><i><span class="Apple-style-span" style="font-size:medium;">availability zones are fairly low latency (I assume the context here </span></i></span><span class="Apple-style-span" style="font-family:'times new roman';"><i><span class="Apple-style-span" style="font-size:medium;">is EC2).</span></i></span></p> <p style="margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Consolas; min-height: 15.0px"><span class="Apple-style-span" style="font-family:'times new roman';"><i><span class="Apple-style-span" style="font-size:medium;"><br></span></i></span></p> <p style="margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Consolas"><span class="Apple-style-span" style="font-family:'times new roman';"><i><span class="Apple-style-span" style="font-size:medium;">Reads can be either to the primary, if immediate/strong consistency </span></i></span><span class="Apple-style-span" style="font-family:'times new roman';"><i><span class="Apple-style-span" style="font-size:medium;">semantics are desired, or to the local zone member, if eventually </span></i></span><span class="Apple-style-span" style="font-family:'times new roman';"><i><span class="Apple-style-span" style="font-size:medium;">consistent read semantics are acceptable.</span></i></span></p></blockquote><p style="margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Consolas"><span class="Apple-style-span" style="font-family:'times new roman';"><span class="Apple-style-span" style="font-size:medium;"><i></i></span></span></p><p style="margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Consolas"><span class="Apple-style-span" style="font-size:medium;"><br></span></p><b><span class="Apple-style-span" style="font-size:medium;">Question 2: Partitioned Behavior with Two Zones<br></span></b><span class="Apple-style-span" style="font-size:medium;">If
+ the connection between two zones fails, and a partition occurs so that 
+external traffic coming into and staying within a zone continues to 
+work, but traffic between zones is lost, what happens? In particular, 
+which of these outcomes does the NoSQL service support?<br></span><ul><li><span class="Apple-style-span" style="font-size:medium;">one zone decides that it is still working for reads and writes but half the size, and the other zone decide it is offline</span></li><li><span class="Apple-style-span" style="font-size:medium;">both zones continue to satisfy reads, but refuse writes until repaired</span></li><li><span class="Apple-style-span" style="font-size:medium;">data that has a master copy in the good zone supports read and write, slave copies stop for both read and write</span></li><li><span class="Apple-style-span" style="font-size:medium;">both zones continue to accept writes, and attempt to reconcile any inconsistency on repair</span></li></ul><b><blockquote><span class="Apple-style-span" style="font-weight: normal;"><i><span class="Apple-style-span" style="font-size:medium;"><span class="Apple-style-span" style="font-family:'times new roman';">Let's
+ assume again we are using three zones - we could use two but three is 
+more interesting.  To be primary in a replica set, the primary must be 
+visible to a majority of the members of the set: in this case, two 
+thirds of the members, or two thirds of the zones.  If one zone is 
+partitioned from the other two, what will happen is: a member in the 2 
+zone side of the partition will become primary, if not already.  It will
+ be available for reads and writes.<br><br>The minority partition will not service writes.  Eventually consistent reads are still possible in the minority partition.<br><br>Once the partition heals, the servers automatically reconcile.<br><br></span></span><a href="http://www.mongodb.org/display/DOCS/Replica+Set+Design+Concepts"><span class="Apple-style-span" style="font-size:medium;"><span class="Apple-style-span" style="font-family:'times new roman';"> http://www.mongodb.org/display/DOCS/Replica+Set+Design+Concepts</span></span></a><span class="Apple-style-span" style="font-style: normal; font-weight: 800;"><span class="Apple-style-span" style="font-weight: normal;"><i><span class="Apple-style-span" style="font-family:'times new roman';"><span class="Apple-style-span" style="font-size:medium;"><br></span></span></i></span></span></i></span></blockquote><span class="Apple-style-span" style="font-size:medium;">Question 3: Appending a movie to the favorites list<br></span></b><span class="Apple-style-span" style="font-size:medium;">If an update is performed by read-modify-write of the entire list, what mechanisms can be used to avoid race conditions?</span></div><div><p style="margin-top: 0px; margin-right: 0px; margin-bottom: 0px; margin-left: 0px; font: normal normal normal 13px/normal Consolas; "><i><span class="Apple-style-span" style="font-family:'times new roman';"><span class="Apple-style-span" style="font-size:medium;"><span class="Apple-style-span"></span></span></span></i></p><blockquote><p style="margin-top: 0px; margin-right: 0px; margin-bottom: 0px; margin-left: 0px; font: normal normal normal 13px/normal Consolas; "><i><span class="Apple-style-span" style="font-family:'times new roman';"><span class="Apple-style-span"><span class="Apple-style-span" style="font-size:medium;">MongoDB supports atomic operations on single documents via both its $ </span></span></span></i><i><span class="Apple-style-span" style="font-family:'times new roman';"><span class="Apple-style-span"><span class="Apple-style-span" style="font-size:medium;">operators ($set, $inc) and also by compare-and-swap operations.  In </span></span></span></i><i><span class="Apple-style-span" style="font-family:'times new roman';"><span class="Apple-style-span"><span class="Apple-style-span" style="font-size:medium;">MongoDB one could model the list as a document per favorite, or, put </span></span></span></i><i><span class="Apple-style-span" style="font-family:'times new roman';"><span class="Apple-style-span"><span class="Apple-style-span" style="font-size:medium;">all the favorites in a single BSON object.  In both cases atomic </span></span></span></i><i><span class="Apple-style-span" style="font-family:'times new roman';"><span class="Apple-style-span"><span class="Apple-style-span" style="font-size:medium;">operations free of race conditions are possible. </span></span></span></i><span class="Apple-style-span" style="color: rgb(23, 56, 245); "><span style="text-decoration: underline; "><i><span class="Apple-style-span" style="font-family:'times new roman';"><span class="Apple-style-span" style="font-size:medium;"><a href="http://www.mongodb.org/display/DOCS/Atomic+Operations">http://www.mongodb.org/display/DOCS/Atomic+Operations</a></span></span></i></span></span></p><p style="margin-top: 0px; margin-right: 0px; margin-bottom: 0px; margin-left: 0px; font: normal normal normal 13px/normal Consolas; min-height: 15px; "><i><span class="Apple-style-span" style="font-family:'times new roman';"><span class="Apple-style-span"><span class="Apple-style-span" style="font-size:medium;"><br></span></span></span></i></p><p style="margin-top: 0px; margin-right: 0px; margin-bottom: 0px; margin-left: 0px; font: normal normal normal 13px/normal Consolas; min-height: 15px; "><i><span class="Apple-style-span" style="font-family:'times new roman';"><span class="Apple-style-span"><span class="Apple-style-span" style="font-size:medium;">This is why mongodb elects a node primary: to facilitate these </span></span></span></i><i><span class="Apple-style-span" style="font-family:'times new roman';"><span class="Apple-style-span"><span class="Apple-style-span" style="font-size:medium;">atomic operations for use cases where these semantics are required.</span></span></span></i></p></blockquote><p style="margin-top: 0px; margin-right: 0px; margin-bottom: 0px; margin-left: 0px; font: normal normal normal 13px/normal Consolas; "><i><span class="Apple-style-span" style="font-family:'times new roman';"><span class="Apple-style-span" style="font-size:medium;"><span class="Apple-style-span"></span></span></span></i></p></div><div><i><span class="Apple-style-span" style="font-family:'times new roman';"><span class="Apple-style-span"><span class="Apple-style-span" style="font-size:medium;"><br></span></span></span></i></div><div><span class="Apple-style-span" style="font-size:medium;">If multiple attribute/values are supported for a key, can an additional value be written directly without reading first? </span></div><div><span class="Apple-style-span" style="font-family:Consolas;"><i><span class="Apple-style-span" style="font-family:'times new roman';"><span class="Apple-style-span"><blockquote><span class="Apple-style-span" style="font-size:medium;">Yes.</span></blockquote></span></span></i></span></div><div><span class="Apple-style-span" style="font-size:medium;">What limits exist on the size of the value or number of attribute/values?</span><span class="Apple-style-span" style="font-family:'times new roman';"><i><span class="Apple-style-span" style="font-family:Georgia, serif;"><span class="Apple-style-span" style=" font-style: normal;"><span class="Apple-style-span" style="font-size:medium;"><br></span></span></span></i></span></div><div> <p style="margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Consolas"><i><span class="Apple-style-span" style="font-size:medium;"><span class="Apple-style-span" style="font-family:'times new roman';"></span></span></i></p><blockquote><p style="margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Consolas"><i><span class="Apple-style-span" style="font-family:'times new roman';"><span class="Apple-style-span" style="font-size:medium;">A single BSON document must be under the limit -- currently that </span></span></i><i><span class="Apple-style-span" style="font-family:'times new roman';"><span class="Apple-style-span" style="font-size:medium;">limit is 8MB.  If larger than this, one should consider modeling as </span></span></i><i><span class="Apple-style-span" style="font-family:'times new roman';"><span class="Apple-style-span" style="font-size:medium;">multiple documents during schema design.</span></span></i></p></blockquote><p style="margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Consolas"><i><span class="Apple-style-span" style="font-size:medium;"><span class="Apple-style-span" style="font-family:'times new roman';"></span></span></i></p><p style="margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Consolas; min-height: 15.0px"><span class="Apple-style-span" style="font-size:medium;"><span class="Apple-style-span" style="font-family:'times new roman';"></span></span></p><blockquote></blockquote><span class="Apple-style-span" style="font-size:medium;">and are queries by attribute/value supported?</span><p></p> <p style="margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Consolas"><i><span class="Apple-style-span" style="font-size:medium;"><span class="Apple-style-span" style="font-family:'times new roman';"></span></span></i></p><blockquote><p style="margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Consolas"><i><span class="Apple-style-span" style="font-family:'times new roman';"><span class="Apple-style-span" style="font-size:medium;">Yes. For performance, MongoDB supports secondary (composite) indices.</span></span></i></p><p style="margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Consolas"></p></blockquote><p style="margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Consolas"><i><span class="Apple-style-span" style="font-family:'times new roman';"><span class="Apple-style-span" style="font-size:medium;"><br></span></span></i></p></div><div><b><span class="Apple-style-span" style="font-size:medium;">Question 4: Handling Silent Data Corruption</span></b></div><div><span class="Apple-style-span" style="font-size:medium;">When
+ the storage or network subsystem corrupts data without raising an 
+error, does the NoSQL service detect and correct this? When is it 
+detected and corrected, on write, on read or asynchronously?</span></div><div><p style="margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Consolas"><span class="Apple-style-span" style="font-size:medium;"><i></i></span></p><blockquote><p style="margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Consolas"><i><span class="Apple-style-span" style="font-family:'times new roman';"><span class="Apple-style-span" style="font-size:medium;">The general assumption is that the storage system is reliable.  Thus, </span></span></i><i><span class="Apple-style-span" style="font-family:'times new roman';"><span class="Apple-style-span" style="font-size:medium;">one would normally use a RAID with mirroring, or a service like EBS </span></span></i><i><span class="Apple-style-span" style="font-family:'times new roman';"><span class="Apple-style-span" style="font-size:medium;">which has intrinsic mirroring.</span></span></i></p><p style="margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Consolas"><i><span class="Apple-style-span" style="font-family:'times new roman';"><span class="Apple-style-span" style="font-size:medium;"><br></span></span></i></p> <p style="margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Consolas"><i><span class="Apple-style-span" style="font-family:'times new roman';"><span class="Apple-style-span" style="font-size:medium;">However, the BSON format has a reasonable amount of structure to it. </span></span></i><i><span class="Apple-style-span" style="font-family:'times new roman';"><span class="Apple-style-span" style="font-size:medium;">It is highly probable, although not certain, that a corrupt object </span></span></i><i><span class="Apple-style-span" style="font-family:'times new roman';"><span class="Apple-style-span" style="font-size:medium;">would be detected and an error reported.  This could then be correct </span></span></i><i><span class="Apple-style-span" style="font-family:'times new roman';"><span class="Apple-style-span" style="font-size:medium;">with a database repair operation.</span></span></i></p> <p style="margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Consolas; min-height: 15.0px"><i><span class="Apple-style-span" style="font-family:'times new roman';"><span class="Apple-style-span" style="font-size:medium;"><br></span></span></i></p> <p style="margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Consolas"><i><span class="Apple-style-span" style="font-family:'times new roman';"><span class="Apple-style-span" style="font-size:medium;">Note: the above assumes an actual storage system fault.  Another case </span></span></i><i><span class="Apple-style-span" style="font-family:'times new roman';"><span class="Apple-style-span" style="font-size:medium;">of interest is simply a hard crash of the server.  MongoDB 1.6 </span></span></i><i><span class="Apple-style-span" style="font-family:'times new roman';"><span class="Apple-style-span" style="font-size:medium;">requires a --repair after this.  MongoDB v1.8 (pending) is crash-safe </span></span></i><i><span class="Apple-style-span" style="font-family:'times new roman';"><span class="Apple-style-span" style="font-size:medium;">in its storage engine via journaling.</span></span></i></p></blockquote><p style="margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Consolas"><span class="Apple-style-span" style="font-size:medium;"><i></i></span></p></div><div><span class="Apple-style-span" style="font-size:medium;"><br></span></div><div><b><span class="Apple-style-span" style="font-size:medium;">Question 5: Backup and Restore</span></b></div><div><span class="Apple-style-span" style="font-size:medium;">Without
+ stopping incoming requests, how can a point in time backup of the 
+entire dataset be performed? What is the performance and availability 
+impact during the backup? </span></div><div><p style="margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Consolas"><i><span class="Apple-style-span" style="font-size:medium;"><span class="Apple-style-span" style="font-family:'times new roman';"></span></span></i></p><blockquote><p style="margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Consolas"><i><span class="Apple-style-span" style="font-family:'times new roman';"><span class="Apple-style-span" style="font-size:medium;">The most used method is to have a replica which is used for backups </span></span></i><i><span class="Apple-style-span" style="font-family:'times new roman';"><span class="Apple-style-span" style="font-size:medium;">only; perhaps an inexpensive server or VM.  This node can be taken </span></span></i><i><span class="Apple-style-span" style="font-family:'times new roman';"><span class="Apple-style-span" style="font-size:medium;">offline at any time and any backup strategy used.  Once re-enabled, it </span></span></i><span class="Apple-style-span" style="color: rgb(23, 56, 245); "><span style="color:#000000;"><i><span class="Apple-style-span" style="font-family:'times new roman';"><span class="Apple-style-span" style="font-size:medium;">will catch back up.  </span></span></i></span><span style="text-decoration: underline"><i><span class="Apple-style-span" style="font-family:'times new roman';"><span class="Apple-style-span" style="font-size:medium;"><a href="http://www.mongodb.org/display/DOCS/Backups">http://www.mongodb.org/display/DOCS/Backups</a></span></span></i></span></span></p> <p style="margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Consolas; min-height: 15.0px"><i><span class="Apple-style-span" style="font-family:'times new roman';"><span class="Apple-style-span" style="font-size:medium;"><br></span></span></i></p> <p style="margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Consolas"><i><span class="Apple-style-span" style="font-family:'times new roman';"><span class="Apple-style-span" style="font-size:medium;">With something like EBS, quick snapshotting is possible using the </span></span></i><i><span class="Apple-style-span" style="font-family:'times new roman';"><span class="Apple-style-span" style="font-size:medium;">fsync-and-lock command.</span></span></i></p></blockquote><p style="margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Consolas"><i><span class="Apple-style-span" style="font-size:medium;"><span class="Apple-style-span" style="font-family:'times new roman';"></span></span></i></p></div><div><span class="Apple-style-span" style="font-size:medium;"><br></span></div><div><span class="Apple-style-span" style="font-size:medium;">For
+ cases such as roll-back after a buggy application code push, how is a 
+known good version of the dataset restored, how is it made consistent, 
+and what is the performance and availability impact during the restore? 
+Are there any scalability limits on the backed up dataset size, what's 
+the biggest you have seen?</span></div><div><p style="margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Consolas"><span class="Apple-style-span" style="font-family:'times new roman';"><span class="Apple-style-span" style="font-size:medium;"><i></i></span></span></p><blockquote><p style="margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Consolas"><span class="Apple-style-span" style="font-family:'times new roman';"><i><span class="Apple-style-span" style="font-size:medium;">One can stop the server(s), restore the old data file images, and restart.</span></i></span></p> <p style="margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Consolas; min-height: 15.0px"><span class="Apple-style-span" style="font-family:'times new roman';"><i><span class="Apple-style-span" style="font-size:medium;"><br></span></i></span></p> <p style="margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Consolas"><span class="Apple-style-span" style="font-family:'times new roman';"><i><span class="Apple-style-span" style="font-size:medium;">MongoDB supports a slaveDelay option which allows one to force a </span></i></span><span class="Apple-style-span" style="font-family:'times new roman';"><i><span class="Apple-style-span" style="font-size:medium;">replica to stay a certain number of hours behind realtime.  This is a </span></i></span><span class="Apple-style-span" style="font-family:'times new roman';"><i><span class="Apple-style-span" style="font-size:medium;">good way to maintain a rolling backup in case of someone </span></i></span><span class="Apple-style-span" style="font-family:'times new roman';"><i><span class="Apple-style-span" style="font-size:medium;">"fat-fingering" a database operation.</span></i></span></p></blockquote><p style="margin: 0.0px 0.0px 0.0px 0.0px; font: 13.0px Consolas"><span class="Apple-style-span" style="font-family:'times new roman';"><span class="Apple-style-span" style="font-size:large;"><i></i></span></span></p></div>
+<div style="clear: both;"></div>
+</div>
+<div class="post-footer">
+<div class="post-footer-line post-footer-line-1"><span class="post-author vcard">
+Posted by
+<span class="fn" itemprop="author" itemscope="itemscope" itemtype="http://schema.org/Person">
+<meta content="http://www.blogger.com/profile/14695336135416848505" itemprop="url">
+<a href="http://www.blogger.com/profile/14695336135416848505" rel="author" title="author profile">
+<span itemprop="name">Adrian Cockcroft</span>
+</a>
+</span>
+</span>
+<span class="post-timestamp">
+at
+<meta content="http://perfcap.blogspot.com/2010/10/nosql-netflix-use-case-comparison-for_31.html" itemprop="url">
+<a class="timestamp-link" href="http://perfcap.blogspot.in/2010/10/nosql-netflix-use-case-comparison-for_31.html" rel="bookmark" title="permanent link"><abbr class="published" itemprop="datePublished" title="2010-10-31T11:09:00-07:00">11:09 AM</abbr></a>
+</span>
+<span class="post-comment-link">
+</span>
+<span class="post-icons">
+<span class="item-action">
+<a href="http://www.blogger.com/email-post.g?blogID=7434008&amp;postID=4142906401694795007" title="Email Post">
+<img alt="" class="icon-action" src="nosql-netflix-use-case-comparison-for_31_files/icon18_email.gif" height="13" width="18">
+</a>
+</span>
+<span class="item-control blog-admin pid-1813568466">
+<a href="http://www.blogger.com/post-edit.g?blogID=7434008&amp;postID=4142906401694795007&amp;from=pencil" title="Edit Post">
+<img alt="" class="icon-action" src="nosql-netflix-use-case-comparison-for_31_files/icon18_edit_allbkg.gif" height="18" width="18">
+</a>
+</span>
+</span>
+<div class="post-share-buttons goog-inline-block">
+<a class="goog-inline-block share-button sb-email" href="http://www.blogger.com/share-post.g?blogID=7434008&amp;postID=4142906401694795007&amp;target=email" target="_blank" title="Email This"><span class="share-button-link-text">Email This</span></a><a class="goog-inline-block share-button sb-blog" href="http://www.blogger.com/share-post.g?blogID=7434008&amp;postID=4142906401694795007&amp;target=blog" onclick='window.open(this.href, "_blank", "height=270,width=475"); return false;' target="_blank" title="BlogThis!"><span class="share-button-link-text">BlogThis!</span></a><a class="goog-inline-block share-button sb-twitter" href="http://www.blogger.com/share-post.g?blogID=7434008&amp;postID=4142906401694795007&amp;target=twitter" target="_blank" title="Share to Twitter"><span class="share-button-link-text">Share to Twitter</span></a><a class="goog-inline-block share-button sb-facebook" href="http://www.blogger.com/share-post.g?blogID=7434008&amp;postID=4142906401694795007&amp;target=facebook" onclick='window.open(this.href, "_blank", "height=430,width=640"); return false;' target="_blank" title="Share to Facebook"><span class="share-button-link-text">Share to Facebook</span></a><div class="goog-inline-block dummy-container"><div id="___plusone_0" style="height: 20px; width: 300px; display: inline-block; text-indent: 0pt; margin: 0pt; padding: 0pt; background: none repeat scroll 0% 0% transparent; border-style: none; float: none; line-height: normal; font-size: 1px; vertical-align: baseline;"><iframe title="+1" data-gapiattached="true" allowtransparency="true" src="nosql-netflix-use-case-comparison-for_31_files/fastbutton.htm" name="I0_1363604289857" id="I0_1363604289857" vspace="0" tabindex="0" style="position: static; top: 0pt; width: 300px; margin: 0px; border-style: none; left: 0pt; visibility: visible; height: 20px;" marginwidth="0" marginheight="0" hspace="0" frameborder="0" scrolling="no" width="100%"></iframe></div></div>
+</div>
+</div>
+<div class="post-footer-line post-footer-line-2"><span class="post-labels">
+Labels:
+<a href="http://perfcap.blogspot.in/search/label/mongodb" rel="tag">mongodb</a>,
+<a href="http://perfcap.blogspot.in/search/label/netflix" rel="tag">netflix</a>,
+<a href="http://perfcap.blogspot.in/search/label/nosql" rel="tag">nosql</a>
+</span>
+</div>
+<div class="post-footer-line post-footer-line-3"></div>
+</div>
+</div>
+<div class="comments" id="comments">
+<a name="comments"></a>
+<h4>1 comment:</h4>
+<div class="comments-content">
+<script async="async" src="nosql-netflix-use-case-comparison-for_31_files/comments.js" type="text/javascript"></script>
+<script type="text/javascript">
+    (function() {
+      var items = [{'id': '882048032044666840', 'body': 'This shared a number of characteristics with a sharded MySQL setup including the use of out-of-service replicas for backup purposes, and the existence of a primary.  A key difference is that the primary is elected and managed by the system rather than by a human operator.  However, the ability to direct a query to the primary allows the implementation of a web service that can provide consistent read-after-write behavior.  Such a web service can return a short-lived cookie; a client that requires read-after-write consistency returns the cookie on the subsequent request.  The cookie can contain the id\46#39;s of objects that have been recently modified, and when those modifications took place.  The cookie lifetime is chosen to be relatively certain that replication has occurred before the cookie\46#39;s expiration.  When the service receives a request with the cookie, if the request is to read an object listed in the cookie, and the request is within a period too short to be reasonably certain of replication across all replicas, the service can direct the read to the primary to see the recently written content.  It\46#39;s not guaranteed, but its pretty good, and other measures can be taken to preclude duplication (unique indexes); I\46#39;ve done this before with MySQL-based web services to direct read-after-writes to the master.', 'timestamp': '1292570745038', 'permalink': 'http://perfcap.blogspot.com/2010/10/nosql-netflix-use-case-comparison-for_31.html?showComment\0751292570745038#c882048032044666840', 'author': {'name': 'Chris Westin', 'avatarUrl': 'http://img2.blogblog.com/img/b16-rounded.gif', 'profileUrl': 'http://www.blogger.com/profile/08117678810380576829'}, 'displayTime': '11:25 PM', 'deleteclass': 'item-control blog-admin pid-1889447378'}];
+      var msgs = {'loadMore': 'Load more...', 'loading': 'Loading...', 'loaded': 'No more!', 'addComment': 'Add comment', 'reply': 'Reply', 'delete': 'Delete'};
+      var config = {'blogId': '7434008', 'postId': '4142906401694795007', 'feed': 'http://perfcap.blogspot.com/feeds/4142906401694795007/comments/default', 'authorName': 'Adrian Cockcroft', 'authorUrl': 'http://www.blogger.com/profile/14695336135416848505', 'baseUri': 'http://www.blogger.com', 'maxThreadDepth': 2};
+
+// <![CDATA[
+      var cursor = null;
+      if (items && items.length > 0) {
+        cursor = parseInt(items[items.length - 1].timestamp) + 1;
+      }
+
+      var bodyFromEntry = function(entry) {
+        if (entry.gd$extendedProperty) {
+          for (var k in entry.gd$extendedProperty) {
+            if (entry.gd$extendedProperty[k].name == 'blogger.contentRemoved') {
+              return '<span class="deleted-comment">' + entry.content.$t + '</span>';
+            }
+          }
+        }
+        return entry.content.$t;
+      }
+
+      var parse = function(data) {
+        cursor = null;
+        var comments = [];
+        if (data && data.feed && data.feed.entry) {
+          for (var i = 0, entry; entry = data.feed.entry[i]; i++) {
+            var comment = {};
+            // comment ID, parsed out of the original id format
+            var id = /blog-(\d+).post-(\d+)/.exec(entry.id.$t);
+            comment.id = id ? id[2] : null;
+            comment.body = bodyFromEntry(entry);
+            comment.timestamp = Date.parse(entry.published.$t) + '';
+            if (entry.author && entry.author.constructor === Array) {
+              var auth = entry.author[0];
+              if (auth) {
+                comment.author = {
+                  name: (auth.name ? auth.name.$t : undefined),
+                  profileUrl: (auth.uri ? auth.uri.$t : undefined),
+                  avatarUrl: (auth.gd$image ? auth.gd$image.src : undefined)
+                };
+              }
+            }
+            if (entry.link) {
+              if (entry.link[2]) {
+                comment.link = comment.permalink = entry.link[2].href;
+              }
+              if (entry.link[3]) {
+                var pid = /.*comments\/default\/(\d+)\?.*/.exec(entry.link[3].href);
+                if (pid && pid[1]) {
+                  comment.parentId = pid[1];
+                }
+              }
+            }
+            comment.deleteclass = 'item-control blog-admin';
+            if (entry.gd$extendedProperty) {
+              for (var k in entry.gd$extendedProperty) {
+                if (entry.gd$extendedProperty[k].name == 'blogger.itemClass') {
+                  comment.deleteclass += ' ' + entry.gd$extendedProperty[k].value;
+                } else if (entry.gd$extendedProperty[k].name == 'blogger.displayTime') {
+                  comment.displayTime = entry.gd$extendedProperty[k].value;
+                }
+              }
+            }
+            comments.push(comment);
+          }
+        }
+        return comments;
+      };
+
+      var paginator = function(callback) {
+        if (hasMore()) {
+          var url = config.feed + '?alt=json&v=2&orderby=published&reverse=false&max-results=50';
+          if (cursor) {
+            url += '&published-min=' + new Date(cursor).toISOString();
+          }
+          window.bloggercomments = function(data) {
+            var parsed = parse(data);
+            cursor = parsed.length < 50 ? null
+                : parseInt(parsed[parsed.length - 1].timestamp) + 1
+            callback(parsed);
+            window.bloggercomments = null;
+          }
+          url += '&callback=bloggercomments';
+          var script = document.createElement('script');
+          script.type = 'text/javascript';
+          script.src = url;
+          document.getElementsByTagName('head')[0].appendChild(script);
+        }
+      };
+      var hasMore = function() {
+        return !!cursor;
+      };
+      var getMeta = function(key, comment) {
+        if ('iswriter' == key) {
+          var matches = !!comment.author
+              && comment.author.name == config.authorName
+              && comment.author.profileUrl == config.authorUrl;
+          return matches ? 'true' : '';
+        } else if ('deletelink' == key) {
+          return config.baseUri + '/delete-comment.g?blogID='
+               + config.blogId + '&postID=' + comment.id;
+        } else if ('deleteclass' == key) {
+          return comment.deleteclass;
+        }
+        return '';
+      };
+
+      var replybox = null;
+      var replyUrlParts = null;
+      var replyParent = undefined;
+
+      var onReply = function(commentId, domId) {
+        if (replybox == null) {
+          // lazily cache replybox, and adjust to suit this style:
+          replybox = document.getElementById('comment-editor');
+          if (replybox != null) {
+            replybox.height = '250px';
+            replybox.style.display = 'block';
+            replyUrlParts = replybox.src.split('#');
+          }
+        }
+        if (replybox && (commentId !== replyParent)) {
+          document.getElementById(domId).insertBefore(replybox, null);
+          replybox.src = replyUrlParts[0]
+              + (commentId ? '&parentID=' + commentId : '')
+              + '#' + replyUrlParts[1];
+          replyParent = commentId;
+        }
+      };
+
+      var hash = (window.location.hash || '#').substring(1);
+      var startThread, targetComment;
+      if (/^comment-form_/.test(hash)) {
+        startThread = hash.substring('comment-form_'.length);
+      } else if (/^c[0-9]+$/.test(hash)) {
+        targetComment = hash.substring(1);
+      }
+
+      // Configure commenting API:
+      var configJso = {
+        'maxDepth': config.maxThreadDepth
+      };
+      var provider = {
+        'id': config.postId,
+        'data': items,
+        'loadNext': paginator,
+        'hasMore': hasMore,
+        'getMeta': getMeta,
+        'onReply': onReply,
+        'rendered': true,
+        'initComment': targetComment,
+        'initReplyThread': startThread,
+        'config': configJso,
+        'messages': msgs
+      };
+
+      var render = function() {
+        if (window.goog && window.goog.comments) {
+          var holder = document.getElementById('comment-holder');
+          window.goog.comments.render(holder, provider);
+        }
+      };
+
+      // render now, or queue to render when library loads:
+      if (window.goog && window.goog.comments) {
+        render();
+      } else {
+        window.goog = window.goog || {};
+        window.goog.comments = window.goog.comments || {};
+        window.goog.comments.loadQueue = window.goog.comments.loadQueue || [];
+        window.goog.comments.loadQueue.push(render);
+      }
+    })();
+// ]]>
+</script>
+<div id="comment-holder">
+<div id="bc_0_2C" kind="c"><div id="bc_0_2CT"><div id="bc_0_1T" class="comment-thread" kind="r" t="0" u="0"><ol id="bc_0_1TB"><li id="bc_0_0B" class="comment" kind="b"><div class="avatar-image-container"><img src="nosql-netflix-use-case-comparison-for_31_files/b36-rounded.png"></div><div id="c882048032044666840" class="comment-block"><div id="bc_0_0M" class="comment-header" kind="m"><cite class="user"><a rel="nofollow" href="http://www.blogger.com/profile/08117678810380576829">Chris Westin</a></cite><span class="icon user"></span><span class="datetime secondary-text"><a rel="nofollow" href="http://perfcap.blogspot.com/2010/10/nosql-netflix-use-case-comparison-for_31.html?showComment=1292570745038#c882048032044666840">11:25 PM</a></span></div><p id="bc_0_0MC" class="comment-content">This
+ shared a number of characteristics with a sharded MySQL setup including
+ the use of out-of-service replicas for backup purposes, and the 
+existence of a primary.  A key difference is that the primary is elected
+ and managed by the system rather than by a human operator.  However, 
+the ability to direct a query to the primary allows the implementation 
+of a web service that can provide consistent read-after-write behavior. 
+ Such a web service can return a short-lived cookie; a client that 
+requires read-after-write consistency returns the cookie on the 
+subsequent request.  The cookie can contain the id's of objects that 
+have been recently modified, and when those modifications took place.  
+The cookie lifetime is chosen to be relatively certain that replication 
+has occurred before the cookie's expiration.  When the service receives a
+ request with the cookie, if the request is to read an object listed in 
+the cookie, and the request is within a period too short to be 
+reasonably certain of replication across all replicas, the service can 
+direct the read to the primary to see the recently written content.  
+It's not guaranteed, but its pretty good, and other measures can be 
+taken to preclude duplication (unique indexes); I've done this before 
+with MySQL-based web services to direct read-after-writes to the master.</p><span id="bc_0_0MN" class="comment-actions secondary-text" kind="m"><a kind="i" href="javascript:;" target="_self" o="r">Reply</a><span class="item-control blog-admin pid-1889447378"><a o="d" target="_self" href="http://www.blogger.com/delete-comment.g?blogID=7434008&amp;postID=882048032044666840">Delete</a></span></span></div><div id="bc_0_0BR" class="comment-replies"></div><div id="bc_0_0B_box" class="comment-replybox-single"></div></li></ol><div id="bc_0_1I" class="continue" kind="ci"><a href="javascript:;" target="_self">Add comment</a></div><div id="bc_0_1T_box" class="comment-replybox-thread"></div><div id="bc_0_1L" class="loadmore loaded" kind="rb"><a href="javascript:;" target="_self">Load more...</a></div></div></div></div>
+</div>
+</div>
+<p class="comment-footer">
+</p><div class="comment-form">
+<a name="comment-form"></a>
+<p>
+</p>
+<a href="http://www.blogger.com/comment-iframe.g?blogID=7434008&amp;postID=4142906401694795007" id="comment-editor-src"></a>
+<iframe allowtransparency="true" class="blogger-iframe-colorize blogger-comment-from-post" id="comment-editor" name="comment-editor" src="" frameborder="0" height="410" width="100%"></iframe>
+<script type="text/javascript" src="nosql-netflix-use-case-comparison-for_31_files/2029410298-comment_from_post_iframe.htm"></script>
+<script type="text/javascript">
+      BLOG_CMT_createIframe('http://www.blogger.com/rpc_relay.html', '00294055515342977160');
+    </script>
+</div>
+<p></p>
+<div id="backlinks-container">
+<div id="Blog1_backlinks-container">
+</div>
+</div>
+</div>
+</div>
+
+        </div></div>
+      
+<!-- google_ad_section_end -->
+</div>
+<div class="blog-pager" id="blog-pager">
+<span id="blog-pager-newer-link">
+<a class="blog-pager-newer-link" href="http://perfcap.blogspot.in/2010/11/are-we-ready-for-spotcloud-yet.html" id="Blog1_blog-pager-newer-link" title="Newer Post">Newer Post</a>
+</span>
+<span id="blog-pager-older-link">
+<a class="blog-pager-older-link" href="http://perfcap.blogspot.in/2010/10/nosql-netflix-use-case-comparison-for.html" id="Blog1_blog-pager-older-link" title="Older Post">Older Post</a>
+</span>
+<a class="home-link" href="http://perfcap.blogspot.in/">Home</a>
+</div>
+<div class="clear"></div>
+<div class="post-feeds">
+<div class="feed-links">
+Subscribe to:
+<a class="feed-link" href="http://perfcap.blogspot.com/feeds/4142906401694795007/comments/default" target="_blank" type="application/atom+xml">Post Comments (Atom)</a>
+</div>
+</div>
+<script type="text/javascript">window.___gcfg = {'lang': 'en_US'};</script>
+</div></div>
+<div id="footer-wrapper">
+<div class="footer section" id="footer"><div class="widget HTML" id="HTML5">
+<div class="widget-content">
+<script src="nosql-netflix-use-case-comparison-for_31_files/urchin.js" type="text/javascript">
+</script>
+<script type="text/javascript">
+_uacct = "UA-1588354-1";
+urchinTracker();
+</script>
+</div>
+<div class="clear"></div>
+<span class="widget-item-control">
+<span class="item-control blog-admin">
+<a class="quickedit" href="http://www.blogger.com/rearrange?blogID=7434008&amp;widgetType=HTML&amp;widgetId=HTML5&amp;action=editWidget&amp;sectionId=footer" onclick='return _WidgetManager._PopupConfig(document.getElementById("HTML5"));' target="configHTML5" title="Edit">
+<img alt="" src="nosql-netflix-use-case-comparison-for_31_files/icon18_wrench_allbkg.png" height="18" width="18">
+</a>
+</span>
+</span>
+<div class="clear"></div>
+</div></div>
+</div>
+</div></div>
+<div id="main-bot"></div>
+<!-- placeholder for image -->
+</div><iframe src="nosql-netflix-use-case-comparison-for_31_files/blank.htm" style="height: 0pt; width: 0pt; position: absolute;" name="google_top_static_frame" frameborder="0"></iframe>
+<script type="text/javascript">
+if (window.jstiming) window.jstiming.load.tick('widgetJsBefore');
+</script><script type="text/javascript" src="nosql-netflix-use-case-comparison-for_31_files/3992118587-widgets.htm"></script>
+<script gapi_processed="true" type="text/javascript" src="nosql-netflix-use-case-comparison-for_31_files/plusone.js"></script>
+<script type="text/javascript">
+if (typeof(BLOG_attachCsiOnload) != 'undefined' && BLOG_attachCsiOnload != null) { window['blogger_templates_experiment_id'] = "templatesV1";window['blogger_blog_id'] = '7434008';BLOG_attachCsiOnload('item_'); }_WidgetManager._Init('//www.blogger.com/rearrange?blogID\x3d7434008','//perfcap.blogspot.in/2010/10/nosql-netflix-use-case-comparison-for_31.html','7434008');
+_WidgetManager._SetDataContext([{'name': 'blog', 'data': {'blogId': '7434008', 'bloggerUrl': 'http://www.blogger.com', 'title': 'Adrian Cockcroft\47s Blog', 'pageType': 'item', 'url': 'http://perfcap.blogspot.in/2010/10/nosql-netflix-use-case-comparison-for_31.html', 'canonicalUrl': 'http://perfcap.blogspot.com/2010/10/nosql-netflix-use-case-comparison-for_31.html', 'canonicalHomepageUrl': 'http://perfcap.blogspot.com/', 'homepageUrl': 'http://perfcap.blogspot.in/', 'blogspotFaviconUrl': 'http://perfcap.blogspot.in/favicon.ico', 'enabledCommentProfileImages': true, 'adultContent': false, 'disableAdSenseWidget': false, 'analyticsAccountNumber': '', 'searchLabel': '', 'searchQuery': '', 'pageName': 'NoSQL Netflix Use Case Comparison for MongoDB', 'pageTitle': 'Adrian Cockcroft\47s Blog: NoSQL Netflix Use Case Comparison for MongoDB', 'encoding': 'UTF-8', 'locale': 'en-US', 'localeLanguage': 'en', 'isPrivate': false, 'isMobile': false, 'isMobileRequest': false, 'mobileClass': '', 'isPrivateBlog': false, 'languageDirection': 'ltr', 'feedLinks': '\74link rel\75\42alternate\42 type\75\42application/atom+xml\42 title\75\42Adrian Cockcroft\46#39;s Blog - Atom\42 href\75\42http://perfcap.blogspot.com/feeds/posts/default\42 /\76\n\74link rel\75\42alternate\42 type\75\42application/rss+xml\42 title\75\42Adrian Cockcroft\46#39;s Blog - RSS\42 href\75\42http://perfcap.blogspot.com/feeds/posts/default?alt\75rss\42 /\76\n\74link rel\75\42service.post\42 type\75\42application/atom+xml\42 title\75\42Adrian Cockcroft\46#39;s Blog - Atom\42 href\75\42http://www.blogger.com/feeds/7434008/posts/default\42 /\76\n\74link rel\75\42EditURI\42 type\75\42application/rsd+xml\42 title\75\42RSD\42 href\75\42http://www.blogger.com/rsd.g?blogID\0757434008\42 /\76\n\74link rel\75\42alternate\42 type\75\42application/atom+xml\42 title\75\42Adrian Cockcroft\46#39;s Blog - Atom\42 href\75\42http://perfcap.blogspot.com/feeds/4142906401694795007/comments/default\42 /\76\n', 'meTag': '', 'openIdOpTag': '', 'imageSrcTag': '', 'latencyHeadScript': '\74script type\75\42text/javascript\42\76(function() { var b\75window,e\75\42jstiming\42,g\75\42tick\42;(function(){function d(a){this.t\75{};this.tick\75function(a,d,c){c\75void 0!\75c?c:(new Date).getTime();this.t[a]\75[c,d]};this[g](\42start\42,null,a)}var a\75new d;b.jstiming\75{Timer:d,load:a};if(b.performance\46\46b.performance.timing){var a\75b.performance.timing,c\75b[e].load,f\75a.navigationStart,a\75a.responseStart;0\74f\46\46a\76\75f\46\46(c[g](\42_wtsrt\42,void 0,f),c[g](\42wtsrt_\42,\42_wtsrt\42,a),c[g](\42tbsd_\42,\42wtsrt_\42))}try{a\75null,b.chrome\46\46b.chrome.csi\46\46(a\75Math.floor(b.chrome.csi().pageT),c\46\0460\74f\46\46(c[g](\42_tbnd\42,void 0,b.chrome.csi().startE),\nc[g](\42tbnd_\42,\42_tbnd\42,f))),null\75\75a\46\46b.gtbExternal\46\46(a\75b.gtbExternal.pageT()),null\75\75a\46\46b.external\46\46(a\75b.external.pageT,c\46\0460\74f\46\46(c[g](\42_tbnd\42,void 0,b.external.startE),c[g](\42tbnd_\42,\42_tbnd\42,f))),a\46\46(b[e].pt\75a)}catch(l){}})();b.tickAboveFold\75function(d){var a\0750;if(d.offsetParent){do a+\75d.offsetTop;while(d\75d.offsetParent)}d\75a;750\76\75d\46\46b[e].load[g](\42aft\42)};var h\75!1;function k(){h||(h\75!0,b[e].load[g](\42firstScrollTime\42))}b.addEventListener?b.addEventListener(\42scroll\42,k,!1):b.attachEvent(\42onscroll\42,k);\n })();\74/script\076', 'mobileHeadScript': '', 'adsenseClientId': 'pub-4892855426305845', 'view': '', 'dynamicViewsCommentsSrc': '//www.blogblog.com/dynamicviews/4224c15c4e7c9321/js/comments.js', 'dynamicViewsScriptSrc': '//www.blogblog.com/dynamicviews/2ad9a09a40260f49', 'plusOneApiSrc': 'https://apis.google.com/js/plusone.js'}}, {'name': 'skin', 'data': {'vars': {'textColor': '#29303b', 'linkColor': '#473624', 'pageTitleFont': 'normal normal 225% Georgia, Times New Roman,sans-serif', 'blogDescriptionFont': 'italic normal 100% Georgia, Times New Roman, sans-serif', 'visitedLinkColor': '#956839', 'postTitleColor': '#1b0431', 'sidebarHeaderColor': '#211104', 'headerFont': 'normal normal 150% Georgia, Times New Roman,sans-serif', 'bodyFont': 'normal normal 100% Georgia, Times New Roman,Sans-Serif;', 'blogDescriptionColor': '#29303B', 'endSide': 'right', 'startSide': 'left', 'pageHeaderColor': '#612e00'}, 'override': ''}}, {'name': 'view', 'data': {'classic': {'name': 'classic', 'url': '/?view\75classic'}, 'flipcard': {'name': 'flipcard', 'url': '/?view\75flipcard'}, 'magazine': {'name': 'magazine', 'url': '/?view\75magazine'}, 'mosaic': {'name': 'mosaic', 'url': '/?view\75mosaic'}, 'sidebar': {'name': 'sidebar', 'url': '/?view\75sidebar'}, 'snapshot': {'name': 'snapshot', 'url': '/?view\75snapshot'}, 'timeslide': {'name': 'timeslide', 'url': '/?view\75timeslide'}}}]);
+_WidgetManager._RegisterWidget('_HTMLView', new _WidgetInfo('HTML5', 'footer', null, document.getElementById('HTML5'), {}, 'displayModeFull'));
+_WidgetManager._RegisterWidget('_AdSenseView', new _WidgetInfo('AdSense1', 'sidebar', null, document.getElementById('AdSense1'), {}, 'displayModeFull'));
+_WidgetManager._RegisterWidget('_HTMLView', new _WidgetInfo('HTML3', 'sidebar', null, document.getElementById('HTML3'), {}, 'displayModeFull'));
+_WidgetManager._RegisterWidget('_BlogArchiveView', new _WidgetInfo('BlogArchive1', 'sidebar', null, document.getElementById('BlogArchive1'), {'languageDirection': 'ltr'}, 'displayModeFull'));
+_WidgetManager._RegisterWidget('_HTMLView', new _WidgetInfo('HTML4', 'sidebar', null, document.getElementById('HTML4'), {}, 'displayModeFull'));
+_WidgetManager._RegisterWidget('_HeaderView', new _WidgetInfo('Header1', 'header', null, document.getElementById('Header1'), {}, 'displayModeFull'));
+_WidgetManager._RegisterWidget('_NavbarView', new _WidgetInfo('Navbar1', 'navbar', null, document.getElementById('Navbar1'), {}, 'displayModeFull'));
+_WidgetManager._RegisterWidget('_BlogView', new _WidgetInfo('Blog1', 'main', null, document.getElementById('Blog1'), {'cmtInteractionsEnabled': false, 'lightboxEnabled': true, 'lightboxModuleUrl': '//www.blogger.com/static/v1/jsbin/48268415-lbx.js', 'lightboxCssUrl': '//www.blogger.com/static/v1/v-css/228702327-lightbox_bundle.css'}, 'displayModeFull'));
+</script>
+
+</body></html>

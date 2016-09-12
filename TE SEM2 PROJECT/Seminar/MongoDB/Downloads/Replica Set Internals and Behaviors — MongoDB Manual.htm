@@ -1,0 +1,644 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head>
+    <title>Replica Set Internals and Behaviors — MongoDB Manual</title>
+
+    <link rel="shortcut icon" href="http://media.mongodb.org/favicon.ico">
+    <meta name="robots" content="index">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <link rel="canonical" href="http://docs.mongodb.org/manual/core/replication-internals">
+
+    
+    
+    <link rel="stylesheet" href="Replica%20Set%20Internals%20and%20Behaviors%20%E2%80%94%20MongoDB%20Manual_files/mongodb-docs.css" type="text/css">
+    <link rel="stylesheet" href="Replica%20Set%20Internals%20and%20Behaviors%20%E2%80%94%20MongoDB%20Manual_files/pygments.css" type="text/css">
+      
+    <script id="undefined" src="Replica%20Set%20Internals%20and%20Behaviors%20%E2%80%94%20MongoDB%20Manual_files/inpage_linkid.js" async="" type="text/javascript"></script><script src="Replica%20Set%20Internals%20and%20Behaviors%20%E2%80%94%20MongoDB%20Manual_files/ga.js" async="" type="text/javascript"></script><script src="Replica%20Set%20Internals%20and%20Behaviors%20%E2%80%94%20MongoDB%20Manual_files/cse.js" async="" type="text/javascript"></script><script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '2.2.3',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '',
+        HAS_SOURCE:  false
+      };
+    </script>
+    <script type="text/javascript" src="Replica%20Set%20Internals%20and%20Behaviors%20%E2%80%94%20MongoDB%20Manual_files/jquery.js"></script>
+    <script type="text/javascript" src="Replica%20Set%20Internals%20and%20Behaviors%20%E2%80%94%20MongoDB%20Manual_files/underscore.js"></script>
+    <script type="text/javascript" src="Replica%20Set%20Internals%20and%20Behaviors%20%E2%80%94%20MongoDB%20Manual_files/doctools.js"></script>
+      <link rel="search" type="application/opensearchdescription+xml" href="http://docs.mongodb.org/osd.xml" title="MongoDB Help">
+<link rel="author" title="About these documents" href="http://docs.mongodb.org/manual/about/">
+<link rel="top" title="MongoDB Manual" href="http://docs.mongodb.org/manual/">
+<link rel="up" title="Replication" href="http://docs.mongodb.org/manual/replication/">
+<link rel="next" title="Master Slave Replication" href="http://docs.mongodb.org/manual/administration/master-slave/">
+<link rel="prev" title="Replica Set Considerations and Behaviors for Applications and Development" href="http://docs.mongodb.org/manual/applications/replication/">
+<!-- Put the following javascript before the closing </head> tag. -->
+<script>
+  (function() {
+    var cx = '017213726194841070573:WMX6838984';
+    var gcse = document.createElement('script'); gcse.type = 'text/javascript'; gcse.async = true;
+    gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+        '//www.google.com/cse/cse.js?cx=' + cx;
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(gcse, s);
+  })();
+</script>
+  <script type="text/javascript" src="Replica%20Set%20Internals%20and%20Behaviors%20%E2%80%94%20MongoDB%20Manual_files/jsapi"></script><link rel="stylesheet" href="Replica%20Set%20Internals%20and%20Behaviors%20%E2%80%94%20MongoDB%20Manual_files/defaulten.css" type="text/css"><link rel="stylesheet" href="Replica%20Set%20Internals%20and%20Behaviors%20%E2%80%94%20MongoDB%20Manual_files/default.css" type="text/css"><script src="Replica%20Set%20Internals%20and%20Behaviors%20%E2%80%94%20MongoDB%20Manual_files/defaulten.js" type="text/javascript"></script><script src="Replica%20Set%20Internals%20and%20Behaviors%20%E2%80%94%20MongoDB%20Manual_files/search.js" type="text/javascript"></script><style type="text/css">
+.gsc-control-cse {
+font-family: Arial, sans-serif;
+border-color: #FFFFFF;
+background-color: #FFFFFF;
+}
+.gsc-control-cse .gsc-table-result {
+font-family: Arial, sans-serif;
+}
+input.gsc-input, .gsc-input-box, .gsc-input-box-hover, .gsc-input-box-focus {
+border-color: #D9D9D9;
+}
+input.gsc-search-button, input.gsc-search-button:hover, input.gsc-search-button:focus {
+border-color: #5AAC41;
+background-color: #5AAC41;
+background-image: none;
+filter: none;
+}
+.gsc-tabHeader.gsc-tabhInactive {
+border-color: #CCCCCC;
+background-color: #FFFFFF;
+}
+.gsc-tabHeader.gsc-tabhActive {
+border-color: #CCCCCC;
+border-bottom-color: #FFFFFF;
+background-color: #FFFFFF;
+}
+.gsc-tabsArea {
+border-color: #CCCCCC;
+}
+.gsc-webResult.gsc-result,
+.gsc-results .gsc-imageResult {
+border-color: #FFFFFF;
+background-color: #FFFFFF;
+}
+.gsc-webResult.gsc-result:hover,
+.gsc-imageResult:hover {
+border-color: #FFFFFF;
+background-color: #FFFFFF;
+}
+.gs-webResult.gs-result a.gs-title:link,
+.gs-webResult.gs-result a.gs-title:link b,
+.gs-imageResult a.gs-title:link,
+.gs-imageResult a.gs-title:link b {
+color: #1155CC;
+}
+.gs-webResult.gs-result a.gs-title:visited,
+.gs-webResult.gs-result a.gs-title:visited b,
+.gs-imageResult a.gs-title:visited,
+.gs-imageResult a.gs-title:visited b {
+color: #1155CC;
+}
+.gs-webResult.gs-result a.gs-title:hover,
+.gs-webResult.gs-result a.gs-title:hover b,
+.gs-imageResult a.gs-title:hover,
+.gs-imageResult a.gs-title:hover b {
+color: #1155CC;
+}
+.gs-webResult.gs-result a.gs-title:active,
+.gs-webResult.gs-result a.gs-title:active b,
+.gs-imageResult a.gs-title:active,
+.gs-imageResult a.gs-title:active b {
+color: #1155CC;
+}
+.gsc-cursor-page {
+color: #1155CC;
+}
+a.gsc-trailing-more-results:link {
+color: #1155CC;
+}
+.gs-webResult .gs-snippet,
+.gs-imageResult .gs-snippet,
+.gs-fileFormatType {
+color: #333333;
+}
+.gs-webResult div.gs-visibleUrl,
+.gs-imageResult div.gs-visibleUrl {
+color: #009933;
+}
+.gs-webResult div.gs-visibleUrl-short {
+color: #009933;
+}
+.gs-webResult div.gs-visibleUrl-short {
+display: none;
+}
+.gs-webResult div.gs-visibleUrl-long {
+display: block;
+}
+.gs-promotion div.gs-visibleUrl-short {
+display: none;
+}
+.gs-promotion div.gs-visibleUrl-long {
+display: block;
+}
+.gsc-cursor-box {
+border-color: #FFFFFF;
+}
+.gsc-results .gsc-cursor-box .gsc-cursor-page {
+border-color: #CCCCCC;
+background-color: #FFFFFF;
+color: #1155CC;
+}
+.gsc-results .gsc-cursor-box .gsc-cursor-current-page {
+border-color: #CCCCCC;
+background-color: #FFFFFF;
+color: #1155CC;
+}
+.gsc-webResult.gsc-result.gsc-promotion {
+border-color: #F6F6F6;
+background-color: #F6F6F6;
+}
+.gsc-completion-title {
+color: #1155CC;
+}
+.gsc-completion-snippet {
+color: #333333;
+}
+.gs-promotion a.gs-title:link,
+.gs-promotion a.gs-title:link *,
+.gs-promotion .gs-snippet a:link {
+color: #1155CC;
+}
+.gs-promotion a.gs-title:visited,
+.gs-promotion a.gs-title:visited *,
+.gs-promotion .gs-snippet a:visited {
+color: #1155CC;
+}
+.gs-promotion a.gs-title:hover,
+.gs-promotion a.gs-title:hover *,
+.gs-promotion .gs-snippet a:hover {
+color: #1155CC;
+}
+.gs-promotion a.gs-title:active,
+.gs-promotion a.gs-title:active *,
+.gs-promotion .gs-snippet a:active {
+color: #1155CC;
+}
+.gs-promotion .gs-snippet,
+.gs-promotion .gs-title .gs-promotion-title-right,
+.gs-promotion .gs-title .gs-promotion-title-right * {
+color: #333333;
+}
+.gs-promotion .gs-visibleUrl,
+.gs-promotion .gs-visibleUrl-short {
+color: #009933;
+}
+.gsc-input input.gsc-input {
+background: none repeat scroll 0% 0% white !important;
+}
+</style><style type="text/css">.gsfe_a{border:1px solid #b9b9b9;border-top-color:#a0a0a0;box-shadow:inset 0px 1px 2px rgba(0,0,0,0.1);-moz-box-shadow:inset 0px 1px 2px rgba(0,0,0,0.1);-webkit-box-shadow:inset 0px 1px 2px rgba(0,0,0,0.1);}.gsfe_b{border:1px solid #4d90fe;outline:none;box-shadow:inset 0px 1px 2px rgba(0,0,0,0.3);-moz-box-shadow:inset 0px 1px 2px rgba(0,0,0,0.3);-webkit-box-shadow:inset 0px 1px 2px rgba(0,0,0,0.3);}.gssb_c{border:0;position:absolute;z-index:989}.gssb_e{border:1px solid #ccc;border-top-color:#d9d9d9;box-shadow:0 2px 4px rgba(0,0,0,0.2);-moz-box-shadow:0 2px 4px rgba(0,0,0,0.2);cursor:default}.gssb_f{visibility:hidden;white-space:nowrap}.gssb_k{border:0;display:block;position:absolute;top:0;z-index:988}.gsdd_a{border:none!important}.gsib_a{width:100%;padding:4px 6px 0}.gsib_a,.gsib_b{vertical-align:top}.gssb_a{padding:0 7px}.gssb_a,.gssb_a td{white-space:nowrap;overflow:hidden;line-height:22px}#gssb_b{font-size:11px;color:#36c;text-decoration:none}#gssb_b:hover{font-size:11px;color:#36c;text-decoration:underline}.gssb_g{text-align:center;padding:8px 0 7px;position:relative}.gssb_h{font-size:15px;height:28px;margin:0.2em}.gssb_i{background:#eee}.gss_ifl{visibility:hidden;padding-left:5px}.gssb_i .gss_ifl{visibility:visible}a.gssb_j{font-size:13px;color:#36c;text-decoration:none;line-height:100%}a.gssb_j:hover{text-decoration:underline}.gssb_l{height:1px;background-color:#e5e5e5}.gssb_m{color:#000;background:#fff}.gscsep_a{display:none}.gsq_a{padding:0}.gscb_a{display:inline-block;font:27px/13px arial,sans-serif}.gsst_a .gscb_a{color:#a1b9ed;cursor:pointer}.gsst_a:hover .gscb_a,.gsst_a:focus .gscb_a{color:#36c}.gsst_a{display:inline-block}.gsst_a{cursor:pointer;padding:0 4px}.gsst_a:hover{text-decoration:none!important}.gsst_b{font-size:16px;padding:0 2px;user-select:none;-moz-user-select:none;white-space:nowrap}.gsst_e{opacity:0.55;}.gsst_a:hover .gsst_e,.gsst_a:focus .gsst_e{opacity:0.72;}.gsst_a:active .gsst_e{opacity:1;}.gsst_f{background:white;text-align:left}.gsst_g{background-color:white;border:1px solid #ccc;border-top-color:#d9d9d9;box-shadow:0 2px 4px rgba(0,0,0,0.2);-moz-box-shadow:0 2px 4px rgba(0,0,0,0.2);margin:-1px -3px;padding:0 6px}.gsst_h{background-color:white;height:1px;margin-bottom:-1px;position:relative;top:-1px}.gssb_a{padding:0 9px}.gsib_a{padding-right:8px;padding-left:8px}.gsst_a{padding-top:3px}.gssb_e{border:0}.gssb_l{margin:5px 0}.gssb_c .gsc-completion-container{position:static}.gssb_c{z-index:5000}.gsc-completion-container table{background:transparent;font-size:inherit;font-family:inherit}.gssb_c > tbody > tr,.gssb_c > tbody > tr > td,.gssb_d,.gssb_d > tbody > tr,.gssb_d > tbody > tr > td,.gssb_e,.gssb_e > tbody > tr,.gssb_e > tbody > tr > td{padding:0;margin:0;border:0}.gssb_a table,.gssb_a table tr,.gssb_a table tr td{padding:0;margin:0;border:0}</style><style type="text/css">.atlwdg-blanket {background:#000;height:100%;left:0;opacity:.5;position:fixed;top:0;width:100%;z-index:1000000;}
+.atlwdg-popup {background:#fff;border:1px solid #666;position:fixed;top:50%;left:50%;z-index:10000011;}
+.atlwdg-popup.atlwdg-box-shadow {-moz-box-shadow:10px 10px 20px rgba(0,0,0,0.5);-webkit-box-shadow:10px 10px 20px rgba(0,0,0,0.5);box-shadow:10px 10px 20px rgba(0,0,0,0.5);background-color:#fff;}
+.atlwdg-hidden {display:none;}
+.atlwdg-trigger {position: fixed; background: #013466; padding: 5px;border: 2px solid white;border-top: none; font-weight: bold; color: white; display:block;white-space:nowrap;text-decoration:none; font-family:arial, FreeSans, Helvetica, sans-serif;font-size:12px;box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5);-webkit-box-shadow:5px 5px 10px rgba(0, 0, 0, 0.5); -moz-box-shadow:5px 5px 10px rgba(0, 0, 0, 0.5);border-radius: 0 0 5px 5px; -moz-border-radius: 0 0 5px 5px;}
+a.atlwdg-trigger {text-decoration:none;}
+.atlwdg-trigger.atlwdg-TOP {left: 45%;top:0; }
+.atlwdg-trigger.atlwdg-RIGHT {left:100%; top:40%; -webkit-transform-origin:top left; -webkit-transform: rotate(90deg); -moz-transform: rotate(90deg); -moz-transform-origin:top left;-ms-transform: rotate(90deg); -ms-transform-origin:top left; }
+.atlwdg-trigger.atlwdg-SUBTLE { right:0; bottom:0; border: 1px solid #ccc; border-bottom: none; border-right: none; background-color: #f5f5f5; color: #444; font-size: 11px; padding: 6px; box-shadow: -1px -1px 2px rgba(0, 0, 0, 0.5); border-radius: 2px 0 0 0; }
+.atlwdg-loading {position:absolute;top:220px;left:295px;}</style></head>
+  <body>
+<div id="top-right">
+        <div class="user-right">
+                <ul id="header-menu-bar" class="ajs-menu-bar">
+                <li class="normal"><a target="_blank" href="http://groups.google.com/group/mongodb-user">Forums</a></li>
+                <li class="normal"><a target="_blank" href="http://blog.mongodb.org/">Blog</a></li>
+                <li class="normal"><a href="http://www.mongodb.org/downloads">Download</a></li>
+                <li class="normal"><a href="http://docs.mongodb.org/ecosystem/drivers/">Drivers</a></li>
+                <li class="normal"><a href="http://www.10gen.com/events">Events</a></li>
+                <li class="normal last"><a class="last" href="http://docs.mongodb.org/manual/meta/translation">Translations</a></li>
+                </ul>
+        </div>
+</div>
+<div id="header-db" class="spread">
+        <div class="split">
+                <div id="logo">
+                        <div><a href="http://docs.mongodb.org/manual/"><img class="logo" src="Replica%20Set%20Internals%20and%20Behaviors%20%E2%80%94%20MongoDB%20Manual_files/logo-mongodb.png" alt="MongoDB Logo"></a></div>
+                </div>
+        </div>
+
+<div class="search-db"><div dir="ltr" id="___gcse_0"><form accept-charset="utf-8" class="gsc-search-box gsc-search-box-tools"><table class="gsc-search-box" cellpadding="0" cellspacing="0"><tbody><tr><td class="gsc-input"><div id="gsc-iw-id1" class="gsc-input-box"><table class="gstl_0 " id="gs_id0" style="width: 100%; padding: 0pt;" cellpadding="0" cellspacing="0"><tbody><tr><td class="gsib_a" id="gs_tti0"><input spellcheck="false" dir="ltr" id="gsc-i-id1" style="width: 100%; padding: 0pt; border: medium none; margin: 0pt; height: auto; outline: medium none;" title="search" name="search" class="gsc-input" size="10" autocomplete="off" type="text"></td><td class="gsib_b"><div dir="ltr" id="gs_st0" class="gsst_b"><a style="display: none;" href="javascript:void(0)" class="gsst_a"><span id="gs_cb0" class="gscb_a">×</span></a></div></td></tr></tbody></table></div></td><td class="gsc-search-button"><input title="search" class="gsc-search-button gsc-search-button-v2" src="Replica%20Set%20Internals%20and%20Behaviors%20%E2%80%94%20MongoDB%20Manual_files/search_box_icon.png" type="image"></td><td class="gsc-clear-button"><div title="clear results" class="gsc-clear-button">&nbsp;</div></td></tr></tbody></table><table class="gsc-branding" cellpadding="0" cellspacing="0"><tbody><tr style="display: none;"><td class="gsc-branding-user-defined"></td><td class="gsc-branding-text"><div class="gsc-branding-text">powered by</div></td><td class="gsc-branding-img"><img class="gsc-branding-img" src="Replica%20Set%20Internals%20and%20Behaviors%20%E2%80%94%20MongoDB%20Manual_files/small-logo.png"></td></tr></tbody></table></form></div></div>
+<div id="etp">
+<ul>
+<li><a href="https://github.com/mongodb/docs/blob/master/source/core/replication-internals.txt" target="_blank" title="Edit core/replication-internals.txt on github">Edit this Page</a></li>
+<li><a href="http://github.com/mongodb/docs" target="_blank" title="Fork the documentation on GitHub and contribute.">GitHub</a></li>
+<li><a href="https://jira.mongodb.org/secure/CreateIssueDetails%21init.jspa?pid=10380&amp;issuetype=4&amp;priority=4&amp;summary=Comment+on%3a+%22core/replication-internals%2Etxt%22" target="_blank" title="Report a problem with core/replication-internals.txt on Jira">Report a problem</a></li>
+</ul>
+</div>
+</div>  
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            <div id="cse-results"><div id="___gcse_1"><div class="gsc-control-cse gsc-control-cse-en"><div dir="ltr" class="gsc-control-wrapper-cse"><div class="gsc-results-wrapper-nooverlay"><div class="gsc-tabsAreaInvisible"><div class="gsc-tabHeader gsc-inline-block gsc-tabhActive">Custom Search</div><span class="gs-spacer"> </span></div><div class="gsc-tabsAreaInvisible"></div><div class="gsc-above-wrapper-area-invisible"><table class="gsc-above-wrapper-area-container" cellpadding="0" cellspacing="0"><tbody><tr><td class="gsc-result-info-container"><div class="gsc-result-info-invisible"></div></td></tr></tbody></table></div><div class="gsc-adBlockInvisible"></div><div class="gsc-wrapper"><div class="gsc-adBlockInvisible"></div><div class="gsc-resultsbox-invisible"><div class="gsc-resultsRoot gsc-tabData gsc-tabdActive"><table class="gsc-resultsHeader" cellpadding="0" cellspacing="0"><tbody><tr><td class="gsc-twiddleRegionCell"><div class="gsc-twiddle"><div class="gsc-title">Web</div></div><div class="gsc-stats"></div><div class="gsc-results-selector gsc-all-results-active"><div title="show one result" class="gsc-result-selector gsc-one-result">&nbsp;</div><div title="show more results" class="gsc-result-selector gsc-more-results">&nbsp;</div><div title="show all results" class="gsc-result-selector gsc-all-results">&nbsp;</div></div></td><td class="gsc-configLabelCell"></td></tr></tbody></table><div><div class="gsc-expansionArea"></div></div></div></div></div></div></div></div></div></div>
+            
+  <div class="section" id="replica-set-internals-and-behaviors">
+<h1>Replica Set Internals and Behaviors<a class="headerlink" href="#replica-set-internals-and-behaviors" title="Permalink to this headline">¶</a></h1>
+<p>This document provides a more in-depth explanation of the internals and
+operation of <a class="reference internal" href="http://docs.mongodb.org/manual/reference/glossary/#term-replica-set"><em class="xref std std-term">replica set</em></a> features. This material is not necessary for
+normal operation or application development but may be useful for
+troubleshooting and for further understanding MongoDB’s behavior and approach.</p>
+<p>For additional information about the internals of replication replica
+sets see the following resources in the MongoDB Manual:</p>
+<ul class="simple">
+<li><a class="reference internal" href="http://docs.mongodb.org/manual/reference/local-database/"><em>The local Database</em></a></li>
+<li><a class="reference internal" href="http://docs.mongodb.org/manual/reference/replica-commands/"><em>Replica Set Commands</em></a></li>
+<li><a class="reference internal" href="http://docs.mongodb.org/manual/reference/replication-info/"><em>Replication Info Reference</em></a></li>
+<li><a class="reference internal" href="http://docs.mongodb.org/manual/reference/replica-configuration/"><em>Replica Set Configuration</em></a></li>
+</ul>
+<div class="section" id="oplog-internals">
+<span id="replica-set-internals-oplog"></span><span id="replica-set-oplog"></span><span id="index-0"></span><h2>Oplog Internals<a class="headerlink" href="#oplog-internals" title="Permalink to this headline">¶</a></h2>
+<p>For an explanation of the oplog, see <a class="reference internal" href="http://docs.mongodb.org/manual/core/replication/#replica-set-oplog-sizing"><em>Oplog</em></a>.</p>
+<p>Under various exceptional
+situations, updates to a <a class="reference internal" href="http://docs.mongodb.org/manual/reference/glossary/#term-secondary"><em class="xref std std-term">secondary’s</em></a> oplog might
+lag behind the desired performance time. See
+<a class="reference internal" href="http://docs.mongodb.org/manual/administration/replica-sets/#replica-set-replication-lag"><em>Replication Lag</em></a> for details.</p>
+<p>All members of a <a class="reference internal" href="http://docs.mongodb.org/manual/reference/glossary/#term-replica-set"><em class="xref std std-term">replica set</em></a> send heartbeats (pings) to all
+other members in the set and can import operations to the local oplog
+from any other member in the set.</p>
+<p>Replica set oplog operations are <a class="reference internal" href="http://docs.mongodb.org/manual/reference/glossary/#term-idempotent"><em class="xref std std-term">idempotent</em></a>. The following
+operations require idempotency:</p>
+<ul class="simple">
+<li>initial sync</li>
+<li>post-rollback catch-up</li>
+<li>sharding chunk migrations</li>
+</ul>
+</div>
+<div class="section" id="read-preference-internals">
+<span id="replica-set-implementation"></span><span id="replica-set-data-integrity"></span><h2>Read Preference Internals<a class="headerlink" href="#read-preference-internals" title="Permalink to this headline">¶</a></h2>
+<p id="index-2">MongoDB uses <a class="reference internal" href="http://docs.mongodb.org/manual/reference/glossary/#term-single-master-replication"><em class="xref std std-term">single-master replication</em></a> to ensure that the
+database remains consistent. However, clients may modify the
+<a class="reference internal" href="http://docs.mongodb.org/manual/applications/replication/#replica-set-read-preference"><em>read preferences</em></a> on a
+per-connection basis in order to distribute read operations to the
+<a class="reference internal" href="http://docs.mongodb.org/manual/reference/glossary/#term-secondary"><em class="xref std std-term">secondary</em></a> members of a <a class="reference internal" href="http://docs.mongodb.org/manual/reference/glossary/#term-replica-set"><em class="xref std std-term">replica set</em></a>. Read-heavy deployments may achieve
+greater query throughput by distributing reads to secondary members. But
+keep in mind that replication is asynchronous; therefore, reads from
+secondaries may not always reflect the latest writes to the
+<a class="reference internal" href="http://docs.mongodb.org/manual/reference/glossary/#term-primary"><em class="xref std std-term">primary</em></a>.</p>
+<div class="admonition-see-also admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="http://docs.mongodb.org/manual/core/replication/#replica-set-consistency"><em>Consistency</em></a></p>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Use <a class="reference internal" href="http://docs.mongodb.org/manual/reference/method/db.getReplicationInfo/#db.getReplicationInfo" title="db.getReplicationInfo"><tt class="xref mongodb mongodb-method docutils literal"><span class="pre">db.getReplicationInfo()</span></tt></a> from a secondary member
+and the <a class="reference internal" href="http://docs.mongodb.org/manual/reference/replication-info/"><em>replication status</em></a>
+output to asses the current state of replication and determine if
+there is any unintended replication delay.</p>
+</div>
+</div>
+<div class="section" id="member-configurations">
+<span id="replica-set-member-configurations-internals"></span><span id="index-3"></span><h2>Member Configurations<a class="headerlink" href="#member-configurations" title="Permalink to this headline">¶</a></h2>
+<p>Replica sets can include members with the following four special
+configurations that affect membership behavior:</p>
+<ul class="simple">
+<li><a class="reference internal" href="http://docs.mongodb.org/manual/administration/replica-sets/#replica-set-secondary-only-members"><em>Secondary-only</em></a> members have
+their <tt class="xref mongodb mongodb-data docutils literal"><span class="pre">priority</span></tt> values set to <tt class="docutils literal"><span class="pre">0</span></tt> and thus
+are not eligible for election as primaries.</li>
+<li><a class="reference internal" href="http://docs.mongodb.org/manual/administration/replica-sets/#replica-set-hidden-members"><em>Hidden</em></a> members do not appear in the
+output of <a class="reference internal" href="http://docs.mongodb.org/manual/reference/method/db.isMaster/#db.isMaster" title="db.isMaster"><tt class="xref mongodb mongodb-method docutils literal"><span class="pre">db.isMaster()</span></tt></a>. This prevents clients
+from discovering and potentially querying the member in question.</li>
+<li><a class="reference internal" href="http://docs.mongodb.org/manual/administration/replica-sets/#replica-set-delayed-members"><em>Delayed</em></a> members lag a fixed period
+of time behind the primary. These members are typically used
+for disaster recovery scenarios. For example, if an administrator
+mistakenly truncates a collection, and you discover the mistake within
+the lag window, then you can manually fail over to the delayed member.</li>
+<li><a class="reference internal" href="http://docs.mongodb.org/manual/administration/replica-sets/#replica-set-arbiters"><em>Arbiters</em></a> exist solely to participate
+in elections. They do not replicate data from the primary.</li>
+</ul>
+<p>In almost every case, replica sets simplify the process of
+administering database replication. However, replica sets still have a
+unique set of administrative requirements and concerns. Choosing the
+right <a class="reference internal" href="http://docs.mongodb.org/manual/administration/replica-set-architectures/"><em>system architecture</em></a>
+for your data set is crucial.</p>
+<div class="admonition-see-also admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last">The <a class="reference internal" href="http://docs.mongodb.org/manual/administration/replica-sets/#replica-set-member-configurations"><em>Member Configurations</em></a> topic in the
+<a class="reference internal" href="http://docs.mongodb.org/manual/administration/replica-sets/"><em>Replica Set Operation and Management</em></a> document.</p>
+</div>
+</div>
+<div class="section" id="security-internals">
+<span id="index-4"></span><h2>Security Internals<a class="headerlink" href="#security-internals" title="Permalink to this headline">¶</a></h2>
+<p>Administrators of replica sets also have unique <a class="reference internal" href="http://docs.mongodb.org/manual/administration/monitoring/#replica-set-monitoring"><em>monitoring</em></a> and <a class="reference internal" href="http://docs.mongodb.org/manual/administration/replica-sets/#replica-set-security"><em>security</em></a>
+concerns. The <a class="reference internal" href="http://docs.mongodb.org/manual/reference/javascript/#replica-set-functions"><em>replica set functions</em></a> in
+the <a class="reference internal" href="http://docs.mongodb.org/manual/reference/mongo/#mongo" title="mongo"><tt class="xref mongodb mongodb-program docutils literal"><span class="pre">mongo</span></tt></a> shell, provide the tools necessary for replica set
+administration. In particular use the <a class="reference internal" href="http://docs.mongodb.org/manual/reference/method/rs.conf/#rs.conf" title="rs.conf"><tt class="xref mongodb mongodb-method docutils literal"><span class="pre">rs.conf()</span></tt></a> to return a
+<a class="reference internal" href="http://docs.mongodb.org/manual/reference/glossary/#term-document"><em class="xref std std-term">document</em></a> that holds the <a class="reference internal" href="http://docs.mongodb.org/manual/reference/replica-configuration/"><em>replica set configuration</em></a> and use <a class="reference internal" href="http://docs.mongodb.org/manual/reference/method/rs.reconfig/#rs.reconfig" title="rs.reconfig"><tt class="xref mongodb mongodb-method docutils literal"><span class="pre">rs.reconfig()</span></tt></a> to
+modify the configuration of an existing replica set.</p>
+<span class="target" id="index-5"></span></div>
+<div class="section" id="election-internals">
+<span id="replica-set-election-internals"></span><span id="index-6"></span><h2>Election Internals<a class="headerlink" href="#election-internals" title="Permalink to this headline">¶</a></h2>
+<p>Elections are the process <a class="reference internal" href="http://docs.mongodb.org/manual/reference/glossary/#term-replica-set"><em class="xref std std-term">replica set</em></a> members use to select which member should
+become <a class="reference internal" href="http://docs.mongodb.org/manual/reference/glossary/#term-primary"><em class="xref std std-term">primary</em></a>. A primary is the only member in the replica
+set that can accept write operations, including <a class="reference internal" href="http://docs.mongodb.org/manual/reference/method/db.collection.insert/#db.collection.insert" title="db.collection.insert"><tt class="xref mongodb mongodb-method docutils literal"><span class="pre">insert()</span></tt></a>, <a class="reference internal" href="http://docs.mongodb.org/manual/reference/method/db.collection.update/#db.collection.update" title="db.collection.update"><tt class="xref mongodb mongodb-method docutils literal"><span class="pre">update()</span></tt></a>,
+and <a class="reference internal" href="http://docs.mongodb.org/manual/reference/method/db.collection.remove/#db.collection.remove" title="db.collection.remove"><tt class="xref mongodb mongodb-method docutils literal"><span class="pre">remove()</span></tt></a>.</p>
+<p>The following events can trigger an election:</p>
+<ul class="simple">
+<li>You initialize a replica set for the first time.</li>
+<li>A primary steps down. A primary will step down in response to the
+<a class="reference internal" href="http://docs.mongodb.org/manual/reference/command/replSetStepDown/#replSetStepDown" title="replSetStepDown"><tt class="xref mongodb mongodb-dbcommand docutils literal"><span class="pre">replSetStepDown</span></tt></a> command or if it sees that one of the
+current secondaries is eligible for election <em>and</em> has a higher
+priority. A primary also will step down when it cannot contact a
+majority of the members of the replica set. When the current primary
+steps down, it closes all open client connections to prevent clients
+from unknowingly writing data to a non-primary member.</li>
+<li>A <a class="reference internal" href="http://docs.mongodb.org/manual/reference/glossary/#term-secondary"><em class="xref std std-term">secondary</em></a> member loses contact with a primary. A secondary
+will call for an election if it cannot establish a connection to a
+primary.</li>
+<li>A <a class="reference internal" href="http://docs.mongodb.org/manual/reference/glossary/#term-failover"><em class="xref std std-term">failover</em></a> occurs.</li>
+</ul>
+<p>In an election, all members have one vote,
+including <a class="reference internal" href="http://docs.mongodb.org/manual/administration/replica-sets/#replica-set-hidden-members"><em>hidden</em></a> members, <a class="reference internal" href="http://docs.mongodb.org/manual/administration/replica-sets/#replica-set-arbiters"><em>arbiters</em></a>, and even recovering members.
+Any <a class="reference internal" href="http://docs.mongodb.org/manual/reference/mongod/#mongod" title="mongod"><tt class="xref mongodb mongodb-program docutils literal"><span class="pre">mongod</span></tt></a> can veto an election.</p>
+<p>In the default configuration, all members have an equal chance of
+becoming primary; however, it’s possible to set <tt class="xref mongodb mongodb-data docutils literal"><span class="pre">priority</span></tt> values that weight the election. In some
+architectures, there may be operational reasons for increasing the
+likelihood of a specific replica set member becoming primary. For
+instance, a member located in a remote data center should <em>not</em> become
+primary. See: <a class="reference internal" href="http://docs.mongodb.org/manual/core/replication/#replica-set-node-priority"><em>Member Priority</em></a> for more
+information.</p>
+<p>Any member of a replica set can veto an election, even if the
+member is a <a class="reference internal" href="http://docs.mongodb.org/manual/administration/replica-sets/#replica-set-non-voting-members"><em>non-voting member</em></a>.</p>
+<p>A member of the set will veto an election under the following
+conditions:</p>
+<ul class="simple">
+<li>If the member seeking an election is not a member of the voter’s set.</li>
+<li>If the member seeking an election is not up-to-date with the most
+recent operation accessible in the replica set.</li>
+<li>If the member seeking an election has a lower priority than another member
+in the set that is also eligible for election.</li>
+<li>If a <a class="reference internal" href="http://docs.mongodb.org/manual/administration/replica-sets/#replica-set-secondary-only-members"><em>secondary only member</em></a> <a class="footnote-reference" href="#imply-secondary-only" id="id1">[1]</a> is the
+most current member at the time of the election, another eligible
+member of the set will catch up to the state of this secondary
+member and then attempt to become primary.</li>
+<li>If the current primary member has more recent operations
+(i.e. a higher “optime”) than the member seeking election, from the
+perspective of the voting member.</li>
+<li>The current primary will veto an election if it has the same or
+more recent operations (i.e. a “higher or equal optime”) than the
+member seeking election.</li>
+</ul>
+<p>The first member to receive votes from a majority of members in a set
+becomes the next primary until the next election. Be
+aware of the following conditions and possible situations:</p>
+<ul class="simple">
+<li>Replica set members send heartbeats (pings) to each other every 2
+seconds. If a heartbeat does not return for more than 10 seconds,
+the other members mark the delinquent member as inaccessible.</li>
+<li>Replica set members compare priorities only with other members of
+the set. The absolute value of priorities does not have any impact on
+the outcome of replica set elections, with the exception of the value <tt class="docutils literal"><span class="pre">0</span></tt>,
+which indicates the member cannot become primary and cannot seek election.
+For details, see <a class="reference internal" href="http://docs.mongodb.org/manual/administration/replica-sets/#replica-set-node-priority-configuration"><em>Adjusting Priority</em></a>.</li>
+<li>A replica set member cannot become primary <em>unless</em> it has the
+highest “optime” of any visible member in the set.</li>
+<li>If the member of the set with the highest priority is within 10
+seconds of the latest <a class="reference internal" href="http://docs.mongodb.org/manual/reference/glossary/#term-oplog"><em class="xref std std-term">oplog</em></a> entry, then the set will <em>not</em> elect a
+primary until the member with the highest priority catches up
+to the latest operation.</li>
+</ul>
+<div class="admonition-see-also admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="http://docs.mongodb.org/manual/administration/replica-sets/#replica-set-non-voting-members"><em>Non-voting members in a replica
+set</em></a>,
+<a class="reference internal" href="http://docs.mongodb.org/manual/administration/replica-sets/#replica-set-node-priority-configuration"><em>Adjusting Priority</em></a>, and
+<tt class="xref mongodb mongodb-data docutils literal"><span class="pre">replica</span> <span class="pre">configuration</span></tt>.</p>
+</div>
+<table class="docutils footnote" frame="void" id="imply-secondary-only" rules="none">
+<colgroup><col class="label"><col></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id1">[1]</a></td><td>Remember that <a class="reference internal" href="http://docs.mongodb.org/manual/administration/replica-sets/#replica-set-hidden-members"><em>hidden</em></a> and <a class="reference internal" href="http://docs.mongodb.org/manual/administration/replica-sets/#replica-set-delayed-members"><em>delayed</em></a> imply <a class="reference internal" href="http://docs.mongodb.org/manual/administration/replica-sets/#replica-set-secondary-only-members"><em>secondary-only</em></a> configuration.</td></tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="syncing">
+<span id="replica-set-syncing"></span><span id="index-7"></span><h2>Syncing<a class="headerlink" href="#syncing" title="Permalink to this headline">¶</a></h2>
+<p>In order to remain up-to-date with the current state of the
+<a class="reference internal" href="http://docs.mongodb.org/manual/reference/glossary/#term-replica-set"><em class="xref std std-term">replica set</em></a>, set members <a class="reference internal" href="http://docs.mongodb.org/manual/reference/glossary/#term-sync"><em class="xref std std-term">sync</em></a>, or copy, <a class="reference internal" href="http://docs.mongodb.org/manual/reference/glossary/#term-oplog"><em class="xref std std-term">oplog</em></a>
+entries from other members. Members sync data at two different points:</p>
+<ul class="simple">
+<li><em>Initial sync</em> occurs when MongoDB creates new databases on a new or
+restored member, populating the member with the replica set’s
+data. When a new or restored member joins or rejoins a set, the member
+waits to receive heartbeats from other members. By default, the member
+syncs from the <em>the closest</em> member of the set that is either the
+primary or another secondary with more recent oplog entries. This
+prevents two secondaries from syncing from each other.</li>
+<li><em>Replication</em> occurs continually after initial sync and keeps the
+member updated with changes to the replica set’s data.</li>
+</ul>
+<p>In MongoDB 2.0, secondaries only change sync targets if the connection
+to the sync target drops <a class="footnote-reference" href="#connection-drop" id="id2">[2]</a> or produces an error.</p>
+<p>For example:</p>
+<ol class="arabic">
+<li><p class="first">If you have two secondary members in one data center and a primary in
+a second facility, and if you start all three instances at roughly
+the same time (i.e. with no existing data sets or oplog), both
+secondaries will likely sync from the primary, as neither secondary
+has more recent oplog entries.</p>
+<p>If you restart one of the secondaries, then when it rejoins the set it
+will likely begin syncing from the other secondary, because of proximity.</p>
+</li>
+<li><p class="first">If you have a primary in one facility and a secondary in an
+alternate facility, and if you add another secondary to the alternate
+facility, the new secondary will likely sync from the existing
+secondary because it is closer than the primary.</p>
+</li>
+</ol>
+<p>In MongoDB 2.2, secondaries also use the following additional sync
+behaviors:</p>
+<ul class="simple">
+<li>Secondaries will sync from <a class="reference internal" href="http://docs.mongodb.org/manual/administration/replica-sets/#replica-set-delayed-members"><em>delayed members</em></a> <em>only</em> if no other member is available.</li>
+<li>Secondaries will <em>not</em> sync from <a class="reference internal" href="http://docs.mongodb.org/manual/administration/replica-sets/#replica-set-hidden-members"><em>hidden members</em></a>.</li>
+<li>Secondaries will <em>not</em> start syncing from a member in a
+<a class="reference internal" href="http://docs.mongodb.org/manual/reference/glossary/#term-recovering"><em class="xref std std-term">recovering</em></a> state.</li>
+<li>For one member to sync from another, both members must have the same
+value, either <tt class="docutils literal"><span class="pre">true</span></tt> or <tt class="docutils literal"><span class="pre">false</span></tt>, for the
+<tt class="xref mongodb mongodb-data docutils literal"><span class="pre">members[n].buildIndexes</span></tt> field.</li>
+</ul>
+<table class="docutils footnote" frame="void" id="connection-drop" rules="none">
+<colgroup><col class="label"><col></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id2">[2]</a></td><td>Secondaries will stop syncing from a member if
+the connection used to poll oplog entries is unresponsive for 30
+seconds. If a connection times out, the member may select a new
+member to sync from.</td></tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="multithreaded-replication">
+<h2>Multithreaded Replication<a class="headerlink" href="#multithreaded-replication" title="Permalink to this headline">¶</a></h2>
+<p>MongoDB applies write operations in batches using a multithreaded
+approach. The replication process divides each batch among a group of
+threads which apply many operations with greater concurrency.</p>
+<p>Even though threads may apply operations out of order, a client
+reading data from a secondary will never return documents that reflect
+an in-between state that never existed on the primary. To ensure this
+consistency, MongoDB blocks all read operations while applying the
+batch of operations.</p>
+<p>To help improve the performance of operation application, MongoDB
+fetches all the memory pages that hold data and indexes that the
+operations in the batch will affect. The prefetch stage minimizes the
+amount of time MongoDB must hold the write lock to apply
+operations. See the <a class="reference internal" href="http://docs.mongodb.org/manual/reference/configuration-options/#replIndexPrefetch" title="replIndexPrefetch"><tt class="xref mongodb mongodb-setting docutils literal"><span class="pre">replIndexPrefetch</span></tt></a> setting to modify the
+index fetching behavior.</p>
+</div>
+<div class="section" id="pre-fetching-indexes-to-improve-replication-throughput">
+<h2>Pre-Fetching Indexes to Improve Replication Throughput<a class="headerlink" href="#pre-fetching-indexes-to-improve-replication-throughput" title="Permalink to this headline">¶</a></h2>
+<p>By default, secondaries will in most cases pre-fetch <a class="reference internal" href="http://docs.mongodb.org/manual/indexes/#indexes"><em>Indexes</em></a>
+associated with the affected document to improve replication throughput.</p>
+<p>You can limit this feature to pre-fetch only the index on the <tt class="docutils literal"><span class="pre">_id</span></tt>
+field, or you can disable this feature entirely. For more information,
+see <a class="reference internal" href="http://docs.mongodb.org/manual/reference/configuration-options/#replIndexPrefetch" title="replIndexPrefetch"><tt class="xref mongodb mongodb-setting docutils literal"><span class="pre">replIndexPrefetch</span></tt></a>.</p>
+</div>
+</div>
+
+
+<div id="btnv">
+<ul id="btnvl">
+<li id="btnvpr"><a href="http://docs.mongodb.org/manual/applications/replication/" title="Previous Section: Replica Set Considerations and Behaviors for Applications and Development">&lt; &nbsp; Replica Set Considerations and Behaviors for Applications and Development</a></li>
+<li id="btnvup"><a href="http://docs.mongodb.org/manual/replication/" title="Parent Section: Replication">/\&nbsp; Replication</a></li>
+<li id="btnvnx"><a href="http://docs.mongodb.org/manual/administration/master-slave/" title="Next Section: Master Slave Replication">Master Slave Replication &nbsp;&gt;</a></li>
+</ul>
+</div>
+</div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper"><h3><a href="http://docs.mongodb.org/manual/contents/">MongoDB Manual</a>
+
+<small><a href="http://docs.mongodb.org/manual/genindex/">(Index)</a></small>
+
+</h3>
+
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="http://docs.mongodb.org/manual/installation/">Installing MongoDB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://docs.mongodb.org/manual/administration/">Administration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://docs.mongodb.org/manual/security/">Security</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://docs.mongodb.org/manual/crud/">Core MongoDB Operations (CRUD)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://docs.mongodb.org/manual/aggregation/">Aggregation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://docs.mongodb.org/manual/indexes/">Indexes</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="http://docs.mongodb.org/manual/replication/">Replication</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="http://docs.mongodb.org/manual/replication/#replica-set-use-and-operation">Replica Set Use and Operation</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="http://docs.mongodb.org/manual/core/replication/">Replica Set Fundamental Concepts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="http://docs.mongodb.org/manual/administration/replica-sets/">Replica Set Operation and Management</a></li>
+<li class="toctree-l3"><a class="reference internal" href="http://docs.mongodb.org/manual/administration/replica-set-architectures/">Replica Set Architectures and Deployment Patterns</a></li>
+<li class="toctree-l3"><a class="reference internal" href="http://docs.mongodb.org/manual/applications/replication/">Replica Set Considerations and Behaviors for Applications and Development</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="">Replica Set Internals and Behaviors</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#oplog-internals">Oplog Internals</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#read-preference-internals">Read Preference Internals</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#member-configurations">Member Configurations</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#security-internals">Security Internals</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#election-internals">Election Internals</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#syncing">Syncing</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#multithreaded-replication">Multithreaded Replication</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pre-fetching-indexes-to-improve-replication-throughput">Pre-Fetching Indexes to Improve Replication Throughput</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="http://docs.mongodb.org/manual/administration/master-slave/">Master Slave Replication</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="http://docs.mongodb.org/manual/replication/#replica-set-tutorials-and-procedures">Replica Set Tutorials and Procedures</a></li>
+<li class="toctree-l2"><a class="reference internal" href="http://docs.mongodb.org/manual/replication/#replica-set-reference-material">Replica Set Reference Material</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="http://docs.mongodb.org/manual/sharding/">Sharding</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://docs.mongodb.org/manual/applications/">Application Development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://docs.mongodb.org/manual/mongo/">Using the <tt class="docutils literal"><span class="pre">mongo</span></tt> Shell</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://docs.mongodb.org/manual/use-cases/">Use Cases</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://docs.mongodb.org/manual/tutorial/">MongoDB Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://docs.mongodb.org/manual/faq/">Frequently Asked Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://docs.mongodb.org/manual/reference/">Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://docs.mongodb.org/manual/about/">About MongoDB Documentation</a></li>
+</ul>
+
+<h3 style="padding-bottom: 1em;"><a href="http://www.mongodb.org/about/">MongoDB.org</a></h3>
+<h3 style="padding-bottom: 1em;"><a href="http://docs.mongodb.org/ecosystem/">MongoDB Ecosystem</a></h3><h3>Formats</h3>
+<ul class="this-page-menu">
+  <li><a href="http://docs.mongodb.org/master/single/">MongoDB Manual, Single HTML Page</a></li>
+  <li><a href="http://docs.mongodb.org/master/MongoDB-Manual-master.pdf" rel="nofollow">MongoDB Manual, PDF Format</a></li>
+  <li><a href="http://docs.mongodb.org/master/MongoDB-Manual-master.epub" rel="nofollow">MongoDB Manual, ePub Format</a></li>
+</ul><h3>MongoDB Resources</h3>
+
+<ul>
+ <li><strong>Getting Started</strong>
+   <ul>
+     <li><a href="http://www.mongodb.org/about/introduction">Introduction</a></li>
+     <li><a href="http://www.mongodb.org/downloads">Downloads</a></li>
+   </ul>
+ </li>
+ <li><strong><a href="http://www.mongodb.org/about/community">Community</a> and <a href="http://docs.mongodb.org/ecosystem/">Ecosystem</a></strong>
+   <ul>
+     <li><a href="http://www.10gen.com/">10gen</a></li>
+     <li><a href="http://www.10gen.com/events">MongoDB Events</a></li>
+     <li><a href="http://planet.mongodb.org/">Planet MongoDB</a></li>
+     <li><a href="http://mongodb.org/about/community/masters">MongoDB Masters</a></li>
+     <li><a href="http://www.10gen.com/presentations">Slides and Video</a></li>
+     <li><a href="http://docs.mongodb.org/ecosystem/platforms/">Hosting Center</a></li>
+     <li><a href="http://docs.mongodb.org/ecosystem/platforms/windows">Windows</a></li>
+     <li><a href="http://www.10gen.com/products/mms/">MongoDB Monitoring Service</a> (<a href="http://mms.10gen.com/help/">docs</a>)</li>
+     <li><a href="http://docs.mongodb.org/ecosystem/tools/administration-interfaces/">Administrative Interfaces</a></li>
+     <li><a href="http://www.10gen.com/books/">MongoDB Books</a></li>
+   </ul>
+ </li>
+ <li><strong><a href="http://docs.mongodb.org/ecosystem/drivers/">Drivers</a></strong>
+   <ul>
+     <li><a href="http://docs.mongodb.org/ecosystem/drivers/javascript">JavaScript</a> (<a href="http://api.mongodb.org/js/current">docs</a>)</li>
+     <li><a href="http://docs.mongodb.org/ecosystem/drivers/python">Python</a> (<a href="http://api.mongodb.org/python/current">docs</a>)</li>
+     <li><a href="http://docs.mongodb.org/ecosystem/drivers/ruby">Ruby</a> (<a href="http://api.mongodb.org/ruby/current">docs</a>)</li>
+     <li><a href="http://docs.mongodb.org/ecosystem/drivers/php">PHP</a> (<a href="http://php.net/mongo/">docs</a>)</li>
+     <li><a href="http://docs.mongodb.org/ecosystem/drivers/perl">Perl</a> (<a href="http://api.mongodb.org/perl/current/">docs</a>)</li>
+     <li><a href="http://docs.mongodb.org/ecosystem/drivers/java">Java</a> (<a href="http://api.mongodb.org/java/current">docs</a>)</li>
+     <li><a href="http://docs.mongodb.org/ecosystem/drivers/scala">Scala</a> (<a href="http://api.mongodb.org/scala/casbah/current/">docs</a>)</li>
+     <li><a href="http://docs.mongodb.org/ecosystem/drivers/csharp">C#</a> (<a href="http://api.mongodb.org/csharp/current/">docs</a>)</li>
+     <li><a href="http://docs.mongodb.org/ecosystem/drivers/c">C</a> (<a href="http://api.mongodb.org/c/current/">docs</a>)</li>
+     <li><a href="http://docs.mongodb.org/ecosystem/drivers/cpp">C++</a> (<a href="http://api.mongodb.org/cplusplus/current/">docs</a>)</li>
+     <li><a href="http://hackage.haskell.org/package/mongoDB">Haskell</a> (<a href="http://api.mongodb.org/haskell">docs</a>)</li>
+     <li><a href="http://docs.mongodb.org/ecosystem/drivers/erlang">Erlang</a> (<a href="http://api.mongodb.org/erlang">docs</a>)</li>
+   </ul>
+ </li>
+</ul>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+  <div class="footer">
+    <p>
+       © <a href="">Copyright</a> 2011-2013, 10gen, Inc. 
+       MongoDB®, Mongo®, and the leaf logo are registered trademarks of 10gen, Inc.
+    </p>
+  </div><script type="text/javascript">
+var _gaq = _gaq || [];
+var pluginUrl = (('https:' == document.location.protocol) ? 'https://ssl.' : 'http://www.') + 'google-analytics.com/plugins/ga/inpage_linkid.js';
+_gaq.push(['_require', 'inpage_linkid', pluginUrl]);
+_gaq.push(['_setAccount', 'UA-7301842-8']);
+_gaq.push(['_setDomainName', 'docs.mongodb.org']);
+_gaq.push(['_trackPageview']);
+(function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0];
+        s.parentNode.insertBefore(ga, s);
+        })();
+</script>
+
+<script type="text/javascript">
+document.write(unescape("%3Cscript src='" + document.location.protocol + "//munchkin.marketo.net/munchkin.js' type='text/javascript'%3E%3C/script%3E"));
+</script><script src="Replica%20Set%20Internals%20and%20Behaviors%20%E2%80%94%20MongoDB%20Manual_files/munchkin.htm" type="text/javascript"></script>
+<script>try { mktoMunchkin("017-HGS-593"); } catch(e) {}</script><script type="text/javascript">
+jQuery.ajax({
+    url: "https://jira.mongodb.org/s/en_US-bxctp1/782/6/1.2.4/_/download/batch/com.atlassian.jira.collector.plugin.jira-issue-collector-plugin:issuecollector-embededjs/com.atlassian.jira.collector.plugin.jira-issue-collector-plugin:issuecollector-embededjs.js?collectorId=298ba4e7",
+    type: "get",
+    cache: true,
+    dataType: "script"
+});
+window.ATL_JQ_PAGE_PROPS =  {
+"triggerFunction": function(showCollectorDialog) {
+jQuery("#jirafeedback").click(function(e) {e.preventDefault();showCollectorDialog();});
+jQuery("#jirafooter").click(function(e) {e.preventDefault();showCollectorDialog();});
+}};
+</script>
+
+<table class="gstl_0 gssb_c" style="width: 129px; display: none; top: 70px; left: 751px; position: absolute;" cellpadding="0" cellspacing="0"><tbody><tr><td class="gssb_f"></td><td style="width: 100%;" class="gssb_e"></td></tr></tbody></table><div style="display: none;" id="atlwdg-blanket" class="atlwdg-blanket"></div><div class="atlwdg-popup atlwdg-box-shadow atlwdg-hidden" id="atlwdg-container"></div></body></html>

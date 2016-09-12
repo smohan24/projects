@@ -1,0 +1,21 @@
+mysql> use proj;
+Database changed
+
+mysql> create table feedback(title varchar(4) NOT NULL,fname varchar(20) NOT NULL,lname varchar(20) NOT NULL,addr varchar(100) NOT NULL,city varchar(15) NOT NULL,mobno varchar(10) NOT NULL,email_id varchar(35) NOT NULL,feedback varchar(100) NOT NULL);
+
+Query OK, 0 rows affected (0.05 sec)
+
+mysql> describe feedback;
++----------+--------------+------+-----+---------+-------+
+| Field    | Type         | Null | Key | Default | Extra |
++----------+--------------+------+-----+---------+-------+
+| title    | varchar(4)   |      |     |         |       |
+| fname    | varchar(20)  |      |     |         |       |
+| lname    | varchar(20)  |      |     |         |       |
+| addr     | varchar(100) |      |     |         |       |
+| city     | varchar(15)  |      |     |         |       |
+| mobno    | varchar(10)  |      |     |         |       |
+| email_id | varchar(35)  |      |     |         |       |
+| feedback | varchar(100) |      |     |         |       |
++----------+--------------+------+-----+---------+-------+
+8 rows in set (0.00 sec)

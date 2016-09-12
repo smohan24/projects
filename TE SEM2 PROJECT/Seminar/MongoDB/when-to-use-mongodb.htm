@@ -1,0 +1,1307 @@
+<!DOCTYPE html>
+<html><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    
+    <title>mysql - When to use MongoDB - Stack Overflow</title>
+    <link rel="shortcut icon" href="http://cdn.sstatic.net/stackoverflow/img/favicon.ico">
+    <link rel="apple-touch-icon" href="http://cdn.sstatic.net/stackoverflow/img/apple-touch-icon.png">
+    <link rel="search" type="application/opensearchdescription+xml" title="Stack Overflow" href="http://stackoverflow.com/opensearch.xml">
+
+    
+    <script src="when-to-use-mongodb_files/adzerk1_2_4_43adzerk2_2_17_45adzerk3_2_4_44.js" async="" type="text/javascript"></script><script src="when-to-use-mongodb_files/ga.js" async="" type="text/javascript"></script><script src="when-to-use-mongodb_files/quant.js" async="" type="text/javascript"></script><script type="text/javascript" src="when-to-use-mongodb_files/jquery.js"></script>
+    <script type="text/javascript" src="when-to-use-mongodb_files/stub.js"></script>
+    <link rel="stylesheet" type="text/css" href="when-to-use-mongodb_files/all.css">
+    
+    <meta name="relativepagescore" content="165717">
+    <link rel="canonical" href="http://stackoverflow.com/questions/4981753/when-to-use-mongodb">
+    <link rel="alternate" type="application/atom+xml" title="Feed for question 'When to use MongoDB'" href="http://stackoverflow.com/feeds/question/4981753">
+    <script type="text/javascript">
+        
+        StackExchange.ready(function () {
+            
+            StackExchange.question.init({showAnswerHelp:true,totalCommentCount:4,shownCommentCount:4,highlightColor:'#F4A83D',backgroundColor:'#FFF',questionId:4981753});
+
+            styleCode();
+
+                StackExchange.realtime.subscribeToQuestion('1', '4981753');
+            
+                
+        });
+    </script>
+
+
+    <script type="text/javascript">
+        StackExchange.init({"stackAuthUrl":"https://stackauth.com","serverTime":1360037346,"styleCode":true,"enableUserHovercards":true,"site":{"name":"Stack Overflow","description":"Q&A for professional and enthusiast programmers","isNoticesTabEnabled":true,"recaptchaPublicKey":"6LdchgIAAAAAAJwGpIzRQSOFaO0pU6s44Xt8aTwc","enableSocialMediaInSharePopup":true},"user":{"fkey":"4e3787400b298a5a5021574a9baca258","isAnonymous":true}});
+        StackExchange.using.setCacheBreakers({"js/prettify-full.js":"c862bf93b3ec","js/moderator.js":"53a4fbf22d01","js/full-anon.js":"1dda421a303f","js/full.js":"bbd049c5bad6","js/wmd.js":"fd5b31f81840","js/third-party/jquery.autocomplete.min.js":"e5f01e97f7c3","js/mobile.js":"6eb68240242f","js/help.js":"fc9fb0517db2","js/tageditor.js":"450c9e8426fc","js/tageditornew.js":"f12653fbfd29","js/inline-tag-editing.js":"30f72b99548b","js/revisions.js":"7273bb714bba","js/review.js":"8c05e24ebaa2","js/tagsuggestions.js":"c019341b234d"});
+        
+    </script>
+
+
+    <script type="text/javascript">
+        StackExchange.using(
+            "gps",
+            function () {
+                StackExchange.gps.init(false);
+            }
+        );
+    </script>
+
+<script src="when-to-use-mongodb_files/full-anon.js" type="text/javascript" async=""></script><script src="when-to-use-mongodb_files/prettify-full.js" type="text/javascript" async=""></script><script src="when-to-use-mongodb_files/ados-voting.js" type="text/javascript"></script><link href="when-to-use-mongodb_files/ados-voting.css" rel="stylesheet"></head>
+<body class="question-page">
+    <noscript><div id="noscript-padding"></div></noscript>
+    <div id="notify-container"></div>
+    <div id="overlay-header"></div>
+    <div id="custom-header"></div>
+
+    <div class="container">
+        <div id="header">
+            <div id="portalLink">
+                <a class="genu" onclick="StackExchange.ready(function(){genuwine.click();});return false;">Stack Exchange</a>
+            </div>
+            <div id="topbar">
+                <div id="hlinks">
+                    
+
+
+
+
+
+
+
+
+
+<span id="hlinks-user">
+
+</span>
+<span id="hlinks-nav">
+                   <a href="http://stackoverflow.com/users/login?returnurl=%2fquestions%2f4981753%2fwhen-to-use-mongodb">log in</a>
+
+ <span class="lsep">|</span>
+                    <a href="http://careers.stackoverflow.com/">careers 2.0</a>
+
+ <span class="lsep">|</span>
+
+</span>
+<span id="hlinks-custom">
+        <a href="http://chat.stackoverflow.com/">chat</a>
+
+ <span class="lsep">|</span>
+            <a href="http://meta.stackoverflow.com/">meta</a>
+
+ <span class="lsep">|</span>
+        <a href="http://stackoverflow.com/about">about</a>
+
+ <span class="lsep">|</span>
+    <a href="http://stackoverflow.com/faq">faq</a>
+
+</span>
+                </div>
+                <div id="hsearch">
+                    <form id="search" action="/search" method="get" autocomplete="off">
+                    <div>
+                        <input autocomplete="off" name="q" class="textbox" placeholder="search" tabindex="1" maxlength="240" size="28" type="text">
+                    </div>
+                    </form>
+                </div>
+            </div>
+            <br class="cbt">
+            <div id="hlogo">
+                <a href="http://stackoverflow.com/">Stack Overflow</a>
+            </div>
+            <div id="hmenus">
+                <div class="nav mainnavs">
+                    <ul>
+                        <li class="youarehere"><a id="nav-questions" href="http://stackoverflow.com/questions">Questions</a></li>
+                        <li><a id="nav-tags" href="http://stackoverflow.com/tags">Tags</a></li>
+                        <li><a id="nav-users" href="http://stackoverflow.com/users">Users</a></li>
+                        <li><a id="nav-badges" href="http://stackoverflow.com/badges">Badges</a></li>
+                        <li><a id="nav-unanswered" href="http://stackoverflow.com/unanswered">Unanswered</a></li>
+                    </ul>
+                </div>
+                <div class="nav askquestion">
+                    <ul>
+                        <li>
+                            <a id="nav-askquestion" href="http://stackoverflow.com/questions/ask">Ask Question</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        
+
+
+
+        <div id="content">
+            
+
+<div itemscope="" itemtype="http://schema.org/Article">
+<link itemprop="image" href="http://cdn.sstatic.net/stackoverflow/img/apple-touch-icon.png">
+<div id="question-header">
+    <h1 itemprop="name"><a href="http://stackoverflow.com/questions/4981753/when-to-use-mongodb" class="question-hyperlink">When to use MongoDB</a></h1>
+</div>
+<div id="mainbar">
+
+
+
+<div class="question" data-questionid="4981753" id="question">
+    
+            <div class="everyonelovesstackoverflow adzerk-vote" id="adzerk1"><a href="http://engine.adzerk.net/redirect/0/5919/7472/8277/6940a0e32e9c4f799139d37e3d2e45ec/43/1178/10184/634956341738204940/?keywords=mysql%2cdatabase%2cdatabase-design%2cmongodb%2crelational-database" rel="nofollow" target="_blank" title=""><img src="when-to-use-mongodb_files/4c4f1be011a447efbce49c1811022e7a.png" title="" alt="" border="0" height="90" width="728"></a><img src="when-to-use-mongodb_files/v.gif" height="0" width="0"><script type="text/javascript">azInitExtension("voting", "adzerk1", 414, 8277, 43, 10184, 5919);</script><div class="adzerk-vote-controls" style="display: none;"><div class="adzerk-vote-option adzerk-vote-up"><div class="adzerk-vote-icon"></div></div><div class="adzerk-vote-option adzerk-vote-down"><div class="adzerk-vote-icon"></div></div></div><div class="adzerk-vote-survey" style="display:none;"><form><span>No problem. We won't show you that ad again. Why didn't you like it?</span><ul><li><label><input value="12" name="downvoteReason" type="radio">Uninteresting</label></li><li><label><input value="13" name="downvoteReason" type="radio">Misleading</label></li><li><label><input value="14" name="downvoteReason" type="radio">Offensive</label></li><li><label><input value="15" name="downvoteReason" type="radio">Repetitive</label></li></ul><a href="#" class="adzerk-vote-cancel">Oops! I didn't mean to do this.</a></form></div></div>
+
+
+    <table>
+        <tbody><tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+    <input value="4981753" type="hidden">
+    <a class="vote-up-off" title="This question shows research effort; it is useful and clear (click again to undo)">up vote</a>
+    <span class="vote-count-post ">5</span>
+    <a class="vote-down-off" title="This question does not show any research effort; it is unclear or not useful (click again to undo)">down vote</a>
+    
+    <a class="star-off" href="#" title="This is a favorite question (click again to undo)">favorite</a>
+    <div class="favoritecount"><b>6</b></div>   
+
+ 
+</div>
+
+            </td>
+            
+<td class="postcell">
+<div>
+    <div class="post-text" itemprop="description">
+        <p>I'm writing an application that doesn't necessarily need <strong>scaling abilities</strong> as it won't be collecting large amounts data at the beginning. (However, if I'm lucky, I could down the road potentially.)</p>
+
+<p>I will be running my web server and database on the same box (for now).</p>
+
+<p>That being said, I am looking for performance and efficiency. </p>
+
+<p>The main part of my application will be loading blog articles. Using 
+an RDBMS (MySQL) I will make 6 queries (2 of the queries being joins), 
+just to load a single blog article page. </p>
+
+<pre style="" class="lang-sql prettyprint prettyprinted"><code><span class="kwd">select</span><span class="pln"> blog
+</span><span class="kwd">select</span><span class="pln"> blog_album
+</span><span class="kwd">select</span><span class="pln"> blog_tags
+</span><span class="kwd">select</span><span class="pln"> blog_notes
+</span><span class="kwd">select</span><span class="pln"> blog_comments </span><span class="pun">(</span><span class="kwd">join</span><span class="pln"> </span><span class="kwd">with</span><span class="pln"> users</span><span class="pun">)</span><span class="pln">
+</span><span class="kwd">select</span><span class="pln"> blog_author_participants </span><span class="pun">(</span><span class="kwd">join</span><span class="pln"> </span><span class="kwd">with</span><span class="pln"> users</span><span class="pun">)</span></code></pre>
+
+<p>However, with <a href="http://en.wikipedia.org/wiki/MongoDB">MongoDB</a>
+ I can de-normalize and flatten 6 tables into just 2 tables/collections 
+and minimizes my queries to potentially just one 1 query,</p>
+
+<pre style="" class="lang-sql prettyprint prettyprinted"><code><span class="pln">users
+blogs
+    </span><span class="pun">-&gt;</span><span class="pln">blog_album
+    </span><span class="pun">-&gt;</span><span class="pln">blog_tags        
+    </span><span class="pun">-&gt;</span><span class="pln">blog_notes
+    </span><span class="pun">-&gt;</span><span class="pln">blog_comments
+    </span><span class="pun">-&gt;</span><span class="pln">blog_author_participants</span></code></pre>
+
+<p>Now, going with the MongoDB schema, there will be some data redundancy. However, hard drive space is cheaper than CPU/servers. </p>
+
+<p>1.) Would this be a good scenario to use MongoDB? </p>
+
+<p>2.) Do you only benefit in performance using MongoDB when scaling beyond a single server?</p>
+
+<p>3.) Are there any durability risks using MongoDB? I hear that there 
+is potential for loss of data while performing inserts - as insert are 
+written to memory first, then to the database.</p>
+
+<p>4.) Should this stop me from using MongoDB in production?</p>
+
+    </div>
+    <div class="post-taglist">
+        <a href="http://stackoverflow.com/questions/tagged/mysql" class="post-tag" title="show questions tagged 'mysql'" rel="tag">mysql</a> <a href="http://stackoverflow.com/questions/tagged/database" class="post-tag" title="show questions tagged 'database'" rel="tag">database</a> <a href="http://stackoverflow.com/questions/tagged/database-design" class="post-tag" title="show questions tagged 'database-design'" rel="tag">database-design</a> <a href="http://stackoverflow.com/questions/tagged/mongodb" class="post-tag" title="show questions tagged 'mongodb'" rel="tag">mongodb</a> <a href="http://stackoverflow.com/questions/tagged/relational-database" class="post-tag" title="show questions tagged 'relational-database'" rel="tag">relational-database</a> 
+    </div>
+    <table class="fw">
+    <tbody><tr>
+    <td class="vt">
+
+
+
+
+
+
+
+
+
+<div class="post-menu"><a href="http://stackoverflow.com/q/4981753" title="short permalink to this question" class="short-link" id="link-post-4981753">share</a><span class="lsep">|</span><a href="http://stackoverflow.com/posts/4981753/edit" class="suggest-edit-post" title="">improve this question</a></div>            </td>
+    <td class="post-signature" align="right">
+
+
+    <div class="user-info ">
+        <div class="user-action-time">
+                            edited
+                             <a href="http://stackoverflow.com/posts/4981753/revisions" title="show all edits to this post"><span title="2011-11-03 19:26:34Z" class="relativetime">Nov 3 '11 at 19:26</span></a>
+
+        </div>
+        <div class="user-gravatar32">
+            
+        </div>
+        <div class="user-details">
+            <br>
+            
+        </div>
+    </div>
+    </td>
+    <td class="post-signature owner">
+        
+
+    <div class="user-info ">
+        <div class="user-action-time">
+                                    asked
+ <span title="2011-02-13 01:00:22Z" class="relativetime">Feb 13 '11 at 1:00</span>
+        </div>
+        <div class="user-gravatar32">
+            <a href="http://stackoverflow.com/users/85349/dezwald"><div class=""><img src="when-to-use-mongodb_files/ab125d3244528efea787f71725ea2577.htm" alt="" height="32" width="32"></div></a>
+        </div>
+        <div class="user-details">
+            <a href="http://stackoverflow.com/users/85349/dezwald">dezwald</a><br>
+            <span class="reputation-score" title="reputation score" dir="ltr">119</span><span title="4 silver badges"><span class="badge2"></span><span class="badgecount">4</span></span><span title="13 bronze badges"><span class="badge3"></span><span class="badgecount">13</span></span>
+        </div>
+    </div>
+
+    </td>
+    </tr>
+    </tbody></table>
+</div>
+</td>
+        </tr>
+
+
+<tr>
+<td class="votecell"></td>
+<td>
+    <div id="comments-4981753" class="comments">
+        <table>
+        <tbody>
+                    
+    <tr id="comment-5563595" class="comment">
+        <td></td>
+        <td class="comment-text"><div><span class="comment-copy">" I am 
+looking for performance and efficiency." and "I will be running my web 
+server and db on the same box." are at odds with each other.</span> –&nbsp;<a href="http://stackoverflow.com/users/16076/mitch-wheat" title="129076 reputation" class="comment-user">Mitch Wheat</a> <span class="comment-date" dir="ltr"><a class="comment-link" onclick="StackExchange.question.highlightComment(5563595, 0)" href="#comment5563595_4981753"><span title="2011-02-13 01:02:47Z" class="relativetime-clean">Feb 13 '11 at 1:02</span></a></span></div></td>
+    </tr>
+            
+    <tr id="comment-5563604" class="comment">
+        <td class="comment-actions"><table><tbody><tr>
+<td class="comment-score">
+<span title="number of 'useful comment' votes received" class="cool">2</span>
+</td>
+<td>
+&nbsp;
+</td></tr>
+</tbody></table></td>
+        <td class="comment-text"><div><span class="comment-copy">30 
+million people seem to be doing fine using WordPress, running just as 
+many queries per page to display their blogs. You seem to have been 
+sucked in to the NoSQL hype. When you actually have a problem with too 
+many queries to the RDBMS to build a page, you just throw a caching 
+proxy in front, or even easier, one-click install a cache plugin in your
+ blog platform.</span> –&nbsp;<a href="http://stackoverflow.com/users/280598/dan-grossman" title="25840 reputation" class="comment-user">Dan Grossman</a> <span class="comment-date" dir="ltr"><a class="comment-link" onclick="StackExchange.question.highlightComment(5563604, 0)" href="#comment5563604_4981753"><span title="2011-02-13 01:04:11Z" class="relativetime-clean">Feb 13 '11 at 1:04</span></a></span></div></td>
+    </tr>
+            
+    <tr id="comment-5563669" class="comment">
+        <td class="comment-actions"><table><tbody><tr>
+<td class="comment-score">
+<span title="number of 'useful comment' votes received" class="warm">6</span>
+</td>
+<td>
+&nbsp;
+</td></tr>
+</tbody></table></td>
+        <td class="comment-text"><div><span class="comment-copy"><a href="http://www.youtube.com/watch?v=b2F-DItXtZs" rel="nofollow">MongoDB is Web Scale</a></span> –&nbsp;<a href="http://stackoverflow.com/users/280598/dan-grossman" title="25840 reputation" class="comment-user">Dan Grossman</a> <span class="comment-date" dir="ltr"><a class="comment-link" onclick="StackExchange.question.highlightComment(5563669, 0)" href="#comment5563669_4981753"><span title="2011-02-13 01:19:30Z" class="relativetime-clean">Feb 13 '11 at 1:19</span></a></span></div></td>
+    </tr>
+            
+    <tr id="comment-5587373" class="comment">
+        <td class="comment-actions"><table><tbody><tr>
+<td class="comment-score">
+<span title="number of 'useful comment' votes received" class="cool">1</span>
+</td>
+<td>
+&nbsp;
+</td></tr>
+</tbody></table></td>
+        <td class="comment-text"><div><span class="comment-copy">@Dan Grossman LMAO, that video was hilarious.</span> –&nbsp;<a href="http://stackoverflow.com/users/463123/anthony-jack" title="961 reputation" class="comment-user">Anthony Jack</a> <span class="comment-date" dir="ltr"><a class="comment-link" onclick="StackExchange.question.highlightComment(5587373, 0)" href="#comment5587373_4981753"><span title="2011-02-15 03:20:35Z" class="relativetime-clean">Feb 15 '11 at 3:20</span></a></span><span class="edited-yes" title="this comment was edited"></span></div></td>
+    </tr>
+
+        </tbody>
+    
+        </table>
+    </div>
+    
+    
+    <div style="color: rgb(136, 136, 136);" class="was-this-helpful">
+        feedback
+    </div>
+    
+</td>
+</tr>            </tbody></table>    
+</div>
+
+
+    
+
+
+<div id="answers">
+
+    <a name="tab-top"></a>
+    <div id="answers-header">
+        <div class="subheader answers-subheader">
+            <h2>
+                    4 Answers
+            </h2>
+            <div id="tabs">
+                <a href="http://stackoverflow.com/questions/4981753/when-to-use-mongodb?answertab=active#tab-top" title="Answers with the latest activity first">active</a>
+<a href="http://stackoverflow.com/questions/4981753/when-to-use-mongodb?answertab=oldest#tab-top" title="Answers in the order they were provided">oldest</a>
+<a class="youarehere" href="http://stackoverflow.com/questions/4981753/when-to-use-mongodb?answertab=votes#tab-top" title="Answers with the highest score first">votes</a>
+
+            </div>
+        </div>    
+    </div>    
+
+
+
+
+  
+<a name="4982487"></a>
+<div id="answer-4982487" class="answer accepted-answer" data-answerid="4982487">
+    <table>
+        <tbody><tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+    <input value="4982487" type="hidden">
+    <a class="vote-up-off" title="This answer is useful (click again to undo)">up vote</a>
+    <span class="vote-count-post ">2</span>
+    <a class="vote-down-off" title="This answer is not useful (click again to undo)">down vote</a>
+    
+
+            <span class="vote-accepted-on load-accepted-answer-date" title="loading when this answer was accepted...">accepted</span>
+ 
+</div>
+
+            </td>
+            
+
+
+<td class="answercell">
+    <div class="post-text"><blockquote>
+  <p>However, with MongoDB I can de-normalize and flatten 6 tables into 
+just 2 tables/collections and minimizes my queries to potentially just 
+one 1 query</p>
+</blockquote>
+
+<p>But you can easily query MySQL for 6 tables worth of information 
+related to a single blog post with a single properly crafted SQL 
+statement.</p>
+
+<blockquote>
+  <p>however hard drive space is cheaper than CPU/servers.</p>
+</blockquote>
+
+<p>If performance and scaling is a priority then you are going to be 
+concerned with having enough RAM to fit everything into main memory and 
+enough CPU cores to run queries.  An enterprise grade RAID 10 array is a
+ requirement, don't get me wrong, but as soon as your database software 
+(MongoDB or MySQL) needs to scan an index that can't fit into main 
+memory you'll be in for a world of pain assuming a large active 
+database.  :)</p>
+
+<p>I like MongoDB, but it's big strength in my mind is map/reduce and 
+its document-orientation.  You require neither of those features.  MySQL
+ is time-tested in large scale deployments and supports partitioning 
+(but I would argue that your database would have to be in the order of 
+50-100 GB before you can realize substantial gain from partitioning vs a
+ single (plus passive backup) server with tons (64 GB+) of RAM.  I would
+ also argue that if performance is truly a concern then MySQL would be 
+preferable as you would have supreme control over your indexes.  </p>
+
+<p>That's not to say that MongoDB isn't high performance, but its place 
+probably isn't serving blogs.  Your concern with inserts is valid as 
+well.  MongoDB is not an <a href="http://en.wikipedia.org/wiki/ACID" rel="nofollow">ACID</a> system.  Google transactions in both systems and compare.</p>
+</div>
+    <table class="fw">
+    <tbody><tr>
+    <td class="vt">
+
+
+
+
+
+
+
+
+
+<div class="post-menu"><a href="http://stackoverflow.com/a/4982487" title="short permalink to this answer" class="short-link" id="link-post-4982487">share</a><span class="lsep">|</span><a href="http://stackoverflow.com/posts/4982487/edit" class="suggest-edit-post" title="">improve this answer</a></div>                    </td>
+    <td class="post-signature" align="right">
+
+
+    <div class="user-info user-hover">
+        <div class="user-action-time">
+                            edited
+                             <a href="http://stackoverflow.com/posts/4982487/revisions" title="show all edits to this post"><span title="2011-03-08 13:46:20Z" class="relativetime">Mar 8 '11 at 13:46</span></a>
+
+        </div>
+        <div class="user-gravatar32">
+            <a href="http://stackoverflow.com/users/63550/peter-mortensen"><div class=""><img src="when-to-use-mongodb_files/18e42b0ddc143340cfb072987f45ca50.htm" alt="" height="32" width="32"></div></a>
+        </div>
+        <div class="user-details">
+            <a href="http://stackoverflow.com/users/63550/peter-mortensen">Peter Mortensen</a><br>
+            <span class="reputation-score" title="reputation score" dir="ltr">5,686</span><span title="7 gold badges"><span class="badge1"></span><span class="badgecount">7</span></span><span title="30 silver badges"><span class="badge2"></span><span class="badgecount">30</span></span><span title="63 bronze badges"><span class="badge3"></span><span class="badgecount">63</span></span>
+        </div>
+    </div>
+    </td>
+            
+
+
+    <td class="post-signature" align="right">   
+       
+
+    
+
+    <div class="user-info user-hover">
+        <div class="user-action-time">
+                                    answered
+ <span title="2011-02-13 04:52:46Z" class="relativetime">Feb 13 '11 at 4:52</span>
+        </div>
+        <div class="user-gravatar32">
+            <a href="http://stackoverflow.com/users/612373/mdaubs"><div class=""><img src="when-to-use-mongodb_files/5562b8f061255a00cb90b73878a9a95d.htm" alt="" height="32" width="32"></div></a>
+        </div>
+        <div class="user-details">
+            <a href="http://stackoverflow.com/users/612373/mdaubs">MDaubs</a><br>
+            <span class="reputation-score" title="reputation score" dir="ltr">1,253</span><span title="3 silver badges"><span class="badge2"></span><span class="badgecount">3</span></span><span title="9 bronze badges"><span class="badge3"></span><span class="badgecount">9</span></span>
+        </div>
+    </div>
+
+    </td>
+    </tr>
+    </tbody></table>
+</td>
+        </tr>
+
+
+
+<tr>
+<td class="votecell"></td>
+<td>
+    <div id="comments-4982487" class="comments dno">
+        <table>
+        <tbody>
+        
+            <tr><td></td><td></td></tr>
+        
+        </tbody>
+    
+        </table>
+    </div>
+    
+    
+    <div class="was-this-helpful">
+        feedback
+    </div>
+    
+</td>
+</tr>
+   
+    
+    </tbody></table>
+</div>
+        <div class="everyonelovesstackoverflow adzerk-vote" id="adzerk3">
+        <iframe frameborder="0" height="90" scrolling="no" width="728"></iframe><script type="text/javascript">azInitExtension("voting", "adzerk3", 1427, 8277, 44, 73363, 51313);</script><div class="adzerk-vote-controls" style="display:none;"><div class="adzerk-vote-option adzerk-vote-up"><div class="adzerk-vote-icon"></div></div><div class="adzerk-vote-option adzerk-vote-down"><div class="adzerk-vote-icon"></div></div></div><div class="adzerk-vote-survey" style="display:none;"><form><span>No problem. We won't show you that ad again. Why didn't you like it?</span><ul><li><label><input value="12" name="downvoteReason" type="radio">Uninteresting</label></li><li><label><input value="13" name="downvoteReason" type="radio">Misleading</label></li><li><label><input value="14" name="downvoteReason" type="radio">Offensive</label></li><li><label><input value="15" name="downvoteReason" type="radio">Repetitive</label></li></ul><a href="#" class="adzerk-vote-cancel">Oops! I didn't mean to do this.</a></form></div></div>
+
+
+
+  
+<a name="4981803"></a>
+<div id="answer-4981803" class="answer" data-answerid="4981803">
+    <table>
+        <tbody><tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+    <input value="4981803" type="hidden">
+    <a class="vote-up-off" title="This answer is useful (click again to undo)">up vote</a>
+    <span class="vote-count-post ">7</span>
+    <a class="vote-down-off" title="This answer is not useful (click again to undo)">down vote</a>
+    
+
+ 
+</div>
+
+            </td>
+            
+
+
+<td class="answercell">
+    <div class="post-text"><p>You would use MongoDB when you have a use case that matches its strengths.</p>
+
+<p>Do you need a schema-less document store? Nope, you have a stable schema.</p>
+
+<p>Do you need automatic sharding? Nope, you don't have extraordinary data needs or budget for horizontally scaling hardware.</p>
+
+<p>Do you need map/reduce data processing? Not for something like a blog.</p>
+
+<p>So why are you even considering it?</p>
+</div>
+    <table class="fw">
+    <tbody><tr>
+    <td class="vt">
+
+
+
+
+
+
+
+
+
+<div class="post-menu"><a href="http://stackoverflow.com/a/4981803" title="short permalink to this answer" class="short-link" id="link-post-4981803">share</a><span class="lsep">|</span><a href="http://stackoverflow.com/posts/4981803/edit" class="suggest-edit-post" title="">improve this answer</a></div>                    </td>
+            
+
+
+    <td class="post-signature" align="right">   
+       
+
+    
+
+    <div class="user-info user-hover">
+        <div class="user-action-time">
+                                    answered
+ <span title="2011-02-13 01:14:22Z" class="relativetime">Feb 13 '11 at 1:14</span>
+        </div>
+        <div class="user-gravatar32">
+            <a href="http://stackoverflow.com/users/280598/dan-grossman"><div class=""><img src="when-to-use-mongodb_files/a1726e7c01a6d789b2102595b471a579.htm" alt="" height="32" width="32"></div></a>
+        </div>
+        <div class="user-details">
+            <a href="http://stackoverflow.com/users/280598/dan-grossman">Dan Grossman</a><br>
+            <span class="reputation-score" title="reputation score 25840" dir="ltr">25.8k</span><span title="3 gold badges"><span class="badge1"></span><span class="badgecount">3</span></span><span title="29 silver badges"><span class="badge2"></span><span class="badgecount">29</span></span><span title="40 bronze badges"><span class="badge3"></span><span class="badgecount">40</span></span>
+        </div>
+    </div>
+
+    </td>
+    </tr>
+    </tbody></table>
+</td>
+        </tr>
+
+
+
+<tr>
+<td class="votecell"></td>
+<td>
+    <div id="comments-4981803" class="comments">
+        <table>
+        <tbody>
+                    
+    <tr id="comment-5570252" class="comment">
+        <td></td>
+        <td class="comment-text"><div><span class="comment-copy">i 
+appreciate the answer, Dan.  
+There are 3 reasons why i was considering mongodb:
+
+yes, mongodb does seem charming up front and after seeing some bench 
+marks, tutorials, number of articles, i started to question, "why not 
+use mongodb?"  
+
+1.) efficiency - reducing the number queries, reducing the number of 
+tables, and maintenance of code.
+
+2.) it's flexibility - being able to change it's data structure on the 
+fly - however, that kind of flexibility scares me at risking the chance 
+of mistakingly over writing data</span> –&nbsp;<a href="http://stackoverflow.com/users/85349/dezwald" title="119 reputation" class="comment-user owner">dezwald</a> <span class="comment-date" dir="ltr"><a class="comment-link" onclick="StackExchange.question.highlightComment(5570252, 4981803)" href="#comment5570252_4981803"><span title="2011-02-13 20:27:59Z" class="relativetime-clean">Feb 13 '11 at 20:27</span></a></span></div></td>
+    </tr>
+            
+    <tr id="comment-5570315" class="comment">
+        <td></td>
+        <td class="comment-text"><div><span class="comment-copy">3: i've
+ been using mysql for the past 7 years and i thought trying something 
+new would be beneficial.
+
+However, all that being said, if mongodb has no benefits over mysql 
+while running a small application on 1 server...then i don't see any 
+purpose for swicthing to mongodb.   
+
+thanks for your asnwer.</span> –&nbsp;<a href="http://stackoverflow.com/users/85349/dezwald" title="119 reputation" class="comment-user owner">dezwald</a> <span class="comment-date" dir="ltr"><a class="comment-link" onclick="StackExchange.question.highlightComment(5570315, 4981803)" href="#comment5570315_4981803"><span title="2011-02-13 20:37:45Z" class="relativetime-clean">Feb 13 '11 at 20:37</span></a></span></div></td>
+    </tr>
+
+        </tbody>
+    
+        </table>
+    </div>
+    
+    
+    <div class="was-this-helpful">
+        feedback
+    </div>
+    
+</td>
+</tr>
+   
+    
+    </tbody></table>
+</div>
+
+  
+<a name="4981807"></a>
+<div id="answer-4981807" class="answer" data-answerid="4981807">
+    <table>
+        <tbody><tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+    <input value="4981807" type="hidden">
+    <a class="vote-up-off" title="This answer is useful (click again to undo)">up vote</a>
+    <span class="vote-count-post ">6</span>
+    <a class="vote-down-off" title="This answer is not useful (click again to undo)">down vote</a>
+    
+
+ 
+</div>
+
+            </td>
+            
+
+
+<td class="answercell">
+    <div class="post-text"><p><a href="http://it.toolbox.com/blogs/madgreek/nosql-vs-rdbms-apples-and-oranges-37713" rel="nofollow">NoSQL vs. RDBMS: Apples and Oranges?</a></p>
+
+<p>I would advise you to read up a little on what NoSQL is and what it 
+does before you decide whether you can use it. You can't take a normal 
+database and turn it into a NoSQL thing just like that. The way you work
+ with the data is completely different.</p>
+
+<p>NoSQL definitely has its uses. But it's definitely not the answer for
+ everything. The main advantage of NoSQL is the easily changeable data 
+model.</p>
+</div>
+    <table class="fw">
+    <tbody><tr>
+    <td class="vt">
+
+
+
+
+
+
+
+
+
+<div class="post-menu"><a href="http://stackoverflow.com/a/4981807" title="short permalink to this answer" class="short-link" id="link-post-4981807">share</a><span class="lsep">|</span><a href="http://stackoverflow.com/posts/4981807/edit" class="suggest-edit-post" title="">improve this answer</a></div>                    </td>
+    <td class="post-signature" align="right">
+
+
+    <div class="user-info user-hover">
+        <div class="user-action-time">
+                            edited
+                             <a href="http://stackoverflow.com/posts/4981807/revisions" title="show all edits to this post"><span title="2011-03-08 13:48:50Z" class="relativetime">Mar 8 '11 at 13:48</span></a>
+
+        </div>
+        <div class="user-gravatar32">
+            <a href="http://stackoverflow.com/users/63550/peter-mortensen"><div class=""><img src="when-to-use-mongodb_files/18e42b0ddc143340cfb072987f45ca50.htm" alt="" height="32" width="32"></div></a>
+        </div>
+        <div class="user-details">
+            <a href="http://stackoverflow.com/users/63550/peter-mortensen">Peter Mortensen</a><br>
+            <span class="reputation-score" title="reputation score" dir="ltr">5,686</span><span title="7 gold badges"><span class="badge1"></span><span class="badgecount">7</span></span><span title="30 silver badges"><span class="badge2"></span><span class="badgecount">30</span></span><span title="63 bronze badges"><span class="badge3"></span><span class="badgecount">63</span></span>
+        </div>
+    </div>
+    </td>
+            
+
+
+    <td class="post-signature" align="right">   
+       
+
+    
+
+    <div class="user-info ">
+        <div class="user-action-time">
+                                    answered
+ <span title="2011-02-13 01:16:18Z" class="relativetime">Feb 13 '11 at 1:16</span>
+        </div>
+        <div class="user-gravatar32">
+            <a href="http://stackoverflow.com/users/54017/wolph"><div class=""><img src="when-to-use-mongodb_files/9842122bc427d15b32bce91b8a608c5f.htm" alt="" height="32" width="32"></div></a>
+        </div>
+        <div class="user-details">
+            <a href="http://stackoverflow.com/users/54017/wolph">WoLpH</a><br>
+            <span class="reputation-score" title="reputation score 17641" dir="ltr">17.6k</span><span title="22 silver badges"><span class="badge2"></span><span class="badgecount">22</span></span><span title="49 bronze badges"><span class="badge3"></span><span class="badgecount">49</span></span>
+        </div>
+    </div>
+
+    </td>
+    </tr>
+    </tbody></table>
+</td>
+        </tr>
+
+
+
+<tr>
+<td class="votecell"></td>
+<td>
+    <div id="comments-4981807" class="comments dno">
+        <table>
+        <tbody>
+        
+            <tr><td></td><td></td></tr>
+        
+        </tbody>
+    
+        </table>
+    </div>
+    
+    
+    <div class="was-this-helpful">
+        feedback
+    </div>
+    
+</td>
+</tr>
+   
+    
+    </tbody></table>
+</div>
+
+  
+<a name="14185491"></a>
+<div id="answer-14185491" class="answer" data-answerid="14185491">
+    <table>
+        <tbody><tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+    <input value="14185491" type="hidden">
+    <a class="vote-up-off" title="This answer is useful (click again to undo)">up vote</a>
+    <span class="vote-count-post ">1</span>
+    <a class="vote-down-off" title="This answer is not useful (click again to undo)">down vote</a>
+    
+
+ 
+</div>
+
+            </td>
+            
+
+
+<td class="answercell">
+    <div class="post-text"><p>here is a good explanation </p>
+
+<p><a href="http://bjclark.me/2009/08/nosql-if-only-it-was-that-easy/" rel="nofollow">http://bjclark.me/2009/08/nosql-if-only-it-was-that-easy/</a></p>
+
+<p>that is resumed in the last paragraph</p>
+
+<blockquote>
+  <p>" What am I going to build my next app on? Probably Postgres. Will I
+ use NoSQL? Maybe. I might also use Hadoop and Hive. I might keep 
+everything in flat files. Maybe I’ll start hacking on Maglev. I’ll use 
+whatever is best for the job. If I need reporting, I won’t be using any 
+NoSQL. If I need caching, I’ll probably use Tokyo Tyrant. If I need 
+ACIDity, I won’t use NoSQL. If I need a ton of counters, I’ll use Redis.
+ If I need transactions, I’ll use Postgres. If I have a ton of a single 
+type of documents, I’ll probably use Mongo. If I need to write 1 billion
+ objects a day, I’d probably use Voldemort. If I need full text search, 
+I’d probably use Solr. If I need full text search of volatile data, I’d 
+probably use Sphinx.
+  What am I going to build my next app on? Probably Postgres. Will I use
+ NoSQL? Maybe. I might also use Hadoop and Hive. I might keep everything
+ in flat files. Maybe I’ll start hacking on Maglev. I’ll use whatever is
+ best for the job. If I need reporting, I won’t be using any NoSQL. If I
+ need caching, I’ll probably use Tokyo Tyrant. If I need ACIDity, I 
+won’t use NoSQL. If I need a ton of counters, I’ll use Redis. If I need 
+transactions, I’ll use Postgres. If I have a ton of a single type of 
+documents, I’ll probably use Mongo. If I need to write 1 billion objects
+ a day, I’d probably use Voldemort. If I need full text search, I’d 
+probably use Solr. If I need full text search of volatile data, I’d 
+probably use Sphinx. "</p>
+</blockquote>
+</div>
+    <table class="fw">
+    <tbody><tr>
+    <td class="vt">
+
+
+
+
+
+
+
+
+
+<div class="post-menu"><a href="http://stackoverflow.com/a/14185491" title="short permalink to this answer" class="short-link" id="link-post-14185491">share</a><span class="lsep">|</span><a href="http://stackoverflow.com/posts/14185491/edit" class="suggest-edit-post" title="">improve this answer</a></div>                    </td>
+            
+
+
+    <td class="post-signature" align="right">   
+       
+
+    
+
+    <div class="user-info ">
+        <div class="user-action-time">
+                                    answered
+ <span title="2013-01-06 18:45:49Z" class="relativetime">Jan 6 at 18:45</span>
+        </div>
+        <div class="user-gravatar32">
+            <a href="http://stackoverflow.com/users/1124673/gusridd"><div class=""><img src="when-to-use-mongodb_files/96c3592470504b6a3a17989060d5ed7a.htm" alt="" height="32" width="32"></div></a>
+        </div>
+        <div class="user-details">
+            <a href="http://stackoverflow.com/users/1124673/gusridd">gusridd</a><br>
+            <span class="reputation-score" title="reputation score" dir="ltr">11</span><span title="1 bronze badge"><span class="badge3"></span><span class="badgecount">1</span></span>
+        </div>
+    </div>
+
+    </td>
+    </tr>
+    </tbody></table>
+</td>
+        </tr>
+
+
+
+<tr>
+<td class="votecell"></td>
+<td>
+    <div id="comments-14185491" class="comments dno">
+        <table>
+        <tbody>
+        
+            <tr><td></td><td></td></tr>
+        
+        </tbody>
+    
+        </table>
+    </div>
+    
+    
+    <div class="was-this-helpful">
+        feedback
+    </div>
+    
+</td>
+</tr>
+   
+    
+    </tbody></table>
+</div>
+    <a name="new-answer"></a>
+    <form id="post-form" action="/questions/4981753/answer/submit" method="post" class="post-form">
+        <h2 class="space">Your Answer</h2>
+
+
+
+
+<script type="text/javascript">
+    StackExchange.ready(function() {
+        initTagRenderer("".split(" "), "".split(" "));
+         
+        prepareEditor({
+            heartbeatType: 'answer',
+            bindNavPrevention: true,
+            postfix: "",
+            onDemand: true,
+            discardSelector: ".discard-answer"
+            ,immediatelyShowMarkdownHelp:true
+        });
+        
+
+    });  
+</script>
+
+
+<div id="post-editor" class="post-editor">  
+
+    
+    <div class="wmd-container">
+        <div id="wmd-button-bar" class="wmd-button-bar"><ul id="wmd-button-row" class="wmd-button-row"><li style="left: 0px;" class="wmd-button" id="wmd-bold-button"><span style="background-position: 0px -20px;"></span></li><li style="left: 25px;" class="wmd-button" id="wmd-italic-button"><span style="background-position: -20px -20px;"></span></li><li style="left: 50px;" class="wmd-spacer" id="wmd-spacer1"><span style="background-position: -40px -20px;"></span></li><li style="left: 75px;" class="wmd-button" id="wmd-link-button"><span style="background-position: -40px -20px;"></span></li><li style="left: 100px;" class="wmd-button" id="wmd-quote-button"><span style="background-position: -60px -20px;"></span></li><li style="left: 125px;" class="wmd-button" id="wmd-code-button"><span style="background-position: -80px -20px;"></span></li><li style="left: 150px;" class="wmd-button" id="wmd-image-button"><span style="background-position: -100px -20px;"></span></li><li style="left: 175px;" class="wmd-spacer" id="wmd-spacer2"><span style="background-position: -120px -20px;"></span></li><li style="left: 200px;" class="wmd-button" id="wmd-olist-button"><span style="background-position: -120px -20px;"></span></li><li style="left: 225px;" class="wmd-button" id="wmd-ulist-button"><span style="background-position: -140px -20px;"></span></li><li style="left: 250px;" class="wmd-button" id="wmd-heading-button"><span style="background-position: -160px -20px;"></span></li><li style="left: 275px;" class="wmd-button" id="wmd-hr-button"><span style="background-position: -180px -20px;"></span></li><li style="left: 300px;" class="wmd-spacer" id="wmd-spacer3"><span style="background-position: -200px -20px;"></span></li><li style="left: 325px;" class="wmd-button" id="wmd-undo-button"><span style="background-position: -200px -20px;"></span></li><li style="left: 350px;" class="wmd-button" id="wmd-redo-button"><span style="background-position: -220px -20px;"></span></li></ul></div>
+        <textarea id="wmd-input" class="wmd-input" name="post-text" cols="92" rows="15" tabindex="101"></textarea>
+    </div>
+
+    <div class="fl" style="margin-top: 8px; height:24px;">&nbsp;</div>
+    <div id="draft-saved" class="draft-saved community-option fl" style="margin-top: 8px; height:24px; display:none;">draft saved</div>
+
+    <div id="draft-discarded" class="draft-discarded community-option fl" style="margin-top: 8px; height:24px; display:none;">draft discarded</div>
+
+
+
+    <div id="wmd-preview" class="wmd-preview"></div>
+    <div></div>
+    <div class="edit-block">
+        <input id="fkey" name="fkey" value="4e3787400b298a5a5021574a9baca258" type="hidden">
+        <input id="author" name="author" type="text">
+    </div>
+</div>            <div class="form-item">
+        <table>
+        <tbody><tr>
+                <td class="vm open-id-login">
+                    <a id="login-link" style="font-size: 200%; margin-left: 30px;" href="http://stackoverflow.com/users/login?returnurl=%2fquestions%2f4981753%2fwhen-to-use-mongodb">log in</a>
+                    <script type="text/javascript">
+                        StackExchange.ready(function () {
+                            StackExchange.helpers.onClickDraftSave('#login-link');
+                        });
+                    </script>
+                </td>
+                    <script type="text/javascript">
+                StackExchange.ready(function () {
+                    StackExchange.helpers.bindHelpOverlayEvents($('.vm input'));
+                });
+            </script>
+                <td class="orcell">
+                    <div class="orword">or</div>
+                    <div class="orline"></div>
+                </td>
+            <td class="vm">
+                <div>
+                    <label for="display-name">Name</label>
+                    <input disabled="disabled" class="actual-edit-overlay" style="opacity: 1; position: absolute; background-color: white; color: black; width: 211px; height: 16px; line-height: 16px; font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; font-size: 12.8px; text-align: start; border-left: 1px solid rgb(153, 153, 153); border-right: 1px solid rgb(153, 153, 153); border-style: solid; border-color: rgb(153, 153, 153); border-width: 1px;" size="30" maxlength="30" tabindex="105" type="text"><input class="edit-field-overlayed" style="opacity: 0.4; z-index: 1; position: relative;" id="display-name" name="display-name" size="30" maxlength="30" tabindex="105" type="text">
+                </div>
+                <div>
+                    <label for="m-address">Email</label>
+                    <input disabled="disabled" class="actual-edit-overlay" style="opacity: 1; position: absolute; background-color: white; color: black; width: 271px; height: 16px; line-height: 16px; font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; font-size: 12.8px; text-align: start; border-left: 1px solid rgb(153, 153, 153); border-right: 1px solid rgb(153, 153, 153); border-style: solid; border-color: rgb(153, 153, 153); border-width: 1px;" size="40" maxlength="100" value="required, but never shown" tabindex="106" type="text"><input class="edit-field-overlayed" style="opacity: 0.4; z-index: 1; position: relative;" id="m-address" name="m-address" size="40" maxlength="100" tabindex="106" type="text">
+                    <span class="edit-field-overlay">required, but never shown</span>
+                </div>
+                    <div>
+                        <label for="home-page">Home Page</label>
+                        <input disabled="disabled" class="actual-edit-overlay" style="opacity: 1; position: absolute; background-color: white; color: black; width: 271px; height: 16px; line-height: 16px; font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; font-size: 12.8px; text-align: start; border-left: 1px solid rgb(153, 153, 153); border-right: 1px solid rgb(153, 153, 153); border-style: solid; border-color: rgb(153, 153, 153); border-width: 1px;" size="40" maxlength="200" tabindex="107" type="text"><input class="edit-field-overlayed" style="opacity: 0.4; z-index: 1; position: relative;" id="home-page" name="home-page" size="40" maxlength="200" tabindex="107" type="text">
+                    </div>
+            </td>
+        </tr>
+        </tbody></table>
+    </div>
+           
+            <div class="form-submit cbt">
+            <input id="submit-button" value="Post Your Answer" tabindex="110" type="submit">
+            <a href="#" class="discard-answer dno">discard</a>
+    <p class="privacy-policy-agreement">
+        By posting your answer, you agree to the 
+        <a href="http://stackexchange.com/legal/privacy-policy" target="_blank">privacy policy</a> and 
+        <a href="http://stackexchange.com/legal/terms-of-service" target="_blank">terms of service</a>.
+    </p>
+    <input name="legalLinksShown" value="1" type="hidden">
+        </div>
+    </form>
+
+
+
+        <h2 class="bottom-notice">
+                Not the answer you're looking for? 
+            Browse other questions tagged <a href="http://stackoverflow.com/questions/tagged/mysql" class="post-tag" title="show questions tagged 'mysql'" rel="tag">mysql</a> <a href="http://stackoverflow.com/questions/tagged/database" class="post-tag" title="show questions tagged 'database'" rel="tag">database</a> <a href="http://stackoverflow.com/questions/tagged/database-design" class="post-tag" title="show questions tagged 'database-design'" rel="tag">database-design</a> <a href="http://stackoverflow.com/questions/tagged/mongodb" class="post-tag" title="show questions tagged 'mongodb'" rel="tag">mongodb</a> <a href="http://stackoverflow.com/questions/tagged/relational-database" class="post-tag" title="show questions tagged 'relational-database'" rel="tag">relational-database</a> 
+                or <a href="http://stackoverflow.com/questions/ask">ask your own question</a>.
+        </h2>
+</div>
+</div>
+<div id="sidebar">
+
+
+
+     <script type="text/javascript">
+        window.showNewUser = true;
+
+            
+                (function(){
+                    var cs = window.sessionStorage && window.sessionStorage['tNewsletter'];
+                    var m = /:\/\/([^\/]*)/.exec(document.referrer);
+                    var h = {'www.reddit.com':1,'news.ycombinator.com':1};
+                    if(window.sessionStorage && (cs || (m && m.length == 2 && h[m[1]]))){
+                        showNewUser = false;
+                        StackExchange.ready(function(){
+                            StackExchange.newsletterAd.loader(m[1], cs);
+                        });
+                    }
+                    if (window.localStorage && showNewUser){
+                        var c = parseInt(localStorage['nuCounter'],10); 
+                        c = isNaN(c) ? 1 : c+1;
+                        window.localStorage['nuCounter'] = c; 
+                        showNewUser = c < 10;
+                    }
+                })()
+            
+     </script>
+    <div class="module newuser newuser-greeting" id="newuser-box" style="">
+        <h4>Hello World!</h4>
+        <div>
+            <p>This is a collaboratively edited question and answer site for <b>professional and enthusiast programmers</b>. It's 100% free, no registration required.</p>
+            <p class="ar">
+                    <a href="http://stackoverflow.com/about?mnu=1">about »</a>&nbsp;&nbsp;&nbsp;
+                <a href="http://stackoverflow.com/faq?mnu=1">faq »</a>
+            </p>
+        </div>
+    </div>
+     <script type="text/javascript">
+        if (showNewUser) {
+            document.getElementById('newuser-box').style.display = '';
+        }
+     </script>
+        <div class="module question-stats">
+        <p class="label-key">tagged</p>
+        <div class="tagged"><a href="http://stackoverflow.com/questions/tagged/mysql" class="post-tag" title="show questions tagged 'mysql'" rel="tag">mysql</a>&nbsp;<span class="item-multiplier"><span class="item-multiplier-x">×</span>&nbsp;<span class="item-multiplier-count">142810</span></span><br>
+<a href="http://stackoverflow.com/questions/tagged/database" class="post-tag" title="show questions tagged 'database'" rel="tag">database</a>&nbsp;<span class="item-multiplier"><span class="item-multiplier-x">×</span>&nbsp;<span class="item-multiplier-count">48928</span></span><br>
+<a href="http://stackoverflow.com/questions/tagged/mongodb" class="post-tag" title="show questions tagged 'mongodb'" rel="tag">mongodb</a>&nbsp;<span class="item-multiplier"><span class="item-multiplier-x">×</span>&nbsp;<span class="item-multiplier-count">13578</span></span><br>
+<a href="http://stackoverflow.com/questions/tagged/database-design" class="post-tag" title="show questions tagged 'database-design'" rel="tag">database-design</a>&nbsp;<span class="item-multiplier"><span class="item-multiplier-x">×</span>&nbsp;<span class="item-multiplier-count">10188</span></span><br>
+<a href="http://stackoverflow.com/questions/tagged/relational-database" class="post-tag" title="show questions tagged 'relational-database'" rel="tag">relational-database</a>&nbsp;<span class="item-multiplier"><span class="item-multiplier-x">×</span>&nbsp;<span class="item-multiplier-count">1633</span></span><br>
+</div>
+        <table id="qinfo">
+            <tbody><tr>
+                <td><p class="label-key">asked</p></td>
+                <td style="padding-left:10px"><p class="label-key" title="2011-02-13 01:00:22Z"><b>1 year ago</b></p></td>
+            </tr>
+            <tr>
+                <td><p class="label-key">viewed</p></td>
+
+                <td style="padding-left:10px">
+                    <p class="label-key">
+                        <b>4868 times</b>
+                    </p>
+                </td>
+            </tr>
+            <tr>
+                <td><p class="label-key">active</p></td>
+                <td style="padding-left:10px"><p class="label-key"><b><a href="http://stackoverflow.com/questions/4981753/when-to-use-mongodb?lastactivity" class="lastactivity-link" title="2013-01-06 18:45:49Z">29 days ago</a></b></p></td>
+            </tr>
+        </tbody></table>
+    </div>
+        
+                <script type="text/javascript">
+                var scriptSrc = "http://engine.adzerk.net/z/8277/adzerk1_2_4_43,adzerk2_2_17_45,adzerk3_2_4_44?keywords=mysql,database,database-design,mongodb,relational-database";
+                if (document.referrer) {
+                    if (/\?/.test(scriptSrc))
+                        scriptSrc += "&";
+                    else
+                        scriptSrc += "?";
+                    scriptSrc += "xReferrer=" + document.referrer;
+                }
+                StackExchange.ready(function () {
+                    var z = document.createElement("script");
+                    z.type = "text/javascript";
+                    z.async = "true";
+                    z.src = scriptSrc;
+                    var s = document.getElementsByTagName("script")[0];
+                    s.parentNode.insertBefore(z, s);
+                });
+            </script>
+        <div class="everyonelovesstackoverflow adzerk-vote" id="adzerk2"><a href="http://engine.adzerk.net/redirect/0/9336/2444/8277/62dc633964b34c7eb698e24c3d297983/45/1178/14846/634956341738247030/?keywords=mysql%2cdatabase%2cdatabase-design%2cmongodb%2crelational-database" rel="nofollow" target="_blank" title=""><img src="when-to-use-mongodb_files/d18eea9d28f3490b8dcbfa9e38f8336e.jpg" title="" alt="" border="0" height="250" width="220"></a><img src="when-to-use-mongodb_files/v_002.gif" height="0" width="0"><script type="text/javascript">azInitExtension("voting", "adzerk2", 414, 8277, 45, 14846, 9336);</script><div class="adzerk-vote-controls" style="display:none;"><div class="adzerk-vote-option adzerk-vote-up"><div class="adzerk-vote-icon"></div></div><div class="adzerk-vote-option adzerk-vote-down"><div class="adzerk-vote-icon"></div></div></div><div class="adzerk-vote-survey" style="display:none;"><form><span>No problem. We won't show you that ad again. Why didn't you like it?</span><ul><li><label><input value="12" name="downvoteReason" type="radio">Uninteresting</label></li><li><label><input value="13" name="downvoteReason" type="radio">Misleading</label></li><li><label><input value="14" name="downvoteReason" type="radio">Offensive</label></li><li><label><input value="15" name="downvoteReason" type="radio">Repetitive</label></li></ul><a href="#" class="adzerk-vote-cancel">Oops! I didn't mean to do this.</a></form></div></div>
+    <div id="hireme">
+        <script type="text/javascript">
+            var careers_adurl="http://careers.stackoverflow.com/gethired/js",careers_cssurl="//careerscdn.sstatic.net/careers/gethired/sidebar.css?fffffffff879eaa0",careers_leaderboardcssurl="//careerscdn.sstatic.net/careers/gethired/ninja.min.css?3a3e90",careers_companycssurl="//careerscdn.sstatic.net/careers/gethired/company",careers_adselector="div.hireme, div#hireme";StackExchange.ready(function(){$.ajax({url:"//careerscdn.sstatic.net/careers/gethired/loader.min.js?3a3e90",dataType:"script",cache:!0})})
+        </script>
+    </div>
+
+
+
+      
+    
+    <div class="module sidebar-linked">
+        <h4 id="h-linked">Linked</h4>
+        <div class="linked" data-tracker="lq=1">
+            <div class="spacer">
+<a href="http://stackoverflow.com/questions/10805926/nosql-dilema-for-time-tracker-application?lq=1" class="question-hyperlink">NoSQL dilema for time tracker application</a>
+</div>
+
+        </div>
+    </div>
+    <div class="module sidebar-related">
+        <h4 id="h-related">Related</h4>
+        <div class="related" data-tracker="rq=1">
+            <div class="spacer">
+<a href="http://stackoverflow.com/questions/2909558/best-way-to-store-11-user-relationships-in-relational-database?rq=1" class="question-hyperlink">best way to store 1:1 user relationships in relational database</a>
+</div>
+<div class="spacer">
+<a href="http://stackoverflow.com/questions/2999931/database-design-grouping-contacts-by-lists-and-companies?rq=1" class="question-hyperlink">Database design grouping contacts by lists and companies</a>
+</div>
+<div class="spacer">
+<a href="http://stackoverflow.com/questions/3042538/why-is-it-bad-to-use-boolean-flags-in-databases-and-what-should-be-used-instead?rq=1" class="question-hyperlink">Why is it bad to use boolean flags in databases? And what should be used instead?</a>
+</div>
+<div class="spacer">
+<a href="http://stackoverflow.com/questions/4171137/database-design-credit-top-ups-and-transactions?rq=1" class="question-hyperlink">Database design: credit top-ups and transactions</a>
+</div>
+<div class="spacer">
+<a href="http://stackoverflow.com/questions/4241553/data-model-for-profile-page-views?rq=1" class="question-hyperlink">Data Model for Profile Page Views</a>
+</div>
+<div class="spacer">
+<a href="http://stackoverflow.com/questions/4269625/storing-relationship-data-in-mongodb?rq=1" class="question-hyperlink">Storing relationship data in mongodb</a>
+</div>
+<div class="spacer">
+<a href="http://stackoverflow.com/questions/5810761/consolidating-tables-with-one-to-one-relationships?rq=1" class="question-hyperlink">Consolidating tables with one-to-one relationships</a>
+</div>
+<div class="spacer">
+<a href="http://stackoverflow.com/questions/5888174/one-to-many-relationship?rq=1" class="question-hyperlink">One-to-many relationship?</a>
+</div>
+<div class="spacer">
+<a href="http://stackoverflow.com/questions/6353004/good-table-structure-for-collaborative-article-editor?rq=1" class="question-hyperlink">Good table structure for collaborative article editor</a>
+</div>
+<div class="spacer">
+<a href="http://stackoverflow.com/questions/6460803/would-mongodb-be-a-good-fit-for-my-industry?rq=1" class="question-hyperlink">Would MongoDB be a good fit for my industry?</a>
+</div>
+<div class="spacer">
+<a href="http://stackoverflow.com/questions/8868164/mongoose-update-schema-design?rq=1" class="question-hyperlink">Mongoose update / schema design</a>
+</div>
+<div class="spacer">
+<a href="http://stackoverflow.com/questions/9204618/split-mysql-table-into-2-current-search-is-too-slow?rq=1" class="question-hyperlink">Split MySQL table into 2? Current search is too slow</a>
+</div>
+<div class="spacer">
+<a href="http://stackoverflow.com/questions/9549307/while-modelling-data-what-is-the-best-way-to-model-a-table-that-grows-say-1000-t?rq=1" class="question-hyperlink">While modelling data what is the best way to model a table that grows say 1000 times over a year for every user that is added?</a>
+</div>
+<div class="spacer">
+<a href="http://stackoverflow.com/questions/9753713/how-to-setup-the-relationship-for-these-tables-in-mysql?rq=1" class="question-hyperlink">How to setup the relationship for these tables in MySQL?</a>
+</div>
+<div class="spacer">
+<a href="http://stackoverflow.com/questions/10254884/store-calculated-data-or-pre-calculated-data-on-table-calculated-user-age-or-ti?rq=1" class="question-hyperlink">store calculated data or pre-calculated data on table (calculated user age or timestamp)</a>
+</div>
+<div class="spacer">
+<a href="http://stackoverflow.com/questions/10285933/mongodb-mysql-and-relationships?rq=1" class="question-hyperlink">MongoDB, Mysql and relationships</a>
+</div>
+<div class="spacer">
+<a href="http://stackoverflow.com/questions/10409956/designing-hierarchical-schema-in-mysql?rq=1" class="question-hyperlink">Designing Hierarchical Schema in MySQL</a>
+</div>
+<div class="spacer">
+<a href="http://stackoverflow.com/questions/11088632/my-sql-database-specific-senario?rq=1" class="question-hyperlink">My SQL database specific senario?</a>
+</div>
+<div class="spacer">
+<a href="http://stackoverflow.com/questions/11493157/unique-vote-disable-revote?rq=1" class="question-hyperlink">Unique vote, disable revote</a>
+</div>
+<div class="spacer">
+<a href="http://stackoverflow.com/questions/11600791/modelling-a-one-to-one-or-two-relationship?rq=1" class="question-hyperlink">Modelling a “one to one or two” relationship</a>
+</div>
+<div class="spacer">
+<a href="http://stackoverflow.com/questions/11710673/is-many-to-many-needed-on-this-db?rq=1" class="question-hyperlink">Is many to many needed on this DB?</a>
+</div>
+<div class="spacer">
+<a href="http://stackoverflow.com/questions/12631470/mongodb-performance-vs-relational-db-for-many-many-one-many?rq=1" class="question-hyperlink">MongoDB Performance vs Relational DB for Many-Many One-Many</a>
+</div>
+<div class="spacer">
+<a href="http://stackoverflow.com/questions/13469522/mongodb-saas-single-vs-multiple-database?rq=1" class="question-hyperlink">Mongodb SaaS Single vs Multiple Database</a>
+</div>
+<div class="spacer">
+<a href="http://stackoverflow.com/questions/14199366/database-design-mysql-standalone-and-chain-of-shops?rq=1" class="question-hyperlink">Database design (MySQL) - standalone and chain of shops</a>
+</div>
+<div class="spacer">
+<a href="http://stackoverflow.com/questions/14322919/mysql-3-way-1-n-tables-relation?rq=1" class="question-hyperlink">MySQL 3-way 1..n tables relation</a>
+</div>
+
+        </div>
+    </div>
+        <div class="everyonelovesstackoverflow" id="adzerk3">
+        </div>
+
+
+</div>
+
+<div id="feed-link">
+    <div id="feed-link-text"><a href="http://stackoverflow.com/feeds/question/4981753" title="feed of this question and its answers"><span class="feed-icon"></span>question feed</a></div>
+</div>
+<script type="text/javascript">
+StackExchange.ready(function(){$.get('/posts/4981753/ivc/a0ab');});
+</script>
+<noscript>
+    <div><img src="/posts/4981753/ivc/a0ab" class="dno" alt="" width="0" height="0"></div>
+</noscript><div style="display:none" id="prettify-lang">lang-sql</div></div>
+        </div>
+    </div>
+    <div id="footer">
+        <div class="footerwrap">
+            <div id="footer-menu">
+                    <a href="http://stackoverflow.com/about">about</a> |
+                <a href="http://stackoverflow.com/faq">faq</a> |
+                <a href="http://blog.stackexchange.com/?blb=1">blog</a> |
+                    <a href="http://chat.stackoverflow.com/">chat</a> |
+                <a href="http://data.stackexchange.com/">data</a> |
+                <a href="http://stackexchange.com/legal">legal</a> |
+                <a href="http://stackexchange.com/legal/privacy-policy">privacy policy</a> |
+                <a href="http://stackexchange.com/about/hiring">jobs</a> |
+                <a href="http://engine.adzerk.net/redirect/0/2776/2751/0/4de3c60f719c4dfcb1a57531c7050090/0">advertising info</a> |
+
+                <a onclick="StackExchange.switchMobile('on', '/questions/4981753/when-to-use-mongodb')">mobile</a> |
+
+                <b><a href="http://stackoverflow.com/help">contact us</a></b>
+                  | <b><a href="http://meta.stackoverflow.com/">feedback</a></b>
+                <div id="footer-sites">
+                    
+                        <span style="color:#FE7A15;font-size:140%">■</span>&nbsp;<a href="http://stackoverflow.com/">stackoverflow.com</a>&nbsp; 
+                        <span style="color:#FE7A15;font-size:140%">■</span>&nbsp;<a href="http://stackapps.com/">api/apps</a>&nbsp; 
+                        <span style="color:#FE7A15;font-size:140%">■</span>&nbsp;<a href="http://careers.stackoverflow.com/">careers 2.0</a>&nbsp; 
+                        <span style="color:#E8272C;font-size:140%">■</span>&nbsp;<a href="http://serverfault.com/">serverfault.com</a>&nbsp; 
+                        <span style="color:#00AFEF;font-size:140%">■</span>&nbsp;<a href="http://superuser.com/">superuser.com</a>&nbsp; 
+                        <span style="color:#969696;font-size:140%">■</span>&nbsp;<a href="http://meta.stackoverflow.com/">meta</a>&nbsp; 
+                        <span style="color:#46937D;font-size:140%">■</span>&nbsp;<a href="http://area51.stackexchange.com/">area&nbsp;51</a>&nbsp; 
+                        <span style="color:#C0D0DC;font-size:140%">■</span>&nbsp;<a href="http://webapps.stackexchange.com/">webapps</a>&nbsp; 
+                        <span style="color:#000000;font-size:140%">■</span>&nbsp;<a href="http://gaming.stackexchange.com/">gaming</a>&nbsp; 
+                        <span style="color:#dd4814;font-size:140%">■</span>&nbsp;<a href="http://askubuntu.com/">ubuntu</a>&nbsp; 
+                        <span style="color:#9ce4fe;font-size:140%">■</span>&nbsp;<a href="http://webmasters.stackexchange.com/">webmasters</a>&nbsp; 
+                        <span style="color:#cf4d3f;font-size:140%">■</span>&nbsp;<a href="http://cooking.stackexchange.com/">cooking</a>&nbsp; 
+                        <span style="color:#f4f28d;font-size:140%">■</span>&nbsp;<a href="http://gamedev.stackexchange.com/">game development</a>&nbsp; 
+                        <span style="color:#0f3559;font-size:140%">■</span>&nbsp;<a href="http://math.stackexchange.com/">math</a>&nbsp; 
+                        <span style="color:#f2f2f2;font-size:140%">■</span>&nbsp;<a href="http://photo.stackexchange.com/">photography</a>&nbsp; 
+                        <span style="color:#037187;font-size:140%">■</span>&nbsp;<a href="http://stats.stackexchange.com/">stats</a>&nbsp; 
+                        <span style="color:#f1e7cc;font-size:140%">■</span>&nbsp;<a href="http://tex.stackexchange.com/">tex</a>&nbsp; 
+                        <span style="color:#e1cdae;font-size:140%">■</span>&nbsp;<a href="http://english.stackexchange.com/">english</a>&nbsp; 
+                        <span style="color:#a2d9f6;font-size:140%">■</span>&nbsp;<a href="http://cstheory.stackexchange.com/">theoretical cs</a>&nbsp; 
+                        <span style="color:#1b3e6c;font-size:140%">■</span>&nbsp;<a href="http://programmers.stackexchange.com/">programmers</a>&nbsp; 
+                        <span style="color:#293a5d;font-size:140%">■</span>&nbsp;<a href="http://unix.stackexchange.com/">unix</a>&nbsp;
+                        <span style="color:#bec0cb;font-size:140%">■</span>&nbsp;<a href="http://apple.stackexchange.com/">apple</a>&nbsp;
+                        <span style="color:#939185;font-size:140%">■</span>&nbsp;<a href="http://wordpress.stackexchange.com/">wordpress</a>&nbsp;
+                        <span style="color:#ebf5f5;font-size:140%">■</span>&nbsp;<a href="http://physics.stackexchange.com/">physics</a>&nbsp;
+                        <span style="color:#4176ab;font-size:140%">■</span>&nbsp;<a href="http://diy.stackexchange.com/">home&nbsp;improvement</a>&nbsp;
+                        <span style="color:#d1d8d7;font-size:140%">■</span>&nbsp;<a href="http://gis.stackexchange.com/">gis</a>&nbsp;
+                        <span style="color:#e5e2d3;font-size:140%">■</span>&nbsp;<a href="http://electronics.stackexchange.com/">electrical&nbsp;engineering</a>&nbsp;
+                        <span style="color:#a4c639;font-size:140%">■</span>&nbsp;<a href="http://android.stackexchange.com/">android</a>&nbsp;
+                        <span style="color:#2e4e60;font-size:140%">■</span>&nbsp;<a href="http://security.stackexchange.com/">security</a>&nbsp;
+                        <span style="color:#45bcb5;font-size:140%">■</span>&nbsp;<a href="http://bicycles.stackexchange.com/">bicycles</a>&nbsp;
+                        <span style="color:#00adee;font-size:140%">■</span>&nbsp;<a href="http://dba.stackexchange.com/">dba</a>&nbsp;
+                        <span style="color:#2edaf0;font-size:140%">■</span>&nbsp;<a href="http://drupal.stackexchange.com/">drupal</a>&nbsp;
+                        <span style="color:#213951;font-size:140%">■</span>&nbsp;<a href="http://sharepoint.stackexchange.com/">sharepoint</a>&nbsp;
+                        <span style="color:#73abb3;font-size:140%">■</span>&nbsp;<a href="http://scifi.stackexchange.com/">scifi&nbsp;&amp;&nbsp;fantasy</a>&nbsp;
+                        <span style="color:#23629F;font-size:140%">■</span>&nbsp;<a href="http://ux.stackexchange.com/">user&nbsp;experience</a>&nbsp;
+                        <span style="color:#faff72;font-size:140%">■</span>&nbsp;<a href="http://skeptics.stackexchange.com/">skeptics</a>&nbsp;
+                        <span style="color:#623121;font-size:140%">■</span>&nbsp;<a href="http://rpg.stackexchange.com/">rpg</a>&nbsp;
+                        <span style="color:#e4be88;font-size:140%">■</span>&nbsp;<a href="http://judaism.stackexchange.com/">judaism</a>&nbsp;
+                        <span style="color:#ffecb1;font-size:140%">■</span>&nbsp;<a href="http://mathematica.stackexchange.com/">mathematica</a>&nbsp;
+                        <span style="color:#1b8598;font-size:140%">■</span>&nbsp;<a href="http://travel.stackexchange.com/">travel</a>&nbsp;
+                </div>
+            </div>
+            <div id="footer-flair">
+                <a class="peer1" href="http://www.peer1.com/stackoverflow"></a>  
+	            <a href="http://creativecommons.org/licenses/by-sa/3.0/" class="cc-wiki-link"></a>
+                <div id="svnrev">rev 2013.2.4.1332</div>
+                        </div>
+            <div id="copyright">
+                site design / logo © 2013 stack exchange inc; 
+                user contributions licensed under <a href="http://creativecommons.org/licenses/by-sa/3.0/" rel="license">cc-wiki</a> with <a href="http://blog.stackoverflow.com/2009/06/attribution-required/" rel="license">attribution required</a>
+            </div>
+            
+
+        </div>
+    </div>
+    
+    <noscript>
+        <div id="noscript-warning">Stack Overflow works best with JavaScript enabled<img src="http://pixel.quantserve.com/pixel/p-c1rF4kxgLUzNc.gif" alt="" class="dno"></div>
+    </noscript>
+    <script type="text/javascript">var _gaq=_gaq||[];_gaq.push(['_setAccount','UA-5620270-1']);
+        _gaq.push(['_setCustomVar', 1, 'tags', '|mysql|database|database-design|mongodb|relational-database|']); 
+_gaq.push(['_trackPageview']);
+    var _qevents = _qevents || [];
+    (function(){
+        var s=document.getElementsByTagName('script')[0];
+        var ga=document.createElement('script');
+        ga.type='text/javascript';
+        ga.async=true;
+        ga.src='http://www.google-analytics.com/ga.js';
+        s.parentNode.insertBefore(ga,s);
+        var sc=document.createElement('script');
+        sc.type='text/javascript';
+        sc.async=true;
+        sc.src='http://edge.quantserve.com/quant.js'; 
+        s.parentNode.insertBefore(sc,s);
+    })();
+    </script>
+    <script type="text/javascript">
+        _qevents.push({ qacct: "p-c1rF4kxgLUzNc" });
+    </script>    
+    
+
+</body></html>

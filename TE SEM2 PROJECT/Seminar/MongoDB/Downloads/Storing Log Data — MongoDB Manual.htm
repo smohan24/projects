@@ -1,0 +1,1170 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head>
+    <title>Storing Log Data — MongoDB Manual</title>
+
+    <link rel="shortcut icon" href="http://media.mongodb.org/favicon.ico">
+    <meta name="robots" content="index">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <link rel="canonical" href="http://docs.mongodb.org/manual/use-cases/storing-log-data">
+
+    
+    
+    <link rel="stylesheet" href="Storing%20Log%20Data%20%E2%80%94%20MongoDB%20Manual_files/mongodb-docs.css" type="text/css">
+    <link rel="stylesheet" href="Storing%20Log%20Data%20%E2%80%94%20MongoDB%20Manual_files/pygments.css" type="text/css">
+      
+    <script id="undefined" src="Storing%20Log%20Data%20%E2%80%94%20MongoDB%20Manual_files/inpage_linkid.js" async="" type="text/javascript"></script><script src="Storing%20Log%20Data%20%E2%80%94%20MongoDB%20Manual_files/ga.js" async="" type="text/javascript"></script><script src="Storing%20Log%20Data%20%E2%80%94%20MongoDB%20Manual_files/cse.js" async="" type="text/javascript"></script><script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '2.2.3',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '',
+        HAS_SOURCE:  false
+      };
+    </script>
+    <script type="text/javascript" src="Storing%20Log%20Data%20%E2%80%94%20MongoDB%20Manual_files/jquery.js"></script>
+    <script type="text/javascript" src="Storing%20Log%20Data%20%E2%80%94%20MongoDB%20Manual_files/underscore.js"></script>
+    <script type="text/javascript" src="Storing%20Log%20Data%20%E2%80%94%20MongoDB%20Manual_files/doctools.js"></script>
+      <link rel="search" type="application/opensearchdescription+xml" href="http://docs.mongodb.org/osd.xml" title="MongoDB Help">
+<link rel="author" title="About these documents" href="http://docs.mongodb.org/manual/about/">
+<link rel="top" title="MongoDB Manual" href="http://docs.mongodb.org/manual/">
+<link rel="up" title="Use Cases" href="http://docs.mongodb.org/manual/use-cases/">
+<link rel="next" title="Pre-Aggregated Reports" href="http://docs.mongodb.org/manual/use-cases/pre-aggregated-reports/">
+<link rel="prev" title="Use Cases" href="http://docs.mongodb.org/manual/use-cases/">
+<!-- Put the following javascript before the closing </head> tag. -->
+<script>
+  (function() {
+    var cx = '017213726194841070573:WMX6838984';
+    var gcse = document.createElement('script'); gcse.type = 'text/javascript'; gcse.async = true;
+    gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+        '//www.google.com/cse/cse.js?cx=' + cx;
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(gcse, s);
+  })();
+</script>
+  <script type="text/javascript" src="Storing%20Log%20Data%20%E2%80%94%20MongoDB%20Manual_files/jsapi"></script><link rel="stylesheet" href="Storing%20Log%20Data%20%E2%80%94%20MongoDB%20Manual_files/defaulten.css" type="text/css"><link rel="stylesheet" href="Storing%20Log%20Data%20%E2%80%94%20MongoDB%20Manual_files/default.css" type="text/css"><script src="Storing%20Log%20Data%20%E2%80%94%20MongoDB%20Manual_files/defaulten.js" type="text/javascript"></script><script src="Storing%20Log%20Data%20%E2%80%94%20MongoDB%20Manual_files/search.js" type="text/javascript"></script><style type="text/css">
+.gsc-control-cse {
+font-family: Arial, sans-serif;
+border-color: #FFFFFF;
+background-color: #FFFFFF;
+}
+.gsc-control-cse .gsc-table-result {
+font-family: Arial, sans-serif;
+}
+input.gsc-input, .gsc-input-box, .gsc-input-box-hover, .gsc-input-box-focus {
+border-color: #D9D9D9;
+}
+input.gsc-search-button, input.gsc-search-button:hover, input.gsc-search-button:focus {
+border-color: #5AAC41;
+background-color: #5AAC41;
+background-image: none;
+filter: none;
+}
+.gsc-tabHeader.gsc-tabhInactive {
+border-color: #CCCCCC;
+background-color: #FFFFFF;
+}
+.gsc-tabHeader.gsc-tabhActive {
+border-color: #CCCCCC;
+border-bottom-color: #FFFFFF;
+background-color: #FFFFFF;
+}
+.gsc-tabsArea {
+border-color: #CCCCCC;
+}
+.gsc-webResult.gsc-result,
+.gsc-results .gsc-imageResult {
+border-color: #FFFFFF;
+background-color: #FFFFFF;
+}
+.gsc-webResult.gsc-result:hover,
+.gsc-imageResult:hover {
+border-color: #FFFFFF;
+background-color: #FFFFFF;
+}
+.gs-webResult.gs-result a.gs-title:link,
+.gs-webResult.gs-result a.gs-title:link b,
+.gs-imageResult a.gs-title:link,
+.gs-imageResult a.gs-title:link b {
+color: #1155CC;
+}
+.gs-webResult.gs-result a.gs-title:visited,
+.gs-webResult.gs-result a.gs-title:visited b,
+.gs-imageResult a.gs-title:visited,
+.gs-imageResult a.gs-title:visited b {
+color: #1155CC;
+}
+.gs-webResult.gs-result a.gs-title:hover,
+.gs-webResult.gs-result a.gs-title:hover b,
+.gs-imageResult a.gs-title:hover,
+.gs-imageResult a.gs-title:hover b {
+color: #1155CC;
+}
+.gs-webResult.gs-result a.gs-title:active,
+.gs-webResult.gs-result a.gs-title:active b,
+.gs-imageResult a.gs-title:active,
+.gs-imageResult a.gs-title:active b {
+color: #1155CC;
+}
+.gsc-cursor-page {
+color: #1155CC;
+}
+a.gsc-trailing-more-results:link {
+color: #1155CC;
+}
+.gs-webResult .gs-snippet,
+.gs-imageResult .gs-snippet,
+.gs-fileFormatType {
+color: #333333;
+}
+.gs-webResult div.gs-visibleUrl,
+.gs-imageResult div.gs-visibleUrl {
+color: #009933;
+}
+.gs-webResult div.gs-visibleUrl-short {
+color: #009933;
+}
+.gs-webResult div.gs-visibleUrl-short {
+display: none;
+}
+.gs-webResult div.gs-visibleUrl-long {
+display: block;
+}
+.gs-promotion div.gs-visibleUrl-short {
+display: none;
+}
+.gs-promotion div.gs-visibleUrl-long {
+display: block;
+}
+.gsc-cursor-box {
+border-color: #FFFFFF;
+}
+.gsc-results .gsc-cursor-box .gsc-cursor-page {
+border-color: #CCCCCC;
+background-color: #FFFFFF;
+color: #1155CC;
+}
+.gsc-results .gsc-cursor-box .gsc-cursor-current-page {
+border-color: #CCCCCC;
+background-color: #FFFFFF;
+color: #1155CC;
+}
+.gsc-webResult.gsc-result.gsc-promotion {
+border-color: #F6F6F6;
+background-color: #F6F6F6;
+}
+.gsc-completion-title {
+color: #1155CC;
+}
+.gsc-completion-snippet {
+color: #333333;
+}
+.gs-promotion a.gs-title:link,
+.gs-promotion a.gs-title:link *,
+.gs-promotion .gs-snippet a:link {
+color: #1155CC;
+}
+.gs-promotion a.gs-title:visited,
+.gs-promotion a.gs-title:visited *,
+.gs-promotion .gs-snippet a:visited {
+color: #1155CC;
+}
+.gs-promotion a.gs-title:hover,
+.gs-promotion a.gs-title:hover *,
+.gs-promotion .gs-snippet a:hover {
+color: #1155CC;
+}
+.gs-promotion a.gs-title:active,
+.gs-promotion a.gs-title:active *,
+.gs-promotion .gs-snippet a:active {
+color: #1155CC;
+}
+.gs-promotion .gs-snippet,
+.gs-promotion .gs-title .gs-promotion-title-right,
+.gs-promotion .gs-title .gs-promotion-title-right * {
+color: #333333;
+}
+.gs-promotion .gs-visibleUrl,
+.gs-promotion .gs-visibleUrl-short {
+color: #009933;
+}
+.gsc-input input.gsc-input {
+background: none repeat scroll 0% 0% white !important;
+}
+</style><style type="text/css">.gsfe_a{border:1px solid #b9b9b9;border-top-color:#a0a0a0;box-shadow:inset 0px 1px 2px rgba(0,0,0,0.1);-moz-box-shadow:inset 0px 1px 2px rgba(0,0,0,0.1);-webkit-box-shadow:inset 0px 1px 2px rgba(0,0,0,0.1);}.gsfe_b{border:1px solid #4d90fe;outline:none;box-shadow:inset 0px 1px 2px rgba(0,0,0,0.3);-moz-box-shadow:inset 0px 1px 2px rgba(0,0,0,0.3);-webkit-box-shadow:inset 0px 1px 2px rgba(0,0,0,0.3);}.gssb_c{border:0;position:absolute;z-index:989}.gssb_e{border:1px solid #ccc;border-top-color:#d9d9d9;box-shadow:0 2px 4px rgba(0,0,0,0.2);-moz-box-shadow:0 2px 4px rgba(0,0,0,0.2);cursor:default}.gssb_f{visibility:hidden;white-space:nowrap}.gssb_k{border:0;display:block;position:absolute;top:0;z-index:988}.gsdd_a{border:none!important}.gsib_a{width:100%;padding:4px 6px 0}.gsib_a,.gsib_b{vertical-align:top}.gssb_a{padding:0 7px}.gssb_a,.gssb_a td{white-space:nowrap;overflow:hidden;line-height:22px}#gssb_b{font-size:11px;color:#36c;text-decoration:none}#gssb_b:hover{font-size:11px;color:#36c;text-decoration:underline}.gssb_g{text-align:center;padding:8px 0 7px;position:relative}.gssb_h{font-size:15px;height:28px;margin:0.2em}.gssb_i{background:#eee}.gss_ifl{visibility:hidden;padding-left:5px}.gssb_i .gss_ifl{visibility:visible}a.gssb_j{font-size:13px;color:#36c;text-decoration:none;line-height:100%}a.gssb_j:hover{text-decoration:underline}.gssb_l{height:1px;background-color:#e5e5e5}.gssb_m{color:#000;background:#fff}.gscsep_a{display:none}.gsq_a{padding:0}.gscb_a{display:inline-block;font:27px/13px arial,sans-serif}.gsst_a .gscb_a{color:#a1b9ed;cursor:pointer}.gsst_a:hover .gscb_a,.gsst_a:focus .gscb_a{color:#36c}.gsst_a{display:inline-block}.gsst_a{cursor:pointer;padding:0 4px}.gsst_a:hover{text-decoration:none!important}.gsst_b{font-size:16px;padding:0 2px;user-select:none;-moz-user-select:none;white-space:nowrap}.gsst_e{opacity:0.55;}.gsst_a:hover .gsst_e,.gsst_a:focus .gsst_e{opacity:0.72;}.gsst_a:active .gsst_e{opacity:1;}.gsst_f{background:white;text-align:left}.gsst_g{background-color:white;border:1px solid #ccc;border-top-color:#d9d9d9;box-shadow:0 2px 4px rgba(0,0,0,0.2);-moz-box-shadow:0 2px 4px rgba(0,0,0,0.2);margin:-1px -3px;padding:0 6px}.gsst_h{background-color:white;height:1px;margin-bottom:-1px;position:relative;top:-1px}.gssb_a{padding:0 9px}.gsib_a{padding-right:8px;padding-left:8px}.gsst_a{padding-top:3px}.gssb_e{border:0}.gssb_l{margin:5px 0}.gssb_c .gsc-completion-container{position:static}.gssb_c{z-index:5000}.gsc-completion-container table{background:transparent;font-size:inherit;font-family:inherit}.gssb_c > tbody > tr,.gssb_c > tbody > tr > td,.gssb_d,.gssb_d > tbody > tr,.gssb_d > tbody > tr > td,.gssb_e,.gssb_e > tbody > tr,.gssb_e > tbody > tr > td{padding:0;margin:0;border:0}.gssb_a table,.gssb_a table tr,.gssb_a table tr td{padding:0;margin:0;border:0}</style><style type="text/css">.atlwdg-blanket {background:#000;height:100%;left:0;opacity:.5;position:fixed;top:0;width:100%;z-index:1000000;}
+.atlwdg-popup {background:#fff;border:1px solid #666;position:fixed;top:50%;left:50%;z-index:10000011;}
+.atlwdg-popup.atlwdg-box-shadow {-moz-box-shadow:10px 10px 20px rgba(0,0,0,0.5);-webkit-box-shadow:10px 10px 20px rgba(0,0,0,0.5);box-shadow:10px 10px 20px rgba(0,0,0,0.5);background-color:#fff;}
+.atlwdg-hidden {display:none;}
+.atlwdg-trigger {position: fixed; background: #013466; padding: 5px;border: 2px solid white;border-top: none; font-weight: bold; color: white; display:block;white-space:nowrap;text-decoration:none; font-family:arial, FreeSans, Helvetica, sans-serif;font-size:12px;box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5);-webkit-box-shadow:5px 5px 10px rgba(0, 0, 0, 0.5); -moz-box-shadow:5px 5px 10px rgba(0, 0, 0, 0.5);border-radius: 0 0 5px 5px; -moz-border-radius: 0 0 5px 5px;}
+a.atlwdg-trigger {text-decoration:none;}
+.atlwdg-trigger.atlwdg-TOP {left: 45%;top:0; }
+.atlwdg-trigger.atlwdg-RIGHT {left:100%; top:40%; -webkit-transform-origin:top left; -webkit-transform: rotate(90deg); -moz-transform: rotate(90deg); -moz-transform-origin:top left;-ms-transform: rotate(90deg); -ms-transform-origin:top left; }
+.atlwdg-trigger.atlwdg-SUBTLE { right:0; bottom:0; border: 1px solid #ccc; border-bottom: none; border-right: none; background-color: #f5f5f5; color: #444; font-size: 11px; padding: 6px; box-shadow: -1px -1px 2px rgba(0, 0, 0, 0.5); border-radius: 2px 0 0 0; }
+.atlwdg-loading {position:absolute;top:220px;left:295px;}</style></head>
+  <body>
+<div id="top-right">
+        <div class="user-right">
+                <ul id="header-menu-bar" class="ajs-menu-bar">
+                <li class="normal"><a target="_blank" href="http://groups.google.com/group/mongodb-user">Forums</a></li>
+                <li class="normal"><a target="_blank" href="http://blog.mongodb.org/">Blog</a></li>
+                <li class="normal"><a href="http://www.mongodb.org/downloads">Download</a></li>
+                <li class="normal"><a href="http://docs.mongodb.org/ecosystem/drivers/">Drivers</a></li>
+                <li class="normal"><a href="http://www.10gen.com/events">Events</a></li>
+                <li class="normal last"><a class="last" href="http://docs.mongodb.org/manual/meta/translation">Translations</a></li>
+                </ul>
+        </div>
+</div>
+<div id="header-db" class="spread">
+        <div class="split">
+                <div id="logo">
+                        <div><a href="http://docs.mongodb.org/manual/"><img class="logo" src="Storing%20Log%20Data%20%E2%80%94%20MongoDB%20Manual_files/logo-mongodb.png" alt="MongoDB Logo"></a></div>
+                </div>
+        </div>
+
+<div class="search-db"><div dir="ltr" id="___gcse_0"><form accept-charset="utf-8" class="gsc-search-box gsc-search-box-tools"><table class="gsc-search-box" cellpadding="0" cellspacing="0"><tbody><tr><td class="gsc-input"><div id="gsc-iw-id1" class="gsc-input-box"><table class="gstl_0 " id="gs_id0" style="width: 100%; padding: 0pt;" cellpadding="0" cellspacing="0"><tbody><tr><td class="gsib_a" id="gs_tti0"><input spellcheck="false" dir="ltr" id="gsc-i-id1" style="width: 100%; padding: 0pt; border: medium none; margin: 0pt; height: auto; outline: medium none;" title="search" name="search" class="gsc-input" size="10" autocomplete="off" type="text"></td><td class="gsib_b"><div dir="ltr" id="gs_st0" class="gsst_b"><a style="display: none;" href="javascript:void(0)" class="gsst_a"><span id="gs_cb0" class="gscb_a">×</span></a></div></td></tr></tbody></table></div></td><td class="gsc-search-button"><input title="search" class="gsc-search-button gsc-search-button-v2" src="Storing%20Log%20Data%20%E2%80%94%20MongoDB%20Manual_files/search_box_icon.png" type="image"></td><td class="gsc-clear-button"><div title="clear results" class="gsc-clear-button">&nbsp;</div></td></tr></tbody></table><table class="gsc-branding" cellpadding="0" cellspacing="0"><tbody><tr style="display: none;"><td class="gsc-branding-user-defined"></td><td class="gsc-branding-text"><div class="gsc-branding-text">powered by</div></td><td class="gsc-branding-img"><img class="gsc-branding-img" src="Storing%20Log%20Data%20%E2%80%94%20MongoDB%20Manual_files/small-logo.png"></td></tr></tbody></table></form></div></div>
+<div id="etp">
+<ul>
+<li><a href="https://github.com/mongodb/docs/blob/master/source/use-cases/storing-log-data.txt" target="_blank" title="Edit use-cases/storing-log-data.txt on github">Edit this Page</a></li>
+<li><a href="http://github.com/mongodb/docs" target="_blank" title="Fork the documentation on GitHub and contribute.">GitHub</a></li>
+<li><a href="https://jira.mongodb.org/secure/CreateIssueDetails%21init.jspa?pid=10380&amp;issuetype=4&amp;priority=4&amp;summary=Comment+on%3a+%22use-cases/storing-log-data%2Etxt%22" target="_blank" title="Report a problem with use-cases/storing-log-data.txt on Jira">Report a problem</a></li>
+</ul>
+</div>
+</div>  
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            <div id="cse-results"><div id="___gcse_1"><div class="gsc-control-cse gsc-control-cse-en"><div dir="ltr" class="gsc-control-wrapper-cse"><div class="gsc-results-wrapper-nooverlay"><div class="gsc-tabsAreaInvisible"><div class="gsc-tabHeader gsc-inline-block gsc-tabhActive">Custom Search</div><span class="gs-spacer"> </span></div><div class="gsc-tabsAreaInvisible"></div><div class="gsc-above-wrapper-area-invisible"><table class="gsc-above-wrapper-area-container" cellpadding="0" cellspacing="0"><tbody><tr><td class="gsc-result-info-container"><div class="gsc-result-info-invisible"></div></td></tr></tbody></table></div><div class="gsc-adBlockInvisible"></div><div class="gsc-wrapper"><div class="gsc-adBlockInvisible"></div><div class="gsc-resultsbox-invisible"><div class="gsc-resultsRoot gsc-tabData gsc-tabdActive"><table class="gsc-resultsHeader" cellpadding="0" cellspacing="0"><tbody><tr><td class="gsc-twiddleRegionCell"><div class="gsc-twiddle"><div class="gsc-title">Web</div></div><div class="gsc-stats"></div><div class="gsc-results-selector gsc-all-results-active"><div title="show one result" class="gsc-result-selector gsc-one-result">&nbsp;</div><div title="show more results" class="gsc-result-selector gsc-more-results">&nbsp;</div><div title="show all results" class="gsc-result-selector gsc-all-results">&nbsp;</div></div></td><td class="gsc-configLabelCell"></td></tr></tbody></table><div><div class="gsc-expansionArea"></div></div></div></div></div></div></div></div></div></div>
+            
+  <div class="section" id="storing-log-data">
+<h1>Storing Log Data<a class="headerlink" href="#storing-log-data" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
+<p>This document outlines the basic patterns and principles for using
+MongoDB as a persistent storage engine for log data from servers and
+other machine data.</p>
+<div class="section" id="problem">
+<h3>Problem<a class="headerlink" href="#problem" title="Permalink to this headline">¶</a></h3>
+<p>Servers generate a large number of events (i.e. logging,) that contain
+useful information about their operation including errors, warnings,
+and users behavior. By default, most servers, store these data in
+plain text log files on their local file systems.</p>
+<p>While plain-text logs are accessible and human-readable, they are
+difficult to use, reference, and analyze without holistic systems for
+aggregating and storing these data.</p>
+</div>
+<div class="section" id="solution">
+<h3>Solution<a class="headerlink" href="#solution" title="Permalink to this headline">¶</a></h3>
+<p>The solution described below assumes that each server
+generates events also consumes event data and that each server can
+access the MongoDB instance. Furthermore, this design assumes that the
+query rate for this logging data is substantially lower than
+common for logging applications with a high-bandwidth event stream.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">This case assumes that you’re using an standard uncapped collection
+for this event data, unless otherwise noted. See the section on
+<a class="reference internal" href="#rta-storing-log-data-capped-collections"><em>capped collections</em></a></p>
+</div>
+</div>
+<div class="section" id="schema-design">
+<h3>Schema Design<a class="headerlink" href="#schema-design" title="Permalink to this headline">¶</a></h3>
+<p>The schema for storing log data in MongoDB depends on the format of
+the event data that you’re storing. For a simple example, consider
+standard request logs in the combined format from the Apache HTTP
+Server.  A line from these logs may resemble the following:</p>
+<div class="highlight-text"><div class="highlight"><pre>127.0.0.1 - frank [10/Oct/2000:13:55:36 -0700] "GET /apache_pb.gif HTTP/1.0" 200 2326 "[http://www.example.com/start.html](http://www.example.com/start.html)" "Mozilla/4.08 [en] (Win98; I ;Nav)"
+</pre></div>
+</div>
+<p>The simplest approach to storing the log data would be putting the exact
+text of the log record into a document:</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="p">{</span>
+  <span class="nx">_id</span><span class="o">:</span> <span class="nx">ObjectId</span><span class="p">(</span><span class="s1">'4f442120eb03305789000000'</span><span class="p">),</span>
+ <span class="nx">line</span><span class="o">:</span> <span class="s1">'127.0.0.1 - frank [10/Oct/2000:13:55:36 -0700] "GET /apache_pb.gif HTTP/1.0" 200 2326 "[http://www.example.com/start.html](http://www.example.com/start.html)" "Mozilla/4.08 [en] (Win98; I ;Nav)"'</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>While this solution is does capture all data in a format that MongoDB can
+use, the data is not particularly useful, or it’s not terribly
+efficient: if you need to find events that the same page, you would
+need to use a regular expression query, which would require a full
+scan of the collection. The preferred approach is to extract the
+relevant information from the log data into individual fields in a
+MongoDB <a class="reference internal" href="http://docs.mongodb.org/manual/reference/glossary/#term-document"><em class="xref std std-term">document</em></a>.</p>
+<p>When you extract data from the log into fields, pay attention to the
+data types you use to render the log data into MongoDB.</p>
+<p>As you design this schema, be mindful that the data types you use to
+encode the data can have a significant impact on the performance and
+capability of the logging system. Consider the date field: In the
+above example, <tt class="docutils literal"><span class="pre">[10/Oct/2000:13:55:36</span> <span class="pre">-0700]</span></tt> is 28 bytes long. If
+you store this with the UTC timestamp type, you can convey the same
+information in only 8 bytes.</p>
+<p>Additionally, using proper types for your data also increases query
+flexibility: if you store date as a timestamp you can make date range
+queries, whereas it’s very difficult to compare two <em>strings</em> that
+represent dates. The same issue holds for numeric fields; storing
+numbers as strings requires more space and is difficult to query.</p>
+<p>Consider the following document that captures all data from the above
+log entry:</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="p">{</span>
+     <span class="nx">_id</span><span class="o">:</span> <span class="nx">ObjectId</span><span class="p">(</span><span class="s1">'4f442120eb03305789000000'</span><span class="p">),</span>
+     <span class="nx">host</span><span class="o">:</span> <span class="s2">"127.0.0.1"</span><span class="p">,</span>
+     <span class="nx">logname</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span>
+     <span class="nx">user</span><span class="o">:</span> <span class="s1">'frank'</span><span class="p">,</span>
+     <span class="nx">time</span><span class="o">:</span> <span class="nx">ISODate</span><span class="p">(</span><span class="s2">"2000-10-10T20:55:36Z"</span><span class="p">),</span>
+     <span class="nx">path</span><span class="o">:</span> <span class="s2">"/apache_pb.gif"</span><span class="p">,</span>
+     <span class="nx">request</span><span class="o">:</span> <span class="s2">"GET /apache_pb.gif HTTP/1.0"</span><span class="p">,</span>
+     <span class="nx">status</span><span class="o">:</span> <span class="mi">200</span><span class="p">,</span>
+     <span class="nx">response_size</span><span class="o">:</span> <span class="mi">2326</span><span class="p">,</span>
+     <span class="nx">referrer</span><span class="o">:</span> <span class="s2">"[http://www.example.com/start.html](http://www.example.com/start.html)"</span><span class="p">,</span>
+     <span class="nx">user_agent</span><span class="o">:</span> <span class="s2">"Mozilla/4.08 [en] (Win98; I ;Nav)"</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>When extracting data from logs and designing a schema, also consider
+what information you can omit from your log tracking system. In most
+cases there’s no need to track <em>all</em> data from an event log, and you
+can omit other fields. To continue the above example, here the most
+crucial information may be the host, time, path, user agent, and
+referrer, as in the following example document:</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="p">{</span>
+     <span class="nx">_id</span><span class="o">:</span> <span class="nx">ObjectId</span><span class="p">(</span><span class="s1">'4f442120eb03305789000000'</span><span class="p">),</span>
+     <span class="nx">host</span><span class="o">:</span> <span class="s2">"127.0.0.1"</span><span class="p">,</span>
+     <span class="nx">time</span><span class="o">:</span>  <span class="nx">ISODate</span><span class="p">(</span><span class="s2">"2000-10-10T20:55:36Z"</span><span class="p">),</span>
+     <span class="nx">path</span><span class="o">:</span> <span class="s2">"/apache_pb.gif"</span><span class="p">,</span>
+     <span class="nx">referer</span><span class="o">:</span> <span class="s2">"[http://www.example.com/start.html](http://www.example.com/start.html)"</span><span class="p">,</span>
+     <span class="nx">user_agent</span><span class="o">:</span> <span class="s2">"Mozilla/4.08 [en] (Win98; I ;Nav)"</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>You may also consider omitting explicit time fields, because the
+<tt class="docutils literal"><span class="pre">ObjectId</span></tt> embeds creation time:</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="p">{</span>
+     <span class="nx">_id</span><span class="o">:</span> <span class="nx">ObjectId</span><span class="p">(</span><span class="s1">'4f442120eb03305789000000'</span><span class="p">),</span>
+     <span class="nx">host</span><span class="o">:</span> <span class="s2">"127.0.0.1"</span><span class="p">,</span>
+     <span class="nx">path</span><span class="o">:</span> <span class="s2">"/apache_pb.gif"</span><span class="p">,</span>
+     <span class="nx">referer</span><span class="o">:</span> <span class="s2">"[http://www.example.com/start.html](http://www.example.com/start.html)"</span><span class="p">,</span>
+     <span class="nx">user_agent</span><span class="o">:</span> <span class="s2">"Mozilla/4.08 [en] (Win98; I ;Nav)"</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="system-architecture">
+<h3>System Architecture<a class="headerlink" href="#system-architecture" title="Permalink to this headline">¶</a></h3>
+<p>The primary performance concern for event logging systems are:</p>
+<ol class="arabic">
+<li><p class="first">how many inserts per second can it support, which limits the event
+throughput, and</p>
+</li>
+<li><p class="first">how will the system manage the growth of event data, particularly
+concerning a growth in insert activity.</p>
+<p>In most cases the best way to increase the capacity of the system
+is to use an architecture with some sort of <a class="reference internal" href="http://docs.mongodb.org/manual/reference/glossary/#term-partition"><em class="xref std std-term">partitioning</em></a> or <a class="reference internal" href="http://docs.mongodb.org/manual/reference/glossary/#term-sharding"><em class="xref std std-term">sharding</em></a> that distributes writes among a
+cluster of systems.</p>
+</li>
+</ol>
+</div>
+</div>
+<div class="section" id="operations">
+<h2>Operations<a class="headerlink" href="#operations" title="Permalink to this headline">¶</a></h2>
+<p>Insertion speed is the primary performance concern for an event
+logging system. At the same time, the system must be able to support
+flexible queries so that you can return data from the system
+efficiently. This section describes procedures for both document
+insertion and basic analytics queries.</p>
+<p>The examples that follow use the Python programming language and the
+<a class="reference external" href="http://api.mongodb.org/python/current">PyMongo</a> <a class="reference internal" href="http://docs.mongodb.org/manual/reference/glossary/#term-driver"><em class="xref std std-term">driver</em></a> for MongoDB, but you
+can implement this system using any language you choose.</p>
+<div class="section" id="inserting-a-log-record">
+<h3>Inserting a Log Record<a class="headerlink" href="#inserting-a-log-record" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="write-concern">
+<h4>Write Concern<a class="headerlink" href="#write-concern" title="Permalink to this headline">¶</a></h4>
+<p>MongoDB has a configurable <a class="reference internal" href="http://docs.mongodb.org/manual/reference/glossary/#term-write-concern"><em class="xref std std-term">write concern</em></a>. This capability
+allows you to balance the importance of guaranteeing that all writes
+are fully recorded in the database with the speed of the insert.</p>
+<p>For example, if you issue writes to MongoDB and do not require that
+the database issue any response, the write operations will return
+<em>very</em> fast (i.e. asynchronously,) but you cannot be certain that all
+writes succeeded. Conversely, if you require that MongoDB acknowledge
+every write operation, the database will not return as quickly but you
+can be certain that every item will be present in the database.</p>
+<p>The proper write concern is often an application specific decision,
+and depends on the reporting requirements and uses of your analytics
+application.</p>
+</div>
+<div class="section" id="insert-performance">
+<h4>Insert Performance<a class="headerlink" href="#insert-performance" title="Permalink to this headline">¶</a></h4>
+<p>The following example contains the setup for a Python console session
+using PyMongo, with an event from the Apache Log:</p>
+<div class="highlight-pycon"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">bson</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">pymongo</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">conn</span> <span class="o">=</span> <span class="n">pymongo</span><span class="o">.</span><span class="n">Connection</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">db</span> <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="n">event_db</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">event</span> <span class="o">=</span> <span class="p">{</span>
+<span class="gp">... </span>    <span class="n">_id</span><span class="p">:</span> <span class="n">bson</span><span class="o">.</span><span class="n">ObjectId</span><span class="p">(),</span>
+<span class="gp">... </span>    <span class="n">host</span><span class="p">:</span> <span class="s">"127.0.0.1"</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">time</span><span class="p">:</span>  <span class="n">datetime</span><span class="p">(</span><span class="mi">2000</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="mi">20</span><span class="p">,</span><span class="mi">55</span><span class="p">,</span><span class="mi">36</span><span class="p">),</span>
+<span class="gp">... </span>    <span class="n">path</span><span class="p">:</span> <span class="s">"/apache_pb.gif"</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">referer</span><span class="p">:</span> <span class="s">"[http://www.example.com/start.html](http://www.example.com/start.html)"</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="n">user_agent</span><span class="p">:</span> <span class="s">"Mozilla/4.08 [en] (Win98; I ;Nav)"</span>
+<span class="go">...}</span>
+</pre></div>
+</div>
+<p>The following command will insert the <tt class="docutils literal"><span class="pre">event</span></tt> object into the
+<tt class="docutils literal"><span class="pre">events</span></tt> collection.</p>
+<div class="highlight-pycon"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">db</span><span class="o">.</span><span class="n">events</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="n">event</span><span class="p">,</span> <span class="n">w</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>By setting <tt class="docutils literal"><span class="pre">w=0</span></tt>, you do not require that MongoDB
+acknowledges receipt of the insert.  Although very fast, this is risky
+because the application cannot detect network and server failures. See
+<a class="reference internal" href="http://docs.mongodb.org/manual/core/write-operations/#write-concern"><em>Write Concern</em></a> for more information.</p>
+<p>If you want to ensure that MongoDB acknowledges inserts, you can pass
+<tt class="docutils literal"><span class="pre">w=1</span></tt> argument as follows:</p>
+<div class="highlight-pycon"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">db</span><span class="o">.</span><span class="n">events</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="n">event</span><span class="p">,</span> <span class="n">w</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>MongoDB also supports a more stringent level of write concern, if you
+have a lower tolerance for data loss:</p>
+<p>You can ensure that MongoDB not only <em>acknowledge</em> receipt of the
+message but also commit the write operation to the on-disk journal
+before returning successfully to the application, use can use the
+following <a class="reference external" href="http://api.mongodb.org/python/current/api/pymongo/collection.html#pymongo.collection.Collection.insert" title="(in PyMongo v2.4.2)"><tt class="xref py py-meth docutils literal"><span class="pre">insert()</span></tt></a> operation:</p>
+<div class="highlight-pycon"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">db</span><span class="o">.</span><span class="n">events</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="n">event</span><span class="p">,</span> <span class="n">j</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last"><tt class="docutils literal"><span class="pre">j=True</span></tt> implies <tt class="docutils literal"><span class="pre">w=1</span></tt>.</p>
+</div>
+<p>Finally, if you have <em>extremely low</em> tolerance for event data loss,
+you can require that MongoDB replicate the data to multiple
+<a class="reference internal" href="http://docs.mongodb.org/manual/reference/glossary/#term-secondary"><em class="xref std std-term">secondary</em></a> <a class="reference internal" href="http://docs.mongodb.org/manual/reference/glossary/#term-replica-set"><em class="xref std std-term">replica set</em></a> members before returning:</p>
+<div class="highlight-pycon"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">db</span><span class="o">.</span><span class="n">events</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="n">event</span><span class="p">,</span> <span class="n">w</span><span class="o">=</span><span class="n">majority</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>This will force your application to acknowledge that the data has
+replicated to a majority of configured members of the <a class="reference internal" href="http://docs.mongodb.org/manual/reference/glossary/#term-replica-set"><em class="xref std std-term">replica set</em></a>. You can combine
+options as well:</p>
+<div class="highlight-pycon"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">db</span><span class="o">.</span><span class="n">events</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="n">event</span><span class="p">,</span> <span class="n">j</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">w</span><span class="o">=</span><span class="n">majority</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>In this case, your application will wait for a successful journal
+commit on the <a class="reference internal" href="http://docs.mongodb.org/manual/reference/glossary/#term-primary"><em class="xref std std-term">primary</em></a> <em>and</em> a replication acknowledgment from
+a majority of configured secondaries. This is the safest option
+presented in this section, but it is the slowest. There is always a
+trade-off between safety and speed.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p>If possible, consider using bulk inserts to insert event data.</p>
+<p class="last">All write concern options apply to bulk inserts, but you can pass
+multiple events to the <a class="reference external" href="http://api.mongodb.org/python/current/api/pymongo/collection.html#pymongo.collection.Collection.insert" title="(in PyMongo v2.4.2)"><tt class="xref py py-meth docutils literal"><span class="pre">insert()</span></tt></a> method at
+once. Batch inserts allow MongoDB to distribute the performance
+penalty incurred by more stringent write concern across a group of
+inserts.</p>
+</div>
+<div class="admonition-see-also admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last">“<a class="reference internal" href="http://docs.mongodb.org/manual/applications/replication/#replica-set-write-concern"><em>Write Concern for Replica Sets</em></a>”
+and <a class="reference internal" href="http://docs.mongodb.org/manual/reference/command/getLastError/#getLastError" title="getLastError"><tt class="xref mongodb mongodb-dbcommand docutils literal"><span class="pre">getLastError</span></tt></a>.</p>
+</div>
+</div>
+</div>
+<div class="section" id="finding-all-events-for-a-particular-page">
+<h3>Finding All Events for a Particular Page<a class="headerlink" href="#finding-all-events-for-a-particular-page" title="Permalink to this headline">¶</a></h3>
+<p>The value in maintaining a collection of event data derives from being
+able to query that data to answer specific questions. You may have a
+number of simple queries that you may use to analyze these data.</p>
+<p>As an example, you may want to return all of the events associated
+with specific value of a field. Extending the Apache access log
+example from above, a common case would be to query for all events
+with a specific value in the <tt class="docutils literal"><span class="pre">path</span></tt> field: This section contains a
+pattern for returning data and optimizing this operation.</p>
+<div class="section" id="query">
+<h4>Query<a class="headerlink" href="#query" title="Permalink to this headline">¶</a></h4>
+<p>Use a query that resembles the following to return all documents with
+the <tt class="docutils literal"><span class="pre">/apache_pb.gif</span></tt> value in the <tt class="docutils literal"><span class="pre">path</span></tt> field:</p>
+<div class="highlight-pycon"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">q_events</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">events</span><span class="o">.</span><span class="n">find</span><span class="p">({</span><span class="s">'path'</span><span class="p">:</span> <span class="s">'/apache_pb.gif'</span><span class="p">})</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">If you choose to <a class="reference internal" href="http://docs.mongodb.org/manual/reference/glossary/#term-shard"><em class="xref std std-term">shard</em></a> the collection that stores this
+data, the <a class="reference internal" href="http://docs.mongodb.org/manual/reference/glossary/#term-shard-key"><em class="xref std std-term">shard key</em></a> you choose can impact the performance
+of this query. See the <a class="reference internal" href="#rta-storing-log-data-sharding"><em>sharding</em></a>
+section of the sharding document.</p>
+</div>
+</div>
+<div class="section" id="index-support">
+<h4>Index Support<a class="headerlink" href="#index-support" title="Permalink to this headline">¶</a></h4>
+<p>Adding an index on the <tt class="docutils literal"><span class="pre">path</span></tt> field would significantly enhance the
+performance of this operation.</p>
+<div class="highlight-pycon"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">db</span><span class="o">.</span><span class="n">events</span><span class="o">.</span><span class="n">ensure_index</span><span class="p">(</span><span class="s">'path'</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Because the values of the <tt class="docutils literal"><span class="pre">path</span></tt> likely have a random distribution,
+in order to operate efficiently, the entire index should be resident
+in RAM. In this case, the number of distinct paths is typically small
+in relation to the number of documents, which will limit the space
+that the index requires.</p>
+<p>If your system has a limited amount of RAM, or your data set has a
+wider distribution in values, you may need to re investigate your
+indexing support. In most cases, however, this index is entirely
+sufficient.</p>
+<div class="admonition-see-also admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last">The <a class="reference internal" href="http://docs.mongodb.org/manual/reference/method/db.collection.ensureIndex/#db.collection.ensureIndex" title="db.collection.ensureIndex"><tt class="xref mongodb mongodb-method docutils literal"><span class="pre">db.collection.ensureIndex()</span></tt></a> JavaScript method
+and the <a class="reference external" href="http://api.mongodb.org/python/current/api/pymongo/collection.html#pymongo.collection.Collection.ensure_index" title="(in PyMongo v2.4.2)"><tt class="xref py py-meth docutils literal"><span class="pre">db.events.ensure_index()</span></tt></a>
+method in <a class="reference external" href="http://api.mongodb.org/python/current">PyMongo</a>.</p>
+</div>
+</div>
+</div>
+<div class="section" id="finding-all-the-events-for-a-particular-date">
+<h3>Finding All the Events for a Particular Date<a class="headerlink" href="#finding-all-the-events-for-a-particular-date" title="Permalink to this headline">¶</a></h3>
+<p>The next example describes the process for returning all the events
+for a particular date.</p>
+<div class="section" id="id1">
+<h4>Query<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h4>
+<p>To retrieve this data, use the following query:</p>
+<div class="highlight-pycon"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">q_events</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">events</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s">'time'</span><span class="p">:</span>
+<span class="gp">... </span>    <span class="p">{</span> <span class="s">'$gte'</span><span class="p">:</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2000</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="mi">10</span><span class="p">),</span><span class="s">'$lt'</span><span class="p">:</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2000</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="mi">11</span><span class="p">)})</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id2">
+<h4>Index Support<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h4>
+<p>In this case, an index on the <tt class="docutils literal"><span class="pre">time</span></tt> field would optimize
+performance:</p>
+<div class="highlight-pycon"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">db</span><span class="o">.</span><span class="n">events</span><span class="o">.</span><span class="n">ensure_index</span><span class="p">(</span><span class="s">'time'</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Because your application is inserting events in order, the parts of
+the index that capture recent events will always be in active RAM. As
+a result, if you query primarily on recent data, MongoDB will be able
+to maintain a large index, quickly fulfill queries, and avoid using
+much system memory.</p>
+<div class="admonition-see-also admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last">The <a class="reference internal" href="http://docs.mongodb.org/manual/reference/method/db.collection.ensureIndex/#db.collection.ensureIndex" title="db.collection.ensureIndex"><tt class="xref mongodb mongodb-method docutils literal"><span class="pre">db.events.ensureIndex()</span></tt></a> JavaScript method
+and the <a class="reference external" href="http://api.mongodb.org/python/current/api/pymongo/collection.html#pymongo.collection.Collection.ensure_index" title="(in PyMongo v2.4.2)"><tt class="xref py py-meth docutils literal"><span class="pre">db.events.ensure_index()</span></tt></a>
+method in <a class="reference external" href="http://api.mongodb.org/python/current">PyMongo</a>.</p>
+</div>
+</div>
+</div>
+<div class="section" id="finding-all-events-for-a-particular-host-date">
+<h3>Finding All Events for a Particular Host/Date<a class="headerlink" href="#finding-all-events-for-a-particular-host-date" title="Permalink to this headline">¶</a></h3>
+<p>The following example describes a more complex query for returning
+all events in the collection for a particular host on a particular
+date. This kinds analysis may be useful for investigating suspicious
+behavior by a specific user.</p>
+<div class="section" id="id3">
+<h4>Query<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h4>
+<p>Use a query that resembles the following:</p>
+<div class="highlight-pycon"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">q_events</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">events</span><span class="o">.</span><span class="n">find</span><span class="p">({</span>
+<span class="gp">... </span>    <span class="s">'host'</span><span class="p">:</span> <span class="s">'127.0.0.1'</span><span class="p">,</span>
+<span class="gp">... </span>    <span class="s">'time'</span><span class="p">:</span> <span class="p">{</span><span class="s">'$gte'</span><span class="p">:</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2000</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="mi">10</span><span class="p">),</span><span class="s">'$lt'</span><span class="p">:</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2000</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="mi">11</span><span class="p">)}</span>
+<span class="gp">... </span><span class="p">})</span>
+</pre></div>
+</div>
+<p>This query selects <a class="reference internal" href="http://docs.mongodb.org/manual/reference/glossary/#term-document"><em class="xref std std-term">documents</em></a> from the <tt class="docutils literal"><span class="pre">events</span></tt>
+collection where the <tt class="docutils literal"><span class="pre">host</span></tt> field is <tt class="docutils literal"><span class="pre">127.0.0.1</span></tt> (i.e. local
+host), and the value of the <tt class="docutils literal"><span class="pre">time</span></tt> field represents a date that is
+on or after (i.e. <a class="reference internal" href="http://docs.mongodb.org/manual/reference/operator/gte/#_S_gte" title="$gte"><tt class="xref mongodb mongodb-operator docutils literal"><span class="pre">$gte</span></tt></a>) <tt class="docutils literal"><span class="pre">2000-10-10</span></tt> but before
+(i.e. <a class="reference internal" href="http://docs.mongodb.org/manual/reference/operator/lt/#_S_lt" title="$lt"><tt class="xref mongodb mongodb-operator docutils literal"><span class="pre">$lt</span></tt></a>) <tt class="docutils literal"><span class="pre">2000-10-11</span></tt>.</p>
+</div>
+<div class="section" id="id4">
+<h4>Index Support<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h4>
+<p>The indexes you use may have significant implications for the
+performance of these kinds of queries. For instance, you <em>can</em> create
+a compound index on the <tt class="docutils literal"><span class="pre">time</span></tt> and <tt class="docutils literal"><span class="pre">host</span></tt> field, using the
+following command:</p>
+<div class="highlight-pycon"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">db</span><span class="o">.</span><span class="n">events</span><span class="o">.</span><span class="n">ensure_index</span><span class="p">([(</span><span class="s">'time'</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="s">'host'</span><span class="p">,</span> <span class="mi">1</span><span class="p">)])</span>
+</pre></div>
+</div>
+<p>To analyze the performance for the above query using this index, issue
+the
+<a class="reference external" href="http://api.mongodb.org/python/current/api/pymongo/cursor.html#pymongo.cursor.Cursor.explain" title="(in PyMongo v2.4.2)"><tt class="xref py py-meth docutils literal"><span class="pre">q_events.explain()</span></tt></a>
+method in a Python console. This will return something that resembles:</p>
+<div class="highlight-pycon"><div class="highlight"><pre><span class="go">{ ...</span>
+<span class="go">  u'cursor': u'BtreeCursor time_1_host_1',</span>
+<span class="go">  u'indexBounds': {u'host': [[u'127.0.0.1', u'127.0.0.1']],</span>
+<span class="go">  u'time': [</span>
+<span class="go">      [ datetime.datetime(2000, 10, 10, 0, 0),</span>
+<span class="go">        datetime.datetime(2000, 10, 11, 0, 0)]]</span>
+<span class="go">  },</span>
+<span class="go">  ...</span>
+<span class="go">  u'millis': 4,</span>
+<span class="go">  u'n': 11,</span>
+<span class="go">  u'nscanned': 1296,</span>
+<span class="go">  u'nscannedObjects': 11,</span>
+<span class="go">  ... }</span>
+</pre></div>
+</div>
+<p>This query had to scan 1296 items from the index to return 11 objects in 4
+milliseconds. Conversely, you can test a different compound index with
+the <tt class="docutils literal"><span class="pre">host</span></tt> field first, followed by the <tt class="docutils literal"><span class="pre">time</span></tt> field. Create this
+index using the following operation:</p>
+<div class="highlight-pycon"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">db</span><span class="o">.</span><span class="n">events</span><span class="o">.</span><span class="n">ensure_index</span><span class="p">([(</span><span class="s">'host'</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="s">'time'</span><span class="p">,</span> <span class="mi">1</span><span class="p">)])</span>
+</pre></div>
+</div>
+<p>Use the
+<a class="reference external" href="http://api.mongodb.org/python/current/api/pymongo/cursor.html#pymongo.cursor.Cursor.explain" title="(in PyMongo v2.4.2)"><tt class="xref py py-meth docutils literal"><span class="pre">q_events.explain()</span></tt></a>
+operation to test the performance:</p>
+<div class="highlight-pycon"><div class="highlight"><pre><span class="go">{ ...</span>
+<span class="go">  u'cursor': u'BtreeCursor host_1_time_1',</span>
+<span class="go">  u'indexBounds': {u'host': [[u'127.0.0.1', u'127.0.0.1']],</span>
+<span class="go">  u'time': [[datetime.datetime(2000, 10, 10, 0, 0),</span>
+<span class="go">      datetime.datetime(2000, 10, 11, 0, 0)]]},</span>
+<span class="go">  ...</span>
+<span class="go">  u'millis': 0,</span>
+<span class="go">  u'n': 11,</span>
+<span class="go">  ...</span>
+<span class="go">  u'nscanned': 11,</span>
+<span class="go">  u'nscannedObjects': 11,</span>
+<span class="go">  ...</span>
+<span class="go">}</span>
+</pre></div>
+</div>
+<p>Here, the query had to scan 11 items from the index before returning
+11 objects in less than a millisecond. By placing the more selective
+element of your query <em>first</em> in a compound index you may be able to
+build more useful queries.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Although the index order has an impact query performance, remember
+that index scans are <em>much</em> faster than collection scans, and
+depending on your other queries, it may make more sense to use the
+<tt class="docutils literal"><span class="pre">{</span> <span class="pre">time:</span> <span class="pre">1,</span> <span class="pre">host:</span> <span class="pre">1</span> <span class="pre">}</span></tt> index depending on usage profile.</p>
+</div>
+<div class="admonition-see-also admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last">The <a class="reference internal" href="http://docs.mongodb.org/manual/reference/method/db.collection.ensureIndex/#db.collection.ensureIndex" title="db.collection.ensureIndex"><tt class="xref mongodb mongodb-method docutils literal"><span class="pre">db.events.ensureIndex()</span></tt></a> JavaScript method and the
+<a class="reference external" href="http://api.mongodb.org/python/current/api/pymongo/collection.html#pymongo.collection.Collection.ensure_index" title="(in PyMongo v2.4.2)"><tt class="xref py py-meth docutils literal"><span class="pre">db.events.ensure_index()</span></tt></a>
+method in <a class="reference external" href="http://api.mongodb.org/python/current">PyMongo</a>.</p>
+</div>
+</div>
+</div>
+<div class="section" id="counting-requests-by-day-and-page">
+<h3>Counting Requests by Day and Page<a class="headerlink" href="#counting-requests-by-day-and-page" title="Permalink to this headline">¶</a></h3>
+<p>The following example describes the process for using the collection
+of Apache access events to determine the number of request per
+resource (i.e. page) per day in the last month.</p>
+<div class="section" id="aggregation">
+<h4>Aggregation<a class="headerlink" href="#aggregation" title="Permalink to this headline">¶</a></h4>
+<p class="versionadded">
+<span class="versionmodified">New in version 2.1.</span></p>
+<p>The <a class="reference internal" href="http://docs.mongodb.org/manual/reference/glossary/#term-aggregation-framework"><em class="xref std std-term">aggregation framework</em></a> provides the capacity for queries
+that select, process, and aggregate results from large numbers of
+documents. The <a class="reference internal" href="http://docs.mongodb.org/manual/reference/method/db.collection.aggregate/#db.collection.aggregate" title="db.collection.aggregate"><tt class="xref mongodb mongodb-method docutils literal"><span class="pre">aggregate()</span></tt></a> offers greater
+flexibility, capacity with less complexity than the existing
+<a class="reference internal" href="http://docs.mongodb.org/manual/reference/command/mapReduce/#mapReduce" title="mapReduce"><tt class="xref mongodb mongodb-dbcommand docutils literal"><span class="pre">mapReduce</span></tt></a> and <a class="reference internal" href="http://docs.mongodb.org/manual/reference/command/group/#group" title="group"><tt class="xref mongodb mongodb-dbcommand docutils literal"><span class="pre">group</span></tt></a> aggregation commands.</p>
+<p>Consider the following aggregation <a class="reference internal" href="http://docs.mongodb.org/manual/reference/glossary/#term-pipeline"><em class="xref std std-term">pipeline</em></a>:
+<a class="footnote-reference" href="#sql-aggregation-equivalents" id="id5">[1]</a></p>
+<div class="highlight-pycon"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">result</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">command</span><span class="p">(</span><span class="s">'aggregate'</span><span class="p">,</span> <span class="s">'events'</span><span class="p">,</span> <span class="n">pipeline</span><span class="o">=</span><span class="p">[</span>
+<span class="gp">... </span>        <span class="p">{</span>  <span class="s">'$match'</span><span class="p">:</span> <span class="p">{</span>
+<span class="gp">... </span>              <span class="s">'time'</span><span class="p">:</span> <span class="p">{</span>
+<span class="gp">... </span>                  <span class="s">'$gte'</span><span class="p">:</span> <span class="n">datetime</span><span class="p">(</span><span class="mi">2000</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span>
+<span class="gp">... </span>                  <span class="s">'$lt'</span><span class="p">:</span>  <span class="n">datetime</span><span class="p">(</span><span class="mi">2000</span><span class="p">,</span><span class="mi">11</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span> <span class="p">}</span> <span class="p">}</span> <span class="p">},</span>
+<span class="gp">... </span>        <span class="p">{</span>  <span class="s">'$project'</span><span class="p">:</span> <span class="p">{</span>
+<span class="gp">... </span>                <span class="s">'path'</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+<span class="gp">... </span>                <span class="s">'date'</span><span class="p">:</span> <span class="p">{</span>
+<span class="gp">... </span>                    <span class="s">'y'</span><span class="p">:</span> <span class="p">{</span> <span class="s">'$year'</span><span class="p">:</span> <span class="s">'$time'</span> <span class="p">},</span>
+<span class="gp">... </span>                    <span class="s">'m'</span><span class="p">:</span> <span class="p">{</span> <span class="s">'$month'</span><span class="p">:</span> <span class="s">'$time'</span> <span class="p">},</span>
+<span class="gp">... </span>                    <span class="s">'d'</span><span class="p">:</span> <span class="p">{</span> <span class="s">'$dayOfMonth'</span><span class="p">:</span> <span class="s">'$time'</span> <span class="p">}</span> <span class="p">}</span> <span class="p">}</span> <span class="p">},</span>
+<span class="gp">... </span>        <span class="p">{</span> <span class="s">'$group'</span><span class="p">:</span> <span class="p">{</span>
+<span class="gp">... </span>                <span class="s">'_id'</span><span class="p">:</span> <span class="p">{</span>
+<span class="gp">... </span>                    <span class="s">'p'</span><span class="p">:</span><span class="s">'$path'</span><span class="p">,</span>
+<span class="gp">... </span>                    <span class="s">'y'</span><span class="p">:</span> <span class="s">'$date.y'</span><span class="p">,</span>
+<span class="gp">... </span>                    <span class="s">'m'</span><span class="p">:</span> <span class="s">'$date.m'</span><span class="p">,</span>
+<span class="gp">... </span>                    <span class="s">'d'</span><span class="p">:</span> <span class="s">'$date.d'</span> <span class="p">},</span>
+<span class="gp">... </span>                <span class="s">'hits'</span><span class="p">:</span> <span class="p">{</span> <span class="s">'$sum'</span><span class="p">:</span> <span class="mi">1</span> <span class="p">}</span> <span class="p">}</span> <span class="p">},</span>
+<span class="gp">... </span>        <span class="p">])</span>
+</pre></div>
+</div>
+<p>This command aggregates documents from the <tt class="docutils literal"><span class="pre">events</span></tt> collection with
+a pipeline that:</p>
+<ol class="arabic">
+<li><p class="first">Uses the <a class="reference internal" href="http://docs.mongodb.org/manual/reference/aggregation/match/#_S_match" title="$match"><tt class="xref agg agg-pipeline docutils literal"><span class="pre">$match</span></tt></a> to limit the documents that the
+aggregation framework must process. <a class="reference internal" href="http://docs.mongodb.org/manual/reference/aggregation/match/#_S_match" title="$match"><tt class="xref agg agg-pipeline docutils literal"><span class="pre">$match</span></tt></a> is
+similar to a <a class="reference internal" href="http://docs.mongodb.org/manual/reference/method/db.collection.find/#db.collection.find" title="db.collection.find"><tt class="xref mongodb mongodb-method docutils literal"><span class="pre">find()</span></tt></a> query.</p>
+<p>This operation selects all documents where the value of the
+<tt class="docutils literal"><span class="pre">time</span></tt> field represents a date that is on or after
+(i.e. <a class="reference internal" href="http://docs.mongodb.org/manual/reference/operator/gte/#_S_gte" title="$gte"><tt class="xref mongodb mongodb-operator docutils literal"><span class="pre">$gte</span></tt></a>) <tt class="docutils literal"><span class="pre">2000-10-10</span></tt> but before
+(i.e. <a class="reference internal" href="http://docs.mongodb.org/manual/reference/operator/lt/#_S_lt" title="$lt"><tt class="xref mongodb mongodb-operator docutils literal"><span class="pre">$lt</span></tt></a>) <tt class="docutils literal"><span class="pre">2000-10-11</span></tt>.</p>
+</li>
+<li><p class="first">Uses the <a class="reference internal" href="http://docs.mongodb.org/manual/reference/aggregation/project/#_S_project" title="$project"><tt class="xref agg agg-pipeline docutils literal"><span class="pre">$project</span></tt></a> to limit the data that continues
+through the pipeline. This operator:</p>
+<ul class="simple">
+<li>Selects the <tt class="docutils literal"><span class="pre">path</span></tt> field.</li>
+<li>Creates a <tt class="docutils literal"><span class="pre">y</span></tt> field to hold the year, computed from the
+<tt class="docutils literal"><span class="pre">time</span></tt> field in the original documents.</li>
+<li>Creates a <tt class="docutils literal"><span class="pre">m</span></tt> field to hold the month, computed from the
+<tt class="docutils literal"><span class="pre">time</span></tt> field in the original documents</li>
+<li>Creates a <tt class="docutils literal"><span class="pre">d</span></tt> field to hold the day, computed from the
+<tt class="docutils literal"><span class="pre">time</span></tt> field in the original documents.</li>
+</ul>
+</li>
+<li><p class="first">Uses the <a class="reference internal" href="http://docs.mongodb.org/manual/reference/aggregation/group/#_S_group" title="$group"><tt class="xref agg agg-pipeline docutils literal"><span class="pre">$group</span></tt></a> to create new computed
+documents. This step will create a single new document for each
+unique path/date combination. The documents take the following
+form:</p>
+<ul class="simple">
+<li>the <tt class="docutils literal"><span class="pre">_id</span></tt> field holds a sub-document with the contents <tt class="docutils literal"><span class="pre">path</span></tt>
+field from the original documents in the <tt class="docutils literal"><span class="pre">p</span></tt> field, with the
+<tt class="docutils literal"><span class="pre">date</span></tt> fields from the <a class="reference internal" href="http://docs.mongodb.org/manual/reference/aggregation/project/#_S_project" title="$project"><tt class="xref agg agg-pipeline docutils literal"><span class="pre">$project</span></tt></a>  as the
+remaining fields.</li>
+<li>the <tt class="docutils literal"><span class="pre">hits</span></tt> field use the <a class="reference internal" href="http://docs.mongodb.org/manual/reference/aggregation/sum/#_S_sum" title="$sum"><tt class="xref agg agg-group docutils literal"><span class="pre">$sum</span></tt></a> statement to
+increment a counter for every document in the group. In the
+aggregation output, this field holds the total number of
+documents at the beginning of the aggregation pipeline with this
+unique date and path.</li>
+</ul>
+</li>
+</ol>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p>In sharded environments, the performance of aggregation operations
+depends on the <a class="reference internal" href="http://docs.mongodb.org/manual/reference/glossary/#term-shard-key"><em class="xref std std-term">shard key</em></a>. Ideally, all the items in a
+particular <a class="reference internal" href="http://docs.mongodb.org/manual/reference/aggregation/group/#_S_group" title="$group"><tt class="xref agg agg-pipeline docutils literal"><span class="pre">$group</span></tt></a> operation will reside on the same
+server.</p>
+<p class="last">While this distribution of documents would occur if you chose the
+<tt class="docutils literal"><span class="pre">time</span></tt> field as the shard key, a field like <tt class="docutils literal"><span class="pre">path</span></tt> also has
+this property and is a typical choice for sharding. Also see the
+“<a class="reference internal" href="#rta-storing-log-data-sharding"><em>sharding considerations</em></a>.”
+of this document for additional recommendations for using sharding.</p>
+</div>
+<div class="admonition-see-also admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last">“<a class="reference internal" href="http://docs.mongodb.org/manual/applications/aggregation/"><em>Aggregation Framework</em></a>“</p>
+</div>
+<table class="docutils footnote" frame="void" id="sql-aggregation-equivalents" rules="none">
+<colgroup><col class="label"><col></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id5">[1]</a></td><td>To translate statements from the
+<a class="reference internal" href="http://docs.mongodb.org/manual/applications/aggregation/"><em>aggregation framework</em></a> to SQL,
+you can consider the <a class="reference internal" href="http://docs.mongodb.org/manual/reference/aggregation/match/#_S_match" title="$match"><tt class="xref agg agg-pipeline docutils literal"><span class="pre">$match</span></tt></a> equivalent to
+<tt class="docutils literal"><span class="pre">WHERE</span></tt>, <a class="reference internal" href="http://docs.mongodb.org/manual/reference/aggregation/project/#_S_project" title="$project"><tt class="xref agg agg-pipeline docutils literal"><span class="pre">$project</span></tt></a> to <tt class="docutils literal"><span class="pre">SELECT</span></tt>, and
+<a class="reference internal" href="http://docs.mongodb.org/manual/reference/aggregation/group/#_S_group" title="$group"><tt class="xref agg agg-pipeline docutils literal"><span class="pre">$group</span></tt></a> to <tt class="docutils literal"><span class="pre">GROUP</span> <span class="pre">BY</span></tt>.</td></tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="id6">
+<h4>Index Support<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h4>
+<p>To optimize the aggregation operation, ensure that the initial
+<a class="reference internal" href="http://docs.mongodb.org/manual/reference/aggregation/match/#_S_match" title="$match"><tt class="xref agg agg-pipeline docutils literal"><span class="pre">$match</span></tt></a> query has an index. Use the following command
+to create an index on the <tt class="docutils literal"><span class="pre">time</span></tt> field in the <tt class="docutils literal"><span class="pre">events</span></tt> collection:</p>
+<div class="highlight-pycon"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">db</span><span class="o">.</span><span class="n">events</span><span class="o">.</span><span class="n">ensure_index</span><span class="p">(</span><span class="s">'time'</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">If you have already created a compound index on the <tt class="docutils literal"><span class="pre">time</span></tt> and
+<tt class="docutils literal"><span class="pre">host</span></tt> (i.e. <tt class="docutils literal"><span class="pre">{</span> <span class="pre">time:</span> <span class="pre">1,</span> <span class="pre">host,</span> <span class="pre">1</span> <span class="pre">}</span></tt>,) MongoDB will use this
+index for range queries on just the <tt class="docutils literal"><span class="pre">time</span></tt> field. Do not create
+an additional index, in these situations.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="sharding">
+<span id="rta-storing-log-data-sharding"></span><h2>Sharding<a class="headerlink" href="#sharding" title="Permalink to this headline">¶</a></h2>
+<p>Eventually your system’s events will exceed the capacity of a single
+event logging database instance. In these situations you will want to
+use a <a class="reference internal" href="http://docs.mongodb.org/manual/reference/glossary/#term-sharded-cluster"><em class="xref std std-term">sharded cluster</em></a>, which takes advantage of MongoDB’s
+<a class="reference internal" href="http://docs.mongodb.org/manual/reference/glossary/#term-sharding"><em class="xref std std-term">sharding</em></a> functionality. This section introduces the unique
+sharding concerns for this event logging case.</p>
+<div class="admonition-see-also admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="http://docs.mongodb.org/manual/sharding/"><em>Sharding</em></a> and <a class="reference internal" href="http://docs.mongodb.org/manual/faq/sharding/"><em>FAQ: Sharding with MongoDB</em></a></p>
+</div>
+<div class="section" id="limitations">
+<h3>Limitations<a class="headerlink" href="#limitations" title="Permalink to this headline">¶</a></h3>
+<p>In a sharded environment the limitations on the maximum insertion rate
+are:</p>
+<ul class="simple">
+<li>the number of shards in the cluster.</li>
+<li>the <a class="reference internal" href="http://docs.mongodb.org/manual/reference/glossary/#term-shard-key"><em class="xref std std-term">shard key</em></a> you chose.</li>
+</ul>
+<p>Because MongoDB distributed data in using “ranges” (i.e. <a class="reference internal" href="http://docs.mongodb.org/manual/reference/glossary/#term-chunk"><em class="xref std std-term">chunks</em></a>) of <a class="reference internal" href="http://docs.mongodb.org/manual/reference/glossary/#term-shard-key"><em class="xref std std-term">keys</em></a>, the choice of shard key can
+control how MongoDB distributes data and the resulting systems’
+capacity for writes and queries.</p>
+<p>Ideally, your shard key should allow insertions balance evenly among
+the shards <a class="footnote-reference" href="#timestamps" id="id7">[2]</a> and for most queries to only <em>need</em> to
+access a single shard. <a class="footnote-reference" href="#hashes" id="id8">[3]</a> Continue reading for an analysis of
+a collection of shard key choices.</p>
+<table class="docutils footnote" frame="void" id="timestamps" rules="none">
+<colgroup><col class="label"><col></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id7">[2]</a></td><td>For this reason, avoid shard keys based on the
+timestamp or the insertion time (i.e. the <tt class="docutils literal"><span class="pre">ObjectId</span></tt>) because all
+writes will end up on a single node.</td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="hashes" rules="none">
+<colgroup><col class="label"><col></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id8">[3]</a></td><td>For this reason, avoid randomized shard keys (e.g. hash
+based shard keys) because any query will have to access all shards
+in the cluster.</td></tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="shard-by-time">
+<span id="rta-storing-log-data-sharding-option-1"></span><h3>Shard by Time<a class="headerlink" href="#shard-by-time" title="Permalink to this headline">¶</a></h3>
+<p>While using the timestamp, or the <tt class="docutils literal"><span class="pre">ObjectId</span></tt> in the <tt class="docutils literal"><span class="pre">_id</span></tt>
+field, <a class="footnote-reference" href="#objid" id="id9">[4]</a> would distribute your data evenly among shards, these
+keys lead to two problems:</p>
+<ol class="arabic simple">
+<li>All inserts always flow to the same shard, which means that your
+<a class="reference internal" href="http://docs.mongodb.org/manual/reference/glossary/#term-sharded-cluster"><em class="xref std std-term">sharded cluster</em></a> will have the same write throughput as a
+standalone instance.</li>
+<li>Most reads will tend to cluster on the same shard, as analytics
+queries.</li>
+</ol>
+<table class="docutils footnote" frame="void" id="objid" rules="none">
+<colgroup><col class="label"><col></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id9">[4]</a></td><td>The <tt class="docutils literal"><span class="pre">ObjectId</span></tt> derives from the creation time, and is
+effectively a timestamp in this case.</td></tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="shard-by-a-semi-random-key">
+<span id="rta-storing-log-data-sharding-option-2"></span><h3>Shard by a Semi-Random Key<a class="headerlink" href="#shard-by-a-semi-random-key" title="Permalink to this headline">¶</a></h3>
+<p>To distribute data more evenly among the shards, you may consider
+using a more “random” piece of data, such as a hash of the <tt class="docutils literal"><span class="pre">_id</span></tt>
+field (i.e. the <tt class="docutils literal"><span class="pre">ObjectId</span></tt> as a <a class="reference internal" href="http://docs.mongodb.org/manual/reference/glossary/#term-shard-key"><em class="xref std std-term">shard key</em></a>.</p>
+<p>While this introduces some additional complexity into your application,
+to generate the key, it will distribute writes among the shards. In
+these deployments having 5 shards will provide 5 times the write
+capacity as a single instance.</p>
+<p>Using this shard key, or any hashed value as a key presents the
+following downsides:</p>
+<ul class="simple">
+<li>the shard key, and the index on the key will consume additional
+space in the database.</li>
+<li>queries, unless they include the shard key itself, <a class="footnote-reference" href="#queries" id="id10">[5]</a>
+must run in parallel on all shards, which may lead to degraded
+performance.</li>
+</ul>
+<p>This might be an acceptable trade-off in some situations. The workload
+of event logging systems tends to be heavily skewed toward writing,
+read performance may not be as critical as more robust write
+performance.</p>
+<table class="docutils footnote" frame="void" id="queries" rules="none">
+<colgroup><col class="label"><col></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id10">[5]</a></td><td>Typically, it is difficult to use these kinds of shard
+keys in queries.</td></tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="shard-by-an-evenly-distributed-key-in-the-data-set">
+<span id="rta-storing-log-data-sharding-option-3"></span><h3>Shard by an Evenly-Distributed Key in the Data Set<a class="headerlink" href="#shard-by-an-evenly-distributed-key-in-the-data-set" title="Permalink to this headline">¶</a></h3>
+<p>If a field in your documents has values that are evenly distributed
+among the documents, you may consider using this key as a <a class="reference internal" href="http://docs.mongodb.org/manual/reference/glossary/#term-shard-key"><em class="xref std std-term">shard
+key</em></a>.</p>
+<p>Continuing the example from above, you may consider using the <tt class="docutils literal"><span class="pre">path</span></tt>
+field. Which may have a couple of advantages:</p>
+<ol class="arabic simple">
+<li>writes will tend to balance evenly among shards.</li>
+<li>reads will tend to be selective and local to a single shard if the
+query selects on the <tt class="docutils literal"><span class="pre">path</span></tt> field.</li>
+</ol>
+<p>There are a few potential problems with these kinds of shard keys:</p>
+<ol class="arabic simple">
+<li>If a large number of documents will have the same shard key, you
+run the risk of having a portion of your data collection MongoDB
+cannot distribute throughout the cluster.</li>
+<li>If there are a small number of possible values, there may be a
+limit to how much MongoDB will be able to distribute the data among
+the shard.</li>
+</ol>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Test using your existing data to ensure that the distribution is
+truly even, and that there is a sufficient quantity of distinct
+values for the shard key.</p>
+</div>
+</div>
+<div class="section" id="shard-by-combine-a-natural-and-synthetic-key">
+<span id="rta-storing-log-data-sharding-option-4"></span><h3>Shard by Combine a Natural and Synthetic Key<a class="headerlink" href="#shard-by-combine-a-natural-and-synthetic-key" title="Permalink to this headline">¶</a></h3>
+<p>MongoDB supports compound <a class="reference internal" href="http://docs.mongodb.org/manual/reference/glossary/#term-shard-key"><em class="xref std std-term">shard keys</em></a> that combine
+the best aspects of <a class="reference internal" href="#rta-storing-log-data-sharding-option-3"><em>sharding by a evenly distributed key in the
+set</em></a> and <a class="reference internal" href="#rta-storing-log-data-sharding-option-2"><em>sharding by a
+random key</em></a>. In these
+situations, the shard key would resemble <tt class="docutils literal"><span class="pre">{</span> <span class="pre">path:</span> <span class="pre">1</span> <span class="pre">,</span> <span class="pre">ssk:</span> <span class="pre">1</span> <span class="pre">}</span></tt>
+where, <tt class="docutils literal"><span class="pre">path</span></tt> is an often used “natural key, or value from your
+data and <tt class="docutils literal"><span class="pre">ssk</span></tt> is a hash of the <tt class="docutils literal"><span class="pre">_id</span></tt> field. <a class="footnote-reference" href="#ssk" id="id11">[6]</a></p>
+<p>Using this type of shard key, data is largely distributed by the
+natural key, or <tt class="docutils literal"><span class="pre">path</span></tt>, which makes most queries that access the
+<tt class="docutils literal"><span class="pre">path</span></tt> field local to a single shard or group of shards. At the same
+time, if there is not sufficient distribution for specific values of
+<tt class="docutils literal"><span class="pre">path</span></tt>, the <tt class="docutils literal"><span class="pre">ssk</span></tt> makes it possible for MongoDB to create
+<a class="reference internal" href="http://docs.mongodb.org/manual/reference/glossary/#term-chunk"><em class="xref std std-term">chunks</em></a> and data across the cluster.</p>
+<p>In most situations, these kinds of keys provide the ideal balance
+between distributing writes across the cluster and ensuring that most
+queries will only need to access a select number of shards.</p>
+<table class="docutils footnote" frame="void" id="ssk" rules="none">
+<colgroup><col class="label"><col></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id11">[6]</a></td><td>You must still calculate the value of this synthetic key in
+your application when you insert documents into your collection.</td></tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="test-with-your-own-data">
+<h3>Test with Your Own Data<a class="headerlink" href="#test-with-your-own-data" title="Permalink to this headline">¶</a></h3>
+<p>Selecting shard keys is difficult because: there are no definitive
+“best-practices,” the decision has a large impact on performance, and
+it is difficult or impossible to change the shard key after making the
+selection.</p>
+<p>The <a class="reference internal" href="#rta-storing-log-data-sharding"><em>sharding options</em></a> provides a
+good starting point for thinking about <a class="reference internal" href="http://docs.mongodb.org/manual/reference/glossary/#term-shard-key"><em class="xref std std-term">shard key</em></a>
+selection. Nevertheless, the best way to select a shard key is to
+analyze the actual insertions and queries from your own application.</p>
+</div>
+</div>
+<div class="section" id="managing-event-data-growth">
+<h2>Managing Event Data Growth<a class="headerlink" href="#managing-event-data-growth" title="Permalink to this headline">¶</a></h2>
+<p>Without some strategy for managing the size of your database, most
+event logging systems can grow infinitely. This is particularly
+important in the context of MongoDB may not relinquish data to the
+file system in the way you might expect. Consider the following
+strategies for managing data growth:</p>
+<div class="section" id="capped-collections">
+<span id="rta-storing-log-data-capped-collections"></span><h3>Capped Collections<a class="headerlink" href="#capped-collections" title="Permalink to this headline">¶</a></h3>
+<p>Depending on your data retention requirements as well as your
+reporting and analytics needs, you may consider using a <a class="reference internal" href="http://docs.mongodb.org/manual/reference/glossary/#term-capped-collection"><em class="xref std std-term">capped
+collection</em></a> to store your events. Capped collections have a fixed
+size, and drop old data when inserting new data after reaching cap.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">In the current version, it is not possible to shard capped
+collections.</p>
+</div>
+</div>
+<div class="section" id="multiple-collections-single-database">
+<span id="rta-storing-log-data-multiple-collections-single-database"></span><h3>Multiple Collections, Single Database<a class="headerlink" href="#multiple-collections-single-database" title="Permalink to this headline">¶</a></h3>
+<p><strong>Strategy:</strong> Periodically rename your event collection so that your
+data collection rotates in much the same way that you might rotate log
+files. When needed, you can drop the oldest collection from the
+database.</p>
+<p>This approach has several advantages over the single collection
+approach:</p>
+<ol class="arabic simple">
+<li>Collection renames are fast and atomic.</li>
+<li>MongoDB does not bring any document into memory to drop a
+collection.</li>
+<li>MongoDB can effectively reuse space freed by removing entire
+collections without leading to data fragmentation.</li>
+</ol>
+<p>Nevertheless, this operation may increase some complexity for queries,
+if any of your analyses depend on events that may reside in the
+current and previous collection. For most real time data collection
+systems, this approach is the most ideal.</p>
+</div>
+<div class="section" id="multiple-databases">
+<h3>Multiple Databases<a class="headerlink" href="#multiple-databases" title="Permalink to this headline">¶</a></h3>
+<p><strong>Strategy:</strong> Rotate databases rather than collections, as in the
+“<a class="reference internal" href="#rta-storing-log-data-multiple-collections-single-database"><em>Multiple Collections, Single Database</em></a>
+example.</p>
+<p>While this <em>significantly</em> increases application complexity for
+insertions and queries, when you drop old databases, MongoDB will
+return disk space to the file system. This approach makes the most
+sense in scenarios where your event insertion rates and/or your data
+retention rates were extremely variable.</p>
+<p>For example, if you are performing a large backfill of event data and
+want to make sure that the entire set of event data for 90 days is
+available during the backfill, during normal operations you only need
+30 days of event data, you might consider using multiple databases.</p>
+</div>
+</div>
+</div>
+
+
+<div id="btnv">
+<ul id="btnvl">
+<li id="btnvpr"><a href="http://docs.mongodb.org/manual/use-cases/" title="Previous Section: Use Cases">&lt; &nbsp; Use Cases</a></li>
+<li id="btnvup"><a href="http://docs.mongodb.org/manual/use-cases/" title="Parent Section: Use Cases">/\&nbsp; Use Cases</a></li>
+<li id="btnvnx"><a href="http://docs.mongodb.org/manual/use-cases/pre-aggregated-reports/" title="Next Section: Pre-Aggregated Reports">Pre-Aggregated Reports &nbsp;&gt;</a></li>
+</ul>
+</div>
+</div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper"><h3><a href="http://docs.mongodb.org/manual/contents/">MongoDB Manual</a>
+
+<small><a href="http://docs.mongodb.org/manual/genindex/">(Index)</a></small>
+
+</h3>
+
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="http://docs.mongodb.org/manual/installation/">Installing MongoDB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://docs.mongodb.org/manual/administration/">Administration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://docs.mongodb.org/manual/security/">Security</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://docs.mongodb.org/manual/crud/">Core MongoDB Operations (CRUD)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://docs.mongodb.org/manual/aggregation/">Aggregation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://docs.mongodb.org/manual/indexes/">Indexes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://docs.mongodb.org/manual/replication/">Replication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://docs.mongodb.org/manual/sharding/">Sharding</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://docs.mongodb.org/manual/applications/">Application Development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://docs.mongodb.org/manual/mongo/">Using the <tt class="docutils literal"><span class="pre">mongo</span></tt> Shell</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="http://docs.mongodb.org/manual/use-cases/">Use Cases</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="http://docs.mongodb.org/manual/use-cases/#operational-intelligence">Operational Intelligence</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="">Storing Log Data</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#overview">Overview</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="#problem">Problem</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#solution">Solution</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#schema-design">Schema Design</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#system-architecture">System Architecture</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#operations">Operations</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="#inserting-a-log-record">Inserting a Log Record</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="#write-concern">Write Concern</a></li>
+<li class="toctree-l6"><a class="reference internal" href="#insert-performance">Insert Performance</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="#finding-all-events-for-a-particular-page">Finding All Events for a Particular Page</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="#query">Query</a></li>
+<li class="toctree-l6"><a class="reference internal" href="#index-support">Index Support</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="#finding-all-the-events-for-a-particular-date">Finding All the Events for a Particular Date</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="#id1">Query</a></li>
+<li class="toctree-l6"><a class="reference internal" href="#id2">Index Support</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="#finding-all-events-for-a-particular-host-date">Finding All Events for a Particular Host/Date</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="#id3">Query</a></li>
+<li class="toctree-l6"><a class="reference internal" href="#id4">Index Support</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="#counting-requests-by-day-and-page">Counting Requests by Day and Page</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="#aggregation">Aggregation</a></li>
+<li class="toctree-l6"><a class="reference internal" href="#id6">Index Support</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#sharding">Sharding</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="#limitations">Limitations</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#shard-by-time">Shard by Time</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#shard-by-a-semi-random-key">Shard by a Semi-Random Key</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#shard-by-an-evenly-distributed-key-in-the-data-set">Shard by an Evenly-Distributed Key in the Data Set</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#shard-by-combine-a-natural-and-synthetic-key">Shard by Combine a Natural and Synthetic Key</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#test-with-your-own-data">Test with Your Own Data</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#managing-event-data-growth">Managing Event Data Growth</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="#capped-collections">Capped Collections</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#multiple-collections-single-database">Multiple Collections, Single Database</a></li>
+<li class="toctree-l5"><a class="reference internal" href="#multiple-databases">Multiple Databases</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="http://docs.mongodb.org/manual/use-cases/pre-aggregated-reports/">Pre-Aggregated Reports</a></li>
+<li class="toctree-l3"><a class="reference internal" href="http://docs.mongodb.org/manual/use-cases/hierarchical-aggregation/">Hierarchical Aggregation</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="http://docs.mongodb.org/manual/use-cases/#product-data-management">Product Data Management</a></li>
+<li class="toctree-l2"><a class="reference internal" href="http://docs.mongodb.org/manual/use-cases/#content-management-systems">Content Management Systems</a></li>
+<li class="toctree-l2"><a class="reference internal" href="http://docs.mongodb.org/manual/use-cases/#python-application-development">Python Application Development</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="http://docs.mongodb.org/manual/tutorial/">MongoDB Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://docs.mongodb.org/manual/faq/">Frequently Asked Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://docs.mongodb.org/manual/reference/">Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://docs.mongodb.org/manual/about/">About MongoDB Documentation</a></li>
+</ul>
+
+<h3 style="padding-bottom: 1em;"><a href="http://www.mongodb.org/about/">MongoDB.org</a></h3>
+<h3 style="padding-bottom: 1em;"><a href="http://docs.mongodb.org/ecosystem/">MongoDB Ecosystem</a></h3><h3>Formats</h3>
+<ul class="this-page-menu">
+  <li><a href="http://docs.mongodb.org/master/single/">MongoDB Manual, Single HTML Page</a></li>
+  <li><a href="http://docs.mongodb.org/master/MongoDB-Manual-master.pdf" rel="nofollow">MongoDB Manual, PDF Format</a></li>
+  <li><a href="http://docs.mongodb.org/master/MongoDB-Manual-master.epub" rel="nofollow">MongoDB Manual, ePub Format</a></li>
+</ul><h3>MongoDB Resources</h3>
+
+<ul>
+ <li><strong>Getting Started</strong>
+   <ul>
+     <li><a href="http://www.mongodb.org/about/introduction">Introduction</a></li>
+     <li><a href="http://www.mongodb.org/downloads">Downloads</a></li>
+   </ul>
+ </li>
+ <li><strong><a href="http://www.mongodb.org/about/community">Community</a> and <a href="http://docs.mongodb.org/ecosystem/">Ecosystem</a></strong>
+   <ul>
+     <li><a href="http://www.10gen.com/">10gen</a></li>
+     <li><a href="http://www.10gen.com/events">MongoDB Events</a></li>
+     <li><a href="http://planet.mongodb.org/">Planet MongoDB</a></li>
+     <li><a href="http://mongodb.org/about/community/masters">MongoDB Masters</a></li>
+     <li><a href="http://www.10gen.com/presentations">Slides and Video</a></li>
+     <li><a href="http://docs.mongodb.org/ecosystem/platforms/">Hosting Center</a></li>
+     <li><a href="http://docs.mongodb.org/ecosystem/platforms/windows">Windows</a></li>
+     <li><a href="http://www.10gen.com/products/mms/">MongoDB Monitoring Service</a> (<a href="http://mms.10gen.com/help/">docs</a>)</li>
+     <li><a href="http://docs.mongodb.org/ecosystem/tools/administration-interfaces/">Administrative Interfaces</a></li>
+     <li><a href="http://www.10gen.com/books/">MongoDB Books</a></li>
+   </ul>
+ </li>
+ <li><strong><a href="http://docs.mongodb.org/ecosystem/drivers/">Drivers</a></strong>
+   <ul>
+     <li><a href="http://docs.mongodb.org/ecosystem/drivers/javascript">JavaScript</a> (<a href="http://api.mongodb.org/js/current">docs</a>)</li>
+     <li><a href="http://docs.mongodb.org/ecosystem/drivers/python">Python</a> (<a href="http://api.mongodb.org/python/current">docs</a>)</li>
+     <li><a href="http://docs.mongodb.org/ecosystem/drivers/ruby">Ruby</a> (<a href="http://api.mongodb.org/ruby/current">docs</a>)</li>
+     <li><a href="http://docs.mongodb.org/ecosystem/drivers/php">PHP</a> (<a href="http://php.net/mongo/">docs</a>)</li>
+     <li><a href="http://docs.mongodb.org/ecosystem/drivers/perl">Perl</a> (<a href="http://api.mongodb.org/perl/current/">docs</a>)</li>
+     <li><a href="http://docs.mongodb.org/ecosystem/drivers/java">Java</a> (<a href="http://api.mongodb.org/java/current">docs</a>)</li>
+     <li><a href="http://docs.mongodb.org/ecosystem/drivers/scala">Scala</a> (<a href="http://api.mongodb.org/scala/casbah/current/">docs</a>)</li>
+     <li><a href="http://docs.mongodb.org/ecosystem/drivers/csharp">C#</a> (<a href="http://api.mongodb.org/csharp/current/">docs</a>)</li>
+     <li><a href="http://docs.mongodb.org/ecosystem/drivers/c">C</a> (<a href="http://api.mongodb.org/c/current/">docs</a>)</li>
+     <li><a href="http://docs.mongodb.org/ecosystem/drivers/cpp">C++</a> (<a href="http://api.mongodb.org/cplusplus/current/">docs</a>)</li>
+     <li><a href="http://hackage.haskell.org/package/mongoDB">Haskell</a> (<a href="http://api.mongodb.org/haskell">docs</a>)</li>
+     <li><a href="http://docs.mongodb.org/ecosystem/drivers/erlang">Erlang</a> (<a href="http://api.mongodb.org/erlang">docs</a>)</li>
+   </ul>
+ </li>
+</ul>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+  <div class="footer">
+    <p>
+       © <a href="">Copyright</a> 2011-2013, 10gen, Inc. 
+       MongoDB®, Mongo®, and the leaf logo are registered trademarks of 10gen, Inc.
+    </p>
+  </div><script type="text/javascript">
+var _gaq = _gaq || [];
+var pluginUrl = (('https:' == document.location.protocol) ? 'https://ssl.' : 'http://www.') + 'google-analytics.com/plugins/ga/inpage_linkid.js';
+_gaq.push(['_require', 'inpage_linkid', pluginUrl]);
+_gaq.push(['_setAccount', 'UA-7301842-8']);
+_gaq.push(['_setDomainName', 'docs.mongodb.org']);
+_gaq.push(['_trackPageview']);
+(function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0];
+        s.parentNode.insertBefore(ga, s);
+        })();
+</script>
+
+<script type="text/javascript">
+document.write(unescape("%3Cscript src='" + document.location.protocol + "//munchkin.marketo.net/munchkin.js' type='text/javascript'%3E%3C/script%3E"));
+</script><script src="Storing%20Log%20Data%20%E2%80%94%20MongoDB%20Manual_files/munchkin.htm" type="text/javascript"></script>
+<script>try { mktoMunchkin("017-HGS-593"); } catch(e) {}</script><script type="text/javascript">
+jQuery.ajax({
+    url: "https://jira.mongodb.org/s/en_US-bxctp1/782/6/1.2.4/_/download/batch/com.atlassian.jira.collector.plugin.jira-issue-collector-plugin:issuecollector-embededjs/com.atlassian.jira.collector.plugin.jira-issue-collector-plugin:issuecollector-embededjs.js?collectorId=298ba4e7",
+    type: "get",
+    cache: true,
+    dataType: "script"
+});
+window.ATL_JQ_PAGE_PROPS =  {
+"triggerFunction": function(showCollectorDialog) {
+jQuery("#jirafeedback").click(function(e) {e.preventDefault();showCollectorDialog();});
+jQuery("#jirafooter").click(function(e) {e.preventDefault();showCollectorDialog();});
+}};
+</script>
+
+<table class="gstl_0 gssb_c" style="width: 129px; display: none; top: 70px; left: 751px; position: absolute;" cellpadding="0" cellspacing="0"><tbody><tr><td class="gssb_f"></td><td style="width: 100%;" class="gssb_e"></td></tr></tbody></table><div style="display: none;" id="atlwdg-blanket" class="atlwdg-blanket"></div><div class="atlwdg-popup atlwdg-box-shadow atlwdg-hidden" id="atlwdg-container"></div></body></html>

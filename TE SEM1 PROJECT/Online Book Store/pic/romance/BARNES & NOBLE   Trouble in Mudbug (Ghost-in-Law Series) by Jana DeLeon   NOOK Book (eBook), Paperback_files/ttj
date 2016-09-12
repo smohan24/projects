@@ -1,0 +1,14 @@
+function writeJS(doc){
+var str='';
+str += '<!-- Begin: GroovinAds  | 300x250 html -->\n';
+str += '<script type="text\/javascript">\n';
+str += 'var IDTAG="1677";\n';
+str += 'var WIDTH="300";\n';
+str += 'var HEIGHT="250";\n';
+str += 'var OSClickTracker="http://bub.px.invitemedia.com/pixel?returnType=redirect&key=Click&b=oho38.ovq.wiz.cebq2&message=eJwdjLENwDAIBHf52kXAYAwrxSKVlSLK7kEp_153DwgBOdh1uIgcPtSY5kCDIqZbgyHIumoDI7hhIFT8v3oRUu7GXqNKO8.87ixbELnXKlycJlX3_QDlQhgO&redirectURL=";\n';
+str += '<\/script>\n';
+str += '<script type="text\/javascript" src="http:\/\/ads01.groovinads.com\/osadspro.os"><\/script>\n';
+str += '<!-- End: GroovinAds  | 300x250 html -->\n';
+doc.write(str);
+}
+writeJS(document);document.write('<img src="http://bub.px.invitemedia.com/adnxs_imp?returnType=image&key=AdImp&cost=0.15&creativeID=309570&message=eJwdjLENwDAIBHf52kXAYAwrxSKVlSLK7kEp_153DwgBOdh1uIgcPtSY5kCDIqZbgyHIumoDI7hhIFT8v3oRUu7GXqNKO8.87ixbELnXKlycJlX3_QDlQhgO&managed=false&b=oho38.ovq.wiz.cebq2" width="1" height="1"/><img src="http://view.atdmt.com/ADO/view/278612728/direct;wi.1;hi.1/01" width="1" height="1"/>');

@@ -1,0 +1,365 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head>
+    <title>$skip (aggregation) — MongoDB Manual</title>
+
+    <link rel="shortcut icon" href="http://media.mongodb.org/favicon.ico">
+    <meta name="robots" content="index">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <link rel="canonical" href="http://docs.mongodb.org/manual/reference/aggregation/skip">
+
+    
+    
+    <link rel="stylesheet" href="$skip%20%28aggregation%29%20%E2%80%94%20MongoDB%20Manual_files/mongodb-docs.css" type="text/css">
+    <link rel="stylesheet" href="$skip%20%28aggregation%29%20%E2%80%94%20MongoDB%20Manual_files/pygments.css" type="text/css">
+      
+    <script src="$skip%20%28aggregation%29%20%E2%80%94%20MongoDB%20Manual_files/cse.js" async="" type="text/javascript"></script><script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     '2.2.3',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '',
+        HAS_SOURCE:  false
+      };
+    </script>
+    <script type="text/javascript" src="$skip%20%28aggregation%29%20%E2%80%94%20MongoDB%20Manual_files/jquery.js"></script>
+    <script type="text/javascript" src="$skip%20%28aggregation%29%20%E2%80%94%20MongoDB%20Manual_files/underscore.js"></script>
+    <script type="text/javascript" src="$skip%20%28aggregation%29%20%E2%80%94%20MongoDB%20Manual_files/doctools.js"></script>
+      <link rel="search" type="application/opensearchdescription+xml" href="http://docs.mongodb.org/osd.xml" title="MongoDB Help">
+<link rel="author" title="About these documents" href="http://docs.mongodb.org/manual/about/">
+<link rel="top" title="MongoDB Manual" href="http://docs.mongodb.org/manual/">
+<link rel="up" title="Query, Update, Projection, and Aggregation Operators" href="http://docs.mongodb.org/manual/reference/operator/">
+<link rel="next" title="$sort (aggregation)" href="http://docs.mongodb.org/manual/reference/aggregation/sort/">
+<link rel="prev" title="$second (aggregation)" href="http://docs.mongodb.org/manual/reference/aggregation/second/">
+<!-- Put the following javascript before the closing </head> tag. -->
+<script>
+  (function() {
+    var cx = '017213726194841070573:WMX6838984';
+    var gcse = document.createElement('script'); gcse.type = 'text/javascript'; gcse.async = true;
+    gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+        '//www.google.com/cse/cse.js?cx=' + cx;
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(gcse, s);
+  })();
+</script>
+  <script type="text/javascript" src="$skip%20%28aggregation%29%20%E2%80%94%20MongoDB%20Manual_files/jsapi"></script><link rel="stylesheet" href="$skip%20%28aggregation%29%20%E2%80%94%20MongoDB%20Manual_files/defaulten.css" type="text/css"><link rel="stylesheet" href="$skip%20%28aggregation%29%20%E2%80%94%20MongoDB%20Manual_files/default.css" type="text/css"><script src="$skip%20%28aggregation%29%20%E2%80%94%20MongoDB%20Manual_files/defaulten.js" type="text/javascript"></script><script src="$skip%20%28aggregation%29%20%E2%80%94%20MongoDB%20Manual_files/search.js" type="text/javascript"></script><style type="text/css">
+.gsc-control-cse {
+font-family: Arial, sans-serif;
+border-color: #FFFFFF;
+background-color: #FFFFFF;
+}
+.gsc-control-cse .gsc-table-result {
+font-family: Arial, sans-serif;
+}
+input.gsc-input, .gsc-input-box, .gsc-input-box-hover, .gsc-input-box-focus {
+border-color: #D9D9D9;
+}
+input.gsc-search-button, input.gsc-search-button:hover, input.gsc-search-button:focus {
+border-color: #5AAC41;
+background-color: #5AAC41;
+background-image: none;
+filter: none;
+}
+.gsc-tabHeader.gsc-tabhInactive {
+border-color: #CCCCCC;
+background-color: #FFFFFF;
+}
+.gsc-tabHeader.gsc-tabhActive {
+border-color: #CCCCCC;
+border-bottom-color: #FFFFFF;
+background-color: #FFFFFF;
+}
+.gsc-tabsArea {
+border-color: #CCCCCC;
+}
+.gsc-webResult.gsc-result,
+.gsc-results .gsc-imageResult {
+border-color: #FFFFFF;
+background-color: #FFFFFF;
+}
+.gsc-webResult.gsc-result:hover,
+.gsc-imageResult:hover {
+border-color: #FFFFFF;
+background-color: #FFFFFF;
+}
+.gs-webResult.gs-result a.gs-title:link,
+.gs-webResult.gs-result a.gs-title:link b,
+.gs-imageResult a.gs-title:link,
+.gs-imageResult a.gs-title:link b {
+color: #1155CC;
+}
+.gs-webResult.gs-result a.gs-title:visited,
+.gs-webResult.gs-result a.gs-title:visited b,
+.gs-imageResult a.gs-title:visited,
+.gs-imageResult a.gs-title:visited b {
+color: #1155CC;
+}
+.gs-webResult.gs-result a.gs-title:hover,
+.gs-webResult.gs-result a.gs-title:hover b,
+.gs-imageResult a.gs-title:hover,
+.gs-imageResult a.gs-title:hover b {
+color: #1155CC;
+}
+.gs-webResult.gs-result a.gs-title:active,
+.gs-webResult.gs-result a.gs-title:active b,
+.gs-imageResult a.gs-title:active,
+.gs-imageResult a.gs-title:active b {
+color: #1155CC;
+}
+.gsc-cursor-page {
+color: #1155CC;
+}
+a.gsc-trailing-more-results:link {
+color: #1155CC;
+}
+.gs-webResult .gs-snippet,
+.gs-imageResult .gs-snippet,
+.gs-fileFormatType {
+color: #333333;
+}
+.gs-webResult div.gs-visibleUrl,
+.gs-imageResult div.gs-visibleUrl {
+color: #009933;
+}
+.gs-webResult div.gs-visibleUrl-short {
+color: #009933;
+}
+.gs-webResult div.gs-visibleUrl-short {
+display: none;
+}
+.gs-webResult div.gs-visibleUrl-long {
+display: block;
+}
+.gs-promotion div.gs-visibleUrl-short {
+display: none;
+}
+.gs-promotion div.gs-visibleUrl-long {
+display: block;
+}
+.gsc-cursor-box {
+border-color: #FFFFFF;
+}
+.gsc-results .gsc-cursor-box .gsc-cursor-page {
+border-color: #CCCCCC;
+background-color: #FFFFFF;
+color: #1155CC;
+}
+.gsc-results .gsc-cursor-box .gsc-cursor-current-page {
+border-color: #CCCCCC;
+background-color: #FFFFFF;
+color: #1155CC;
+}
+.gsc-webResult.gsc-result.gsc-promotion {
+border-color: #F6F6F6;
+background-color: #F6F6F6;
+}
+.gsc-completion-title {
+color: #1155CC;
+}
+.gsc-completion-snippet {
+color: #333333;
+}
+.gs-promotion a.gs-title:link,
+.gs-promotion a.gs-title:link *,
+.gs-promotion .gs-snippet a:link {
+color: #1155CC;
+}
+.gs-promotion a.gs-title:visited,
+.gs-promotion a.gs-title:visited *,
+.gs-promotion .gs-snippet a:visited {
+color: #1155CC;
+}
+.gs-promotion a.gs-title:hover,
+.gs-promotion a.gs-title:hover *,
+.gs-promotion .gs-snippet a:hover {
+color: #1155CC;
+}
+.gs-promotion a.gs-title:active,
+.gs-promotion a.gs-title:active *,
+.gs-promotion .gs-snippet a:active {
+color: #1155CC;
+}
+.gs-promotion .gs-snippet,
+.gs-promotion .gs-title .gs-promotion-title-right,
+.gs-promotion .gs-title .gs-promotion-title-right * {
+color: #333333;
+}
+.gs-promotion .gs-visibleUrl,
+.gs-promotion .gs-visibleUrl-short {
+color: #009933;
+}
+.gsc-input input.gsc-input {
+background: none repeat scroll 0% 0% white !important;
+}
+</style></head>
+  <body>
+<div id="top-right">
+        <div class="user-right">
+                <ul id="header-menu-bar" class="ajs-menu-bar">
+                <li class="normal"><a target="_blank" href="http://groups.google.com/group/mongodb-user">Forums</a></li>
+                <li class="normal"><a target="_blank" href="http://blog.mongodb.org/">Blog</a></li>
+                <li class="normal"><a href="http://www.mongodb.org/downloads">Download</a></li>
+                <li class="normal"><a href="http://docs.mongodb.org/ecosystem/drivers/">Drivers</a></li>
+                <li class="normal"><a href="http://www.10gen.com/events">Events</a></li>
+                <li class="normal last"><a class="last" href="http://docs.mongodb.org/manual/meta/translation">Translations</a></li>
+                </ul>
+        </div>
+</div>
+<div id="header-db" class="spread">
+        <div class="split">
+                <div id="logo">
+                        <div><a href="http://docs.mongodb.org/manual/"><img class="logo" src="$skip%20%28aggregation%29%20%E2%80%94%20MongoDB%20Manual_files/logo-mongodb.png" alt="MongoDB Logo"></a></div>
+                </div>
+        </div>
+
+<div class="search-db"><gcse:searchbox></gcse:searchbox></div>
+<div id="etp">
+<ul>
+<li><a href="https://github.com/mongodb/docs/blob/master/source/reference/aggregation/skip.txt" target="_blank" title="Edit reference/aggregation/skip.txt on github">Edit this Page</a></li>
+<li><a href="http://github.com/mongodb/docs" target="_blank" title="Fork the documentation on GitHub and contribute.">GitHub</a></li>
+<li><a href="https://jira.mongodb.org/secure/CreateIssueDetails%21init.jspa?pid=10380&amp;issuetype=4&amp;priority=4&amp;summary=Comment+on%3a+%22reference/aggregation/skip%2Etxt%22" target="_blank" title="Report a problem with reference/aggregation/skip.txt on Jira">Report a problem</a></li>
+</ul>
+</div>
+</div>  
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            <div id="cse-results"><gcse:searchresults></gcse:searchresults></div>
+            
+  <div class="section" id="skip-aggregation">
+<h1>$skip (aggregation)<a class="headerlink" href="#skip-aggregation" title="Permalink to this headline">¶</a></h1>
+<dl class="pipeline">
+<dt id="_S_skip">
+<tt class="descname">$skip</tt><a class="headerlink" href="#_S_skip" title="Permalink to this definition">¶</a></dt>
+<dd><p>Skips over the specified number of <a class="reference internal" href="http://docs.mongodb.org/manual/reference/glossary/#term-document"><em class="xref std std-term">documents</em></a>
+that pass through the <a class="reference internal" href="#_S_skip" title="$skip"><tt class="xref agg agg-pipeline docutils literal"><span class="pre">$skip</span></tt></a> in the <a class="reference internal" href="http://docs.mongodb.org/manual/reference/glossary/#term-pipeline"><em class="xref std std-term">pipeline</em></a>
+before passing all of the remaining input.</p>
+<p><a class="reference internal" href="#_S_skip" title="$skip"><tt class="xref agg agg-pipeline docutils literal"><span class="pre">$skip</span></tt></a> takes a single numeric (positive whole number)
+value as a parameter. Once the operation has skipped the specified
+number of documents, it passes all the remaining documents along the
+<a class="reference internal" href="http://docs.mongodb.org/manual/reference/glossary/#term-pipeline"><em class="xref std std-term">pipeline</em></a> without alteration. Consider the following
+example:</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="nx">db</span><span class="p">.</span><span class="nx">article</span><span class="p">.</span><span class="nx">aggregate</span><span class="p">(</span>
+    <span class="p">{</span> <span class="nx">$skip</span> <span class="o">:</span> <span class="mi">5</span> <span class="p">}</span>
+<span class="p">);</span>
+</pre></div>
+</div>
+<p>This operation skips the first 5 documents passed to it by the
+pipeline. <a class="reference internal" href="#_S_skip" title="$skip"><tt class="xref agg agg-pipeline docutils literal"><span class="pre">$skip</span></tt></a> has no effect on the content of the
+documents it passes along the pipeline.</p>
+</dd></dl>
+
+</div>
+
+
+<div id="btnv">
+<ul id="btnvl">
+<li id="btnvpr"><a href="http://docs.mongodb.org/manual/reference/aggregation/second/" title="Previous Section: $second (aggregation)">&lt; &nbsp; $second (aggregation)</a></li>
+<li id="btnvup"><a href="http://docs.mongodb.org/manual/reference/" title="Parent Section: Reference">/\&nbsp; Reference</a></li>
+<li id="btnvnx"><a href="http://docs.mongodb.org/manual/reference/aggregation/sort/" title="Next Section: $sort (aggregation)">$sort (aggregation) &nbsp;&gt;</a></li>
+</ul>
+</div>
+</div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper"><h3><a href="http://docs.mongodb.org/manual/contents/">MongoDB Manual</a>
+
+<small><a href="http://docs.mongodb.org/manual/genindex/">(Index)</a></small>
+
+</h3>
+
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="http://docs.mongodb.org/manual/installation/">Installing MongoDB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://docs.mongodb.org/manual/administration/">Administration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://docs.mongodb.org/manual/security/">Security</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://docs.mongodb.org/manual/crud/">Core MongoDB Operations (CRUD)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://docs.mongodb.org/manual/aggregation/">Aggregation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://docs.mongodb.org/manual/indexes/">Indexes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://docs.mongodb.org/manual/replication/">Replication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://docs.mongodb.org/manual/sharding/">Sharding</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://docs.mongodb.org/manual/applications/">Application Development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://docs.mongodb.org/manual/mongo/">Using the <tt class="docutils literal"><span class="pre">mongo</span></tt> Shell</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://docs.mongodb.org/manual/use-cases/">Use Cases</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://docs.mongodb.org/manual/tutorial/">MongoDB Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://docs.mongodb.org/manual/faq/">Frequently Asked Questions</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="http://docs.mongodb.org/manual/reference/">Reference</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="http://docs.mongodb.org/manual/reference/#mongodb-interface">MongoDB Interface</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="http://docs.mongodb.org/manual/reference/#id1">Reference</a><ul class="current">
+<li class="toctree-l4 current"><a class="reference internal" href="http://docs.mongodb.org/manual/reference/operator/">Query, Update, Projection, and Aggregation Operators</a><ul class="current">
+<li class="toctree-l5"><a class="reference internal" href="http://docs.mongodb.org/manual/reference/operator/addToSet/">$addToSet</a></li>
+<li class="toctree-l5"><a class="reference internal" href="http://docs.mongodb.org/manual/reference/operator/all/">$all</a></li>
+<li class="toctree-l5"><a class="reference internal" href="http://docs.mongodb.org/manual/reference/operator/and/">$and</a></li>
+<li class="toctree-l5"><a class="reference internal" href="http://docs.mongodb.org/manual/reference/operator/bit/">$bit</a></li>
+<li class="toctree-l5"><a class="reference internal" href="http://docs.mongodb.org/manual/reference/operator/box/">$box</a></li>
+<li class="toctree-l5"><a class="reference internal" href="http://docs.mongodb.org/manual/reference/operator/center/">$center</a></li>
+<li class="toctree-l5"><a class="reference internal" href="http://docs.mongodb.org/manual/reference/operator/centerSphere/">$centerSphere</a></li>
+<li class="toctree-l5"><a class="reference internal" href="http://docs.mongodb.org/manual/reference/operator/comment/">$comment</a></li>
+<li class="toctree-l5"><a class="reference internal" href="http://docs.mongodb.org/manual/reference/operator/each/">$each</a></li>
+<li class="toctree-l5"><a class="reference internal" href="http://docs.mongodb.org/manual/reference/operator/elemMatch/">$elemMatch (query)</a></li>
+<li class="toctree-l5"><a class="reference internal" href="http://docs.mongodb.org/manual/reference/operator/exists/">$exists</a></li>
+<li class="toctree-l5"><a class="reference internal" href="http://docs.mongodb.org/manual/reference/operator/explain/">$explain</a></li>
+<li class="toctree-l5"><a class="reference internal" href="http://docs.mongodb.org/manual/reference/operator/gt/">$gt</a></li>
+<li class="toctree-l5"><a class="reference internal" href="http://docs.mongodb.org/manual/reference/operator/gte/">$gte</a></li>
+<li class="toctree-l5"><a class="reference internal" href="http://docs.mongodb.org/manual/reference/operator/hint/">$hint</a></li>
+<li class="toctree-l5"><a class="reference internal" href="http://docs.mongodb.org/manual/reference/operator/in/">$in</a></li>
+<li class="toctree-l5"><a class="reference internal" href="http://docs.mongodb.org/manual/reference/operator/inc/">$inc</a></li>
+<li class="toctree-l5"><a class="reference internal" href="http://docs.mongodb.org/manual/reference/operator/isolated/">$isolated</a></li>
+<li class="toctree-l5"><a class="reference internal" href="http://docs.mongodb.org/manual/reference/operator/lt/">$lt</a></li>
+<li class="toctree-l5"><a class="reference internal" href="http://docs.mongodb.org/manual/reference/operator/lte/">$lte</a></li>
+<li class="toctree-l5"><a class="reference internal" href="http://docs.mongodb.org/manual/reference/operator/max/">$max</a></li>
+<li class="toctree-l5"><a class="reference internal" href="http://docs.mongodb.org/manual/reference/operator/maxDistance/">$maxDistance</a></li>
+<li class="toctree-l5"><a class="reference internal" href="http://docs.mongodb.org/manual/reference/operator/maxScan/">$maxScan</a></li>
+<li class="toctree-l5"><a class="reference internal" href="http://docs.mongodb.org/manual/reference/operator/min/">$min</a></li>
+<li class="toctree-l5"><a class="reference internal" href="http://docs.mongodb.org/manual/reference/operator/mod/">$mod</a></li>
+<li class="toctree-l5"><a class="reference internal" href="http://docs.mongodb.org/manual/reference/operator/natural/">$natural</a></li>
+<li class="toctree-l5"><a class="reference internal" href="http://docs.mongodb.org/manual/reference/operator/ne/">$ne</a></li>
+<li class="toctree-l5"><a class="reference internal" href="http://docs.mongodb.org/manual/reference/operator/near/">$near</a></li>
+<li class="toctree-l5"><a class="reference internal" href="http://docs.mongodb.org/manual/reference/operator/nearSphere/">$nearSphere</a></li>
+<li class="toctree-l5"><a class="reference internal" href="http://docs.mongodb.org/manual/reference/operator/nin/">$nin</a></li>
+<li class="toctree-l5"><a class="reference internal" href="http://docs.mongodb.org/manual/reference/operator/nor/">$nor</a></li>
+<li class="toctree-l5"><a class="reference internal" href="http://docs.mongodb.org/manual/reference/operator/not/">$not</a></li>
+<li class="toctree-l5"><a class="reference internal" href="http://docs.mongodb.org/manual/reference/operator/or/">$or</a></li>
+<li class="toctree-l5"><a class="reference internal" href="http://docs.mongodb.org/manual/reference/operator/orderby/">$orderby</a></li>
+<li class="toctree-l5"><a class="reference internal" href="http://docs.mongodb.org/manual/reference/operator/polygon/">$polygon</a></li>
+<li class="toctree-l5"><a class="reference internal" href="http://docs.mongodb.org/manual/reference/operator/pop/">$pop</a></li>
+<li class="toctree-l5"><a class="reference internal" href="http://docs.mongodb.org/manual/reference/operator/positional/">$ (query)</a></li>
+<li class="toctree-l5"><a class="reference internal" href="http://docs.mongodb.org/manual/reference/operator/pull/">$pull</a></li>
+<li class="toctree-l5"><a class="reference internal" href="http://docs.mongodb.org/manual/reference/operator/pullAll/">$pullAll</a></li>
+<li class="toctree-l5"><a class="reference internal" href="http://docs.mongodb.org/manual/reference/operator/push/">$push</a></li>
+<li class="toctree-l5"><a class="reference internal" href="http://docs.mongodb.org/manual/reference/operator/pushAll/">$pushAll</a></li>
+<li class="toctree-l5"><a class="reference internal" href="http://docs.mongodb.org/manual/reference/operator/query/">$query</a></li>
+<li class="toctree-l5"><a class="reference internal" href="http://docs.mongodb.org/manual/reference/operator/regex/">$regex</a></li>
+<li class="toctree-l5"><a class="reference internal" href="http://docs.mongodb.org/manual/reference/operator/rename/">$rename</a></li>
+<li class="toctree-l5"><a class="reference internal" href="http://docs.mongodb.org/manual/reference/operator/returnKey/">$returnKey</a></li>
+<li class="toctree-l5"><a class="reference internal" href="http://docs.mongodb.org/manual/reference/operator/set/">$set</a></li>
+<li class="toctree-l5"><a class="reference internal" href="http://docs.mongodb.org/manual/reference/operator/showDiskLoc/">$showDiskLoc</a></li>
+<li class="toctree-l5"><a class="reference internal" href="http://docs.mongodb.org/manual/reference/operator/size/">$size</a></li>
+<li class="toctree-l5"><a class="reference internal" href="http://docs.mongodb.org/manual/reference/operator/snapshot/">$snapshot</a></li>
+<li class="toctree-l5"><a class="reference internal" href="http://docs.mongodb.org/manual/reference/operator/type/">$type</a></li>
+<li class="toctree-l5"><a class="reference internal" href="http://docs.mongodb.org/manual/reference/operator/uniqueDocs/">$uniqueDocs</a></li>
+<li class="toctree-l5"><a class="reference internal" href="http://docs.mongodb.org/manual/reference/operator/unset/">$unset</a></li>
+<li class="toctree-l5"><a class="reference internal" href="http://docs.mongodb.org/manual/reference/operator/where/">$where</a></li>
+<li class="toctree-l5"><a class="reference internal" href="http://docs.mongodb.org/manual/reference/operator/within/">$within</a></li>
+<li class="toctree-l5"><a class="reference internal" href="http://docs.mongodb.org/manual/reference/projection/elemMatch/">$elemMatch (projection)</a></li>
+<li class="toctree-l5"><a class="reference internal" href="http://docs.mongodb.org/manual/reference/projection/positional/">$ (projection)</a></li>
+<li class="toctree-l5"><a class="reference internal" href="http://docs.mongodb.org/manual/reference/projection/slice/">$slice (projection)</a></li>
+<li class="toctree-l5"><a class="reference internal" href="http://docs.mongodb.org/manual/reference/aggregation/add/">$add (aggregation)</a></li>
+<li class="toctree-l5"><a class="reference internal" href="http://docs.mongodb.org/manual/reference/aggregation/addToSet/">$addToSet (aggregation)</a></li>
+<li class="toctree-l5"><a class="reference internal" href="http://docs.mongodb.org/manual/reference/aggregation/and/">$and (aggregation)</a></li>
+<li class="toctree-l5"><a class="reference internal" href="http://docs.mongodb.org/manual/reference/aggregation/avg/">$avg (aggregation)</a></li>
+<li class="toctree-l5"><a class="reference internal" href="http://docs.mongodb.org/manual/reference/aggregation/cmp/">$cmp (aggregation)</a></li>
+<li class="toctree-l5"><a class="reference internal" href="http://docs.mongodb.org/manual/reference/aggregation/cond/">$cond (aggregation)</a></li>
+<li class="toctree-l5"><a class="reference internal" href="http://docs.mongodb.org/manual/reference/aggregation/dayOfMonth/">$dayOfMonth (aggregation)</a></li>
+<li class="toctree-l5"><a class="reference internal" href="http://docs.mongodb.org/manual/reference/aggregation/dayOfWeek/">$dayOfWeek (aggregation)</a></li>
+<li class="toctree-l5"><a class="reference internal" href="http://docs.mongodb.org/manual/reference/aggregation/dayOfYear/">$dayOfYear (aggregation)</a></li>
+<li class="toctree-l5"><a class="reference internal" href="http://docs.mongodb.org/manual/reference/aggregation/divide/">$divide (aggregation)</a></li>
+<li class="toctree-l5"><a class="reference internal" href="http://docs.mongodb.org/manual/reference/aggregation/eq/">$eq (aggregation)</a></li>
+<li class="toctree-l5"><a class="reference internal" href="http://docs.mongodb.org/manual/reference/aggregation/first/">$first (aggregation)</a></li>
+<li class="toctree-l5"><a class="reference internal" href="http://docs.mongodb.org/manual/reference/aggregation/group/">$group (aggregation)</a></li>
+<li class="toctree-l5"><a class="reference internal" href="http://docs.mongodb.org/manual/reference/aggregation/gt/">$gt (aggregation)</a></li>
+<li class="toctree-l5"><a class="reference internal" href="http://docs.mongodb.org/manual/reference/aggregation/gte/">$gte (aggregation)</a></li>
+<li class="toctree-l5"><a class="reference internal" href="http://docs.mongodb.org/manual/reference/aggregation/hour/">$hour (aggregation)</a></li>
+<li class="toctree-l5"><a class="reference internal" href="http://docs.mongodb.org/manual/reference/aggregation/ifNull/">$ifNull (aggregation)</a></li>
+<li class="toctree-l5"><a class="reference internal" href="http://docs.mongodb.org/manual/reference/aggregation/last/">$last (aggregation)</a></li>
+<li class="toctree-l5"><a class="reference internal" href="http://docs.mongodb.org/manual/reference/aggregation/limit/">$limit (aggregation)</a></li>
+<li class="toctree-l5"></li></ul></li></ul></li></ul></li></ul></li></ul></div></div></div></body></html>

@@ -1,0 +1,173 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head>
+    <title>db.collection.save() — MongoDB Manual</title>
+
+    <link rel="shortcut icon" href="http://media.mongodb.org/favicon.ico">
+    <meta name="robots" content="index">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <link rel="canonical" href="http://docs.mongodb.org/manual/reference/method/db.collection.save">
+
+    
+    
+    <link rel="stylesheet" href="db.collection.save%28%29%20%E2%80%94%20MongoDB%20Manual_files/mongodb-docs.css" type="text/css">
+    <link rel="stylesheet" href="db.collection.save%28%29%20%E2%80%94%20MongoDB%20Manual_files/pygments.css" type="text/css">
+      
+    <script src="db.collection.save%28%29%20%E2%80%94%20MongoDB%20Manual_files/cse.js" async="" type="text/javascript"></script><script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     '2.2.3',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '',
+        HAS_SOURCE:  false
+      };
+    </script>
+    <script type="text/javascript" src="db.collection.save%28%29%20%E2%80%94%20MongoDB%20Manual_files/jquery.js"></script>
+    <script type="text/javascript" src="db.collection.save%28%29%20%E2%80%94%20MongoDB%20Manual_files/underscore.js"></script>
+    <script type="text/javascript" src="db.collection.save%28%29%20%E2%80%94%20MongoDB%20Manual_files/doctools.js"></script>
+      <link rel="search" type="application/opensearchdescription+xml" href="http://docs.mongodb.org/osd.xml" title="MongoDB Help">
+<link rel="author" title="About these documents" href="http://docs.mongodb.org/manual/about/">
+<link rel="top" title="MongoDB Manual" href="http://docs.mongodb.org/manual/">
+<link rel="up" title="JavaScript Methods" href="http://docs.mongodb.org/manual/reference/method/">
+<link rel="next" title="db.collection.stats()" href="http://docs.mongodb.org/manual/reference/method/db.collection.stats/">
+<link rel="prev" title="db.collection.renameCollection()" href="http://docs.mongodb.org/manual/reference/method/db.collection.renameCollection/">
+<!-- Put the following javascript before the closing </head> tag. -->
+<script>
+  (function() {
+    var cx = '017213726194841070573:WMX6838984';
+    var gcse = document.createElement('script'); gcse.type = 'text/javascript'; gcse.async = true;
+    gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+        '//www.google.com/cse/cse.js?cx=' + cx;
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(gcse, s);
+  })();
+</script>
+  <script type="text/javascript" src="db.collection.save%28%29%20%E2%80%94%20MongoDB%20Manual_files/jsapi"></script><link rel="stylesheet" href="db.collection.save%28%29%20%E2%80%94%20MongoDB%20Manual_files/defaulten.css" type="text/css"><link rel="stylesheet" href="db.collection.save%28%29%20%E2%80%94%20MongoDB%20Manual_files/default.css" type="text/css"><script src="db.collection.save%28%29%20%E2%80%94%20MongoDB%20Manual_files/defaulten.js" type="text/javascript"></script><script src="db.collection.save%28%29%20%E2%80%94%20MongoDB%20Manual_files/search.js" type="text/javascript"></script></head>
+  <body>
+<div id="top-right">
+        <div class="user-right">
+                <ul id="header-menu-bar" class="ajs-menu-bar">
+                <li class="normal"><a target="_blank" href="http://groups.google.com/group/mongodb-user">Forums</a></li>
+                <li class="normal"><a target="_blank" href="http://blog.mongodb.org/">Blog</a></li>
+                <li class="normal"><a href="http://www.mongodb.org/downloads">Download</a></li>
+                <li class="normal"><a href="http://docs.mongodb.org/ecosystem/drivers/">Drivers</a></li>
+                <li class="normal"><a href="http://www.10gen.com/events">Events</a></li>
+                <li class="normal last"><a class="last" href="http://docs.mongodb.org/manual/meta/translation">Translations</a></li>
+                </ul>
+        </div>
+</div>
+<div id="header-db" class="spread">
+        <div class="split">
+                <div id="logo">
+                        <div><a href="http://docs.mongodb.org/manual/"><img class="logo" src="db.collection.save%28%29%20%E2%80%94%20MongoDB%20Manual_files/logo-mongodb.png" alt="MongoDB Logo"></a></div>
+                </div>
+        </div>
+
+<div class="search-db"><gcse:searchbox></gcse:searchbox></div>
+<div id="etp">
+<ul>
+<li><a href="https://github.com/mongodb/docs/blob/master/source/reference/method/db.collection.save.txt" target="_blank" title="Edit reference/method/db.collection.save.txt on github">Edit this Page</a></li>
+<li><a href="http://github.com/mongodb/docs" target="_blank" title="Fork the documentation on GitHub and contribute.">GitHub</a></li>
+<li><a href="https://jira.mongodb.org/secure/CreateIssueDetails%21init.jspa?pid=10380&amp;issuetype=4&amp;priority=4&amp;summary=Comment+on%3a+%22reference/method/db.collection.save%2Etxt%22" target="_blank" title="Report a problem with reference/method/db.collection.save.txt on Jira">Report a problem</a></li>
+</ul>
+</div>
+</div>  
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            <div id="cse-results"><gcse:searchresults></gcse:searchresults></div>
+            
+  <div class="section" id="db-collection-save">
+<h1>db.collection.save()<a class="headerlink" href="#db-collection-save" title="Permalink to this headline">¶</a></h1>
+<dl class="method">
+<dt id="db.collection.save">
+<tt class="descclassname">db.collection.</tt><tt class="descname">save</tt><big>(</big><em>document</em><big>)</big><a class="headerlink" href="#db.collection.save" title="Permalink to this definition">¶</a></dt>
+<dd><p>The <a class="reference internal" href="#db.collection.save" title="db.collection.save"><tt class="xref mongodb mongodb-method docutils literal"><span class="pre">save()</span></tt></a> method updates an
+existing document or inserts a document depending on the parameter.</p>
+<p>The <a class="reference internal" href="#db.collection.save" title="db.collection.save"><tt class="xref mongodb mongodb-method docutils literal"><span class="pre">save()</span></tt></a> method takes the following
+parameter:</p>
+<table class="docutils field-list" frame="void" rules="none">
+<colgroup><col class="field-name">
+<col class="field-body">
+</colgroup><tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>document</strong> – <p>Specify a document to save to the collection.</p>
+<p><strong>If</strong> the document does not contain an <a class="reference internal" href="http://docs.mongodb.org/manual/reference/glossary/#term-id"><em class="xref std std-term">_id</em></a> field,
+then the <a class="reference internal" href="#db.collection.save" title="db.collection.save"><tt class="xref mongodb mongodb-method docutils literal"><span class="pre">save()</span></tt></a> method performs
+an insert with the specified fields in the document as well
+as an <tt class="docutils literal"><span class="pre">_id</span></tt> field with a unique <a class="reference internal" href="http://docs.mongodb.org/manual/reference/glossary/#term-objectid"><em class="xref std std-term">objectid</em></a> value.</p>
+<p><strong>If</strong> the document contains an <tt class="docutils literal"><span class="pre">_id</span></tt> field, then the
+<a class="reference internal" href="#db.collection.save" title="db.collection.save"><tt class="xref mongodb mongodb-method docutils literal"><span class="pre">save()</span></tt></a> method performs an
+<tt class="docutils literal"><span class="pre">upsert</span></tt> querying the collection on the <tt class="docutils literal"><span class="pre">_id</span></tt> field:</p>
+<ul>
+<li>If a document does not exist with the specified <tt class="docutils literal"><span class="pre">_id</span></tt> value,
+the <a class="reference internal" href="#db.collection.save" title="db.collection.save"><tt class="xref mongodb mongodb-method docutils literal"><span class="pre">save()</span></tt></a> method performs an
+insert with the specified fields in the document.</li>
+<li>If a document exists with the specified <tt class="docutils literal"><span class="pre">_id</span></tt> value, the
+<a class="reference internal" href="#db.collection.save" title="db.collection.save"><tt class="xref mongodb mongodb-method docutils literal"><span class="pre">save()</span></tt></a> method performs an
+update, replacing all field in the existing record with the
+fields from the document.</li>
+</ul>
+</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Consider the following examples of the <a class="reference internal" href="#db.collection.save" title="db.collection.save"><tt class="xref mongodb mongodb-method docutils literal"><span class="pre">save()</span></tt></a> method:</p>
+<ul>
+<li><p class="first">Pass to the <a class="reference internal" href="#db.collection.save" title="db.collection.save"><tt class="xref mongodb mongodb-method docutils literal"><span class="pre">save()</span></tt></a> method a
+document without an <tt class="docutils literal"><span class="pre">_id</span></tt> field, so that to insert the document into the
+collection and have MongoDB generate the unique <tt class="docutils literal"><span class="pre">_id</span></tt> as in the
+following:</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="nx">db</span><span class="p">.</span><span class="nx">products</span><span class="p">.</span><span class="nx">save</span><span class="p">(</span> <span class="p">{</span> <span class="nx">item</span><span class="o">:</span> <span class="s2">"book"</span><span class="p">,</span> <span class="nx">qty</span><span class="o">:</span> <span class="mi">40</span> <span class="p">}</span> <span class="p">)</span>
+</pre></div>
+</div>
+<p>This operation inserts a new document into the <tt class="docutils literal"><span class="pre">products</span></tt>
+collection with the <tt class="docutils literal"><span class="pre">item</span></tt> field set to <tt class="docutils literal"><span class="pre">book</span></tt>, the <tt class="docutils literal"><span class="pre">qty</span></tt>
+field set to <tt class="docutils literal"><span class="pre">40</span></tt>, and the <tt class="docutils literal"><span class="pre">_id</span></tt> field set to a unique
+<tt class="docutils literal"><span class="pre">ObjectId</span></tt>:</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="p">{</span> <span class="s2">"_id"</span> <span class="o">:</span> <span class="nx">ObjectId</span><span class="p">(</span><span class="s2">"50691737d386d8fadbd6b01d"</span><span class="p">),</span> <span class="s2">"item"</span> <span class="o">:</span> <span class="s2">"book"</span><span class="p">,</span> <span class="s2">"qty"</span> <span class="o">:</span> <span class="mi">40</span> <span class="p">}</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Most MongoDB driver clients will include the <tt class="docutils literal"><span class="pre">_id</span></tt> field and
+generate an <tt class="docutils literal"><span class="pre">ObjectId</span></tt> before sending the insert operation to
+MongoDB; however, if the client sends a document without an <tt class="docutils literal"><span class="pre">_id</span></tt>
+field, the <a class="reference internal" href="http://docs.mongodb.org/manual/reference/mongod/#mongod" title="mongod"><tt class="xref mongodb mongodb-program docutils literal"><span class="pre">mongod</span></tt></a> will add the <tt class="docutils literal"><span class="pre">_id</span></tt> field and generate
+the <tt class="docutils literal"><span class="pre">ObjectId</span></tt>.</p>
+</div>
+</li>
+<li><p class="first">Pass to the <a class="reference internal" href="#db.collection.save" title="db.collection.save"><tt class="xref mongodb mongodb-method docutils literal"><span class="pre">save()</span></tt></a> method a
+document with an <tt class="docutils literal"><span class="pre">_id</span></tt> field that holds a value that does not
+exist in the collection to insert the document with that value in
+the <tt class="docutils literal"><span class="pre">_id</span></tt> value into the collection, as in the following:</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="nx">db</span><span class="p">.</span><span class="nx">products</span><span class="p">.</span><span class="nx">save</span><span class="p">(</span> <span class="p">{</span> <span class="nx">_id</span><span class="o">:</span> <span class="mi">100</span><span class="p">,</span> <span class="nx">item</span><span class="o">:</span> <span class="s2">"water"</span><span class="p">,</span> <span class="nx">qty</span><span class="o">:</span> <span class="mi">30</span> <span class="p">}</span> <span class="p">)</span>
+</pre></div>
+</div>
+<p>This operation inserts a new document into the <tt class="docutils literal"><span class="pre">products</span></tt>
+collection with the <tt class="docutils literal"><span class="pre">_id</span></tt> field set to <tt class="docutils literal"><span class="pre">100</span></tt>, the <tt class="docutils literal"><span class="pre">item</span></tt>
+field set to <tt class="docutils literal"><span class="pre">water</span></tt>, and the field <tt class="docutils literal"><span class="pre">qty</span></tt> set to <tt class="docutils literal"><span class="pre">30</span></tt>:</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="p">{</span> <span class="s2">"_id"</span> <span class="o">:</span> <span class="mi">100</span><span class="p">,</span> <span class="s2">"item"</span> <span class="o">:</span> <span class="s2">"water"</span><span class="p">,</span> <span class="s2">"qty"</span> <span class="o">:</span> <span class="mi">30</span> <span class="p">}</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Most MongoDB driver clients will include the <tt class="docutils literal"><span class="pre">_id</span></tt> field and
+generate an <tt class="docutils literal"><span class="pre">ObjectId</span></tt> before sending the insert operation to
+MongoDB; however, if the client sends a document without an <tt class="docutils literal"><span class="pre">_id</span></tt>
+field, the <a class="reference internal" href="http://docs.mongodb.org/manual/reference/mongod/#mongod" title="mongod"><tt class="xref mongodb mongodb-program docutils literal"><span class="pre">mongod</span></tt></a> will add the <tt class="docutils literal"><span class="pre">_id</span></tt> field and generate
+the <tt class="docutils literal"><span class="pre">ObjectId</span></tt>.</p>
+</div>
+</li>
+<li><p class="first">Pass to the <a class="reference internal" href="#db.collection.save" title="db.collection.save"><tt class="xref mongodb mongodb-method docutils literal"><span class="pre">save()</span></tt></a> method a
+document with the <tt class="docutils literal"><span class="pre">_id</span></tt> field set to a value in the
+<tt class="docutils literal"><span class="pre">collection</span></tt> to replace all fields and values of the matching
+document with the new fields and values, as in the following:</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="nx">db</span><span class="p">.</span><span class="nx">products</span><span class="p">.</span><span class="nx">save</span><span class="p">(</span> <span class="p">{</span> <span class="nx">_id</span><span class="o">:</span><span class="mi">100</span><span class="p">,</span> <span class="nx">item</span><span class="o">:</span><span class="s2">"juice"</span> <span class="p">}</span> <span class="p">)</span>
+</pre></div>
+</div>
+<p>This operation replaces the existing document with a value of
+<tt class="docutils literal"><span class="pre">100</span></tt> in the <tt class="docutils literal"><span class="pre">_id</span></tt> field. The updated document will resemble
+the following:</p>
+<div class="highlight-javascript"></div></li></ul></dd></dl></div></div></div></div></div></body></html>

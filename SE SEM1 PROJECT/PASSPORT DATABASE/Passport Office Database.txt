@@ -1,0 +1,1326 @@
+-------------------------------------------------------------------------------
+                        PASSPORT OFFICE DATABASE
+--------------------------------------------------------------------------------
+
+                          ****** MENU ******
+
+                        1.CREATE THE DATABASE
+                        2.DISPLAY THE DATABASE
+                        3.SEARCH A RECORD
+                        4.MODIFY A RECORD
+                        5.RENEW THE PASSPORT
+                        6.REISSUE THE PASSPORT
+                        7.ADD A RECORD
+                        8.DELETE A RECORD
+                        9.CHANGE STATUS OF THE RECORD
+                        10.VIEW STATUS
+                        11.EXIT
+--------------------------------------------------------------------------------
+
+
+Enter your choice :: 1
+
+--------------------------------------------------------------------------------
+
+Enter applicant's information  :
+
+
+Applicant's full name (Surname Name Father's/Husband's name):
+Shinde8 Shipra Shivaji
+
+Enter alphabets only :
+Re-enter the data :
+Shinde Shipra Shivaji
+
+Mother's name : Pratibha6
+
+Enter alphabets only :
+Re-enter the data :
+Pratibha
+
+Father's name :
+
+Re-enter the data :
+ Shivaji
+
+Residential address : Sainath,Kawadenagar,Pimple Gurav,Pune-411061
+
+Gender [1.Male 2.Female] :2
+
+Mobile no : 9689493583
+
+Date of birth (dd mm yy) : 17 06 1993
+
+Place of birth : Pune
+
+Marital status [1.Unmarried 2.Married] : 1
+
+Educational qualification : BE
+
+Occupation : NA
+
+Police Verification [1.Clear 2.Not Clear] : 1
+
+Nationality [1.Indian 2.Other] : 1
+
+Is the applicant a government employee ? (y/n) : n
+
+Has the applicant applied before ? (y/n) :n
+
+Is there an emergency  ? (y/n) :n
+
+--------------------------------------------------------------------------------
+
+Do you want to create more nodes? (y/n) : y
+
+Enter applicant's information  :
+
+
+Applicant's full name (Surname Name Father's/Husband's name):
+Sreeja Mohan
+
+Mother's name : Sujatha
+
+Father's name : Mohan
+
+Residential address : Lakshmi krupa,Samarthnagar,Pune-411027
+
+Gender [1.Male 2.Female] :2
+
+Mobile no : 997005783
+
+Mobile number should contain 10 digits only
+Re-enter the mobile number :9970057835
+
+Date of birth (dd mm yy) : 24 06 19992
+
+Invalid year
+Re-enter date (dd mm yy) : 24 06 1992
+
+Place of birth : Pune1
+
+Enter alphabets only :
+Re-enter the data :
+ Pune
+
+Marital status [1.Unmarried 2.Married] : 1
+
+Educational qualification : BE
+
+Occupation : NA
+
+Police Verification [1.Clear 2.Not Clear] : 1
+
+Nationality [1.Indian 2.Other] : 2
+
+Is the applicant a government employee ? (y/n) : n
+
+Has the applicant applied before ? (y/n) :n
+
+Is there an emergency  ? (y/n) :n
+
+--------------------------------------------------------------------------------
+
+Do you want to create more nodes? (y/n) : y
+
+Enter applicant's information  :
+
+
+Applicant's full name (Surname Name Father's/Husband's name):
+Vaidya Noopur Sudhir
+
+Mother's name : Lata
+
+Father's name : Sudhir
+
+Residential address : Well Worth,Karvenagar,Pune-411038
+
+Gender [1.Male 2.Female] :2
+
+Mobile no : 98625783478
+
+Mobile number should contain 10 digits only
+Re-enter the mobile number :9862578347
+
+Date of birth (dd mm yy) : 09 13 1992
+
+There are only 12 months
+
+Re-enter the date: 09 10 1992
+
+Place of birth : Karvenagar
+
+Marital status [1.Unmarried 2.Married] : 1
+
+Educational qualification : BE
+
+Occupation : NA
+
+Police Verification [1.Clear 2.Not Clear] : 2
+
+Nationality [1.Indian 2.Other] : 1
+
+Is the applicant a government employee ? (y/n) : n
+
+Has the applicant applied before ? (y/n) :n
+
+Is there an emergency  ? (y/n) :n
+
+--------------------------------------------------------------------------------
+
+Do you want to create more nodes? (y/n) : y
+
+Applicant's full name (Surname Name Father's/Husband's name):
+Umalkar Samruddhi Vidyasagar
+
+Mother's name : Kalpana
+
+Father's name : Vidyasagar
+
+Residential address : Empire Estate,Sinhagad road,Pune-411031
+
+Gender [1.Male 2.Female] :2
+
+Mobile no : 996594754l
+
+Enter numbers only :
+Re-enter the mobile number :9965947541
+
+Date of birth (dd mm yy) : 40 11 1992
+
+This month contains only 30 days
+Re-enter date (dd mm yy) : 04 11 1992
+
+Place of birth : Karvenagar
+
+Marital status [1.Unmarried 2.Married] : 1
+
+Educational qualification : BE
+
+Occupation : NA
+
+Police Verification [1.Clear 2.Not Clear] : 2
+
+Nationality [1.Indian 2.Other] : 2
+
+Is the applicant a government employee ? (y/n) : n
+
+Has the applicant applied before ? (y/n) :n
+
+Is there an emergency  ? (y/n) :n
+
+--------------------------------------------------------------------
+
+Do you want to create more nodes? (y/n) : y
+
+Enter applicant's information  :
+
+
+
+
+Applicant's full name (Surname Name Father's/Husband's name):
+Simi Mohan
+
+Mother's name : Sujatha
+
+Father's name : Mohan
+
+Residential address : Lakshmi Krupa,Samarthnagar,Pune-411027
+
+Gender [1.Male 2.Female] :2
+
+Mobile no : 9975776537
+
+Date of birth (dd mm yy) : 16 11 1986
+
+Place of birth : Pune
+
+Marital status [1.Unmarried 2.Married] : 1
+
+Educational qualification : BE
+
+Occupation : IT Engineer
+
+Police Verification [1.Clear 2.Not Clear] : 1
+
+Nationality [1.Indian 2.Other] : 1
+
+Is the applicant a government employee ? (y/n) : n
+
+Has the applicant applied before ? (y/n) :n
+
+Is there an emergency  ? (y/n) :y
+
+--------------------------------------------------------------------
+
+Do you want to create more nodes? (y/n) : y
+
+Enter applicant's information  :
+
+Applicant's full name (Surname Name Father's/Husband's name):
+Shinde Shweta Shivaji
+
+Mother's name : Pratibha
+
+Father's name : Shivaji
+
+Residential address : Sainath,Kawadenagar,Pimple Gurav,Pune-411061
+
+Gender [1.Male 2.Female] :2
+
+Mobile no : 9689493582
+
+Date of birth (dd mm yy) : 24 09 1991
+
+Place of birth : Pune
+
+Marital status [1.Unmarried 2.Married] : 1
+
+Educational qualification : BE
+
+Occupation : IT Engineer
+
+Police Verification [1.Clear 2.Not Clear] : 1
+
+Nationality [1.Indian 2.Other] : 1
+
+Is the applicant a government employee ? (y/n) : n
+
+Has the applicant applied before ? (y/n) :n
+
+Is there an emergency  ? (y/n) :y
+
+--------------------------------------------------------------------
+
+Do you want to create more nodes? (y/n) : y
+
+Enter applicant's information  :
+
+
+Applicant's full name (Surname Name Father's/Husband's name):
+Kalukatil Girish Sasi
+
+Mother's name : Lalithamma
+
+Father's name : Sasi
+
+Residential address : Sai Heritage,Sangamnagar,Pune-411026
+
+Gender [1.Male 2.Female] :1
+
+Mobile no : 9962341575
+
+Date of birth (dd mm yy) : 14 1 1989
+
+Place of birth : Kerala
+
+Marital status [1.Unmarried 2.Married] : 1
+
+Educational qualification : Diploma
+
+Occupation : Service
+
+Police Verification [1.Clear 2.Not Clear] : 1
+
+Nationality [1.Indian 2.Other] : 1
+
+Is the applicant a government employee ? (y/n) : y
+
+Has the applicant applied before ? (y/n) :n
+
+Is there an emergency  ? (y/n) :n
+
+--------------------------------------------------------------------
+
+Do you want to create more nodes? (y/n) : y
+
+Enter applicant's information  :
+
+
+Applicant's full name (Surname Name Father's/Husband's name):
+Kadam Umesh Suresh
+
+Mother's name : Sanjana
+
+Father's name : Suresh
+
+Residential address : Bhakti Complex,Jayamalanagar,Pune-411024
+
+Gender [1.Male 2.Female] :1
+
+Mobile no : 8857964126
+
+Date of birth (dd mm yy) : 12 5 1976
+
+Place of birth : Kolhapur
+
+Marital status [1.Unmarried 2.Married] : 1
+
+Educational qualification : M Com
+
+Occupation : Service
+
+Police Verification [1.Clear 2.Not Clear] : 1
+
+Nationality [1.Indian 2.Other] : 1
+
+Is the applicant a government employee ? (y/n) : y
+
+Has the applicant applied before ? (y/n) :n
+
+Is there an emergency  ? (y/n) :y
+
+--------------------------------------------------------------------
+
+Do you want to create more nodes? (y/n) : y
+
+Enter applicant's information  :
+
+
+Applicant's full name (Surname Name Father's/Husband's name):
+Acharya Rajesh Vasudevan
+
+Mother's name : Kamalamma
+
+Father's name : Vasudevan
+
+Residential address : Mayan,jayamalanagar,Pune-411024
+
+Gender [1.Male 2.Female] :1
+
+Mobile no : 9974125836
+
+Date of birth (dd mm yy) : 14 6 1975
+
+Place of birth : Kerala
+
+Marital status [1.Unmarried 2.Married] : 2
+
+Educational qualification : Architecture
+
+Occupation : Architect
+
+Police Verification [1.Clear 2.Not Clear] : 1
+
+Nationality [1.Indian 2.Other] : 1
+
+Is the applicant a government employee ? (y/n) : n
+
+Has the applicant applied before ? (y/n) :n
+
+Is there an emergency  ? (y/n) :
+
+Re-enter the choice :n
+
+--------------------------------------------------------------------
+
+Do you want to create more nodes? (y/n) : n
+
+--------------------------------------------------------------------
+Do you want to continue ?(Y/N) ::y
+
+--------------------------------------------------------------------
+-------------------------------------------------------------------------------
+                        PASSPORT OFFICE DATABASE
+--------------------------------------------------------------------------------
+
+                          ****** MENU ******
+
+                        1.CREATE THE DATABASE
+                        2.DISPLAY THE DATABASE
+                        3.SEARCH A RECORD
+                        4.MODIFY A RECORD
+                        5.RENEW THE PASSPORT
+                        6.REISSUE THE PASSPORT
+                        7.ADD A RECORD
+                        8.DELETE A RECORD
+                        9.CHANGE STATUS OF THE RECORD
+                        10.VIEW STATUS
+                        11.EXIT
+--------------------------------------------------------------------------------
+
+
+Enter your choice :: 2
+
+-------------------------------------------------------------------------------
+
+FILE NO : 1000
+-------------------------------------------------------------------------------
+
+Full name                   :  Shinde Shipra Shivaji
+
+Mother's name           :  Pratibha
+
+Father's name            :  Shivaji
+
+Residential address    :  Sainath,Kawadenagar,Pimple Gurav,pune-411061
+
+Gender                 :  Female
+
+Mobile no              :  9689493583
+
+Date of birth          :  17/6/1993
+
+Place of birth         :  Pune
+
+Marital status         :  Unmarried
+
+Nationality              :  Indian
+
+Qualification           :  BE
+
+Occupation                      :  NA
+
+Police Verification           :  Clear
+
+Government Employee    :  No
+
+Fees                                :  Rs1000
+
+Applied Before                  :  No
+
+Emergency                        :  No
+
+Passport Status                :  In process
+
+Issue Date             :  NA
+
+Expiry Date            :  NA
+
+-------------------------------------------------------------------------------
+
+FILE NO : 1001
+-------------------------------------------------------------------------------
+
+Full name              :  Sreeja Mohan
+
+Mother's name          :  Sujatha
+
+Father's name          :  Mohan
+
+Residential address    :  Lakshmi krupa,Samarthnagar,Pune-411027
+
+Gender                 :  Female
+
+Mobile no              :  9970057835
+
+Date of birth          :  24/6/1992
+
+Place of birth         :  Pune
+
+Marital status         :  Unmarried
+
+Nationality            :  Other
+
+Qualification          :  BE
+
+Occupation             :  NA
+
+Police Verification    :  Clear
+
+Government Employee    :  No
+
+Fees                   :  Rs1000
+
+Applied Before         :  No
+
+Emergency              :  No
+
+Passport Status        :  Rejected
+
+Issue Date             :  NA
+
+Expiry Date            :  NA
+-------------------------------------------------------------------------------
+
+FILE NO : 1002
+-------------------------------------------------------------------------------
+
+Full name              :  Vaidya Noopur Sudhir
+
+Mother's name          :  Lata
+
+Father's name          :  Sudhir
+
+Residential address    :  Well Worth,Karvenagar,Pune-411038
+
+Gender                 :  Female
+
+Mobile no              :  9862578347
+
+Date of birth          :  9/10/1992
+
+Place of birth         :  Karvenagar
+
+Marital status         :  Unmarried
+
+Nationality            :  Indian
+
+Qualification          :  BE
+
+Occupation             :  NA
+
+Police Verification    :  Not Clear
+
+Government Employee    :  No
+
+Fees                   :  Rs1000
+
+Applied Before         :  No
+
+Emergency              :  No
+
+Passport Status        :  Rejected
+
+Issue Date             :  NA
+
+Expiry Date            :  NA
+-------------------------------------------------------------------------------
+
+FILE NO : 1003
+-------------------------------------------------------------------------------
+
+Full name              :  Umalkar Samruddhi Vidyasagar
+
+Mother's name          :  Kalpana
+
+Father's name          :  Vidyasagar
+
+Residential address    :  Empire Estate,Sinhagad road,Pune-411031
+
+Gender                 :  Female
+
+Mobile no              :  9965947541
+
+Date of birth          :  4/11/1992
+
+Place of birth         :  Karvenagar
+
+Marital status         :  Unmarried
+
+Nationality            :  Other
+
+Qualification          :  BE
+
+Occupation             :  NA
+
+Police Verification    :  Not Clear
+
+Government Employee    :  No
+
+Fees                   :  Rs1000
+
+Applied Before         :  No
+
+Emergency              :  No
+
+Passport Status        :  Rejected
+
+Issue Date             :  NA
+
+Expiry Date            :  NA
+-------------------------------------------------------------------------------
+
+FILE NO : 1004
+-------------------------------------------------------------------------------
+
+Full name              :  Simi Mohan
+
+Mother's name          :  Sujatha
+
+Father's name          :  Mohan
+
+Residential address    :  Lakshmi Krupa,Samarthnagar,Pune-411027
+
+Gender                 :  Female
+
+Mobile no              :  9975776537
+
+Date of birth          :  16/11/1986
+
+Place of birth         :  Pune
+
+Marital status         :  Unmarried
+
+Nationality            :  Indian
+
+Qualification          :  BE
+
+Occupation             :  IT Engineer
+
+Police Verification    :  Clear
+
+Government Employee    :  No
+
+Fees                   :  Rs1000
+
+Applied Before         :  No
+
+Emergency              :  Yes
+
+Passport Status        :  In process
+
+Issue Date             :  NA
+
+Expiry Date            :  NA
+
+-------------------------------------------------------------------------------
+
+FILE NO : 1005
+-------------------------------------------------------------------------------
+
+Full name              :  Shinde Shweta Shivaji
+
+Mother's name          :  Pratibha
+
+Father's name          :  Shivaji
+
+Residential address    :  Sainath,Kawadenagar,Pimple G
+urav,Pune-411061
+
+Gender                 :  Female
+
+Mobile no              :  9689493582
+
+Date of birth          :  24/9/1991
+
+Place of birth         :  Pune
+
+Marital status         :  Unmarried
+
+Nationality            :  Indian
+
+Qualification          :  BE
+
+Occupation             :  IT Engineer
+
+Police Verification    :  Clear
+
+Government Employee    :  No
+
+Fees                   :  Rs1000
+
+Applied Before         :  No
+
+Emergency              :  Yes
+
+Passport Status        :  In process
+
+Issue Date             :  NA
+
+Expiry Date            :  NA
+-------------------------------------------------------------------------------
+
+FILE NO : 1006
+-------------------------------------------------------------------------------
+
+Full name              :  Kalukatil Girish Sasi
+
+Mother's name          :  Lalithamma
+
+Father's name          :  Sasi
+
+Residential address    :  Sai Heritage,Sangamnagar,Pune-411026
+
+Gender                 :  Male
+
+Mobile no              :  9962341575
+
+Date of birth          :  14/1/1989
+
+Place of birth         :  Kerala
+
+Marital status         :  Unmarried
+
+Nationality            :  Indian
+
+Qualification          :  Diploma
+
+Occupation             :  Service
+
+Police Verification    :  Clear
+
+Government Employee    :  Yes
+
+Fees                   :  Rs500
+
+Applied Before         :  No
+
+Emergency              :  No
+
+Passport Status        :  In process
+
+Issue Date             :  NA
+
+Expiry Date            :  NA
+-------------------------------------------------------------------------------
+
+FILE NO : 1007
+-------------------------------------------------------------------------------
+
+Full name              :  Kadam Umesh Suresh
+
+Mother's name          :  Sanjana
+
+Father's name          :  Suresh
+
+Residential address    :  Bhakti Complex,Jayamalanagar,Pune-411024
+
+Gender                 :  Male
+
+Mobile no              :  8857964126
+
+Date of birth          :  12/5/1976
+
+Place of birth         :  Kolhapur
+
+Marital status         :  Unmarried
+
+Nationality            :  Indian
+
+Qualification          :  M Com
+
+Occupation             :  Service
+
+Police Verification    :  Clear
+
+Government Employee    :  Yes
+
+Fees                   :  Rs500
+
+Applied Before         :  No
+
+Emergency              :  Yes
+
+Passport Status        :  In process
+
+Issue Date             :  NA
+
+Expiry Date            :  NA
+-------------------------------------------------------------------------------
+
+FILE NO : 1008
+-------------------------------------------------------------------------------
+
+Full name              :  Acharya Rajesh Vasudevan
+
+Mother's name          :  Kamalamma
+
+Father's name          :  Vasudevan
+
+Residential address    :  Mayan,Jayamalanagar,Pune-411024
+
+Gender                 :  Male
+
+Mobile no              :  9974125836
+
+Date of birth          :  14/6/1975
+
+Place of birth         :  Kerala
+
+Marital status         :  Married
+
+Nationality            :  Indian
+
+Qualification          :  Architecture
+
+Occupation             :  Architect
+
+Police Verification    :  Clear
+
+Government Employee    :  No
+
+Fees                   :  Rs1000
+
+Applied Before         :  No
+
+Emergency              :  No
+
+Passport Status        :  In process
+
+Issue Date             :  NA
+
+Expiry Date            :  NA
+--------------------------------------------------------------------------------
+
+
+Do you want to continue ?(Y/N) ::y
+-----------------------------------------------------------------------------
+                        PASSPORT OFFICE DATABASE
+-----------------------------------------------------------------------------
+
+                          ****** MENU ******
+
+                        1.CREATE THE DATABASE
+                        2.DISPLAY THE DATABASE
+                        3.SEARCH A RECORD
+                        4.MODIFY A RECORD
+                        5.RENEW THE PASSPORT
+                        6.REISSUE THE PASSPORT
+                        7.ADD A RECORD
+                        8.DELETE A RECORD
+                        9.CHANGE STATUS OF THE RECORD
+                        10.VIEW STATUS
+                        11.EXIT
+-----------------------------------------------------------------------------
+
+
+Enter your choice :: 3
+
+-----------------------------------------------------------------------------
+
+Enter the applicant's file number :1004
+
+Enter the applicant's name: Simi Mohan
+-----------------------------------------------------------------------------
+
+FILE NO : 1004
+-----------------------------------------------------------------------------
+
+Full name              :  Simi Mohan
+
+Mother's name          :  Sujatha
+
+Father's name          :  Mohan
+
+Residential address    :  Lakshmi Krupa,Samarthnagar,Pune-411027
+
+Gender                 :  Female
+
+Mobile no              :  9975776537
+
+Date of birth          :  16/11/1986
+
+Place of birth         :  Pune
+
+Marital status         :  Unmarried
+
+Nationality            :  Indian
+
+Qualification          :  BE
+
+Occupation             :  IT Engineer
+
+Police Verification    :  Clear
+
+Government Employee    :  No
+
+Fees                   :  Rs1000
+
+Applied Before         :  No
+
+Emergency              :  Yes
+
+Passport Status        :  In process
+
+Issue Date             :  NA
+
+Expiry Date            :  NA
+-----------------------------------------------------------------------------
+
+
+Do you want to continue ?(Y/N) ::y
+-----------------------------------------------------------------------------
+                        PASSPORT OFFICE DATABASE
+-----------------------------------------------------------------------------
+
+                          ****** MENU ******
+
+                        1.CREATE THE DATABASE
+                        2.DISPLAY THE DATABASE
+                        3.SEARCH A RECORD
+                        4.MODIFY A RECORD
+                        5.RENEW THE PASSPORT
+                        6.REISSUE THE PASSPORT
+                        7.ADD A RECORD
+                        8.DELETE A RECORD
+                        9.CHANGE STATUS OF THE RECORD
+                        10.VIEW STATUS
+                        11.EXIT
+-----------------------------------------------------------------------------
+
+
+Enter your choice :: 15
+
+-----------------------------------------------------------------------------
+
+         INVALID CHOICE
+-----------------------------------------------------------------------------
+
+
+Do you want to continue ?(Y/N) ::y
+-----------------------------------------------------------------------------
+                        PASSPORT OFFICE DATABASE
+-----------------------------------------------------------------------------
+
+                          ****** MENU ******
+
+                        1.CREATE THE DATABASE
+                        2.DISPLAY THE DATABASE
+                        3.SEARCH A RECORD
+                        4.MODIFY A RECORD
+                        5.RENEW THE PASSPORT
+                        6.REISSUE THE PASSPORT
+                        7.ADD A RECORD
+                        8.DELETE A RECORD
+                        9.CHANGE STATUS OF THE RECORD
+                        10.VIEW STATUS
+                        11.EXIT
+-----------------------------------------------------------------------------
+
+
+Enter your choice :: 3
+
+-----------------------------------------------------------------------------
+
+Enter the applicant's file number :1000
+
+Enter the applicant's name: Shinde Shipra
+
+Record of applicant not found
+-----------------------------------------------------------------------------
+
+
+Do you want to continue ?(Y/N) ::y
+
+-----------------------------------------------------------------------------
+                        PASSPORT OFFICE DATABASE
+-----------------------------------------------------------------------------
+
+                          ****** MENU ******
+
+                        1.CREATE THE DATABASE
+                        2.DISPLAY THE DATABASE
+                        3.SEARCH A RECORD
+                        4.MODIFY A RECORD
+                        5.RENEW THE PASSPORT
+                        6.REISSUE THE PASSPORT
+                        7.ADD A RECORD
+                        8.DELETE A RECORD
+                        9.CHANGE STATUS OF THE RECORD
+                        10.VIEW STATUS
+                        11.EXIT
+-----------------------------------------------------------------------------
+
+
+Enter your choice :: 4
+
+-----------------------------------------------------------------------------
+
+Enter the applicant's file number :1007
+
+Enter the applicant's name: Kadam Umesh Suresh
+
+-----------------------------------------------------------------------------
+
+                 **** MENU ****
+                1.FULL NAME
+                2.RESIDENTIAL ADDRESS
+                3.MOBILE NUMBER
+                4.MARITAL STATUS
+
+-----------------------------------------------------------------------------
+
+Full name              :  Kadam Umesh Suresh
+
+Mother's name          :  Sanjana
+
+Father's name          :  Suresh
+
+Residential address    :  Bhakti Complex,Jayamalanagar,Pune-411024
+
+Gender                 :  Male
+
+Mobile no              :  8857964126
+
+Date of birth          :  12/5/1976
+
+Place of birth         :  Kolhapur
+
+Marital status         :  Unmarried
+
+Nationality            :  Indian
+
+Qualification          :  M Com
+
+Occupation             :  Service
+
+Police Verification    :  Clear
+
+Government Employee    :  Yes
+
+Fees                   :  Rs500
+
+Applied Before         :  No
+
+Emergency              :  Yes
+
+Passport Status        :  In process
+
+Issue Date             :  NA
+
+Expiry Date            :  NA
+-----------------------------------------------------------------------------
+
+                 **** MENU ****
+                1.FULL NAME
+                2.RESIDENTIAL ADDRESS
+                3.MOBILE NUMBER
+                4.MARITAL STATUS
+
+-----------------------------------------------------------------------------
+
+Enter the field that is to be modified :4
+
+Enter marital status [1.Unmarried 2.Married] : 2
+
+The modified record is :
+-----------------------------------------------------------------------------
+
+FILE NO : 1007
+-----------------------------------------------------------------------------
+
+Full name              :  Kadam Umesh Suresh
+
+Mother's name          :  Sanjana
+
+Father's name          :  Suresh
+
+Residential address    :  Bhakti Complex,Jayamalanagar,Pune-411024
+
+Gender                 :  Male
+
+Mobile no              :  8857964126
+
+Date of birth          :  12/5/1976
+
+Place of birth         :  Kolhapur
+
+Marital status         :  Married
+
+Nationality            :  Indian
+
+Qualification          :  M Com
+
+Occupation             :  Service
+
+Police Verification    :  Clear
+
+Government Employee    :  Yes
+
+Fees                   :  Rs500
+
+Applied Before         :  No
+
+Emergency              :  Yes
+
+Passport Status        :  In process
+
+Issue Date             :  NA
+
+Expiry Date            :  NA
+-----------------------------------------------------------------------------
+Do you want to modify more fields ?(Y/N):y
+
+-----------------------------------------------------------------------------
+
+                 **** MENU ****
+                1.FULL NAME
+                2.RESIDENTIAL ADDRESS
+                3.MOBILE NUMBER
+                4.MARITAL STATUS
+
+-----------------------------------------------------------------------------
+
+Enter the field that is to be modified :5
+
+Invalid choice
+-----------------------------------------------------------------------------
+Do you want to modify more fields ?(Y/N):n
+-----------------------------------------------------------------------------
+
+Do you want to continue ?(Y/N) ::y
+-----------------------------------------------------------------------------
+
+                        PASSPORT OFFICE DATABASE
+-----------------------------------------------------------------------------
+
+                          ****** MENU ******
+
+                        1.CREATE THE DATABASE
+                        2.DISPLAY THE DATABASE
+                        3.SEARCH A RECORD
+                        4.MODIFY A RECORD
+                        5.RENEW THE PASSPORT
+                        6.REISSUE THE PASSPORT
+                        7.ADD A RECORD
+                        8.DELETE A RECORD
+                        9.CHANGE STATUS OF THE RECORD
+                        10.VIEW STATUS
+                        11.EXIT
+-----------------------------------------------------------------------------
+
+
+Enter your choice :: 5
+
+-----------------------------------------------------------------------------
+
+Enter the applicant's file number :1001
+
+Enter the applicant's name: Sreeja Mohan
+
+Passport is not yet issued
+-----------------------------------------------------------------------------
+
+
+Do you want to continue ?(Y/N) ::y
+-----------------------------------------------------------------------------
+                        PASSPORT OFFICE DATABASE
+-----------------------------------------------------------------------------
+
+                          ****** MENU ******
+
+                        1.CREATE THE DATABASE
+                        2.DISPLAY THE DATABASE
+                        3.SEARCH A RECORD
+                        4.MODIFY A RECORD
+                        5.RENEW THE PASSPORT
+                        6.REISSUE THE PASSPORT
+                        7.ADD A RECORD
+                        8.DELETE A RECORD
+                        9.CHANGE STATUS OF THE RECORD
+                        10.VIEW STATUS
+                        11.EXIT
+-----------------------------------------------------------------------------
+
+
+Enter your choice :: 9
+
+-----------------------------------------------------------------------------
+
+Enter the applicant's file number :1005
+
+Enter the applicant's name: Shinde Shweta Shivaji
+
+Enter new status [1.In process 2.Issued]: 2
+
+Enter Issue Date : 13 10 2011
+-----------------------------------------------------------------------------
+
+FILE NO : 1005
+-----------------------------------------------------------------------------
+
+Full name              :  Shinde Shweta Shivaji
+
+Mother's name          :  Pratibha
+
+Father's name          :  Shivaji
+
+Residential address    :  Sainath,Kawadenagar,Pimple gurav,Pune-411061
+
+Gender                 :  Female
+
+Mobile no              :  9689493582
+
+Date of birth          :  24/9/1991
+
+Place of birth         :  Pune
+
+Marital status         :  Unmarried
+
+Nationality            :  Indian
+
+Qualification          :  BE
+
+Occupation             :  IT Engineer
+
+Police Verification    :  Clear
+
+Government Employee    :  No
+
+Fees                   :  Rs1000
+
+Applied Before         :  No
+
+Emergency              :  Yes
+
+Passport Status        :  Issued
+
+Issue Date             :  13/10/2011
+
+Expiry Date            :  14/10/2016
+-----------------------------------------------------------------------------
+
+
+Do you want to continue ?(Y/N) ::y
+-----------------------------------------------------------------------------
+                        PASSPORT OFFICE DATABASE
+-----------------------------------------------------------------------------
+
+                          ****** MENU ******
+
+                        1.CREATE THE DATABASE
+                        2.DISPLAY THE DATABASE
+                        3.SEARCH A RECORD
+                        4.MODIFY A RECORD
+                        5.RENEW THE PASSPORT
+                        6.REISSUE THE PASSPORT
+                        7.ADD A RECORD
+                        8.DELETE A RECORD
+                        9.CHANGE STATUS OF THE RECORD
+                        10.VIEW STATUS
+                        11.EXIT
+-----------------------------------------------------------------------------
+
+
+Enter your choice :: 10
+
+-----------------------------------------------------------------------------
+
+Enter the applicant's file number :1005
+
+Enter the applicant's name : Shinde Shweta Shivaji
+
+Status      :  Issued
+
+Issue Date  :  13/10/2011
+
+Expiry Date :  14/10/2016
+-----------------------------------------------------------------------------
+
+
+Do you want to continue ?(Y/N) ::y
+-----------------------------------------------------------------------------
+                        PASSPORT OFFICE DATABASE
+-----------------------------------------------------------------------------
+
+                          ****** MENU ******
+
+                        1.CREATE THE DATABASE
+                        2.DISPLAY THE DATABASE
+                        3.SEARCH A RECORD
+                        4.MODIFY A RECORD
+                        5.RENEW THE PASSPORT
+                        6.REISSUE THE PASSPORT
+                        7.ADD A RECORD
+                        8.DELETE A RECORD
+                        9.CHANGE STATUS OF THE RECORD
+                        10.VIEW STATUS
+                        11.EXIT
+-----------------------------------------------------------------------------
+
+
+Enter your choice :: 10
+
+-----------------------------------------------------------------------------
+
+Enter the applicant's file number :1003
+
+Enter the applicant's name : Umalkar Samruddhi Vidyasagar
+
+Status      :  Rejected
+-----------------------------------------------------------------------------
+
+
+Do you want to continue ?(Y/N) ::y
+

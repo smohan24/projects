@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html class="wf-adelle1adelle2-i4-active wf-adelle1adelle2-n7-active wf-anivers1anivers2-n4-active wf-anivers1anivers2-n7-active wf-adelle1adelle2-n4-active wf-active" xmlns="http://www.w3.org/1999/xhtml"><head><script async="" type="text/javascript" src="mongodb-architecture-overview_files/bih1sjl.js"></script><script>var translated_warning_string = 'Warning: Never enter your Tumblr password unless \u201chttps://www.tumblr.com/login\u201d\x0ais the address in your web browser.\x0a\x0aYou should also see a green \u201cTumblr, Inc.\u201d identification in the address bar.\x0a\x0aSpammers and other bad guys use fake forms to steal passwords.\x0a\x0aTumblr will never ask you to log in from a user\u2019s blog.\x0a\x0aAre you absolutely sure you want to continue?'; var php_config_log_time_interval = 3000; var php_config_log_url_base = 'http://www.tumblr.com/svc/log/tr'; var php_thash_value = '13e6c3a1c8c06c301897581a3e68ba0b'; var php_config_enable_redirect_logging = 1; var php_config_enable_dom_wrappers = 0;</script><script type="text/javascript" language="javascript" src="mongodb-architecture-overview_files/pre_tumblelog.js"></script>
+
+
+<!-- 
+Author : Alex Popescu & Bistrian Iosip
+Version: 1.0-201112140203
+License: This theme cannot be used without the explicit consent of the authors.
+ -->
+ 
+    <!-- custom_variables -->
+    <meta name="if:Show Album Art on Audio Posts" content="1">
+    <meta name="text:BlogScript Version" content="1">
+    <meta name="text:BlogCss Version" content="1">
+    <meta name="text:Blog BaseURI" content="http://nosql.mypopescu.com">
+    <meta name="text:Perm Symbol" content="✦"> <!-- &#x2727; &#x272A; -->
+    <meta name="text:More Symbol" content="Continue to read ➤"> <!-- &#x27B2; &rarr; &#x27A4; &#9654; &#9658; -->
+    <meta name="text:Google Analytics ID" content="UA-462613-13">
+    <meta name="text:Google Site Verification" content="C_c1BxsO1S5cBTaH-Sm7SScPTdJMebn7TFb3qxkykGU">    
+    <meta name="text:Typekit Kit ID" content="bih1sjl"> <!-- bih1sjl -->
+    <meta name="text:Disqus Shortname" content="mynosql">
+    <meta name="text:Outbrain Id" content="1279891127405">
+    <!-- <meta name="text:Link Symbol" content="&#x27A5;" /> -->
+    <!-- end custom_variables -->
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <link rel="stylesheet" type="text/css" href="mongodb-architecture-overview_files/style.css" media="all">
+    <!--
+    <link rel="stylesheet" type="text/css" href="http://mynosqltools.appspot.com/mynosql/css/style.v19.css" media="all" />
+    -->
+    
+<script type="text/javascript">
+  (function() {
+    var config = {
+      kitId: 'bih1sjl',
+      scriptTimeout: 3000
+    };
+    var h=document.getElementsByTagName("html")[0];h.className+=" wf-loading";var t=setTimeout(function(){h.className=h.className.replace(/( |^)wf-loading( |$)/g,"");h.className+=" wf-inactive"},config.scriptTimeout);var tk=document.createElement("script");tk.src='//use.typekit.net/'+config.kitId+'.js';tk.type="text/javascript";tk.async="true";tk.onload=tk.onreadystatechange=function(){var a=this.readyState;if(a&&a!="complete"&&a!="loaded")return;clearTimeout(t);try{Typekit.load(config)}catch(b){}};var s=document.getElementsByTagName("script")[0];s.parentNode.insertBefore(tk,s)
+  })();
+</script>
+    <!--
+    <script type="text/javascript" src="http://use.typekit.com/bih1sjl.js"></script> 
+    <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
+    -->
+    
+    <link rel="icon" href="http://25.media.tumblr.com/avatar_57f58c2308d6_16.png">
+    <link rel="alternate" type="application/rss+xml" title="RSS" href="http://feeds.feedburner.com/nosql">
+    
+    <meta name="google-site-verification" content="C_c1BxsO1S5cBTaH-Sm7SScPTdJMebn7TFb3qxkykGU">
+        
+    <!-- page_titles -->
+    
+    <title>MongoDB Architecture Overview • myNoSQL</title>
+    <meta name="description" content="MongoDB Architecture Overview. About MongoDB, document database, ">
+        
+            <meta name="keywords" content="MongoDB, document database,  NoSQL, NoSQL databases, NoSQL community, NoSQL database">
+        
+    
+    
+    <!-- end page_titles -->
+    <!--[if lt IE 7]><link rel="stylesheet" type="text/css" media="screen, projection" href="http://friendfeedredux.appspot.com/mynosql/css/ie6.css" /><![endif]-->
+    <style type="text/css">
+a.clkimg {
+    text-decoration:none;
+    border-bottom:none;
+}
+
+     </style>
+ 
+<!-- BEGIN TUMBLR FACEBOOK OPENGRAPH TAGS -->
+<!-- If you'd like to specify your own Open Graph tags, define the og:url and og:title tags in your theme's HTML. -->
+<!-- Read more: http://ogp.me/ -->
+<meta property="fb:app_id" content="48119224995">
+<meta property="og:title" content="MongoDB Architecture Overview">
+<meta property="og:url" content="http://nosql.mypopescu.com/post/20583077001/mongodb-architecture-overview">
+<meta property="og:description" content="Ricky Ho takes a look at MongoDB and summarizes his thoughts about: Major differences between MongoDB and RDBMS MongoDB query processing, data update, and transaction Storage model Replication model Sharding model MongoDB Map-Reduce execution concluding: One thing I am very impressed by MongoDb is that it is extremely easy to use and the underlying architecture is also very easy to understand. He’s definitely not the only one. Original title and link: MongoDB Architecture Overview (NoSQL database©myNoSQL)">
+<meta property="og:type" content="tumblr-feed:link">
+<meta property="og:image" content="http://assets.tumblr.com/images/facebook_og_link.png?1084">
+<!-- END TUMBLR FACEBOOK OPENGRAPH TAGS -->
+
+
+<!-- TWITTER TAGS -->
+<meta charset="utf-8">
+<meta name="twitter:image" content="http://assets.tumblr.com/images/facebook_og_link.png?1084">
+<meta name="twitter:image:width" content="90">
+<meta name="twitter:image:height" content="90">
+<meta name="twitter:url" content="http://nosql.mypopescu.com/post/20583077001/mongodb-architecture-overview">
+<meta name="twitter:site" content="tumblr">
+
+
+<script type="text/javascript" language="javascript" src="mongodb-architecture-overview_files/tumblelog.js"></script><meta http-equiv="x-dns-prefetch-control" content="off">
+<meta name="keywords" content="document database,MongoDB"><style type="text/css">.webfont-sser{font-family:"anivers-1","anivers-2","Futura","Helvetica Neue","Helvetica",sans-serif;}.tk-adelle,.webfont-ser{font-family:"adelle-1","adelle-2","Palatino","Georgia","Hoefler Text",serif;}</style><link href="mongodb-architecture-overview_files/bih1sjl-d.css" rel="stylesheet">
+
+<script src="mongodb-architecture-overview_files/ga.js" async="" type="text/javascript"></script><script src="mongodb-architecture-overview_files/get" type="text/javascript" async="async" id="outbrainPostRecRankRequestID_0"></script><script src="mongodb-architecture-overview_files/a" type="text/javascript"></script><style type="text/css">.gsfe_a{border:1px solid #b9b9b9;border-top-color:#a0a0a0;box-shadow:inset 0px 1px 2px rgba(0,0,0,0.1);-moz-box-shadow:inset 0px 1px 2px rgba(0,0,0,0.1);-webkit-box-shadow:inset 0px 1px 2px rgba(0,0,0,0.1);}.gsfe_b{border:1px solid #4d90fe;outline:none;box-shadow:inset 0px 1px 2px rgba(0,0,0,0.3);-moz-box-shadow:inset 0px 1px 2px rgba(0,0,0,0.3);-webkit-box-shadow:inset 0px 1px 2px rgba(0,0,0,0.3);}.gscsep_a{display:none}.gsq_a{padding:0}.gssb_c{border:0;position:absolute;z-index:989}.gssb_e{border:1px solid #ccc;border-top-color:#d9d9d9;box-shadow:0 2px 4px rgba(0,0,0,0.2);-moz-box-shadow:0 2px 4px rgba(0,0,0,0.2);cursor:default}.gssb_f{visibility:hidden;white-space:nowrap}.gssb_k{border:0;display:block;position:absolute;top:0;z-index:988}.gsdd_a{border:none!important}.gsib_a{width:100%;padding:4px 6px 0}.gsib_a,.gsib_b{vertical-align:top}.gssb_a{padding:0 7px}.gssb_a,.gssb_a td{white-space:nowrap;overflow:hidden;line-height:22px}#gssb_b{font-size:11px;color:#36c;text-decoration:none}#gssb_b:hover{font-size:11px;color:#36c;text-decoration:underline}.gssb_g{text-align:center;padding:8px 0 7px;position:relative}.gssb_h{font-size:15px;height:28px;margin:0.2em}.gssb_i{background:#eee}.gss_ifl{visibility:hidden;padding-left:5px}.gssb_i .gss_ifl{visibility:visible}a.gssb_j{font-size:13px;color:#36c;text-decoration:none;line-height:100%}a.gssb_j:hover{text-decoration:underline}.gssb_l{height:1px;background-color:#e5e5e5}.gssb_m{color:#000;background:#fff}.gscb_a{display:inline-block;font:27px/13px arial,sans-serif}.gsst_a .gscb_a{color:#a1b9ed;cursor:pointer}.gsst_a:hover .gscb_a,.gsst_a:focus .gscb_a{color:#36c}.gsst_a{display:inline-block}.gsst_a{cursor:pointer;padding:0 4px}.gsst_a:hover{text-decoration:none!important}.gsst_b{font-size:16px;padding:0 2px;user-select:none;-moz-user-select:none;white-space:nowrap}.gsst_e{opacity:0.55;}.gsst_a:hover .gsst_e,.gsst_a:focus .gsst_e{opacity:0.72;}.gsst_a:active .gsst_e{opacity:1;}.gsst_f{background:white;text-align:left}.gsst_g{background-color:white;border:1px solid #ccc;border-top-color:#d9d9d9;box-shadow:0 2px 4px rgba(0,0,0,0.2);-moz-box-shadow:0 2px 4px rgba(0,0,0,0.2);margin:-1px -3px;padding:0 6px}.gsst_h{background-color:white;height:1px;margin-bottom:-1px;position:relative;top:-1px}.gssb_a{padding:0 7px}.gssb_e{border:0}.gssb_l{margin:5px 0}.gssb_c .gsc-completion-container{position:static}.gssb_c{z-index:5000}.gsc-completion-container table{background:transparent;font-size:inherit;font-family:inherit}.gssb_c > tbody > tr,.gssb_c > tbody > tr > td,.gssb_d,.gssb_d > tbody > tr,.gssb_d > tbody > tr > td,.gssb_e,.gssb_e > tbody > tr,.gssb_e > tbody > tr > td{padding:0;margin:0;border:0}.gssb_a table,.gssb_a table tr,.gssb_a table tr td{padding:0;margin:0;border:0}</style><script src="mongodb-architecture-overview_files/search.js" type="text/javascript"></script><script charset="UTF-8" async="" src="mongodb-architecture-overview_files/alfie.js"></script><link href="mongodb-architecture-overview_files/outbrainWidget.css" id="cssLinkID" type="text/css" rel="stylesheet"><style class="ob-custom-css NA" type="text/css">#ob_strip_container_rel_0_stripBox{width:100%;position:relative;overflow:hidden} #ob_strip_container_rel_0_stripBox .strip-img{width:109;height:109px;border:none !important;margin:0px !important;display:block;padding:0px !important;background-image: url(http://widgets.outbrain.com/strip_default.png)} #ob_strip_container_rel_0_stripBox .strip-rec-link-title {color:rgb(21, 21, 21);font-size:13px;font-weight:normal;line-height:16px;text-decoration:none;} #ob_strip_container_rel_0_stripBox .strip-rec-link-source{color:rgb(0, 0, 238);font-size:12px;line-height:16px;text-decoration:none;} #outbrain_container_0_stripBox .strip-like{padding-bottom:4px;font-size:14px;line-height:16px;height:20px;font-weight:bold;} .item-container a,.item-container a:hover,.item-container a:visited{border:medium none;text-decoration:none;}#ob_strip_container_rel_0_stripBox .ob_video{border:medium none;position:absolute}#ob_strip_container_rel_0_stripBox .strip-rec-link-img{ position:relative;} .wbr:before {content: "\200B"} #ob_strip_container_0_stripBox{width:100%;position:absolute;} #ob_strip_container_rel_0_stripBox A{display:block;text-align:left;} #ob_strip_container_rel_0_stripBox .strip-text-content A{width:auto;padding:0px 3px;} #ob_strip_container_rel_0_stripBox .strip-text-content{padding-top:6px;}#ob_strip_container_0_stripBox .item-container{padding-right:9px;float:left;width:119px;margin-bottom:300px;} #ob_strip_container_0_stripBox .item-container-last{padding-right:0px;} #ob_strip_container_shadow_0_stripBox{position:static;overflow-x:hidden;} #ob_strip_container_shadow_0_stripBox .item-container{width:119px;visibility:hidden;} #ob_strip_container_shadow_outer_0_stripBox {position:static;width:100%;} #ob_strip_container_shadow_0_stripBox .item-container-shadow{width:0px;float:left;overflow-x:hidden;} #ob_strip_container_rel_0_stripBox .item-container-ad{position: relative}#ob_strip_container_rel_0_stripBox .item-container-ad .paid-distribution a,#ob_strip_container_rel_0_stripBox .item-container-ad .paid-distribution a:hover{text-decoration:none;background-color:rgb(21, 21, 21);  border-color:#FFF;  border-style:solid;  border-width:2px 2px 0 0;color:#FFF;float:left;font-family:verdana,arial,sans-serif;font-size:9px;font-size-adjust:none;font-stretch:normal;font-style:normal;font-variant:normal;font-weight:normal;  line-height:normal;  padding:2px 4px; position:relative;  top:-18px;  z-index:10;clear:both}#ob_strip_container_rel_0_stripBox .item-container-ad .strip-text-content{position:relative;top: -18px;clear:both}#ob_strip_container_rel_0_stripBox        .strip-rec-link-img{ border:2px solid #ccc ;display:block;padding:3px;width:109px;height:109px;} #ob_strip_container_rel_0_stripBox .hover .strip-rec-link-img{ border:2px solid rgb(21, 21, 21) ;display:block;padding:3px;width:109px;height:109px;} </style></head>
+ <body>
+
+<div id="hidden-box-topics" class="typo-sser webfont-sser">
+    <div class="box-topics">
+        <p class="heading">ALL COVERED TOPICS</p>
+        <p>
+            <a href="http://nosql.mypopescu.com/tagged/nosql_theory" title="NoSQL">NoSQL</a>
+            <a href="http://nosql.mypopescu.com/tagged/benchmark" title="Benchmarks">Benchmarks</a>
+            <a href="http://nosql.mypopescu.com/tagged/usecase" title="NoSQL use cases">NoSQL use cases</a>
+            <a href="http://nosql.mypopescu.com/tagged/video" title="NoSQL videos">NoSQL Videos</a>
+            <a href="http://nosql.mypopescu.com/tagged/NoSQL_hybrid" title="NoSQL Hybrid Solutions">NoSQL Hybrid Solutions</a>
+            <a href="http://nosql.mypopescu.com/tagged/presentation" title="NoSQL presentations">NoSQL Presentations</a>
+            <a href="http://nosql.mypopescu.com/search/bigdata">Big Data</a>
+            <a href="http://nosql.mypopescu.com/search/hadoop">Hadoop</a>
+            <a href="http://nosql.mypopescu.com/search/mapreduce">MapReduce</a>
+            <a href="http://nosql.mypopescu.com/tagged/pig">Pig</a>
+            <a href="http://nosql.mypopescu.com/tagged/hive">Hive</a>
+            <a href="http://nosql.mypopescu.com/tagged/flume">Flume</a>            
+            <a href="http://nosql.mypopescu.com/tagged/oozie">Oozie</a>
+            <a href="http://nosql.mypopescu.com/tagged/sqoop">Sqoop</a>
+            <a href="http://nosql.mypopescu.com/tagged/hdfs">HDFS</a>
+            <a href="http://nosql.mypopescu.com/tagged/zookeeper">ZooKeeper</a>
+            <a href="http://nosql.mypopescu.com/tagged/cascading">Cascading</a>
+            <a href="http://nosql.mypopescu.com/tagged/cascalog">Cascalog</a>            
+            <a href="http://nosql.mypopescu.com/tagged/bigtable">BigTable</a>
+            <a href="http://nosql.mypopescu.com/search/cassandra">Cassandra</a>
+            <a href="http://nosql.mypopescu.com/search/hbase">HBase</a>
+            <a href="http://nosql.mypopescu.com/tagged/hypertable">Hypertable</a>
+            <a href="http://nosql.mypopescu.com/tagged/couchbase">Couchbase</a>
+            <a href="http://nosql.mypopescu.com/search/couchdb">CouchDB</a>
+            <a href="http://nosql.mypopescu.com/search/mongodb">MongoDB</a>
+            <a href="http://nosql.mypopescu.com/tagged/orientdb">OrientDB</a>
+            <a href="http://nosql.mypopescu.com/tagged/ravendb">RavenDB</a>
+            <a href="http://nosql.mypopescu.com/tagged/jackrabbit">Jackrabbit</a>
+            <a href="http://nosql.mypopescu.com/tagged/terrastore">Terrastore</a>
+            <a href="http://nosql.mypopescu.com/tagged/dynamodb">Amazon DynamoDB</a>
+            <a href="http://nosql.mypopescu.com/search/redis">Redis</a>
+            <a href="http://nosql.mypopescu.com/search/riak">Riak</a>
+            <a href="http://nosql.mypopescu.com/tagged/voldemort">Project Voldemort</a>
+            <a href="http://nosql.mypopescu.com/tagged/tokyo_cabinet">Tokyo Cabinet</a>
+            <a href="http://nosql.mypopescu.com/tagged/kyoto_cabinet">Kyoto Cabinet</a>
+            <a href="http://nosql.mypopescu.com/tagged/memcached">memcached</a>
+            <a href="http://nosql.mypopescu.com/tagged/simpledb">Amazon SimpleDB</a>
+            <a href="http://nosql.mypopescu.com/tagged/datomic">Datomic</a>
+            <a href="http://nosql.mypopescu.com/tagged/memcachedb">MemcacheDB</a>
+            <a href="http://nosql.mypopescu.com/tagged/mdb">M/DB</a>
+            <a href="http://nosql.mypopescu.com/tagged/gtm">GT.M</a>
+            <a href="http://nosql.mypopescu.com/tagged/dynamo">Amazon Dynamo</a>
+            <a href="http://nosql.mypopescu.com/tagged/dynomite">Dynomite</a>
+            <a href="http://nosql.mypopescu.com/tagged/mnesia">Mnesia</a>
+            <a href="http://nosql.mypopescu.com/tagged/pnuts">Yahoo! PNUTS/Sherpa</a>
+            <a href="http://nosql.mypopescu.com/search/neo4j">Neo4j</a>
+            <a href="http://nosql.mypopescu.com/tagged/infogrid">InfoGrid</a>
+            <a href="http://nosql.mypopescu.com/tagged/sones">Sones GraphDB</a>
+            <a href="http://nosql.mypopescu.com/tagged/infinitegraph">InfiniteGraph</a>
+            <a href="http://nosql.mypopescu.com/tagged/allegrograph">AllegroGraph</a>
+            <a href="http://nosql.mypopescu.com/tagged/marklogic">MarkLogic</a>
+            <a href="http://nosql.mypopescu.com/tagged/clustrix">Clustrix</a>
+            <a href="http://nosql.mypopescu.com/tagged/couchdb_case_study">CouchDB Case Studies</a>
+            <a href="http://nosql.mypopescu.com/tagged/mongodb_case_study">MongoDB Case Studies</a>
+            <a href="http://nosql.mypopescu.com/tagged/adobe">NoSQL at Adobe</a>
+            <a href="http://nosql.mypopescu.com/tagged/facebook">NoSQL at Facebook</a>
+            <a href="http://nosql.mypopescu.com/tagged/twitter">NoSQL at Twitter</a>
+        </p>
+        <div class="clear"></div>
+        <p class="heading">NAVIGATE MAIN CATEGORIES</p>
+        <ul class="categs">
+            <li><a href="http://nosql.mypopescu.com/tagged/bigdata" title="BigData">BigData</a></li>
+            <li><a href="http://nosql.mypopescu.com/tagged/bigdata" title="BigData">Hadoop</a></li>
+            <li><a href="http://nosql.mypopescu.com/tagged/usecase" title="Case Studies">Case Studies</a></li>
+            <li><a href="http://nosql.mypopescu.com/tagged/column_store" title="Column stores">Column stores</a></li>
+            <li><a href="http://nosql.mypopescu.com/tagged/document_database" title="Document stores or Document databases">Document databases</a></li>
+            <li><a href="http://nosql.mypopescu.com/tagged/key-value_store" title="Key-Value stores">Key-Value stores</a></li>
+            <li><a href="http://nosql.mypopescu.com/tagged/graph_database" title="Graph databases">Graph databases</a></li>
+            <li><a href="http://nosql.mypopescu.com/tagged/NoSQL_event" title="NoSQL events">NoSQL Events</a></li>
+        </ul>
+    </div>
+    <a href="#" title="Close" class="close">Close</a>
+</div>
+<div id="wrapper">
+    <!-- Start Header -->
+    <div id="header">
+      
+        <!-- Start Top Navigation -->
+        <div id="top-navigation" class="typo-sser webfont-sser">
+          <a href="#" class="explore-topics" title="Explore All Topics"> Explore all topics</a>
+    	    <ul>
+            <li><a href="http://nosql.mypopescu.com/tagged/hadoop" title="Hadoop">Hadoop</a></li>
+            <li><a href="http://nosql.mypopescu.com/tagged/bigdata" title="BigData">BigData</a></li>
+            <li><a href="http://nosql.mypopescu.com/tagged/mongodb" title="MongoDB">MongoDB</a></li>
+            <li><a href="http://nosql.mypopescu.com/tagged/redis" title="Redis">Redis</a></li>
+            <li><a href="http://nosql.mypopescu.com/tagged/cassandra" title="Cassandra">Cassandra</a></li>
+            <li><a href="http://nosql.mypopescu.com/tagged/hbase" title="HBase">HBase</a></li>
+            <li><a href="http://nosql.mypopescu.com/tagged/riak" title="Riak">Riak</a></li>
+            <li><a href="http://nosql.mypopescu.com/tagged/couchdb" title="CouchDB">CouchDB</a></li>                
+            <li><a href="http://nosql.mypopescu.com/tagged/neo4j" title="Neo4j">Neo4j</a></li>
+            <li><a href="http://nosql.mypopescu.com/tagged/mapreduce" title="MapReduce">MapReduce</a></li>
+            </ul>
+            <span class="arrow-topics"></span>
+            <div class="clear"></div>
+        </div>
+        <!-- End Top Navigation -->
+        
+        
+        
+        <div class="logo-inner">
+            <div class="homepage"><a href="http://nosql.mypopescu.com/" title="myNoSQL homepage">Home ›</a></div>
+            <a href="http://nosql.mypopescu.com/" title="myNoSQL" id="site-logo">myNoSQL</a>
+            <div class="clear"></div>
+        </div>
+        
+        <div class="clear"></div>
+    </div>
+    <!-- End Header -->
+  
+  
+<!-- Start Site Content -->
+<div id="content" class="single-entry">
+    <!-- Start Left Side -->
+    <div id="left-side">
+        
+        
+        <div class="navigation-top">
+            
+            <div class="byline">
+                <span class="date"><a href="http://nosql.mypopescu.com/day/2012/04/06/">Friday, 6 April 2012</a></span>
+            </div>
+            
+            <a href="http://nosql.mypopescu.com/" class="back" title="Back">‹ Back</a>
+        </div>
+        
+
+        
+            
+          
+            <div id="e20583077001" class="entry linkpost">
+                
+                    
+                    <h1 class="t"><a href="http://nosql.mypopescu.com/post/20583077001/mongodb-architecture-overview" title="Permalink: MongoDB Architecture Overview" rel="permalink">MongoDB Architecture Overview</a></h1>
+                    
+                    
+                    
+                        
+                        
+                        
+                        
+                        
+                        
+                    
+                
+                
+
+                
+                
+                
+                
+                
+                
+
+                <div class="post-meta webfont-ser">
+                   
+                    <div class="tags">
+                        About:
+                        
+                        <h5><a href="http://nosql.mypopescu.com/tagged/MongoDB" rel="tag">MongoDB</a></h5>, <h5><a href="http://nosql.mypopescu.com/tagged/document-database" rel="tag">document database</a></h5>, 
+                    </div>
+                    
+
+                    
+                    <!-- AddThis Button BEGIN -->
+                    <div class="addthis_toolbox addthis_default_style" addthis:title="" addthis:url="http://nosql.mypopescu.com/post/20583077001/mongodb-architecture-overview">
+                        <a href="http://www.addthis.com/bookmark.php" class="share-this">Share it:</a>
+                        <a class="addthis_link addthis_button_twitter"><span class="at300bs at15t_twitter"></span></a>
+                        <a class="addthis_link addthis_button_hackernews"><span class="at300bs at15t_hackernews"></span></a>
+                        <a class="addthis_link addthis_button_reddit"><span class="at300bs at15t_reddit"></span></a>
+                        <a class="addthis_button_compact"><img src="mongodb-architecture-overview_files/icon-plus.gif"></a>
+                    </div>
+                    
+                    <br class="clear">
+                </div>
+
+                <!-- entries with title & body --> 
+                
+                
+                
+                <div class="entry_body webfont-ser">
+                    <p>Ricky Ho takes a look at MongoDB and summarizes his thoughts about:</p>
+<ul><li>Major differences between MongoDB and RDBMS</li>
+<li>MongoDB query processing, data update, and transaction</li>
+<li>Storage model</li>
+<li>Replication model</li>
+<li>Sharding model</li>
+<li>MongoDB Map-Reduce execution</li>
+</ul><p>concluding:</p>
+<blockquote>
+<p>One thing I am very impressed by MongoDb is that it is extremely easy
+ to use and the underlying architecture is also very easy to understand.</p>
+</blockquote>
+<p><a href="http://nosql.mypopescu.com/post/20582627772/mongodb-features-roadmap-full-text-search-data" target="_blank">He’s definitely not the only one</a>.</p>
+<p><img alt="MongoDB Storage Model" src="mongodb-architecture-overview_files/MongoDB2520Storage2520Model.png" height="278" width="400"></p>
+
+<p class="cc" style="font-style: italic; font-size: 0.9em;">Original title and link: <a href="http://nosql.mypopescu.com/post/20583077001" rel="permalink" style="color:red" target="_blank">MongoDB Architecture Overview</a> (<a href="http://nosql.mypopescu.com/" style="display:none;visibility:hidden;" target="_blank">NoSQL database</a>©myNoSQL)</p>
+                    <!-- source -->
+                    <p class="linksrc"><cite>
+                        
+                    
+                    <a href="http://horicky.blogspot.com/2012/04/mongodb-architecture.html" rel="external nofollow">via: http://horicky.blogspot.com/2012/04/mongodb-architecture.html</a>
+                    
+                    </cite></p>
+                </div>
+                
+                
+
+                    
+            </div>
+
+            
+        
+
+        
+            <div id="articles-refs" class="webfont-ser" style="display:none"><h4>References</h4></div>
+
+            
+            
+            <div id="ext-tags" class="webfont-ser" style="visibility:hidden;">
+                <span>Find more articles on the same topics:</span> 
+                <a href="http://nosql.mypopescu.com/tagged/MongoDB" rel="tag">MongoDB</a>, <a href="http://nosql.mypopescu.com/tagged/document-database" rel="tag">document database</a>, 
+            </div>
+            
+            
+
+            
+            <div id="ext-ocer" class="webfont-ser">
+                <script language="JavaScript">
+var OB_langJS='http://widgets.outbrain.com/lang_en.js';var OBITm='1279891127405';var OB_raterMode='none';var OB_recMode='strip'; 
+var OutbrainPermaLink='http://nosql.mypopescu.com/post/20583077001/mongodb-architecture-overview'; 
+if ( typeof(OB_Script)!='undefined' )OutbrainStart(); else { var OB_Script=true;var str=unescape("%3Cscript src=\'http://widgets.outbrain.com/OutbrainRater.js\' type=\'text/javascript\'%3E%3C/script%3E"); document.write(str); }
+                </script><script src="mongodb-architecture-overview_files/OutbrainRater.js" type="text/javascript"></script><div id="outbrain_manager_helper_div" style="display:none;"><script src="mongodb-architecture-overview_files/stripBoxTemplate.js" async="async" type="text/javascript" id="undefined"></script></div><iframe id="odbPingIframeId" src="mongodb-architecture-overview_files/a.htm" name="odbFrame" style="width:0px;height:0px;display:none;" frameborder="0"></iframe><span id="outbrainCurrentPosition"></span><div class="outbrainGlobalClass"></div><div class="OB_default" style="display: block;" id="outbrain_widget_0"><div id="outbrain_container_0_stripBox" class="div-wrapper" style="clear:both;;padding:0 0 10px 0;"><div class="voterDiv" style="display: block;" id="OutbrainVoterDiv_0_stripBox"><div style="clear:both;"><div id="recommendationsFieldset_0_stripBox" class="outbrain_stripBox_template" style="display: block;"> <div class="strip-like">You might like:</div>  <div id="ob_strip_container_rel_0_stripBox">    <div style="display: block;" id="ob_strip_container_0_stripBox">    <div id="item-container-0-0" class="item-container  " onmouseover="javasctipt:outbrain_template_manager.templates['stripBox'].onMouseOver(0,0,'item-container');" onmouseout="javasctipt:outbrain_template_manager.templates['stripBox'].onMouseOut (0,0,'item-container');">  <div class="top-bar"></div>    <a href="http://nosql.mypopescu.com/post/41941085563/the-big-data-landscape" onmousedown="this.href='http://traffic.outbrain.com/network/redir?key=02246d4603941dc0d1d0504c6cb57db9&amp;rdid=304258449&amp;type=SYLD_d/RF_la&amp;in-site=true&amp;idx=0&amp;req_id=101c293a613dd8aa8b146f03d431d361&amp;agent=blog_JS_rec&amp;recMode=2&amp;reqType=1&amp;wid=1&amp;imgType=2&amp;refPub=0&amp;prs=false&amp;scp=false&amp;version=88923';return true;" class="strip-rec-link-img" target="_self">      <img title="The Big Data Landscape" class="strip-img" alt="The Big Data Landscape" src="mongodb-architecture-overview_files/AiRtRgOUHcDR0FBMbLV9uQee-0-109x109.jpeg" onerror="javasctipt:outbrain_template_manager.templates['stripBox'].imageError(this);" height="109" width="109">          </a>        <div class="strip-text-content">      <a href="http://nosql.mypopescu.com/post/41941085563/the-big-data-landscape" onmousedown="this.href='http://traffic.outbrain.com/network/redir?key=02246d4603941dc0d1d0504c6cb57db9&amp;rdid=304258449&amp;type=SYLD_d/RF_la&amp;in-site=true&amp;idx=0&amp;req_id=101c293a613dd8aa8b146f03d431d361&amp;agent=blog_JS_rec&amp;recMode=2&amp;reqType=1&amp;wid=1&amp;imgType=2&amp;refPub=0&amp;prs=false&amp;scp=false&amp;version=88923';return true;" target="_self" class="strip-rec-link-title">The Big Data Landscape  </a>                 </div></div><div id="item-container-0-1" class="item-container    hover" onmouseover="javasctipt:outbrain_template_manager.templates['stripBox'].onMouseOver(0,1,'item-container');" onmouseout="javasctipt:outbrain_template_manager.templates['stripBox'].onMouseOut (0,1,'item-container');">  <div class="top-bar"></div>    <a href="http://nosql.mypopescu.com/post/1016366403/nosql-guide-for-beginners" onmousedown="this.href='http://traffic.outbrain.com/network/redir?key=fdd0ea752524a99b7e331f8eab8e8087&amp;rdid=304258449&amp;type=SYLD_d/RF_la&amp;in-site=true&amp;idx=1&amp;req_id=101c293a613dd8aa8b146f03d431d361&amp;agent=blog_JS_rec&amp;recMode=2&amp;reqType=1&amp;wid=1&amp;imgType=2&amp;refPub=0&amp;prs=false&amp;scp=false&amp;version=88923';return true;" class="strip-rec-link-img" target="_self">      <img title="NoSQL Guide for Beginners" class="strip-img" alt="NoSQL Guide for Beginners" src="mongodb-architecture-overview_files/dDqdSUkqZtpMxpOq46Ahwee-0-109x109.jpeg" onerror="javasctipt:outbrain_template_manager.templates['stripBox'].imageError(this);" height="109" width="109">          </a>        <div class="strip-text-content">      <a href="http://nosql.mypopescu.com/post/1016366403/nosql-guide-for-beginners" onmousedown="this.href='http://traffic.outbrain.com/network/redir?key=fdd0ea752524a99b7e331f8eab8e8087&amp;rdid=304258449&amp;type=SYLD_d/RF_la&amp;in-site=true&amp;idx=1&amp;req_id=101c293a613dd8aa8b146f03d431d361&amp;agent=blog_JS_rec&amp;recMode=2&amp;reqType=1&amp;wid=1&amp;imgType=2&amp;refPub=0&amp;prs=false&amp;scp=false&amp;version=88923';return true;" target="_self" class="strip-rec-link-title">No<wbr><span class="wbr"></span>SQL Guide for Beginners  </a>                 </div></div><div id="item-container-0-2" class="item-container   " onmouseover="javasctipt:outbrain_template_manager.templates['stripBox'].onMouseOver(0,2,'item-container');" onmouseout="javasctipt:outbrain_template_manager.templates['stripBox'].onMouseOut (0,2,'item-container');">  <div class="top-bar"></div>    <a href="http://nosql.mypopescu.com/post/13474372971/nosql-databases-and-big-data-market-a-quick-look-at" onmousedown="this.href='http://traffic.outbrain.com/network/redir?key=6e85332174917ff9138c01f4b0d90649&amp;rdid=304258449&amp;type=SYLD_d/RF_la&amp;in-site=true&amp;idx=2&amp;req_id=101c293a613dd8aa8b146f03d431d361&amp;agent=blog_JS_rec&amp;recMode=2&amp;reqType=1&amp;wid=1&amp;imgType=2&amp;refPub=0&amp;prs=false&amp;scp=false&amp;version=88923';return true;" class="strip-rec-link-img" target="_self">      <img title="NoSQL Databases and Big Data Market: A Quick Look at Technology vs Funding Status" class="strip-img" alt="NoSQL Databases and Big Data Market: A Quick Look at Technology vs Funding Status" src="mongodb-architecture-overview_files/boUzIXSRfkTjAH0sNkGSQee-0-109x109.jpeg" onerror="javasctipt:outbrain_template_manager.templates['stripBox'].imageError(this);" height="109" width="109">          </a>        <div class="strip-text-content">      <a href="http://nosql.mypopescu.com/post/13474372971/nosql-databases-and-big-data-market-a-quick-look-at" onmousedown="this.href='http://traffic.outbrain.com/network/redir?key=6e85332174917ff9138c01f4b0d90649&amp;rdid=304258449&amp;type=SYLD_d/RF_la&amp;in-site=true&amp;idx=2&amp;req_id=101c293a613dd8aa8b146f03d431d361&amp;agent=blog_JS_rec&amp;recMode=2&amp;reqType=1&amp;wid=1&amp;imgType=2&amp;refPub=0&amp;prs=false&amp;scp=false&amp;version=88923';return true;" target="_self" class="strip-rec-link-title">No<wbr><span class="wbr"></span>SQL Databases and Big Data Market: A Quick Look at Technology vs Funding Status  </a>                 </div></div><div id="item-container-0-3" class="item-container   " onmouseover="javasctipt:outbrain_template_manager.templates['stripBox'].onMouseOver(0,3,'item-container');" onmouseout="javasctipt:outbrain_template_manager.templates['stripBox'].onMouseOut (0,3,'item-container');">  <div class="top-bar"></div>    <a href="http://nosql.mypopescu.com/post/392418792/translate-sql-to-mongodb-mapreduce" onmousedown="this.href='http://traffic.outbrain.com/network/redir?key=dcac554252e27ba81a93c16a98042f60&amp;rdid=304258449&amp;type=SYLD_d/RF_la&amp;in-site=true&amp;idx=3&amp;req_id=101c293a613dd8aa8b146f03d431d361&amp;agent=blog_JS_rec&amp;recMode=2&amp;reqType=1&amp;wid=1&amp;imgType=2&amp;refPub=0&amp;prs=false&amp;scp=false&amp;version=88923';return true;" class="strip-rec-link-img" target="_self">      <img title="Translate SQL to MongoDB MapReduce" class="strip-img" alt="Translate SQL to MongoDB MapReduce" src="mongodb-architecture-overview_files/3KxVQlLie6gak8FqmAQvYAee-0-109x109.jpeg" onerror="javasctipt:outbrain_template_manager.templates['stripBox'].imageError(this);" height="109" width="109">          </a>        <div class="strip-text-content">      <a href="http://nosql.mypopescu.com/post/392418792/translate-sql-to-mongodb-mapreduce" onmousedown="this.href='http://traffic.outbrain.com/network/redir?key=dcac554252e27ba81a93c16a98042f60&amp;rdid=304258449&amp;type=SYLD_d/RF_la&amp;in-site=true&amp;idx=3&amp;req_id=101c293a613dd8aa8b146f03d431d361&amp;agent=blog_JS_rec&amp;recMode=2&amp;reqType=1&amp;wid=1&amp;imgType=2&amp;refPub=0&amp;prs=false&amp;scp=false&amp;version=88923';return true;" target="_self" class="strip-rec-link-title">Translate SQL to Mongo<wbr><span class="wbr"></span>DB Map<wbr><span class="wbr"></span>Reduce  </a>                 </div></div><div id="item-container-0-4" class="item-container  item-container-last  " onmouseover="javasctipt:outbrain_template_manager.templates['stripBox'].onMouseOver(0,4,'item-container');" onmouseout="javasctipt:outbrain_template_manager.templates['stripBox'].onMouseOut (0,4,'item-container');">  <div class="top-bar"></div>    <a href="http://nosql.mypopescu.com/post/41796161560/redis-stat-redis-monitoring-with-netflixs-hystrix" onmousedown="this.href='http://traffic.outbrain.com/network/redir?key=1926c14dbaab7af43f30f3a9e0b18f31&amp;rdid=304258449&amp;type=MV_d/RF_la&amp;in-site=true&amp;idx=4&amp;req_id=101c293a613dd8aa8b146f03d431d361&amp;agent=blog_JS_rec&amp;recMode=2&amp;reqType=1&amp;wid=1&amp;imgType=2&amp;refPub=0&amp;prs=false&amp;scp=false&amp;version=88923';return true;" class="strip-rec-link-img" target="_self">      <img title="Redis-Stat: Redis Monitoring With Netflix’s Hystrix Flavor" class="strip-img" alt="Redis-Stat: Redis Monitoring With Netflix’s Hystrix Flavor" src="mongodb-architecture-overview_files/GSbBTbqrevQMPOp4LGPMQee-0-109x109.jpeg" onerror="javasctipt:outbrain_template_manager.templates['stripBox'].imageError(this);" height="109" width="109">          </a>        <div class="strip-text-content">      <a href="http://nosql.mypopescu.com/post/41796161560/redis-stat-redis-monitoring-with-netflixs-hystrix" onmousedown="this.href='http://traffic.outbrain.com/network/redir?key=1926c14dbaab7af43f30f3a9e0b18f31&amp;rdid=304258449&amp;type=MV_d/RF_la&amp;in-site=true&amp;idx=4&amp;req_id=101c293a613dd8aa8b146f03d431d361&amp;agent=blog_JS_rec&amp;recMode=2&amp;reqType=1&amp;wid=1&amp;imgType=2&amp;refPub=0&amp;prs=false&amp;scp=false&amp;version=88923';return true;" target="_self" class="strip-rec-link-title">Redis-Stat: Redis Monitoring With Netflix’s Hystrix Flavor  </a>                 </div></div></div>    <div id="ob_strip_container_shadow_outer_0_stripBox">      <div id="ob_strip_container_shadow_0_stripBox"><div class="item-container-shadow "><div id="item-container-0-4" class="item-container  item-container-last" onmouseover="javasctipt:outbrain_template_manager.templates['stripBox'].onMouseOver(0,4,'item-container');" onmouseout="javasctipt:outbrain_template_manager.templates['stripBox'].onMouseOut (0,4,'item-container');">  <div class="top-bar"></div>    <a href="http://nosql.mypopescu.com/post/41796161560/redis-stat-redis-monitoring-with-netflixs-hystrix" onmousedown="this.href='http://traffic.outbrain.com/network/redir?key=1926c14dbaab7af43f30f3a9e0b18f31&amp;rdid=304258449&amp;type=MV_d/RF_la&amp;in-site=true&amp;idx=4&amp;req_id=101c293a613dd8aa8b146f03d431d361&amp;agent=blog_JS_rec&amp;recMode=2&amp;reqType=1&amp;wid=1&amp;imgType=2&amp;refPub=0&amp;prs=false&amp;scp=false&amp;version=88923';return true;" class="strip-rec-link-img" target="_self">      <img title="Redis-Stat: Redis Monitoring With Netflix’s Hystrix Flavor" class="strip-img" alt="Redis-Stat: Redis Monitoring With Netflix’s Hystrix Flavor" src="mongodb-architecture-overview_files/GSbBTbqrevQMPOp4LGPMQee-0-109x109.jpeg" onerror="javasctipt:outbrain_template_manager.templates['stripBox'].imageError(this);" height="109" width="109">          </a>        <div class="strip-text-content">      <a href="http://nosql.mypopescu.com/post/41796161560/redis-stat-redis-monitoring-with-netflixs-hystrix" onmousedown="this.href='http://traffic.outbrain.com/network/redir?key=1926c14dbaab7af43f30f3a9e0b18f31&amp;rdid=304258449&amp;type=MV_d/RF_la&amp;in-site=true&amp;idx=4&amp;req_id=101c293a613dd8aa8b146f03d431d361&amp;agent=blog_JS_rec&amp;recMode=2&amp;reqType=1&amp;wid=1&amp;imgType=2&amp;refPub=0&amp;prs=false&amp;scp=false&amp;version=88923';return true;" target="_self" class="strip-rec-link-title">Redis-Stat: Redis Monitoring With Netflix’s Hystrix Flavor  </a>                 </div></div></div><div class="item-container-shadow "><div id="item-container-0-3" class="item-container  " onmouseover="javasctipt:outbrain_template_manager.templates['stripBox'].onMouseOver(0,3,'item-container');" onmouseout="javasctipt:outbrain_template_manager.templates['stripBox'].onMouseOut (0,3,'item-container');">  <div class="top-bar"></div>    <a href="http://nosql.mypopescu.com/post/392418792/translate-sql-to-mongodb-mapreduce" onmousedown="this.href='http://traffic.outbrain.com/network/redir?key=dcac554252e27ba81a93c16a98042f60&amp;rdid=304258449&amp;type=SYLD_d/RF_la&amp;in-site=true&amp;idx=3&amp;req_id=101c293a613dd8aa8b146f03d431d361&amp;agent=blog_JS_rec&amp;recMode=2&amp;reqType=1&amp;wid=1&amp;imgType=2&amp;refPub=0&amp;prs=false&amp;scp=false&amp;version=88923';return true;" class="strip-rec-link-img" target="_self">      <img title="Translate SQL to MongoDB MapReduce" class="strip-img" alt="Translate SQL to MongoDB MapReduce" src="mongodb-architecture-overview_files/3KxVQlLie6gak8FqmAQvYAee-0-109x109.jpeg" onerror="javasctipt:outbrain_template_manager.templates['stripBox'].imageError(this);" height="109" width="109">          </a>        <div class="strip-text-content">      <a href="http://nosql.mypopescu.com/post/392418792/translate-sql-to-mongodb-mapreduce" onmousedown="this.href='http://traffic.outbrain.com/network/redir?key=dcac554252e27ba81a93c16a98042f60&amp;rdid=304258449&amp;type=SYLD_d/RF_la&amp;in-site=true&amp;idx=3&amp;req_id=101c293a613dd8aa8b146f03d431d361&amp;agent=blog_JS_rec&amp;recMode=2&amp;reqType=1&amp;wid=1&amp;imgType=2&amp;refPub=0&amp;prs=false&amp;scp=false&amp;version=88923';return true;" target="_self" class="strip-rec-link-title">Translate SQL to Mongo<wbr><span class="wbr"></span>DB Map<wbr><span class="wbr"></span>Reduce  </a>                 </div></div></div><div class="item-container-shadow "><div id="item-container-0-2" class="item-container  " onmouseover="javasctipt:outbrain_template_manager.templates['stripBox'].onMouseOver(0,2,'item-container');" onmouseout="javasctipt:outbrain_template_manager.templates['stripBox'].onMouseOut (0,2,'item-container');">  <div class="top-bar"></div>    <a href="http://nosql.mypopescu.com/post/13474372971/nosql-databases-and-big-data-market-a-quick-look-at" onmousedown="this.href='http://traffic.outbrain.com/network/redir?key=6e85332174917ff9138c01f4b0d90649&amp;rdid=304258449&amp;type=SYLD_d/RF_la&amp;in-site=true&amp;idx=2&amp;req_id=101c293a613dd8aa8b146f03d431d361&amp;agent=blog_JS_rec&amp;recMode=2&amp;reqType=1&amp;wid=1&amp;imgType=2&amp;refPub=0&amp;prs=false&amp;scp=false&amp;version=88923';return true;" class="strip-rec-link-img" target="_self">      <img title="NoSQL Databases and Big Data Market: A Quick Look at Technology vs Funding Status" class="strip-img" alt="NoSQL Databases and Big Data Market: A Quick Look at Technology vs Funding Status" src="mongodb-architecture-overview_files/boUzIXSRfkTjAH0sNkGSQee-0-109x109.jpeg" onerror="javasctipt:outbrain_template_manager.templates['stripBox'].imageError(this);" height="109" width="109">          </a>        <div class="strip-text-content">      <a href="http://nosql.mypopescu.com/post/13474372971/nosql-databases-and-big-data-market-a-quick-look-at" onmousedown="this.href='http://traffic.outbrain.com/network/redir?key=6e85332174917ff9138c01f4b0d90649&amp;rdid=304258449&amp;type=SYLD_d/RF_la&amp;in-site=true&amp;idx=2&amp;req_id=101c293a613dd8aa8b146f03d431d361&amp;agent=blog_JS_rec&amp;recMode=2&amp;reqType=1&amp;wid=1&amp;imgType=2&amp;refPub=0&amp;prs=false&amp;scp=false&amp;version=88923';return true;" target="_self" class="strip-rec-link-title">No<wbr><span class="wbr"></span>SQL Databases and Big Data Market: A Quick Look at Technology vs Funding Status  </a>                 </div></div></div><div class="item-container-shadow "><div id="item-container-0-1" class="item-container  " onmouseover="javasctipt:outbrain_template_manager.templates['stripBox'].onMouseOver(0,1,'item-container');" onmouseout="javasctipt:outbrain_template_manager.templates['stripBox'].onMouseOut (0,1,'item-container');">  <div class="top-bar"></div>    <a href="http://nosql.mypopescu.com/post/1016366403/nosql-guide-for-beginners" onmousedown="this.href='http://traffic.outbrain.com/network/redir?key=fdd0ea752524a99b7e331f8eab8e8087&amp;rdid=304258449&amp;type=SYLD_d/RF_la&amp;in-site=true&amp;idx=1&amp;req_id=101c293a613dd8aa8b146f03d431d361&amp;agent=blog_JS_rec&amp;recMode=2&amp;reqType=1&amp;wid=1&amp;imgType=2&amp;refPub=0&amp;prs=false&amp;scp=false&amp;version=88923';return true;" class="strip-rec-link-img" target="_self">      <img title="NoSQL Guide for Beginners" class="strip-img" alt="NoSQL Guide for Beginners" src="mongodb-architecture-overview_files/dDqdSUkqZtpMxpOq46Ahwee-0-109x109.jpeg" onerror="javasctipt:outbrain_template_manager.templates['stripBox'].imageError(this);" height="109" width="109">          </a>        <div class="strip-text-content">      <a href="http://nosql.mypopescu.com/post/1016366403/nosql-guide-for-beginners" onmousedown="this.href='http://traffic.outbrain.com/network/redir?key=fdd0ea752524a99b7e331f8eab8e8087&amp;rdid=304258449&amp;type=SYLD_d/RF_la&amp;in-site=true&amp;idx=1&amp;req_id=101c293a613dd8aa8b146f03d431d361&amp;agent=blog_JS_rec&amp;recMode=2&amp;reqType=1&amp;wid=1&amp;imgType=2&amp;refPub=0&amp;prs=false&amp;scp=false&amp;version=88923';return true;" target="_self" class="strip-rec-link-title">No<wbr><span class="wbr"></span>SQL Guide for Beginners  </a>                 </div></div></div><div class="item-container-shadow "><div id="item-container-0-0" class="item-container  " onmouseover="javasctipt:outbrain_template_manager.templates['stripBox'].onMouseOver(0,0,'item-container');" onmouseout="javasctipt:outbrain_template_manager.templates['stripBox'].onMouseOut (0,0,'item-container');">  <div class="top-bar"></div>    <a href="http://nosql.mypopescu.com/post/41941085563/the-big-data-landscape" onmousedown="this.href='http://traffic.outbrain.com/network/redir?key=02246d4603941dc0d1d0504c6cb57db9&amp;rdid=304258449&amp;type=SYLD_d/RF_la&amp;in-site=true&amp;idx=0&amp;req_id=101c293a613dd8aa8b146f03d431d361&amp;agent=blog_JS_rec&amp;recMode=2&amp;reqType=1&amp;wid=1&amp;imgType=2&amp;refPub=0&amp;prs=false&amp;scp=false&amp;version=88923';return true;" class="strip-rec-link-img" target="_self">      <img title="The Big Data Landscape" class="strip-img" alt="The Big Data Landscape" src="mongodb-architecture-overview_files/AiRtRgOUHcDR0FBMbLV9uQee-0-109x109.jpeg" onerror="javasctipt:outbrain_template_manager.templates['stripBox'].imageError(this);" height="109" width="109">          </a>        <div class="strip-text-content">      <a href="http://nosql.mypopescu.com/post/41941085563/the-big-data-landscape" onmousedown="this.href='http://traffic.outbrain.com/network/redir?key=02246d4603941dc0d1d0504c6cb57db9&amp;rdid=304258449&amp;type=SYLD_d/RF_la&amp;in-site=true&amp;idx=0&amp;req_id=101c293a613dd8aa8b146f03d431d361&amp;agent=blog_JS_rec&amp;recMode=2&amp;reqType=1&amp;wid=1&amp;imgType=2&amp;refPub=0&amp;prs=false&amp;scp=false&amp;version=88923';return true;" target="_self" class="strip-rec-link-title">The Big Data Landscape  </a>                 </div></div></div>        <div style="clear:both"></div>      </div>    </div> </div><div id="outbrain_whatIs_0_stripBox" class="what_is_container" style="direction:LTR"><a class="what_is_link" onclick="outbrain_whatIs.loadJs(0);">[?]</a></div></div><div style="clear:both;"></div></div> </div></div></div>
+            </div>
+            
+
+            
+            <div id="ext-disqus" class="webfont-ser">
+                <div id="disqus_thread"><iframe verticalscrolling="no" horizontalscrolling="no" src="mongodb-architecture-overview_files/a_002.htm" style="width: 100%; border: medium none; overflow: hidden; height: 513px;" role="application" allowtransparency="true" data-disqus-uid="1" id="dsq1" frameborder="0" scrolling="no" width="100%"></iframe><iframe src="mongodb-architecture-overview_files/client.htm" style="width: 100%; border: medium none; overflow: hidden; display: none;" role="application" allowtransparency="true" data-disqus-uid="3" id="dsq3" frameborder="0" width="100%"></iframe></div>
+                <script type="text/javascript">
+var disqus_url="http://nosql.mypopescu.com/post/20583077001/mongodb-architecture-overview", disqus_title="MongoDB Architecture Overview", disqus_shortname='mynosql',disqus_identifier='20583077001';
+                </script>
+                <script type="text/javascript" src="mongodb-architecture-overview_files/embed.js"></script>
+                <noscript><a href="http://disqus.com/forums/mynosql/?url=ref" rel="nofollow external">View the discussion thread.</a></noscript>
+            </div>
+            
+        
+        
+
+        
+        <div class="pagination typo-sser webfont-sser">
+            <a href="http://nosql.mypopescu.com/post/20582934957" class="back">« Previous post</a>
+            <a href="http://nosql.mypopescu.com/post/20594817983" class="next">Next post »</a>
+            <br class="clear">
+        </div>
+        
+    </div>
+    <!-- End Left Side -->
+    
+    <!-- Start Right Side -->
+    <div id="right-side" class="webfont-ser">
+        <p class="who">by <strong><a href="#about-blog">Alex Popescu</a></strong></p>
+        
+        <div class="content-widget">
+        <p style="padding-left:1em;"><a href="http://nosql.mypopescu.com/sponsors" style="color:#ff6600;text-decoration:underline;font-size:0.9em;">Sponsor myNoSQL</a></p>
+        </div>
+        
+        
+        <div class="content-widget">
+            <ul class="tabs">
+                <li class="first-tab">Most read</li>
+                <li class="second-tab second-tab-inactive">Latest</li>
+            </ul>
+            <div class="clear"></div>
+        
+            <div class="articles-list" id="most-read">
+                <noscript><ul>
+                        <li><a href="/search/bigdata">Big Data</a></li>
+                        <li><a href="/search/hadoop">Hadoop</a></li>
+                        <li><a href="/search/mapreduce">MapReduce</a></li>
+                        <li><a href="/search/cassandra">Cassandra</a></li>
+                        <li><a href="/search/hbase">HBase</a></li>
+                        <li><a href="/search/couchdb">CouchDB</a></li>
+                        <li><a href="/search/mongodb">MongoDB</a></li>
+                        <li><a href="/search/redis">Redis</a></li>
+                        <li><a href="/search/riak">Riak</a></li>
+                        <li><a href="/search/neo4j">Neo4j</a></li></ul>         
+                </noscript>
+            <ul><li><a href="http://nosql.mypopescu.com/post/2955078419">Origin of NoSQL</a></li><li><a href="http://nosql.mypopescu.com/post/816470307">Tutorial: MongoDB in Java</a></li><li><a href="http://nosql.mypopescu.com/post/505511044">In-Memory Elastic Databases</a></li><li><a href="http://nosql.mypopescu.com/post/10162152437">What Is a Graph Database?</a></li><li><a href="http://nosql.mypopescu.com/post/1085685966">MySQL is Not ACID Compliant</a></li><li><a href="http://nosql.mypopescu.com/post/334469038">A Couple of Nice GUI Tools for MongoDB</a></li><li><a href="http://nosql.mypopescu.com/post/573604395">Tutorial: Getting Started With Cassandra</a></li><li><a href="http://nosql.mypopescu.com/post/6412803549">NoSQL Databases: What, Why, and When</a></li><li><a href="http://nosql.mypopescu.com/post/383437318">Integrating MongoDB with Solr</a></li><li><a href="http://nosql.mypopescu.com/post/498705278">Quick Review of Existing Graph Databases</a></li></ul></div>
+        
+            <div class="articles-list" id="newest" style="display:none;">
+            </div>
+        </div>
+        
+        
+      
+        
+        
+        <div class="inner-rss-round-content"><a class="rss-subscribe" href="http://feeds.feedburner.com/nosql" title="ubscribe to myNoSQL RSS feed"><span></span>RSS Subscribe</a></div>
+        <div class="inner-about-contact">
+            <a href="#about-blog" class="about" title="About"><span></span>About</a>
+            <a href="mailto:alex%20at%20mynosql%20.%20tv" class="contact" title="Contact" onclick="this.href='mailto:alex@mynosql.tv'"><span></span>Contact</a>
+        </div>
+        
+
+        <div id="searchbox" class="search">
+            <!--
+            <form name="search" action="" method="post">
+                <input type="text" name="search-field" value="Search here" onfocus="if (this.value == 'Search here') {this.value = '';}" onblur="if (this.value == '') {this.value = 'Search here';}" class="webfont-ser" />
+            </form>
+            -->
+            <div id="cse-search-form" style="width: 100%;"><div dir="ltr" class="gsc-control-searchbox-only gsc-control-searchbox-only-en"><form accept-charset="utf-8" class="gsc-search-box"><table class="gsc-search-box" cellpadding="0" cellspacing="0"><tbody><tr><td class="gsc-input"><input style="outline: medium none; background: url(&quot;http://www.google.com/cse/intl/en/images/google_custom_search_watermark.gif&quot;) no-repeat scroll left center rgb(255, 255, 255);" spellcheck="false" dir="ltr" id="gsc-i-id1" title="search" name="search" class=" gsc-input" size="10" autocomplete="off" type="text"></td><td class="gsc-search-button"><input title="search" class="gsc-search-button" value="Search" type="button"></td><td class="gsc-clear-button"><div title="clear results" class="gsc-clear-button">&nbsp;</div></td></tr></tbody></table><table class="gsc-branding" cellpadding="0" cellspacing="0"><tbody><tr><td class="gsc-branding-user-defined"></td><td class="gsc-branding-text"><div class="gsc-branding-text">powered by</div></td><td class="gsc-branding-img"><img class="gsc-branding-img" src="mongodb-architecture-overview_files/small-logo.png"></td></tr></tbody></table></form></div></div>
+        </div>
+    </div>
+    <!-- End Right Side -->
+    
+    <div class="clear"></div> 
+  </div>
+  <!-- End Site Content -->
+
+    <!-- Start footer -->
+    <div id="footer">
+        <div id="footer-body">
+            <div class="left">
+                <p>Copyright © 2009-2012. All rights reserved.<br></p>
+                <p id="about-blog" style="color:#333;">
+                This blog is called myNoSQL and it is written by me, 
+Alex Popescu, a software architect with a passion for open source and 
+communities. It records my readings, learnings, and opinions on NoSQL 
+databases, polyglot persistence, and distributed systems -- subjects 
+that I'm passionate about. The opinions expressed here are my own, and <a href="http://www.linkedin.com/in/alexandrup">no other party necessarily agrees with them</a>. If you feel I'm biased, I probably am.</p>
+            </div>
+            <div class="theme-by">
+                <p>Tumblr theme by<br>
+                    <a href="http://twitter.com/al3xandru" title="Alex Popescu">Alex Popescu</a><a href="http://supraelastic.com/" class="second" title="Bistrian IOSIP">Bistrian IOSIP</a>
+                </p>
+            </div>
+        </div>
+    </div> 
+    <!-- End footer -->
+</div>
+
+
+<script type="text/javascript" src="mongodb-architecture-overview_files/jquery-1.js"></script>
+<script type="text/javascript" src="mongodb-architecture-overview_files/mynosql.js"></script>
+
+<script type="text/javascript">//<![CDATA[
+var _gaq = _gaq || [];
+_gaq.push(['_setAccount', 'UA-462613-13']);
+_gaq.push(['_trackPageview']);
+_gaq.push(['_trackPageLoadTime']);
+(function() {
+  var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+  ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ga);
+})();
+var OBCTm='1279891127405';
+//]]></script>
+
+<script type="text/javascript" id="_jsinit">
+//<![CDATA[
+    $(document).ready(function() {
+        //blog.registerFloatRightbar();
+        blog.registerHeaderExpandCollapse();
+        blog.registerRightbarTabs();
+        blog.getMostRead('most-read',10);
+        
+        //blog.getReferences('div.tags a[rel="tag"]', 'articles-refs');
+        blog.getLatest('newest', 10);
+        blog.trackTagViews('div.tags a[rel="tag"]');
+        
+        //blog.solveLinks();
+        blog.registerVisibleTopicClicks('#top-navigation ul a');
+        blog.registerTagClicks('div.tags a[rel="tag"]');
+        blog.registerMainTopicClicks('#hidden-box-topics ul.categs a');
+        blog.registerAllTopicClicks('#hidden-box-topics p a');
+    });
+//]]>
+</script>
+
+<script type="text/javascript" src="mongodb-architecture-overview_files/addthis_widget.htm"></script>
+
+<!-- outbrain -->
+<div id="ext-outbrain-hid"><input name="OBKey" value="3J3SAbazHBNmQA078UdihQ==" type="hidden">
+    <script type="text/javascript" src="mongodb-architecture-overview_files/claim.js"></script>
+</div>
+
+
+<script src="mongodb-architecture-overview_files/jsapi" type="text/javascript"></script>
+<script type="text/javascript"> 
+  google.load('search', '1', {language : 'en', style : google.loader.themes.MINIMALIST});
+  google.setOnLoadCallback(function() {
+    var customSearchControl = new google.search.CustomSearchControl(
+      '009328346457437942837:fxxyyzmcsxi');
+
+    customSearchControl.setResultSetSize(google.search.Search.FILTERED_CSE_RESULTSET);
+    var options = new google.search.DrawOptions();
+    options.setAutoComplete(true);
+    options.enableSearchboxOnly("http://www.google.com/cse?cx=009328346457437942837:fxxyyzmcsxi", null, true);
+    customSearchControl.draw('cse-search-form', options);
+  }, true);
+</script><script src="mongodb-architecture-overview_files/a_002" type="text/javascript"></script><link href="mongodb-architecture-overview_files/defaulten.css" type="text/css" rel="stylesheet"><link href="mongodb-architecture-overview_files/minimalist.css" type="text/css" rel="stylesheet"><script src="mongodb-architecture-overview_files/defaulten.js" type="text/javascript"></script>
+ <!-- BEGIN TUMBLR CODE -->
+        <iframe src="mongodb-architecture-overview_files/iframe.htm" style="position:absolute; z-index:1337; top:0px; right:0px; border:0px; background-color:transparent; overflow:hidden;" id="tumblr_controls" frameborder="0" height="25" scrolling="no" width="330"></iframe>
+    <!--[if IE]><script type="text/javascript">document.getElementById('tumblr_controls').allowTransparency=true;</script><![endif]-->
+    <img style="position:absolute;z-index:-3334;top:0px;left:0px;visibility:hidden;" src="mongodb-architecture-overview_files/impixu.png"><!-- END TUMBLR CODE --><iframe src="mongodb-architecture-overview_files/analytics.htm" style="background-color:transparent; overflow:hidden; position:absolute; top:0; left:0 z-index:9999;" id="ga_target" frameborder="0" height="1" scrolling="no" width="1"></iframe>
+
+
+    <script type="text/javascript">
+        __qoptions = _qoptions = { qacct: 'p-19UtqE8ngoZbM' };
+    </script>
+    <script type="text/javascript" src="mongodb-architecture-overview_files/quant.js"></script>
+    <noscript>
+        <img src="http://pixel.quantserve.com/pixel/p-19UtqE8ngoZbM.gif"
+        style="display:none; border-width:0px; height:1px; width:1px;"/>
+    </noscript>
+
+
+<img style="position:absolute;z-index:-3334;top:0px;left:0px;visibility:hidden;" src="mongodb-architecture-overview_files/impixu_002.png">
+<table class="gstl_0 gssb_c" style="width: 107px; display: none; top: 528px; left: 816px; position: absolute;" cellpadding="0" cellspacing="0"><tbody><tr><td class="gssb_f"></td><td style="width: 100%;" class="gssb_e"></td></tr></tbody></table></body></html>

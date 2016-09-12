@@ -1,0 +1,488 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head>
+    <title>Read Operations — MongoDB Manual</title>
+
+    <link rel="shortcut icon" href="http://media.mongodb.org/favicon.ico">
+    <meta name="robots" content="index">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <link rel="canonical" href="http://docs.mongodb.org/manual/core/read-operations">
+
+    
+    
+    <link rel="stylesheet" href="Read%20Operations%20%E2%80%94%20MongoDB%20Manual_files/mongodb-docs.css" type="text/css">
+    <link rel="stylesheet" href="Read%20Operations%20%E2%80%94%20MongoDB%20Manual_files/pygments.css" type="text/css">
+      
+    <script src="Read%20Operations%20%E2%80%94%20MongoDB%20Manual_files/cse.js" async="" type="text/javascript"></script><script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '2.2.2',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '',
+        HAS_SOURCE:  false
+      };
+    </script>
+    <script type="text/javascript" src="Read%20Operations%20%E2%80%94%20MongoDB%20Manual_files/jquery.js"></script>
+    <script type="text/javascript" src="Read%20Operations%20%E2%80%94%20MongoDB%20Manual_files/underscore.js"></script>
+    <script type="text/javascript" src="Read%20Operations%20%E2%80%94%20MongoDB%20Manual_files/doctools.js"></script>
+      <link rel="search" type="application/opensearchdescription+xml" href="http://docs.mongodb.org/osd.xml" title="MongoDB Help">
+<link rel="author" title="About these documents" href="http://docs.mongodb.org/manual/about/">
+<link rel="top" title="MongoDB Manual" href="http://docs.mongodb.org/manual/">
+<link rel="up" title="Core MongoDB Operations (CRUD)" href="http://docs.mongodb.org/manual/crud/">
+<link rel="next" title="Write Operations" href="http://docs.mongodb.org/manual/core/write-operations/">
+<link rel="prev" title="Core MongoDB Operations (CRUD)" href="http://docs.mongodb.org/manual/crud/">
+<!-- Put the following javascript before the closing </head> tag. -->
+<script>
+  (function() {
+    var cx = '017213726194841070573:WMX6838984';
+    var gcse = document.createElement('script'); gcse.type = 'text/javascript'; gcse.async = true;
+    gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+        '//www.google.com/cse/cse.js?cx=' + cx;
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(gcse, s);
+  })();
+</script>
+  <script type="text/javascript" src="Read%20Operations%20%E2%80%94%20MongoDB%20Manual_files/jsapi"></script><link rel="stylesheet" href="Read%20Operations%20%E2%80%94%20MongoDB%20Manual_files/defaulten.css" type="text/css"><link rel="stylesheet" href="Read%20Operations%20%E2%80%94%20MongoDB%20Manual_files/default.css" type="text/css"><script src="Read%20Operations%20%E2%80%94%20MongoDB%20Manual_files/defaulten.js" type="text/javascript"></script><script src="Read%20Operations%20%E2%80%94%20MongoDB%20Manual_files/search.js" type="text/javascript"></script><style type="text/css">
+.gsc-control-cse {
+font-family: Arial, sans-serif;
+border-color: #FFFFFF;
+background-color: #FFFFFF;
+}
+.gsc-control-cse .gsc-table-result {
+font-family: Arial, sans-serif;
+}
+input.gsc-input, .gsc-input-box, .gsc-input-box-hover, .gsc-input-box-focus {
+border-color: #D9D9D9;
+}
+input.gsc-search-button, input.gsc-search-button:hover, input.gsc-search-button:focus {
+border-color: #5AAC41;
+background-color: #5AAC41;
+background-image: none;
+filter: none;
+}
+.gsc-tabHeader.gsc-tabhInactive {
+border-color: #CCCCCC;
+background-color: #FFFFFF;
+}
+.gsc-tabHeader.gsc-tabhActive {
+border-color: #CCCCCC;
+border-bottom-color: #FFFFFF;
+background-color: #FFFFFF;
+}
+.gsc-tabsArea {
+border-color: #CCCCCC;
+}
+.gsc-webResult.gsc-result,
+.gsc-results .gsc-imageResult {
+border-color: #FFFFFF;
+background-color: #FFFFFF;
+}
+.gsc-webResult.gsc-result:hover,
+.gsc-imageResult:hover {
+border-color: #FFFFFF;
+background-color: #FFFFFF;
+}
+.gs-webResult.gs-result a.gs-title:link,
+.gs-webResult.gs-result a.gs-title:link b,
+.gs-imageResult a.gs-title:link,
+.gs-imageResult a.gs-title:link b {
+color: #1155CC;
+}
+.gs-webResult.gs-result a.gs-title:visited,
+.gs-webResult.gs-result a.gs-title:visited b,
+.gs-imageResult a.gs-title:visited,
+.gs-imageResult a.gs-title:visited b {
+color: #1155CC;
+}
+.gs-webResult.gs-result a.gs-title:hover,
+.gs-webResult.gs-result a.gs-title:hover b,
+.gs-imageResult a.gs-title:hover,
+.gs-imageResult a.gs-title:hover b {
+color: #1155CC;
+}
+.gs-webResult.gs-result a.gs-title:active,
+.gs-webResult.gs-result a.gs-title:active b,
+.gs-imageResult a.gs-title:active,
+.gs-imageResult a.gs-title:active b {
+color: #1155CC;
+}
+.gsc-cursor-page {
+color: #1155CC;
+}
+a.gsc-trailing-more-results:link {
+color: #1155CC;
+}
+.gs-webResult .gs-snippet,
+.gs-imageResult .gs-snippet,
+.gs-fileFormatType {
+color: #333333;
+}
+.gs-webResult div.gs-visibleUrl,
+.gs-imageResult div.gs-visibleUrl {
+color: #009933;
+}
+.gs-webResult div.gs-visibleUrl-short {
+color: #009933;
+}
+.gs-webResult div.gs-visibleUrl-short {
+display: none;
+}
+.gs-webResult div.gs-visibleUrl-long {
+display: block;
+}
+.gs-promotion div.gs-visibleUrl-short {
+display: none;
+}
+.gs-promotion div.gs-visibleUrl-long {
+display: block;
+}
+.gsc-cursor-box {
+border-color: #FFFFFF;
+}
+.gsc-results .gsc-cursor-box .gsc-cursor-page {
+border-color: #CCCCCC;
+background-color: #FFFFFF;
+color: #1155CC;
+}
+.gsc-results .gsc-cursor-box .gsc-cursor-current-page {
+border-color: #CCCCCC;
+background-color: #FFFFFF;
+color: #1155CC;
+}
+.gsc-webResult.gsc-result.gsc-promotion {
+border-color: #F6F6F6;
+background-color: #F6F6F6;
+}
+.gsc-completion-title {
+color: #1155CC;
+}
+.gsc-completion-snippet {
+color: #333333;
+}
+.gs-promotion a.gs-title:link,
+.gs-promotion a.gs-title:link *,
+.gs-promotion .gs-snippet a:link {
+color: #1155CC;
+}
+.gs-promotion a.gs-title:visited,
+.gs-promotion a.gs-title:visited *,
+.gs-promotion .gs-snippet a:visited {
+color: #1155CC;
+}
+.gs-promotion a.gs-title:hover,
+.gs-promotion a.gs-title:hover *,
+.gs-promotion .gs-snippet a:hover {
+color: #1155CC;
+}
+.gs-promotion a.gs-title:active,
+.gs-promotion a.gs-title:active *,
+.gs-promotion .gs-snippet a:active {
+color: #1155CC;
+}
+.gs-promotion .gs-snippet,
+.gs-promotion .gs-title .gs-promotion-title-right,
+.gs-promotion .gs-title .gs-promotion-title-right * {
+color: #333333;
+}
+.gs-promotion .gs-visibleUrl,
+.gs-promotion .gs-visibleUrl-short {
+color: #009933;
+}
+.gsc-input input.gsc-input {
+background: none repeat scroll 0% 0% white !important;
+}
+</style></head>
+  <body>
+<div id="top-right">
+        <div class="user-right">
+                <ul id="header-menu-bar" class="ajs-menu-bar">
+                <li class="normal"><a target="_blank" href="http://groups.google.com/group/mongodb-user">Forums</a></li>
+                <li class="normal"><a target="_blank" href="http://blog.mongodb.org/">Blog</a></li>
+                <li class="normal"><a href="http://www.mongodb.org/downloads">Download</a></li>
+                <li class="normal"><a href="http://docs.mongodb.org/ecosystem/drivers/">Drivers</a></li>
+                <li class="normal"><a href="http://www.10gen.com/events">Events</a></li>
+                <li class="normal last"><a class="last" href="http://docs.mongodb.org/manual/meta/translation">Translations</a></li>
+                </ul>
+        </div>
+</div>
+<div id="header-db" class="spread">
+        <div class="split">
+                <div id="logo">
+                        <div><a href="http://docs.mongodb.org/manual/"><img class="logo" src="Read%20Operations%20%E2%80%94%20MongoDB%20Manual_files/logo-mongodb.png" alt="MongoDB Logo"></a></div>
+                </div>
+        </div>
+
+<div class="search-db"><gcse:searchbox></gcse:searchbox></div>
+<div id="etp">
+<ul>
+<li><a href="https://github.com/mongodb/docs/blob/master/source/core/read-operations.txt" target="_blank" title="Edit core/read-operations.txt on github">Edit this Page</a></li>
+<li><a href="http://github.com/mongodb/docs" target="_blank" title="Fork the documentation on GitHub and contribute.">GitHub</a></li>
+<li><a href="https://jira.mongodb.org/secure/CreateIssueDetails%21init.jspa?pid=10380&amp;issuetype=4&amp;priority=4&amp;summary=Comment+on%3a+%22core/read-operations%2Etxt%22" target="_blank" title="Report a problem with core/read-operations.txt on Jira">Report a problem</a></li>
+</ul>
+</div>
+</div>  
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            <div id="cse-results"><gcse:searchresults></gcse:searchresults></div>
+            
+  <div class="section" id="read-operations">
+<h1>Read Operations<a class="headerlink" href="#read-operations" title="Permalink to this headline">¶</a></h1>
+<p>Read operations include all operations that return a cursor in
+response to application request data (i.e. <em>queries</em>,) and also
+include a number of <a class="reference internal" href="http://docs.mongodb.org/manual/aggregation/"><em>aggregation</em></a> operations that
+do not return a cursor but have similar properties as queries. These
+commands include <tt class="xref mongodb mongodb-dbcommand docutils literal"><span class="pre">aggregate</span></tt>, <tt class="xref mongodb mongodb-dbcommand docutils literal"><span class="pre">count</span></tt>, and
+<tt class="xref mongodb mongodb-dbcommand docutils literal"><span class="pre">distinct</span></tt>.</p>
+<p>This document describes the syntax and structure of the queries
+applications use to request data from MongoDB and how different
+factors affect the efficiency of reads.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">All of the examples in this document use the <a class="reference internal" href="http://docs.mongodb.org/manual/reference/mongo/#mongo" title="mongo"><tt class="xref mongodb mongodb-program docutils literal"><span class="pre">mongo</span></tt></a>
+shell interface. All of these operations are available in an
+idiomatic interface for each language by way of the <a class="reference internal" href="http://docs.mongodb.org/manual/applications/drivers/"><em>MongoDB
+Driver</em></a>. See your <a class="reference external" href="http://api.mongodb.org/">driver documentation</a> for
+full API documentation.</p>
+</div>
+<div class="section" id="queries-in-mongodb">
+<span id="read-operations-queries"></span><span id="read-operations-query-operations"></span><span id="index-0"></span><h2>Queries in MongoDB<a class="headerlink" href="#queries-in-mongodb" title="Permalink to this headline">¶</a></h2>
+<p>In the <a class="reference internal" href="http://docs.mongodb.org/manual/reference/mongo/#mongo" title="mongo"><tt class="xref mongodb mongodb-program docutils literal"><span class="pre">mongo</span></tt></a> shell, the <a class="reference internal" href="http://docs.mongodb.org/manual/reference/method/db.collection.find/#db.collection.find" title="db.collection.find"><tt class="xref mongodb mongodb-method docutils literal"><span class="pre">find()</span></tt></a> and <a class="reference internal" href="http://docs.mongodb.org/manual/reference/method/db.collection.findOne/#db.collection.findOne" title="db.collection.findOne"><tt class="xref mongodb mongodb-method docutils literal"><span class="pre">findOne()</span></tt></a> methods perform read operations. The
+<a class="reference internal" href="http://docs.mongodb.org/manual/reference/method/db.collection.find/#db.collection.find" title="db.collection.find"><tt class="xref mongodb mongodb-method docutils literal"><span class="pre">find()</span></tt></a> method has the following
+syntax: <a class="footnote-reference" href="#formal-query-structure" id="id1">[1]</a></p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="nx">db</span><span class="p">.</span><span class="nx">collection</span><span class="p">.</span><span class="nx">find</span><span class="p">(</span> <span class="o">&lt;</span><span class="nx">query</span><span class="o">&gt;</span><span class="p">,</span> <span class="o">&lt;</span><span class="nx">projection</span><span class="o">&gt;</span> <span class="p">)</span>
+</pre></div>
+</div>
+<ul>
+<li><p class="first">The <tt class="docutils literal"><span class="pre">db.collection</span></tt> object specifies the database and collection
+to query. All queries in MongoDB address a <em>single</em> collection.</p>
+<p>You can enter <tt class="docutils literal"><span class="pre">db</span></tt> in the <a class="reference internal" href="http://docs.mongodb.org/manual/reference/mongo/#mongo" title="mongo"><tt class="xref mongodb mongodb-program docutils literal"><span class="pre">mongo</span></tt></a> shell to return the
+name of the current database. Use the <tt class="docutils literal"><span class="pre">show</span> <span class="pre">collections</span></tt> operation
+in the <a class="reference internal" href="http://docs.mongodb.org/manual/reference/mongo/#mongo" title="mongo"><tt class="xref mongodb mongodb-program docutils literal"><span class="pre">mongo</span></tt></a> shell to list the current collections in the
+database.</p>
+</li>
+<li><p class="first">Queries in MongoDB are <a class="reference internal" href="http://docs.mongodb.org/manual/reference/glossary/#term-bson"><em class="xref std std-term">BSON</em></a> objects that use a set of
+<a class="reference internal" href="http://docs.mongodb.org/manual/reference/operators/"><em>query operators</em></a> to describe query
+parameters.</p>
+<p>The <tt class="docutils literal"><span class="pre">&lt;query&gt;</span></tt> argument of the <a class="reference internal" href="http://docs.mongodb.org/manual/reference/method/db.collection.find/#db.collection.find" title="db.collection.find"><tt class="xref mongodb mongodb-method docutils literal"><span class="pre">find()</span></tt></a> method holds this query document. A read
+operation without a query document will return all documents in the
+collection.</p>
+</li>
+<li><p class="first">The <tt class="docutils literal"><span class="pre">&lt;projection&gt;</span></tt> argument describes the result set in the form of
+a document. Projections specify or limit the fields to return.</p>
+<p>Without a projection, the operation will return all
+fields of the documents. Specify a projection if your documents are
+larger, or when your application only needs a subset of available
+fields.</p>
+</li>
+<li><p class="first">The order of documents returned by a query is not defined and is not
+necessarily consistent unless you specify a sort (<a class="reference internal" href="http://docs.mongodb.org/manual/reference/method/cursor.sort/#cursor.sort" title="cursor.sort"><tt class="xref mongodb mongodb-method docutils literal"><span class="pre">sort()</span></tt></a>).</p>
+</li>
+</ul>
+<p>For example, the following operation on the <tt class="docutils literal"><span class="pre">inventory</span></tt> collection
+selects all documents where the <tt class="docutils literal"><span class="pre">type</span></tt> field equals <tt class="docutils literal"><span class="pre">'food'</span></tt> and
+the <tt class="docutils literal"><span class="pre">price</span></tt> field has a value less than <tt class="docutils literal"><span class="pre">9.95</span></tt>. The projection
+limits the response to the <tt class="docutils literal"><span class="pre">item</span></tt> and <tt class="docutils literal"><span class="pre">qty</span></tt>, and <tt class="docutils literal"><span class="pre">_id</span></tt> field:</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="nx">db</span><span class="p">.</span><span class="nx">inventory</span><span class="p">.</span><span class="nx">find</span><span class="p">(</span> <span class="p">{</span> <span class="nx">type</span><span class="o">:</span> <span class="s1">'food'</span><span class="p">,</span> <span class="nx">price</span><span class="o">:</span> <span class="p">{</span> <span class="nx">$lt</span><span class="o">:</span> <span class="mf">9.95</span> <span class="p">}</span> <span class="p">},</span>
+                   <span class="p">{</span> <span class="nx">item</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span> <span class="nx">qty</span><span class="o">:</span> <span class="mi">1</span> <span class="p">}</span> <span class="p">)</span>
+</pre></div>
+</div>
+<p>The <a class="reference internal" href="http://docs.mongodb.org/manual/reference/method/db.collection.findOne/#db.collection.findOne" title="db.collection.findOne"><tt class="xref mongodb mongodb-method docutils literal"><span class="pre">findOne()</span></tt></a> method is similar to
+the <a class="reference internal" href="http://docs.mongodb.org/manual/reference/method/db.collection.find/#db.collection.find" title="db.collection.find"><tt class="xref mongodb mongodb-method docutils literal"><span class="pre">find()</span></tt></a> method except the
+<a class="reference internal" href="http://docs.mongodb.org/manual/reference/method/db.collection.findOne/#db.collection.findOne" title="db.collection.findOne"><tt class="xref mongodb mongodb-method docutils literal"><span class="pre">findOne()</span></tt></a> method returns a single
+document from a collection rather than a cursor. The method has the
+syntax:</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="nx">db</span><span class="p">.</span><span class="nx">collection</span><span class="p">.</span><span class="nx">findOne</span><span class="p">(</span> <span class="o">&lt;</span><span class="nx">query</span><span class="o">&gt;</span><span class="p">,</span> <span class="o">&lt;</span><span class="nx">projection</span><span class="o">&gt;</span> <span class="p">)</span>
+</pre></div>
+</div>
+<p>For additional documentation and examples of the main MongoDB read
+operators, refer to the <a class="reference internal" href="http://docs.mongodb.org/manual/applications/read/"><em>Read</em></a> page of the
+<a class="reference internal" href="http://docs.mongodb.org/manual/crud/"><em>Core MongoDB Operations (CRUD)</em></a> section.</p>
+<table class="docutils footnote" frame="void" id="formal-query-structure" rules="none">
+<colgroup><col class="label"><col></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id1">[1]</a></td><td><a class="reference internal" href="http://docs.mongodb.org/manual/reference/method/db.collection.find/#db.collection.find" title="db.collection.find"><tt class="xref mongodb mongodb-method docutils literal"><span class="pre">db.collection.find()</span></tt></a> is a
+wrapper for the more formal query structure with the
+<a class="reference internal" href="http://docs.mongodb.org/manual/reference/operator/query/#_S_query" title="$query"><tt class="xref mongodb mongodb-operator docutils literal"><span class="pre">$query</span></tt></a> operator.</td></tr>
+</tbody>
+</table>
+<div class="section" id="query-document">
+<span id="read-operations-query-argument"></span><span id="read-operations-query-document"></span><h3>Query Document<a class="headerlink" href="#query-document" title="Permalink to this headline">¶</a></h3>
+<p>This section provides an overview of the query document for MongoDB
+queries. See the preceding section for more information on
+<a class="reference internal" href="#read-operations-query-operations"><em>queries in MongoDB</em></a>.</p>
+<p>The following examples demonstrate the key properties of the query
+document in MongoDB queries, using the <a class="reference internal" href="http://docs.mongodb.org/manual/reference/method/db.collection.find/#db.collection.find" title="db.collection.find"><tt class="xref mongodb mongodb-method docutils literal"><span class="pre">find()</span></tt></a> method from the <a class="reference internal" href="http://docs.mongodb.org/manual/reference/mongo/#mongo" title="mongo"><tt class="xref mongodb mongodb-program docutils literal"><span class="pre">mongo</span></tt></a> shell, and a
+collection of documents named <tt class="docutils literal"><span class="pre">inventory</span></tt>:</p>
+<ul>
+<li><p class="first">An empty query document (<tt class="docutils literal"><span class="pre">{}</span></tt>) selects all documents in the
+collection:</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="nx">db</span><span class="p">.</span><span class="nx">inventory</span><span class="p">.</span><span class="nx">find</span><span class="p">(</span> <span class="p">{}</span> <span class="p">)</span>
+</pre></div>
+</div>
+<p>Not specifying a query document to the <a class="reference internal" href="http://docs.mongodb.org/manual/reference/method/db.collection.find/#db.collection.find" title="db.collection.find"><tt class="xref mongodb mongodb-method docutils literal"><span class="pre">find()</span></tt></a> is equivalent to specifying an empty query
+document. Therefore the following operation is equivalent to the
+previous operation:</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="nx">db</span><span class="p">.</span><span class="nx">inventory</span><span class="p">.</span><span class="nx">find</span><span class="p">()</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">A single-clause query selects all documents in a collection where a
+field has a certain value. These are simple “equality” queries.</p>
+<p>In the following example, the query selects all documents in the
+collection where the <tt class="docutils literal"><span class="pre">type</span></tt> field has the value <tt class="docutils literal"><span class="pre">snacks</span></tt>:</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="nx">db</span><span class="p">.</span><span class="nx">inventory</span><span class="p">.</span><span class="nx">find</span><span class="p">(</span> <span class="p">{</span> <span class="nx">type</span><span class="o">:</span> <span class="s2">"snacks"</span> <span class="p">}</span> <span class="p">)</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">A single-clause query document can also select all documents in a
+collection given a condition or set of conditions for one field in
+the collection’s documents. Use the <a class="reference internal" href="http://docs.mongodb.org/manual/reference/operators/#query-selectors"><em>query operators</em></a> to specify conditions in a MongoDB query.</p>
+<p>In the following example, the query selects all documents in the
+collection where the value of the <tt class="docutils literal"><span class="pre">type</span></tt> field is either
+<tt class="docutils literal"><span class="pre">'food'</span></tt> or <tt class="docutils literal"><span class="pre">'snacks'</span></tt>:</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="nx">db</span><span class="p">.</span><span class="nx">inventory</span><span class="p">.</span><span class="nx">find</span><span class="p">(</span> <span class="p">{</span> <span class="nx">type</span><span class="o">:</span> <span class="p">{</span> <span class="nx">$in</span><span class="o">:</span> <span class="p">[</span> <span class="s1">'food'</span><span class="p">,</span> <span class="s1">'snacks'</span> <span class="p">]</span> <span class="p">}</span> <span class="p">}</span> <span class="p">)</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Although you can express this query using the <a class="reference internal" href="http://docs.mongodb.org/manual/reference/operator/or/#_S_or" title="$or"><tt class="xref mongodb mongodb-operator docutils literal"><span class="pre">$or</span></tt></a>
+operator, choose the <a class="reference internal" href="http://docs.mongodb.org/manual/reference/operator/in/#_S_in" title="$in"><tt class="xref mongodb mongodb-operator docutils literal"><span class="pre">$in</span></tt></a> operator rather than the
+<a class="reference internal" href="http://docs.mongodb.org/manual/reference/operator/or/#_S_or" title="$or"><tt class="xref mongodb mongodb-operator docutils literal"><span class="pre">$or</span></tt></a> operator when performing equality checks on the
+same field.</p>
+</div>
+</li>
+<li><p class="first">A compound query can specify conditions for more than one field in
+the collection’s documents. Implicitly, a logical <tt class="docutils literal"><span class="pre">AND</span></tt> conjunction
+connects the clauses of a compound query so that the query selects
+the documents in the collection that match all the conditions.</p>
+<p>In the following example, the query document specifies an equality
+match on a single field, followed by a range of values for a second
+field using a <a class="reference internal" href="http://docs.mongodb.org/manual/reference/operators/#query-selectors-comparison"><em>comparison operator</em></a>:</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="nx">db</span><span class="p">.</span><span class="nx">inventory</span><span class="p">.</span><span class="nx">find</span><span class="p">(</span> <span class="p">{</span> <span class="nx">type</span><span class="o">:</span> <span class="s1">'food'</span><span class="p">,</span> <span class="nx">price</span><span class="o">:</span> <span class="p">{</span> <span class="nx">$lt</span><span class="o">:</span> <span class="mf">9.95</span> <span class="p">}</span> <span class="p">}</span> <span class="p">)</span>
+</pre></div>
+</div>
+<p>This query selects all documents where the <tt class="docutils literal"><span class="pre">type</span></tt> field has the
+value <tt class="docutils literal"><span class="pre">'food'</span></tt> <strong>and</strong> the value of the <tt class="docutils literal"><span class="pre">price</span></tt> field is less
+than (<a class="reference internal" href="http://docs.mongodb.org/manual/reference/operator/lt/#_S_lt" title="$lt"><tt class="xref mongodb mongodb-operator docutils literal"><span class="pre">$lt</span></tt></a>) <tt class="docutils literal"><span class="pre">9.95</span></tt>.</p>
+</li>
+<li><p class="first">Using the <a class="reference internal" href="http://docs.mongodb.org/manual/reference/operator/or/#_S_or" title="$or"><tt class="xref mongodb mongodb-operator docutils literal"><span class="pre">$or</span></tt></a> operator, you can specify a compound query
+that joins each clause with a logical <tt class="docutils literal"><span class="pre">OR</span></tt> conjunction so that the
+query selects the documents in the collection that match at least one
+condition.</p>
+<p>In the following example, the query document selects all documents
+in the collection where the field <tt class="docutils literal"><span class="pre">qty</span></tt> has a value greater than
+(<a class="reference internal" href="http://docs.mongodb.org/manual/reference/operator/gt/#_S_gt" title="$gt"><tt class="xref mongodb mongodb-operator docutils literal"><span class="pre">$gt</span></tt></a>) <tt class="docutils literal"><span class="pre">100</span></tt> <strong>or</strong> the value of the <tt class="docutils literal"><span class="pre">price</span></tt>
+field is less than (<a class="reference internal" href="http://docs.mongodb.org/manual/reference/operator/lt/#_S_lt" title="$lt"><tt class="xref mongodb mongodb-operator docutils literal"><span class="pre">$lt</span></tt></a>) <tt class="docutils literal"><span class="pre">9.95</span></tt>:</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="nx">db</span><span class="p">.</span><span class="nx">inventory</span><span class="p">.</span><span class="nx">find</span><span class="p">(</span> <span class="p">{</span> <span class="nx">$or</span><span class="o">:</span> <span class="p">[</span> <span class="p">{</span> <span class="nx">qty</span><span class="o">:</span> <span class="p">{</span> <span class="nx">$gt</span><span class="o">:</span> <span class="mi">100</span> <span class="p">}</span> <span class="p">},</span>
+                            <span class="p">{</span> <span class="nx">price</span><span class="o">:</span> <span class="p">{</span> <span class="nx">$lt</span><span class="o">:</span> <span class="mf">9.95</span> <span class="p">}</span> <span class="p">}</span> <span class="p">]</span>
+                   <span class="p">}</span> <span class="p">)</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">With additional clauses, you can specify precise conditions for
+matching documents. In the following example, the compound query
+document selects all documents in the collection where the value of
+the <tt class="docutils literal"><span class="pre">type</span></tt> field is <tt class="docutils literal"><span class="pre">'food'</span></tt> <strong>and</strong> <em>either</em> the <tt class="docutils literal"><span class="pre">qty</span></tt> has a
+value greater than (<a class="reference internal" href="http://docs.mongodb.org/manual/reference/operator/gt/#_S_gt" title="$gt"><tt class="xref mongodb mongodb-operator docutils literal"><span class="pre">$gt</span></tt></a>) <tt class="docutils literal"><span class="pre">100</span></tt> <em>or</em> the value of
+the <tt class="docutils literal"><span class="pre">price</span></tt> field is less than (<a class="reference internal" href="http://docs.mongodb.org/manual/reference/operator/lt/#_S_lt" title="$lt"><tt class="xref mongodb mongodb-operator docutils literal"><span class="pre">$lt</span></tt></a>) <tt class="docutils literal"><span class="pre">9.95</span></tt>:</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="nx">db</span><span class="p">.</span><span class="nx">inventory</span><span class="p">.</span><span class="nx">find</span><span class="p">(</span> <span class="p">{</span> <span class="nx">type</span><span class="o">:</span> <span class="s1">'food'</span><span class="p">,</span> <span class="nx">$or</span><span class="o">:</span> <span class="p">[</span> <span class="p">{</span> <span class="nx">qty</span><span class="o">:</span> <span class="p">{</span> <span class="nx">$gt</span><span class="o">:</span> <span class="mi">100</span> <span class="p">}</span> <span class="p">},</span>
+                                          <span class="p">{</span> <span class="nx">price</span><span class="o">:</span> <span class="p">{</span> <span class="nx">$lt</span><span class="o">:</span> <span class="mf">9.95</span> <span class="p">}</span> <span class="p">}</span> <span class="p">]</span>
+                    <span class="p">}</span> <span class="p">)</span>
+</pre></div>
+</div>
+</li>
+</ul>
+<div class="section" id="subdocuments">
+<span id="read-operations-subdocuments"></span><h4>Subdocuments<a class="headerlink" href="#subdocuments" title="Permalink to this headline">¶</a></h4>
+<p>When the field holds an embedded document (i.e. subdocument), you can
+either specify the entire subdocument as the value of a field, or
+“reach into” the subdocument using <a class="reference internal" href="http://docs.mongodb.org/manual/reference/glossary/#term-dot-notation"><em class="xref std std-term">dot notation</em></a>, to specify
+values for individual fields in the subdocument:</p>
+<ul>
+<li><p class="first">Equality matches within subdocuments select documents if the
+subdocument matches <em>exactly</em> the specified subdocument, including the
+field order.</p>
+<p>In the following example, the query matches all documents where
+the value of the field <tt class="docutils literal"><span class="pre">producer</span></tt> is a subdocument that contains
+<em>only</em> the field <tt class="docutils literal"><span class="pre">company</span></tt> with the value <tt class="docutils literal"><span class="pre">'ABC123'</span></tt> and the field
+<tt class="docutils literal"><span class="pre">address</span></tt> with the value <tt class="docutils literal"><span class="pre">'123</span> <span class="pre">Street'</span></tt>, in the exact order:</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="nx">db</span><span class="p">.</span><span class="nx">inventory</span><span class="p">.</span><span class="nx">find</span><span class="p">(</span> <span class="p">{</span>
+                     <span class="nx">producer</span><span class="o">:</span> <span class="p">{</span>
+                                 <span class="nx">company</span><span class="o">:</span> <span class="s1">'ABC123'</span><span class="p">,</span>
+                                 <span class="nx">address</span><span class="o">:</span> <span class="s1">'123 Street'</span>
+                               <span class="p">}</span>
+                   <span class="p">}</span>
+                 <span class="p">)</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">Equality matches for specific fields within subdocuments select
+documents when the field in the subdocument contains a field that
+matches the specified value.</p>
+<p>In the following example, the query uses the <a class="reference internal" href="http://docs.mongodb.org/manual/reference/glossary/#term-dot-notation"><em class="xref std std-term">dot notation</em></a> to
+match all documents where the value of the field <tt class="docutils literal"><span class="pre">producer</span></tt> is a
+subdocument that contains a field <tt class="docutils literal"><span class="pre">company</span></tt> with the value
+<tt class="docutils literal"><span class="pre">'ABC123'</span></tt> and may contain other fields:</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="nx">db</span><span class="p">.</span><span class="nx">inventory</span><span class="p">.</span><span class="nx">find</span><span class="p">(</span> <span class="p">{</span> <span class="s1">'producer.company'</span><span class="o">:</span> <span class="s1">'ABC123'</span> <span class="p">}</span> <span class="p">)</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</div>
+<div class="section" id="arrays">
+<span id="read-operations-arrays"></span><h4>Arrays<a class="headerlink" href="#arrays" title="Permalink to this headline">¶</a></h4>
+<p>When the field holds an array, you can query for values in the array,
+and if the array holds sub-documents, you query for specific fields
+within the sub-documents using <a class="reference internal" href="http://docs.mongodb.org/manual/reference/glossary/#term-dot-notation"><em class="xref std std-term">dot notation</em></a>:</p>
+<ul>
+<li><p class="first">Equality matches can specify an entire array, to select an array
+that matches exactly. In the following example, the query matches all
+documents where the value of the field <tt class="docutils literal"><span class="pre">tags</span></tt> is an array and
+holds three elements, <tt class="docutils literal"><span class="pre">'fruit'</span></tt>, <tt class="docutils literal"><span class="pre">'food'</span></tt>, and <tt class="docutils literal"><span class="pre">'citrus'</span></tt>, in
+this order:</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="nx">db</span><span class="p">.</span><span class="nx">inventory</span><span class="p">.</span><span class="nx">find</span><span class="p">(</span> <span class="p">{</span> <span class="nx">tags</span><span class="o">:</span> <span class="p">[</span> <span class="s1">'fruit'</span><span class="p">,</span> <span class="s1">'food'</span><span class="p">,</span> <span class="s1">'citrus'</span> <span class="p">]</span> <span class="p">}</span> <span class="p">)</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">Equality matches can specify a single element in the array. If the
+array contains at least <em>one</em> element with the specified value, as
+in the following example: the query matches all documents where
+the value of the field <tt class="docutils literal"><span class="pre">tags</span></tt> is an array that contains, as one of
+its elements, the element <tt class="docutils literal"><span class="pre">'fruit'</span></tt>:</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="nx">db</span><span class="p">.</span><span class="nx">inventory</span><span class="p">.</span><span class="nx">find</span><span class="p">(</span> <span class="p">{</span> <span class="nx">tags</span><span class="o">:</span> <span class="s1">'fruit'</span> <span class="p">}</span> <span class="p">)</span>
+</pre></div>
+</div>
+<p>Equality matches can also select documents by values in an array
+using the array index (i.e. position) of the element in the array,
+as in the following example: the query uses the <a class="reference internal" href="http://docs.mongodb.org/manual/reference/glossary/#term-dot-notation"><em class="xref std std-term">dot notation</em></a>
+to match all documents where the value of the <tt class="docutils literal"><span class="pre">tags</span></tt> field is an
+array whose first element equals <tt class="docutils literal"><span class="pre">'fruit'</span></tt>:</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="nx">db</span><span class="p">.</span><span class="nx">inventory</span><span class="p">.</span><span class="nx">find</span><span class="p">(</span> <span class="p">{</span> <span class="s1">'tags.0'</span> <span class="o">:</span> <span class="s1">'fruit'</span> <span class="p">}</span> <span class="p">)</span>
+</pre></div>
+</div>
+</li>
+</ul>
+<p>In the following examples, consider an array that contains
+subdocuments:</p>
+<ul>
+<li><p class="first">If you know the array index of the subdocument, you can specify the
+document using the subdocument’s position.</p>
+<p>The following example selects all documents where the <tt class="docutils literal"><span class="pre">memos</span></tt>
+contains an array whose first element (i.e. index is <tt class="docutils literal"><span class="pre">0</span></tt>) is a
+subdocument with the field <tt class="docutils literal"><span class="pre">by</span></tt> with the value <tt class="docutils literal"><span class="pre">'shipping'</span></tt>:</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="nx">db</span><span class="p">.</span><span class="nx">inventory</span><span class="p">.</span><span class="nx">find</span><span class="p">(</span> <span class="p">{</span> <span class="s1">'memos.0.by'</span><span class="o">:</span> <span class="s1">'shipping'</span> <span class="p">}</span> <span class="p">)</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">If you do not know the index position of the subdocument,
+concatenate the name of the field that contains the array, with a
+dot (<tt class="docutils literal"><span class="pre">.</span></tt>) and the name of the field in the subdocument.</p>
+<p>The following example selects all documents where the <tt class="docutils literal"><span class="pre">memos</span></tt> field
+contains an array that contains at least one subdocument with the
+field <tt class="docutils literal"><span class="pre">by</span></tt> with the value <tt class="docutils literal"><span class="pre">'shipping'</span></tt>:</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="nx">db</span><span class="p">.</span><span class="nx">inventory</span><span class="p">.</span><span class="nx">find</span><span class="p">(</span> <span class="p">{</span> <span class="s1">'memos.by'</span><span class="o">:</span> <span class="s1">'shipping'</span> <span class="p">}</span> <span class="p">)</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">To match by multiple fields in the subdocument, you can use either
+dot notation or the </p></li></ul></div></div></div></div></div></div></div></div></body></html>

@@ -1,0 +1,523 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head>
+    <title>Frequently Asked Questions — MongoDB Manual</title>
+
+    <link rel="shortcut icon" href="http://media.mongodb.org/favicon.ico">
+    <meta name="robots" content="index">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <link rel="canonical" href="http://docs.mongodb.org/manual/faq">
+
+    
+    
+    <link rel="stylesheet" href="Frequently%20Asked%20Questions%20%E2%80%94%20MongoDB%20Manual_files/mongodb-docs.css" type="text/css">
+    <link rel="stylesheet" href="Frequently%20Asked%20Questions%20%E2%80%94%20MongoDB%20Manual_files/pygments.css" type="text/css">
+      
+    <script id="undefined" src="Frequently%20Asked%20Questions%20%E2%80%94%20MongoDB%20Manual_files/inpage_linkid.js" async="" type="text/javascript"></script><script src="Frequently%20Asked%20Questions%20%E2%80%94%20MongoDB%20Manual_files/ga.js" async="" type="text/javascript"></script><script src="Frequently%20Asked%20Questions%20%E2%80%94%20MongoDB%20Manual_files/cse.js" async="" type="text/javascript"></script><script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '2.2.2',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '',
+        HAS_SOURCE:  false
+      };
+    </script>
+    <script type="text/javascript" src="Frequently%20Asked%20Questions%20%E2%80%94%20MongoDB%20Manual_files/jquery.js"></script>
+    <script type="text/javascript" src="Frequently%20Asked%20Questions%20%E2%80%94%20MongoDB%20Manual_files/underscore.js"></script>
+    <script type="text/javascript" src="Frequently%20Asked%20Questions%20%E2%80%94%20MongoDB%20Manual_files/doctools.js"></script>
+      <link rel="search" type="application/opensearchdescription+xml" href="http://docs.mongodb.org/osd.xml" title="MongoDB Help">
+<link rel="author" title="About these documents" href="http://docs.mongodb.org/manual/about/">
+<link rel="top" title="MongoDB Manual" href="http://docs.mongodb.org/manual/">
+<link rel="next" title="FAQ: MongoDB Fundamentals" href="http://docs.mongodb.org/manual/faq/fundamentals/">
+<link rel="prev" title="Build Old Style Indexes" href="http://docs.mongodb.org/manual/tutorial/roll-back-to-v1.8-index/">
+<!-- Put the following javascript before the closing </head> tag. -->
+<script>
+  (function() {
+    var cx = '017213726194841070573:WMX6838984';
+    var gcse = document.createElement('script'); gcse.type = 'text/javascript'; gcse.async = true;
+    gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+        '//www.google.com/cse/cse.js?cx=' + cx;
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(gcse, s);
+  })();
+</script>
+  <script type="text/javascript" src="Frequently%20Asked%20Questions%20%E2%80%94%20MongoDB%20Manual_files/jsapi"></script><link rel="stylesheet" href="Frequently%20Asked%20Questions%20%E2%80%94%20MongoDB%20Manual_files/defaulten.css" type="text/css"><link rel="stylesheet" href="Frequently%20Asked%20Questions%20%E2%80%94%20MongoDB%20Manual_files/default.css" type="text/css"><script src="Frequently%20Asked%20Questions%20%E2%80%94%20MongoDB%20Manual_files/defaulten.js" type="text/javascript"></script><script src="Frequently%20Asked%20Questions%20%E2%80%94%20MongoDB%20Manual_files/search.js" type="text/javascript"></script><style type="text/css">
+.gsc-control-cse {
+font-family: Arial, sans-serif;
+border-color: #FFFFFF;
+background-color: #FFFFFF;
+}
+.gsc-control-cse .gsc-table-result {
+font-family: Arial, sans-serif;
+}
+input.gsc-input, .gsc-input-box, .gsc-input-box-hover, .gsc-input-box-focus {
+border-color: #D9D9D9;
+}
+input.gsc-search-button, input.gsc-search-button:hover, input.gsc-search-button:focus {
+border-color: #5AAC41;
+background-color: #5AAC41;
+background-image: none;
+filter: none;
+}
+.gsc-tabHeader.gsc-tabhInactive {
+border-color: #CCCCCC;
+background-color: #FFFFFF;
+}
+.gsc-tabHeader.gsc-tabhActive {
+border-color: #CCCCCC;
+border-bottom-color: #FFFFFF;
+background-color: #FFFFFF;
+}
+.gsc-tabsArea {
+border-color: #CCCCCC;
+}
+.gsc-webResult.gsc-result,
+.gsc-results .gsc-imageResult {
+border-color: #FFFFFF;
+background-color: #FFFFFF;
+}
+.gsc-webResult.gsc-result:hover,
+.gsc-imageResult:hover {
+border-color: #FFFFFF;
+background-color: #FFFFFF;
+}
+.gs-webResult.gs-result a.gs-title:link,
+.gs-webResult.gs-result a.gs-title:link b,
+.gs-imageResult a.gs-title:link,
+.gs-imageResult a.gs-title:link b {
+color: #1155CC;
+}
+.gs-webResult.gs-result a.gs-title:visited,
+.gs-webResult.gs-result a.gs-title:visited b,
+.gs-imageResult a.gs-title:visited,
+.gs-imageResult a.gs-title:visited b {
+color: #1155CC;
+}
+.gs-webResult.gs-result a.gs-title:hover,
+.gs-webResult.gs-result a.gs-title:hover b,
+.gs-imageResult a.gs-title:hover,
+.gs-imageResult a.gs-title:hover b {
+color: #1155CC;
+}
+.gs-webResult.gs-result a.gs-title:active,
+.gs-webResult.gs-result a.gs-title:active b,
+.gs-imageResult a.gs-title:active,
+.gs-imageResult a.gs-title:active b {
+color: #1155CC;
+}
+.gsc-cursor-page {
+color: #1155CC;
+}
+a.gsc-trailing-more-results:link {
+color: #1155CC;
+}
+.gs-webResult .gs-snippet,
+.gs-imageResult .gs-snippet,
+.gs-fileFormatType {
+color: #333333;
+}
+.gs-webResult div.gs-visibleUrl,
+.gs-imageResult div.gs-visibleUrl {
+color: #009933;
+}
+.gs-webResult div.gs-visibleUrl-short {
+color: #009933;
+}
+.gs-webResult div.gs-visibleUrl-short {
+display: none;
+}
+.gs-webResult div.gs-visibleUrl-long {
+display: block;
+}
+.gs-promotion div.gs-visibleUrl-short {
+display: none;
+}
+.gs-promotion div.gs-visibleUrl-long {
+display: block;
+}
+.gsc-cursor-box {
+border-color: #FFFFFF;
+}
+.gsc-results .gsc-cursor-box .gsc-cursor-page {
+border-color: #CCCCCC;
+background-color: #FFFFFF;
+color: #1155CC;
+}
+.gsc-results .gsc-cursor-box .gsc-cursor-current-page {
+border-color: #CCCCCC;
+background-color: #FFFFFF;
+color: #1155CC;
+}
+.gsc-webResult.gsc-result.gsc-promotion {
+border-color: #F6F6F6;
+background-color: #F6F6F6;
+}
+.gsc-completion-title {
+color: #1155CC;
+}
+.gsc-completion-snippet {
+color: #333333;
+}
+.gs-promotion a.gs-title:link,
+.gs-promotion a.gs-title:link *,
+.gs-promotion .gs-snippet a:link {
+color: #1155CC;
+}
+.gs-promotion a.gs-title:visited,
+.gs-promotion a.gs-title:visited *,
+.gs-promotion .gs-snippet a:visited {
+color: #1155CC;
+}
+.gs-promotion a.gs-title:hover,
+.gs-promotion a.gs-title:hover *,
+.gs-promotion .gs-snippet a:hover {
+color: #1155CC;
+}
+.gs-promotion a.gs-title:active,
+.gs-promotion a.gs-title:active *,
+.gs-promotion .gs-snippet a:active {
+color: #1155CC;
+}
+.gs-promotion .gs-snippet,
+.gs-promotion .gs-title .gs-promotion-title-right,
+.gs-promotion .gs-title .gs-promotion-title-right * {
+color: #333333;
+}
+.gs-promotion .gs-visibleUrl,
+.gs-promotion .gs-visibleUrl-short {
+color: #009933;
+}
+.gsc-input input.gsc-input {
+background: none repeat scroll 0% 0% white !important;
+}
+</style><style type="text/css">.gsfe_a{border:1px solid #b9b9b9;border-top-color:#a0a0a0;box-shadow:inset 0px 1px 2px rgba(0,0,0,0.1);-moz-box-shadow:inset 0px 1px 2px rgba(0,0,0,0.1);-webkit-box-shadow:inset 0px 1px 2px rgba(0,0,0,0.1);}.gsfe_b{border:1px solid #4d90fe;outline:none;box-shadow:inset 0px 1px 2px rgba(0,0,0,0.3);-moz-box-shadow:inset 0px 1px 2px rgba(0,0,0,0.3);-webkit-box-shadow:inset 0px 1px 2px rgba(0,0,0,0.3);}.gssb_c{border:0;position:absolute;z-index:989}.gssb_e{border:1px solid #ccc;border-top-color:#d9d9d9;box-shadow:0 2px 4px rgba(0,0,0,0.2);-moz-box-shadow:0 2px 4px rgba(0,0,0,0.2);cursor:default}.gssb_f{visibility:hidden;white-space:nowrap}.gssb_k{border:0;display:block;position:absolute;top:0;z-index:988}.gsdd_a{border:none!important}.gsib_a{width:100%;padding:4px 6px 0}.gsib_a,.gsib_b{vertical-align:top}.gssb_a{padding:0 7px}.gssb_a,.gssb_a td{white-space:nowrap;overflow:hidden;line-height:22px}#gssb_b{font-size:11px;color:#36c;text-decoration:none}#gssb_b:hover{font-size:11px;color:#36c;text-decoration:underline}.gssb_g{text-align:center;padding:8px 0 7px;position:relative}.gssb_h{font-size:15px;height:28px;margin:0.2em}.gssb_i{background:#eee}.gss_ifl{visibility:hidden;padding-left:5px}.gssb_i .gss_ifl{visibility:visible}a.gssb_j{font-size:13px;color:#36c;text-decoration:none;line-height:100%}a.gssb_j:hover{text-decoration:underline}.gssb_l{height:1px;background-color:#e5e5e5}.gssb_m{color:#000;background:#fff}.gscsep_a{display:none}.gsq_a{padding:0}.gscb_a{display:inline-block;font:27px/13px arial,sans-serif}.gsst_a .gscb_a{color:#a1b9ed;cursor:pointer}.gsst_a:hover .gscb_a,.gsst_a:focus .gscb_a{color:#36c}.gsst_a{display:inline-block}.gsst_a{cursor:pointer;padding:0 4px}.gsst_a:hover{text-decoration:none!important}.gsst_b{font-size:16px;padding:0 2px;user-select:none;-moz-user-select:none;white-space:nowrap}.gsst_e{opacity:0.55;}.gsst_a:hover .gsst_e,.gsst_a:focus .gsst_e{opacity:0.72;}.gsst_a:active .gsst_e{opacity:1;}.gsst_f{background:white;text-align:left}.gsst_g{background-color:white;border:1px solid #ccc;border-top-color:#d9d9d9;box-shadow:0 2px 4px rgba(0,0,0,0.2);-moz-box-shadow:0 2px 4px rgba(0,0,0,0.2);margin:-1px -3px;padding:0 6px}.gsst_h{background-color:white;height:1px;margin-bottom:-1px;position:relative;top:-1px}.gssb_a{padding:0 9px}.gsib_a{padding-right:8px;padding-left:8px}.gsst_a{padding-top:3px}.gssb_e{border:0}.gssb_l{margin:5px 0}.gssb_c .gsc-completion-container{position:static}.gssb_c{z-index:5000}.gsc-completion-container table{background:transparent;font-size:inherit;font-family:inherit}.gssb_c > tbody > tr,.gssb_c > tbody > tr > td,.gssb_d,.gssb_d > tbody > tr,.gssb_d > tbody > tr > td,.gssb_e,.gssb_e > tbody > tr,.gssb_e > tbody > tr > td{padding:0;margin:0;border:0}.gssb_a table,.gssb_a table tr,.gssb_a table tr td{padding:0;margin:0;border:0}</style><style type="text/css">.atlwdg-blanket {background:#000;height:100%;left:0;opacity:.5;position:fixed;top:0;width:100%;z-index:1000000;}
+.atlwdg-popup {background:#fff;border:1px solid #666;position:fixed;top:50%;left:50%;z-index:10000011;}
+.atlwdg-popup.atlwdg-box-shadow {-moz-box-shadow:10px 10px 20px rgba(0,0,0,0.5);-webkit-box-shadow:10px 10px 20px rgba(0,0,0,0.5);box-shadow:10px 10px 20px rgba(0,0,0,0.5);background-color:#fff;}
+.atlwdg-hidden {display:none;}
+.atlwdg-trigger {position: fixed; background: #013466; padding: 5px;border: 2px solid white;border-top: none; font-weight: bold; color: white; display:block;white-space:nowrap;text-decoration:none; font-family:arial, FreeSans, Helvetica, sans-serif;font-size:12px;box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5);-webkit-box-shadow:5px 5px 10px rgba(0, 0, 0, 0.5); -moz-box-shadow:5px 5px 10px rgba(0, 0, 0, 0.5);border-radius: 0 0 5px 5px; -moz-border-radius: 0 0 5px 5px;}
+a.atlwdg-trigger {text-decoration:none;}
+.atlwdg-trigger.atlwdg-TOP {left: 45%;top:0; }
+.atlwdg-trigger.atlwdg-RIGHT {left:100%; top:40%; -webkit-transform-origin:top left; -webkit-transform: rotate(90deg); -moz-transform: rotate(90deg); -moz-transform-origin:top left;-ms-transform: rotate(90deg); -ms-transform-origin:top left; }
+.atlwdg-trigger.atlwdg-SUBTLE { right:0; bottom:0; border: 1px solid #ccc; border-bottom: none; border-right: none; background-color: #f5f5f5; color: #444; font-size: 11px; padding: 6px; box-shadow: -1px -1px 2px rgba(0, 0, 0, 0.5); border-radius: 2px 0 0 0; }
+.atlwdg-loading {position:absolute;top:220px;left:295px;}</style></head>
+  <body>
+<div id="top-right">
+        <div class="user-right">
+                <ul id="header-menu-bar" class="ajs-menu-bar">
+                <li class="normal"><a target="_blank" href="http://groups.google.com/group/mongodb-user">Forums</a></li>
+                <li class="normal"><a target="_blank" href="http://blog.mongodb.org/">Blog</a></li>
+                <li class="normal"><a href="http://www.mongodb.org/downloads">Download</a></li>
+                <li class="normal"><a href="http://docs.mongodb.org/ecosystem/drivers/">Drivers</a></li>
+                <li class="normal"><a href="http://www.10gen.com/events">Events</a></li>
+                <li class="normal last"><a class="last" href="http://docs.mongodb.org/manual/meta/translation">Translations</a></li>
+                </ul>
+        </div>
+</div>
+<div id="header-db" class="spread">
+        <div class="split">
+                <div id="logo">
+                        <div><a href="http://docs.mongodb.org/manual/"><img class="logo" src="Frequently%20Asked%20Questions%20%E2%80%94%20MongoDB%20Manual_files/logo-mongodb.png" alt="MongoDB Logo"></a></div>
+                </div>
+        </div>
+
+<div class="search-db"><div dir="ltr" id="___gcse_0"><form accept-charset="utf-8" class="gsc-search-box gsc-search-box-tools"><table class="gsc-search-box" cellpadding="0" cellspacing="0"><tbody><tr><td class="gsc-input"><div id="gsc-iw-id1" class="gsc-input-box"><table class="gstl_0 " id="gs_id0" style="width: 100%; padding: 0px;" cellpadding="0" cellspacing="0"><tbody><tr><td class="gsib_a" id="gs_tti0"><input spellcheck="false" dir="ltr" id="gsc-i-id1" style="width: 100%; padding: 0px; border: medium none; margin: 0px; height: auto; outline: medium none;" title="search" name="search" class="gsc-input" size="10" autocomplete="off" type="text"></td><td class="gsib_b"><div dir="ltr" id="gs_st0" class="gsst_b"><a style="display: none;" href="javascript:void(0)" class="gsst_a"><span id="gs_cb0" class="gscb_a">×</span></a></div></td></tr></tbody></table></div></td><td class="gsc-search-button"><input title="search" class="gsc-search-button gsc-search-button-v2" src="Frequently%20Asked%20Questions%20%E2%80%94%20MongoDB%20Manual_files/search_box_icon.png" type="image"></td><td class="gsc-clear-button"><div title="clear results" class="gsc-clear-button">&nbsp;</div></td></tr></tbody></table><table class="gsc-branding" cellpadding="0" cellspacing="0"><tbody><tr style="display: none;"><td class="gsc-branding-user-defined"></td><td class="gsc-branding-text"><div class="gsc-branding-text">powered by</div></td><td class="gsc-branding-img"><img class="gsc-branding-img" src="Frequently%20Asked%20Questions%20%E2%80%94%20MongoDB%20Manual_files/small-logo.png"></td></tr></tbody></table></form></div></div>
+<div id="etp">
+<ul>
+<li><a href="https://github.com/mongodb/docs/blob/master/source/faq.txt" target="_blank" title="Edit faq.txt on github">Edit this Page</a></li>
+<li><a href="http://github.com/mongodb/docs" target="_blank" title="Fork the documentation on GitHub and contribute.">GitHub</a></li>
+<li><a href="https://jira.mongodb.org/secure/CreateIssueDetails%21init.jspa?pid=10380&amp;issuetype=4&amp;priority=4&amp;summary=Comment+on%3a+%22faq%2Etxt%22" target="_blank" title="Report a problem with faq.txt on Jira">Report a problem</a></li>
+</ul>
+</div>
+</div>  
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            <div id="cse-results"><div id="___gcse_1"><div class="gsc-control-cse gsc-control-cse-en"><div dir="ltr" class="gsc-control-wrapper-cse"><div class="gsc-results-wrapper-nooverlay"><div class="gsc-tabsAreaInvisible"><div class="gsc-tabHeader gsc-inline-block gsc-tabhActive">Custom Search</div><span class="gs-spacer"> </span></div><div class="gsc-tabsAreaInvisible"></div><div class="gsc-above-wrapper-area-invisible"><table class="gsc-above-wrapper-area-container" cellpadding="0" cellspacing="0"><tbody><tr><td class="gsc-result-info-container"><div class="gsc-result-info-invisible"></div></td></tr></tbody></table></div><div class="gsc-adBlockInvisible"></div><div class="gsc-wrapper"><div class="gsc-adBlockInvisible"></div><div class="gsc-resultsbox-invisible"><div class="gsc-resultsRoot gsc-tabData gsc-tabdActive"><table class="gsc-resultsHeader" cellpadding="0" cellspacing="0"><tbody><tr><td class="gsc-twiddleRegionCell"><div class="gsc-twiddle"><div class="gsc-title">Web</div></div><div class="gsc-stats"></div><div class="gsc-results-selector gsc-all-results-active"><div title="show one result" class="gsc-result-selector gsc-one-result">&nbsp;</div><div title="show more results" class="gsc-result-selector gsc-more-results">&nbsp;</div><div title="show all results" class="gsc-result-selector gsc-all-results">&nbsp;</div></div></td><td class="gsc-configLabelCell"></td></tr></tbody></table><div><div class="gsc-expansionArea"></div></div></div></div></div></div></div></div></div></div>
+            
+  <div class="section" id="frequently-asked-questions">
+<h1>Frequently Asked Questions<a class="headerlink" href="#frequently-asked-questions" title="Permalink to this headline">¶</a></h1>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="http://docs.mongodb.org/manual/faq/fundamentals/">FAQ: MongoDB Fundamentals</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="http://docs.mongodb.org/manual/faq/fundamentals/#what-kind-of-database-is-mongodb">What kind of database is MongoDB?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="http://docs.mongodb.org/manual/faq/fundamentals/#do-mongodb-databases-have-tables">Do MongoDB databases have tables?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="http://docs.mongodb.org/manual/faq/fundamentals/#do-mongodb-databases-have-schemas">Do MongoDB databases have schemas?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="http://docs.mongodb.org/manual/faq/fundamentals/#what-languages-can-i-use-to-work-with-the-mongodb">What languages can I use to work with the MongoDB?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="http://docs.mongodb.org/manual/faq/fundamentals/#does-mongodb-support-sql">Does MongoDB support SQL?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="http://docs.mongodb.org/manual/faq/fundamentals/#what-are-typical-uses-for-mongodb">What are typical uses for MongoDB?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="http://docs.mongodb.org/manual/faq/fundamentals/#does-mongodb-support-transactions">Does MongoDB support transactions?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="http://docs.mongodb.org/manual/faq/fundamentals/#does-mongodb-require-a-lot-of-ram">Does MongoDB require a lot of RAM?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="http://docs.mongodb.org/manual/faq/fundamentals/#how-do-i-configure-the-cache-size">How do I configure the cache size?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="http://docs.mongodb.org/manual/faq/fundamentals/#does-mongodb-require-a-separate-caching-layer-for-application-level-caching">Does MongoDB require a separate caching layer for application-level caching?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="http://docs.mongodb.org/manual/faq/fundamentals/#does-mongodb-handle-caching">Does MongoDB handle caching?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="http://docs.mongodb.org/manual/faq/fundamentals/#are-writes-written-to-disk-immediately-or-lazily">Are writes written to disk immediately, or lazily?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="http://docs.mongodb.org/manual/faq/fundamentals/#what-language-is-mongodb-written-in">What language is MongoDB written in?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="http://docs.mongodb.org/manual/faq/fundamentals/#what-are-the-limitations-of-32-bit-versions-of-mongodb">What are the limitations of 32-bit versions of MongoDB?</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="http://docs.mongodb.org/manual/faq/developers/">FAQ: MongoDB for Application Developers</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="http://docs.mongodb.org/manual/faq/developers/#what-is-a-namespace-in-mongodb">What is a namespace in MongoDB?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="http://docs.mongodb.org/manual/faq/developers/#how-do-you-copy-all-objects-from-one-collection-to-another">How do you copy all objects from one collection to another?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="http://docs.mongodb.org/manual/faq/developers/#if-you-remove-a-document-does-mongodb-remove-it-from-disk">If you remove a document, does MongoDB remove it from disk?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="http://docs.mongodb.org/manual/faq/developers/#when-does-mongodb-write-updates-to-disk">When does MongoDB write updates to disk?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="http://docs.mongodb.org/manual/faq/developers/#how-do-i-do-transactions-and-locking-in-mongodb">How do I do transactions and locking in MongoDB?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="http://docs.mongodb.org/manual/faq/developers/#how-do-you-aggregate-data-with-mongodb">How do you aggregate data with MongoDB?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="http://docs.mongodb.org/manual/faq/developers/#why-does-mongodb-log-so-many-connection-accepted-events">Why does MongoDB log so many “Connection Accepted” events?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="http://docs.mongodb.org/manual/faq/developers/#does-mongodb-run-on-amazon-ebs">Does MongoDB run on Amazon EBS?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="http://docs.mongodb.org/manual/faq/developers/#why-are-mongodb-s-data-files-so-large">Why are MongoDB’s data files so large?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="http://docs.mongodb.org/manual/faq/developers/#how-do-i-optimize-storage-use-for-small-documents">How do I optimize storage use for small documents?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="http://docs.mongodb.org/manual/faq/developers/#when-should-i-use-gridfs">When should I use GridFS?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="http://docs.mongodb.org/manual/faq/developers/#how-does-mongodb-address-sql-or-query-injection">How does MongoDB address SQL or Query injection?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="http://docs.mongodb.org/manual/faq/developers/#how-does-mongodb-provide-concurrency">How does MongoDB provide concurrency?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="http://docs.mongodb.org/manual/faq/developers/#what-is-the-compare-order-for-bson-types">What is the compare order for BSON types?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="http://docs.mongodb.org/manual/faq/developers/#how-do-i-query-for-fields-that-have-null-values">How do I query for fields that have null values?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="http://docs.mongodb.org/manual/faq/developers/#are-there-any-restrictions-on-the-names-of-collections">Are there any restrictions on the names of Collections?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="http://docs.mongodb.org/manual/faq/developers/#how-do-i-isolate-cursors-from-intervening-write-operations">How do I isolate cursors from intervening write operations?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="http://docs.mongodb.org/manual/faq/developers/#when-should-i-embed-documents-within-other-documents">When should I embed documents within other documents?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="http://docs.mongodb.org/manual/faq/developers/#can-i-manually-pad-documents-to-prevent-moves-during-updates">Can I manually pad documents to prevent moves during updates?</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="http://docs.mongodb.org/manual/faq/mongo/">FAQ: The <tt class="docutils literal"><span class="pre">mongo</span></tt> Shell</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="http://docs.mongodb.org/manual/faq/mongo/#how-can-i-enter-multi-line-operations-in-the-mongo-shell">How can I enter multi-line operations in the <tt class="docutils literal"><span class="pre">mongo</span></tt> shell?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="http://docs.mongodb.org/manual/faq/mongo/#how-can-i-access-to-different-databases-temporarily">How can I access to different databases temporarily?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="http://docs.mongodb.org/manual/faq/mongo/#does-the-mongo-shell-support-tab-completion-and-other-keyboard-shortcuts">Does the <tt class="docutils literal"><span class="pre">mongo</span></tt> shell support tab completion and other keyboard shortcuts?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="http://docs.mongodb.org/manual/faq/mongo/#how-can-i-customize-the-mongo-shell-prompt">How can I customize the <tt class="docutils literal"><span class="pre">mongo</span></tt> shell prompt?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="http://docs.mongodb.org/manual/faq/mongo/#can-i-edit-long-shell-operations-with-an-external-text-editor">Can I edit long shell operations with an external text editor?</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="http://docs.mongodb.org/manual/faq/concurrency/">FAQ: Concurrency</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="http://docs.mongodb.org/manual/faq/concurrency/#what-type-of-locking-does-mongodb-use">What type of locking does MongoDB use?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="http://docs.mongodb.org/manual/faq/concurrency/#how-granular-are-locks-in-mongodb">How granular are locks in MongoDB?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="http://docs.mongodb.org/manual/faq/concurrency/#how-do-i-see-the-status-of-locks-on-my-mongod-instances">How do I see the status of locks on my <tt class="docutils literal"><span class="pre">mongod</span></tt> instances?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="http://docs.mongodb.org/manual/faq/concurrency/#does-a-read-or-write-operation-ever-yield-the-lock">Does a read or write operation ever yield the lock?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="http://docs.mongodb.org/manual/faq/concurrency/#which-operations-lock-the-database">Which operations lock the database?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="http://docs.mongodb.org/manual/faq/concurrency/#which-administrative-commands-lock-the-database">Which administrative commands lock the database?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="http://docs.mongodb.org/manual/faq/concurrency/#does-a-mongodb-operation-ever-lock-more-than-one-database">Does a MongoDB operation ever lock more than one database?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="http://docs.mongodb.org/manual/faq/concurrency/#how-does-sharding-affect-concurrency">How does sharding affect concurrency?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="http://docs.mongodb.org/manual/faq/concurrency/#how-does-concurrency-affect-a-replica-set-primary">How does concurrency affect a replica set primary?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="http://docs.mongodb.org/manual/faq/concurrency/#how-does-concurrency-affect-secondaries">How does concurrency affect secondaries?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="http://docs.mongodb.org/manual/faq/concurrency/#what-kind-of-concurrency-does-mongodb-provide-for-javascript-operations">What kind of concurrency does MongoDB provide for JavaScript operations?</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="http://docs.mongodb.org/manual/faq/sharding/">FAQ: Sharding with MongoDB</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="http://docs.mongodb.org/manual/faq/sharding/#is-sharding-appropriate-for-a-new-deployment">Is sharding appropriate for a new deployment?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="http://docs.mongodb.org/manual/faq/sharding/#how-does-sharding-work-with-replication">How does sharding work with replication?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="http://docs.mongodb.org/manual/faq/sharding/#can-i-change-the-shard-key-after-sharding-a-collection">Can I change the shard key after sharding a collection?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="http://docs.mongodb.org/manual/faq/sharding/#what-happens-to-unsharded-collections-in-sharded-databases">What happens to unsharded collections in sharded databases?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="http://docs.mongodb.org/manual/faq/sharding/#how-does-mongodb-distribute-data-across-shards">How does MongoDB distribute data across shards?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="http://docs.mongodb.org/manual/faq/sharding/#what-happens-if-a-client-updates-a-document-in-a-chunk-during-a-migration">What happens if a client updates a document in a chunk during a migration?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="http://docs.mongodb.org/manual/faq/sharding/#what-happens-to-queries-if-a-shard-is-inaccessible-or-slow">What happens to queries if a shard is inaccessible or slow?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="http://docs.mongodb.org/manual/faq/sharding/#how-does-mongodb-distribute-queries-among-shards">How does MongoDB distribute queries among shards?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="http://docs.mongodb.org/manual/faq/sharding/#how-does-mongodb-sort-queries-in-sharded-environments">How does MongoDB sort queries in sharded environments?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="http://docs.mongodb.org/manual/faq/sharding/#how-does-mongodb-ensure-unique-id-field-values-when-using-a-shard-key-other-than-id">How does MongoDB ensure unique <tt class="docutils literal"><span class="pre">_id</span></tt> field values when using a shard key <em>other</em> than <tt class="docutils literal"><span class="pre">_id</span></tt>?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="http://docs.mongodb.org/manual/faq/sharding/#i-ve-enabled-sharding-and-added-a-second-shard-but-all-the-data-is-still-on-one-server-why">I’ve enabled sharding and added a second shard, but all the data is still on one server. Why?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="http://docs.mongodb.org/manual/faq/sharding/#is-it-safe-to-remove-old-files-in-the-movechunk-directory">Is it safe to remove old files in the <tt class="docutils literal"><span class="pre">moveChunk</span></tt> directory?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="http://docs.mongodb.org/manual/faq/sharding/#how-does-mongos-use-connections">How does <tt class="docutils literal"><span class="pre">mongos</span></tt> use connections?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="http://docs.mongodb.org/manual/faq/sharding/#why-does-mongos-hold-connections-open">Why does <tt class="docutils literal"><span class="pre">mongos</span></tt> hold connections open?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="http://docs.mongodb.org/manual/faq/sharding/#where-does-mongodb-report-on-connections-used-by-mongos">Where does MongoDB report on connections used by <tt class="docutils literal"><span class="pre">mongos</span></tt>?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="http://docs.mongodb.org/manual/faq/sharding/#what-does-writebacklisten-in-the-log-mean">What does <tt class="docutils literal"><span class="pre">writebacklisten</span></tt> in the log mean?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="http://docs.mongodb.org/manual/faq/sharding/#how-should-administrators-deal-with-failed-migrations">How should administrators deal with failed migrations?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="http://docs.mongodb.org/manual/faq/sharding/#what-is-the-process-for-moving-renaming-or-changing-the-number-of-config-servers">What is the process for moving, renaming, or changing the number of config servers?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="http://docs.mongodb.org/manual/faq/sharding/#when-do-the-mongos-servers-detect-config-server-changes">When do the <tt class="docutils literal"><span class="pre">mongos</span></tt> servers detect config server changes?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="http://docs.mongodb.org/manual/faq/sharding/#is-it-possible-to-quickly-update-mongos-servers-after-updating-a-replica-set-configuration">Is it possible to quickly update <tt class="docutils literal"><span class="pre">mongos</span></tt> servers after updating a replica set configuration?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="http://docs.mongodb.org/manual/faq/sharding/#what-does-the-maxconns-setting-on-mongos-do">What does the <tt class="docutils literal"><span class="pre">maxConns</span></tt> setting on <tt class="docutils literal"><span class="pre">mongos</span></tt> do?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="http://docs.mongodb.org/manual/faq/sharding/#how-do-indexes-impact-queries-in-sharded-systems">How do indexes impact queries in sharded systems?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="http://docs.mongodb.org/manual/faq/sharding/#can-shard-keys-be-randomly-generated">Can shard keys be randomly generated?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="http://docs.mongodb.org/manual/faq/sharding/#can-shard-keys-have-a-non-uniform-distribution-of-values">Can shard keys have a non-uniform distribution of values?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="http://docs.mongodb.org/manual/faq/sharding/#can-you-shard-on-the-id-field">Can you shard on the <tt class="docutils literal"><span class="pre">_id</span></tt> field?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="http://docs.mongodb.org/manual/faq/sharding/#can-shard-key-be-in-ascending-order-like-dates-or-timestamps">Can shard key be in ascending order, like dates or timestamps?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="http://docs.mongodb.org/manual/faq/sharding/#what-do-movechunk-commit-failed-errors-mean">What do <tt class="docutils literal"><span class="pre">moveChunk</span> <span class="pre">commit</span> <span class="pre">failed</span></tt> errors mean?</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="http://docs.mongodb.org/manual/faq/replica-sets/">FAQ: Replica Sets and Replication in MongoDB</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="http://docs.mongodb.org/manual/faq/replica-sets/#what-kinds-of-replication-does-mongodb-support">What kinds of replication does MongoDB support?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="http://docs.mongodb.org/manual/faq/replica-sets/#what-do-the-terms-primary-and-master-mean">What do the terms “primary” and “master” mean?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="http://docs.mongodb.org/manual/faq/replica-sets/#what-do-the-terms-secondary-and-slave-mean">What do the terms “secondary” and “slave” mean?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="http://docs.mongodb.org/manual/faq/replica-sets/#how-long-does-replica-set-failover-take">How long does replica set failover take?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="http://docs.mongodb.org/manual/faq/replica-sets/#does-replication-work-over-the-internet-and-wan-connections">Does replication work over the Internet and WAN connections?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="http://docs.mongodb.org/manual/faq/replica-sets/#can-mongodb-replicate-over-a-noisy-connection">Can MongoDB replicate over a “noisy” connection?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="http://docs.mongodb.org/manual/faq/replica-sets/#what-is-the-preferred-replication-method-master-slave-or-replica-sets">What is the preferred replication method: master/slave or replica sets?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="http://docs.mongodb.org/manual/faq/replica-sets/#what-is-the-preferred-replication-method-replica-sets-or-replica-pairs">What is the preferred replication method: replica sets or replica pairs?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="http://docs.mongodb.org/manual/faq/replica-sets/#why-use-journaling-if-replication-already-provides-data-redundancy">Why use journaling if replication already provides data redundancy?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="http://docs.mongodb.org/manual/faq/replica-sets/#are-write-operations-durable-if-write-concern-does-not-acknowledge-writes">Are write operations durable if write concern does not acknowledge writes?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="http://docs.mongodb.org/manual/faq/replica-sets/#how-many-arbiters-do-replica-sets-need">How many arbiters do replica sets need?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="http://docs.mongodb.org/manual/faq/replica-sets/#what-information-do-arbiters-exchange-with-the-rest-of-the-replica-set">What information do arbiters exchange with the rest of the replica set?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="http://docs.mongodb.org/manual/faq/replica-sets/#which-members-of-a-replica-set-vote-in-elections">Which members of a replica set vote in elections?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="http://docs.mongodb.org/manual/faq/replica-sets/#do-hidden-members-vote-in-replica-set-elections">Do hidden members vote in replica set elections?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="http://docs.mongodb.org/manual/faq/replica-sets/#is-it-normal-for-replica-set-members-to-use-different-amounts-of-disk-space">Is it normal for replica set members to use different amounts of disk space?</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="http://docs.mongodb.org/manual/faq/storage/">FAQ: MongoDB Storage</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="http://docs.mongodb.org/manual/faq/storage/#what-are-memory-mapped-files">What are memory mapped files?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="http://docs.mongodb.org/manual/faq/storage/#how-do-memory-mapped-files-work">How do memory mapped files work?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="http://docs.mongodb.org/manual/faq/storage/#how-does-mongodb-work-with-memory-mapped-files">How does MongoDB work with memory mapped files?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="http://docs.mongodb.org/manual/faq/storage/#what-are-page-faults">What are page faults?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="http://docs.mongodb.org/manual/faq/storage/#what-is-the-difference-between-soft-and-hard-page-faults">What is the difference between soft and hard page faults?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="http://docs.mongodb.org/manual/faq/storage/#what-tools-can-i-use-to-investigate-storage-use-in-mongodb">What tools can I use to investigate storage use in MongoDB?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="http://docs.mongodb.org/manual/faq/storage/#what-is-the-working-set">What is the working set?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="http://docs.mongodb.org/manual/faq/storage/#why-are-the-files-in-my-data-directory-larger-than-the-data-in-my-database">Why are the files in my data directory larger than the data in my database?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="http://docs.mongodb.org/manual/faq/storage/#how-can-i-check-the-size-of-a-collection">How can I check the size of a collection?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="http://docs.mongodb.org/manual/faq/storage/#how-can-i-check-the-size-of-indexes">How can I check the size of indexes?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="http://docs.mongodb.org/manual/faq/storage/#how-do-i-know-when-the-server-runs-out-of-disk-space">How do I know when the server runs out of disk space?</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="http://docs.mongodb.org/manual/faq/indexes/">FAQ: Indexes</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="http://docs.mongodb.org/manual/faq/indexes/#should-you-run-ensureindex-after-every-insert">Should you run <tt class="docutils literal"><span class="pre">ensureIndex()</span></tt> after every insert?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="http://docs.mongodb.org/manual/faq/indexes/#how-do-you-know-what-indexes-exist-in-a-collection">How do you know what indexes exist in a collection?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="http://docs.mongodb.org/manual/faq/indexes/#how-do-you-determine-the-size-of-an-index">How do you determine the size of an index?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="http://docs.mongodb.org/manual/faq/indexes/#what-happens-if-an-index-does-not-fit-into-ram">What happens if an index does not fit into RAM?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="http://docs.mongodb.org/manual/faq/indexes/#how-do-you-know-what-index-a-query-used">How do you know what index a query used?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="http://docs.mongodb.org/manual/faq/indexes/#how-do-you-determine-what-fields-to-index">How do you determine what fields to index?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="http://docs.mongodb.org/manual/faq/indexes/#how-do-write-operations-affect-indexes">How do write operations affect indexes?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="http://docs.mongodb.org/manual/faq/indexes/#will-building-a-large-index-affect-database-performance">Will building a large index affect database performance?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="http://docs.mongodb.org/manual/faq/indexes/#can-i-use-index-keys-to-constrain-query-matches">Can I use index keys to constrain query matches?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="http://docs.mongodb.org/manual/faq/indexes/#using-ne-and-nin-in-a-query-is-slow-why">Using <tt class="docutils literal"><span class="pre">$ne</span></tt> and <tt class="docutils literal"><span class="pre">$nin</span></tt> in a query is slow. Why?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="http://docs.mongodb.org/manual/faq/indexes/#can-i-use-a-multi-key-index-to-support-a-query-for-a-whole-array">Can I use a multi-key index to support a query for a whole array?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="http://docs.mongodb.org/manual/faq/indexes/#how-can-i-effectively-use-indexes-strategy-for-attribute-lookups">How can I effectively use indexes strategy for attribute lookups?</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="http://docs.mongodb.org/manual/faq/diagnostics/">FAQ: MongoDB Diagnostics</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="http://docs.mongodb.org/manual/faq/diagnostics/#where-can-i-find-information-about-a-mongod-process-that-stopped-running-unexpectedly">Where can I find information about a <tt class="docutils literal"><span class="pre">mongod</span></tt> process that stopped running unexpectedly?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="http://docs.mongodb.org/manual/faq/diagnostics/#does-tcp-keepalive-time-affect-sharded-clusters-and-replica-sets">Does TCP <tt class="docutils literal"><span class="pre">keepalive</span></tt> time affect sharded clusters and replica sets?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="http://docs.mongodb.org/manual/faq/diagnostics/#memory-diagnostics">Memory Diagnostics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="http://docs.mongodb.org/manual/faq/diagnostics/#sharded-cluster-diagnostics">Sharded Cluster Diagnostics</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+
+
+<div id="btnv">
+<ul id="btnvl">
+<li id="btnvpr"><a href="http://docs.mongodb.org/manual/tutorial/roll-back-to-v1.8-index/" title="Previous Section: Build Old Style Indexes">&lt; &nbsp; Build Old Style Indexes</a></li>
+<li id="btnvnx"><a href="http://docs.mongodb.org/manual/faq/fundamentals/" title="Next Section: FAQ: MongoDB Fundamentals">FAQ: MongoDB Fundamentals &nbsp;&gt;</a></li>
+</ul>
+</div>
+</div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper"><h3><a href="http://docs.mongodb.org/manual/contents/">MongoDB Manual</a>
+
+<small><a href="http://docs.mongodb.org/manual/genindex/">(Index)</a></small>
+
+</h3>
+
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="http://docs.mongodb.org/manual/installation/">Installing MongoDB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://docs.mongodb.org/manual/administration/">Administration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://docs.mongodb.org/manual/security/">Security</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://docs.mongodb.org/manual/crud/">Core MongoDB Operations (CRUD)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://docs.mongodb.org/manual/aggregation/">Aggregation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://docs.mongodb.org/manual/indexes/">Indexes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://docs.mongodb.org/manual/replication/">Replication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://docs.mongodb.org/manual/sharding/">Sharding</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://docs.mongodb.org/manual/applications/">Application Development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://docs.mongodb.org/manual/mongo/">Using the <tt class="docutils literal"><span class="pre">mongo</span></tt> Shell</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://docs.mongodb.org/manual/use-cases/">Use Cases</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://docs.mongodb.org/manual/tutorial/">MongoDB Tutorials</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="">Frequently Asked Questions</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="http://docs.mongodb.org/manual/faq/fundamentals/">FAQ: MongoDB Fundamentals</a></li>
+<li class="toctree-l2"><a class="reference internal" href="http://docs.mongodb.org/manual/faq/developers/">FAQ: MongoDB for Application Developers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="http://docs.mongodb.org/manual/faq/mongo/">FAQ: The <tt class="docutils literal"><span class="pre">mongo</span></tt> Shell</a></li>
+<li class="toctree-l2"><a class="reference internal" href="http://docs.mongodb.org/manual/faq/concurrency/">FAQ: Concurrency</a></li>
+<li class="toctree-l2"><a class="reference internal" href="http://docs.mongodb.org/manual/faq/sharding/">FAQ: Sharding with MongoDB</a></li>
+<li class="toctree-l2"><a class="reference internal" href="http://docs.mongodb.org/manual/faq/replica-sets/">FAQ: Replica Sets and Replication in MongoDB</a></li>
+<li class="toctree-l2"><a class="reference internal" href="http://docs.mongodb.org/manual/faq/storage/">FAQ: MongoDB Storage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="http://docs.mongodb.org/manual/faq/indexes/">FAQ: Indexes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="http://docs.mongodb.org/manual/faq/diagnostics/">FAQ: MongoDB Diagnostics</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="http://docs.mongodb.org/manual/reference/">Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http://docs.mongodb.org/manual/about/">About MongoDB Documentation</a></li>
+</ul>
+
+<h3 style="padding-bottom: 1em;"><a href="http://www.mongodb.org/about/">MongoDB.org</a></h3>
+<h3 style="padding-bottom: 1em;"><a href="http://docs.mongodb.org/ecosystem/">MongoDB Ecosystem</a></h3><h3>Formats</h3>
+<ul class="this-page-menu">
+  <li><a href="http://docs.mongodb.org/master/single/">MongoDB Manual, Single HTML Page</a></li>
+  <li><a href="http://docs.mongodb.org/master/MongoDB-Manual-master.pdf" rel="nofollow">MongoDB Manual, PDF Format</a></li>
+  <li><a href="http://docs.mongodb.org/master/MongoDB-Manual-master.epub" rel="nofollow">MongoDB Manual, ePub Format</a></li>
+</ul><h3>MongoDB Wiki</h3>
+
+<ul>
+ <li><strong>Getting Started</strong>
+   <ul>
+     <li><a href="http://www.mongodb.org/about/introduction">Introduction</a></li>
+     <li><a href="http://www.mongodb.org/downloads">Downloads</a></li>
+   </ul>
+ </li>
+ <li><strong><a href="http://www.mongodb.org/about/community">Community</a> and <a href="http://docs.mongodb.org/ecosystem/">Ecosystem</a></strong>
+   <ul>
+     <li><a href="http://www.10gen.com/">10gen</a></li>
+     <li><a href="http://www.10gen.com/events">MongoDB Events</a></li>
+     <li><a href="http://planet.mongodb.org/">Planet MongoDB</a></li>
+     <li><a href="http://mongodb.org/about/community/masters">MongoDB Masters</a></li>
+     <li><a href="http://www.10gen.com/presentations">Slides and Video</a></li>
+     <li><a href="http://docs.mongodb.org/ecosystem/platforms/">Hosting Center</a></li>
+     <li><a href="http://docs.mongodb.org/ecosystem/platforms/windows">Windows</a></li>
+     <li><a href="http://www.10gen.com/products/mms/">MongoDB Monitoring Service</a> (<a href="http://mms.10gen.com/help/">docs</a>)</li>
+     <li><a href="http://docs.mongodb.org/ecosystem/tools/administration-interfaces/">Administrative Interfaces</a></li>
+     <li><a href="http://www.10gen.com/books/">MongoDB Books</a></li>
+   </ul>
+ </li>
+ <li><strong><a href="http://docs.mongodb.org/ecosystem/drivers/">Drivers</a></strong>
+   <ul>
+     <li><a href="http://docs.mongodb.org/ecosystem/drivers/javascript">JavaScript</a> (<a href="http://api.mongodb.org/js/current">docs</a>)</li>
+     <li><a href="http://docs.mongodb.org/ecosystem/drivers/python">Python</a> (<a href="http://api.mongodb.org/python/current">docs</a>)</li>
+     <li><a href="http://docs.mongodb.org/ecosystem/drivers/ruby">Ruby</a> (<a href="http://api.mongodb.org/ruby/current">docs</a>)</li>
+     <li><a href="http://docs.mongodb.org/ecosystem/drivers/php">PHP</a> (<a href="http://php.net/mongo/">docs</a>)</li>
+     <li><a href="http://docs.mongodb.org/ecosystem/drivers/perl">Perl</a> (<a href="http://api.mongodb.org/perl/current/">docs</a>)</li>
+     <li><a href="http://docs.mongodb.org/ecosystem/drivers/java">Java</a> (<a href="http://api.mongodb.org/java/current">docs</a>)</li>
+     <li><a href="http://api.mongodb.org/scala/casbah/current/">Scala</a> (<a href="http://api.mongodb.org/scala/casbah/current/">docs</a>)</li>
+<!-- <li><a href="http://docs.mongodb.org/ecosystem/drivers/scala">Scala</a> (<a href="http://api.mongodb.org/scala/casbah/current/">docs</a>)</li> -->
+     <li><a href="http://docs.mongodb.org/ecosystem/drivers/csharp">C#</a> (<a href="http://api.mongodb.org/csharp/current/">docs</a>)</li>
+     <li><a href="http://docs.mongodb.org/ecosystem/drivers/c">C</a> (<a href="http://api.mongodb.org/c/current/">docs</a>)</li>
+     <li><a href="http://docs.mongodb.org/ecosystem/drivers/cpp">C++</a> (<a href="http://api.mongodb.org/cplusplus/current/">docs</a>)</li>
+     <li><a href="http://docs.mongodb.org/ecosystem/drivers/haskell">Haskell</a> (<a href="http://api.mongodb.org/haskell">docs</a>)</li>
+     <li><a href="http://docs.mongodb.org/ecosystem/drivers/erlang">Erlang</a> (<a href="http://api.mongodb.org/erlang">docs</a>)</li>
+   </ul>
+ </li>
+</ul>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+  <div class="footer">
+    <p>
+       © <a href="">Copyright</a> 2011-2013, 10gen, Inc. 
+       MongoDB®, Mongo®, and the leaf logo are registered trademarks of 10gen, Inc.
+    </p>
+  </div><script type="text/javascript">
+var _gaq = _gaq || [];
+var pluginUrl = (('https:' == document.location.protocol) ? 'https://ssl.' : 'http://www.') + 'google-analytics.com/plugins/ga/inpage_linkid.js';
+_gaq.push(['_require', 'inpage_linkid', pluginUrl]);
+_gaq.push(['_setAccount', 'UA-7301842-8']);
+_gaq.push(['_setDomainName', 'docs.mongodb.org']);
+_gaq.push(['_trackPageview']);
+(function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0];
+        s.parentNode.insertBefore(ga, s);
+        })();
+</script>
+
+<script type="text/javascript">
+document.write(unescape("%3Cscript src='" + document.location.protocol + "//munchkin.marketo.net/munchkin.js' type='text/javascript'%3E%3C/script%3E"));
+</script><script src="Frequently%20Asked%20Questions%20%E2%80%94%20MongoDB%20Manual_files/munchkin.htm" type="text/javascript"></script>
+<script>try { mktoMunchkin("017-HGS-593"); } catch(e) {}</script><script type="text/javascript">
+jQuery.ajax({
+    url: "https://jira.mongodb.org/s/en_US-bxctp1/782/6/1.2.4/_/download/batch/com.atlassian.jira.collector.plugin.jira-issue-collector-plugin:issuecollector-embededjs/com.atlassian.jira.collector.plugin.jira-issue-collector-plugin:issuecollector-embededjs.js?collectorId=298ba4e7",
+    type: "get",
+    cache: true,
+    dataType: "script"
+});
+window.ATL_JQ_PAGE_PROPS =  {
+"triggerFunction": function(showCollectorDialog) {
+jQuery("#jirafeedback").click(function(e) {e.preventDefault();showCollectorDialog();});
+jQuery("#jirafooter").click(function(e) {e.preventDefault();showCollectorDialog();});
+}};
+</script>
+
+<table class="gstl_0 gssb_c" style="width: 129px; display: none; top: 70px; left: 879px; position: absolute;" cellpadding="0" cellspacing="0"><tbody><tr><td class="gssb_f"></td><td style="width: 100%;" class="gssb_e"></td></tr></tbody></table><div style="display: none;" id="atlwdg-blanket" class="atlwdg-blanket"></div><div class="atlwdg-popup atlwdg-box-shadow atlwdg-hidden" id="atlwdg-container"></div></body></html>
