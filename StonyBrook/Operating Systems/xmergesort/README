@@ -1,0 +1,53 @@
+Assignment #1 Design Documentation
+__________________________________
+
+This assignment implements a system call that takes 2 files as input and produces a merged output file depending on the flags specified. The input files are assumed to be sorted but not necessarily sorted. 
+
+User program:
+Takes as input the flags, input and output file names.
+Invokes the system call and returns the status of the syatem call.
+
+Kernel code:
+The kernel code takes a void pointer to the structure containing the flags along with the input and output file names.
+It reads the input files, compares the lines and produces the output file containing the merged sorted content of both the files. 
+
+Design of kernel code
+_____________________
+
+1. Copies over the arguments from user address space to kernel address space.
+2. Check the status of the input files provided. 
+3. Check the status of the output file.
+4. Check if the input files are distinct.
+5. If the output file exists then check if it is different from the input files.
+6. Allocate memory for buffers and open the files.
+7. Total 6 buffers are used: 2 for reading blocks of size 4095 from the input files, 2 for holding the lines read from these 2 input files, 1 as output buffer to write to the output file in blocks of 4096 and 1 to maintain the previous line written to the output buffer.
+8. Read blocks of size 4096 bytes from both the files.
+9. Read lines delimited by '\n' from these blocks.
+10. Compare the 2 lines and write the line that is lexicographically smaller to the output buffer depending on the flags set.
+11. Repeat this until the input buffers become empty.
+12. Read the next blocks from files if there are any.
+13. Repeat the process until there is data in both files.
+14. Handle the data from the file that has extra lines.
+15. If the flag to count the total number of lines written to the output file is set then copy the data back from kernel space to user space.
+16. Cleanup section: If any error is encountered during the program execution, the control is passed to this section and the memory allocated for all the buffers is deallocated and the files are closed.
+17. The error number is returned to the user program.
+
+Validations handled:
+
+User program:
+1. Number of arguments passed to user program
+2. Format of the arguments passed.
+3. Flag format
+4. The path length and file name length of input and output files.
+
+Kernel Program:
+1. Address of the structure passed from user program.
+2. File validations like permission checks, existence of input files.
+3. The input and output files should not point to the same file.
+4. Throw an error if a line in the input file exceeds 4095 characters.
+5. Throw an error if the -t option is set and the input file is not sorted.
+6. Validation checks for memory allocation.
+
+
+
+
